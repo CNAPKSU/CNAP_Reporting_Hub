@@ -383,3 +383,4 @@ a:hover{color:var(--purple-ink)}
   .spine a::before{display:none}
   .spine a[aria-current="step"]{font:600 14px/20px var(--sans);background:var(--acc-tint);border-color:transparent}
 }
+.spine ol{padding-left:0}
