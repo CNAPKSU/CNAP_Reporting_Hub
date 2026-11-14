@@ -384,3 +384,5 @@ a:hover{color:var(--purple-ink)}
   .spine a[aria-current="step"]{font:600 14px/20px var(--sans);background:var(--acc-tint);border-color:transparent}
 }
 .spine ol{padding-left:0}
+
+.card .ppl{display:flex;flex-direction:column;margin:2px 0 4px}.card .ppl b{font-weight:500;color:var(--ink)}.card .ppl a{font-size:14px;overflow-wrap:anywhere}
