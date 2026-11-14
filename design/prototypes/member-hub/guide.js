@@ -34,4 +34,4 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=docum
 (function(){var a=document.querySelector('[data-dl]');if(!a||!window.claude||!window.claude.use)return;var dl=null;
 window.claude.use('downloads').then(function(d){dl=d;}).catch(function(){});
 a.addEventListener('click',function(e){if(!dl)return;e.preventDefault();var name=a.getAttribute('data-dl');
-fetch(name).then(function(r){if(!r.ok)throw 0;return r.blob();}).then(function(b){return dl.save({filename:name,data:b});}).catch(function(){});});})();
+var b64=window.CNAP_MEETING_LOG;var p=b64?Promise.resolve(Uint8Array.from(atob(b64),function(c){return c.charCodeAt(0);})):fetch(name).then(function(r){if(!r.ok)throw 0;return r.blob();});p.then(function(d){return dl.save({filename:name,data:d});}).catch(function(){});});})();
