@@ -1350,6 +1350,21 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 
 /* the menu dots sit centered on the line */
 .otp ol{padding-left:0!important}
+
+/* section rules: the dark accent slides to the far end of the line */
+.sh{--s0:0px}
+.sh::before{left:calc(100% - 40px)}
+@media (min-width:1181px){.sh-r{--s0:calc(50% + var(--gap) / 2)}.sh-r::before{left:calc(100% - 40px)}}
+@media (prefers-reduced-motion:no-preference){
+  .js-draw .sh::before{left:var(--s0)}
+  .js-draw .sh.drawn::before{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+@keyframes shslide{from{left:var(--s0)}to{left:calc(100% - 40px)}}
+@media (max-width:1180px){.bi::before{left:calc(100% - 40px)}}
+@media (max-width:1180px) and (prefers-reduced-motion:no-preference){
+  .brief .bi::before{left:0;animation:grow .7s cubic-bezier(.2,.7,.2,1) forwards,bislide 1.3s cubic-bezier(.65,0,.35,1) forwards;animation-delay:calc(1.6s + var(--n,0) * .18s),calc(2.4s + var(--n,0) * .18s)}
+}
+@keyframes bislide{from{left:0}to{left:calc(100% - 40px)}}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -1824,7 +1839,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 
 
   /* corner rules: draw in once their section is on screen */
-  try{if('IntersectionObserver' in window){document.documentElement.classList.add('js-draw');var dio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('drawn');dio.unobserve(e.target);}});},{rootMargin:'0px 0px -25% 0px'});document.querySelectorAll('.ns-band,.cx').forEach(function(el){dio.observe(el);});}}catch(e){}
+  try{if('IntersectionObserver' in window){document.documentElement.classList.add('js-draw');var dio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('drawn');dio.unobserve(e.target);}});},{rootMargin:'0px 0px -25% 0px'});document.querySelectorAll('.ns-band,.cx,.sh').forEach(function(el){dio.observe(el);});}}catch(e){}
   /* calendar: prototype data only, nothing here is connected to a real calendar */
   var KIND={ns:'NeuroSync',ctr:'Center event',due:'Deadline',you:'Your meeting · only you see this',cam:'K-State'};
   var SHAPE={ns:'<circle cx="5" cy="5" r="4"/>',ctr:'<path d="M5 .5L9.5 5 5 9.5 .5 5z"/>',due:'<rect x="1" y="1" width="8" height="8" rx="1"/>',you:'<circle cx="5" cy="5" r="3.4" fill="none" stroke-width="2"/>',cam:'<path d="M5 .8L9.4 9H.6z"/>'};

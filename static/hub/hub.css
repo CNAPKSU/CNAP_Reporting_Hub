@@ -1385,3 +1385,18 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 .fbk-msg{min-height:1.2em;color:var(--purple)}
 @media (max-width:560px){.fbk-topics{grid-template-columns:1fr}}
 .fbk .fieldrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+
+/* section rules: the dark accent slides to the far end of the line */
+.sh{--s0:0px}
+.sh::before{left:calc(100% - 40px)}
+@media (min-width:1181px){.sh-r{--s0:calc(50% + var(--gap) / 2)}.sh-r::before{left:calc(100% - 40px)}}
+@media (prefers-reduced-motion:no-preference){
+  .js-draw .sh::before{left:var(--s0)}
+  .js-draw .sh.drawn::before{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+@keyframes shslide{from{left:var(--s0)}to{left:calc(100% - 40px)}}
+@media (max-width:1180px){.bi::before{left:calc(100% - 40px)}}
+@media (max-width:1180px) and (prefers-reduced-motion:no-preference){
+  .brief .bi::before{left:0;animation:grow .7s cubic-bezier(.2,.7,.2,1) forwards,bislide 1.3s cubic-bezier(.65,0,.35,1) forwards;animation-delay:calc(1.6s + var(--n,0) * .18s),calc(2.4s + var(--n,0) * .18s)}
+}
+@keyframes bislide{from{left:0}to{left:calc(100% - 40px)}}
