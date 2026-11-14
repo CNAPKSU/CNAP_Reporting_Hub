@@ -475,3 +475,10 @@ a:hover{color:var(--purple-ink)}
 .go:hover{background:var(--acc-ink)}
 .go:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 @media (max-width:760px){.rflow{grid-template-columns:1fr;gap:16px}.rflow li{padding:0 0 0 24px}.rflow li::before{left:4px;right:auto;top:12px;bottom:-22px;width:2px;height:auto}.rflow li:last-child::before{display:none}.rflow li::after{top:4px}.tiles.tiles-2{grid-template-columns:1fr}}
+
+.note.save{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px}
+.note.save p{margin:0}
+.save-a{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.go svg{margin-right:8px}
+.save-g{font-size:14.5px;font-weight:600;color:var(--acc-ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--acc-ink) 35%,transparent)}
+.save-g:hover{text-decoration-color:currentColor}
