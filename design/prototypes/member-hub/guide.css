@@ -531,3 +531,8 @@ a:hover{color:var(--purple-ink)}
 .pf-note{margin:28px 0 16px;padding:16px 18px;border-radius:8px;background:var(--band);font-size:14.5px;line-height:22px;color:var(--ink-2)}
 @media (max-width:760px){.pf-g{grid-template-columns:1fr}.pf-h h1{font-size:32px;line-height:38px}.pf-log li{grid-template-columns:1fr;gap:2px}.pf-rep li{flex-direction:column;align-items:flex-start;gap:4px}}
 .pf-ol{list-style:decimal}
+
+/* step sub-headers: serif, like the step titles */
+.step-b h3{font:500 22px/28px var(--serif);letter-spacing:-.01em;color:var(--ink);margin-top:36px}
+.step-b h3:first-child{margin-top:0}
+@media (max-width:640px){.step-b h3{font-size:20px;line-height:26px;margin-top:28px}}
