@@ -482,3 +482,9 @@ a:hover{color:var(--purple-ink)}
 .go svg{margin-right:8px}
 .save-g{font-size:14.5px;font-weight:600;color:var(--acc-ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--acc-ink) 35%,transparent)}
 .save-g:hover{text-decoration-color:currentColor}
+
+.dl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:4px}
+.dl-a{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--acc-ink);font-weight:600;font-size:14.5px;text-decoration:none}
+.dl-a:hover{border-color:var(--acc)}
+.dl-a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.dl span{font-size:14px;line-height:20px;color:var(--muted)}

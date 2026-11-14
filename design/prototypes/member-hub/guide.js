@@ -30,3 +30,8 @@ if(!open){b.setAttribute('aria-expanded','true');document.getElementById(b.getAt
 (function(){function closeAll(){document.querySelectorAll('.pp-b[aria-expanded="true"]').forEach(function(b){b.setAttribute('aria-expanded','false');document.getElementById(b.getAttribute('aria-controls')).hidden=true;});}
 document.addEventListener('click',function(e){if(!e.target.closest('.pp-it'))closeAll();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=document.querySelector('.pp-b[aria-expanded="true"]');closeAll();if(o)o.focus();}});})();
+
+(function(){var a=document.querySelector('[data-dl]');if(!a||!window.claude||!window.claude.use)return;var dl=null;
+window.claude.use('downloads').then(function(d){dl=d;}).catch(function(){});
+a.addEventListener('click',function(e){if(!dl)return;e.preventDefault();var name=a.getAttribute('data-dl');
+fetch(name).then(function(r){if(!r.ok)throw 0;return r.blob();}).then(function(b){return dl.save({filename:name,data:b});}).catch(function(){});});})();
