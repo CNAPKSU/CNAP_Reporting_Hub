@@ -385,4 +385,18 @@ a:hover{color:var(--purple-ink)}
 }
 .spine ol{padding-left:0}
 
-.card .ppl{display:flex;flex-direction:column;margin:2px 0 4px}.card .ppl b{font-weight:500;color:var(--ink)}.card .ppl a{font-size:14px;overflow-wrap:anywhere}
+
+.pp{list-style:none;margin:0;padding:0;display:grid}
+.pp li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.pp li:first-child{border-top:0;padding-top:2px}
+.pp-i{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--acc-tint);color:var(--acc-ink);font:500 15px/1 var(--serif)}
+.pp p{margin:0}
+.pp-r{font-size:12.5px;line-height:17px;color:var(--muted)}
+.pp-n{font:500 17px/23px var(--serif);color:var(--ink);margin-top:1px!important}
+.pp-e{display:inline-block;margin-top:2px;font-size:14px;line-height:20px;color:var(--acc-ink);text-decoration:none;overflow-wrap:anywhere}
+.pp-e:hover,.pp-e:focus-visible{text-decoration:underline}
+.pp-d{margin-top:6px!important;font-size:14px;line-height:21px;color:var(--ink-2)}
+.card .contact{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.card .contact span{color:var(--muted)}
+.card .contact a{color:var(--acc-ink);font-weight:500;text-decoration:none}
+.card .contact a:hover{text-decoration:underline}
