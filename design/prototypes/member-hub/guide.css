@@ -213,3 +213,41 @@ a:hover{color:var(--purple-ink)}
 .ag-d{font-weight:600}
 .ag-d small{display:block;font-weight:400;font-size:14px;color:var(--muted)}
 @media (max-width:640px){.agenda li{grid-template-columns:1fr;gap:4px}}
+
+/* ---- Review fixes (MW 2026-11-14) ---- */
+/* 1. three clearly separated label rows on the timeline */
+.rib{height:214px}
+.pin b{margin-top:30px}
+.pin.lo b{margin-top:88px}
+.pin.lo2 b{margin-top:150px}
+@media (max-width:980px){.rib{height:auto}.pin b,.pin.lo b,.pin.lo2 b{margin-top:0}}
+/* 3. step headers: the number and time on one line, then the title, everything flush left */
+.step-h{display:block}
+.step-k{display:flex;align-items:baseline;gap:14px;font-size:14px;font-weight:600;color:var(--muted)}
+.step-n{font:400 44px/1 var(--serif);color:var(--acc)}
+.step h2{margin-top:10px}
+@media (max-width:640px){.step-n{font-size:38px}}
+/* 4. each role sits with its description, and roles are spaced apart evenly */
+.card dl{display:block}
+.card dt{margin-top:16px}
+.card dt:first-child{margin-top:0}
+.card dd{margin:3px 0 0}
+/* 5. to-do rows are a plain list, not checkboxes */
+.todo li::before{content:"";width:10px;height:2px;margin-top:12px;border-radius:0;box-shadow:none;background:var(--acc)}
+/* 9. long lists open on request */
+.more summary{display:inline-flex;align-items:center;gap:8px;min-height:40px;cursor:pointer;list-style:none;font-weight:600;font-size:15px;color:var(--acc)}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"";width:7px;height:7px;border-right:1.8px solid currentColor;border-bottom:1.8px solid currentColor;transform:rotate(45deg) translateY(-3px);transition:transform .2s}
+.more[open] summary::after{transform:rotate(-135deg) translateY(-1px)}
+.more[open] summary{margin-bottom:10px}
+/* 11. quiet breadcrumb */
+.crumb a{text-decoration:none}.crumb a:hover{text-decoration:underline;color:var(--ink)}
+/* 12. the summary card lines up with the top of the title */
+.open-g{align-items:start}
+.who{margin-top:38px}
+@media (max-width:980px){.who{margin-top:0}}
+.foot .wrap span:last-child{max-width:70ch;text-align:right}
+@media (max-width:640px){.foot .wrap span:last-child{text-align:left}}
+/* the Today marker stops at the timeline, clear of the month names */
+.today{top:-30px}
+.today::after{height:12px}
