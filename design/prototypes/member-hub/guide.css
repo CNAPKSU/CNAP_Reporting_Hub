@@ -194,3 +194,16 @@ a:hover{color:var(--purple-ink)}
 .pin.lo b{margin-top:70px}
 .pin.lo2 b{margin-top:140px}
 @media (max-width:980px){.rib{height:auto}.pin b,.pin.lo b,.pin.lo2 b{margin-top:0}}
+/* the Hub's forms, word for word */
+.fq-h{margin-top:8px;font:600 15px/22px var(--sans);color:var(--ink)}
+.fq-scale{font-size:13.5px;line-height:20px;color:var(--muted)}
+.fq{counter-reset:q;display:grid;gap:0;border-top:1px solid var(--line)}
+.fq li{counter-increment:q;display:grid;grid-template-columns:32px 1fr;gap:8px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:22px;color:var(--ink)}
+.fq li::before{content:counter(q) ".";font-variant-numeric:tabular-nums;color:var(--muted)}
+.fq-open{display:grid;gap:10px}
+.fq-open li{padding:12px 14px;border-radius:6px;background:var(--paper);font-size:15px;line-height:22px}
+.fq-open b{color:var(--ink)}
+.fq-open em{font-style:normal;font-size:13px;color:var(--muted);margin-left:6px}
+.fq-open span{display:block;margin-top:4px;font-size:14px;line-height:21px;color:var(--ink-2)}
+.fq-link{margin-top:6px;padding-top:12px;border-top:1px solid var(--line);font-size:15px}
+.fq-link a{font-weight:600}
