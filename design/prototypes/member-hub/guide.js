@@ -10,7 +10,11 @@
   steps.forEach(function(s){var b=s.querySelector('.read');if(!b)return;b.addEventListener('click',function(){store[s.id]=!store[s.id];try{localStorage.setItem(key,JSON.stringify(store));}catch(e){}paint();});});
   paint();
   function spy(){var y=innerHeight*.3,cur=steps[0];steps.forEach(function(s){if(s.getBoundingClientRect().top<y)cur=s;});links.forEach(function(a){a.toggleAttribute('aria-current',a.getAttribute('href')==='#'+cur.id);if(a.hasAttribute('aria-current'))a.setAttribute('aria-current','step');});}
-  addEventListener('scroll',spy,{passive:true});spy();
+  var tr=document.querySelector('.spine-track'),fl=document.querySelector('.spine-fill'),ol=document.querySelector('.spine ol');
+  function track(){if(!tr||!links.length)return;var o=ol.getBoundingClientRect().top,dot=function(a){var r=a.getBoundingClientRect();return r.top-o+15;};
+    var t=dot(links[0]),b=dot(links[links.length-1]);tr.style.top=(ol.offsetTop+t)+'px';tr.style.height=(b-t)+'px';
+    var cur=document.querySelector('.spine a[aria-current]');fl.style.height=cur?(dot(cur)-t)+'px':'0px';}
+  addEventListener('scroll',function(){spy();track();},{passive:true});addEventListener('resize',track);spy();track();
   var cb=document.querySelector('.cite button');if(cb)cb.addEventListener('click',function(){var t=document.getElementById('cite-t').textContent.trim();
     function done(){cb.textContent='Copied';setTimeout(function(){cb.textContent='Copy the acknowledgement';},1800);}
     try{navigator.clipboard.writeText(t).then(done,function(){sel();});}catch(e){sel();}
