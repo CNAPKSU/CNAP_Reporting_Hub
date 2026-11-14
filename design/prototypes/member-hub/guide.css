@@ -400,3 +400,38 @@ a:hover{color:var(--purple-ink)}
 .card .contact span{color:var(--muted)}
 .card .contact a{color:var(--acc-ink);font-weight:500;text-decoration:none}
 .card .contact a:hover{text-decoration:underline}
+
+/* Who to ask, collapsed to initials */
+@media (min-width:1281px){.rail{justify-self:end;width:216px}}
+.ask{padding:16px 16px 14px}
+.ask h2{margin-bottom:10px}
+.pp-row{display:flex;flex-wrap:wrap;gap:8px}
+.pp-b{all:unset;cursor:pointer;border-radius:50%}
+.pp-b .pp-i{transition:background .15s,color .15s,box-shadow .15s}
+.pp-b:hover .pp-i{box-shadow:0 0 0 2px var(--acc)}
+.pp-b:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.pp-b[aria-expanded="true"] .pp-i{background:var(--acc);color:#fff}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.pp-hint{margin:10px 0 0;font-size:13px;line-height:18px;color:var(--muted)}
+.pp-p{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.pp-p p{margin:0}
+.ask .contact{margin-top:12px;font-size:13.5px}
+
+.ask .pp-i{width:36px;height:36px;font-size:14px}
+.pp-row{gap:6px}
+/* In this guide: a dot rail that opens on hover or focus, as on the homepage */
+@media (min-width:981px){
+  .guide .wrap{grid-template-columns:28px minmax(0,1fr);gap:48px}
+  .spine{position:sticky;top:104px;z-index:20;width:28px;padding:10px 0;box-sizing:border-box;background:transparent;border:1px solid transparent;box-shadow:none;transition:width .25s cubic-bezier(.2,.7,.2,1),padding .25s,background .2s,box-shadow .2s}
+  .spine .spine-h{display:none}
+  .spine a{height:26px;padding:3px 0 3px 18px;overflow:hidden;white-space:nowrap;color:transparent!important}
+  .spine a::before{left:9px;top:10px}
+  .spine .spine-track{left:13.5px}
+  .spine:hover,.spine:focus-within{width:260px;padding:20px 20px 14px;background:var(--surface);border-color:rgba(29,27,33,.07);box-shadow:0 1px 1px rgba(29,27,33,.04),0 4px 10px -2px rgba(29,27,33,.06),0 24px 48px -20px rgba(60,29,102,.22)}
+  .spine:hover .spine-h,.spine:focus-within .spine-h{display:block}
+  .spine:hover a,.spine:focus-within a{height:auto;padding:6px 0 6px 18px;white-space:normal;color:var(--ink-2)!important}
+  .spine:hover a[aria-current="step"],.spine:focus-within a[aria-current="step"]{color:var(--acc-ink)!important}
+  .spine:hover a::before,.spine:focus-within a::before{left:-1px;top:13px}
+  .spine:hover .spine-track,.spine:focus-within .spine-track{left:23.5px}
+}
+@media (min-width:1281px){.guide .wrap{grid-template-columns:28px minmax(0,1fr) 216px;gap:56px}}

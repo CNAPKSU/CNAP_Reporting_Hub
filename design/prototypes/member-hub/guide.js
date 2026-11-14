@@ -11,12 +11,18 @@
   paint();
   function spy(){var y=innerHeight*.3,cur=steps[0];steps.forEach(function(s){if(s.getBoundingClientRect().top<y)cur=s;});links.forEach(function(a){a.toggleAttribute('aria-current',a.getAttribute('href')==='#'+cur.id);if(a.hasAttribute('aria-current'))a.setAttribute('aria-current','step');});}
   var tr=document.querySelector('.spine-track'),fl=document.querySelector('.spine-fill'),ol=document.querySelector('.spine ol');
-  function track(){if(!tr||!links.length)return;var o=ol.getBoundingClientRect().top,dot=function(a){var r=a.getBoundingClientRect();return r.top-o+15;};
+  function track(){if(!tr||!links.length)return;var o=ol.getBoundingClientRect().top,dot=function(a){var r=a.getBoundingClientRect();var s=getComputedStyle(a,'::before');return r.top-o+parseFloat(s.top)+5;};
     var t=dot(links[0]),b=dot(links[links.length-1]);tr.style.top=(ol.offsetTop+t)+'px';tr.style.height=(b-t)+'px';
     var cur=document.querySelector('.spine a[aria-current]');fl.style.height=cur?(dot(cur)-t)+'px':'0px';}
-  addEventListener('scroll',function(){spy();track();},{passive:true});addEventListener('resize',track);spy();track();
+  addEventListener('scroll',function(){spy();track();},{passive:true});addEventListener('resize',track);var sp=document.querySelector('.spine');if(sp){['mouseenter','mouseleave','focusin','focusout','transitionend'].forEach(function(e){sp.addEventListener(e,function(){requestAnimationFrame(track);setTimeout(track,280);});});}spy();track();
   var cb=document.querySelector('.cite button');if(cb)cb.addEventListener('click',function(){var t=document.getElementById('cite-t').textContent.trim();
     function done(){cb.textContent='Copied';setTimeout(function(){cb.textContent='Copy the acknowledgement';},1800);}
     try{navigator.clipboard.writeText(t).then(done,function(){sel();});}catch(e){sel();}
     function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('cite-t'));var s=getSelection();s.removeAllRanges();s.addRange(r);cb.textContent='Selected. Press Ctrl+C to copy';}});
 })();
+
+(function(){var bs=document.querySelectorAll('.pp-b');if(!bs.length)return;var hint=document.querySelector('.pp-hint');
+bs.forEach(function(b){b.addEventListener('click',function(){var open=b.getAttribute('aria-expanded')==='true';
+bs.forEach(function(o){o.setAttribute('aria-expanded','false');document.getElementById(o.getAttribute('aria-controls')).hidden=true});
+if(!open){b.setAttribute('aria-expanded','true');document.getElementById(b.getAttribute('aria-controls')).hidden=false}
+if(hint)hint.hidden=!open?true:false;});});})();
