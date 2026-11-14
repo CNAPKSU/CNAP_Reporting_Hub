@@ -42,7 +42,7 @@
       "title": "Meetings",
       "repeatable": true,
       "repeat_label": "Add a meeting",
-      "instructions": "Please add one entry for each meeting during the reporting period.",
+      "instructions": "Add one entry for each meeting during the reporting period.",
       "questions": [
         {
           "code": "meeting_date",
