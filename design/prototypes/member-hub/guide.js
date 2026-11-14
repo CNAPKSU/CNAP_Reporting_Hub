@@ -26,3 +26,7 @@ bs.forEach(function(b){b.addEventListener('click',function(){var open=b.getAttri
 bs.forEach(function(o){o.setAttribute('aria-expanded','false');document.getElementById(o.getAttribute('aria-controls')).hidden=true});
 if(!open){b.setAttribute('aria-expanded','true');document.getElementById(b.getAttribute('aria-controls')).hidden=false}
 });});})();
+
+(function(){function closeAll(){document.querySelectorAll('.pp-b[aria-expanded="true"]').forEach(function(b){b.setAttribute('aria-expanded','false');document.getElementById(b.getAttribute('aria-controls')).hidden=true;});}
+document.addEventListener('click',function(e){if(!e.target.closest('.pp-it'))closeAll();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=document.querySelector('.pp-b[aria-expanded="true"]');closeAll();if(o)o.focus();}});})();
