@@ -1,3 +1,7 @@
+(function(){if(location.hash)return;try{if('scrollRestoration' in history)history.scrollRestoration='manual';}catch(e){}
+function top(){window.scrollTo(0,0);try{document.scrollingElement.scrollTop=0;}catch(e){}}
+top();document.addEventListener('DOMContentLoaded',top);addEventListener('load',function(){top();setTimeout(top,150);});
+addEventListener('pageshow',function(e){if(e.persisted)top();});})();
 /* Guide behaviour: the spine follows the reader, "Mark as read" is remembered in this browser only
    (the Hub doesn't store it yet), and the acknowledgement copies to the clipboard. */
 (function(){

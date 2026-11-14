@@ -1946,7 +1946,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 </script>
 <script>
 (function(){var id=(location.hash||'').slice(1);try{if(!id){id=sessionStorage.getItem('cnap-goto')||'';}sessionStorage.removeItem('cnap-goto');}catch(x){}
-if(!id||!/^[\w-]+$/.test(id))return;function go(){var el=document.getElementById(id);if(!el)return;var y=el.getBoundingClientRect().top+scrollY-96;window.scrollTo({top:Math.max(0,y),behavior:'instant'});}
+if(!id||!/^[\w-]+$/.test(id)){if('scrollRestoration' in history)history.scrollRestoration='manual';var t=function(){scrollTo(0,0)};t();addEventListener('load',t);return;}function go(){var el=document.getElementById(id);if(!el)return;var y=el.getBoundingClientRect().top+scrollY-96;window.scrollTo({top:Math.max(0,y),behavior:'instant'});}
 if('scrollRestoration' in history)history.scrollRestoration='manual';
 requestAnimationFrame(go);addEventListener('load',function(){go();setTimeout(go,400);});})();
 </script>
