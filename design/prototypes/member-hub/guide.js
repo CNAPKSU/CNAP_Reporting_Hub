@@ -35,3 +35,5 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=docum
 window.claude.use('downloads').then(function(d){dl=d;}).catch(function(){});
 a.addEventListener('click',function(e){if(!dl)return;e.preventDefault();var name=a.getAttribute('data-dl');
 var b64=window.CNAP_MEETING_LOG;var p=b64?Promise.resolve(Uint8Array.from(atob(b64),function(c){return c.charCodeAt(0);})):fetch(name).then(function(r){if(!r.ok)throw 0;return r.blob();});p.then(function(d){return dl.save({filename:name,data:d});}).catch(function(){});});})();
+
+(function(){document.addEventListener('click',function(e){var a=e.target.closest('a[href^="index.html#"]');if(!a)return;try{sessionStorage.setItem('cnap-goto',a.getAttribute('href').split('#')[1]);}catch(x){}});})();
