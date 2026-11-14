@@ -488,3 +488,5 @@ a:hover{color:var(--purple-ink)}
 .dl-a:hover{border-color:var(--acc)}
 .dl-a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .dl span{font-size:14px;line-height:20px;color:var(--muted)}
+
+@media (min-width:981px) and (max-width:1120px){.nav{gap:0;margin-left:4px}.nav a{padding:8px 8px;font-size:14px}}

@@ -1365,6 +1365,9 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
   .brief .bi::before{left:0;animation:grow .7s cubic-bezier(.2,.7,.2,1) forwards,bislide 1.3s cubic-bezier(.65,0,.35,1) forwards;animation-delay:calc(1.6s + var(--n,0) * .18s),calc(2.4s + var(--n,0) * .18s)}
 }
 @keyframes bislide{from{left:0}to{left:calc(100% - 40px)}}
+
+@media (min-width:1024px) and (max-width:1120px){.nav a{padding:0 7px;font-size:14px}.hdr .wrap{gap:14px}}
+@media (max-width:1023px){.nav,.search{display:none}.only-phone{display:grid;place-items:center;width:44px;height:44px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);cursor:pointer}}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -1398,7 +1401,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 <header class="hdr">
   <div class="wrap">
     <a class="brand" href="#"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="#512888"/><path d="M8.5 23.5c3.4-7.6 6.6-9.8 9.4-9.8 2.7 0 4.3 4.1 9.6 4.1" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="8.5" cy="23.5" r="2.4" fill="#fff"/><circle cx="27.5" cy="17.8" r="2.4" fill="#fff"/></svg><span><b>CNAP Member Hub</b><small>Kansas State University</small></span></a>
-    <nav class="nav" aria-label="Main"><a href="#" aria-current="page">Home</a><a href="#">Research</a><a href="#">Events</a><a href="#">Funding</a><a href="#">Community</a><a href="#">Resources</a></nav>
+    <nav class="nav" aria-label="Main"><a href="#" aria-current="page">Home</a><a href="#wk">Reporting</a><a href="#">Research</a><a href="#">Events</a><a href="#">Funding</a><a href="#">Community</a><a href="#">Resources</a></nav>
     <div class="tools">
       <a class="search" href="#" role="button" aria-label="Search people, events, resources, and funding"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><span class="st">Search CNAP</span><kbd>/</kbd></a>
       <a class="mywork" href="#" data-when="admin" hidden style="border-style:dashed">Administration</a>

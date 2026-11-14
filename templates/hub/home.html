@@ -16,7 +16,7 @@
 <header class="hdr">
   <div class="wrap">
     <a class="brand" href="{% url 'home' %}"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="#512888"/><path d="M8.5 23.5c3.4-7.6 6.6-9.8 9.4-9.8 2.7 0 4.3 4.1 9.6 4.1" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="8.5" cy="23.5" r="2.4" fill="#fff"/><circle cx="27.5" cy="17.8" r="2.4" fill="#fff"/></svg><span><b>{{ platform_name }}</b><small>Kansas State University</small></span></a>
-    <nav class="nav" aria-label="Main"><a href="{% url 'home' %}" aria-current="page">Home</a><a href="#res-h">Research</a><a href="#cal-h">Events</a><a href="{% url 'portal:funding' %}">Funding</a><a href="#com-h">Community</a><a href="#cores-h">Resources</a></nav>
+    <nav class="nav" aria-label="Main"><a href="{% url 'home' %}" aria-current="page">Home</a><a href="{% url 'portal:tasks' %}">Reporting</a><a href="#res-h">Research</a><a href="#cal-h">Events</a><a href="{% url 'portal:funding' %}">Funding</a><a href="#com-h">Community</a><a href="#cores-h">Resources</a></nav>
     <div class="tools">
       {% if is_admin %}<a class="mywork" href="{% url 'manage:home' %}" style="border-style:dashed">Administration</a>{% endif %}
       <a class="mywork" href="{% url 'portal:tasks' %}">My work{% if rep %} <span class="count"{% if not rep.todo %} style="background:var(--green)"{% endif %}>{{ rep.todo }}</span>{% endif %}</a>

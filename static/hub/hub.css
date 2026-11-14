@@ -1400,3 +1400,6 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
   .brief .bi::before{left:0;animation:grow .7s cubic-bezier(.2,.7,.2,1) forwards,bislide 1.3s cubic-bezier(.65,0,.35,1) forwards;animation-delay:calc(1.6s + var(--n,0) * .18s),calc(2.4s + var(--n,0) * .18s)}
 }
 @keyframes bislide{from{left:0}to{left:calc(100% - 40px)}}
+
+@media (min-width:1024px) and (max-width:1120px){.nav a{padding:0 7px;font-size:14px}.hdr .wrap{gap:14px}}
+@media (max-width:1023px){.nav,.search{display:none}.only-phone{display:grid;place-items:center;width:44px;height:44px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);cursor:pointer}}
