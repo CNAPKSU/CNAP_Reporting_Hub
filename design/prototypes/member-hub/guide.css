@@ -439,3 +439,5 @@ a:hover{color:var(--purple-ink)}
 .pp-row{flex-direction:column;flex-wrap:nowrap;gap:8px;align-items:stretch}
 .pp-hint{margin:0 0 12px}
 .pp-it .pp-p{margin:8px 0 6px;padding:0 0 0 0;border-top:0}
+
+.ask .contact{display:block;color:var(--muted)}
