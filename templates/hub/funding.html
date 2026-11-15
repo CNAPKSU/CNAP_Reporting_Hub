@@ -89,7 +89,7 @@
         </section>
         {% elif part == "resources" %}
         <section class="fp-sec" id="s-before" aria-labelledby="s-before-h">
-          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {% if questions|length == 7 %}seven{% else %}{{ questions|length }}{% endif %} questions before starting an application.</p><p>Select a question to read the full question.</p></div>
+          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {% if questions|length == 7 %}seven{% else %}{{ questions|length }}{% endif %} questions before starting an application.</p><p>Please select a question to read the full question.</p></div>
           <div class="fp-weigh">
             <div class="fp-qcard">
               <div class="fp-qcols"><ol class="fp-qs">{% for q in questions|slice:":4" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol><ol class="fp-qs" start="5">{% for q in questions|slice:"4:" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter|add:4 }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol></div>
@@ -98,7 +98,7 @@
             <aside class="fp-help-card" id="s-consult" aria-labelledby="s-consult-h">
               <h3 id="s-consult-h">Talk through a draft</h3>
               <p>Unsure about one of the questions? The Assistant Director for Grants and Contracts meets one on one with CNAP members about proposals.</p>
-              <p>Bring a specific aims page, a budget question, or an opportunity you are still weighing.</p>
+              <p>Please bring a specific aims page, a budget question, or an opportunity you are still weighing.</p>
               <a class="fp-btn pri" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a>
             </aside>
           </div>
@@ -108,11 +108,11 @@
           <dl class="fp-labels">
             <div><dt><span class="fp-st ok">Counts toward the R01 milestone</span></dt><dd>The award is an R01 or an equivalent award. Winning the award meets the milestone.</dd></div>
             <div id="bridge"><dt><span class="fp-st">Bridge funding</span></dt><dd>A smaller or shorter award that keeps your research going and builds preliminary data on the way to an R01-equivalent award. Bridge funding doesn’t meet the milestone by itself, but bridge funding can strengthen your next application.</dd></div>
-            <div><dt><span class="fp-st">Ask your program officer</span></dt><dd>Whether the award counts depends on the award’s terms. Ask your program officer and the CNAP team before you apply.</dd></div>
+            <div><dt><span class="fp-st">Please ask your program officer</span></dt><dd>Whether the award counts depends on the award’s terms. Please ask your program officer and the CNAP team before you apply.</dd></div>
           </dl>
         </section>
         <section class="fp-sec" id="s-idea" aria-labelledby="s-idea-h">
-          <div class="fp-sh"><h2 id="s-idea-h">NIH opportunities for IDeA states</h2><p>Beyond the Center’s own award, the National Institute of General Medical Sciences (NIGMS) offers co-funding, instrumentation grants, training grants, and the Support for Research Excellence program to Institutional Development Award (IDeA) states such as Kansas.</p><p>Opportunity numbers and dates change every cycle. Confirm each one in the NIH Guide and the Notice of Funding Opportunity (NOFO) Forecast before you plan around the opportunity.</p></div>
+          <div class="fp-sh"><h2 id="s-idea-h">NIH opportunities for IDeA states</h2><p>Beyond the Center’s own award, the National Institute of General Medical Sciences (NIGMS) offers co-funding, instrumentation grants, training grants, and the Support for Research Excellence program to Institutional Development Award (IDeA) states such as Kansas.</p><p>Opportunity numbers and dates change every cycle. Please confirm each one in the NIH Guide and the Notice of Funding Opportunity (NOFO) Forecast before you plan around the opportunity.</p></div>
           <div class="fp-idea">
             <article class="fp-ic fp-ic-lead">
               <p class="fp-for">For an unfunded R01, R15, or R35</p>
@@ -175,7 +175,7 @@
         </section>
         
         <section class="fp-sec" id="s-most" aria-labelledby="s-most-h">
-          <div class="fp-sh"><h2 id="s-most-h">Relevant to most members</h2><p>{{ everyone|length }} opportunit{{ everyone|length|pluralize:"y,ies" }}{% if everyone_next %}. Next deadline {{ everyone_next|date:"F j, Y" }}{% endif %}.</p><p>Check each opportunity’s eligibility before applying.</p></div>
+          <div class="fp-sh"><h2 id="s-most-h">Relevant to most members</h2><p>{{ everyone|length }} opportunit{{ everyone|length|pluralize:"y,ies" }}{% if everyone_next %}. Next deadline {{ everyone_next|date:"F j, Y" }}{% endif %}.</p><p>Please check each opportunity’s eligibility before applying.</p></div>
           {% if everyone %}<ul class="fp-ops">{% for r in everyone %}{% include "hub/_funding_row.html" with mode="everyone" %}{% endfor %}</ul>
           {% else %}<div class="fp-empty"><p>No opportunities are listed yet.</p><p>The CNAP team adds new opportunities as they are announced.</p></div>{% endif %}
         </section>
@@ -185,12 +185,12 @@
           {% else %}<div class="fp-empty"><p>No letters yet.</p><p>A letter from the CNAP team appears here after the letter is sent.</p></div>{% endif %}
         </section>
         <section class="fp-sec" id="s-suggest" aria-labelledby="s-suggest-h">
-          <div class="fp-sh"><h2 id="s-suggest-h">Suggest an opportunity</h2><p>Send the CNAP team a funding opportunity worth a look.</p><p>The team reviews each suggestion before the opportunity appears on any page.</p></div>
+          <div class="fp-sh"><h2 id="s-suggest-h">Suggest an opportunity</h2><p>Please send the CNAP team a funding opportunity worth a look.</p><p>The team reviews each suggestion before the opportunity appears on any page.</p></div>
           <form class="fp-form" method="post" action="{% url 'portal:funding_suggest' %}">{% csrf_token %}<input type="hidden" name="for" value="{{ owner.pk }}">
             <div class="fp-field"><label for="s-name">Opportunity name</label><input id="s-name" name="name" type="text" maxlength="300" required></div>
             <div class="fp-field"><label for="s-sponsor">Sponsor <span class="fp-opt">(optional)</span></label><input id="s-sponsor" name="sponsor" type="text" maxlength="300"></div>
             <div class="fp-field"><label for="s-url">Link to the announcement <span class="fp-opt">(optional)</span></label><p class="fp-help">Paste the full web address of the sponsor’s announcement.</p><input id="s-url" name="url" type="text" inputmode="url" maxlength="500"></div>
-            <div class="fp-field"><label for="s-dl">Deadline <span class="fp-opt">(optional)</span></label><p class="fp-help">Write the date out, such as March 1, 2027.</p><input id="s-dl" name="deadline_text" type="text" maxlength="200"></div>
+            <div class="fp-field"><label for="s-dl">Deadline <span class="fp-opt">(optional)</span></label><p class="fp-help">Please write the date out, such as March 1, 2027.</p><input id="s-dl" name="deadline_text" type="text" maxlength="200"></div>
             <div class="fp-field"><label for="s-why">Why the opportunity is worth a look <span class="fp-opt">(optional)</span></label><textarea id="s-why" name="why" rows="3"></textarea></div>
             <label class="fp-choice" for="s-all"><input id="s-all" name="for_everyone" type="checkbox" value="1"><span>The opportunity could help other CNAP members too.</span></label>
             <div><button class="fp-btn" type="submit" title="Sends the suggestion to the CNAP team for review.">Send the suggestion</button></div>

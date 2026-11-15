@@ -19,7 +19,7 @@ S=[
 F=[('all','All stories'),('pilot','Pilot projects'),('core','Core capabilities'),('pubs','Publications'),('people','Investigator profiles'),('training','Training')]
 def card(s,lead=False):
     img=f'<figure class="sc-im"><img src="{s["img"]}" alt="{s["alt"]}" loading="lazy"><span class="tag">{s["tag"]}</span></figure>'
-    return f'''<li class="sc{' sc-lead' if lead else ''}" data-k="{s['kind']}"><a href="{s['href']}">{img}<div class="sc-t"><p class="eyebrow">{s['k']}</p><h3>{s['t']}</h3><p class="sc-d">{s['d']}</p><p class="meta">The CNAP team · {s['date']} · {s['read']}</p></div></a></li>'''
+    return f'''<li class="sc{' sc-lead' if lead else ''}" data-k="{s['kind']}"><a href="{s['href']}"{' data-proto title="Only one story page is built in the prototype."' if s['href']=='#' else ''}>{img}<div class="sc-t"><p class="eyebrow">{s['k']}</p><h3>{s['t']}</h3><p class="sc-d">{s['d']}</p><p class="meta">The CNAP team · {s['date']} · {s['read']}</p></div></a></li>'''
 lead=S[0]
 feat=f'''<article class="rs-feat" data-k="{lead['kind']}" aria-labelledby="feat-h">
       <a class="rs-feat-im" href="{lead['href']}" tabindex="-1" aria-hidden="true"><img src="{lead['img']}" alt=""><span class="tag">{lead['tag']}</span></a>

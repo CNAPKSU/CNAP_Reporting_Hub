@@ -80,7 +80,7 @@
   var MAP = [
     ['Home', 'index.html', null],
     ['Reporting', 'reporting.html', [['My tasks', 'reporting.html', 'Surveys and reports due this session'], ['My history', 'reporting-history.html', 'Everything you have submitted']]],
-    ['Research', 'research.html', [['Research at CNAP', 'research.html', 'Projects, cores, and the people behind the research'], ['Research stories', 'story.html', 'Findings told for a general reader']]],
+    ['Research', 'research.html', [['Research stories', 'research.html', 'Work from the Center’s pilot projects, cores, and investigators'], ['Suggest a story', 'mailto:cnap@ksu.edu?subject=Story%20idea%20for%20Research%20at%20CNAP', 'Tell the CNAP team about a milestone, paper, or person to profile']]],
     ['Events', 'events.html', [['Events overview', 'events.html', 'Everything on the CNAP calendar'], ['NeuroSync', 'neurosync.html', 'The Wednesday speaker series'], ['The 2027 Site Visit', 'sitevisit.html', 'May 25 and 26, 2027']]],
     ['Funding', 'funding.html', [['Funding opportunities', 'funding.html', 'Picked for you, and relevant to most members'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft'], ['Funding news', 'funding-news.html', 'News from sponsors, and events and talks']]],
     ['Community', 'community.html', [['Community', 'community.html', 'Achievements, questions, and threads'], ['Member directory', 'community.html#cm-dir', 'Find a colleague or a type of expertise'], ['Alumni', 'community.html#cm-alum', 'Where former members are now']]],

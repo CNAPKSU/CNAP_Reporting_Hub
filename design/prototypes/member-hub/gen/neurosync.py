@@ -76,7 +76,7 @@ def srow(kind,d,x):
 tabs=''.join(f'<button type="button" role="tab" aria-selected="{"true" if k=="f26" else "false"}" aria-controls="ns-{k}" id="ns-t-{k}"><b>{n}</b><span>{sub}</span></button>' for k,n,sub,room,rows in SEM)
 def panel(k,n,sub,room,rows):
     talks=sum(1 for r in rows if r[0]=='talk'); opens=sum(1 for r in rows if r[0]=='open')
-    head=f'<p class="ns-ph"><b>{n}</b> · {room} · ' + (f'{opens} open dates. Choose a date to sign up.' if opens else f'{talks} talks') + '</p>'
+    head=f'<p class="ns-ph"><b>{n}</b> · {room} · ' + (f'{opens} open dates. Please choose a date to sign up.' if opens else f'{talks} talks') + '</p>'
     return f'<div class="ns-pnl" id="ns-{k}" role="tabpanel" aria-labelledby="ns-t-{k}"{"" if k=="f26" else " hidden"}>{head}<ol class="ns-rows">{"".join(srow(*r) for r in rows)}</ol></div>'
 panels=''.join(panel(*s) for s in SEM)
 def card(d,x,sem):

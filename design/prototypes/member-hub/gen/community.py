@@ -36,7 +36,7 @@ def intro(name):
 # 1. Your first month: six conversations
 FIRST=[
  ('Your onboarding meeting','The CNAP team schedules this meeting for you, your mentor, and the Center Director. Together you go over your project, your milestones, and how your award year runs.','mentee.html','Read the mentee guide to prepare',None),
- ('Your mentor, Dr. Elena Voss','Set your regular meetings and agree on how often you will meet. Bring your aims page and your timeline.','mentee.html#s2','About your mentoring agreement',None),
+ ('Your mentor, Dr. Elena Voss','Set your regular meetings and agree on how often you will meet. Please bring your aims page and your timeline.','mentee.html#s2','About your mentoring agreement',None),
  ('Heather Bailey, Director','After your onboarding meeting, reach out to the Director any time for introductions to people and resources across the Center.',mt('hbailey@ksu.edu','Introduction from a new project leader','\n'.join(['Name:','Department:','Project title:','','Times that work for me:',''])),'Email Heather','hbailey@ksu.edu'),
  ('Morgan Wills, Assistant Director for Grants and Contracts','Plan your path to the R01 milestone, from your first submission to resubmission.',mt('mkwills@ksu.edu','Proposal planning meeting','\n'.join(['Name:','Department:','Project title:','','Funding I am considering:','','Times that work for me:',''])),'Book a time','mkwills@ksu.edu'),
  ('Roxana Ortiz, Grant Specialist and Accountant','Set up your budget, purchasing, and travel reimbursements before your first expense.',mt('roxana@ksu.edu','Budget and purchasing setup','\n'.join(['Name:','Department:','Project title:','','Questions about my budget or purchasing:',''])),'Email Roxana','roxana@ksu.edu'),
@@ -82,7 +82,7 @@ W=[('Every Wednesday, 2:30 to 3:30 p.m.','NeuroSync Weekly Speaker Series','Talk
 ways=''.join(f'''<li><p class="cm-wk">{k}</p><p class="cm-wt">{t}</p><p class="cm-wd">{d}</p><a class="t3" href="{h}">{l}</a></li>''' for k,t,d,h,l in W)
 
 # 8. Announcements
-AN=[('12','November','CNAP Administrative Core','Reminder: Year 11 pilot letters of intent are due November 20','Letters are limited to one page. Send yours to the Administrative Core by 5:00 p.m.',True),
+AN=[('12','November','CNAP Administrative Core','Reminder: Year 11 pilot letters of intent are due November 20','Letters are limited to one page. Please send yours to the Administrative Core by 5:00 p.m.',True),
     ('9','November','CNAP Director','Welcome to our three newest graduate students','Please join us in welcoming the three students to the Cognitive Neuroscience Core this month.',False),
     ('4','November','CNAP Administrative Core','Updated travel and reimbursement guidelines','The attached guide replaces last year’s version and takes effect December 1.',True)]
 ann=''.join(f'''<li><span class="cm-ad2"><b>{d}</b>{m}</span><div><p class="cm-af">{f}</p><p class="cm-at2">{t}</p><p class="cm-ad3">{x}</p>{'<p class="cm-att">Attachment</p>' if a else ''}</div></li>''' for d,m,f,t,x,a in AN)
@@ -182,7 +182,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-know" aria-labelledby="cm-know-h">
           <h2 id="cm-know-h">Member interests and expertise</h2>
-          <div class="cs-b"><p>Methods and topics members have listed on member profiles. Select a topic to see who knows the topic in the directory.</p><ul class="cm-sks">{skills}</ul></div>
+          <div class="cs-b"><p>Methods and topics members have listed on member profiles. Please select a topic to see who knows the topic in the directory.</p><ul class="cm-sks">{skills}</ul></div>
         </section>
         <section class="step cs" id="cm-dir" aria-labelledby="cm-dir-h">
           <h2 id="cm-dir-h">Member directory</h2>
@@ -234,7 +234,7 @@ page=f'''<!doctype html>
 <dialog class="cm-compose cm-share" aria-labelledby="cms-h">
   <form method="dialog" class="cm-form">
     <h2 id="cms-h">Share an achievement</h2>
-    <p class="cm-sub">Choose something you have already recorded in the Member Hub, or describe something new. The CNAP team posts the achievement here and adds the achievement to the Center’s reports.</p>
+    <p class="cm-sub">Please choose something you have already recorded in the Member Hub, or describe something new. The CNAP team posts the achievement here and adds the achievement to the Center’s reports.</p>
     <fieldset class="cm-prods"><legend>From your publications, presentations, proposals, and awards</legend><label class="cm-pi"><input type="radio" name="prod" value="0" checked><span><b>Publication</b>Slow oscillations and overnight retention in healthy aging<small>Neurobiology of Learning and Memory · Under review</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="1"><span><b>Presentation</b>Sleep, memory, and the aging brain<small>NeuroSync Weekly Speaker Series · September 2026</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="2"><span><b>Proposal</b>Slow-wave sleep enhancement and memory in older adults<small>NIH R21, National Institute on Aging · Submitted June 16, 2026</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="3"><span><b>Presentation</b>Nap timing restores word-pair retention in older adults with fragmented sleep<small>National sleep research meeting · Abstract submitted</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="4"><span><b>Publication</b>Sleep spindles and next-day recall: a pilot study<small>Journal of Sleep Research · Published March 2025</small></span></label>
       <label class="cm-pi"><input type="radio" name="prod" value="new"><span><b>Something else</b>A new paper, talk, proposal, award, or milestone</span></label>
     </fieldset>
