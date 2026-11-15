@@ -25,14 +25,14 @@
           {% if part == "news" %}<h1 id="t">Funding news</h1>
           <p class="fp-lead">Funding news the CNAP team summarized from sponsors and K-State newsletters, and research events and talks coming up at K-State and online.</p>
           <dl class="fp-facts">
-            {% if n_pinned %}<div><dt>Pinned by the CNAP office</dt><dd><a href="#s-pinned">{{ n_pinned }}</a></dd></div>{% endif %}
-            <div><dt>News items</dt><dd><a href="#s-news">{{ news|length }}</a></dd></div>
-            <div><dt>Events coming up</dt><dd><a href="#s-events">{{ events|length }}</a></dd></div>
+            {% if n_pinned %}<div><dt>Pinned by the CNAP office</dt><dd><a href="#s-pinned">{{ n_pinned }} news item{{ n_pinned|pluralize }}</a></dd></div>{% endif %}
+            <div><dt>Latest news</dt><dd><a href="#s-news">{{ news|length }} news item{{ news|length|pluralize }}</a></dd></div>
+            <div><dt>Events and talks</dt><dd><a href="#s-events">{{ events|length }} coming up</a></dd></div>
           </dl>
           {% elif part == "resources" %}<h1 id="t">Grant resources</h1>
           <p class="fp-lead">Help with a proposal from start to finish: seven questions for weighing an opportunity, a one-on-one consultation on a draft, and a proposal writing toolkit.</p>
           <dl class="fp-facts">
-            <div><dt>Questions to weigh an opportunity</dt><dd>{{ questions|length }}</dd></div>
+            <div><dt>Before you apply</dt><dd>{{ questions|length }} question{{ questions|length|pluralize }} to weigh</dd></div>
             <div><dt>Consultations</dt><dd>One on one, by email request</dd></div>
           </dl>
           {% else %}<h1 id="t">Funding opportunities</h1>
