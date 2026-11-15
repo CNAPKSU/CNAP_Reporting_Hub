@@ -1,0 +1,14 @@
+{# One opportunity as a stacked row in the Member Hub design (MW 2026-11-14): the name as the link, status words, then fixed label columns. Same fields as proto/portal/_funding_row.html. #}
+<li class="pg-rec">
+  {% if r.o.url %}<a class="pg-name" href="{{ r.o.url }}" target="_blank" rel="noopener" title="Opens the sponsor’s announcement in a new tab.">{{ r.o.name }}</a>{% else %}<span class="pg-name pg-name-t">{{ r.o.name }}</span>{% endif %}
+  <span class="pg-chips"><span class="pg-st{% if r.state == 'ok' %} ok{% elif r.state == 'warn' %} warn{% elif r.state == 'alert' %} alert{% endif %}">{{ r.words }}</span><span class="pg-st{% if r.milestone_state == 'ok' %} ok{% endif %}">{{ r.milestone }}</span>{% if r.o.esi_only %}<span class="pg-st">Early Stage Investigators only</span>{% endif %}</span>
+  <dl class="pg-kv">
+    <div><dt>Deadline</dt><dd>{{ r.when }}</dd></div>
+    <div><dt>Amount</dt><dd>{{ r.o.amount_text|default:"See the announcement" }}</dd></div>
+    {% if r.o.sponsor %}<div><dt>Sponsor</dt><dd>{{ r.o.sponsor }}</dd></div>{% endif %}
+    {% if r.o.bulletin %}<div><dt>From</dt><dd>{% if r.o.bulletin.url %}<a href="{{ r.o.bulletin.url }}" target="_blank" rel="noopener" title="Opens the full issue in a new tab.">{{ r.o.bulletin }}</a>{% else %}{{ r.o.bulletin }}{% endif %}</dd></div>{% endif %}
+    {% if mode == 'picked' %}{% if r.why %}<div><dt>Why this fits</dt><dd>{{ r.why|linebreaksbr }}</dd></div>{% endif %}
+    <div><dt>Next step</dt><dd><a href="#s-before" data-onpage title="Opens the seven questions in Before you apply.">Weigh the opportunity with the seven questions</a></dd></div>
+    {% elif r.o.summary %}<div><dt>Notes</dt><dd>{{ r.o.summary|linebreaksbr }}</dd></div>{% endif %}
+  </dl>
+</li>

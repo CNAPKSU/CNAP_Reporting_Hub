@@ -352,3 +352,24 @@ def build(request):
         "mentors_others": any(r.relationship_type.code in MENTOR_CODES for r in rels),
         "leads_project": any(r.relationship_type.code in LED_CODES for r in rels),
     }
+
+
+def chrome(request):
+    """The Hub header's context for pages other than the homepage: the person, initials, first role,
+    open reporting count, and administrator link. Reads records only (MW 2026-11-14)."""
+    user = request.user
+    person = user.person
+    rels = list(
+        person.current_relationships().select_related("relationship_type", "core", "project")
+    )
+    is_admin = access.can_view_admin(user)
+    roles = role_lines(person, rels)
+    if not roles and is_admin:
+        roles = [access.admin_label(user)]
+    return {
+        "person": person,
+        "initials": (person.first_name[:1] + person.last_name[:1]).upper(),
+        "roles": roles,
+        "rep": reporting(person),
+        "is_admin": is_admin,
+    }

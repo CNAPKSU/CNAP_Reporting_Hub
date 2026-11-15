@@ -36,7 +36,7 @@ SCREENS = {
     "core_reports": "portal/core_reports.html",
     "core_report": "portal/core_report.html",  # Review before launch, redesigned (MW 2026-11-06)
     # Funding opportunities (MW 2026-11-10), built to the approved "Investigator Funding View" preview.
-    "funding": "proto/portal/funding.html",
+    "funding": "hub/funding.html",  # in the Member Hub design (MW 2026-11-14); off: proto/portal/funding.html
     "funding_letter": "proto/portal/funding_letter.html",
     # The CNAP Member Hub homepage (MW 2026-11-13), built from design/prototypes/member-hub/.
     "hub": "hub/home.html",

@@ -44,10 +44,16 @@ def page(request):
     letters = funding.letters_for(owner)
     nxt = funding.next_deadline(picked + everyone)
     tpl = prototype.template(request, "funding", "proto/portal/funding.html")
+    chrome = {}
+    if tpl.startswith("hub/"):
+        from . import hub
+
+        chrome = hub.chrome(request)  # the Hub header (MW 2026-11-14)
     return render(
         request,
         tpl,
         {
+            **chrome,
             "owner": owner,
             "owners": owners,
             "acting_for_other": owner.pk != request.user.person.pk,

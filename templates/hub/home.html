@@ -13,27 +13,7 @@
 {% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
 <a class="skip" href="#main">Skip to main content</a>
 
-<header class="hdr">
-  <div class="wrap">
-    <a class="brand" href="{% url 'home' %}"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="#512888"/><path d="M8.5 23.5c3.4-7.6 6.6-9.8 9.4-9.8 2.7 0 4.3 4.1 9.6 4.1" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="8.5" cy="23.5" r="2.4" fill="#fff"/><circle cx="27.5" cy="17.8" r="2.4" fill="#fff"/></svg><span><b>{{ platform_name }}</b><small>Kansas State University</small></span></a>
-    <nav class="nav" aria-label="Main"><a href="{% url 'home' %}" aria-current="page">Home</a><a href="{% url 'portal:tasks' %}">Reporting</a><a href="#res-h">Research</a><a href="#cal-h">Events</a><a href="{% url 'portal:funding' %}">Funding</a><a href="#com-h">Community</a><a href="#cores-h">Resources</a></nav>
-    <div class="tools">
-      {% if is_admin %}<a class="mywork" href="{% url 'manage:home' %}" style="border-style:dashed">Administration</a>{% endif %}
-      <a class="mywork" href="{% url 'portal:tasks' %}">My work{% if rep %} <span class="count"{% if not rep.todo %} style="background:var(--green)"{% endif %}>{{ rep.todo }}</span>{% endif %}</a>
-      <div class="acct">
-        <button type="button" class="avatar" aria-expanded="false" aria-controls="acct-menu" aria-label="{{ person.full_name }}: profile and settings">{{ initials }}</button>
-        <div class="acct-menu" id="acct-menu">
-          <p class="acct-who">{{ person.full_name }}{% if roles %}<span>{{ roles.0 }}</span>{% endif %}</p>
-          <a href="{% url 'portal:profile' %}">Profile</a>
-          <a href="{% url 'portal:history' %}">My history</a>
-          {% if is_admin %}<a href="{% url 'manage:home' %}">Administration</a>{% endif %}
-          {% if user.has_usable_password %}<a href="{% url 'password_change' %}">Change password</a>{% endif %}
-          <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button type="submit">Log out</button></form>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+{% include "hub/_header.html" with active="home" %}
 
 <main id="main">
 <button type="button" class="otp-btn" aria-expanded="false" aria-controls="otp-menu"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 4h10M3 8h10M3 12h7"/></svg>Sections</button><nav class="otp" id="otp-menu" aria-label="On this homepage"><p class="otp-h">On this homepage</p><div class="otp-track" aria-hidden="true"><span class="otp-fill"></span></div><ol><li><a href="#wk" data-t="wk">Your week</a></li><li><a href="#res-h" data-t="res-h">Research at CNAP</a></li><li><a href="#fund-h" data-t="fund-h">Funding and proposals</a></li><li><a href="#news-h" data-t="news-h">Funding news</a></li><li><a href="#pw-h" data-t="pw-h">Proposal writing toolkit</a></li><li><a href="#cal-h" data-t="cal-h">Calendar</a></li><li><a href="#com-h" data-t="com-h">Community</a></li><li><a href="#list-h" data-t="list-h">Emails from the CNAP listserv</a></li><li><a href="#ev-h" data-t="ev-h">NeuroSync</a></li><li><a href="#cores-h" data-t="cores-h">Research cores</a></li><li><a href="#onb-h" data-t="onb-h">Getting started</a></li><li><a href="#ph-h" data-t="ph-h">2026 Site Visit Photos</a></li></ol></nav>
@@ -162,7 +142,7 @@
             <a href="#pw-h"><b>Respond to reviews</b><span>Summary statements and resubmission</span></a>
             <a href="#pw-h"><b>Manage the award</b><span>Progress reports and closeout</span></a>
           </nav>
-          <div class="consult"><p>Talk through a draft, one on one, with the Assistant Director for Grants and Contracts.</p><a class="btn" href="mailto:{{ evaluator_email }}?subject=Talk%20through%20a%20draft">Book a time</a></div>
+          <div class="consult"><p>Talk through a draft, one on one, with the Assistant Director for Grants and Contracts.</p><a class="btn" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a></div>
         </aside>
       </div>
       <div class="sheet news-sheet">

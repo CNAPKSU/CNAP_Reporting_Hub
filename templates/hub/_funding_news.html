@@ -1,0 +1,7 @@
+{# One funding news item (MW 2026-11-14, Member Hub design): the CNAP team's summary, with the source. #}
+<li class="pg-rec">
+  <span class="pg-name pg-name-t">{{ n.headline }}</span>
+  {% if n.pinned %}<span class="pg-chips"><span class="pg-st on">Pinned by the CNAP office</span></span>{% endif %}
+  <p class="pg-sum">{{ n.summary|linebreaksbr }}</p>
+  <dl class="pg-kv"><div><dt>Date</dt><dd>{% if n.date_text %}{{ n.date_text }}{% elif n.news_date %}{{ n.news_date|date:"F j, Y" }}{% else %}Not dated{% endif %}</dd></div>{% if n.source_url %}<div><dt>Source</dt><dd><a href="{{ n.source_url }}" target="_blank" rel="noopener" title="Opens the source in a new tab.">{{ n.source_name|default:"The source" }}</a></dd></div>{% endif %}</dl>
+</li>

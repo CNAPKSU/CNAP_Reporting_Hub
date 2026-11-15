@@ -1,0 +1,11 @@
+{# One research event or talk (MW 2026-11-14, Member Hub design). #}
+<li class="pg-rec">
+  {% if e.url %}<a class="pg-name" href="{{ e.url }}" target="_blank" rel="noopener" title="Opens the event’s details in a new tab.">{{ e.title }}</a>{% else %}<span class="pg-name pg-name-t">{{ e.title }}</span>{% endif %}
+  <dl class="pg-kv">
+    <div><dt>Date</dt><dd>{% if e.ends_on %}{{ e.starts_on|date:"F j" }} to {{ e.ends_on|date:"F j, Y" }}{% else %}{{ e.starts_on|date:"l, F j, Y" }}{% endif %}</dd></div>
+    {% if e.time_text %}<div><dt>Time</dt><dd>{{ e.time_text }}</dd></div>{% endif %}
+    {% if e.place %}<div><dt>Place</dt><dd>{{ e.place }}</dd></div>{% endif %}
+    {% if e.host %}<div><dt>Host</dt><dd>{{ e.host }}</dd></div>{% endif %}
+    {% if e.summary %}<div><dt>About</dt><dd>{{ e.summary|linebreaksbr }}</dd></div>{% endif %}
+  </dl>
+</li>
