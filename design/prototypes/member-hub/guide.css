@@ -924,3 +924,38 @@ body.co-bn{--acc:var(--amber);--acc-ink:#5e3300;--acc-tint:#f5ece1}
 @media (max-width:900px){.ev{grid-template-columns:minmax(0,1fr)}.ev .ev-add{padding-top:6px}}
 @media (max-width:900px){.lu li{grid-template-columns:44px minmax(0,1fr);gap:4px 14px}.lu-i{grid-row:span 3}.lu-dt,.lu b,.lu-w{grid-column:2}}
 @media (max-width:760px){.ev-feat{grid-template-columns:1fr;padding:24px 22px}.ev-poster{flex-direction:row;align-items:baseline;gap:10px;padding:0 0 16px;border-right:0;border-bottom:1px solid var(--line);min-width:0}.p-num{font-size:64px;margin:0}.p-mon{font-size:24px}.ag-day{grid-template-columns:64px minmax(0,1fr);gap:14px}.ag-n{font-size:34px}.ev-side{grid-template-columns:1fr}.ev-svg{grid-template-columns:1fr}.ev-svd{flex-direction:row;gap:10px;align-items:baseline;justify-content:flex-start;min-width:0;padding:16px 20px}.ev-svd b{font-size:48px}.ev-bar{position:static}}
+
+/* Research at CNAP, step 1 (MW 2026-11-14): the sleep story is the main feature, and the other stories sit in a carousel at the bottom */
+.rs-body{gap:72px}
+.rs-feat{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);border-radius:12px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:0 1px 1px rgba(29,27,33,.04),0 24px 48px -28px rgba(60,29,102,.28)}
+.rs-feat-im{position:relative;display:block;min-height:520px;background:#1a1024;overflow:hidden}
+.rs-feat-im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.rs-feat:hover .rs-feat-im img{transform:scale(1.025)}
+.rs-feat-im .tag{position:absolute;left:12px;top:12px}
+.rs-feat-t{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:14px;padding:48px 52px}
+.rs-feat-t h2{font:400 clamp(34px,3.4vw,50px)/1.1 var(--serif);letter-spacing:-.015em;text-wrap:balance}
+.rs-feat-t h2 a{color:var(--ink);text-decoration:none}
+.rs-feat-t h2 a:hover{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1.5px}
+.rs-feat-d{font-size:18px;line-height:29px;color:var(--ink-2);max-width:46ch}
+.rs-feat-t .meta{font-size:14px}
+.rs-feat-t .btn{margin-top:10px}
+.rs-more{position:relative;border-top:1px solid var(--line);padding-top:32px}
+.rs-more::before{content:"";position:absolute;right:0;top:-1px;width:40px;height:2px;background:var(--ink)}
+.rs-more-h{display:flex;align-items:flex-end;justify-content:space-between;gap:16px 32px;flex-wrap:wrap}
+.rs-more-h h2{font:400 32px/1.15 var(--serif);letter-spacing:-.01em}
+.rs-more-h .meta{margin-top:6px;font-size:15px}
+.rs-nav{display:flex;gap:10px}
+.rs-nav button{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);cursor:pointer;transition:background-color .15s,border-color .15s}
+.rs-nav button:hover:not(:disabled){background:var(--band);border-color:var(--ink-2)}
+.rs-nav button:disabled{opacity:.4;cursor:default}
+.rs-more .rs-filt{margin-top:20px}
+.rs-car{list-style:none;margin:24px 0 0;padding:0 0 8px;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px) / 3);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:0;scrollbar-width:none;overscroll-behavior-x:contain}
+.rs-car::-webkit-scrollbar{display:none}
+.rs-car .sc{scroll-snap-align:start}
+.rs-car .sc[hidden]{display:none}
+@media (max-width:1100px){.rs-feat{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}.rs-feat-im{min-height:420px}.rs-feat-t{padding:36px 36px}}
+@media (max-width:900px){.rs-car{grid-auto-columns:calc((100% - 20px) / 2)}}
+@media (max-width:760px){.rs-feat{grid-template-columns:1fr}.rs-feat-im{min-height:0;aspect-ratio:16/10}.rs-feat-t{padding:28px 24px 30px}.rs-feat-d{font-size:17px;line-height:27px}.rs-body{gap:56px}}
+@media (max-width:560px){.rs-car{grid-auto-columns:84%}}
+@media (prefers-reduced-motion:reduce){.rs-feat-im img{transition:none}}
+.rs-body>*{min-width:0}
