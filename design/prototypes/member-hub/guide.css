@@ -1962,3 +1962,4 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-north path{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .sv-north text{font:600 12px var(--sans);fill:var(--muted);text-anchor:middle}
 .sv-hc-head{padding-top:14px;border-top:1px solid var(--line-2)}
+.sv-q2{align-self:start}.sv-q2 blockquote{padding-top:24px}
