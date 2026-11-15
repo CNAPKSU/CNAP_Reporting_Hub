@@ -2025,3 +2025,21 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-v{grid-template-columns:auto 112px minmax(0,1fr)!important;align-items:start}
 .sv-vph{width:112px;height:76px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
 @media (max-width:520px){.sv-v{grid-template-columns:auto minmax(0,1fr)!important}.sv-vph{grid-column:2;width:100%;height:auto;aspect-ratio:2/1;max-width:100%}}
+/* Last year's feedback, organized: three labeled tiers on one grid (MW 2026-11-14) */
+.sv-fb{display:grid;gap:56px;margin-top:40px}
+.sv-fbb>.sv-ck2{margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.sv-fb .sv-hstats2{margin:0}
+.sv-fbq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.sv-fq{position:relative;margin:0;padding:28px 28px 24px 64px;border-radius:12px;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.sv-fqm{position:absolute;left:22px;top:14px;font:400 56px/1 var(--serif);color:var(--brass)}
+.sv-fq blockquote{margin:0}
+.sv-fq p{margin:0;font:400 21px/1.45 var(--serif);color:var(--ink)}
+.sv-fq figcaption{margin-top:auto;font-size:14px;color:var(--muted)}
+.sv-fbt{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.sv-fbt li{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);gap:20px;align-items:center;padding:18px 22px;border-radius:12px;background:var(--paper);border:1px solid var(--line)}
+.sv-fbt p{margin:0;line-height:23px}
+.sv-fbt span{display:block;margin-bottom:4px;font:600 12.5px/18px var(--sans);letter-spacing:.01em}
+.sv-fh{font-size:15px;color:var(--muted)}.sv-fh span{color:var(--muted)}
+.sv-fc{font-size:16px;color:var(--ink)}.sv-fc span{color:var(--purple)}
+.sv-fa{width:24px;height:24px;fill:none;stroke:var(--brass);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:820px){.sv-fbq{grid-template-columns:minmax(0,1fr)}.sv-fbt li{grid-template-columns:minmax(0,1fr);gap:10px}.sv-fa{transform:rotate(90deg)}}
