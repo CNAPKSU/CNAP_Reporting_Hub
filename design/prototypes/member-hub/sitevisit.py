@@ -124,7 +124,7 @@ page=f'''<!doctype html>
 
   <section class="sv-sec sv-why" id="sv-why" aria-labelledby="sv-why-h">
     <div class="wrap">
-      <header class="sv-sh"><h2 id="sv-why-h">Why it matters</h2><p>The Site Visit gives Center members an important opportunity to reflect on the past year and look ahead to the next. It also gives the Center’s External Advisory Committee a firsthand view of the Center’s progress and where it stands today. We hope everyone leaves motivated and encouraged in their work and in their role in the CNAP community.</p></header>
+      <header class="sv-sh"><h2 id="sv-why-h">Why it matters</h2><p>The Site Visit gives Center members an important opportunity to reflect on the past year and look ahead to the next. It also gives the Center’s External Advisory Committee a firsthand view of the Center’s progress and where it stands today. We hope everyone leaves motivated and encouraged in their work and role within the CNAP scientific community.</p></header>
       <div class="sv-three">
         <article><p class="sv-n num">01</p><h3>Stronger together</h3><p>Mentors, project leaders, core staff, and students meet in person, and the conversations started here often become collaborations.</p></article>
         <article><p class="sv-n num">02</p><h3>Science up close</h3><p>Hear where each project and core stands, walk through the labs, and see the work of two dozen students and trainees on the poster walls.</p></article>
