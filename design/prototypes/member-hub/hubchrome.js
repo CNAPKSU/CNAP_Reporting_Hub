@@ -119,6 +119,7 @@
     + 'header.f-mini .brand small,header.f-mini .mywork{display:none!important}header.f-mini .wrap{gap:10px}'
     + 'header.f-logo .brand>span{display:none}'
     + 'header .hn .hn-p{min-width:320px;padding:6px;display:grid;gap:2px}'
+    + 'header .hn .hn-p[hidden],.hn-acct .hn-p[hidden]{display:none!important}'
     + 'header .hn .hn-p a,header .hn .hn-p a:hover{display:grid;gap:1px;padding:10px 14px 10px 16px;border-radius:8px;border:0;box-shadow:none;text-decoration:none;background:transparent;position:relative}'
     + 'header .hn .hn-p a b{font:500 15px/21px var(--sans,system-ui,sans-serif);color:var(--ink,#1d1b21)}'
     + 'header .hn .hn-p a small{font:400 13px/18px var(--sans,system-ui,sans-serif);color:var(--muted,#6b6772)}'
