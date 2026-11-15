@@ -1961,3 +1961,4 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 @media (max-width:980px){.sv-fibers{-webkit-mask-image:linear-gradient(90deg,transparent 20%,#000 90%);mask-image:linear-gradient(90deg,transparent 20%,#000 90%)}}
 .sv-north path{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .sv-north text{font:600 12px var(--sans);fill:var(--muted);text-anchor:middle}
+.sv-hc-head{padding-top:14px;border-top:1px solid var(--line-2)}
