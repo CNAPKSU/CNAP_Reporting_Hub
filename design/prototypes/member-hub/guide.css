@@ -581,3 +581,6 @@ a:hover{color:var(--purple-ink)}
 .pf-side .pf-rep li{flex-wrap:wrap}
 @media (max-width:1180px){.pf-cols{grid-template-columns:1fr}.pf-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:760px){.pf-h{grid-template-columns:auto minmax(0,1fr)}.pf-contact{grid-column:1 / -1}.pf-contact div{justify-content:start}.pf-contact dt{text-align:left}.pf-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.pr > li{grid-template-columns:1fr}.pr-s{flex-direction:row;align-items:center;justify-content:flex-start}}
+
+.pf-stats{gap:0;background:var(--surface)}
+.pf-stats li{box-shadow:-1px 0 0 var(--line),0 -1px 0 var(--line)}
