@@ -59,5 +59,6 @@ car.addEventListener('scroll',ends,{passive:true});addEventListener('resize',end
 bs.forEach(function(b){b.addEventListener('click',function(){var f=b.dataset.f,n=0;bs.forEach(function(o){o.setAttribute('aria-pressed',o===b)});
 cards.forEach(function(c){var on=f==='all'||c.dataset.k===f;c.hidden=!on;if(on)n++;});num.textContent=n;none.hidden=n>0;car.hidden=n===0;car.scrollLeft=0;ends();});});ends();})();
 </script>
+<script src="hubchrome.js" defer></script>
 </body>
 </html>

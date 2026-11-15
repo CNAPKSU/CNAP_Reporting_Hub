@@ -106,5 +106,6 @@
   if('IntersectionObserver' in window){document.documentElement.classList.add('sv-js');var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -20% 0px'});document.querySelectorAll('.sv-sh').forEach(function(el){io.observe(el);});}
 })();
 </script>
+<script src="hubchrome.js" defer></script>
 </body>
 </html>

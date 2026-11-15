@@ -98,5 +98,6 @@ document.querySelectorAll('.ag-m').forEach(function(x){x.hidden=!x.querySelector
 bs.forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.k;on[k]=on[k]?0:1;b.setAttribute('aria-pressed',!!on[k]);apply();});});
 var c=document.querySelector('.ev-copyfeed');if(c)c.addEventListener('click',function(){c.textContent='Available when the Hub goes live';setTimeout(function(){c.textContent='Copy calendar link'},2400);});})();
 </script>
+<script src="hubchrome.js" defer></script>
 </body>
 </html>
