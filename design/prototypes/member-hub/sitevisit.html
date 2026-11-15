@@ -286,7 +286,9 @@
   document.querySelectorAll('[data-day]').forEach(function(a){a.addEventListener('click',function(){var t=document.getElementById('sv-t'+a.getAttribute('data-day'));if(t)t.click();});});
   (function(){var r=document.querySelector('.sv-rail'),h=document.querySelector('.sv-hero');if(!r||!h)return;function f(){r.classList.toggle('is-off',h.getBoundingClientRect().bottom>innerHeight*0.5);}addEventListener('scroll',f,{passive:true});addEventListener('resize',f);f();})();
   try{if('scrollRestoration' in history)history.scrollRestoration='manual';}catch(e){}
-  if(!location.hash){window.scrollTo(0,0);try{document.documentElement.scrollIntoView({block:'start'});}catch(e){}}
+  function svTop(){window.scrollTo(0,0);try{document.documentElement.scrollIntoView({block:'start'});}catch(e){}}
+  if(location.hash){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
+  svTop();addEventListener('load',function(){svTop();setTimeout(svTop,60);});
   var sp=document.querySelector('.sv-rail'),links=[].slice.call(sp.querySelectorAll('ol a')),secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));}),tr=sp.querySelector('.spine-track'),fl=sp.querySelector('.spine-fill'),ol=sp.querySelector('ol');
   function spy(){var y=innerHeight*.35,k=-1;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<y)k=i;});links.forEach(function(a,i){if(i===k)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');a.classList.toggle('done',i<k);});sp.classList.toggle('on',k>-1);}
   function track(){if(!tr||getComputedStyle(tr).display==='none')return;var o=ol.getBoundingClientRect().top;function dot(a){return a.getBoundingClientRect().top-o+parseFloat(getComputedStyle(a,'::before').top)+5;}var t=dot(links[0]),b=dot(links[links.length-1]);tr.style.top=(ol.offsetTop+t)+'px';tr.style.height=(b-t)+'px';var c=sp.querySelector('a[aria-current]');fl.style.height=c?(dot(c)-t)+'px':'0px';}
