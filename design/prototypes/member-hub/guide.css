@@ -2149,3 +2149,7 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 /* No one-word last lines (MW 2026-11-15) */
 p,li,dd,figcaption,blockquote{text-wrap:pretty}
 .sv-dkg{grid-template-columns:repeat(4,minmax(0,1fr))}@media (max-width:1100px){.sv-dkg{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:700px){.sv-dkg{grid-template-columns:minmax(0,1fr)}}
+.sv-dkg{grid-template-columns:repeat(5,minmax(0,1fr))}
+.sv-dkc-open{border-top-color:var(--brass)}
+.sv-dkc-open .sv-dkd{color:var(--brass)}
+@media (max-width:1240px){.sv-dkg{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:820px){.sv-dkg{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:560px){.sv-dkg{grid-template-columns:minmax(0,1fr)}}
