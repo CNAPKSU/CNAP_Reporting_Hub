@@ -2087,3 +2087,32 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-kdl span{font-size:14.5px;line-height:21px;color:var(--ink-2)}
 @media (min-width:981px){.sv-you .sv-sh{position:sticky;top:104px}}
 .sv-you .sv-yr a{margin-left:0}
+/* Key dates band, right under the hero (MW 2026-11-14) */
+.sv-dk{padding:56px 0;background:var(--paper);border-bottom:1px solid var(--line)}
+.sv-dkh{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.sv-dkh h2{margin:0;font:400 clamp(30px,3.2vw,40px)/1.15 var(--serif)}
+.sv-dkg{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.sv-dkc{display:flex;flex-direction:column;gap:6px;padding:20px 18px;border-radius:12px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--purple)}
+.sv-dkc.is-tbd{border-top-color:var(--brass);background:var(--paper);border-style:dashed;border-top-style:solid}
+.sv-dkc p{margin:0}
+.sv-dkd{font:500 14px/20px var(--sans);color:var(--purple)}
+.sv-dkc.is-tbd .sv-dkd{color:var(--brass)}
+.sv-dkt{font:400 21px/1.25 var(--serif);color:var(--ink)}
+.sv-dkx{font-size:14px;line-height:21px;color:var(--ink-2)}
+.sv-dkl{margin-top:auto!important;padding-top:10px;font-size:13.5px;color:var(--muted)}
+.sv-dkl a{color:var(--purple-ink)}
+@media (max-width:1100px){.sv-dkg{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.sv-dkg{grid-template-columns:minmax(0,1fr)}.sv-dk{padding:40px 0}}
+/* Checklist photo in place of the dates */
+.sv-ckph{margin:28px 0 0;max-width:420px}
+.sv-ckph .im{position:relative;display:block;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--surface)}
+.sv-ckph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sv-ckph .tag{position:absolute;left:12px;top:12px;padding:4px 10px;border-radius:999px;background:var(--paper);color:var(--muted);font-size:12.5px}
+@media (max-width:980px){.sv-ckph{display:none}}
+/* Section grounds alternate in a steady rhythm: paper and warm surface, with charcoal for the hero and the evening (MW 2026-11-14) */
+.sv-page main>section,.sv-page .sv-tband{border-top:0!important;border-bottom:0!important}
+#sv-dates,.sv-tband,#sv-prog,#sv-map,#sv-stay,#sv-pho,#sv-faq{background:var(--surface)}
+#sv-why,#sv-rsvp,#sv-you,#sv-food,#sv-heard{background:var(--paper)}
+#sv-dates .sv-dkc{background:var(--paper)}
+#sv-dates .sv-dkc.is-tbd{background:transparent}
+#sv-dates,.sv-tband,#sv-prog,#sv-map,#sv-stay,#sv-pho,#sv-faq{background:var(--band)}
