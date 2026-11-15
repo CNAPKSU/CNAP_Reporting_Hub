@@ -27,7 +27,6 @@ E=[# date,time,end,kind,title,detail,(enddate)
  ('2026-11-30','All day',None,'due','Fall reporting closes','Surveys and reports are due in the Member Hub',None),
  ('2026-12-02','2:30 p.m.','3:30 p.m.','ns','Machine learning for spike sorting','Dr. Daniel Kim · '+NSLOC,None),
  ('2026-12-03','10:00 a.m.','10:30 a.m.','you','Check-in with Dr. Elena Voss','Shown only to you',None),
- ('2026-12-09','2:30 p.m.','3:30 p.m.','ns','Stress, the heart, and the aging brain','Dr. Ana Herrera · '+NSLOC,None),
  ('2026-12-10','3:30 p.m.','5:00 p.m.','ctr','Fall social for members and students','Every member, student, and core user is welcome',None),
  ('2026-12-11','All day',None,'cam','Last day of fall classes','From the K-State calendar',None),
  ('2026-12-14','All week',None,'cam','Final examinations','December 14 to 18','2026-12-18'),
@@ -76,7 +75,7 @@ F=''.join(f'<button type="button" class="ev-f" aria-pressed="true" data-k="{k}">
 SUB=mt('cnap@ksu.edu','Event for the CNAP calendar','\n'.join(['Event title:','Date and time:','Location or Zoom link:','Who it is for:','','Description:','','Contact person:','']),cc=None)
 SPK=mt('cnap@ksu.edu','NeuroSync speaker suggestion','\n'.join(['Speaker name and institution:','Research topic:','Why CNAP members would value the talk:','','Your name:','']),cc=None)
 ns_next=[e for e in E if e[3]=='ns' and d(e[0])>=TODAY][0]
-lineup=[('PR','Wednesday, November 18','Memory consolidation during sleep','Dr. Priya Raman'),('DK','Wednesday, December 2','Machine learning for spike sorting','Dr. Daniel Kim'),('AH','Wednesday, December 9','Stress, the heart, and the aging brain','Dr. Ana Herrera'),('SN','Wednesday, January 27','Rodent models of memory decline','Dr. Sam Novak'),('LT','Wednesday, February 3','Learning across the lifespan','Dr. Lea Torres'),('MO','Wednesday, February 10','Attention and the sleeping brain','Dr. Maya Okafor'),('RB','Wednesday, February 17','Imaging small circuits in behaving animals','Dr. Ravi Bhat')]
+lineup=[('PR','Wednesday, November 18','Memory consolidation during sleep','Dr. Priya Raman'),('DK','Wednesday, December 2','Machine learning for spike sorting','Dr. Daniel Kim, invited speaker'),('+','Spring 2027','13 Wednesdays are open for sign-up','Sign up to present')]
 lu=''.join(f'<li><span class="lu-dt">{dt}</span><span class="lu-i" aria-hidden="true">{i}</span><b>{ti}</b><span class="lu-w">{w}</span></li>' for i,dt,ti,w in lineup)
 sv=('2027-05-25','All day',None,'ctr','CNAP Site Visit','Core tours, project presentations, keynote address and banquet, and a poster session','2027-05-26')
 html=f'''<!doctype html>

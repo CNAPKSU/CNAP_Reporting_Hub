@@ -1578,3 +1578,36 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .ns-wka{margin-top:18px}
 @media (max-width:980px){.ns-hg>div:first-child{grid-template-columns:minmax(0,1fr)}.ns-hg>div:first-child>.ns-facts{grid-column:1;grid-row:auto;margin-top:12px}
   .ns-wk{grid-template-columns:96px minmax(0,1fr);grid-template-areas:"k k" "hs side" "main main";padding:24px}.ns-hs{width:96px;height:120px}.ns-hs span{font-size:36px}.ns-wkh>div:last-child{padding-left:0;border-left:0;align-self:center}}
+/* NeuroSync on the real calendar, and the invited speaker as a flyer (MW 2026-11-14) */
+.ns-semtabs{flex-wrap:wrap}
+.ns-semtabs button{padding:12px 20px}
+.ns-ph{margin:0 0 12px;font-size:14.5px;color:var(--muted)}
+.ns-ph b{color:var(--ink)}
+.ns-ra-off{width:44px;height:2px;background:var(--line-2);border-radius:1px}
+.ns-r.is-off{padding:10px 0}
+.ns-r.is-off .ns-rd b{font-size:20px;color:var(--muted)}
+.ns-r.is-off .ns-rt{font:500 14.5px/20px var(--sans);color:var(--muted)}
+.ns-r.is-off .ns-rw{margin:0}
+.ns-fly{margin:0 0 48px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--surface);box-shadow:0 30px 60px -36px rgba(60,29,102,.4)}
+.ns-fly-top{padding:28px 32px;background:var(--night,#1d1b21);color:#f6f2fa}
+.ns-fk{margin:0 0 16px;font-size:13.5px;font-weight:600;color:#d9c08a}
+.ns-fh{display:grid;grid-template-columns:120px minmax(0,1fr);gap:24px;align-items:center}
+.ns-fly .ns-hs{width:120px;height:150px}
+.ns-fl{margin:0 0 6px;font-size:12.5px;font-weight:600;letter-spacing:.06em;color:var(--brass,#b48a3c)}
+.ns-fly-top .ns-fl{color:#d9c08a}
+.ns-fly h3{font:400 clamp(28px,3vw,40px)/1.1 var(--serif);color:#fff;text-wrap:balance}
+.ns-fn{margin:12px 0 0;font:500 20px/26px var(--serif);color:#fff}
+.ns-fr{margin:2px 0 0;font-size:14.5px;line-height:21px;color:#cfc6da}
+.ns-fly-b{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:32px;padding:26px 32px}
+.ns-fly-b p:not(.ns-fl){margin:0;font-size:15.5px;line-height:25px;color:var(--ink-2)}
+.ns-rec{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ns-rec li{padding-left:14px;border-left:2px solid var(--brass,#b48a3c);font-size:14.5px;line-height:21px;color:var(--ink)}
+.ns-fly-w{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;border-top:1px solid var(--line)}
+.ns-fly-w div{padding:18px 24px}
+.ns-fly-w div+div{border-left:1px solid var(--line)}
+.ns-fly-w dt{font-size:12.5px;font-weight:600;color:var(--muted)}
+.ns-fly-w dd{margin:4px 0 0;font-size:14.5px;line-height:21px}
+.ns-fq{margin:0;padding:14px 32px;border-top:1px solid var(--line);background:var(--paper);font-size:14.5px;color:var(--muted)}
+@media (max-width:980px){.ns-fly-b{grid-template-columns:minmax(0,1fr)}.ns-fly-w{grid-template-columns:repeat(2,minmax(0,1fr))}.ns-fly-w div:nth-child(3){border-left:0}.ns-fly-w div:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:640px){.ns-fh{grid-template-columns:80px minmax(0,1fr);gap:16px}.ns-fly .ns-hs{width:80px;height:100px}.ns-fly-top,.ns-fly-b{padding:22px 20px}.ns-fly-w{grid-template-columns:minmax(0,1fr)}.ns-fly-w div{border-left:0!important;border-top:1px solid var(--line)}.ns-fq{padding:14px 20px}}
+.ns-fly .ns-hs{grid-area:auto;width:120px;height:150px}.ns-fly .ns-hs span{font-size:44px}@media (max-width:640px){.ns-fly .ns-hs{width:80px;height:100px}.ns-fly .ns-hs span{font-size:30px}}
