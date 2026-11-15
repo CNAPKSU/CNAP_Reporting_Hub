@@ -33,10 +33,11 @@ def av(k,size=''):
 def intro(name):
     return mt('cnap@ksu.edu',f'Introduction to {name}','\n'.join(['Name:','','I would like to meet '+name+' because:','','Times that work for me:','']),cc=None)
 
-# 1. Your first month: five people to meet
+# 1. Your first month: six conversations
 FIRST=[
- ('Your mentor, Dr. Elena Voss','Set your first meeting and agree on how often you will meet. Bring your aims page and your timeline.','mentee.html','Read the mentee guide',None),
- ('Heather Bailey, Director','Introduce yourself and your project. The Director knows every project and can point you to the right people.',mt('hbailey@ksu.edu','Introduction from a new project leader','\n'.join(['Name:','Department:','Project title:','','Times that work for me:',''])),'Email Heather','hbailey@ksu.edu'),
+ ('Your onboarding meeting','The CNAP team schedules this meeting for you, your mentor, and the Center Director. Together you go over your project, your milestones, and how your award year runs.','mentee.html','Read the mentee guide to prepare',None),
+ ('Your mentor, Dr. Elena Voss','Set your regular meetings and agree on how often you will meet. Bring your aims page and your timeline.','mentee.html#s2','About your mentoring agreement',None),
+ ('Heather Bailey, Director','After your onboarding meeting, reach out to the Director any time for introductions to people and resources across the Center.',mt('hbailey@ksu.edu','Introduction from a new project leader','\n'.join(['Name:','Department:','Project title:','','Times that work for me:',''])),'Email Heather','hbailey@ksu.edu'),
  ('Morgan Wills, Assistant Director for Grants and Contracts','Plan your path to the R01 milestone, from your first submission to resubmission.',mt('mkwills@ksu.edu','Proposal planning meeting','\n'.join(['Name:','Department:','Project title:','','Funding I am considering:','','Times that work for me:',''])),'Book a time','mkwills@ksu.edu'),
  ('Roxana Ortiz, Grant Specialist and Accountant','Set up your budget, purchasing, and travel reimbursements before your first expense.',mt('roxana@ksu.edu','Budget and purchasing setup','\n'.join(['Name:','Department:','Project title:','','Questions about my budget or purchasing:',''])),'Email Roxana','roxana@ksu.edu'),
  ('The research cores you will use','Take an orientation with each core before you book time. Each core page lists its services and how to start.','index.html#cores-h','See the research cores',None),
@@ -86,7 +87,34 @@ AN=[('12','November','CNAP Administrative Core','Reminder: Year 11 pilot letters
     ('4','November','CNAP Administrative Core','Updated travel and reimbursement guidelines','The attached guide replaces last year’s version and takes effect December 1.',True)]
 ann=''.join(f'''<li><span class="cm-ad2"><b>{d}</b>{m}</span><div><p class="cm-af">{f}</p><p class="cm-at2">{t}</p><p class="cm-ad3">{x}</p>{'<p class="cm-att">Attachment</p>' if a else ''}</div></li>''' for d,m,f,t,x,a in AN)
 
-SECS=[('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Who knows what'),('cm-dir','Member directory'),('cm-ask','Ask the community'),('cm-ach','Recent achievements'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
+
+import math,random
+random.seed(7)
+W,H,CX,CY=520,380,260,190
+GROUPS=[('pl','Project leaders',14),('mn','Mentors',11),('co','Core staff',9),('st','Students',17),('al','Alumni',6)]
+outer=[];idx=0;tot=sum(n for _,_,n in GROUPS)
+for g,_,n in GROUPS:
+    for k in range(n):
+        a=2*math.pi*(idx/tot)+random.uniform(-.05,.05);r=random.uniform(150,178)
+        outer.append((g,CX+r*math.cos(a)*1.0,CY+r*math.sin(a)*0.92));idx+=1
+MATCHN=[('jl','Jordan Lee','Sleep EEG',-2.35),('pr','Priya Raman','Sleep and memory',-0.75),('ms','Maya Singh','Aging',0.45),('om','Omar Mendes','Sleep',2.2)]
+mpos=[(k,nm,why,CX+120*math.cos(a),CY+120*math.sin(a)*0.86) for k,nm,why,a in MATCHN]
+lines=[]
+for n,(g,x,y) in enumerate(outer):
+    m=outer[(n+1)%len(outer)]
+    lines.append(f'<path class="cm-l0" d="M{x:.1f} {y:.1f}L{m[1]:.1f} {m[2]:.1f}"/>')
+    if n%5==0:
+        k,nm,why,mx,my=mpos[min(3,int(4*n/len(outer)))]
+        lines.append(f'<path class="cm-l1" d="M{x:.1f} {y:.1f}L{mx:.1f} {my:.1f}"/>')
+for k,nm,why,x,y in mpos:
+    lines.append(f'<path class="cm-l2" d="M{CX} {CY}L{x:.1f} {y:.1f}"/>')
+dots=''.join(f'<circle class="cm-g-{g}" cx="{x:.1f}" cy="{y:.1f}" r="{4.5 if g!="st" else 3.5}"/>' for g,x,y in outer)
+mnodes=''.join(f'<g class="cm-mn2" style="--d:{.25*i+.6}s"><circle cx="{x:.1f}" cy="{y:.1f}" r="21"/><text class="cm-ini" x="{x:.1f}" y="{y+5:.1f}">{BY[k][1]}</text><text class="cm-nm" x="{x:.1f}" y="{y+37:.1f}">{nm}</text><text class="cm-wy" x="{x:.1f}" y="{y+51:.1f}">{why}</text></g>' for i,(k,nm,why,x,y) in enumerate(mpos))
+legend=''.join(f'<li><i class="cm-k-{g}"></i>{lbl}</li>' for g,lbl,_ in GROUPS)
+NET=f'''<figure class="cm-net"><svg viewBox="0 0 {W} {H}" role="img" aria-label="You at the center of the CNAP network of 61 members, with four members who share your interests nearest to you"><g class="cm-ls">{''.join(lines)}</g><g class="cm-outer">{dots}</g>{mnodes}<g class="cm-me2"><circle class="cm-halo" cx="{CX}" cy="{CY}" r="44"/><circle cx="{CX}" cy="{CY}" r="32"/><text x="{CX}" y="{CY+6}">AO</text></g></svg>
+          <figcaption><span>You, the four members who share your interests, and 57 more across the Center.</span><ul class="cm-legend">{legend}</ul></figcaption></figure>'''
+
+SECS=[('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-ask','Ask the community'),('cm-ach','Recent achievements'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
 spine=''.join(f'<li><a href="#{i}"><span class="n"><b>{n}</b></span><span>{t}</span></a></li>' for n,(i,t) in enumerate(SECS,1))
 SHARE=mt('cnap@ksu.edu','An achievement to share','\n'.join(['Name:','','The achievement (a paper, grant, talk, award, or milestone):','','A link, if there is one:','']),cc=None)
 
@@ -107,17 +135,10 @@ page=f'''<!doctype html>
         <div class="cm-hd">
           <p class="for">The people of CNAP</p>
           <h1 id="t">Community</h1>
-          <p class="lead">Who works on what, who to ask, and where to meet. Start here to find a collaborator, a second opinion on your methods, or the person who has already solved your problem.</p>
-          <div class="co-act"><button type="button" class="btn pri" data-compose>Start a conversation thread</button><a class="btn" href="{SHARE}">Share an achievement</a></div>
+          <p class="lead">Who works on what, who to ask, and where to meet. Start here to find a collaborator, a second opinion on your methods, or someone who has navigated a similar challenge.</p>
+          <div class="co-act"><button type="button" class="btn pri" data-compose>Start a conversation thread</button><button type="button" class="btn" data-share>Share an achievement</button></div>
         </div>
-        <figure class="cm-net" aria-label="61 members, with the four who share your interests highlighted">
-          <svg viewBox="0 0 420 300" aria-hidden="true"><g class="cm-lines"><path d="M210 150 98 70M210 150 320 64M210 150 352 190M210 150 120 236M210 150 248 262M98 70 40 150M98 70 190 40M320 64 392 110M352 190 392 110M120 236 40 150M248 262 352 190M190 40 320 64"/></g>
-          <g class="cm-dots"><circle cx="40" cy="150" r="7"/><circle cx="190" cy="40" r="7"/><circle cx="392" cy="110" r="7"/><circle cx="248" cy="262" r="7"/><circle cx="60" cy="260" r="5"/><circle cx="300" cy="20" r="5"/><circle cx="400" cy="250" r="5"/><circle cx="20" cy="60" r="5"/></g>
-          <g class="cm-match-dots"><circle cx="98" cy="70" r="20"/><circle cx="320" cy="64" r="20"/><circle cx="352" cy="190" r="20"/><circle cx="120" cy="236" r="20"/></g>
-          <g class="cm-you"><circle cx="210" cy="150" r="30"/></g>
-          <g class="cm-lbl"><text x="210" y="155">AO</text><text x="98" y="75">JL</text><text x="320" y="69">PR</text><text x="352" y="195">MS</text><text x="120" y="241">OM</text></g></svg>
-          <figcaption>You and the four members who share your interests in sleep, memory, and EEG.</figcaption>
-        </figure>
+        {NET}
       </div>
       <ul class="co-facts" aria-label="At a glance"><li><b class="num">61</b><span>Members</span></li><li><b class="num">3</b><span>Joined this month</span></li><li><b class="num">14</b><span>Open conversation threads</span></li><li><b class="num">2</b><span>Grants awarded this fall</span></li></ul>
     </div>
@@ -125,17 +146,21 @@ page=f'''<!doctype html>
 
   <div class="guide">
     <div class="wrap">
+      <nav class="spine" aria-label="Sections on this page">
+        <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
+        <ol>{spine}</ol>
+      </nav>
       <div class="steps">
         <section class="step cs" id="cm-first" aria-labelledby="cm-first-h">
           <h2 id="cm-first-h">Your first month</h2>
-          <div class="cs-b"><p>Five conversations that make the rest of your award easier. Most new project leaders have all five in their first four weeks.</p><ol class="cm-first">{first}</ol></div>
+          <div class="cs-b"><p>Six conversations that make the rest of your award easier, best held in your first month.</p><ol class="cm-first">{first}</ol></div>
         </section>
         <section class="step cs" id="cm-match" aria-labelledby="cm-match-h">
           <h2 id="cm-match-h">Members who share your interests</h2>
           <div class="cs-b"><p>Matched on the interests in your profile: sleep, memory, aging, and EEG. The CNAP team makes the introduction, so nobody gets a cold email.</p><ul class="cm-mcs">{match}</ul></div>
         </section>
         <section class="step cs" id="cm-know" aria-labelledby="cm-know-h">
-          <h2 id="cm-know-h">Who knows what</h2>
+          <h2 id="cm-know-h">Member interests and expertise</h2>
           <div class="cs-b"><p>Methods and topics members have listed on their profiles. Select one to see who knows it in the directory.</p><ul class="cm-sks">{skills}</ul></div>
         </section>
         <section class="step cs" id="cm-dir" aria-labelledby="cm-dir-h">
@@ -158,7 +183,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-ach" aria-labelledby="cm-ach-h">
           <h2 id="cm-ach-h">Recent achievements</h2>
-          <div class="cs-b"><ul class="cm-acs">{ach}</ul><p class="meta">Have news of your own? <a href="{SHARE}">Share an achievement</a> and the CNAP team will post it here and in the Center’s reports.</p></div>
+          <div class="cs-b"><ul class="cm-acs">{ach}</ul><p class="meta">Have news of your own? <button type="button" class="t3" data-share>Share an achievement</button> and the CNAP team will post it here and in the Center’s reports.</p></div>
         </section>
         <section class="step cs" id="cm-ways" aria-labelledby="cm-ways-h">
           <h2 id="cm-ways-h">Ways to connect</h2>
@@ -173,10 +198,7 @@ page=f'''<!doctype html>
           <div class="cs-b"><div class="cm-priv"><div><p class="cm-pk">Other members see</p><ul class="dots"><li>Your name, role, and department</li><li>The research interests and methods you list</li><li>The publications, talks, and grants you choose to show</li></ul></div><div><p class="cm-pk">Other members never see</p><ul class="dots"><li>Your Mentee Survey answers, which stay confidential</li><li>Your reporting and its status</li><li>Funding opportunities picked for you, and letters from the Center</li></ul></div></div><p><a class="btn" href="mentee-profile.html">Review your profile</a></p></div>
         </section>
       </div>
-      <aside class="co-rail" aria-label="Your community profile"><div class="co-rc cm-me"><p class="co-rk">Your community profile</p><span class="cm-av av-p lg" aria-hidden="true">AO</span><p class="co-pn">Dr. Amara Okafor</p><p class="pp-r">Pilot project leader, Grant Year 10</p><p class="cm-chips"><span>Sleep</span><span>Memory</span><span>Aging</span><span>EEG</span></p><dl class="co-rd"><div><dt>Mentor</dt><dd>Dr. Elena Voss</dd></div><div><dt>Cores you use</dt><dd><a href="core-cn.html">Cognitive Neuroscience</a> and <a href="core-ni.html">Neuroinformatics</a></dd></div></dl><a class="t3" href="mentee-profile.html">Review your profile</a></div><nav class="spine spine-r" aria-label="Sections on this page">
-        <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
-        <ol>{spine}</ol>
-      </nav></aside>
+      <aside class="co-rail" aria-label="Your community profile"><div class="co-rc cm-me"><p class="co-rk">Your community profile</p><span class="cm-av av-p lg" aria-hidden="true">AO</span><p class="co-pn">Dr. Amara Okafor</p><p class="pp-r">Pilot project leader, Grant Year 10</p><p class="cm-chips"><span>Sleep</span><span>Memory</span><span>Aging</span><span>EEG</span></p><dl class="co-rd"><div><dt>Mentor</dt><dd>Dr. Elena Voss</dd></div><div><dt>Cores you use</dt><dd><a href="core-cn.html">Cognitive Neuroscience</a> and <a href="core-ni.html">Neuroinformatics</a></dd></div></dl><a class="t3" href="mentee-profile.html">Review your profile</a></div></aside>
     </div>
   </div>
 </main>
@@ -196,6 +218,19 @@ page=f'''<!doctype html>
     <div class="cm-fb"><button type="submit" value="cancel" class="btn">Cancel</button><button type="button" class="btn pri" data-post>Post the thread</button></div>
   </form>
 </dialog>
+<dialog class="cm-compose cm-share" aria-labelledby="cms-h">
+  <form method="dialog" class="cm-form">
+    <h2 id="cms-h">Share an achievement</h2>
+    <p class="cm-sub">Choose something you have already recorded in the Member Hub, or describe something new. The CNAP team posts it here and adds it to the Center’s reports.</p>
+    <fieldset class="cm-prods"><legend>From your publications, presentations, proposals, and awards</legend><label class="cm-pi"><input type="radio" name="prod" value="0" checked><span><b>Publication</b>Slow oscillations and overnight retention in healthy aging<small>Neurobiology of Learning and Memory · Under review</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="1"><span><b>Presentation</b>Sleep, memory, and the aging brain<small>NeuroSync Weekly Speaker Series · September 2026</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="2"><span><b>Proposal</b>Slow-wave sleep enhancement and memory in older adults<small>NIH R21, National Institute on Aging · Submitted June 16, 2026</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="3"><span><b>Presentation</b>Nap timing restores word-pair retention in older adults with fragmented sleep<small>National sleep research meeting · Abstract submitted</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="4"><span><b>Publication</b>Sleep spindles and next-day recall: a pilot study<small>Journal of Sleep Research · Published March 2025</small></span></label>
+      <label class="cm-pi"><input type="radio" name="prod" value="new"><span><b>Something else</b>A new paper, talk, proposal, award, or milestone</span></label>
+    </fieldset>
+    <div class="cm-newfields" hidden><label for="cms-t">What happened</label><input id="cms-t" type="text" placeholder="For example: my R21 was funded by the National Institute on Aging"><label for="cms-l">A link <span class="cm-opt">(optional)</span></label><input id="cms-l" type="text" inputmode="url"></div>
+    <label for="cms-n">A sentence for members <span class="cm-opt">(optional)</span></label><textarea id="cms-n" rows="2" placeholder="What it means for your project, or who helped"></textarea>
+    <p class="cm-note" role="status" hidden>Prototype only. In the Member Hub, the CNAP team reviews your achievement, posts it in Community, and adds it to the Center’s reports.</p>
+    <div class="cm-fb"><button type="submit" value="cancel" class="btn">Cancel</button><button type="button" class="btn pri" data-sendach>Share it</button></div>
+  </form>
+</dialog>
 <footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. The members, threads, and achievements are fictional. The Director, the Assistant Director for Grants and Contracts, and the Grant Specialist are real staff. Posting threads isn’t connected yet.</span></div></footer>
 <script src="guide.js"></script>
 <script>
@@ -213,6 +248,9 @@ page=f'''<!doctype html>
   dlg.querySelector('[data-post]').addEventListener('click',function(){{dlg.querySelector('.cm-note').hidden=false;}});
   var PH={{funding:'For example: has anyone applied for the Brain & Behavior Research Foundation Young Investigator Grant?',expertise:'For example: does anyone know someone who runs TMS with EEG?',student:'For example: I am hiring a graduate student to run sleep EEG sessions in the spring',other:'For example: who has run sleep EEG with older adults?'}},ti=dlg.querySelector('#cmc-t');
   dlg.querySelectorAll('input[name=kind]').forEach(function(r){{r.addEventListener('change',function(){{ti.placeholder=PH[r.value];}});}});
+  var sd=document.querySelector('.cm-share');document.querySelectorAll('[data-share]').forEach(function(b){{b.addEventListener('click',function(){{try{{sd.showModal();}}catch(e){{sd.setAttribute('open','')}}sd.querySelector('.cm-note').hidden=true;}});}});
+  sd.querySelectorAll('input[name=prod]').forEach(function(r){{r.addEventListener('change',function(){{sd.querySelector('.cm-newfields').hidden=r.value!=='new';}});}});
+  sd.querySelector('[data-sendach]').addEventListener('click',function(){{sd.querySelector('.cm-note').hidden=false;}});
   try{{var k=new URLSearchParams(location.search).get('t');if(k&&PH[k]){{var r=dlg.querySelector('input[value='+k+']');r.checked=true;ti.placeholder=PH[k];setTimeout(function(){{try{{dlg.showModal();}}catch(e){{dlg.setAttribute('open','')}}}},400);}}}}catch(e){{}}
 }})();
 </script>

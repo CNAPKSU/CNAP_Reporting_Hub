@@ -466,3 +466,20 @@ a.fp-evh:hover{color:var(--purple);text-decoration:underline;text-underline-offs
   .fp-body>.wrap>.fp-sidecol{position:static;align-self:stretch;align-content:start}
   .fp-sidecol .spine,.fp-sidecol .spine:hover,.fp-sidecol .spine:focus-within{position:sticky!important;top:104px!important}
 }
+/* NIH opportunities for IDeA states (MW 2026-11-14) */
+.fp-idea{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.fp-ic{display:flex;flex-direction:column;gap:10px;padding:24px 26px;border-radius:10px;background:var(--surface);box-shadow:var(--sh);min-width:0}
+.fp-ic h3{font:400 22px/28px var(--serif);color:var(--ink);text-wrap:balance}
+.fp-ic>p{font-size:15.5px;line-height:25px;color:var(--ink-2)}
+.fp-ic-lead{grid-column:1/-1;box-shadow:inset 0 3px 0 var(--purple),var(--sh)}
+.fp-ic:has(.fp-tbl){grid-column:1/-1}
+.fp-ic-next{margin-top:4px;padding:12px 16px;border-radius:8px;background:var(--purple-tint);color:var(--purple-ink)!important;font-weight:500}
+.fp-ic-note{margin-top:4px;padding-top:12px;border-top:1px solid var(--line);font-size:14.5px!important;color:var(--muted)!important}
+.fp-tbl{overflow-x:auto;margin-top:4px}
+.fp-tbl table{width:100%;border-collapse:collapse;font-size:15px;line-height:23px}
+.fp-tbl th,.fp-tbl td{text-align:left;vertical-align:top;padding:12px 16px 12px 0;border-top:1px solid var(--line)}
+.fp-tbl thead th{border-top:0;padding-top:0;font-size:13px;font-weight:600;color:var(--muted)}
+.fp-tbl tbody th{font:500 16px/23px var(--serif);color:var(--ink);min-width:200px}
+.fp-tbl tbody th span{display:block;font:500 13px/20px var(--sans);color:var(--muted)}
+.fp-tbl td{color:var(--ink-2)}
+@media (max-width:760px){.fp-idea{grid-template-columns:minmax(0,1fr)}.fp-ic{padding:20px}}

@@ -1142,25 +1142,59 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 @media (max-width:980px){.cm-hero{grid-template-columns:minmax(0,1fr)}.cm-net{max-width:440px}}
 @media (max-width:760px){.cm-mcs,.cm-acs,.cm-ways,.cm-priv{grid-template-columns:minmax(0,1fr)}.cm-priv>div+div{border-left:0;border-top:1px solid var(--line)}.cm-sks{grid-template-columns:minmax(0,1fr)}.cm-dr{grid-template-columns:44px minmax(0,1fr)}.cm-dr .t3,.cm-dr .cm-chips{grid-column:2}.cm-th{grid-template-columns:44px minmax(0,1fr)}.cm-th .st{grid-column:2;justify-self:start}.cm-first li{padding:18px;gap:14px}}
 
-/* Core pages and Community (MW 2026-11-14): On this page sits in the right-hand column, under the contact or profile card, and stays open, so it never covers the sections */
-@media (min-width:981px){
-  .core-page .guide .wrap{grid-template-columns:minmax(0,1fr) 300px!important;gap:56px}
-  .core-page .guide .wrap>.steps{grid-area:auto}
-  .core-page .guide .wrap>.co-rail{grid-area:auto;display:grid;gap:20px;align-content:start}
-  .co-rail .spine-r,.co-rail .spine-r:hover,.co-rail .spine-r:focus-within{position:relative;top:auto;width:auto;margin:0;padding:20px 22px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:none}
-  .co-rail .spine-r .spine-h{display:block;font:500 19px/24px var(--serif);padding-bottom:12px}
-  .co-rail .spine-r a{height:auto;padding:6px 0 6px 18px;overflow:visible;white-space:normal;color:var(--ink-2)!important}
-  .co-rail .spine-r a[aria-current="step"]{color:var(--acc-ink)!important;font:500 16px/22px var(--serif)}
-  .co-rail .spine-r a::before{left:-1px;top:13px}
-  .co-rail .spine-r .spine-track{display:block;left:23.5px}
-  .co-rail .spine-r a .n{display:none}
-}
-@media (max-width:980px){.core-page .co-rail{display:grid;gap:16px;order:-1}.core-page .co-rail .co-rc{display:none}}
 .guide .wrap>*,.co-rail>*{min-width:0}
-@media (max-width:980px){.co-rail .spine-r ol{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}.co-rail .spine-r a{white-space:nowrap}}
 .cm-kinds{border:0;margin:0 0 4px;padding:0;display:grid;gap:6px}
 .cm-kinds legend{font-size:14.5px;font-weight:600;margin-bottom:8px;padding:0}
 .cm-kinds label{display:flex;align-items:center;gap:10px;margin:0;padding:10px 12px;border:1px solid var(--line-2);border-radius:8px;font-size:15px;font-weight:500;cursor:pointer}
 .cm-kinds label:has(input:checked){border-color:var(--purple);background:var(--purple-tint);color:var(--purple-ink)}
 .cm-kinds input{width:16px;height:16px;min-height:0;accent-color:var(--purple);margin:0}
-@media (min-width:981px){.core-page .guide .wrap>.co-rail{position:static;align-self:stretch}.co-rail .co-rc{position:static}.co-rail .spine-r,.co-rail .spine-r:hover,.co-rail .spine-r:focus-within{position:sticky;top:104px}}
+
+/* Community network, richer (MW 2026-11-14): the whole Center in a ring, the four matched members nearest you, a legend */
+.cm-hero{grid-template-columns:minmax(0,1fr) minmax(0,520px)}
+.cm-ls path{fill:none}
+.cm-l0{stroke:var(--line);stroke-width:1}
+.cm-l1{stroke:var(--line-2);stroke-width:1;stroke-dasharray:2 3}
+.cm-l2{stroke:var(--teal);stroke-width:2;stroke-linecap:round}
+.cm-g-pl,.cm-k-pl{fill:#7c55b8;background:#7c55b8}
+.cm-g-mn,.cm-k-mn{fill:var(--teal);background:var(--teal)}
+.cm-g-co,.cm-k-co{fill:#b9772c;background:#b9772c}
+.cm-g-st,.cm-k-st{fill:#c4b5dc;background:#c4b5dc}
+.cm-g-al,.cm-k-al{fill:#8c8694;background:#8c8694}
+.cm-mn2 circle{fill:#e4efec;stroke:var(--teal);stroke-width:2}
+.cm-mn2 text{text-anchor:middle}
+.cm-ini{font:500 14px var(--serif);fill:#07474e}
+.cm-nm{font:600 12px var(--sans);fill:var(--ink)}
+.cm-wy{font:500 11px var(--sans);fill:var(--teal)}
+.cm-me2 circle{fill:var(--purple)}
+.cm-me2 .cm-halo{fill:none;stroke:var(--purple);stroke-opacity:.25;stroke-width:6}
+.cm-me2 text{font:500 18px var(--serif);fill:#fff;text-anchor:middle}
+.cm-net figcaption{display:grid;gap:10px;justify-items:center}
+.cm-legend{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;font-size:13px;color:var(--muted)}
+.cm-legend li{display:inline-flex;align-items:center;gap:6px}
+.cm-legend i{width:9px;height:9px;border-radius:50%}
+@media (prefers-reduced-motion:no-preference){
+  .cm-l2{stroke-dasharray:120;stroke-dashoffset:120;animation:cmdraw 1s cubic-bezier(.2,.7,.2,1) .4s forwards}
+  .cm-mn2{opacity:0;animation:cmin .6s ease-out var(--d) forwards}
+  .cm-me2 .cm-halo{animation:cmhalo 3.6s ease-in-out 1.6s infinite}
+  .cm-match-dots circle{animation:none}
+}
+@keyframes cmdraw{to{stroke-dashoffset:0}}
+@keyframes cmin{to{opacity:1}}
+@keyframes cmhalo{0%,100%{stroke-opacity:.25;stroke-width:6}50%{stroke-opacity:.08;stroke-width:14}}
+
+/* share an achievement */
+.cm-share{width:min(620px,calc(100vw - 32px))}
+.cm-sub{margin:-4px 0 6px;font-size:15px;line-height:23px;color:var(--ink-2)}
+.cm-prods{border:0;margin:0;padding:0;display:grid;gap:8px;max-height:46vh;overflow:auto}
+.cm-prods legend{font-size:14.5px;font-weight:600;margin-bottom:8px;padding:0}
+.cm-pi{display:grid;grid-template-columns:18px minmax(0,1fr);gap:12px;align-items:start;margin:0!important;padding:12px 14px;border:1px solid var(--line-2);border-radius:8px;cursor:pointer;font-weight:400!important}
+.cm-pi:has(input:checked){border-color:var(--purple);background:var(--purple-tint)}
+.cm-pi input{width:16px;height:16px;min-height:0;margin:3px 0 0;accent-color:var(--purple)}
+.cm-pi span{display:grid;gap:2px;font:500 16px/22px var(--serif);color:var(--ink)}
+.cm-pi b{font:600 12.5px/18px var(--sans);color:var(--purple)}
+.cm-pi small{font:400 13.5px/20px var(--sans);color:var(--muted)}
+.cm-newfields{display:grid;gap:8px}
+.cm-newfields[hidden]{display:none}
+.cm-mn2 text{paint-order:stroke;stroke:var(--surface);stroke-width:5px;stroke-linejoin:round}
+.cm-mn2 .cm-ini{stroke:none}
+.cm-l1{stroke-opacity:.55}
