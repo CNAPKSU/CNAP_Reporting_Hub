@@ -2030,11 +2030,11 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-fbb>.sv-ck2{margin:0 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
 .sv-fb .sv-hstats2{margin:0}
 .sv-fbq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.sv-fq{position:relative;margin:0;padding:28px 28px 24px 64px;border-radius:12px;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.sv-fquo{position:relative;margin:0;padding:28px 28px 24px 64px;border-radius:12px;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
 .sv-fqm{position:absolute;left:22px;top:14px;font:400 56px/1 var(--serif);color:var(--brass)}
-.sv-fq blockquote{margin:0}
-.sv-fq p{margin:0;font:400 21px/1.45 var(--serif);color:var(--ink)}
-.sv-fq figcaption{margin-top:auto;font-size:14px;color:var(--muted)}
+.sv-fquo blockquote{margin:0}
+.sv-fquo p{margin:0;font:400 21px/1.45 var(--serif);color:var(--ink)}
+.sv-fquo figcaption{margin-top:auto;font-size:14px;color:var(--muted)}
 .sv-fbt{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .sv-fbt li{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);gap:20px;align-items:center;padding:18px 22px;border-radius:12px;background:var(--paper);border:1px solid var(--line)}
 .sv-fbt p{margin:0;line-height:23px}
