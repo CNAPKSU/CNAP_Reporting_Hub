@@ -98,7 +98,7 @@ ck=''.join(f'''<ul class="sv-ck" data-role="{k}"{'' if k=='all' else ' hidden'}>
 HINT={'all':'The essentials for everyone','talk':'Your talk slot and slides','poster':'Hanging and presenting your poster','mentor':'Your hotel and the discussions','core':'Your update, tours, and the closed meeting','eac':'The closed meeting and the meeting agenda'}
 roles=''.join(f'<button type="button" aria-pressed="{"true" if k=="all" else "false"}" data-role="{k}"><span class="sv-rt">{l}</span><span class="sv-rh">{HINT[k]}</span></button>' for k,l in ROLES)
 
-FAQ=[('I’m presenting. When do I send my slides?','There is no deadline. Please email your slides to Morgan Wills at mkwills@ksu.edu anytime before the visit, or bring them on a USB drive the morning of your talk. Please arrive a few minutes early to load them and check the projector.'),('I’m not presenting. Do I need to prepare?','No. Reading the program, the map, and these questions is enough. The Center looks forward to the perspectives you bring to each discussion.'),
+FAQ=[('I’m presenting. When do I send my slides?','There is no deadline. Please email your slides to Morgan Wills at <a href="mailto:mkwills@ksu.edu">mkwills@ksu.edu</a> anytime before the visit, or bring them on a USB drive the morning of your talk. Please arrive a few minutes early to load them and check the projector.'),('I’m not presenting. Do I need to prepare?','No. Reading the program, the map, and these questions is enough. The Center looks forward to the perspectives you bring to each discussion.'),
  ('Where do I park?','Out-of-town guests park free at the Bluemont Hotel, and every venue is within walking distance. In-town guests can buy a $6 daily permit for the Union Parking Garage through the parking app, since street parking isn’t allowed before 9:00 a.m. Parking on campus is free after 5:00 p.m., so the banquet is easy.'),
  ('Can I get a ride?','Uber and other rideshares run in Manhattan, but cars can be scarce. Book ahead and allow extra time, or arrange a ride with your CNAP mentee.'),
  ('What will the weather be like?','Late May is usually mild: highs in the mid-70s to low 80s, evenings in the upper 50s to low 60s, and a chance of an afternoon thunderstorm. Rooms can be cool, so bring layers, a light jacket, and an umbrella.'),
@@ -268,7 +268,7 @@ page=f'''<!doctype html>
               <h4>Your answers</h4>
               <dl class="sv-meals" id="sv-sum"></dl>
               <p id="sv-postr" hidden>Your poster details are still to come. Please add the poster details on the Site Visit page by Friday, April 23.</p>
-              <p>To change an answer, return to the Site Visit page. Questions go to Morgan Wills at mkwills@ksu.edu.</p>
+              <p>To change an answer, return to the Site Visit page. Questions go to Morgan Wills at <a href="mailto:mkwills@ksu.edu">mkwills@ksu.edu</a>.</p>
               <p>With thanks,<br>The CNAP office</p>
             </div>
           </article>
@@ -321,7 +321,7 @@ page=f'''<!doctype html>
       <div class="sv-cards">
         <article class="sv-c sv-c-lead"><p class="sv-ck2">For out-of-town guests</p><h3>Your room is booked</h3><p>The Center reserves a room for each out-of-town guest at the Bluemont Hotel from Monday, May 24, to Wednesday, May 26. Please give your first and last name at the front desk for your key.</p><dl class="sv-dl"><div><dt>Check-in</dt><dd>4:00 p.m.</dd></div><div><dt>Checkout</dt><dd>11:00 a.m.</dd></div><div><dt>Covered by the Center</dt><dd>Lodging, hotel parking, and breakfast</dd></div><div><dt>Early or late</dt><dd>Luggage storage is available. Please ask the front desk about early check-in or late checkout.</dd></div></dl><p class="sv-fine">The hotel is smoke-free, and smoking in a room carries a $250 cleaning fee.</p></article>
         <article class="sv-c"><p class="sv-ck2">For K-State guests</p><h3>Parking</h3><p>Street parking isn’t allowed before 9:00 a.m. Please park in the Union Parking Garage with a $6 daily permit from the parking app. Campus parking is free after 5:00 p.m.</p><a class="t3" href="https://www.k-state.edu/parking/parking/visitor.html" target="_blank" rel="noopener">Visitor parking at K-State</a></article>
-        <article class="sv-c"><p class="sv-ck2">After the visit</p><h3>Travel reimbursement</h3><p>Please sign the front of each receipt, then email your receipts to Roxana Ortiz, Grant Specialist and Accountant. Lodging, hotel parking, and breakfast are already paid.</p><a class="t3" href="{RCPT}">Email Roxana</a><span class="sv-em">roxana@ksu.edu</span></article>
+        <article class="sv-c"><p class="sv-ck2">After the visit</p><h3>Travel reimbursement</h3><p>Please sign the front of each receipt, then email your receipts to Roxana Ortiz, Grant Specialist and Accountant. Lodging, hotel parking, and breakfast are already paid.</p><a class="t3" href="{RCPT}">Email Roxana</a><a class="sv-em" href="mailto:roxana@ksu.edu">roxana@ksu.edu</a></article>
         <article class="sv-c"><p class="sv-ck2">What to bring</p><h3>Shoes, layers, and an umbrella</h3><p>The program moves between buildings, the rooms run cool, and late-May afternoons can bring a thunderstorm. Highs are usually in the 70s.</p></article>
       </div>
     </div>

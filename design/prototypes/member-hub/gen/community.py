@@ -42,7 +42,7 @@ FIRST=[
  ('Roxana Ortiz, Grant Specialist and Accountant','Set up your budget, purchasing, and travel reimbursements before your first expense.',mt('roxana@ksu.edu','Budget and purchasing setup','\n'.join(['Name:','Department:','Project title:','','Questions about my budget or purchasing:',''])),'Email Roxana','roxana@ksu.edu'),
  ('The research cores you will use','Meet with the staff of each core you will use before you book time: a tour of the Behavioral Neuroscience Core, or a consultation with the Cognitive Neuroscience or Neuroinformatics Core. The core directors walk you through the equipment, the training you need, and how to schedule.','index.html#cores-h','See the research cores',None),
 ]
-first=''.join(f'''<li><span class="cm-n" aria-hidden="true">{i}</span><div><p class="cm-ft">{t}</p><p class="cm-fd">{d}</p><p class="cm-fa"><a href="{h}">{l}</a>{f'<span class="cm-em">{e}</span>' if e else ''}</p></div></li>''' for i,(t,d,h,l,e) in enumerate(FIRST,1))
+first=''.join(f'''<li><span class="cm-n" aria-hidden="true">{i}</span><div><p class="cm-ft">{t}</p><p class="cm-fd">{d}</p><p class="cm-fa"><a href="{h}">{l}</a>{f'<a class="cm-em" href="mailto:{e}">{e}</a>' if e else ''}</p></div></li>''' for i,(t,d,h,l,e) in enumerate(FIRST,1))
 
 # 2. Members who share your interests
 MATCH=[('jl','You both record sleep EEG, and Jordan is looking for a collaborator.'),('pr','Priya studies memory consolidation during sleep and speaks at NeuroSync on November 18.'),('ms','Maya studies working memory in older adults in the core you use.'),('om','Omar joined this month and studies sleep in rodent models.')]
