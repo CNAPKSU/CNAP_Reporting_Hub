@@ -24,18 +24,17 @@
       <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="events.html">Events</a><span aria-hidden="true">/</span><span aria-current="page">The 2027 Site Visit</span></nav>
       <div class="sv-hg">
         <div class="sv-hd">
-          <p class="for">The Center’s annual meeting</p>
+          <p class="for">Kansas State University · Manhattan, Kansas</p>
           <h1 id="t">The 2027 CNAP Site Visit</h1>
-          <p class="sv-lead">Two days in Manhattan, Kansas, with the people behind the Center’s science. Hear from the cores, tour the labs, spend an evening at the Beach Museum of Art, and close with the project talks and the poster session.</p>
-          <div class="sv-act"><a class="btn pri lg" href="#sv-rsvp">RSVP</a><a class="btn lg" href="#sv-prog">See the program</a></div><p class="sv-st" id="sv-st"><span class="sv-dot" aria-hidden="true"></span><span id="sv-st-t">Your RSVP hasn’t been sent yet.</span></p>
+          <p class="sv-lead">Two days with the people behind the Center’s science: core tours, project talks, an evening at the Beach Museum, and a poster session that fills the halls of Bluemont Hall.</p>
+          <div class="sv-act"><a class="btn pri" href="#sv-rsvp">RSVP</a><a class="btn" href="#sv-prog">See the program</a><span class="sv-cal">Add to <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=CNAP%20Site%20Visit&amp;dates=20270525/20270527&amp;details=The%202027%20CNAP%20Site%20Visit%2C%20Kansas%20State%20University.%20Program%3A%20the%20Site%20Visit%20page%20in%20the%20Member%20Hub.&amp;location=Kansas%20State%20University%2C%20Manhattan%2C%20Kansas" target="_blank" rel="noopener">Google Calendar</a> or <a href="https://outlook.office.com/calendar/0/deeplink/compose?subject=CNAP%20Site%20Visit&amp;startdt=2027-05-25&amp;enddt=2027-05-27&amp;allday=true&amp;location=Kansas%20State%20University%2C%20Manhattan%2C%20Kansas" target="_blank" rel="noopener">Outlook</a></span></div>
         </div>
         <div class="sv-date" aria-label="Tuesday, May 25, and Wednesday, May 26, 2027">
           <p class="sv-mo">May 2027</p>
           <p class="sv-dd"><span><b>25</b><small>Tuesday</small></span><i aria-hidden="true"></i><span><b>26</b><small>Wednesday</small></span></p>
-          <p class="sv-cd"><b class="num" data-days>192</b> days to go</p><p class="sv-cal sv-cal3">Add to <a href="https://outlook.office.com/calendar/0/deeplink/compose?subject=CNAP%20Site%20Visit&amp;startdt=2027-05-25&amp;enddt=2027-05-27&amp;allday=true&amp;location=Kansas%20State%20University%2C%20Manhattan%2C%20Kansas" target="_blank" rel="noopener">Outlook</a> or <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=CNAP%20Site%20Visit&amp;dates=20270525/20270527&amp;details=The%202027%20CNAP%20Site%20Visit%2C%20Kansas%20State%20University.%20Program%3A%20the%20Site%20Visit%20page%20in%20the%20Member%20Hub.&amp;location=Kansas%20State%20University%2C%20Manhattan%2C%20Kansas" target="_blank" rel="noopener">Google Calendar</a></p>
+          <p class="sv-cd"><b class="num" data-days>192</b> days to go</p>
         </div>
       </div>
-      <ol class="sv-glance2" aria-label="The two days at a glance"><li><a href="#sv-prog"><span class="sv-gw">Tuesday morning</span><span class="sv-gt">Hear from the cores</span><span class="sv-gp">Business Building</span></a></li><li><a href="#sv-prog"><span class="sv-gw">Tuesday afternoon</span><span class="sv-gt">Tour the labs</span><span class="sv-gp">Bluemont Hall</span></a></li><li><a href="#sv-prog"><span class="sv-gw">Tuesday evening</span><span class="sv-gt">Keynote and banquet</span><span class="sv-gp">Beach Museum of Art</span></a></li><li><a href="#sv-prog"><span class="sv-gw">Wednesday morning</span><span class="sv-gt">Project talks and posters</span><span class="sv-gp">Ends by 12:30 p.m.</span></a></li></ol>
       <div class="sv-role" role="group" aria-labelledby="role-l"><p id="role-l">I’m coming as</p><div class="sv-rb"><button type="button" aria-pressed="true" data-role="all">A member or guest</button><button type="button" aria-pressed="false" data-role="talk">A speaker</button><button type="button" aria-pressed="false" data-role="poster">A poster presenter</button><button type="button" aria-pressed="false" data-role="mentor">A visiting mentor</button><button type="button" aria-pressed="false" data-role="core">A core director</button><button type="button" aria-pressed="false" data-role="eac">An advisory committee member</button></div></div>
     </div>
   </section>
@@ -252,7 +251,6 @@
     document.getElementById('sv-subj').textContent=no?'We’ll miss you at the 2027 CNAP Site Visit':'You’re registered for the 2027 CNAP Site Visit';
     document.getElementById('sv-lead2').textContent=no?'Thank you for letting us know. We’ll miss you this year, and we’ll share highlights after the visit.':(v==='zoom'?'Thank you for registering for the 2027 CNAP Site Visit. We look forward to having you with us on Zoom. The Zoom link comes with the detailed schedule.':'Thank you for registering for the 2027 CNAP Site Visit. We look forward to having you in Manhattan.');
     var pv=(f.querySelector('[name=poster]:checked')||{}).value;document.getElementById('sv-postr').hidden=!(pv==='yes'||pv==='later');
-    var st=document.getElementById('sv-st');st.classList.add('is-done');document.getElementById('sv-st-t').textContent=v==='no'?'You told us you can’t attend. You can change that anytime.':'Your RSVP is in. You can change it anytime before the deadline.';
     f.hidden=true;done.hidden=false;done.focus();done.scrollIntoView({block:'start'});});
   document.getElementById('sv-edit').addEventListener('click',function(){done.hidden=true;f.hidden=false;f.querySelector('input').focus();});
   document.querySelectorAll('[data-day]').forEach(function(a){a.addEventListener('click',function(){var t=document.getElementById('sv-t'+a.getAttribute('data-day'));if(t)t.click();});});
