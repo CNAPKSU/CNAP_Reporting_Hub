@@ -1713,3 +1713,9 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 @media (max-width:980px){.sv-hstats{grid-template-columns:repeat(2,minmax(0,1fr))}.sv-hcols{grid-template-columns:minmax(0,1fr);gap:40px}}
 .sv-done .sv-meals dd{white-space:pre-line}
 .sv-glance b{min-width:170px}
+/* Photographs: a picture in the open space (MW 2026-11-14) */
+.sv-phfig{margin:32px 0 0;display:grid;gap:10px}
+.sv-phfig .im{position:relative;display:block;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:var(--surface);max-width:100%}
+.sv-phfig img{width:100%;height:100%;object-fit:cover;display:block}
+.sv-phfig .tag{position:absolute;left:12px;top:12px;padding:4px 10px;border-radius:999px;background:var(--paper);color:var(--muted);font-size:12.5px}
+.sv-phfig figcaption{font-size:14px;color:var(--muted)}
