@@ -1,11 +1,8 @@
-{# One research event or talk (MW 2026-11-14, Member Hub design). #}
-<li class="pg-rec">
-  {% if e.url %}<a class="pg-name" href="{{ e.url }}" target="_blank" rel="noopener" title="Opens the event’s details in a new tab.">{{ e.title }}</a>{% else %}<span class="pg-name pg-name-t">{{ e.title }}</span>{% endif %}
-  <dl class="pg-kv">
-    <div><dt>Date</dt><dd>{% if e.ends_on %}{{ e.starts_on|date:"F j" }} to {{ e.ends_on|date:"F j, Y" }}{% else %}{{ e.starts_on|date:"l, F j, Y" }}{% endif %}</dd></div>
-    {% if e.time_text %}<div><dt>Time</dt><dd>{{ e.time_text }}</dd></div>{% endif %}
-    {% if e.place %}<div><dt>Place</dt><dd>{{ e.place }}</dd></div>{% endif %}
-    {% if e.host %}<div><dt>Host</dt><dd>{{ e.host }}</dd></div>{% endif %}
-    {% if e.summary %}<div><dt>About</dt><dd>{{ e.summary|linebreaksbr }}</dd></div>{% endif %}
-  </dl>
+{# One research event or talk in the Member Hub design (MW 2026-11-14). #}
+<li class="fp-ev">
+  <span class="fp-ed" aria-hidden="true"><span>{{ e.starts_on|date:"l" }}</span><b>{{ e.starts_on|date:"j" }}</b><span>{{ e.starts_on|date:"F" }}</span></span>
+  <div>{% if e.url %}<a class="fp-name" href="{{ e.url }}" target="_blank" rel="noopener" title="Opens the event’s details in a new tab.">{{ e.title }}</a>{% else %}<span class="fp-name fp-name-t">{{ e.title }}</span>{% endif %}
+  <span class="fp-meta">{% if e.ends_on %}{{ e.starts_on|date:"F j" }} to {{ e.ends_on|date:"F j, Y" }}{% else %}{{ e.starts_on|date:"l, F j, Y" }}{% endif %}{% if e.time_text %}, {{ e.time_text }}{% endif %}</span>
+  {% if e.place or e.host %}<span class="fp-meta">{% if e.place %}{{ e.place }}{% endif %}{% if e.place and e.host %}. {% endif %}{% if e.host %}Hosted by {{ e.host }}{% endif %}</span>{% endif %}
+  {% if e.summary %}<p>{{ e.summary|linebreaksbr }}</p>{% endif %}</div>
 </li>

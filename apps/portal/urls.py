@@ -28,6 +28,8 @@ urlpatterns = [
     # publications and grants (self-entry)
     path("outcomes/", ov.home, name="outcomes"),
     path("funding/", fv.page, name="funding"),  # MW 2026-11-10
+    path("funding/resources/", fv.page, {"part": "resources"}, name="funding_resources"),  # MW 2026-11-14
+    path("funding/news/", fv.page, {"part": "news"}, name="funding_news"),  # MW 2026-11-14
     path("funding/suggest/", fv.suggest, name="funding_suggest"),
     path("funding/letter/<int:pk>/", fv.letter, name="funding_letter"),
     path("outcomes/presentations/new/", ov.presentation, name="presentation_new"),

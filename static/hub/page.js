@@ -19,3 +19,19 @@
   ab.addEventListener('click',function(e){e.stopPropagation();amOpen(!am.classList.contains('open'));});
   document.addEventListener('click',function(e){if(!am.contains(e.target))amOpen(false);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&am.classList.contains('open')){amOpen(false);ab.focus();}});}catch(e){}})();
+
+/* Funding and proposals (MW 2026-11-14): the dot rail follows the reader, as on the guides */
+(function(){
+  var sp=document.querySelector('.fp-page .spine');if(!sp)return;
+  var links=[].slice.call(sp.querySelectorAll('ol a')),secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));}).filter(Boolean);
+  var tr=sp.querySelector('.spine-track'),fl=sp.querySelector('.spine-fill'),ol=sp.querySelector('ol');
+  function spy(){var y=innerHeight*.3,i=0;secs.forEach(function(s,k){if(s.getBoundingClientRect().top<y)i=k;});
+    links.forEach(function(a,k){if(k===i)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');a.classList.toggle('done',k<i);});}
+  function track(){if(!tr||!links.length||getComputedStyle(tr).display==='none')return;var o=ol.getBoundingClientRect().top;
+    function dot(a){return a.getBoundingClientRect().top-o+parseFloat(getComputedStyle(a,'::before').top)+5;}
+    var t=dot(links[0]),b=dot(links[links.length-1]);tr.style.top=(ol.offsetTop+t)+'px';tr.style.height=(b-t)+'px';
+    var cur=sp.querySelector('a[aria-current]');fl.style.height=cur?(dot(cur)-t)+'px':'0px';}
+  addEventListener('scroll',function(){spy();track();},{passive:true});addEventListener('resize',track);
+  ['mouseenter','mouseleave','focusin','focusout','transitionend'].forEach(function(e){sp.addEventListener(e,function(){requestAnimationFrame(track);setTimeout(track,280);});});
+  spy();track();
+})();

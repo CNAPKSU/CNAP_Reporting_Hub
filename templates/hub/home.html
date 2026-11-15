@@ -76,7 +76,7 @@
   <div class="wrap">
     <section class="sec lead-in" aria-labelledby="res-h">
       <header class="sh">
-        <h2 id="res-h">Research at CNAP</h2>
+        <h2 id="res-h">Research at CNAP</h2>{# links once the app has a Research page; the prototype links to research.html (MW 2026-11-14) #}
         <p>Work from the Center’s pilot projects, cores, and investigators.</p>
       </header>
       <p class="sample-note">Sample content. This section isn’t connected to the Hub yet.</p>
@@ -113,7 +113,7 @@
   <div class="fund-band"><div class="wrap">
     <section class="sec" aria-labelledby="fund-h">
       <header class="sh">
-        <h2 id="fund-h"><a class="sh-link" href="{% url 'portal:funding' %}" title="Opens Funding and proposals: opportunities picked for you, news, events, and letters.">Funding and proposals</a></h2>
+        <h2 id="fund-h"><a class="sh-link" href="{% url 'portal:funding' %}" title="Opens Funding opportunities: opportunities picked for you, opportunities relevant to most members, and letters.">Funding and proposals</a></h2>
         <p>Opportunities the CNAP team picked for your research, and help at each stage of a proposal.</p>
       </header>
       <div class="g sheet">
@@ -147,14 +147,14 @@
       </div>
       <div class="sheet news-sheet">
         <div class="news">
-          <h3 id="news-h">Funding news</h3>
+          <h3 id="news-h"><a class="sh-link" href="{% url 'portal:funding_news' %}" title="Opens Funding news: news items, and research events and talks.">Funding news</a></h3>
           {% if news %}<ul>
 {% for row in news %}{% with n=row.n %}<li><a href="{% if n.source_url %}{{ n.source_url }}{% else %}{% url 'portal:funding' %}{% endif %}"><span class="nw-date">{% if n.news_date %}<span class="nw-num num">{{ n.news_date.day }}</span><span class="nw-mon">{{ n.news_date|date:"F" }}</span>{% else %}<span class="nw-mon">{{ n.date_text }}</span>{% endif %}</span><span class="nw-body">{% if n.bulletin or n.source_name %}<span class="eyebrow">{% if n.bulletin %}{{ n.bulletin.name }}{% else %}{{ n.source_name }}{% endif %}</span>{% endif %}<b>{{ n.headline }}</b><span class="nw-sum">{{ row.first }}</span></span></a></li>{% endwith %}
 {% endfor %}          </ul>{% else %}<p class="meta">No funding news yet. The CNAP team posts news here and on your funding page.</p>{% endif %}
         </div>
       </div>
       <div class="sheet tk-sheet">
-        <div class="tk-head"><div><h3 class="pw-h" id="pw-h">Proposal writing toolkit</h3><p class="tk-lead">Guides and templates for each stage of a proposal, from the first search to closeout.</p><p class="sample-note">Sample content. These links isn’t connected to the Hub yet.</p></div></div>
+        <div class="tk-head"><div><h3 class="pw-h" id="pw-h"><a class="sh-link" href="{% url 'portal:funding_resources' %}#s-toolkit" title="Opens Grant resources, which holds the proposal writing toolkit.">Proposal writing toolkit</a></h3><p class="tk-lead">Guides and templates for each stage of a proposal, from the first search to closeout.</p><p class="sample-note">Sample content. These links aren’t connected to the Hub yet.</p></div></div>
         <ol class="tk no-stage"><li class="tk-s"><span class="tk-n num">1</span><h4>Find funding</h4><p class="tk-d">Sponsors, searches, and eligibility</p><ul class="tk-r"><li><a href="#pw-h">Funding search guide</a></li><li><a href="#pw-h">Eligibility checklist</a></li></ul></li><li class="tk-s"><span class="tk-n num">2</span><h4>Plan the proposal</h4><p class="tk-d">Timelines, aims, and internal review</p><ul class="tk-r"><li><a href="#pw-h">Internal review timeline</a></li><li><a href="#pw-h">Proposal planning calendar</a></li></ul></li><li class="tk-s"><span class="tk-n num">3</span><h4>Write a competitive application</h4><p class="tk-d">Specific Aims, approach, and significance</p><ul class="tk-r"><li><a href="#pw-h">Specific Aims guide</a></li><li><a href="#pw-h">Example aims from funded CNAP pilots</a></li></ul></li><li class="tk-s"><span class="tk-n num">4</span><h4>Prepare NIH documents</h4><p class="tk-d">Biosketch, Other Support, and budget</p><ul class="tk-r"><li><a href="#pw-h">Biosketch template</a></li><li><a href="#pw-h">Budget justification</a></li><li><a href="#pw-h">Letters of support</a></li><li><a href="#pw-h">Data management plan</a></li></ul></li><li class="tk-s"><span class="tk-n num">5</span><h4>Respond to reviews</h4><p class="tk-d">Summary statements and resubmission</p><ul class="tk-r"><li><a href="#pw-h">Reading a summary statement</a></li><li><a href="#pw-h">Introduction to a resubmission</a></li></ul></li><li class="tk-s"><span class="tk-n num">6</span><h4>Manage the award</h4><p class="tk-d">Progress reports and closeout</p><ul class="tk-r"><li><a href="#pw-h">Progress report template</a></li><li><a href="#pw-h">Closeout checklist</a></li></ul></li></ol>
       </div>
       <footer class="sf"><a class="btn" href="{% url 'portal:funding' %}">All funding</a><a class="share" href="{% url 'portal:funding' %}#s-suggest"><span class="plus" aria-hidden="true"></span>Share a grant opportunity or news</a></footer>

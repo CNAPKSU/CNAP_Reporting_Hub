@@ -34,7 +34,7 @@ def _owner(request):
 
 
 @login_required
-def page(request):
+def page(request, part="opportunities"):
     owner, owners = _owner(request)
     picked = funding.picked_for(owner)
     everyone = funding.for_everyone()
@@ -44,6 +44,11 @@ def page(request):
     letters = funding.letters_for(owner)
     nxt = funding.next_deadline(picked + everyone)
     tpl = prototype.template(request, "funding", "proto/portal/funding.html")
+    if part != "opportunities" and not tpl.startswith("hub/"):
+        # Separate pages exist only in the Member Hub design (MW 2026-11-14). With the switch off, the one page keeps every section.
+        anchor = {"resources": "s-before", "news": "s-news"}[part]
+        q = f"?for={owner.pk}" if owner.pk != request.user.person.pk else ""
+        return redirect(f"{reverse('portal:funding')}{q}#{anchor}")
     chrome = {}
     if tpl.startswith("hub/"):
         from . import hub
@@ -54,6 +59,7 @@ def page(request):
         tpl,
         {
             **chrome,
+            "part": part,
             "owner": owner,
             "owners": owners,
             "acting_for_other": owner.pk != request.user.person.pk,

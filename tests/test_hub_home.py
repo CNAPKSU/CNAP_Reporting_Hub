@@ -157,8 +157,15 @@ def test_funding_page_uses_the_hub_design_with_the_same_form_and_sections(client
     names = {t.name for t in r.templates if t.name}
     assert "hub/funding.html" in names and "proto/portal/funding.html" not in names
     html = r.content.decode()
-    for sid in ("s-before", "s-for", "s-most", "s-news", "s-events", "s-letters", "s-suggest"):
+    # Three pages in the Hub design (MW 2026-11-14): opportunities, grant resources, and funding news.
+    for sid in ("s-for", "s-most", "s-letters", "s-suggest"):
         assert f'id="{sid}"' in html
+    res = client.get("/funding/resources/").content.decode()
+    for sid in ("s-before", "s-consult", "s-toolkit"):
+        assert f'id="{sid}"' in res
+    news = client.get("/funding/news/").content.decode()
+    for sid in ("s-news", "s-events"):
+        assert f'id="{sid}"' in news
     assert 'action="/funding/suggest/"' in html
     for field in ('name="name"', 'name="sponsor"', 'name="url"', 'name="deadline_text"', 'name="why"', 'name="for_everyone"'):
         assert field in html
@@ -170,3 +177,6 @@ def test_funding_page_is_unchanged_with_the_switch_off(client, center):
     r = client.get("/funding/")
     assert r.status_code == 200
     assert "proto/portal/funding.html" in {t.name for t in r.templates if t.name}
+    # The separate pages exist only in the Hub design; with the switch off they lead back to the one page.
+    assert client.get("/funding/news/").url == "/funding/#s-news"
+    assert client.get("/funding/resources/").url == "/funding/#s-before"
