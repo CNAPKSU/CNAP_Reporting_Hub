@@ -1873,3 +1873,33 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-hero .sv-act{margin-top:48px}
 }
 @media (min-width:981px){.sv-hd h1{line-height:1.16}.sv-hero .sv-lead{line-height:34px}}
+/* Hero: tinted ground, faint neuron drawing, larger dates (MW 2026-11-14) */
+.sv-hero{position:relative;background:color-mix(in srgb,var(--purple-tint) 60%,var(--paper));isolation:isolate}
+.sv-hero>.wrap{position:relative;z-index:1}
+.sv-neuro{position:absolute;z-index:0;right:-120px;top:50%;transform:translateY(-46%);width:min(1040px,80vw);height:auto;pointer-events:none}
+.sv-neuro g{stroke:var(--purple);opacity:.16}
+.sv-neuro .sm{fill:var(--purple);opacity:.14}
+.sv-neuro .nd{fill:var(--brass);opacity:.5}
+@media (min-width:981px){
+.sv-when{width:540px}
+.sv-im{font-size:24px;gap:20px}
+.sv-dpair{margin-top:28px}
+.sv-dw{font-size:22px}
+.sv-dn{font-size:168px;margin-top:10px!important;font-weight:300}
+.sv-dt{font-size:15.5px;margin-top:16px!important}
+.sv-when .sv-cd{margin-top:28px;padding-top:20px;font-size:16px}
+.sv-when .sv-cd b{font-size:26px}
+}
+@media (min-width:981px) and (max-width:1199px){.sv-when{width:400px}.sv-dn{font-size:120px}}
+@media (max-width:980px){.sv-neuro{right:-260px;top:auto;bottom:-40px;transform:none;width:720px}}
+.sv-neuro{right:-520px;top:-120px;transform:none;width:1040px}
+.sv-neuro g{opacity:.2}
+.sv-neuro .nd{display:none}
+.sv-neuro g path:last-child{display:none}
+@media (min-width:981px){.sv-hero .sv-hg{position:relative}}
+@media (max-width:980px){.sv-neuro{right:-560px;top:-160px;bottom:auto;width:900px}}
+/* Neuron, v2: rises from the lower right corner into open space */
+.sv-neuro{top:auto;bottom:-60px;right:-60px;width:min(980px,72vw);transform:none}
+.sv-neuro g{opacity:.22}
+.sv-neuro g path:last-child{display:inline}
+@media (max-width:980px){.sv-neuro{right:-180px;bottom:-60px;top:auto;width:640px}}
