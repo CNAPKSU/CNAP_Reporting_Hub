@@ -1976,3 +1976,35 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-eeg{inset:auto 0 0 0;height:176px}
 @media (min-width:981px){.sv-hero{padding-bottom:200px}}
 @media (max-width:980px){.sv-hero{padding-bottom:150px}.sv-eeg{height:132px}}
+/* Site Visit hero, dark: glowing EEG over a softly lit brain, an original drawing (MW 2026-11-14) */
+.sv-eeg{display:none}
+.sv-hero{background:var(--night);color:#f6f2fa;border-bottom:0}
+@media (min-width:981px){.sv-hero{padding-bottom:110px}}
+@media (max-width:980px){.sv-hero{padding-bottom:56px}}
+.sv-glow{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(90deg,transparent 22%,rgba(0,0,0,.5) 42%,#000 62%);mask-image:linear-gradient(90deg,transparent 22%,rgba(0,0,0,.5) 42%,#000 62%)}
+.sv-glow .bo{fill:rgba(214,190,255,.05);stroke:#e8d9ff;stroke-width:1.6;opacity:.55}
+.sv-glow .su path{fill:none;stroke:#e8d9ff;stroke-width:1.2;stroke-linecap:round;opacity:.38}
+.sv-glow .tr{fill:none;stroke:#e3c6ff;stroke-width:1.1;stroke-linejoin:round;opacity:.5}
+.sv-glow .tr2,.sv-glow .tr3{opacity:.7}
+.sv-glow .trs{animation:svflick 6s ease-in-out infinite}
+@keyframes svflick{0%,100%{opacity:1}50%{opacity:.75}}
+@media (prefers-reduced-motion:reduce){.sv-glow .trs{animation:none}}
+.sv-hero .crumb,.sv-hero .crumb a{color:#cbbfdc}
+.sv-hero .for{color:#d8bfff}.sv-hero .for::before{background:#d8bfff}
+.sv-hero h1{color:#fff}
+.sv-hero .sv-lead{color:#ddd3ea}
+.sv-hero .btn:not(.pri){background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
+.sv-hero .btn.pri{background:#fff;border-color:#fff;color:var(--purple-ink)}
+.sv-hero .sv-cal{color:#cbbfdc}.sv-hero .sv-cal a{color:#e8d9ff}
+.sv-hero .sv-im{color:#e8d9ff}.sv-hero .sv-im::before,.sv-hero .sv-im::after{background:#e8d9ff}
+.sv-hero .sv-dw{color:#ddd3ea}
+.sv-hero .sv-dn{color:#f3e9ff;text-shadow:0 0 28px rgba(192,79,216,.45)}
+.sv-hero .sv-dt{color:#bfb3d1}
+.sv-hero .sv-dpair>div+div{border-left-color:rgba(255,255,255,.22)}
+.sv-hero .sv-when .sv-cd{border-top-color:rgba(255,255,255,.18);color:#bfb3d1}
+.sv-hero .sv-when .sv-cd b{color:#fff}
+@media (max-width:980px){.sv-glow{-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.35) 0%,#000 60%);mask-image:linear-gradient(180deg,rgba(0,0,0,.35) 0%,#000 60%)}}
+.sv-kl .sv-pl{line-height:1}
+.sv-pl::before{width:7px;height:7px;flex:none;transform:translateY(-1px)}
+/* keep the hero traces off the lead text */
+@media (min-width:981px){.sv-glow{-webkit-mask-image:linear-gradient(90deg,transparent 40%,rgba(0,0,0,.6) 52%,#000 64%);mask-image:linear-gradient(90deg,transparent 40%,rgba(0,0,0,.6) 52%,#000 64%)}}
