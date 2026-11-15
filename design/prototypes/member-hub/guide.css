@@ -1963,3 +1963,16 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-north text{font:600 12px var(--sans);fill:var(--muted);text-anchor:middle}
 .sv-hc-head{padding-top:14px;border-top:1px solid var(--line-2)}
 .sv-q2{align-self:start}.sv-q2 blockquote{padding-top:24px}
+/* Hero art v5: an EEG montage running along the bottom of the hero (MW 2026-11-14) */
+.sv-fibers{display:none}
+.sv-eeg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;
+ -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 30%,#000 70%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.25) 30%,#000 70%)}
+.sv-eeg path{fill:none;stroke:var(--purple);stroke-width:1.1;stroke-linejoin:round;opacity:.28}
+.sv-eeg .ch1,.sv-eeg .ch5{opacity:.18}
+.sv-eeg .ch3{stroke:var(--brass);opacity:.5;stroke-width:1.3}
+.sv-eeg .trk{animation:sveeg 48s linear infinite}
+@keyframes sveeg{to{transform:translateX(-1440px)}}
+@media (prefers-reduced-motion:reduce){.sv-eeg .trk{animation:none}}
+.sv-eeg{inset:auto 0 0 0;height:176px}
+@media (min-width:981px){.sv-hero{padding-bottom:200px}}
+@media (max-width:980px){.sv-hero{padding-bottom:150px}.sv-eeg{height:132px}}
