@@ -1445,6 +1445,36 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 /* New mentors and new project leaders: Getting started moves up under Your week (MW 2026-11-15) */
 .ob-start{display:inline-block;margin-left:8px;padding:1px 10px;border-radius:12px;background:var(--teal,#0f6b6b);color:#fff;font-size:12.5px;line-height:20px;font-weight:600;vertical-align:1px}
 .ob.ob-you{box-shadow:0 0 0 2px var(--teal,#0f6b6b)}
+
+/* Key dates read as true white (MW 2026-11-15: "these letters don't look white") */
+.keys .k-lab{opacity:1;color:#fff;font-weight:700}
+.keys .kd-m{color:#fff;font-weight:700}
+.keys .kd-n{color:#fff;font-weight:500}
+.keys .kd-w{color:#fff;font-weight:700}
+.keys .kd-soon .kd-w{color:#2a1a08}
+.keys .kd-soon .kd-m{color:#f2d9a4}
+.keys .kd-t{color:#fff;font-weight:600;-webkit-font-smoothing:antialiased}
+.keys .kd-s{color:#fff;font-weight:500}
+.keys .kd-d{border-color:rgba(255,255,255,.55)}
+.keys .kd-soon .kd-d{border-color:#d9b469}
+.keys .kd-l .t3{color:#fff;font-weight:600;text-decoration-color:rgba(255,255,255,.7)}
+
+/* Key dates: larger and airier (MW 2026-11-15: "all squished and hard to see") */
+.keys .key{gap:18px}
+.keys .k-lab{font-size:15px;line-height:22px}
+.keys .kd{grid-template-columns:80px minmax(0,1fr);gap:20px}
+.keys .kd+.kd{padding-top:22px;margin-top:4px}
+.keys .kd-d{padding:10px 0 12px;border-radius:10px}
+.keys .kd-m{font-size:15px;line-height:20px}
+.keys .kd-n{font-size:38px;line-height:44px}
+.keys .kd-n.kd-r{font-size:26px;line-height:44px}
+.keys .kd-b{gap:8px}
+.keys .kd-w{font-size:15px;line-height:22px}
+.keys .kd-soon .kd-w{padding:2px 12px;border-radius:14px}
+.keys .kd-t{font-size:22px;line-height:29px}
+.keys .kd-s{font-size:16px;line-height:25px}
+.keys .kd-l{margin-top:2px}
+.keys .kd-l .t3{font-size:16px}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -1717,10 +1747,11 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
           </div>
         </div>
         <div class="keys">
-          <div class="key"><p class="k-lab">Next deadline</p><div class="kd kd-soon"><p class="kd-d" aria-label="Friday, November 20"><span class="kd-m">Nov</span><span class="kd-n num">20</span></p><div class="kd-b"><p class="kd-w">This Friday</p><p class="kd-t">Year 11 pilot letters of intent are due</p><p class=kd-s>Please send yours to the Administrative Core by 5:00 p.m.</p><p class=kd-l><a class="t3" href="funding-news.html">Read the call for letters</a></p></div></div></div>
-          <div class="key"><p class="k-lab">Coming up in December</p><div class="kd"><p class="kd-d" aria-label="Thursday, December 10"><span class="kd-m">Dec</span><span class="kd-n num">10</span></p><div class="kd-b"><p class="kd-w">In 3 weeks</p><p class="kd-t">Fall social for members and students</p><p class=kd-s>Thursday, 3:30 p.m.</p></div></div><div class="kd"><p class="kd-d" aria-label="Friday, December 11"><span class="kd-m">Dec</span><span class="kd-n num">11</span></p><div class="kd-b"><p class="kd-w">In 4 weeks</p><p class="kd-t">Last day of fall classes</p><p class=kd-s>Friday, from the K&#8209;State calendar</p></div></div></div>
-          <div class="key"><p class="k-lab"><a class="sh-link" href="sitevisit.html">The 2027 Site Visit</a></p><div class="kd"><p class="kd-d" aria-label="Tuesday and Wednesday, May 25 and 26, 2027"><span class="kd-m">May</span><span class="kd-n kd-r num">25–26</span></p><div class="kd-b"><p class="kd-w">In 6 months</p><p class="kd-t">Two days of core tours, talks, and posters</p><p class=kd-s>Tuesday and Wednesday. A keynote and banquet close the first day.</p><p class=kd-l><a class="t3" href="sitevisit.html">Plan your visit</a><a class="t3" href="#ph-h">See the 2026 photographs</a></p></div></div></div>
+          <div class="key"><p class="k-lab">Next deadline</p><div class="kd kd-soon"><p class="kd-d" aria-label="Friday, November 20"><span class="kd-m">Nov</span><span class="kd-n num">20</span></p><div class="kd-b"><p class="kd-w">Next Friday</p><p class="kd-t">Year 11 pilot letters of intent are due</p><p class=kd-s>Please send yours to the Administrative Core by 5:00 p.m.</p><p class=kd-l><a class="t3" href="funding-news.html">Read the call for letters</a></p></div></div></div>
+          <div class="key"><p class="k-lab">Coming up in December</p><div class="kd"><p class="kd-d" aria-label="Thursday, December 10"><span class="kd-m">Dec</span><span class="kd-n num">10</span></p><div class="kd-b"><p class="kd-w">In 4 weeks</p><p class="kd-t">Fall social for members and students</p><p class=kd-s>Thursday, 3:30 p.m.</p></div></div><div class="kd"><p class="kd-d" aria-label="Friday, December 11"><span class="kd-m">Dec</span><span class="kd-n num">11</span></p><div class="kd-b"><p class="kd-w">In 4 weeks</p><p class="kd-t">Last day of fall classes</p><p class=kd-s>Friday, from the K&#8209;State calendar</p></div></div></div>
+          <div class="key"><p class="k-lab"><a class="sh-link" href="sitevisit.html">The 2027 Site Visit</a></p><div class="kd"><p class="kd-d" aria-label="Tuesday and Wednesday, May 25 and 26, 2027"><span class="kd-m">May</span><span class="kd-n kd-r num">25–26</span></p><div class="kd-b"><p class="kd-w">In 6 months</p><p class="kd-t">Two days of core tours, talks, and posters</p><p class=kd-s>Tuesday and Wednesday. A keynote and banquet close the first day.</p><p class=kd-l><a class="t3" href="sitevisit.html">Plan your visit</a><a class="t3" href="sitevisit-2026.html">See the 2026 photographs</a></p></div></div></div>
         </div>
+      </div>
       <footer class="sf"><a class="btn" href="events.html">Open the full calendar</a><a class="t3" href="events.html">Subscribe in my calendar app</a><p class="meta">Central Time. K-State dates are from the academic calendar.</p><a class="share" href="events.html"><span class="plus" aria-hidden="true"></span>Submit an event</a></footer>
       </div>
     </section>
@@ -1850,15 +1881,15 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
   <section class="reel-band" aria-labelledby="ph-h">
     <div class="wrap">
       <header class="sh">
-        <h2 id="ph-h"><a class="sh-link" href="sitevisit.html" title="Opens the Site Visit page: the 2027 program, travel, and questions.">The 2026 Site Visit</a></h2>
+        <h2 id="ph-h"><a class="sh-link" href="sitevisit-2026.html" title="Opens all 48 photographs from the 2026 Site Visit.">The 2026 Site Visit</a></h2>
         <p>May 27 and 28 in Manhattan, Kansas: core tours, the keynote, project presentations, and the poster session.</p>
       </header>
       <div class="mosaic" id="reel" tabindex="-1">
-        <a class="ph lead" href="sitevisit.html"><span class="im"><img src="img/reel-1.jpg" alt="Placeholder for a photo of the poster session" loading="lazy"><span class="tag">Photo placeholder</span></span><span class="cap2"><b>Poster session</b><span>Students and investigators present research. Day 2, May 28.</span></span></a>
-        <a class="ph" href="sitevisit.html"><span class="im"><img src="img/reel-2.jpg" alt="Placeholder for a photo of a core tour" loading="lazy"><span class="tag">Photo placeholder</span></span><span class="cap2"><b>Core tours</b><span>Day 1, May 27.</span></span></a>
-        <a class="ph" href="sitevisit.html"><span class="im"><img src="img/reel-3.jpg" alt="Placeholder for a photo of the keynote address" loading="lazy"><span class="tag">Photo placeholder</span></span><span class="cap2"><b>Keynote address</b><span>Day 1, before the banquet.</span></span></a>
+        <a class="ph lead" href="sitevisit-2026.html#pg-poster-session"><span class="im"><img src="img/reel-1.jpg" alt="Placeholder for a photo of the poster session" loading="lazy"><span class="tag">Photo placeholder</span></span><span class="cap2"><b>Poster session</b><span>Students and investigators present research. Day 2, May 28.</span></span></a>
+        <a class="ph" href="sitevisit-2026.html#pg-core-tours"><span class="im"><img src="img/reel-2.jpg" alt="Placeholder for a photo of a core tour" loading="lazy"><span class="tag">Photo placeholder</span></span><span class="cap2"><b>Core tours</b><span>Day 1, May 27.</span></span></a>
+        <a class="ph" href="sitevisit-2026.html#pg-keynote-address"><span class="im"><img src="img/reel-3.jpg" alt="Placeholder for a photo of the keynote address" loading="lazy"><span class="tag">Photo placeholder</span></span><span class="cap2"><b>Keynote address</b><span>Day 1, before the banquet.</span></span></a>
       </div>
-      <footer class="sf"><a class="btn" href="sitevisit.html">View the full gallery</a><p class="meta" data-unless="sparse">Showing 3 of 48 photographs. The rest include the banquet and every project presentation.</p><p class="meta" data-when="sparse" hidden>All 3 photographs from this event.</p><a class="share" href="sitevisit.html"><span class="plus" aria-hidden="true"></span>Share your photographs</a></footer>
+      <footer class="sf"><a class="btn" href="sitevisit-2026.html">View the full gallery</a><p class="meta" data-unless="sparse">Showing 3 of 48 photographs. The rest include the banquet and every project presentation.</p><p class="meta" data-when="sparse" hidden>All 3 photographs from this event.</p><a class="share" href="mailto:cnap@ksu.edu?subject=Photographs%20from%20the%202026%20Site%20Visit&amp;amp;body=Name%3A%0A%0AWhat%20the%20photographs%20show%3A%0A%0AA%20link%20to%20the%20photographs%2C%20or%20attach%20them%3A%0A"><span class="plus" aria-hidden="true"></span>Share your photographs</a></footer>
     </div>
   </section>
 

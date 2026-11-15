@@ -786,3 +786,10 @@ To show real photos, the app needs an optional image on `FundingNews` and `Fundi
 - My tasks: Show and Hide sit in the middle of each row.
 - "All core services" stays on the app's home page, linking to the cores on the CNAP website until the app has its own Resources pages.
 - The old "Mentor Guide · CNAP Member Hub" artifact is kept.
+
+## 2026-11-15 (evening): Threads, Events calendar, 2026 photographs
+
+- Threads get their own pages in the prototype: `threads.html` (every thread, with filters, topic, and search) and `thread.html` (one sample thread). Community keeps a short preview. Dependency: threads in the app need new models, views, and notifications. Not built in the app; needs approval.
+- Events opens on a Calendar view (Home's calendar, copied by `gen/evcal.py`), with a List toggle for the existing agenda. The menu item is "Events calendar."
+- The 2026 Site Visit photographs have their own page, `sitevisit-2026.html`, with placeholders only. Home and Site Visit link to it, which ends the loop between the two pages.
+- Home has two preview scenarios, "New project leader" and "New mentor." Both move Getting started up, just under Your week.

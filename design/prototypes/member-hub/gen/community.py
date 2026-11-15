@@ -64,7 +64,7 @@ T=[('jl','Looking for an EEG collaborator','4 replies','Active today',True,'You 
    ('hc','Office hours for mixed-effects models in R','6 replies','Active Monday',False,'',False),
    ('sr','A journal club on fear extinction, starting in December','5 replies','Active last week',False,'',False),
    ('kb','Calibrating the eye tracker for participants who wear glasses','No replies yet','Started today',False,'',True)]
-thr=''.join(f'''<li class="cm-th" data-m="{'1' if mt_ else '0'}" data-u="{'1' if un else '0'}">{av(k)}<div class="cm-tm"><a class="cm-tt" href="#" data-proto title="Thread pages are not part of the prototype yet.">{t}</a><p class="cm-tx">{BY[k][2]} · {r} · {a}</p>{f'<p class="cm-why">{w}</p>' if w else ''}</div>{'<span class="st st-on">Unanswered</span>' if un else ''}</li>''' for k,t,r,a,mt_,w,un in T)
+thr=''.join(f'''<li class="cm-th" data-m="{'1' if mt_ else '0'}" data-u="{'1' if un else '0'}">{av(k)}<div class="cm-tm">{f'<a class="cm-tt" href="thread.html">{t}</a>' if k=='jl' else f'<a class="cm-tt" href="#" data-proto title="Only one thread page is built in the prototype: Looking for an EEG collaborator.">{t}</a>'}<p class="cm-tx">{BY[k][2]} · {r} · {a}</p>{f'<p class="cm-why">{w}</p>' if w else ''}</div>{'<span class="st st-on">Unanswered</span>' if un else ''}</li>''' for k,t,r,a,mt_,w,un in T)
 
 # 6. Recent achievements
 A=[('ms','Publication','Attention and working memory in older adults: a two-year follow-up','Dr. Maya Singh and colleagues, with the Cognitive Neuroscience Core. Cites CNAP.','November 10'),
@@ -177,7 +177,7 @@ page=f'''<!doctype html>
           <div class="cs-b"><p>Questions about methods, equipment, recruiting, and funding, answered by the members who have the experience. Threads are visible only to CNAP members.</p>
             <div class="cm-thbar"><div class="pf-filt cm-tf" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-t="m">Matched to you</button><button type="button" aria-pressed="false" data-t="u">Unanswered</button><button type="button" aria-pressed="false" data-t="a">All threads</button></div><button type="button" class="btn sm" data-compose>Start a conversation thread</button></div>
             <ul class="cm-ths">{thr}</ul>
-            <p class="meta"><a class="t3" href="#" data-proto title="Thread pages are not part of the prototype yet.">See all 14 threads</a></p>
+            <p class="meta"><a class="t3" href="threads.html">See all 14 threads</a></p>
           </div>
         </section>
         <section class="step cs" id="cm-first" aria-labelledby="cm-first-h">

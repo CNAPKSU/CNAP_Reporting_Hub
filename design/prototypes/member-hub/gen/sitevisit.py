@@ -336,7 +336,7 @@ page=f'''<!doctype html>
 
   <section class="sv-sec sv-pho" id="sv-pho" aria-labelledby="sv-pho-h">
     <div class="wrap sv-pg">
-      <header class="sv-sh"><h2 id="sv-pho-h">Photographs</h2><p>Tuesday from 11:40 a.m. to 12:10 p.m. in the Business Building atrium. The photographs may appear on the CNAP website, in presentations, and in Center materials. Core directors and project leaders are also invited to take an individual photograph, or to send a current headshot.</p><a class="t3" href="index.html#ph-h">See the 2026 photographs</a><figure class="sv-phfig"><span class="im"><img src="img/reel-1.jpg" alt="Placeholder for the 2026 group photograph" loading="lazy"><span class="tag">Photo placeholder</span></span><figcaption>Everyone, at the 2026 Site Visit</figcaption></figure></header>
+      <header class="sv-sh"><h2 id="sv-pho-h">Photographs</h2><p>Tuesday from 11:40 a.m. to 12:10 p.m. in the Business Building atrium. The photographs may appear on the CNAP website, in presentations, and in Center materials. Core directors and project leaders are also invited to take an individual photograph, or to send a current headshot.</p><a class="t3" href="sitevisit-2026.html">See the 2026 photographs</a><figure class="sv-phfig"><span class="im"><img src="img/reel-1.jpg" alt="Placeholder for the 2026 group photograph" loading="lazy"><span class="tag">Photo placeholder</span></span><figcaption>Everyone, at the 2026 Site Visit</figcaption></figure></header>
       <div class="sv-phw"><p class="sv-ck2 sv-phh">Group photographs, in the order the photographs will be taken</p><ol class="sv-photos">{photos}</ol></div>
     </div>
   </section>

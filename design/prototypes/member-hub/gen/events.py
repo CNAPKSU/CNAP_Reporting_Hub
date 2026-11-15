@@ -4,6 +4,8 @@ sys.path.insert(0,'/tmp/claude-0/hubproto/gen')
 from mail import mt
 V='/tmp/claude-0/hubproto/v4/'
 core=open(V+'core-ni.html').read()
+import importlib.util as _u;_sp=_u.spec_from_file_location('evcal','/tmp/claude-0/hubproto/gen/evcal.py');evcal=_u.module_from_spec(_sp);_sp.loader.exec_module(evcal)
+CALMK=evcal.SNIP['markup'];CALJS=evcal.SNIP['script']
 hdr=core[core.index('<a class="skip"'):core.index('<main id="main">')]
 hdr=hdr.replace('<a href="index.html#cores-h" aria-current="page">Resources</a>','<a href="index.html#cores-h">Resources</a>')
 hdr=hdr.replace('<a href="events.html">Events</a>','<a href="events.html" aria-current="page">Events</a>')
@@ -85,6 +87,7 @@ html=f'''<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Events · CNAP Member Hub</title>
 <link rel="stylesheet" href="guide.css">
+<link rel="stylesheet" href="evcal.css">
 </head>
 <body data-guide="events" class="ev-page">
 {hdr}<main id="main">
@@ -112,10 +115,14 @@ html=f'''<!doctype html>
   <div class="ev-body">
     <div class="wrap">
       <div class="ev-main">
+        <div class="ev-mode" role="group" aria-label="Show the calendar as"><button type="button" data-mode="month" aria-pressed="true">Calendar</button><button type="button" data-mode="list" aria-pressed="false">List</button></div>
+        <div class="ev-cal" id="ev-month">{CALMK}</div>
+        <div id="ev-list" hidden>
         <div class="ev-bar"><div class="ev-filt" role="group" aria-label="Show">{F}</div><p class="ev-tz">Central Time</p></div>
         {earlier}
         {agenda}
         <p class="ev-none" hidden>Nothing to show. Turn on more types above.</p>
+        </div>
       </div>
       <aside class="ev-side" aria-label="Key dates and NeuroSync">
         <div class="rp-card">
@@ -154,13 +161,23 @@ html=f'''<!doctype html>
           <li><span class="ag-d">Tuesday, May 25<small>Evening</small></span><span>Keynote address and banquet.</span></li>
           <li><span class="ag-d">Wednesday, May 26<small>Morning, ending by noon</small></span><span>Poster session, open to everyone.</span></li>
         </ol>
-        <div class="ev-fa">{cal_links(sv).replace('class="ev-add"','class="ev-add ev-lg"').replace('>Google</a>','>Google Calendar</a>')}<a class="btn pri" href="sitevisit.html">The program, travel, and FAQ</a><a class="t3" href="index.html#ph-h">See the 2026 photographs</a></div>
+        <div class="ev-fa">{cal_links(sv).replace('class="ev-add"','class="ev-add ev-lg"').replace('>Google</a>','>Google Calendar</a>')}<a class="btn pri" href="sitevisit.html">The program, travel, and FAQ</a><a class="t3" href="sitevisit-2026.html">See the 2026 photographs</a></div>
       </div>
     </div>
   </section>
 </main>
 <footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. The NeuroSync schedule, speakers, and Center events are sample content, shown as of Friday, November 13. K-State dates come from the academic calendar.</span></div></footer>
 <script src="guide.js"></script>
+<script>
+(function(){{
+  {CALJS}
+}})();
+(function(){{var bs=document.querySelectorAll('.ev-mode button'),m=document.getElementById('ev-month'),l=document.getElementById('ev-list');
+  function set(k){{bs.forEach(function(b){{b.setAttribute('aria-pressed',b.dataset.mode===k)}});m.hidden=k!=='month';l.hidden=k!=='list';try{{localStorage.setItem('ev-mode',k)}}catch(e){{}}}}
+  bs.forEach(function(b){{b.addEventListener('click',function(){{set(b.dataset.mode)}})}});
+  var k='month';try{{k=localStorage.getItem('ev-mode')||'month'}}catch(e){{}}set(k);
+}})();
+</script>
 <script>
 (function(){{var on={{ns:1,ctr:1,due:1,you:1,cam:1}},bs=document.querySelectorAll('.ev-f'),none=document.querySelector('.ev-none');
 function apply(){{var n=0;document.querySelectorAll('.ev').forEach(function(e){{var v=!!on[e.dataset.k];e.hidden=!v;if(v&&!e.classList.contains('past'))n++;}});
