@@ -966,3 +966,30 @@ body.co-bn{--acc:var(--amber);--acc-ink:#5e3300;--acc-tint:#f5ece1}
 /* Story header (MW 2026-11-14): the title spans the picture's width, and the byline rule runs the full width too; the summary keeps a reading width */
 .st-h h1{max-width:none;font-size:clamp(38px,4.3vw,60px);line-height:1.08}
 .st-by{max-width:none}
+/* the four types of support (MW 2026-11-14): numbered, with one dividing line down the middle */
+.facts-n{list-style:none;margin:0;padding:6px 0;gap:0;background:var(--surface)}
+.facts-n li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:14px;align-items:start;padding:14px 22px}
+.facts-n li:nth-child(odd){box-shadow:1px 0 0 var(--line)}
+.facts-n li div{background:none;padding:0}
+.facts-n .fn{display:grid;place-items:center;width:30px;height:30px;margin-top:2px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--acc);color:var(--acc);font:500 14px/1 var(--serif)}
+.facts-n .fn+div span{margin-top:4px}
+@media (max-width:980px){.facts-n li:nth-child(odd){box-shadow:none}.facts-n li+li{box-shadow:0 -1px 0 var(--line)}}
+
+/* Guides and core pages (MW 2026-11-14: "we have so much white space to the left, why not just scootch it over a bit?"):
+   from 1500px the dot rail moves into the left margin and the steps line up with the title;
+   from 1920px there is room for the whole "In this guide" list, so it stays open in the margin and never covers the text */
+@media (min-width:1500px){
+  .guide .wrap{grid-template-columns:minmax(0,1fr) 216px}
+  .core-page .guide .wrap{grid-template-columns:minmax(0,1fr) 300px}
+  .guide .wrap>.spine{grid-area:1/1;justify-self:start;align-self:start;margin-left:-68px}
+  .guide .wrap>.steps{grid-area:1/1}
+  .guide .wrap>.rail,.guide .wrap>.co-rail,.guide .wrap>.ask{grid-area:1/2}
+}
+@media (min-width:1920px){
+  .guide .wrap>.spine,.guide .wrap>.spine:hover,.guide .wrap>.spine:focus-within{width:220px;margin-left:-248px;padding:20px 20px 14px;background:var(--surface);border-color:rgba(29,27,33,.07);box-shadow:0 1px 1px rgba(29,27,33,.04),0 4px 10px -2px rgba(29,27,33,.06),0 24px 48px -20px rgba(60,29,102,.22)}
+  .guide .wrap>.spine .spine-h{display:block}
+  .guide .wrap>.spine a{height:auto;padding:6px 0 6px 18px;white-space:normal;color:var(--ink-2)!important}
+  .guide .wrap>.spine a[aria-current="step"]{color:var(--acc-ink)!important}
+  .guide .wrap>.spine a::before{left:-1px;top:13px}
+  .guide .wrap>.spine .spine-track{left:23.5px}
+}

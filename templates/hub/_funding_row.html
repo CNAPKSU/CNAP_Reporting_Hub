@@ -1,14 +1,23 @@
-{# One opportunity as a card in the Member Hub design (MW 2026-11-14). Same fields as proto/portal/_funding_row.html. #}
+{# One opportunity as a card in the Member Hub design (MW 2026-11-14). Same fields as proto/portal/_funding_row.html: the key facts on the left, what to know on the right, and the next steps along the bottom. #}
 <li class="fp-op">
   <div class="fp-op-h">{% if r.o.url %}<a class="fp-name" href="{{ r.o.url }}" target="_blank" rel="noopener" title="Opens the sponsor’s announcement in a new tab.">{{ r.o.name }}</a>{% else %}<span class="fp-name fp-name-t">{{ r.o.name }}</span>{% endif %}
-  <span class="fp-chips"><span class="fp-st{% if r.state == 'ok' %} ok{% elif r.state == 'warn' %} warn{% elif r.state == 'alert' %} alert{% endif %}">{{ r.words }}</span><span class="fp-st{% if r.milestone_state == 'ok' %} ok{% endif %}">{{ r.milestone }}</span>{% if r.o.esi_only %}<span class="fp-st">Early Stage Investigators only</span>{% endif %}</span></div>
-  <dl class="fp-kv">
-    <div><dt>Deadline</dt><dd>{{ r.when }}</dd></div>
-    <div><dt>Amount</dt><dd>{{ r.o.amount_text|default:"See the announcement" }}</dd></div>
-    {% if r.o.sponsor %}<div><dt>Sponsor</dt><dd>{{ r.o.sponsor }}</dd></div>{% endif %}
-    {% if r.o.bulletin %}<div><dt>From</dt><dd>{% if r.o.bulletin.url %}<a href="{{ r.o.bulletin.url }}" target="_blank" rel="noopener" title="Opens the full issue in a new tab.">{{ r.o.bulletin }}</a>{% else %}{{ r.o.bulletin }}{% endif %}</dd></div>{% endif %}
-    {% if mode == 'picked' %}{% if r.why %}<div><dt>Why this fits</dt><dd>{{ r.why|linebreaksbr }}</dd></div>{% endif %}
-    <div><dt>Next step</dt><dd><a href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}#s-before" title="Opens the seven questions in Grant resources.">Weigh the opportunity with the seven questions</a></dd></div>
-    {% elif r.o.summary %}<div><dt>Notes</dt><dd>{{ r.o.summary|linebreaksbr }}</dd></div>{% endif %}
-  </dl>
+  <span class="fp-chips"><span class="fp-st{% if r.state == 'ok' %} ok{% elif r.state == 'warn' %} warn{% elif r.state == 'alert' %} alert{% endif %}">{{ r.words }}</span><a class="fp-st fp-st-l{% if r.milestone_state == 'ok' %} ok{% endif %}" href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}#s-milestones" title="Opens what this label means, in Grant resources.">{{ r.milestone }}</a>{% if r.o.esi_only %}<span class="fp-st">Early Stage Investigators only</span>{% endif %}</span></div>
+  <div class="fp-op-b">
+    <dl class="fp-facts2">
+      <div><dt>Deadline</dt><dd>{{ r.when }}</dd></div>
+      <div><dt>Amount</dt><dd>{{ r.o.amount_text|default:"See the announcement" }}</dd></div>
+      {% if r.o.sponsor %}<div><dt>Sponsor</dt><dd>{{ r.o.sponsor }}</dd></div>{% endif %}
+      {% if r.o.bulletin %}<div><dt>Found in</dt><dd>{% if r.o.bulletin.url %}<a href="{{ r.o.bulletin.url }}" target="_blank" rel="noopener" title="Opens the full issue in a new tab.">{{ r.o.bulletin }}</a>{% else %}{{ r.o.bulletin }}{% endif %}</dd></div>{% endif %}
+    </dl>
+    <div class="fp-know">
+      {% if mode == 'picked' and r.why %}<p class="fp-know-h">Why the CNAP team picked it for {% if acting_for_other %}{{ owner.first_name }}{% else %}you{% endif %}</p><p class="fp-why">{{ r.why|linebreaksbr }}</p>{% endif %}
+      {% if r.o.summary %}<p class="fp-know-h">What to know</p><ul class="fp-pts">{% for line in r.o.summary.splitlines %}{% if line.strip %}<li>{{ line }}</li>{% endif %}{% endfor %}</ul>
+      {% elif not r.why or mode != 'picked' %}<p class="fp-know-h">What to know</p><p class="fp-why">The sponsor’s announcement has the eligibility rules and the full instructions.</p>{% endif %}
+    </div>
+  </div>
+  <div class="fp-op-f">
+    {% if r.o.url %}<a class="fp-btn" href="{{ r.o.url }}" target="_blank" rel="noopener" title="Opens the sponsor’s announcement in a new tab.">Read the announcement</a>{% endif %}
+    <a class="fp-lnk" href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}#s-before" title="Opens the seven questions in Grant resources.">Weigh it with the seven questions</a>
+    <a class="fp-lnk" href="mailto:{{ evaluator_email }}?subject={{ 'Question about '|add:r.o.name|urlencode }}&amp;body={{ 'Name:%0A%0AMy question about this opportunity:%0A'|safe }}" title="Opens an email to the Assistant Director for Grants and Contracts.">Ask about this opportunity</a>
+  </div>
 </li>

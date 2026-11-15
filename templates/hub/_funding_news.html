@@ -1,7 +1,7 @@
-{# One funding news item in the Member Hub design (MW 2026-11-14): the CNAP team's summary, with the source. #}
-<li class="fp-nw{% if n.pinned %} pinned{% endif %}">
-  <span class="fp-nd">{% if n.date_text %}{{ n.date_text }}{% elif n.news_date %}{{ n.news_date|date:"F j, Y" }}{% else %}Not dated{% endif %}</span>
-  <div><b>{{ n.headline }}</b>{% if n.pinned %} <span class="fp-st on">Pinned by the CNAP office</span>{% endif %}
-  <p>{{ n.summary|linebreaksbr }}</p>
-  {% if n.source_url %}<a class="fp-src" href="{{ n.source_url }}" target="_blank" rel="noopener" title="Opens the source in a new tab.">{{ n.source_name|default:"The source" }}</a>{% endif %}</div>
+{# One funding news item in the Member Hub design (MW 2026-11-14): the date and source above, the headline, the CNAP team's summary as points, and a link to the source. #}
+<li class="fp-nw">
+  <p class="fp-nmeta">{% if n.date_text %}{{ n.date_text }}{% elif n.news_date %}{{ n.news_date|date:"F j, Y" }}{% else %}Not dated{% endif %}{% if n.pinned %}<span class="fp-st on">Pinned by the CNAP office</span>{% endif %}</p>
+  <h3 class="fp-nh">{{ n.headline }}</h3>
+  {% if n.summary %}<ul class="fp-pts">{% for line in n.summary.splitlines %}{% if line.strip %}<li>{{ line }}</li>{% endif %}{% endfor %}</ul>{% endif %}
+  {% if n.source_url %}<a class="fp-src" href="{{ n.source_url }}" target="_blank" rel="noopener" title="Opens the source in a new tab.">Source: {{ n.source_name|default:"the original announcement" }}</a>{% endif %}
 </li>

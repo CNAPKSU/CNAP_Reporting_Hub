@@ -1,8 +1,13 @@
-{# One research event or talk in the Member Hub design (MW 2026-11-14). #}
+{# One research event or talk in the Member Hub design (MW 2026-11-14): a date block, the title, when and where, and the description. #}
 <li class="fp-ev">
-  <span class="fp-ed" aria-hidden="true"><span>{{ e.starts_on|date:"l" }}</span><b>{{ e.starts_on|date:"j" }}</b><span>{{ e.starts_on|date:"F" }}</span></span>
-  <div>{% if e.url %}<a class="fp-name" href="{{ e.url }}" target="_blank" rel="noopener" title="Opens the event’s details in a new tab.">{{ e.title }}</a>{% else %}<span class="fp-name fp-name-t">{{ e.title }}</span>{% endif %}
-  <span class="fp-meta">{% if e.ends_on %}{{ e.starts_on|date:"F j" }} to {{ e.ends_on|date:"F j, Y" }}{% else %}{{ e.starts_on|date:"l, F j, Y" }}{% endif %}{% if e.time_text %}, {{ e.time_text }}{% endif %}</span>
-  {% if e.place or e.host %}<span class="fp-meta">{% if e.place %}{{ e.place }}{% endif %}{% if e.place and e.host %}. {% endif %}{% if e.host %}Hosted by {{ e.host }}{% endif %}</span>{% endif %}
-  {% if e.summary %}<p>{{ e.summary|linebreaksbr }}</p>{% endif %}</div>
+  <span class="fp-ed" aria-hidden="true"><span>{{ e.starts_on|date:"D" }}</span><b>{{ e.starts_on|date:"j" }}</b><span>{{ e.starts_on|date:"M" }}</span></span>
+  <div class="fp-ev-t">
+    {% if e.url %}<a class="fp-evh" href="{{ e.url }}" target="_blank" rel="noopener" title="Opens the event’s details in a new tab.">{{ e.title }}</a>{% else %}<span class="fp-evh">{{ e.title }}</span>{% endif %}
+    <dl class="fp-evm">
+      <div><dt>When</dt><dd>{% if e.ends_on %}{{ e.starts_on|date:"F j" }} to {{ e.ends_on|date:"F j, Y" }}{% else %}{{ e.starts_on|date:"l, F j, Y" }}{% endif %}{% if e.time_text %}, {{ e.time_text }}{% endif %}</dd></div>
+      {% if e.place %}<div><dt>Where</dt><dd>{{ e.place }}</dd></div>{% endif %}
+      {% if e.host %}<div><dt>Host</dt><dd>{{ e.host }}</dd></div>{% endif %}
+    </dl>
+    {% if e.summary %}<p class="fp-evd">{{ e.summary|linebreaksbr }}</p>{% endif %}
+  </div>
 </li>

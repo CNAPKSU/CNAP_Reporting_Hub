@@ -1,0 +1,7 @@
+{# A pinned funding news item as a feature card (MW 2026-11-14). #}
+<li class="fp-pin">
+  <p class="fp-nmeta">{% if n.date_text %}{{ n.date_text }}{% elif n.news_date %}{{ n.news_date|date:"F j, Y" }}{% else %}Not dated{% endif %}{% if n.bulletin %} · {{ n.bulletin.name }}{% endif %}</p>
+  <h3 class="fp-pin-h">{{ n.headline }}</h3>
+  {% if n.summary %}<ul class="fp-pts">{% for line in n.summary.splitlines %}{% if line.strip %}<li>{{ line }}</li>{% endif %}{% endfor %}</ul>{% endif %}
+  {% if n.source_url %}<a class="fp-btn" href="{{ n.source_url }}" target="_blank" rel="noopener" title="Opens the source in a new tab.">Read the source: {{ n.source_name|default:"the announcement" }}</a>{% endif %}
+</li>

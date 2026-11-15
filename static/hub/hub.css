@@ -1427,3 +1427,5 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 .reel-band .sh{border-top-color:var(--line-2)}
 .cal-band .sh{border-top:1px solid var(--line);padding-top:32px}
 .cal-band .sh::before{display:block;background:var(--ink)}
+/* Grant resources on the homepage is one linked heading, not a label over a subtitle (MW 2026-11-14) */
+.proposal h3.gr-h{font:500 28px/34px var(--serif);color:var(--ink);margin-bottom:18px}

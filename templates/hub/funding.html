@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/page.css' %}">
 </head>
-<body class="hub-page fp-page">
+<body class="hub-page fp-page{% if part == 'resources' %} fp-noside{% endif %}">
 {# Funding and proposals (formerly Funding and news) in the Member Hub design (MW 2026-11-14). The same view, data, form, letters, and permissions as proto/portal/funding.html; only the presentation changes. #}
 {% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
 <a class="skip" href="#main">Skip to main content</a>
@@ -43,16 +43,12 @@
             <div><dt>Next deadline</dt><dd>{% if next_deadline %}{{ next_deadline|date:"F j, Y" }}{% else %}None listed{% endif %}</dd></div>
           </dl>{% endif %}
         </div>
-        {% if part != "resources" %}<aside class="fp-consult" aria-label="Help with a proposal">
-          <p class="fp-for">Writing a proposal?</p>
-          <p class="fp-ct">Talk through a draft, one on one, with the Assistant Director for Grants and Contracts.</p>
-          <a class="fp-btn pri" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a>
-        </aside>{% endif %}
+
       </div>
       <nav class="fp-tabs" aria-label="Funding pages">
-        <a href="{% url 'portal:funding' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "opportunities" %} aria-current="page"{% endif %}>Funding opportunities</a>
-        <a href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "resources" %} aria-current="page"{% endif %}>Grant resources</a>
-        <a href="{% url 'portal:funding_news' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "news" %} aria-current="page"{% endif %}>Funding news</a>
+        <a href="{% url 'portal:funding' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "opportunities" %} aria-current="page"{% endif %}><b>Funding opportunities</b><span>Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, and relevant to most members</span></a>
+        <a href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "resources" %} aria-current="page"{% endif %}><b>Grant resources</b><span>The seven questions, a consultation, and the toolkit</span></a>
+        <a href="{% url 'portal:funding_news' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "news" %} aria-current="page"{% endif %}><b>Funding news</b><span>News from sponsors, and events and talks</span></a>
       </nav>
     </div>
   </section>
@@ -62,7 +58,7 @@
       <nav class="spine" aria-label="Sections on this page">
         <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
         <ol>
-          {% if part == "news" %}<li><a href="#s-news">Funding news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
+          {% if part == "news" %}{% if n_pinned %}<li><a href="#s-pinned">Pinned by the CNAP office</a></li>{% endif %}<li><a href="#s-news">Latest news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-milestones">What the funding labels mean</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
         </ol>
       </nav>
 
@@ -70,17 +66,23 @@
         {% if messages %}<ul class="fp-msgs" role="status">{% for m in messages %}<li class="{{ m.tags }}">{{ m|stack }}</li>{% endfor %}</ul>{% endif %}
         {% if from_not_funded %}<p class="fp-msg" role="status">The CNAP team will follow up with you personally.</p>{% endif %}
         {% if part == "news" %}
-        <section class="fp-sec" id="s-news" aria-labelledby="s-news-h">
-          <div class="fp-sh"><h2 id="s-news-h">Funding news</h2><p>{{ news|length }} item{{ news|length|pluralize }}{% if n_pinned %}, {{ n_pinned }} pinned by the CNAP office{% endif %}.</p></div>
+        {% if n_pinned %}<section class="fp-sec" id="s-pinned" aria-labelledby="s-pinned-h">
+          <div class="fp-sh"><h2 id="s-pinned-h">Pinned by the CNAP office</h2><p>The news the CNAP team thinks every member should see first.</p></div>
+          <ul class="fp-pins">{% for n in news %}{% if n.pinned %}{% include "hub/_funding_pin.html" %}{% endif %}{% endfor %}</ul>
+        </section>
+        {% endif %}<section class="fp-sec" id="s-news" aria-labelledby="s-news-h">
+          <div class="fp-sh"><h2 id="s-news-h">Latest news</h2><p>{{ news|length }} item{{ news|length|pluralize }}, summarized by the CNAP team and grouped by where each one appeared.</p></div>
           {% if news %}{% with loose=news_groups.0 issues=news_groups.1 %}
-          {% for g in issues %}{% include "hub/_funding_issue_head.html" with b=g.b %}<ul class="fp-news">{% for n in g.items %}{% include "hub/_funding_news.html" %}{% endfor %}</ul>{% endfor %}
-          {% if loose %}{% if issues %}<div class="fp-issue"><h3>From other sources</h3></div>{% endif %}<ul class="fp-news">{% for n in loose %}{% include "hub/_funding_news.html" %}{% endfor %}</ul>{% endif %}
+          <ul class="fp-news">
+          {% for g in issues %}{% for n in g.items %}{% if not n.pinned %}{% ifchanged %}<li class="fp-issue">{% include "hub/_funding_issue_head.html" with b=g.b %}</li>{% endifchanged %}{% include "hub/_funding_news.html" %}{% endif %}{% endfor %}{% endfor %}
+          {% for n in loose %}{% if not n.pinned %}{% ifchanged %}<li class="fp-issue"><h3>From other sources</h3></li>{% endifchanged %}{% include "hub/_funding_news.html" %}{% endif %}{% endfor %}
+          </ul>
           {% endwith %}{% else %}<div class="fp-empty"><p>No funding news yet.</p><p>New items appear here as the CNAP team posts them.</p></div>{% endif %}
         </section>
         <section class="fp-sec" id="s-events" aria-labelledby="s-events-h">
           <div class="fp-sh"><h2 id="s-events-h">Events and talks</h2><p>{{ events|length }} coming up at K-State and online.</p></div>
           {% if events %}{% with loose=event_groups.0 issues=event_groups.1 %}
-          {% for g in issues %}{% include "hub/_funding_issue_head.html" with b=g.b %}<ul class="fp-evs">{% for e in g.items %}{% include "hub/_funding_event.html" %}{% endfor %}</ul>{% endfor %}
+          {% for g in issues %}<div class="fp-issue">{% include "hub/_funding_issue_head.html" with b=g.b %}</div><ul class="fp-evs">{% for e in g.items %}{% include "hub/_funding_event.html" %}{% endfor %}</ul>{% endfor %}
           {% if loose %}{% if issues %}<div class="fp-issue"><h3>From other sources</h3></div>{% endif %}<ul class="fp-evs">{% for e in loose %}{% include "hub/_funding_event.html" %}{% endfor %}</ul>{% endif %}
           {% endwith %}{% else %}<div class="fp-empty"><p>No events are listed right now.</p><p>Events appear here as the CNAP team adds them.</p></div>{% endif %}
         </section>
@@ -99,6 +101,14 @@
               <a class="fp-btn pri" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a>
             </aside>
           </div>
+        </section>
+        <section class="fp-sec" id="s-milestones" aria-labelledby="s-milestones-h">
+          <div class="fp-sh"><h2 id="s-milestones-h">What the funding labels mean</h2><p>Each opportunity carries one of three milestone labels. The labels show how an award relates to the R01 milestone: independent funding through an R01 or an equivalent award, which every CNAP project leader works toward.</p></div>
+          <dl class="fp-labels">
+            <div><dt><span class="fp-st ok">Counts toward the R01 milestone</span></dt><dd>The award is an R01 or an equivalent award. Winning it meets the milestone.</dd></div>
+            <div id="bridge"><dt><span class="fp-st">Bridge funding</span></dt><dd>A smaller or shorter award that keeps your research going and builds preliminary data on the way to an R01-equivalent award. Bridge funding doesn’t meet the milestone by itself, but it can strengthen your next application.</dd></div>
+            <div><dt><span class="fp-st">Ask your program officer</span></dt><dd>Whether the award counts depends on its terms. Ask your program officer and the CNAP team before you apply.</dd></div>
+          </dl>
         </section>
         <section class="fp-sec" id="s-toolkit" aria-labelledby="s-toolkit-h">
           <div class="fp-sh"><h2 id="s-toolkit-h">Proposal writing toolkit</h2><p>Templates, examples, and guides for writing a proposal.</p></div>
@@ -139,6 +149,11 @@
 
         {% if part == "opportunities" %}<p class="fp-who">The opportunities picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, letters, and suggestions are visible only to {% if acting_for_other %}{{ who }}, the people entering for {{ who }},{% else %}you, anyone entering for you,{% endif %} and the CNAP office.<br>Nothing on this page is shared outside CNAP.</p>{% endif %}
       </div>
+      {% if part != "resources" %}<aside class="fp-consult fp-side" aria-label="Help with a proposal">
+          <p class="fp-for">Writing a proposal?</p>
+          <p class="fp-ct">Talk through a draft, one on one, with the Assistant Director for Grants and Contracts.</p>
+          <a class="fp-btn pri" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a>
+        </aside>{% endif %}
     </div>
   </div>
 </main>

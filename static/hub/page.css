@@ -336,3 +336,91 @@ a.fp-name:hover{color:var(--purple);text-decoration:underline}
 .fp-empty p,.fp-who,.fp-card p{max-width:72ch}
 .fp-form{max-width:none}
 .fp-form .fp-field,.fp-form .fp-choice{max-width:720px}
+/* the milestone labels link to their meaning (MW 2026-11-14) */
+a.fp-st-l{text-decoration:none;transition:box-shadow .15s}
+a.fp-st-l:hover{box-shadow:inset 0 0 0 1px currentColor}
+.fp-labels{display:grid;gap:0;margin:0;background:var(--surface);border-radius:10px;box-shadow:var(--sh);padding:4px 28px}
+.fp-labels>div{display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;align-items:baseline;padding:18px 0;scroll-margin-top:104px}
+.fp-labels>div+div{box-shadow:0 -1px 0 var(--line)}
+.fp-labels dt{margin:0}.fp-labels dd{margin:0;font-size:15.5px;line-height:25px;color:var(--ink-2);max-width:72ch}
+@media (max-width:640px){.fp-labels{padding-inline:20px}.fp-labels>div{grid-template-columns:minmax(0,1fr);gap:8px}}
+/* the dot rail sits just left of the content, level with the first section, and follows the reader (MW 2026-11-14: "not that far") */
+@media (min-width:981px){
+  .fp-body>.wrap{display:grid;grid-template-columns:minmax(0,1fr)}
+  .fp-body>.wrap>.spine,.fp-body>.wrap>.fp-main{grid-area:1/1}
+  .fp-page .spine{position:sticky;top:124px;left:auto;align-self:start;justify-self:start;margin-left:-52px;margin-top:6px}
+}
+/* the consultation card sits in a side column under the opening, beside the sections (MW 2026-11-14) */
+.fp-hero{grid-template-columns:minmax(0,1fr)}
+.fp-side{align-self:start}
+@media (min-width:981px){
+  .fp-page:not(.fp-noside) .fp-body>.wrap{grid-template-columns:minmax(0,1fr) 300px;column-gap:48px}
+  .fp-body>.wrap>.fp-side{grid-area:1/2;position:sticky;top:124px}
+}
+@media (max-width:980px){.fp-body>.wrap>.fp-side{order:-1}}
+
+/* the funding pages' tabs (MW 2026-11-14): three equal tabs across the full width, each with a line saying what is on that page */
+.fp-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:40px;box-shadow:inset 0 -1px 0 var(--line)}
+.fp-tabs a{display:flex;flex-direction:column;gap:4px;padding:18px 24px 20px 0;box-shadow:inset 0 -3px 0 transparent;color:var(--ink-2);text-decoration:none;transition:box-shadow .2s}
+.fp-tabs a+a{padding-left:24px;border-left:1px solid var(--line)}
+.fp-tabs b{font:400 22px/28px var(--serif);color:var(--ink);letter-spacing:-.005em}
+.fp-tabs span{font-size:14.5px;line-height:21px;color:var(--muted)}
+.fp-tabs a:hover b{color:var(--purple)}
+.fp-tabs a[aria-current="page"]{box-shadow:inset 0 -3px 0 var(--purple);font-weight:400}
+.fp-tabs a[aria-current="page"] b{color:var(--purple-ink)}
+@media (max-width:760px){.fp-tabs{grid-template-columns:minmax(0,1fr);margin-top:28px}.fp-tabs a,.fp-tabs a+a{padding:12px 0 14px;border-left:0;box-shadow:inset 0 -1px 0 var(--line)}.fp-tabs a[aria-current="page"]{box-shadow:inset 3px 0 0 var(--purple);padding-left:14px}.fp-tabs b{font-size:19px;line-height:25px}}
+
+/* an opportunity (MW 2026-11-14): key facts on the left, what to know on the right, next steps along the bottom */
+.fp-op{padding:0;overflow:hidden}
+.fp-op-h{padding:24px 28px 18px}
+.fp-op-b{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:0;box-shadow:0 -1px 0 var(--line)}
+.fp-facts2{margin:0;padding:20px 28px;background:#fbfaf8;box-shadow:1px 0 0 var(--line);display:grid;gap:14px;align-content:start}
+.fp-facts2 dt{font-size:13px;font-weight:600;color:var(--muted)}
+.fp-facts2 dd{margin:2px 0 0;font:400 17px/24px var(--serif);color:var(--ink);overflow-wrap:anywhere}
+.fp-know{padding:20px 28px;min-width:0}
+.fp-know-h{font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px}
+.fp-know-h:not(:first-child){margin-top:16px}
+.fp-why{font-size:15.5px;line-height:25px;color:var(--ink-2);max-width:72ch}
+.fp-pts{display:grid;gap:8px;max-width:72ch}
+.fp-pts li{position:relative;padding-left:18px;font-size:15.5px;line-height:24px;color:var(--ink-2)}
+.fp-pts li::before{content:"";position:absolute;left:2px;top:10px;width:6px;height:6px;border-radius:50%;background:var(--purple)}
+.fp-op-f{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;padding:16px 28px;box-shadow:0 -1px 0 var(--line)}
+.fp-op-f .fp-btn{min-height:40px;font-size:14.5px}
+.fp-lnk{font-size:14.5px;font-weight:500;color:var(--purple);text-underline-offset:3px;text-decoration-thickness:1px}
+.fp-lnk:hover{color:var(--purple-ink)}
+@media (max-width:760px){.fp-op-b{grid-template-columns:minmax(0,1fr)}.fp-facts2{grid-template-columns:repeat(2,minmax(0,1fr));box-shadow:0 1px 0 var(--line);padding:16px 20px}.fp-op-h,.fp-know,.fp-op-f{padding-inline:20px}}
+@media (max-width:420px){.fp-facts2{grid-template-columns:minmax(0,1fr)}}
+
+/* Funding news, overhauled (MW 2026-11-14): pinned items as feature cards, then the latest news in one list aligned to the section's left edge, with clear space between the headline, the points, and the source */
+.fp-pins{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:20px}
+.fp-pin{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:28px;border-radius:10px;background:var(--surface);box-shadow:inset 0 3px 0 var(--purple),var(--sh)}
+.fp-pin .fp-nmeta{margin-top:-2px}
+.fp-pin-h{font:400 25px/32px var(--serif);letter-spacing:-.01em;color:var(--ink);text-wrap:balance;margin:2px 0 4px}
+.fp-pin .fp-pts{margin-bottom:8px}
+.fp-pin .fp-btn{margin-top:auto;min-height:40px;font-size:14.5px;text-align:left;line-height:1.3;padding-block:10px}
+.fp-nmeta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:14px;line-height:20px;color:var(--muted)}
+.fp-news{list-style:none;margin:0;background:var(--surface);border-radius:10px;box-shadow:var(--sh);padding:8px 32px}
+.fp-news>li{padding:26px 0}
+.fp-news>li+li{box-shadow:0 -1px 0 var(--line)}
+.fp-news>li.fp-issue{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;padding:22px 0 6px;margin:0}
+.fp-news>li.fp-issue+li{box-shadow:none;padding-top:14px}
+.fp-news>li.fp-issue h3{font:500 15px/22px var(--sans);color:var(--purple-ink)}
+.fp-news>li.fp-issue p{font-size:14px;color:var(--muted)}
+.fp-news>li.fp-issue:not(:first-child){margin-top:10px;box-shadow:0 -1px 0 var(--line-2)}
+.fp-nw{display:block}
+.fp-nh{margin:8px 0 12px;font:400 22px/29px var(--serif);letter-spacing:-.005em;color:var(--ink);text-wrap:balance}
+.fp-nw .fp-pts{margin:0}
+.fp-src{display:inline-block;margin-top:14px;font-size:14.5px;font-weight:500;color:var(--purple);text-underline-offset:3px;text-decoration-thickness:1px}
+.fp-src:hover{color:var(--purple-ink)}
+/* events: a date block, then a clear title, the when, where, and host, and the description */
+.fp-ev{grid-template-columns:72px minmax(0,1fr);gap:24px;padding:24px 28px}
+.fp-ed{padding:10px 0;font-size:12.5px;letter-spacing:.02em}
+.fp-ed b{font:400 32px/36px var(--serif)}
+.fp-evh{display:block;font:400 22px/29px var(--serif);color:var(--ink);text-decoration:none;text-wrap:balance}
+a.fp-evh:hover{color:var(--purple);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+.fp-evm{display:flex;flex-wrap:wrap;gap:6px 28px;margin:12px 0 0}
+.fp-evm dt{font-size:12.5px;font-weight:600;color:var(--muted)}
+.fp-evm dd{margin:1px 0 0;font-size:15px;line-height:22px;color:var(--ink)}
+.fp-evd{margin-top:14px;padding-top:14px;box-shadow:0 -1px 0 var(--line);font-size:15.5px;line-height:25px;color:var(--ink-2);max-width:72ch}
+@media (max-width:640px){.fp-news{padding:4px 20px}.fp-pin{padding:22px 20px}.fp-ev{grid-template-columns:56px minmax(0,1fr);gap:16px;padding:20px}.fp-nh,.fp-evh{font-size:20px;line-height:27px}}
+.fp-evm{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,max-content));column-gap:32px}
