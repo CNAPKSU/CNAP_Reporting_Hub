@@ -25,9 +25,9 @@
           {% if part == "news" %}<h1 id="t">Funding news</h1>
           <p class="fp-lead">Funding news the CNAP team summarized from sponsors and K-State newsletters, and research events and talks coming up at K-State and online.</p>
           <dl class="fp-facts">
-            <div><dt>News items</dt><dd>{{ news|length }}</dd></div>
-            <div><dt>Pinned by the CNAP office</dt><dd>{{ n_pinned }}</dd></div>
-            <div><dt>Events coming up</dt><dd>{{ events|length }}</dd></div>
+            {% if n_pinned %}<div><dt>Pinned by the CNAP office</dt><dd><a href="#s-pinned">{{ n_pinned }}</a></dd></div>{% endif %}
+            <div><dt>News items</dt><dd><a href="#s-news">{{ news|length }}</a></dd></div>
+            <div><dt>Events coming up</dt><dd><a href="#s-events">{{ events|length }}</a></dd></div>
           </dl>
           {% elif part == "resources" %}<h1 id="t">Grant resources</h1>
           <p class="fp-lead">Help with a proposal from start to finish: seven questions for weighing an opportunity, a one-on-one consultation on a draft, and a proposal writing toolkit.</p>
@@ -213,8 +213,8 @@
           <p class="fp-for" id="ask-h">Ask the community</p>
           <p class="fp-wt">Someone at CNAP may already know. Start a conversation thread to:</p>
           <ul class="fp-asks">
-            <li><a href="{% url 'home' %}#com-h" data-thread="funding">Ask who has applied for an opportunity</a></li>
-            <li><a href="{% url 'home' %}#com-h" data-thread="expertise">Find a collaborator or a kind of expertise</a></li>
+            <li><a href="{% url 'home' %}#com-h" data-thread="funding">Ask if a colleague has familiarity with a given call</a></li>
+            <li><a href="{% url 'home' %}#com-h" data-thread="expertise">Find a collaborator or a type of expertise</a></li>
             <li><a href="{% url 'home' %}#com-h" data-thread="student">Post a graduate student position</a></li>
           </ul>
         </aside>

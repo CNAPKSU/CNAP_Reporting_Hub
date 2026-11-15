@@ -79,12 +79,12 @@
 (function () {
   var MAP = [
     ['Home', 'index.html', null],
-    ['Reporting', 'reporting.html', [['My tasks', 'reporting.html'], ['My history', 'reporting-history.html']]],
-    ['Research', 'research.html', [['Research at CNAP', 'research.html'], ['Research stories', 'story.html']]],
-    ['Events', 'events.html', [['Events overview', 'events.html'], ['NeuroSync', 'neurosync.html'], ['The 2027 Site Visit', 'sitevisit.html']]],
-    ['Funding', 'funding.html', [['Funding opportunities', 'funding.html'], ['Grant resources and toolkit', 'funding-resources.html'], ['Funding news', 'funding-news.html']]],
-    ['Community', 'community.html', [['Community', 'community.html'], ['Member directory', 'community.html#cm-dir'], ['Alumni', 'community.html#cm-alum']]],
-    ['Resources', 'core-bn.html', [['Behavioral Neuroscience Core', 'core-bn.html'], ['Cognitive Neuroscience Core', 'core-cn.html'], ['Neuroinformatics Core', 'core-ni.html'], ['Mentor guide', 'mentor.html'], ['Mentee guide', 'mentee.html']]]
+    ['Reporting', 'reporting.html', [['My tasks', 'reporting.html', 'Surveys and reports due this session'], ['My history', 'reporting-history.html', 'Everything you have submitted']]],
+    ['Research', 'research.html', [['Research at CNAP', 'research.html', 'Projects, cores, and the people behind them'], ['Research stories', 'story.html', 'Findings told for a general reader']]],
+    ['Events', 'events.html', [['Events overview', 'events.html', 'Everything on the CNAP calendar'], ['NeuroSync', 'neurosync.html', 'The Wednesday speaker series'], ['The 2027 Site Visit', 'sitevisit.html', 'May 25 and 26, 2027']]],
+    ['Funding', 'funding.html', [['Funding opportunities', 'funding.html', 'Picked for you, and relevant to most members'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft'], ['Funding news', 'funding-news.html', 'News from sponsors, and events and talks']]],
+    ['Community', 'community.html', [['Community', 'community.html', 'Achievements, questions, and threads'], ['Member directory', 'community.html#cm-dir', 'Find a colleague or a type of expertise'], ['Alumni', 'community.html#cm-alum', 'Where former members are now']]],
+    ['Resources', 'core-bn.html', [['Behavioral Neuroscience Core', 'core-bn.html', 'Services, equipment, and how to book'], ['Cognitive Neuroscience Core', 'core-cn.html', 'Services, equipment, and how to book'], ['Neuroinformatics Core', 'core-ni.html', 'Data, analysis, and consultation'], ['Mentor guide', 'mentor.html', 'For mentors of CNAP investigators'], ['Mentee guide', 'mentee.html', 'For pilot and project investigators']]]
   ];
   var here = (location.pathname.split('/').pop() || 'index.html');
   if (/^reporting-\d+/.test(here)) here = 'reporting.html';
@@ -118,6 +118,16 @@
     + 'header.f-menu .hn{display:none!important}header.f-menu .hn-m{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:8px;border:1px solid var(--line-2,#d5d3d9);font:500 15px/1 var(--sans,system-ui,sans-serif);color:var(--ink,#1d1b21);cursor:pointer}'
     + 'header.f-mini .brand small,header.f-mini .mywork{display:none!important}header.f-mini .wrap{gap:10px}'
     + 'header.f-logo .brand>span{display:none}'
+    + 'header .hn .hn-p{min-width:320px;padding:6px;display:grid;gap:2px}'
+    + 'header .hn .hn-p a,header .hn .hn-p a:hover{display:grid;gap:1px;padding:10px 14px 10px 16px;border-radius:8px;border:0;box-shadow:none;text-decoration:none;background:transparent;position:relative}'
+    + 'header .hn .hn-p a b{font:500 15px/21px var(--sans,system-ui,sans-serif);color:var(--ink,#1d1b21)}'
+    + 'header .hn .hn-p a small{font:400 13px/18px var(--sans,system-ui,sans-serif);color:var(--muted,#6b6772)}'
+    + 'header .hn .hn-p a:hover,header .hn .hn-p a:focus-visible{background:var(--band,#f2efe9)}'
+    + 'header .hn .hn-p a+a{margin-top:0}header .hn .hn-p a+a::before{content:"";position:absolute;left:16px;right:14px;top:-1px;height:1px;background:var(--line,#e6e3ea)}'
+    + 'header .hn .hn-p a:hover::before,header .hn .hn-p a:hover+a::before,header .hn .hn-p a[aria-current="page"]::before,header .hn .hn-p a[aria-current="page"]+a::before{opacity:0}'
+    + 'header .hn .hn-p a[aria-current="page"]{background:var(--purple-tint,#efe8f8);box-shadow:inset 3px 0 0 var(--purple,#512888)}'
+    + 'header .hn .hn-p a[aria-current="page"] b{color:var(--purple-ink,#3c1d66);font-weight:600}'
+    + 'header .hn .hn-p a.hn-gap{margin-top:8px}header .hn .hn-p a.hn-gap::before{top:-5px;left:6px;right:6px;background:var(--line-2,#d5d3d9)}'
     + '.hn-acct{position:relative}'
     + '.hn-acct>.hn-av{all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--purple-tint,#efe8f8);color:var(--purple-ink,#3c1d66);font:600 14px/1 var(--sans,system-ui,sans-serif);cursor:pointer}'
     + '.hn-acct>.hn-av:focus-visible{outline:2px solid var(--purple,#512888);outline-offset:2px}'
@@ -140,7 +150,7 @@
       var b = document.createElement('button'); b.type = 'button'; b.className = 'hn-b'; b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', 'hn-p' + i);
       b.innerHTML = sec[0] + chev;
       var p = document.createElement('div'); p.className = 'hn-p'; p.id = 'hn-p' + i; p.hidden = true;
-      sec[2].forEach(function (x) { var a = document.createElement('a'); a.href = x[1]; a.textContent = x[0]; if (x[1] === here) a.setAttribute('aria-current', 'page'); p.appendChild(a); });
+      sec[2].forEach(function (x, k) { var a = document.createElement('a'); a.href = x[1]; a.innerHTML = '<b></b><small></small>'; a.firstChild.textContent = x[0]; a.lastChild.textContent = x[2] || ''; if (x[1] === here) a.setAttribute('aria-current', 'page'); if (sec[0] === 'Resources' && k === 3) a.className = 'hn-gap'; p.appendChild(a); });
       b.addEventListener('click', function (e) { e.stopPropagation(); var open = b.getAttribute('aria-expanded') === 'true'; closeAll(); if (!open) { p.hidden = false; b.setAttribute('aria-expanded', 'true'); } });
       panels.push({ b: b, p: p });
       it.appendChild(b); it.appendChild(p);

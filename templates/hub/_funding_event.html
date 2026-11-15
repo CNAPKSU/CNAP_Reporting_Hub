@@ -1,13 +1,14 @@
-{# One research event or talk in the Member Hub design (MW 2026-11-14): a date block, the title, when and where, and the description. #}
+{# One research event or talk in the Member Hub design (MW 2026-11-14). The date block carries the date, so the text gives only the time and place; repeats of the same event are listed as other dates (MW 2026-11-15). #}
 <li class="fp-ev">
   <span class="fp-ed" aria-hidden="true"><span>{{ e.starts_on|date:"D" }}</span><b>{{ e.starts_on|date:"j" }}</b><span>{{ e.starts_on|date:"M" }}</span></span>
   <div class="fp-ev-t">
     {% if e.url %}<a class="fp-evh" href="{{ e.url }}" target="_blank" rel="noopener" title="Opens the event’s details in a new tab.">{{ e.title }}</a>{% else %}<span class="fp-evh">{{ e.title }}</span>{% endif %}
-    <dl class="fp-evm">
-      <div><dt>When</dt><dd>{% if e.ends_on %}{{ e.starts_on|date:"F j" }} to {{ e.ends_on|date:"F j, Y" }}{% else %}{{ e.starts_on|date:"l, F j, Y" }}{% endif %}{% if e.time_text %}, {{ e.time_text }}{% endif %}</dd></div>
-      {% if e.place %}<div><dt>Where</dt><dd>{{ e.place }}</dd></div>{% endif %}
-      {% if e.host %}<div><dt>Host</dt><dd>{{ e.host }}</dd></div>{% endif %}
-    </dl>
+    <ul class="fp-evq">
+      <li><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.8V8l2.2 1.4"/></svg><span class="sr">When: </span>{% if e.ends_on %}{{ e.starts_on|date:"F j" }} to {{ e.ends_on|date:"F j, Y" }}{% else %}{{ e.starts_on|date:"l, F j" }}{% endif %}{% if e.time_text %}, {{ e.time_text }}{% endif %}</li>
+      {% if e.place %}<li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C3.5 9.8 8 14 8 14z"/><circle cx="8" cy="6.5" r="1.6"/></svg><span class="sr">Where: </span>{{ e.place }}</li>{% endif %}
+    </ul>
     {% if e.summary %}<p class="fp-evd">{{ e.summary|linebreaksbr }}</p>{% endif %}
+    {% if e.also %}<p class="fp-also"><span>Also on</span>{% for x in e.also %}<b>{{ x.starts_on|date:"l, F j" }}</b>{% endfor %}</p>{% endif %}
+    {% if e.host %}<p class="fp-host">Hosted by {{ e.host }}</p>{% endif %}
   </div>
 </li>
