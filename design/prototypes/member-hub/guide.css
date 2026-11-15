@@ -959,3 +959,7 @@ body.co-bn{--acc:var(--amber);--acc-ink:#5e3300;--acc-tint:#f5ece1}
 @media (max-width:560px){.rs-car{grid-auto-columns:84%}}
 @media (prefers-reduced-motion:reduce){.rs-feat-im img{transition:none}}
 .rs-body>*{min-width:0}
+/* Story page (MW 2026-11-14): the text runs closer to the side column, still leaving a gutter */
+.st-body{gap:56px}
+.st-text{max-width:940px}
+@media (max-width:1100px){.st-text{max-width:none}}
