@@ -1787,3 +1787,10 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-phfig{min-height:0}.sv-phfig .im{min-height:96px}
 .sv-pho .sv-sh{margin-bottom:0;padding-bottom:0}
 .sv-phfig img{position:absolute;inset:0}
+/* Role chooser moved into the sections it changes (MW 2026-11-14) */
+.sv-sec .sv-role{margin:0 0 28px;padding:0;border-top:0}
+.sv-sec .sv-role>p{font:600 14.5px/22px var(--sans);color:var(--ink-2)}
+.sv-you .sv-yr{margin:-12px 0 20px}
+.sv-you .sv-sh .sv-role{margin:28px 0 0;flex-direction:column;align-items:flex-start}
+.sv-you .sv-yr{margin:20px 0 0}
+.sv-prog .sv-role{margin-bottom:36px}
