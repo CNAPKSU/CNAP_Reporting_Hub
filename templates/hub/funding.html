@@ -89,7 +89,7 @@
         </section>
         {% elif part == "resources" %}
         <section class="fp-sec" id="s-before" aria-labelledby="s-before-h">
-          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {% if questions|length == 7 %}seven{% else %}{{ questions|length }}{% endif %} questions before starting an application.</p><p>Select a question to read it.</p></div>
+          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {% if questions|length == 7 %}seven{% else %}{{ questions|length }}{% endif %} questions before starting an application.</p><p>Select a question to read the full question.</p></div>
           <div class="fp-weigh">
             <div class="fp-qcard">
               <div class="fp-qcols"><ol class="fp-qs">{% for q in questions|slice:":4" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol><ol class="fp-qs" start="5">{% for q in questions|slice:"4:" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter|add:4 }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol></div>
@@ -106,13 +106,13 @@
         <section class="fp-sec" id="s-milestones" aria-labelledby="s-milestones-h">
           <div class="fp-sh"><h2 id="s-milestones-h">What the funding labels mean</h2><p>Each opportunity carries one of three milestone labels. The labels show how an award relates to the R01 milestone: independent funding through an R01 or an equivalent award, which every CNAP project leader works toward.</p></div>
           <dl class="fp-labels">
-            <div><dt><span class="fp-st ok">Counts toward the R01 milestone</span></dt><dd>The award is an R01 or an equivalent award. Winning it meets the milestone.</dd></div>
-            <div id="bridge"><dt><span class="fp-st">Bridge funding</span></dt><dd>A smaller or shorter award that keeps your research going and builds preliminary data on the way to an R01-equivalent award. Bridge funding doesn’t meet the milestone by itself, but it can strengthen your next application.</dd></div>
-            <div><dt><span class="fp-st">Ask your program officer</span></dt><dd>Whether the award counts depends on its terms. Ask your program officer and the CNAP team before you apply.</dd></div>
+            <div><dt><span class="fp-st ok">Counts toward the R01 milestone</span></dt><dd>The award is an R01 or an equivalent award. Winning the award meets the milestone.</dd></div>
+            <div id="bridge"><dt><span class="fp-st">Bridge funding</span></dt><dd>A smaller or shorter award that keeps your research going and builds preliminary data on the way to an R01-equivalent award. Bridge funding doesn’t meet the milestone by itself, but bridge funding can strengthen your next application.</dd></div>
+            <div><dt><span class="fp-st">Ask your program officer</span></dt><dd>Whether the award counts depends on the award’s terms. Ask your program officer and the CNAP team before you apply.</dd></div>
           </dl>
         </section>
         <section class="fp-sec" id="s-idea" aria-labelledby="s-idea-h">
-          <div class="fp-sh"><h2 id="s-idea-h">NIH opportunities for IDeA states</h2><p>Beyond the Center’s own award, the National Institute of General Medical Sciences (NIGMS) offers co-funding, instrumentation grants, training grants, and the Support for Research Excellence program to Institutional Development Award (IDeA) states such as Kansas.</p><p>Opportunity numbers and dates change every cycle. Confirm each one in the NIH Guide and the Notice of Funding Opportunity (NOFO) Forecast before you plan around it.</p></div>
+          <div class="fp-sh"><h2 id="s-idea-h">NIH opportunities for IDeA states</h2><p>Beyond the Center’s own award, the National Institute of General Medical Sciences (NIGMS) offers co-funding, instrumentation grants, training grants, and the Support for Research Excellence program to Institutional Development Award (IDeA) states such as Kansas.</p><p>Opportunity numbers and dates change every cycle. Confirm each one in the NIH Guide and the Notice of Funding Opportunity (NOFO) Forecast before you plan around the opportunity.</p></div>
           <div class="fp-idea">
             <article class="fp-ic fp-ic-lead">
               <p class="fp-for">For an unfunded R01, R15, or R35</p>
@@ -124,7 +124,7 @@
                 <li>Considers applications from the three prior council rounds, starting in May. For fiscal year 2026, those were May 2025, October 2025, and January 2026.</li>
                 <li>The institute that reviewed the application makes the nomination. NIGMS pays up to $350,000 in total costs for the first two years.</li>
               </ul>
-              <p class="fp-ic-next">If your application scored well but was not funded, talk with the program officer assigned to it.</p>
+              <p class="fp-ic-next">If your application scored well but was not funded, talk with the program officer assigned to the application.</p>
             </article>
             <article class="fp-ic">
               <h3>Instrumentation</h3>
@@ -158,7 +158,7 @@
             </article>
             <article class="fp-ic">
               <h3>Administrative supplements</h3>
-              <p>Supplements to an existing award now go through PA-26-001. NIGMS announces its areas of interest as Highlighted Topics, not as notices of special interest.</p>
+              <p>Supplements to an existing award now go through PA-26-001. NIGMS announces the institute’s areas of interest as Highlighted Topics, not as notices of special interest.</p>
               <p class="fp-ic-note">NIGMS is releasing fewer, simpler NOFOs, and release can be slower than in past years. NIGMS cannot discuss dates for unpublished opportunities, so watch the NIH Guide and the NOFO Forecast.</p>
             </article>
           </div>
@@ -182,7 +182,7 @@
         <section class="fp-sec" id="s-letters" aria-labelledby="s-letters-h">
           <div class="fp-sh"><h2 id="s-letters-h">Letters from the Center</h2><p>{{ letters|length }} letter{{ letters|length|pluralize }} from the CNAP team.</p></div>
           {% if letters %}<ul class="fp-list">{% for f in letters %}<li><a class="fp-name" href="{% url 'portal:funding_letter' f.pk %}" title="Opens the full letter.">{{ f.name }}</a><span class="fp-meta">Sent {{ f.sent_at|date:"F j, Y" }} by the CNAP evaluation team</span></li>{% endfor %}</ul>
-          {% else %}<div class="fp-empty"><p>No letters yet.</p><p>A letter from the CNAP team appears here after it is sent.</p></div>{% endif %}
+          {% else %}<div class="fp-empty"><p>No letters yet.</p><p>A letter from the CNAP team appears here after the letter is sent.</p></div>{% endif %}
         </section>
         <section class="fp-sec" id="s-suggest" aria-labelledby="s-suggest-h">
           <div class="fp-sh"><h2 id="s-suggest-h">Suggest an opportunity</h2><p>Send the CNAP team a funding opportunity worth a look.</p><p>The team reviews each suggestion before the opportunity appears on any page.</p></div>

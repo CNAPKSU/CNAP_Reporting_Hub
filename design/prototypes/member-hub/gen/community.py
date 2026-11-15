@@ -40,7 +40,7 @@ FIRST=[
  ('Heather Bailey, Director','After your onboarding meeting, reach out to the Director any time for introductions to people and resources across the Center.',mt('hbailey@ksu.edu','Introduction from a new project leader','\n'.join(['Name:','Department:','Project title:','','Times that work for me:',''])),'Email Heather','hbailey@ksu.edu'),
  ('Morgan Wills, Assistant Director for Grants and Contracts','Plan your path to the R01 milestone, from your first submission to resubmission.',mt('mkwills@ksu.edu','Proposal planning meeting','\n'.join(['Name:','Department:','Project title:','','Funding I am considering:','','Times that work for me:',''])),'Book a time','mkwills@ksu.edu'),
  ('Roxana Ortiz, Grant Specialist and Accountant','Set up your budget, purchasing, and travel reimbursements before your first expense.',mt('roxana@ksu.edu','Budget and purchasing setup','\n'.join(['Name:','Department:','Project title:','','Questions about my budget or purchasing:',''])),'Email Roxana','roxana@ksu.edu'),
- ('The research cores you will use','Meet with the staff of each core you will use before you book time: a tour of the Behavioral Neuroscience Core, or a consultation with the Cognitive Neuroscience or Neuroinformatics Core. They walk you through the equipment, the training you need, and how to schedule.','index.html#cores-h','See the research cores',None),
+ ('The research cores you will use','Meet with the staff of each core you will use before you book time: a tour of the Behavioral Neuroscience Core, or a consultation with the Cognitive Neuroscience or Neuroinformatics Core. The core directors walk you through the equipment, the training you need, and how to schedule.','index.html#cores-h','See the research cores',None),
 ]
 first=''.join(f'''<li><span class="cm-n" aria-hidden="true">{i}</span><div><p class="cm-ft">{t}</p><p class="cm-fd">{d}</p><p class="cm-fa"><a href="{h}">{l}</a>{f'<span class="cm-em">{e}</span>' if e else ''}</p></div></li>''' for i,(t,d,h,l,e) in enumerate(FIRST,1))
 
@@ -59,12 +59,12 @@ dirl=''.join(f'''<li class="cm-dr" data-g="{m[4]}" data-new="{'1' if m[7] else '
 
 # 5. Ask the community
 T=[('jl','Looking for an EEG collaborator','4 replies','Active today',True,'You record sleep EEG in your pilot project.',False),
-   ('rg','Who has used the Beocat cluster for imaging?','No replies yet','Started Wednesday',True,'Your team moved its analysis pipeline onto Beocat. Be the first to answer.',True),
+   ('rg','Who has used the Beocat cluster for imaging?','No replies yet','Started Wednesday',True,'Your team moved the team’s analysis pipeline onto Beocat. Be the first to answer.',True),
    ('lp','Recruiting older adults: what has worked?','3 replies','Active yesterday',True,'Your study recruits adults over 65.',False),
    ('hc','Office hours for mixed-effects models in R','6 replies','Active Monday',False,'',False),
    ('sr','A journal club on fear extinction, starting in December','5 replies','Active last week',False,'',False),
    ('kb','Calibrating the eye tracker for participants who wear glasses','No replies yet','Started today',False,'',True)]
-thr=''.join(f'''<li class="cm-th" data-m="{'1' if mt_ else '0'}" data-u="{'1' if un else '0'}">{av(k)}<div class="cm-tm"><a class="cm-tt" href="#">{t}</a><p class="cm-tx">{BY[k][2]} · {r} · {a}</p>{f'<p class="cm-why">{w}</p>' if w else ''}</div>{'<span class="st st-on">Unanswered</span>' if un else ''}</li>''' for k,t,r,a,mt_,w,un in T)
+thr=''.join(f'''<li class="cm-th" data-m="{'1' if mt_ else '0'}" data-u="{'1' if un else '0'}">{av(k)}<div class="cm-tm"><a class="cm-tt" href="#" data-proto title="Thread pages are not part of the prototype yet.">{t}</a><p class="cm-tx">{BY[k][2]} · {r} · {a}</p>{f'<p class="cm-why">{w}</p>' if w else ''}</div>{'<span class="st st-on">Unanswered</span>' if un else ''}</li>''' for k,t,r,a,mt_,w,un in T)
 
 # 6. Recent achievements
 A=[('ms','Publication','Attention and working memory in older adults: a two-year follow-up','Dr. Maya Singh and colleagues, with the Cognitive Neuroscience Core. Cites CNAP.','November 10'),
@@ -77,13 +77,13 @@ ach=''.join(f'''<li class="cm-ac">{av(k)}<div><p class="cm-ak">{kind}<span>{d}</
 W=[('Every Wednesday, 2:30 to 3:30 p.m.','NeuroSync Weekly Speaker Series','Talks in Leadership Room 127, with questions and time to talk after. CNAP members are expected to attend.','events.html','See the speakers'),
    ('Weekdays, staffed drop-in','CONNECT Lab','Help with experiment programming and data pipelines from the Cognitive Neuroscience and Neuroinformatics Cores.','core-cn.html#cn-cx','About the CONNECT Lab'),
    ('Thursday, December 10, 3:30 to 5:00 p.m.','Fall social for members and students','Every member, student, and core user is welcome.','events.html','See all events'),
-   ('Throughout the year','Scientific Exchange Network','Collaborations, more core access, and workshops with partner institutions.','mentee.html','How it works for your project'),
+   ('Throughout the year','Scientific Exchange Network','Collaborations, more core access, and workshops with partner institutions.','mentee.html','How Community works for your project'),
    ('May 25 and 26, 2027','The Site Visit','Two days of presentations, posters, and conversation with the External Advisory Committee.','events.html','About the Site Visit')]
 ways=''.join(f'''<li><p class="cm-wk">{k}</p><p class="cm-wt">{t}</p><p class="cm-wd">{d}</p><a class="t3" href="{h}">{l}</a></li>''' for k,t,d,h,l in W)
 
 # 8. Announcements
 AN=[('12','November','CNAP Administrative Core','Reminder: Year 11 pilot letters of intent are due November 20','Letters are limited to one page. Send yours to the Administrative Core by 5:00 p.m.',True),
-    ('9','November','CNAP Director','Welcome to our three newest graduate students','Please join us in welcoming them to the Cognitive Neuroscience Core this month.',False),
+    ('9','November','CNAP Director','Welcome to our three newest graduate students','Please join us in welcoming the three students to the Cognitive Neuroscience Core this month.',False),
     ('4','November','CNAP Administrative Core','Updated travel and reimbursement guidelines','The attached guide replaces last year’s version and takes effect December 1.',True)]
 ann=''.join(f'''<li><span class="cm-ad2"><b>{d}</b>{m}</span><div><p class="cm-af">{f}</p><p class="cm-at2">{t}</p><p class="cm-ad3">{x}</p>{'<p class="cm-att">Attachment</p>' if a else ''}</div></li>''' for d,m,f,t,x,a in AN)
 
@@ -166,10 +166,10 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-ask" aria-labelledby="cm-ask-h">
           <h2 id="cm-ask-h">Ask the community</h2>
-          <div class="cs-b"><p>Questions about methods, equipment, recruiting, and funding, answered by the members who have done it. Threads are visible only to CNAP members.</p>
+          <div class="cs-b"><p>Questions about methods, equipment, recruiting, and funding, answered by the members who have the experience. Threads are visible only to CNAP members.</p>
             <div class="cm-thbar"><div class="pf-filt cm-tf" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-t="m">Matched to you</button><button type="button" aria-pressed="false" data-t="u">Unanswered</button><button type="button" aria-pressed="false" data-t="a">All threads</button></div><button type="button" class="btn sm" data-compose>Start a conversation thread</button></div>
             <ul class="cm-ths">{thr}</ul>
-            <p class="meta"><a class="t3" href="#">See all 14 threads</a></p>
+            <p class="meta"><a class="t3" href="#" data-proto title="Thread pages are not part of the prototype yet.">See all 14 threads</a></p>
           </div>
         </section>
         <section class="step cs" id="cm-first" aria-labelledby="cm-first-h">
@@ -182,7 +182,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-know" aria-labelledby="cm-know-h">
           <h2 id="cm-know-h">Member interests and expertise</h2>
-          <div class="cs-b"><p>Methods and topics members have listed on their profiles. Select one to see who knows it in the directory.</p><ul class="cm-sks">{skills}</ul></div>
+          <div class="cs-b"><p>Methods and topics members have listed on member profiles. Select a topic to see who knows the topic in the directory.</p><ul class="cm-sks">{skills}</ul></div>
         </section>
         <section class="step cs" id="cm-dir" aria-labelledby="cm-dir-h">
           <h2 id="cm-dir-h">Member directory</h2>
@@ -196,7 +196,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-alum" aria-labelledby="cm-alum-h">
           <h2 id="cm-alum-h">CNAP alumni</h2>
-          <div class="cs-b"><p>Former project leaders who went on to independent funding. Many are glad to tell you how they got there, from their first submission to their first R01.</p><ul class="cm-als">{alumni}</ul></div>
+          <div class="cs-b"><p>Former project leaders who went on to independent funding. Many alumni are glad to tell you how each career progressed, from the first submission to the first R01.</p><ul class="cm-als">{alumni}</ul></div>
         </section>
         <section class="step cs" id="cm-ways" aria-labelledby="cm-ways-h">
           <h2 id="cm-ways-h">Ways to connect</h2>
@@ -204,11 +204,11 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-ann" aria-labelledby="cm-ann-h">
           <h2 id="cm-ann-h">Announcements</h2>
-          <div class="cs-b"><p>Emails from the CNAP listserv, kept here so you can find them again.</p><ul class="cm-ann">{ann}</ul><p class="meta"><a class="t3" href="#">All announcements</a></p></div>
+          <div class="cs-b"><p>Emails from the CNAP listserv, kept here so you can find each email again.</p><ul class="cm-ann">{ann}</ul><p class="meta"><a class="t3" href="#" data-proto title="Thread pages are not part of the prototype yet.">All announcements</a></p></div>
         </section>
         <section class="step cs" id="cm-priv" aria-labelledby="cm-priv-h">
           <h2 id="cm-priv-h">Your profile and privacy</h2>
-          <div class="cs-b"><div class="cm-priv"><div><p class="cm-pk">Other members see</p><ul class="dots"><li>Your name, role, and department</li><li>The research interests and methods you list</li><li>The publications, talks, and grants you choose to show</li></ul></div><div><p class="cm-pk">Other members never see</p><ul class="dots"><li>Your Mentee Survey answers, which stay confidential</li><li>Your reporting and its status</li><li>Funding opportunities picked for you, and letters from the Center</li><li>The publications, talks, and grants you choose to keep private</li></ul></div></div><p><a class="btn" href="mentee-profile.html">Review your profile</a></p></div>
+          <div class="cs-b"><div class="cm-priv"><div><p class="cm-pk">Other members see</p><ul class="dots"><li>Your name, role, and department</li><li>The research interests and methods you list</li><li>The publications, talks, and grants you choose to show</li></ul></div><div><p class="cm-pk">Other members never see</p><ul class="dots"><li>Your Mentee Survey answers, which stay confidential</li><li>Your reporting and the reporting status</li><li>Funding opportunities picked for you, and letters from the Center</li><li>The publications, talks, and grants you choose to keep private</li></ul></div></div><p><a class="btn" href="mentee-profile.html">Review your profile</a></p></div>
         </section>
       </div>
       <aside class="co-rail" aria-label="Your community profile"><div class="co-rc cm-me"><p class="co-rk">Your community profile</p><span class="cm-av av-p lg" aria-hidden="true">AO</span><p class="co-pn">Dr. Amara Okafor</p><p class="pp-r">Pilot project leader, Grant Year 10</p><p class="cm-chips"><span>Sleep</span><span>Memory</span><span>Aging</span><span>EEG</span></p><dl class="co-rd"><div><dt>Mentor</dt><dd>Dr. Elena Voss</dd></div><div><dt>Cores you use</dt><dd><a href="core-cn.html">Cognitive Neuroscience</a> and <a href="core-ni.html">Neuroinformatics</a></dd></div></dl><a class="t3" href="mentee-profile.html">Review your profile</a></div></aside>
@@ -227,20 +227,20 @@ page=f'''<!doctype html>
     </fieldset>
     <label for="cmc-t">Your question</label><input id="cmc-t" type="text" placeholder="For example: who has run sleep EEG with older adults?">
     <label for="cmc-d">Details <span class="cm-opt">(optional)</span></label><textarea id="cmc-d" rows="4"></textarea>
-    <p class="cm-note" role="status" hidden>Prototype only. In the Member Hub, the thread posts for CNAP members, and the members whose interests match are told about it.</p>
+    <p class="cm-note" role="status" hidden>Prototype only. In the Member Hub, the thread posts for CNAP members, and the members whose interests match are told about the thread.</p>
     <div class="cm-fb"><button type="submit" value="cancel" class="btn">Cancel</button><button type="button" class="btn pri" data-post>Post the thread</button></div>
   </form>
 </dialog>
 <dialog class="cm-compose cm-share" aria-labelledby="cms-h">
   <form method="dialog" class="cm-form">
     <h2 id="cms-h">Share an achievement</h2>
-    <p class="cm-sub">Choose something you have already recorded in the Member Hub, or describe something new. The CNAP team posts it here and adds it to the Center’s reports.</p>
+    <p class="cm-sub">Choose something you have already recorded in the Member Hub, or describe something new. The CNAP team posts the achievement here and adds the achievement to the Center’s reports.</p>
     <fieldset class="cm-prods"><legend>From your publications, presentations, proposals, and awards</legend><label class="cm-pi"><input type="radio" name="prod" value="0" checked><span><b>Publication</b>Slow oscillations and overnight retention in healthy aging<small>Neurobiology of Learning and Memory · Under review</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="1"><span><b>Presentation</b>Sleep, memory, and the aging brain<small>NeuroSync Weekly Speaker Series · September 2026</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="2"><span><b>Proposal</b>Slow-wave sleep enhancement and memory in older adults<small>NIH R21, National Institute on Aging · Submitted June 16, 2026</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="3"><span><b>Presentation</b>Nap timing restores word-pair retention in older adults with fragmented sleep<small>National sleep research meeting · Abstract submitted</small></span></label><label class="cm-pi"><input type="radio" name="prod" value="4"><span><b>Publication</b>Sleep spindles and next-day recall: a pilot study<small>Journal of Sleep Research · Published March 2025</small></span></label>
       <label class="cm-pi"><input type="radio" name="prod" value="new"><span><b>Something else</b>A new paper, talk, proposal, award, or milestone</span></label>
     </fieldset>
     <div class="cm-newfields" hidden><label for="cms-t">What happened</label><input id="cms-t" type="text" placeholder="For example: my R21 was funded by the National Institute on Aging"><label for="cms-l">A link <span class="cm-opt">(optional)</span></label><input id="cms-l" type="text" inputmode="url"></div>
     <label for="cms-n">A sentence for members <span class="cm-opt">(optional)</span></label><textarea id="cms-n" rows="2" placeholder="What it means for your project, or who helped"></textarea>
-    <p class="cm-note" role="status" hidden>Prototype only. In the Member Hub, the CNAP team reviews your achievement, posts it in Community, and adds it to the Center’s reports.</p>
+    <p class="cm-note" role="status" hidden>Prototype only. In the Member Hub, the CNAP team reviews your achievement, posts the achievement in Community, and adds the achievement to the Center’s reports.</p>
     <div class="cm-fb"><button type="submit" value="cancel" class="btn">Cancel</button><button type="button" class="btn pri" data-sendach>Share it</button></div>
   </form>
 </dialog>

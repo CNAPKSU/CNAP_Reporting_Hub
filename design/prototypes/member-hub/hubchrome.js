@@ -57,7 +57,7 @@
   d.className = 'fbk'; d.setAttribute('aria-labelledby', 'fbk-h');
   d.innerHTML = '<form method="dialog" class="fbk-form"><h2 id="fbk-h">How could this page be better?</h2>'
     + '<p class="fbk-sub">Your note goes to the CNAP evaluation team, along with the page you are on.</p><p class="fbk-sub">Big ideas and small fixes are equally welcome.</p>'
-    + '<fieldset class="fbk-topics"><legend>What is it about?</legend>' + topics.map(function (t) { return '<label><input type="radio" name="topic" value="' + t[0] + '"> ' + t[1] + '</label>'; }).join('') + '</fieldset>'
+    + '<fieldset class="fbk-topics"><legend>What is the note about?</legend>' + topics.map(function (t) { return '<label><input type="radio" name="topic" value="' + t[0] + '"> ' + t[1] + '</label>'; }).join('') + '</fieldset>'
     + '<fieldset class="fbk-rate"><legend>How is this page overall? (optional)</legend>' + [1, 2, 3, 4, 5].map(function (n) { return '<label title="' + (n === 1 ? 'Poor' : n === 5 ? 'Excellent' : n + ' of 5') + '"><input type="radio" name="rating" value="' + n + '"><span>' + n + '</span></label>'; }).join('') + '</fieldset>'
     + '<label class="fbk-l" for="fbk-c">Your note</label><textarea id="fbk-c" name="comment" rows="4" placeholder="For example: the dates on this page are hard to find."></textarea>'
     + '<p class="fbk-msg" role="status"></p>'
@@ -80,7 +80,7 @@
   var MAP = [
     ['Home', 'index.html', null],
     ['Reporting', 'reporting.html', [['My tasks', 'reporting.html', 'Surveys and reports due this session'], ['My history', 'reporting-history.html', 'Everything you have submitted']]],
-    ['Research', 'research.html', [['Research at CNAP', 'research.html', 'Projects, cores, and the people behind them'], ['Research stories', 'story.html', 'Findings told for a general reader']]],
+    ['Research', 'research.html', [['Research at CNAP', 'research.html', 'Projects, cores, and the people behind the research'], ['Research stories', 'story.html', 'Findings told for a general reader']]],
     ['Events', 'events.html', [['Events overview', 'events.html', 'Everything on the CNAP calendar'], ['NeuroSync', 'neurosync.html', 'The Wednesday speaker series'], ['The 2027 Site Visit', 'sitevisit.html', 'May 25 and 26, 2027']]],
     ['Funding', 'funding.html', [['Funding opportunities', 'funding.html', 'Picked for you, and relevant to most members'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft'], ['Funding news', 'funding-news.html', 'News from sponsors, and events and talks']]],
     ['Community', 'community.html', [['Community', 'community.html', 'Achievements, questions, and threads'], ['Member directory', 'community.html#cm-dir', 'Find a colleague or a type of expertise'], ['Alumni', 'community.html#cm-alum', 'Where former members are now']]],
@@ -201,3 +201,22 @@
   }
   fit(); addEventListener('resize', fit); addEventListener('load', fit); setTimeout(fit, 300);
 })();
+
+/* Every link has a hover description (CNAP Hub Design Rules, Buttons and links). Links without one get a plain description of where they go. */
+(function () {
+  var NAMES = {'index.html':'Home','reporting.html':'My tasks in Reporting','reporting-history.html':'My history in Reporting','research.html':'Research at CNAP','story.html':'the research story','events.html':'Events','neurosync.html':'NeuroSync','sitevisit.html':'the 2027 Site Visit page','funding.html':'Funding opportunities','funding-resources.html':'Grant resources','funding-news.html':'Funding news','community.html':'Community','core-bn.html':'the Behavioral Neuroscience Core page','core-cn.html':'the Cognitive Neuroscience Core page','core-ni.html':'the Neuroinformatics Core page','mentor.html':'the mentor guide','mentee.html':'the mentee guide','mentee-profile.html':'the profile page'};
+  function run() {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      if (a.title || a.getAttribute('aria-describedby')) return;
+      var h = a.getAttribute('href') || '', t = '';
+      if (/^mailto:/.test(h)) t = 'Starts an email to ' + h.slice(7).split('?')[0] + '.';
+      else if (/^https?:/.test(h)) { try { t = 'Opens ' + new URL(h).hostname.replace(/^www\./, '') + ' in a new tab.'; } catch (e) {} }
+      else if (h.charAt(0) === '#' && h.length > 1) { var el = document.getElementById(h.slice(1)); var hd = el && (el.querySelector('h2,h3') || el); if (hd && hd.textContent.trim()) t = 'Goes to ' + hd.textContent.trim().replace(/\s+/g, ' ').slice(0, 60) + ' on this page.'; }
+      else { var f = h.split('#')[0].split('?')[0]; if (NAMES[f]) t = 'Opens ' + NAMES[f] + '.'; }
+      if (t) a.title = t;
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+  setTimeout(run, 500);
+})();
+document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();});});
