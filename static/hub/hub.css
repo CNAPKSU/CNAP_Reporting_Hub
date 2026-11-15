@@ -1432,3 +1432,4 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 
 /* NeuroSync corners (MW 2026-11-14): every corner sits 24px from its content, with room between the title block and the poster so the inner corners never touch */
 .ns-band [aria-labelledby="ev-h"] > .sh{margin-bottom:80px}
+.brief .bi .act .btn{white-space:nowrap}

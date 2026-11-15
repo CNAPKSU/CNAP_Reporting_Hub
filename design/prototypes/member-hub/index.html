@@ -1401,6 +1401,9 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 
 /* NeuroSync corners (MW 2026-11-14): every corner sits 24px from its content, with room between the title block and the poster so the inner corners never touch */
 .ns-band [aria-labelledby="ev-h"] > .sh{margin-bottom:80px}
+
+/* the first card's button keeps its label on one line (MW 2026-11-14) */
+.brief .bi .act .btn{white-space:nowrap}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -1492,7 +1495,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
           <span class="lab">Most urgent first</span>
           <h2 id="wk">Your week</h2>
           <div class="body"><p class="roles" data-unless="roles admin">Pilot Project Leader<br>Behavioral Neuroscience Core user<br>Mentored by Dr. Elena Voss</p><div data-when="roles" hidden><p class="roles">Pilot Project Leader<br>Mentor to two pilot leaders</p><details class="more-roles"><summary>3 more roles</summary><p class="roles">Behavioral Neuroscience Core user<br>Neuroinformatics Core user<br>NeuroSync planning group</p></details></div><p class="roles" data-when="admin" hidden>Center administrator<br>Cognitive Neuroscience Core user<br>NeuroSync planning group</p></div>
-          <div class="act"><a class="btn" href="reporting.html">See all my reporting assignments</a></div>
+          <div class="act"><a class="btn" href="reporting.html">My reporting assignments</a></div>
         </div>
         <article class="bi" role="listitem" data-unless="clear urgent admin">
           <span class="kind" style="color:var(--amber)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12.5V1.5M3 2h7.5l-1.6 2.6L10.5 7.2H3"/></svg>Due in 17 days</span>
@@ -1688,6 +1691,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
             <p class="k-date"><span class="k-num num">25</span><span class="k-wd">Tuesday and Wednesday<br>May 25 and 26</span></p>
             <p class="k-t">Core tours, project presentations, a keynote and banquet, then a poster session open to all.</p>
             <a class="t3" href="sitevisit.html">Plan your visit</a>
+            <a class="t3" href="#ph-h">See the 2026 photographs</a>
           </div>
         </div>
       </div>
