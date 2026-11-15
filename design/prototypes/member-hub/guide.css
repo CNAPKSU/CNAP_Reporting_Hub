@@ -1824,3 +1824,11 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 @media (max-width:980px){.sv-when{justify-items:start}}
 @media (max-width:520px){.sv-leaves{width:100%}.sv-leaf{flex:1;width:auto}.sv-ln{font-size:64px}}
 @media (max-width:520px){.sv-lt{font-size:12.5px;padding:0 6px 14px}}
+/* "See the visit as" sits between Why it matters and the program (MW 2026-11-14) */
+.sv-tband{border-top:1px solid var(--line);padding:56px 0 0}
+.sv-tband .sv-tailor{margin:0}
+.sv-tband+.sv-sec{border-top:0}
+@media (max-width:980px){.sv-tband{padding-top:40px}}
+.sv-hero{padding-bottom:56px}
+.sv-tband+.sv-sec{padding-top:72px}
+@media (max-width:980px){.sv-hero{padding-bottom:40px}}
