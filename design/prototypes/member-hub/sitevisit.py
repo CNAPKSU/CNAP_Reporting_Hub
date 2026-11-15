@@ -211,7 +211,7 @@ page=f'''<!doctype html>
 
   <section class="sv-sec sv-food" id="sv-food" aria-labelledby="sv-food-h">
     <div class="wrap sv-fg">
-      <header class="sv-sh"><h2 id="sv-food-h">Food</h2><p>Breakfast both mornings, a boxed lunch on Tuesday, and the banquet Tuesday evening. Dietary needs from your RSVP are labeled on each lunch.</p></header>
+      <header class="sv-sh"><h2 id="sv-food-h">Food</h2><p>Each morning starts with coffee and a light breakfast in the Business Building, and out-of-town guests also have breakfast at the hotel. On Tuesday, everyone who RSVPs gets a boxed lunch, and a few extras are usually available.</p><p>Tuesday evening ends with a buffet dinner at the banquet. The dietary needs you note in your RSVP are accommodated at both meals: each boxed lunch is labeled with your name and needs, and the banquet staff will guide you to your options when you arrive.</p></header>
       <div class="sv-food2"><p class="sv-ck2">Wednesday lunch with colleagues</p><p>After the poster session, groups head out together. Most places open around 12:30 p.m.</p><ul class="sv-dine">{dine}</ul></div>
     </div>
   </section>
