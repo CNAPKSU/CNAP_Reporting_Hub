@@ -775,3 +775,14 @@ The prototype now uses copies of the app's reporting pages: My tasks (`reporting
 MW approved trying photos on the Funding news pinned cards and on events. The prototype shows labeled photo placeholders: a wide image at the top of each pinned card, and a small image beside each event (below it on phones). They are added by `design/prototypes/member-hub/gen/ph_inject.py` and styled by `fp-photos.css`. The app is unchanged.
 
 To show real photos, the app needs an optional image on `FundingNews` and `FundingEvent` (a migration), an upload field in the admin with alt text, and storage approved in the K-State security review. Photos must be ones CNAP may use, with no sponsor logos. Not built. Needs MW's approval before any migration.
+
+## 2026-11-15 · Decisions from MW, one by one
+
+- Directions say "Please." This replaces the earlier rule that directions never start with it.
+- The Funding pages keep their three cards. Other tabs keep the segmented style.
+- Two columns are the exception: a table pairing each item with its answer may sit side by side, and stacks on phones.
+- Approved to build, each with a migration: an optional photo with credit and description on funding news items and events, the offer of a story's own preview photo that a person approves, and the Site Visit RSVP (saved responses, editing until March 25, the confirmation email with a calendar file, and an office export). Also approved: the new top ribbon in the app's header.
+- Site Visit: 20-minute slots split 15 to present, 3 for questions, and 2 to change presenters. Slides anytime before, or the morning of. Poster registration closes April 23. Anyone from out of town may request a hotel room. Parking and accessibility questions stay.
+- My tasks: Show and Hide sit in the middle of each row.
+- "All core services" stays on the app's home page, linking to the cores on the CNAP website until the app has its own Resources pages.
+- The old "Mentor Guide · CNAP Member Hub" artifact is kept.
