@@ -1388,6 +1388,13 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 
 .sh-link{color:inherit;text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 2px no-repeat;transition:background-size .25s}
 .sh-link:hover,.sh-link:focus-visible{background-size:100% 2px}
+
+/* MW 2026-11-14: the section rule on every homepage section. Community, the calendar, and the Site Visit photos get the hairline and the sliding accent too. NeuroSync keeps its corner marks, which frame its heading the same way. */
+.sheet-sec .sh,.reel-band .sh{border-top:1px solid var(--line);padding-top:32px}
+.sheet-sec .sh::before,.reel-band .sh::before{display:block}
+.reel-band .sh{border-top-color:var(--line-2)}
+.cal-band .sh{border-top:1px solid var(--line);padding-top:32px}
+.cal-band .sh::before{display:block;background:var(--ink)}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>

@@ -824,6 +824,12 @@ body.co-bn{--acc:var(--amber);--acc-ink:#5e3300;--acc-tint:#f5ece1}
 @media (max-width:1100px){.rs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sc-lead a{grid-template-columns:1fr}.sc-lead .sc-im{min-height:0;aspect-ratio:16/9}.sc-lead .sc-t{padding:28px 28px 30px}.st-body{grid-template-columns:1fr;gap:40px}.st-side{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:680px){.rs-grid,.st-side{grid-template-columns:1fr}.st-deck{font-size:18px;line-height:28px}.st-lede{font-size:20px;line-height:31px}.st-q p{font-size:21px;line-height:31px}.st-fig{padding-inline:0}.st-fig img{border-radius:0;aspect-ratio:4/3}.st-fig figcaption{padding-inline:var(--side)}}
 
+/* Research at CNAP keeps its wide layout in narrower windows, such as the artifact side panel (MW 2026-11-14: "I like the first version"):
+   the featured story stays side by side and the button stays on the right down to 761px, and three story columns hold down to 901px. */
+@media (min-width:761px) and (max-width:1100px){.sc-lead a{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}.sc-lead .sc-im{aspect-ratio:auto;min-height:340px}.sc-lead .sc-t{padding:32px 32px 34px}}
+@media (min-width:901px) and (max-width:1100px){.rs-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rs-grid .sc-t{padding:18px 18px 20px}.rs-grid .sc h3{font-size:20px;line-height:26px}}
+@media (min-width:761px){.rs-mast{flex-wrap:nowrap}.rs-mast>*:first-child{min-width:0}.rs-mast>*:last-child{flex:none}}
+
 /* ---------- Events ---------- */
 .ev-page{--acc:var(--purple);--acc-ink:var(--purple-ink);--acc-tint:var(--purple-tint);--k-ns:#6b3fa8;--k-ctr:#1d6a4f;--k-due:#8a4b00;--k-you:#0a6670;--k-cam:#6b6672}
 .emk{width:10px;height:10px;flex:none;fill:currentColor;display:block}
