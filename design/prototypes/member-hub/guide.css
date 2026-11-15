@@ -1201,6 +1201,18 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .cm-ald dd{margin:2px 0 0;font-size:14.5px;line-height:21px;color:var(--ink)}
 .cm-al .cm-why{margin-top:12px;font-size:14.5px}
 @media (max-width:760px){.cm-al{grid-template-columns:60px minmax(0,1fr)}.cm-al .btn{grid-column:2;justify-self:start}.cm-ald{grid-template-columns:minmax(0,1fr)}}
+/* Alumni career path: where they were at CNAP, then the funding that followed (MW 2026-11-15) */
+.cm-path{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);align-items:stretch;max-width:500px}
+.cm-st{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:8px;background:var(--purple-tint);min-width:0}
+.cm-st2{grid-column:3;background:var(--teal-tint)}
+.cm-path::after{content:"";grid-column:2;grid-row:1;align-self:center;justify-self:center;width:8px;height:8px;border-top:2px solid var(--line-2);border-right:2px solid var(--line-2);transform:translateX(-2px) rotate(45deg)}
+.cm-st .cm-stk{font-size:12.5px;font-weight:600;color:var(--purple)}
+.cm-st2 .cm-stk{color:var(--teal)}
+.cm-st b{font:500 17px/23px var(--serif);color:var(--ink)}
+.cm-st span:not(.cm-stk){font-size:14px;line-height:20px;color:var(--ink-2)}
+.cm-al .cm-ok{display:inline-flex;align-items:center;gap:8px;margin:12px 0 0;padding:4px 12px;border-radius:12px;background:var(--teal-tint);color:var(--teal);font-size:14px;line-height:20px;font-weight:500}
+.cm-al .cm-ok::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal)}
+@media (max-width:560px){.cm-path{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 14px auto}.cm-st2{grid-column:1;grid-row:3}.cm-path::after{grid-column:1;grid-row:2;transform:translateY(-3px) rotate(135deg)}}
 .cm-facts{grid-template-columns:repeat(5,minmax(0,1fr))}
 .cm-facts a{display:block;color:inherit;text-decoration:none}
 .cm-facts a span{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;color:var(--purple)}

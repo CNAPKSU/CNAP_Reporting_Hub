@@ -51,7 +51,7 @@ match=''.join(f'''<li class="cm-mc">{av(k,' lg')}<p class="cm-mn">{BY[k][2]}</p>
 # 3. Who knows what
 SK=['EEG','Sleep','Memory','Eye tracking','Rodent behavior','Electrophysiology','TMS','Imaging','High-performance computing','Statistics','Grant writing','Aging']
 def who(s): return [m[0] for m in M if s in m[5]]
-skills=''.join(f'''<li><button type="button" class="cm-sk" data-skill="{s}"><span class="cm-skn">{s}</span><span class="cm-stack">{''.join(av(k,' sm') for k in who(s)[:4])}</span><span class="cm-skc">{len(who(s))} member{'s' if len(who(s))!=1 else ''}</span></button></li>''' for s in SK)
+skills=''.join(f'''<li><button type="button" class="cm-stk" data-skill="{s}"><span class="cm-stkn">{s}</span><span class="cm-stack">{''.join(av(k,' sm') for k in who(s)[:4])}</span><span class="cm-stkc">{len(who(s))} member{'s' if len(who(s))!=1 else ''}</span></button></li>''' for s in SK)
 
 # 4. Directory
 filt=''.join(f'<button type="button" aria-pressed="{"true" if k=="all" else "false"}" data-g="{k}">{l}</button>' for k,l in G)
@@ -121,7 +121,15 @@ AL=[('DO','t','Dr. David Osei','Pilot project leader, Grant Years 7 and 8','Asso
     ('MH','t','Dr. Marcus Hale','Pilot project leader, Grant Year 8','Assistant Professor, Kinesiology, Kansas State University','R21, National Institute on Drug Abuse, 2025',False),
     ('SC','p','Dr. Sun-Mi Cho','Pilot project leader, Grant Years 5 and 6','Assistant Professor, Psychology, University of Colorado','K01, National Institute on Aging, 2023',True),
     ('AW','a','Dr. Aaron Whitfield','Pilot project leader, Grant Year 6','Research Scientist, a neurotechnology company','Moved into industry research in 2024',False)]
-alumni=''.join(f'''<li class="cm-al"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div class="cm-alb"><p class="cm-mn">{n}</p><p class="cm-alw">{w}</p><dl class="cm-ald"><div><dt>At CNAP</dt><dd>{c}</dd></div><div><dt>Funding after CNAP</dt><dd>{f}</dd></div></dl>{'<p class="cm-why">Happy to talk with new project leaders</p>' if ok else ''}</div>{f'<a class="btn sm" href="{intro(n)}">Ask for an introduction</a>' if ok else ''}</li>''' for i,t,n,c,w,f,ok in AL)
+def _split(x):
+    a,_,b=x.partition(', ')
+    return (a,b) if b else (x,'')
+def _path(c,f):
+    r,yrs=_split(c); aw,ag=_split(f)
+    return (f'<ol class="cm-path" aria-label="Career path">'
+            f'<li class="cm-st"><span class="cm-stk">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
+            f'<li class="cm-st cm-st2"><span class="cm-stk">After CNAP</span><b>{aw}</b>{f"<span>{ag}</span>" if ag else ""}</li></ol>')
+alumni=''.join(f'''<li class="cm-al"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div class="cm-alb"><p class="cm-mn">{n}</p><p class="cm-alw">{w}</p>{_path(c,f)}{'<p class="cm-ok">Happy to talk with new project leaders</p>' if ok else ''}</div>{f'<a class="btn sm" href="{intro(n)}">Ask for an introduction</a>' if ok else ''}</li>''' for i,t,n,c,w,f,ok in AL)
 
 SECS=[('cm-ach','Recent achievements'),('cm-ask','Ask the community'),('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-alum','CNAP alumni'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
 spine=''.join(f'<li><a href="#{i}"><span class="n"><b>{n}</b></span><span>{t}</span></a></li>' for n,(i,t) in enumerate(SECS,1))
@@ -182,14 +190,14 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-know" aria-labelledby="cm-know-h">
           <h2 id="cm-know-h">Member interests and expertise</h2>
-          <div class="cs-b"><p>Methods and topics members have listed on member profiles. Please select a topic to see who knows the topic in the directory.</p><ul class="cm-sks">{skills}</ul></div>
+          <div class="cs-b"><p>Methods and topics members have listed on member profiles. Please select a topic to see who knows the topic in the directory.</p><ul class="cm-stks">{skills}</ul></div>
         </section>
         <section class="step cs" id="cm-dir" aria-labelledby="cm-dir-h">
           <h2 id="cm-dir-h">Member directory</h2>
           <div class="cs-b">
             <div class="cm-tools"><label class="cm-search"><span class="sr">Search members</span><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg><input type="search" placeholder="Search by name, role, or method" data-dirq></label><p class="cm-count" role="status"><span data-dirn>{len(M)}</span> members shown</p></div>
             <div class="pf-filt cm-filt" role="group" aria-label="Show">{filt}</div>
-            <p class="cm-skill-on" hidden><span data-sm>Showing members who know <b data-skn></b>.</span> <button type="button" class="t3 cm-clear">Show everyone</button></p>
+            <p class="cm-stkill-on" hidden><span data-sm>Showing members who know <b data-skn></b>.</span> <button type="button" class="t3 cm-clear">Show everyone</button></p>
             <ul class="cm-dir">{dirl}</ul>
             <p class="cm-none" hidden>No members match. Try a different word, or <button type="button" class="t3 cm-clear">show everyone</button>.</p>
           </div>
@@ -248,14 +256,14 @@ page=f'''<!doctype html>
 <script src="guide.js"></script>
 <script>
 (function(){{
-  var rows=[].slice.call(document.querySelectorAll('.cm-dr')),q=document.querySelector('[data-dirq]'),n=document.querySelector('[data-dirn]'),none=document.querySelector('.cm-none'),gb=document.querySelectorAll('.cm-filt button'),son=document.querySelector('.cm-skill-on'),skn=document.querySelector('[data-skn]'),g='all',skill='';
+  var rows=[].slice.call(document.querySelectorAll('.cm-dr')),q=document.querySelector('[data-dirq]'),n=document.querySelector('[data-dirn]'),none=document.querySelector('.cm-none'),gb=document.querySelectorAll('.cm-filt button'),son=document.querySelector('.cm-stkill-on'),skn=document.querySelector('[data-skn]'),g='all',skill='';
   function apply(){{var t=(q.value||'').trim().toLowerCase(),c=0;rows.forEach(function(r){{var ok=(g==='all'||r.dataset.g===g)&&(!t||r.dataset.q.indexOf(t)>-1)&&(!skill||r.dataset.s.split('|').indexOf(skill)>-1);r.hidden=!ok;if(ok)c++;}});n.textContent=c;none.hidden=c>0;son.hidden=!skill;skn.textContent=skill;}}
   q.addEventListener('input',apply);
   var onlyNew=false;var a0=apply;apply=function(){{a0();if(onlyNew){{var c=0;rows.forEach(function(r){{if(r.dataset.new!=='1')r.hidden=true;if(!r.hidden)c++;}});n.textContent=c;son.hidden=false;son.querySelector('[data-sm]').textContent='Showing the three members who joined this month.';}}}};
   document.querySelector('[data-newonly]').addEventListener('click',function(){{onlyNew=true;skill='';q.value='';g='all';apply();}});
   document.querySelectorAll('.cm-clear').forEach(function(b){{b.addEventListener('click',function(){{onlyNew=false;son.querySelector('[data-sm]').innerHTML='Showing members who know <b data-skn></b>.';skn=son.querySelector('[data-skn]');apply();}});}});
   gb.forEach(function(b){{b.addEventListener('click',function(){{g=b.dataset.g;gb.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});apply();}});}});
-  document.querySelectorAll('.cm-sk').forEach(function(b){{b.addEventListener('click',function(){{skill=b.dataset.skill;g='all';gb.forEach(function(o){{o.setAttribute('aria-pressed',o.dataset.g==='all')}});q.value='';apply();document.getElementById('cm-dir').scrollIntoView({{behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}});}});}});
+  document.querySelectorAll('.cm-stk').forEach(function(b){{b.addEventListener('click',function(){{skill=b.dataset.skill;g='all';gb.forEach(function(o){{o.setAttribute('aria-pressed',o.dataset.g==='all')}});q.value='';apply();document.getElementById('cm-dir').scrollIntoView({{behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}});}});}});
   document.querySelectorAll('.cm-clear').forEach(function(b){{b.addEventListener('click',function(){{skill='';q.value='';g='all';gb.forEach(function(o){{o.setAttribute('aria-pressed',o.dataset.g==='all')}});apply();}});}});
   var th=[].slice.call(document.querySelectorAll('.cm-th')),tb=document.querySelectorAll('.cm-tf button');
   function tf(k){{th.forEach(function(r){{r.hidden=k==='m'?r.dataset.m!=='1':k==='u'?r.dataset.u!=='1':false;}});}}
