@@ -53,6 +53,13 @@ for path, f in files.items():
     if '<button type="button" class="fbk-open"' in s:
         i = s.index('<button type="button" class="fbk-open"'); j = s.index('</script>', s.index('</dialog>', i)) + 9
         s = s[:i] + s[j:]
+    hdr = open(V + 'sitevisit.html').read()
+    hdr = hdr[hdr.index('<a class="skip"'):hdr.index('<main id="main">')]
+    hdr = hdr.replace(' aria-current="page"', '').replace('<a href="reporting.html">Reporting</a>', '<a href="reporting.html" aria-current="page">Reporting</a>')
+    s = re.sub(r'(<body[^>]*>)', lambda m: m.group(1) + '\n' + hdr, s, count=1)
+    # Funding and news now lives in the Hub's top ribbon (MW 2026-11-15)
+    s = re.sub(r'\s*<a href="funding\.html"[^>]*>Funding and news</a>', '', s)
+    s = s.replace('</head>', '<link rel="stylesheet" href="hubbar.css">\n</head>', 1)
     s = s.replace('</body>', PROTO + '<script src="hubchrome.js" defer></script>\n</body>')
     assert '/static/' not in s and 'csrfmiddlewaretoken' not in s and 'href="/' not in s and 'action="/' not in s, (out, re.findall(r'(?:href|action)="/[^"]*"', s)[:3])
     open(V + out, 'w').write(s)
