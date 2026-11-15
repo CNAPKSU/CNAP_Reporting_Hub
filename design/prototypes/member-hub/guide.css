@@ -1217,3 +1217,19 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 @media (min-width:981px){
   .guide .wrap>.spine:hover,.guide .wrap>.spine:focus-within{--w:max(220px,min(260px,calc(var(--m) - 24px)));width:var(--w);margin-left:max(calc(-1 * (var(--m) / 2 + var(--w) / 2)),calc(12px - var(--m)))}
 }
+/* the Stevens Amendment section (MW 2026-11-14), carried over from the reporting form's acknowledgment box */
+.stv{display:grid;gap:14px}
+.stv h4{margin:14px 0 0;font:500 19px/25px var(--serif);color:var(--ink)}
+.stv-why{display:grid;gap:10px;padding:18px 20px;border-radius:10px;background:var(--paper);border:1px solid var(--line)}
+.stv-why p{margin:0;font-size:15.5px;line-height:25px}
+.stv-links{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14.5px}
+.stv-steps{margin:0;padding-left:22px;display:grid;gap:16px}
+.stv-steps li{display:grid;gap:8px}
+.stv-steps li>span{font-size:15px;line-height:24px;color:var(--ink-2)}
+.stv-t{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 16px;align-items:start;padding:14px 16px;border-left:3px solid var(--acc);background:var(--paper);border-radius:0 8px 8px 0}
+.stv-t p{margin:0;font:400 15.5px/25px var(--serif);color:var(--ink)}
+.stv-t .btn{min-height:34px;font-size:13.5px}
+.stv-k{margin:6px 0 0;font-size:14px;font-weight:600;color:var(--muted)}
+.stv-note{font-size:14px!important;line-height:22px;color:var(--muted)!important}
+@media (max-width:640px){.stv-t{grid-template-columns:minmax(0,1fr)}.stv-t .btn{justify-self:start}}
+.stv-steps{list-style:decimal}.stv-steps li::marker{font:600 15px var(--sans);color:var(--acc)}

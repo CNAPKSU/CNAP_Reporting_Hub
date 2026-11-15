@@ -41,3 +41,9 @@ a.addEventListener('click',function(e){if(!dl)return;e.preventDefault();var name
 var b64=window.CNAP_MEETING_LOG;var p=b64?Promise.resolve(Uint8Array.from(atob(b64),function(c){return c.charCodeAt(0);})):fetch(name).then(function(r){if(!r.ok)throw 0;return r.blob();});p.then(function(d){return dl.save({filename:name,data:d});}).catch(function(){});});})();
 
 (function(){document.addEventListener('click',function(e){var a=e.target.closest('a[href^="index.html#"]');if(!a)return;try{sessionStorage.setItem('cnap-goto',a.getAttribute('href').split('#')[1]);}catch(x){}});})();
+
+/* Stevens Amendment statements (MW 2026-11-14): each Copy button copies the statement beside it */
+(function(){document.querySelectorAll('.stv-copy').forEach(function(b){b.addEventListener('click',function(){var p=b.parentNode.querySelector('p'),t=p.textContent.trim();
+  function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1800);}
+  function sel(){var r=document.createRange();r.selectNodeContents(p);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected. Press Ctrl+C';}
+  try{navigator.clipboard.writeText(t).then(done,sel);}catch(e){sel();}});});})();
