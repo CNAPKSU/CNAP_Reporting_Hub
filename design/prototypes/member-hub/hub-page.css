@@ -424,3 +424,45 @@ a.fp-evh:hover{color:var(--purple);text-decoration:underline;text-underline-offs
 .fp-evd{margin-top:14px;padding-top:14px;box-shadow:0 -1px 0 var(--line);font-size:15.5px;line-height:25px;color:var(--ink-2);max-width:72ch}
 @media (max-width:640px){.fp-news{padding:4px 20px}.fp-pin{padding:22px 20px}.fp-ev{grid-template-columns:56px minmax(0,1fr);gap:16px;padding:20px}.fp-nh,.fp-evh{font-size:20px;line-height:27px}}
 .fp-evm{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,max-content));column-gap:32px}
+
+/* The side column (MW 2026-11-14): the consultation card, then On this page, always open, so the list never covers the sections. The facts in the opening sit in an outline box, as on the core pages. */
+@media (min-width:981px){
+  .fp-body>.wrap{grid-template-columns:minmax(0,1fr) 300px!important;column-gap:48px}
+  .fp-body>.wrap>.fp-main{grid-area:1/1}
+  .fp-body>.wrap>.fp-sidecol{grid-area:1/2;position:sticky;top:104px;align-self:start;display:grid;gap:20px}
+  .fp-sidecol .spine,.fp-sidecol .spine:hover,.fp-sidecol .spine:focus-within{position:static;width:auto;margin:0;padding:20px 22px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:none;z-index:auto}
+  .fp-sidecol .spine-h{display:block;font:500 19px/24px var(--serif);padding-bottom:12px}
+  .fp-sidecol .spine a{height:auto;padding:6px 0 6px 18px;overflow:visible;white-space:normal;color:var(--ink-2)!important}
+  .fp-sidecol .spine a[aria-current="step"]{color:var(--purple-ink)!important}
+  .fp-sidecol .spine a::before{left:-1px;top:13px}
+  .fp-sidecol .spine-track{display:block;left:23.5px}
+}
+@media (max-width:980px){.fp-body>.wrap>.fp-sidecol{order:-1;display:grid;gap:16px}}
+.fp-facts{display:inline-grid;grid-auto-flow:column;grid-auto-columns:minmax(150px,auto);gap:0;margin-top:28px;border:1px solid var(--line);border-radius:10px;background:#fbfaf8;overflow:hidden}
+.fp-facts div,.fp-facts div:last-child{margin:0;padding:16px 28px 16px 22px;box-shadow:none}
+.fp-facts div+div{border-left:1px solid var(--line)}
+.fp-facts dd{font-size:20px;line-height:26px}
+@media (max-width:640px){.fp-facts{display:grid;grid-auto-flow:row;grid-auto-columns:auto;width:100%}.fp-facts div+div{border-left:0;border-top:1px solid var(--line)}}
+.fp-body>.wrap>*{min-width:0}.fp-sidecol>*{min-width:0}
+/* the status chips always sit at the top right of an opportunity, however long its name (MW 2026-11-14) */
+.fp-op-h{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:10px 24px}
+.fp-op-h .fp-chips{justify-content:flex-end;padding-top:2px;max-width:360px}
+@media (max-width:640px){.fp-op-h{grid-template-columns:minmax(0,1fr)}.fp-op-h .fp-chips{justify-content:flex-start;max-width:none}}
+@media (min-width:981px){.fp-sidecol .spine{justify-self:stretch;align-self:start;margin:0!important}}
+/* the seven questions follow along in the side column instead of repeating on every opportunity (MW 2026-11-14) */
+.fp-weighcard{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:22px 24px;border-radius:10px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--purple)}
+.fp-wt{font:400 18px/25px var(--serif);color:var(--ink)}
+.fp-weighcard .fp-btn{margin-top:6px;min-height:40px;font-size:14.5px}
+/* ask the community, in the side column (MW 2026-11-14) */
+.fp-askcard{display:flex;flex-direction:column;gap:8px;padding:22px 24px;border-radius:10px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--teal)}
+.fp-askcard .fp-for{color:var(--teal)}
+.fp-asks{list-style:none;margin:4px 0 0;padding:0;display:grid}
+.fp-asks li+li{border-top:1px solid var(--line)}
+.fp-asks a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;font-size:15px;line-height:21px;font-weight:500;color:var(--ink);text-decoration:none}
+.fp-asks a::after{content:"";flex:none;width:7px;height:7px;border-top:1.5px solid var(--teal);border-right:1.5px solid var(--teal);transform:rotate(45deg)}
+.fp-asks a:hover{color:var(--teal)}
+/* the side column runs the full height of the sections; the cards scroll past and On this page stays in view (MW 2026-11-14) */
+@media (min-width:981px){
+  .fp-body>.wrap>.fp-sidecol{position:static;align-self:stretch;align-content:start}
+  .fp-sidecol .spine,.fp-sidecol .spine:hover,.fp-sidecol .spine:focus-within{position:sticky!important;top:104px!important}
+}

@@ -17,7 +17,6 @@
   </div>
   <div class="fp-op-f">
     {% if r.o.url %}<a class="fp-btn" href="{{ r.o.url }}" target="_blank" rel="noopener" title="Opens the sponsor’s announcement in a new tab.">Read the announcement</a>{% endif %}
-    <a class="fp-lnk" href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}#s-before" title="Opens the seven questions in Grant resources.">Weigh it with the seven questions</a>
     <a class="fp-lnk" href="mailto:{{ evaluator_email }}?subject={{ 'Question about '|add:r.o.name|urlencode }}&amp;body={{ 'Name:%0A%0AMy question about this opportunity:%0A'|safe }}" title="Opens an email to the Assistant Director for Grants and Contracts.">Ask about this opportunity</a>
   </div>
 </li>

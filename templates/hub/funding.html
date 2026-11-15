@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/page.css' %}">
 </head>
-<body class="hub-page fp-page{% if part == 'resources' %} fp-noside{% endif %}">
+<body class="hub-page fp-page">
 {# Funding and proposals (formerly Funding and news) in the Member Hub design (MW 2026-11-14). The same view, data, form, letters, and permissions as proto/portal/funding.html; only the presentation changes. #}
 {% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
 <a class="skip" href="#main">Skip to main content</a>
@@ -55,12 +55,7 @@
 
   <div class="fp-body">
     <div class="wrap">
-      <nav class="spine" aria-label="Sections on this page">
-        <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
-        <ol>
-          {% if part == "news" %}{% if n_pinned %}<li><a href="#s-pinned">Pinned by the CNAP office</a></li>{% endif %}<li><a href="#s-news">Latest news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-milestones">What the funding labels mean</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
-        </ol>
-      </nav>
+
 
       <div class="fp-main">
         {% if messages %}<ul class="fp-msgs" role="status">{% for m in messages %}<li class="{{ m.tags }}">{{ m|stack }}</li>{% endfor %}</ul>{% endif %}
@@ -120,7 +115,7 @@
           {% if picked %}<ul class="fp-ops">{% for r in picked %}{% include "hub/_funding_row.html" with mode="picked" %}{% endfor %}</ul>
           {% else %}<div class="fp-empty"><p>The CNAP team adds opportunities picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %} here.</p><p>Everything below is open to all CNAP members.</p></div>{% endif %}
         </section>
-        <p class="fp-hint">Before applying, weigh each opportunity with the <a href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}#s-before">seven questions in Grant resources</a>.</p>
+        
         <section class="fp-sec" id="s-most" aria-labelledby="s-most-h">
           <div class="fp-sh"><h2 id="s-most-h">Relevant to most members</h2><p>{{ everyone|length }} opportunit{{ everyone|length|pluralize:"y,ies" }}{% if everyone_next %}. Next deadline {{ everyone_next|date:"F j, Y" }}{% endif %}.</p><p>Check each opportunity’s eligibility before applying.</p></div>
           {% if everyone %}<ul class="fp-ops">{% for r in everyone %}{% include "hub/_funding_row.html" with mode="everyone" %}{% endfor %}</ul>
@@ -149,11 +144,29 @@
 
         {% if part == "opportunities" %}<p class="fp-who">The opportunities picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, letters, and suggestions are visible only to {% if acting_for_other %}{{ who }}, the people entering for {{ who }},{% else %}you, anyone entering for you,{% endif %} and the CNAP office.<br>Nothing on this page is shared outside CNAP.</p>{% endif %}
       </div>
-      {% if part != "resources" %}<aside class="fp-consult fp-side" aria-label="Help with a proposal">
+      <div class="fp-sidecol">
+        {% if part == "opportunities" %}<aside class="fp-weighcard" aria-label="Before you apply"><p class="fp-for">Before you apply</p><p class="fp-wt">Weigh every opportunity with the seven questions.</p><a class="fp-btn" href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}#s-before" title="Opens the seven questions in Grant resources.">See the seven questions</a></aside>{% endif %}
+        {% if part != "resources" %}<aside class="fp-consult" aria-label="Help with a proposal">
           <p class="fp-for">Writing a proposal?</p>
           <p class="fp-ct">Talk through a draft, one on one, with the Assistant Director for Grants and Contracts.</p>
           <a class="fp-btn pri" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a>
         </aside>{% endif %}
+<aside class="fp-askcard" aria-labelledby="ask-h">
+          <p class="fp-for" id="ask-h">Ask the community</p>
+          <p class="fp-wt">Someone at CNAP may already know. Start a conversation thread to:</p>
+          <ul class="fp-asks">
+            <li><a href="{% url 'home' %}#com-h" data-thread="funding">Ask who has applied for an opportunity</a></li>
+            <li><a href="{% url 'home' %}#com-h" data-thread="expertise">Find a collaborator or a kind of expertise</a></li>
+            <li><a href="{% url 'home' %}#com-h" data-thread="student">Post a graduate student position</a></li>
+          </ul>
+        </aside>
+  <nav class="spine" aria-label="Sections on this page">
+        <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
+        <ol>
+          {% if part == "news" %}{% if n_pinned %}<li><a href="#s-pinned">Pinned by the CNAP office</a></li>{% endif %}<li><a href="#s-news">Latest news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-milestones">What the funding labels mean</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
+        </ol>
+      </nav>
+      </div>
     </div>
   </div>
 </main>
