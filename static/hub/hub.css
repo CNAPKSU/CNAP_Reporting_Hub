@@ -1403,3 +1403,8 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 
 @media (min-width:1024px) and (max-width:1120px){.nav a{padding:0 7px;font-size:14px}.hdr .wrap{gap:14px}}
 @media (max-width:1023px){.nav,.search{display:none}.only-phone{display:grid;place-items:center;width:44px;height:44px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);cursor:pointer}}
+
+/* Getting started sits on its own pale teal band */
+.onb-band{margin-top:var(--sec);background:#eaf3f3;border-block:1px solid #d6e7e8;padding-bottom:var(--sec)}
+.onb-band .sec{margin-top:0;padding-top:var(--sec)}
+.onb-band + .reel-band{margin-top:0;border-top:0}

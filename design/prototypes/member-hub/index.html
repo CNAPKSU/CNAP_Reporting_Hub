@@ -1368,6 +1368,11 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 
 @media (min-width:1024px) and (max-width:1120px){.nav a{padding:0 7px;font-size:14px}.hdr .wrap{gap:14px}}
 @media (max-width:1023px){.nav,.search{display:none}.only-phone{display:grid;place-items:center;width:44px;height:44px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);cursor:pointer}}
+
+/* Getting started sits on its own pale teal band */
+.onb-band{margin-top:var(--sec);background:#eaf3f3;border-block:1px solid #d6e7e8;padding-bottom:var(--sec)}
+.onb-band .sec{margin-top:0;padding-top:var(--sec)}
+.onb-band + .reel-band{margin-top:0;border-top:0}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -1779,7 +1784,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
     </section>
   </div>
 
-  <div class="wrap">
+  <div class="onb-band"><div class="wrap">
     <section class="sec onb" aria-labelledby="onb-h">
       <header class="sh">
         <h2 id="onb-h">Getting started</h2>
@@ -1787,7 +1792,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
       </header>
       <div class="ob-grid"><article class="ob ob-mentor"><p class="ob-l">For mentors</p><h3>Mentoring at CNAP</h3><p class="ob-d">What the Center asks of mentors, and how to support a primary or pilot project leader through the award.</p><details class="ob-x"><summary>See the 5 steps</summary><ol class="ob-s"><li><span class="ob-n num">1</span>Your role and expectations</li><li><span class="ob-n num">2</span>Sign your mentoring agreement</li><li><span class="ob-n num">3</span>Plan your meeting schedule</li><li><span class="ob-n num">4</span>What mentors report, and when</li><li><span class="ob-n num">5</span>Learn about your role at the Site Visit</li></ol></details><div class="ob-a"><a class="btn" href="mentor.html">Start the mentor guide</a><span class="meta">5 steps · about 20 minutes to read</span></div></article><article class="ob ob-awardee"><p class="ob-l">For mentees</p><h3>Starting your project award</h3><p class="ob-d">For primary and pilot project leaders: what to do in your first months, from your mentoring agreement, finance guidelines, and approvals to orientations with the research cores.</p><details class="ob-x"><summary>See the 7 steps</summary><ol class="ob-s"><li><span class="ob-n num">1</span>Welcome to the Center</li><li><span class="ob-n num">2</span>Sign your mentoring agreement</li><li><span class="ob-n num">3</span>Review CNAP’s finance expectations and guidelines</li><li><span class="ob-n num">4</span>Approvals before you begin</li><li><span class="ob-n num">5</span>Orientations with the research cores</li><li><span class="ob-n num">6</span>Your reporting schedule</li><li><span class="ob-n num">7</span>Learn about your role at the Site Visit</li></ol></details><div class="ob-a"><a class="btn" href="mentee.html">Start the mentee guide</a><span class="meta">7 steps · about 40 minutes to read</span></div></article></div>
     </section>
-  </div>
+  </div></div>
 
   <section class="reel-band" aria-labelledby="ph-h">
     <div class="wrap">
