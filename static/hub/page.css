@@ -324,3 +324,15 @@ a.fp-name:hover{color:var(--purple);text-decoration:underline}
   .js-draw .fp-sh.drawn::before{animation:fpslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
 }
 @keyframes fpslide{from{left:0}to{left:calc(100% - 40px)}}
+
+/* Alignment (MW 2026-11-14): the sections share the title's left edge and the consultation card's right edge, and the dot rail sits in the page margin, as on the homepage */
+.fp-main{max-width:none}
+@media (min-width:981px){
+  .fp-body>.wrap{display:block}
+  .fp-main{margin-inline:0}
+  .fp-page .spine{position:fixed;z-index:30;left:max(10px,env(safe-area-inset-left,0px));top:124px}
+}
+.fp-qs p,.fp-nw p,.fp-ev p,.fp-kv dd,.fp-card,.fp-empty,.fp-who{max-width:none}
+.fp-empty p,.fp-who,.fp-card p{max-width:72ch}
+.fp-form{max-width:none}
+.fp-form .fp-field,.fp-form .fp-choice{max-width:720px}
