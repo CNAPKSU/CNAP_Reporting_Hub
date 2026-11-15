@@ -978,20 +978,12 @@ body.co-bn{--acc:var(--amber);--acc-ink:#5e3300;--acc-tint:#f5ece1}
 /* Guides and core pages (MW 2026-11-14: "we have so much white space to the left, why not just scootch it over a bit?"):
    from 1500px the dot rail moves into the left margin and the steps line up with the title;
    from 1920px there is room for the whole "In this guide" list, so it stays open in the margin and never covers the text */
-@media (min-width:1500px){
+@media (min-width:981px){
   .guide .wrap{grid-template-columns:minmax(0,1fr) 216px}
   .core-page .guide .wrap{grid-template-columns:minmax(0,1fr) 300px}
-  .guide .wrap>.spine{grid-area:1/1;justify-self:start;align-self:start;margin-left:-68px}
+  .guide .wrap>.spine{grid-area:1/1;justify-self:start;align-self:start}
   .guide .wrap>.steps{grid-area:1/1}
   .guide .wrap>.rail,.guide .wrap>.co-rail,.guide .wrap>.ask{grid-area:1/2}
-}
-@media (min-width:1920px){
-  .guide .wrap>.spine,.guide .wrap>.spine:hover,.guide .wrap>.spine:focus-within{width:220px;margin-left:-248px;padding:20px 20px 14px;background:var(--surface);border-color:rgba(29,27,33,.07);box-shadow:0 1px 1px rgba(29,27,33,.04),0 4px 10px -2px rgba(29,27,33,.06),0 24px 48px -20px rgba(60,29,102,.22)}
-  .guide .wrap>.spine .spine-h{display:block}
-  .guide .wrap>.spine a{height:auto;padding:6px 0 6px 18px;white-space:normal;color:var(--ink-2)!important}
-  .guide .wrap>.spine a[aria-current="step"]{color:var(--acc-ink)!important}
-  .guide .wrap>.spine a::before{left:-1px;top:13px}
-  .guide .wrap>.spine .spine-track{left:23.5px}
 }
 
 /* ---------- Community (MW 2026-11-14): a page for a new investigator to find people, ask questions, and know where to meet ---------- */
@@ -1215,3 +1207,13 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 @media (max-width:980px){.cm-facts{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:640px){.cm-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .cm-facts li>a{display:flex;flex-direction:column;gap:4px}.cm-facts li>a span{color:var(--purple)}.cm-facts li>a:hover span{color:var(--purple-ink)}
+
+/* On this page, on every page (MW 2026-11-14): collapsed to dots, centered in the left margin; on hover it opens centered in the same margin, never past the left edge */
+@media (min-width:981px){
+  .guide .wrap>.spine,.fp-body>.wrap>.spine{--m:max(40px,calc((100vw - 1400px) / 2));margin-left:calc(-1 * (var(--m) / 2 + 14px));transition:width .25s cubic-bezier(.2,.7,.2,1),padding .25s,background .2s,box-shadow .2s,margin-left .25s cubic-bezier(.2,.7,.2,1)}
+  .guide .wrap>.spine:hover,.guide .wrap>.spine:focus-within,.fp-body>.wrap>.spine:hover,.fp-body>.wrap>.spine:focus-within{margin-left:max(calc(-1 * (var(--m) / 2 + 130px)),calc(12px - var(--m)))}
+}
+@media (min-width:981px) and (max-width:1280px){.guide .wrap{grid-template-columns:minmax(0,1fr)}.guide .wrap>.rail{grid-area:auto}}
+@media (min-width:981px){
+  .guide .wrap>.spine:hover,.guide .wrap>.spine:focus-within{--w:max(220px,min(260px,calc(var(--m) - 24px)));width:var(--w);margin-left:max(calc(-1 * (var(--m) / 2 + var(--w) / 2)),calc(12px - var(--m)))}
+}

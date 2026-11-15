@@ -55,7 +55,7 @@ skills=''.join(f'''<li><button type="button" class="cm-sk" data-skill="{s}"><spa
 
 # 4. Directory
 filt=''.join(f'<button type="button" aria-pressed="{"true" if k=="all" else "false"}" data-g="{k}">{l}</button>' for k,l in G)
-dirl=''.join(f'''<li class="cm-dr" data-g="{m[4]}" data-s="{'|'.join(m[5])}" data-q="{(m[2]+' '+m[3]+' '+' '.join(m[5])).lower()}">{av(m[0])}<div class="cm-dm"><p class="cm-dn">{m[2]}{' <span class="cm-new">New</span>' if m[7] else ''}</p><p class="cm-drl">{m[3]}</p></div><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in m[5])}</p><a class="t3" href="{intro(m[2])}">Ask for an introduction</a></li>''' for m in M)
+dirl=''.join(f'''<li class="cm-dr" data-g="{m[4]}" data-new="{'1' if m[7] else '0'}" data-s="{'|'.join(m[5])}" data-q="{(m[2]+' '+m[3]+' '+' '.join(m[5])).lower()}">{av(m[0])}<div class="cm-dm"><p class="cm-dn">{m[2]}{' <span class="cm-new">New</span>' if m[7] else ''}</p><p class="cm-drl">{m[3]}</p></div><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in m[5])}</p><a class="t3" href="{intro(m[2])}">Ask for an introduction</a></li>''' for m in M)
 
 # 5. Ask the community
 T=[('jl','Looking for an EEG collaborator','4 replies','Active today',True,'You record sleep EEG in your pilot project.',False),
@@ -92,11 +92,11 @@ import math,random
 random.seed(7)
 W,H,CX,CY=520,380,260,190
 GROUPS=[('pl','Project leaders',14),('mn','Mentors',11),('co','Core staff',9),('st','Students',17),('al','Alumni',6)]
-outer=[];idx=0;tot=sum(n for _,_,n in GROUPS)
-for g,_,n in GROUPS:
-    for k in range(n):
-        a=2*math.pi*(idx/tot)+random.uniform(-.05,.05);r=random.uniform(150,178)
-        outer.append((g,CX+r*math.cos(a)*1.0,CY+r*math.sin(a)*0.92));idx+=1
+seq=[g for g,_,n in GROUPS for _ in range(n)];random.shuffle(seq);tot=len(seq)
+outer=[]
+for idx,g in enumerate(seq):
+    a=2*math.pi*(idx/tot)+random.uniform(-.05,.05);r=random.uniform(150,178)
+    outer.append((g,CX+r*math.cos(a),CY+r*math.sin(a)*0.92))
 MATCHN=[('jl','Jordan Lee','Sleep EEG',-2.35),('pr','Priya Raman','Sleep and memory',-0.75),('ms','Maya Singh','Aging',0.45),('om','Omar Mendes','Sleep',2.2)]
 mpos=[(k,nm,why,CX+120*math.cos(a),CY+120*math.sin(a)*0.86) for k,nm,why,a in MATCHN]
 lines=[]
@@ -149,7 +149,7 @@ page=f'''<!doctype html>
         </div>
         {NET}
       </div>
-      <ul class="co-facts cm-facts" aria-label="At a glance"><li><b class="num">61</b><span>Members</span></li><li><b class="num">3</b><span>Joined this month</span></li><li><b class="num">14</b><span>Open conversation threads</span></li><li><b class="num">2</b><span>Grants awarded this fall</span></li><li><a href="#cm-alum"><b class="num">6</b><span>CNAP alumni</span></a></li></ul>
+      <ul class="co-facts cm-facts" aria-label="At a glance"><li><a href="#cm-dir"><b class="num">61</b><span>Members</span></a></li><li><a href="#cm-dir" data-newonly><b class="num">3</b><span>Joined this month</span></a></li><li><a href="#cm-ask"><b class="num">14</b><span>Open conversation threads</span></a></li><li><a href="#cm-ach"><b class="num">2</b><span>Grants awarded this fall</span></a></li><li><a href="#cm-alum"><b class="num">6</b><span>CNAP alumni</span></a></li></ul>
     </div>
   </section>
 
@@ -177,7 +177,7 @@ page=f'''<!doctype html>
           <div class="cs-b">
             <div class="cm-tools"><label class="cm-search"><span class="sr">Search members</span><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg><input type="search" placeholder="Search by name, role, or method" data-dirq></label><p class="cm-count" role="status"><span data-dirn>{len(M)}</span> members shown</p></div>
             <div class="pf-filt cm-filt" role="group" aria-label="Show">{filt}</div>
-            <p class="cm-skill-on" hidden>Showing members who know <b data-skn></b>. <button type="button" class="t3 cm-clear">Show everyone</button></p>
+            <p class="cm-skill-on" hidden><span data-sm>Showing members who know <b data-skn></b>.</span> <button type="button" class="t3 cm-clear">Show everyone</button></p>
             <ul class="cm-dir">{dirl}</ul>
             <p class="cm-none" hidden>No members match. Try a different word, or <button type="button" class="t3 cm-clear">show everyone</button>.</p>
           </div>
@@ -251,6 +251,9 @@ page=f'''<!doctype html>
   var rows=[].slice.call(document.querySelectorAll('.cm-dr')),q=document.querySelector('[data-dirq]'),n=document.querySelector('[data-dirn]'),none=document.querySelector('.cm-none'),gb=document.querySelectorAll('.cm-filt button'),son=document.querySelector('.cm-skill-on'),skn=document.querySelector('[data-skn]'),g='all',skill='';
   function apply(){{var t=(q.value||'').trim().toLowerCase(),c=0;rows.forEach(function(r){{var ok=(g==='all'||r.dataset.g===g)&&(!t||r.dataset.q.indexOf(t)>-1)&&(!skill||r.dataset.s.split('|').indexOf(skill)>-1);r.hidden=!ok;if(ok)c++;}});n.textContent=c;none.hidden=c>0;son.hidden=!skill;skn.textContent=skill;}}
   q.addEventListener('input',apply);
+  var onlyNew=false;var a0=apply;apply=function(){{a0();if(onlyNew){{var c=0;rows.forEach(function(r){{if(r.dataset.new!=='1')r.hidden=true;if(!r.hidden)c++;}});n.textContent=c;son.hidden=false;son.querySelector('[data-sm]').textContent='Showing the three members who joined this month.';}}}};
+  document.querySelector('[data-newonly]').addEventListener('click',function(){{onlyNew=true;skill='';q.value='';g='all';apply();}});
+  document.querySelectorAll('.cm-clear').forEach(function(b){{b.addEventListener('click',function(){{onlyNew=false;son.querySelector('[data-sm]').innerHTML='Showing members who know <b data-skn></b>.';skn=son.querySelector('[data-skn]');apply();}});}});
   gb.forEach(function(b){{b.addEventListener('click',function(){{g=b.dataset.g;gb.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});apply();}});}});
   document.querySelectorAll('.cm-sk').forEach(function(b){{b.addEventListener('click',function(){{skill=b.dataset.skill;g='all';gb.forEach(function(o){{o.setAttribute('aria-pressed',o.dataset.g==='all')}});q.value='';apply();document.getElementById('cm-dir').scrollIntoView({{behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}});}});}});
   document.querySelectorAll('.cm-clear').forEach(function(b){{b.addEventListener('click',function(){{skill='';q.value='';g='all';gb.forEach(function(o){{o.setAttribute('aria-pressed',o.dataset.g==='all')}});apply();}});}});

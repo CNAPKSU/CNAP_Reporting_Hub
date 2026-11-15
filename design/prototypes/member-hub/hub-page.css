@@ -483,3 +483,9 @@ a.fp-evh:hover{color:var(--purple);text-decoration:underline;text-underline-offs
 .fp-tbl tbody th span{display:block;font:500 13px/20px var(--sans);color:var(--muted)}
 .fp-tbl td{color:var(--ink-2)}
 @media (max-width:760px){.fp-idea{grid-template-columns:minmax(0,1fr)}.fp-ic{padding:20px}}
+
+/* On this page, as on every Hub page (MW 2026-11-14): collapsed to dots, centered in the left margin; on hover it opens centered in that margin */
+@media (min-width:981px){
+  .fp-body>.wrap>.spine{grid-area:1/1;position:sticky;top:124px;left:auto;align-self:start;justify-self:start;margin-top:6px;--m:max(40px,calc((100vw - 1360px) / 2 + 40px));margin-left:calc(-1 * (var(--m) / 2 + 14px));transition:width .25s cubic-bezier(.2,.7,.2,1),padding .25s,background .2s,box-shadow .2s,margin-left .25s cubic-bezier(.2,.7,.2,1)}
+  .fp-body>.wrap>.spine:hover,.fp-body>.wrap>.spine:focus-within{--w:max(220px,min(260px,calc(var(--m) - 24px)));width:var(--w);margin-left:max(calc(-1 * (var(--m) / 2 + var(--w) / 2)),calc(12px - var(--m)))}
+}

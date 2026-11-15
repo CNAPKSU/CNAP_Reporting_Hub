@@ -57,6 +57,12 @@
     <div class="wrap">
 
 
+      <nav class="spine" aria-label="Sections on this page">
+        <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
+        <ol>
+          {% if part == "news" %}{% if n_pinned %}<li><a href="#s-pinned">Pinned by the CNAP office</a></li>{% endif %}<li><a href="#s-news">Latest news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-milestones">What the funding labels mean</a></li><li><a href="#s-idea">NIH opportunities for IDeA states</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
+        </ol>
+      </nav>
       <div class="fp-main">
         {% if messages %}<ul class="fp-msgs" role="status">{% for m in messages %}<li class="{{ m.tags }}">{{ m|stack }}</li>{% endfor %}</ul>{% endif %}
         {% if from_not_funded %}<p class="fp-msg" role="status">The CNAP team will follow up with you personally.</p>{% endif %}
@@ -212,12 +218,7 @@
             <li><a href="{% url 'home' %}#com-h" data-thread="student">Post a graduate student position</a></li>
           </ul>
         </aside>
-  <nav class="spine" aria-label="Sections on this page">
-        <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
-        <ol>
-          {% if part == "news" %}{% if n_pinned %}<li><a href="#s-pinned">Pinned by the CNAP office</a></li>{% endif %}<li><a href="#s-news">Latest news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-milestones">What the funding labels mean</a></li><li><a href="#s-idea">NIH opportunities for IDeA states</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
-        </ol>
-      </nav>
+
       </div>
     </div>
   </div>
