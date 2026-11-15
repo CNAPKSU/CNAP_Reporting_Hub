@@ -5,9 +5,10 @@
 (function () {
   var css = ''
     + '.hc-thread{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2,#d5d3d9);background:transparent;color:var(--purple-ink,#3c1d66);font:500 14.5px/1 var(--sans,system-ui,sans-serif);text-decoration:none;white-space:nowrap}'
+    + '@media (min-width:1300px){.tools:has(.hc-thread:not([hidden])) .search{width:190px}}'
     + '.hc-thread:hover{background:var(--purple-tint,#efe8f8)}'
     + '.hc-thread svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}'
-    + '@media (max-width:760px){.hc-thread span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.hc-thread{padding:0 11px}}'
+    + '.hc-thread.hc-icon span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.hc-thread.hc-icon{padding:0 11px}.hc-thread[hidden]{display:none}'
     + '.fbk-open{position:fixed;right:22px;bottom:22px;z-index:50;padding:10px 20px;border-radius:999px;border:0;background:var(--purple,#512888);color:#fff;font:600 14px/20px var(--sans,system-ui,sans-serif);box-shadow:0 8px 24px -8px rgba(60,29,102,.5);cursor:pointer}'
     + '.fbk-open:hover{background:var(--purple-ink,#3c1d66)}'
     + '@media (max-width:980px){.fbk-open{bottom:calc(78px + env(safe-area-inset-bottom,0px));right:16px}}'
@@ -43,6 +44,11 @@
     a.title = 'Ask the CNAP community a question, look for a collaborator, or post a position';
     a.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 3.5h11v7h-6l-3 2.5v-2.5h-2z"/></svg><span>Start a thread</span>';
     mw.parentNode.insertBefore(a, mw);
+    /* fit: full label, then icon only, then hidden, so the ribbon never scrolls sideways */
+    var fit = function () { a.classList.remove('hc-icon'); a.hidden = false;
+      var over = function () { var box = a.parentNode, last = box.lastElementChild, hd = box.closest('header') || box.parentNode; var lim = Math.min(document.documentElement.clientWidth, hd.getBoundingClientRect().right); return last.getBoundingClientRect().right > lim + 1 || box.scrollWidth > box.clientWidth + 1; };
+      if (over()) a.classList.add('hc-icon'); if (over()) a.hidden = true; };
+    fit(); addEventListener('resize', fit); addEventListener('load', fit); setTimeout(fit, 400);
   }
 
   /* 2. Page feedback */

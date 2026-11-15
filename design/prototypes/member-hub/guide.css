@@ -2126,3 +2126,14 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .rp-facts dd span{margin-top:6px}
 @media (max-width:760px){.rp-facts{grid-template-columns:1fr;gap:18px}}
 .rp-hd .lead{font-size:16px;line-height:26px;color:var(--muted);max-width:60ch}
+@media (min-width:761px){.rp-facts{column-gap:clamp(56px,7vw,112px)}}
+@media (max-width:1200px){.rp-facts{column-gap:36px;grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:760px){.rp-facts{grid-template-columns:1fr}}
+/* Reporting side cards, quieter (MW 2026-11-15) */
+.rp-card h2{font:500 16px/22px var(--sans)!important;color:var(--ink);margin-bottom:12px}
+.rp-docs,.rp-how{font-size:14px;line-height:20px;gap:12px}
+.rp-docs a{font-weight:500;color:var(--purple-ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--purple) 35%,transparent)}
+.rp-docs a:hover{text-decoration-color:var(--purple)}
+.rp-docs span{font-size:13px;margin-top:2px}
+.rp-how li{color:var(--muted)}
+.rp-how li::before{width:4px;height:4px;top:8px;background:var(--line-2)}
+.rp-ask{font-size:13.5px;color:var(--muted)}
