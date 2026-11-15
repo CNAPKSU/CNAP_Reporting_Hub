@@ -1832,3 +1832,19 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-hero{padding-bottom:56px}
 .sv-tband+.sv-sec{padding-top:72px}
 @media (max-width:980px){.sv-hero{padding-bottom:40px}}
+/* Hero dates, engraved-invitation treatment (MW 2026-11-14: elegance) */
+.sv-when{width:380px;max-width:100%;justify-items:stretch;gap:0;text-align:center}
+.sv-im{margin:0;display:flex;align-items:center;gap:16px;font:400 18px/1 var(--serif);color:var(--purple-ink)}
+.sv-im::before,.sv-im::after{content:"";flex:1;height:1px;background:var(--purple);opacity:.35}
+.sv-dpair{display:grid;grid-template-columns:1fr 1fr;margin-top:22px}
+.sv-dpair>div{padding:0 12px}
+.sv-dpair>div+div{border-left:1px solid var(--line-2)}
+.sv-dpair p{margin:0}
+.sv-dw{font:400 17px/1.2 var(--serif);color:var(--ink-2)}
+.sv-dn{margin-top:6px!important;font:300 92px/1 var(--serif);letter-spacing:-.04em;color:var(--purple-ink)}
+.sv-dt{margin-top:10px!important;font-size:13.5px;line-height:19px;color:var(--muted)}
+.sv-when .sv-cd{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+.sv-when .sv-cd b{font-size:20px}
+@media (max-width:980px){.sv-when{width:100%;max-width:420px}}
+@media (max-width:520px){.sv-dn{font-size:68px}.sv-dt{font-size:12.5px}}
+.sv-rail{transition:opacity .25s}.sv-rail.is-off{opacity:0;visibility:hidden;pointer-events:none}

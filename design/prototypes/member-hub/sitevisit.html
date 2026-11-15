@@ -30,9 +30,10 @@
           <div class="sv-act"><a class="btn pri" href="#sv-rsvp">RSVP</a><a class="btn" href="#sv-prog">See the program</a><span class="sv-cal">Add to <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=CNAP%20Site%20Visit&amp;dates=20270525/20270527&amp;details=The%202027%20CNAP%20Site%20Visit%2C%20Kansas%20State%20University.%20Program%3A%20the%20Site%20Visit%20page%20in%20the%20Member%20Hub.&amp;location=Kansas%20State%20University%2C%20Manhattan%2C%20Kansas" target="_blank" rel="noopener">Google Calendar</a> or <a href="https://outlook.office.com/calendar/0/deeplink/compose?subject=CNAP%20Site%20Visit&amp;startdt=2027-05-25&amp;enddt=2027-05-27&amp;allday=true&amp;location=Kansas%20State%20University%2C%20Manhattan%2C%20Kansas" target="_blank" rel="noopener">Outlook</a></span></div>
         </div>
         <div class="sv-when" aria-label="Tuesday, May 25, and Wednesday, May 26, 2027">
-          <div class="sv-leaves">
-            <div class="sv-leaf"><p class="sv-lm">May 2027</p><p class="sv-ln">25</p><p class="sv-lw">Tuesday</p><p class="sv-lt">9:00 a.m. to 9:00 p.m.</p></div>
-            <div class="sv-leaf"><p class="sv-lm">May 2027</p><p class="sv-ln">26</p><p class="sv-lw">Wednesday</p><p class="sv-lt">9:00 a.m. to 12:30 p.m.</p></div>
+          <p class="sv-im"><span>May 2027</span></p>
+          <div class="sv-dpair">
+            <div><p class="sv-dw">Tuesday</p><p class="sv-dn">25</p><p class="sv-dt">9:00 a.m. to 9:00 p.m.</p></div>
+            <div><p class="sv-dw">Wednesday</p><p class="sv-dn">26</p><p class="sv-dt">9:00 a.m. to 12:30 p.m.</p></div>
           </div>
           <p class="sv-cd"><b class="num" data-days>192</b> days to go</p>
         </div>
@@ -259,6 +260,7 @@
     f.hidden=true;done.hidden=false;done.focus();done.scrollIntoView({block:'start'});});
   document.getElementById('sv-edit').addEventListener('click',function(){done.hidden=true;f.hidden=false;f.querySelector('input').focus();});
   document.querySelectorAll('[data-day]').forEach(function(a){a.addEventListener('click',function(){var t=document.getElementById('sv-t'+a.getAttribute('data-day'));if(t)t.click();});});
+  (function(){var r=document.querySelector('.sv-rail'),h=document.querySelector('.sv-hero');if(!r||!h)return;function f(){r.classList.toggle('is-off',h.getBoundingClientRect().bottom>innerHeight*0.5);}addEventListener('scroll',f,{passive:true});addEventListener('resize',f);f();})();
   var sp=document.querySelector('.sv-rail'),links=[].slice.call(sp.querySelectorAll('ol a')),secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));}),tr=sp.querySelector('.spine-track'),fl=sp.querySelector('.spine-fill'),ol=sp.querySelector('ol');
   function spy(){var y=innerHeight*.35,k=-1;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<y)k=i;});links.forEach(function(a,i){if(i===k)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');a.classList.toggle('done',i<k);});sp.classList.toggle('on',k>-1);}
   function track(){if(!tr||getComputedStyle(tr).display==='none')return;var o=ol.getBoundingClientRect().top;function dot(a){return a.getBoundingClientRect().top-o+parseFloat(getComputedStyle(a,'::before').top)+5;}var t=dot(links[0]),b=dot(links[links.length-1]);tr.style.top=(ol.offsetTop+t)+'px';tr.style.height=(b-t)+'px';var c=sp.querySelector('a[aria-current]');fl.style.height=c?(dot(c)-t)+'px':'0px';}
