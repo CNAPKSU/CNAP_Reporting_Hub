@@ -1794,3 +1794,33 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-you .sv-sh .sv-role{margin:28px 0 0;flex-direction:column;align-items:flex-start}
 .sv-you .sv-yr{margin:20px 0 0}
 .sv-prog .sv-role{margin-bottom:36px}
+/* Role chooser, third version: a clear "See the visit as" panel in the hero (MW 2026-11-14) */
+.sv-tailor{margin:48px 0 40px;padding:24px;border-radius:14px;background:var(--paper);border:1px solid var(--line);display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px;align-items:start}
+.sv-tlx p{margin:0;font-size:14.5px;line-height:22px;color:var(--muted)}
+.sv-tlx p:first-child{margin-bottom:8px;font:400 24px/1.2 var(--serif);color:var(--ink)}
+.sv-tailor .sv-rb{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sv-tailor .sv-rb button{all:unset;box-sizing:border-box;cursor:pointer;position:relative;display:grid;gap:4px;padding:14px 40px 14px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);transition:border-color .15s,background .15s}
+.sv-tailor .sv-rb button:hover{border-color:var(--line-2);background:var(--paper)}
+.sv-tailor .sv-rb button:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
+.sv-rt{font:500 15.5px/21px var(--sans);color:var(--ink)}
+.sv-rh{font-size:13.5px;line-height:19px;color:var(--muted)}
+.sv-tailor .sv-rb button::after{content:"";position:absolute;right:14px;top:16px;width:16px;height:16px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--line-2)}
+.sv-tailor .sv-rb button[aria-pressed="true"]{border-color:var(--purple);background:var(--purple-tint)}
+.sv-tailor .sv-rb button[aria-pressed="true"] .sv-rt{color:var(--purple-ink);font-weight:600}
+.sv-tailor .sv-rb button[aria-pressed="true"]::after{background:var(--purple) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.3 2.3 4.7-4.9' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat;box-shadow:none}
+.sv-you .sv-yr a{margin-left:6px}
+@media (max-width:980px){.sv-tailor{grid-template-columns:minmax(0,1fr);gap:18px}.sv-tailor .sv-rb{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.sv-tailor{padding:18px;margin-bottom:28px}.sv-tailor .sv-rb{grid-template-columns:minmax(0,1fr)}}
+/* Hero dates as two calendar pages, so the date reads at a glance (MW 2026-11-14) */
+.sv-when{display:grid;gap:16px;justify-items:end}
+.sv-leaves{display:flex;gap:16px}
+.sv-leaf{width:178px;border-radius:14px;overflow:hidden;background:var(--paper);border:1px solid var(--line);box-shadow:0 1px 0 var(--line),0 10px 24px -18px rgba(40,20,70,.35);text-align:center}
+.sv-leaf p{margin:0}
+.sv-lm{padding:9px 0;background:var(--purple-tint);color:var(--purple-ink);font:600 14px/20px var(--sans);border-bottom:1px solid var(--line)}
+.sv-ln{padding-top:14px;font:400 84px/1 var(--serif);letter-spacing:-.03em;color:var(--purple-ink)}
+.sv-lw{margin-top:6px;font:600 16px/22px var(--sans);color:var(--ink)}
+.sv-lt{margin:4px 0 0;padding:0 10px 16px;font-size:13.5px;line-height:19px;color:var(--muted)}
+.sv-when .sv-cd{margin:0}
+@media (max-width:980px){.sv-when{justify-items:start}}
+@media (max-width:520px){.sv-leaves{width:100%}.sv-leaf{flex:1;width:auto}.sv-ln{font-size:64px}}
+@media (max-width:520px){.sv-lt{font-size:12.5px;padding:0 6px 14px}}
