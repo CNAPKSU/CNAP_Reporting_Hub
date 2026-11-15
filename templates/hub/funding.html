@@ -62,7 +62,7 @@
       <nav class="spine" aria-label="Sections on this page">
         <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
         <ol>
-          {% if part == "news" %}<li><a href="#s-news">Funding news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-consult">Talk through a draft</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
+          {% if part == "news" %}<li><a href="#s-news">Funding news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
         </ol>
       </nav>
 
@@ -86,12 +86,19 @@
         </section>
         {% elif part == "resources" %}
         <section class="fp-sec" id="s-before" aria-labelledby="s-before-h">
-          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {{ questions|length }} questions before starting an application.</p><p>The CNAP team can talk through any of the questions with you.</p></div>
-          <ol class="fp-qs">{% for q in questions %}<li><span class="fp-n" aria-hidden="true">{{ forloop.counter }}</span><div><b>{{ q.title }}</b><p>{{ q.text|linebreaksbr }}</p></div></li>{% endfor %}</ol>
-        </section>
-        <section class="fp-sec" id="s-consult" aria-labelledby="s-consult-h">
-          <div class="fp-sh"><h2 id="s-consult-h">Talk through a draft</h2><p>The Assistant Director for Grants and Contracts meets one on one with CNAP members about proposals.</p><p>Book a time by email. The email opens with lines to fill in.</p></div>
-          <div class="fp-card"><p>Bring a specific aims page, a budget question, or an opportunity you are still weighing.</p><a class="fp-btn pri" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a></div>
+          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {% if questions|length == 7 %}seven{% else %}{{ questions|length }}{% endif %} questions before starting an application.</p><p>Select a question to read it.</p></div>
+          <div class="fp-weigh">
+            <div class="fp-qcard">
+              <div class="fp-qcols"><ol class="fp-qs">{% for q in questions|slice:":4" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol><ol class="fp-qs" start="5">{% for q in questions|slice:"4:" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter|add:4 }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol></div>
+              <button type="button" class="fp-qall" data-qall aria-expanded="false">Show all questions</button>
+            </div>
+            <aside class="fp-help-card" id="s-consult" aria-labelledby="s-consult-h">
+              <h3 id="s-consult-h">Talk through a draft</h3>
+              <p>Unsure about one of the questions? The Assistant Director for Grants and Contracts meets one on one with CNAP members about proposals.</p>
+              <p>Bring a specific aims page, a budget question, or an opportunity you are still weighing.</p>
+              <a class="fp-btn pri" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a>
+            </aside>
+          </div>
         </section>
         <section class="fp-sec" id="s-toolkit" aria-labelledby="s-toolkit-h">
           <div class="fp-sh"><h2 id="s-toolkit-h">Proposal writing toolkit</h2><p>Templates, examples, and guides for writing a proposal.</p></div>

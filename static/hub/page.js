@@ -35,3 +35,12 @@
   ['mouseenter','mouseleave','focusin','focusout','transitionend'].forEach(function(e){sp.addEventListener(e,function(){requestAnimationFrame(track);setTimeout(track,280);});});
   spy();track();
 })();
+
+/* Before you apply: Show all questions and Hide all questions (MW 2026-11-14) */
+(function(){
+  var b=document.querySelector('[data-qall]');if(!b)return;
+  var ds=[].slice.call(document.querySelectorAll('.fp-qs details'));
+  function sync(){var all=ds.every(function(d){return d.open;});b.textContent=all?'Hide all questions':'Show all questions';b.setAttribute('aria-expanded',all);}
+  b.addEventListener('click',function(){var open=!ds.every(function(d){return d.open;});ds.forEach(function(d){d.open=open;});sync();});
+  ds.forEach(function(d){d.addEventListener('toggle',sync);});
+})();
