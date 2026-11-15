@@ -2120,3 +2120,8 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 @media (max-width:1099px){.sv-askf{bottom:calc(136px + env(safe-area-inset-bottom,0px))}}
 /* Venue list spans the full height of the route diagram (MW 2026-11-14) */
 @media (min-width:981px){.sv-mapg{align-items:stretch}.sv-vs{grid-template-rows:repeat(4,1fr);height:100%}.sv-v{align-content:center;align-items:center}}
+/* Reporting facts: more breathing room (MW 2026-11-15) */
+.rp-facts{gap:20px 64px;margin-top:36px;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.rp-facts dd{margin-top:8px;font-size:20px;line-height:26px}
+.rp-facts dd span{margin-top:6px}
+@media (max-width:760px){.rp-facts{grid-template-columns:1fr;gap:18px}}
