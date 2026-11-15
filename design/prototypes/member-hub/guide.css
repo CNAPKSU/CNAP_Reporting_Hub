@@ -1233,3 +1233,8 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .stv-note{font-size:14px!important;line-height:22px;color:var(--muted)!important}
 @media (max-width:640px){.stv-t{grid-template-columns:minmax(0,1fr)}.stv-t .btn{justify-self:start}}
 .stv-steps{list-style:decimal}.stv-steps li::marker{font:600 15px var(--sans);color:var(--acc)}
+/* the four types of support: a line across the middle too (MW 2026-11-14) */
+.facts-n{padding:0}
+.facts-n li{padding:18px 22px}
+.facts-n li:nth-child(n+3){border-top:1px solid var(--line)}
+@media (max-width:980px){.facts-n li:nth-child(n+3){border-top:0}}
