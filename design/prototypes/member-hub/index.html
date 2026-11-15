@@ -1385,6 +1385,9 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 /* Calendar: the purple panel now sits on white */
 .cal-band{background:#ffffff;border-block:1px solid var(--line)}
 .cal-panel{box-shadow:0 1px 2px rgba(29,27,33,.06),0 40px 80px -36px rgba(60,29,102,.45)}
+
+.sh-link{color:inherit;text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 2px no-repeat;transition:background-size .25s}
+.sh-link:hover,.sh-link:focus-visible{background-size:100% 2px}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -1573,7 +1576,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
   <div class="fund-band"><div class="wrap">
     <section class="sec" aria-labelledby="fund-h">
       <header class="sh">
-        <h2 id="fund-h">Funding and proposals</h2>
+        <h2 id="fund-h"><a class="sh-link" href="#" title="Opens Funding and proposals: opportunities picked for you, news, events, and letters.">Funding and proposals</a></h2>
         <p>Opportunities the CNAP team picked for your research, and help at each stage of a proposal.</p>
       </header>
       <div class="g sheet">

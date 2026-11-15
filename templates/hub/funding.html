@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Funding and news · {{ platform_name }}</title>
+<title>Funding and proposals · {{ platform_name }}</title>
 <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32.png' %}">
 <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/page.css' %}">
 </head>
 <body class="hub-page pg">
-{# Funding and news in the Member Hub design (MW 2026-11-14). The same view, data, form, letters, and permissions as proto/portal/funding.html; only the presentation changes. #}
+{# Funding and proposals (formerly Funding and news) in the Member Hub design (MW 2026-11-14). The same view, data, form, letters, and permissions as proto/portal/funding.html; only the presentation changes. #}
 {% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
 <a class="skip" href="#main">Skip to main content</a>
 {% include "hub/_header.html" with active="funding" %}
@@ -19,8 +19,8 @@
   <div class="wrap">
     <section class="pg-title" aria-labelledby="pg-h">
       <p class="pg-ctx"><span class="pg-dot" aria-hidden="true"></span>Your funding</p>
-      <h1 id="pg-h">{% if acting_for_other %}Funding and news for {{ owner }}{% else %}Funding and news{% endif %}</h1>
-      <p class="pg-purpose">This page lists funding opportunities picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, opportunities relevant to most members, funding news, and research events and talks.</p>
+      <h1 id="pg-h">{% if acting_for_other %}Funding and proposals for {{ owner }}{% else %}Funding and proposals{% endif %}</h1>
+      <p class="pg-purpose">This page lists funding opportunities picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, opportunities relevant to most members, funding news, research events and talks, and help weighing an opportunity before a proposal.</p>
       <dl class="pg-facts">
         <div><dt>Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</dt><dd>{{ picked|length }} opportunit{{ picked|length|pluralize:"y,ies" }}</dd></div>
         <div><dt>Relevant to most members</dt><dd>{{ everyone|length }} opportunit{{ everyone|length|pluralize:"y,ies" }}</dd></div>
