@@ -763,3 +763,7 @@ The prototype Site Visit page has one RSVP form built from the questions in the 
 After submitting, the page shows the confirmation email the member would receive: a thank-you, the dates and place, the program at a glance, a summary of their answers, and a calendar file (.ics) with both days and a reminder the day before each. In the prototype the calendar file downloads from the page.
 
 Production needs new backend work that has not been built and needs approval: an RSVP model tied to the member and the event year (a migration), a form view with editing until a deadline, an office export for headcounts and catering, and an automatic confirmation email with the .ics attachment sent through K-State mail. Photograph consent and dietary needs are personal data and need the K-State security review before real use.
+
+## 2026-11-15 · The app's reporting pages stay as they are
+
+MW: keep all of the app's reporting pages the same. My tasks (`templates/proto/tasks.html`), the respondent forms, the results pages, and My history keep their current design, last changed in 42eadc5 on November 9. The Member Hub prototype's `reporting.html` ("Your reporting, Amara") is a separate sketch. It does not replace the app's pages, and no redesign of them goes ahead without MW's approval.
