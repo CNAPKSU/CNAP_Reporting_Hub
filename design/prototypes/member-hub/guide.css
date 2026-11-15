@@ -2118,3 +2118,5 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 #sv-dates,.sv-tband,#sv-prog,#sv-map,#sv-stay,#sv-pho,#sv-faq{background:var(--band)}
 @media (max-width:1099px){.sv-askf{right:auto;left:16px;bottom:calc(78px + env(safe-area-inset-bottom,0px))}.sv-askf .pp-p{right:auto;left:0}}
 @media (max-width:1099px){.sv-askf{bottom:calc(136px + env(safe-area-inset-bottom,0px))}}
+/* Venue list spans the full height of the route diagram (MW 2026-11-14) */
+@media (min-width:981px){.sv-mapg{align-items:stretch}.sv-vs{grid-template-rows:repeat(4,1fr);height:100%}.sv-v{align-content:center;align-items:center}}
