@@ -561,3 +561,14 @@ p,li,dd,figcaption,blockquote{text-wrap:pretty}
 .fp-qcols:has(details[open])>.fp-qs{grid-auto-rows:auto}
 .fp-qcard .fp-qall{margin-top:16px;align-self:flex-start}
 }
+
+/* Side column, quieter (MW 2026-11-15: "a bit demurer") */
+.fp-sidecol .fp-weighcard,.fp-sidecol .fp-askcard,.fp-sidecol .fp-consult{padding:18px 20px;gap:6px}
+.fp-sidecol .fp-weighcard{border-top-width:2px}
+.fp-sidecol .fp-askcard{border-top-width:2px}
+.fp-sidecol .fp-for{font-size:13px}
+.fp-sidecol .fp-wt,.fp-sidecol .fp-ct{font-size:16px;line-height:23px}
+.fp-sidecol .fp-btn{min-height:40px;padding:0 14px;font-size:14px;margin-top:4px}
+.fp-sidecol .fp-consult .fp-btn.pri{background:var(--surface);color:var(--purple);border:1px solid var(--line)}
+.fp-sidecol .fp-consult .fp-btn.pri:hover{background:var(--surface);color:var(--purple-ink);border-color:var(--purple)}
+.fp-sidecol .fp-asks a{font-size:14px;line-height:20px;font-weight:400;padding:9px 0}
