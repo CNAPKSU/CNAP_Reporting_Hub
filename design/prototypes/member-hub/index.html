@@ -1376,6 +1376,11 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 
 .core-h{color:inherit;text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1.5px no-repeat;transition:background-size .25s}
 .core-h:hover,.core-h:focus-visible{background-size:100% 1.5px}
+
+/* Funding and proposals sits on a warm cream band */
+.fund-band{margin-top:var(--sec);background:#f6f1e6;border-block:1px solid #ebe3d3;padding-bottom:var(--sec)}
+.fund-band .sec{margin-top:0;padding-top:var(--sec)}
+.fund-band + .cal-band{margin-top:0}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -1561,7 +1566,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
     </section>
   </div>
 
-  <div class="wrap">
+  <div class="fund-band"><div class="wrap">
     <section class="sec" aria-labelledby="fund-h">
       <header class="sh">
         <h2 id="fund-h">Funding and proposals</h2>
@@ -1595,7 +1600,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
             <a href="#"><b>Respond to reviews</b><span>Summary statements and resubmission</span></a>
             <a href="#"><b>Manage the award</b><span>Progress reports and closeout</span></a>
           </nav>
-          <div class="consult"><p>Talk through a draft, one on one, with the Assistant Director for Grants and Contracts.</p><a class="btn" href="#">Book a time</a></div>
+          <div class="consult"><p>Talk through a draft, one on one, with the Assistant Director for Grants and Contracts.</p><a class="btn" href="mailto:mkwills@ksu.edu?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A">Book a time</a></div>
         </aside>
       </div>
       <div class="sheet news-sheet">
@@ -1615,7 +1620,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
       <footer class="sf"><a class="btn" href="#">All funding</a><a class="share" href="#"><span class="plus" aria-hidden="true"></span>Share a grant opportunity or news</a></footer>
     </section>
 
-  </div>
+  </div></div>
 
   <div class="cal-band">
   <div class="wrap">
