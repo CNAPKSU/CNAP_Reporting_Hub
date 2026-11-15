@@ -76,11 +76,11 @@ page=f'''<!doctype html>
         </div>
         <article class="ns-wk" aria-labelledby="wk-t">
           <p class="ns-wkk"><span class="ns-dot" aria-hidden="true"></span>This week at NeuroSync</p>
-          <div class="ns-wkh"><div class="ns-hs av-p" aria-hidden="true"><span>PR</span><small>Headshot to come</small></div><div><p class="ns-wkd">Wednesday, November 18</p><p class="ns-wkn">Dr. Priya Raman</p><p class="ns-wkr">Associate Professor, Psychological Sciences, Kansas State University</p></div></div>
-          <h2 id="wk-t">Memory consolidation during sleep</h2>
+          <div class="ns-wkh"><div class="ns-hs av-p" aria-hidden="true"><span>PR</span><small>Headshot to come</small></div><div><p class="ns-wkd">Wednesday, November 18<br>2:30 to 3:30 p.m., Leadership Room 127</p><p class="ns-wkn">Dr. Priya Raman</p><p class="ns-wkr">Associate Professor, Psychological Sciences, Kansas State University</p></div></div>
+          <div class="ns-wkm"><h2 id="wk-t">Memory consolidation during sleep</h2>
           <p class="ns-abs">How slow waves and sleep spindles decide which memories last, in younger and older adults. Dr. Raman will share new recordings from her lab’s overnight studies, and what they suggest about memory in aging.</p>
           <details class="ns-bio"><summary>About Dr. Raman</summary><p>Dr. Raman studies how sleep shapes memory across the lifespan, using overnight electroencephalography (EEG) and behavioral testing. She leads a CNAP research project and collaborates with the Cognitive Neuroscience Core.</p></details>
-          <div class="ns-wka"><span class="ns-cal">Add to <a href="{gcal('2026-11-18','Memory consolidation during sleep')}" target="_blank" rel="noopener">Google Calendar</a> or <a href="{ocal('2026-11-18','Memory consolidation during sleep')}" target="_blank" rel="noopener">Outlook</a></span></div>
+          <div class="ns-wka"><span class="ns-cal">Add to <a href="{gcal('2026-11-18','Memory consolidation during sleep')}" target="_blank" rel="noopener">Google Calendar</a> or <a href="{ocal('2026-11-18','Memory consolidation during sleep')}" target="_blank" rel="noopener">Outlook</a></span></div></div>
         </article>
       </div>
     </div>

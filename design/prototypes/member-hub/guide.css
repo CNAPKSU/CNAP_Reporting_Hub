@@ -1562,3 +1562,19 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 @media (max-width:980px){.ns-hg,.ns-eg{grid-template-columns:minmax(0,1fr)}.ns-three{grid-template-columns:minmax(0,1fr);gap:24px}.ns-sec{padding:72px 0}.ns-wave{top:200px}}
 @media (max-width:640px){.ns-r{grid-template-columns:48px minmax(0,1fr);gap:4px 14px}.ns-r .cm-av,.ns-ra-open{display:none}.ns-r>.ns-tag,.ns-r>.ns-add,.ns-r>.btn{grid-column:2;justify-self:start}.ns-r .ns-rb{grid-column:2;grid-row:1}.ns-rd{grid-row:1/span 2}.ns-wk{padding:22px 20px}.ns-wkh{grid-template-columns:72px minmax(0,1fr)}.ns-hs{width:72px;height:92px}.ns-facts div{grid-template-columns:minmax(0,1fr);gap:2px}}
 .ns-wave{top:auto;bottom:0;height:90px}.ns-hero{padding-bottom:110px}@media (max-width:980px){.ns-wave{top:auto}}
+/* This week at NeuroSync, full width right under the logistics (MW 2026-11-14) */
+.ns-hg{grid-template-columns:minmax(0,1fr);gap:36px}
+.ns-hg>div:first-child{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:12px 64px;align-items:end}
+.ns-hg>div:first-child>.for,.ns-hg>div:first-child>h1,.ns-hg>div:first-child>.ns-lead{grid-column:1}
+.ns-hg>div:first-child>.ns-facts{grid-column:2;grid-row:1/span 3;align-self:end;margin:0}
+.ns-wk{display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,300px);grid-template-areas:"k k k" "hs main side";gap:16px 36px;padding:32px 36px}
+.ns-wkk{grid-area:k}
+.ns-wkh{display:contents}
+.ns-hs{grid-area:hs;width:200px;height:250px;border-radius:12px}
+.ns-hs span{font-size:64px}
+.ns-wkh>div:last-child{grid-area:side;align-self:start;padding-left:28px;border-left:1px solid var(--line)}
+.ns-wkm{grid-area:main;min-width:0}
+.ns-wk h2{margin-top:0;padding-top:0;border-top:0;font-size:clamp(30px,3vw,40px);line-height:1.12}
+.ns-wka{margin-top:18px}
+@media (max-width:980px){.ns-hg>div:first-child{grid-template-columns:minmax(0,1fr)}.ns-hg>div:first-child>.ns-facts{grid-column:1;grid-row:auto;margin-top:12px}
+  .ns-wk{grid-template-columns:96px minmax(0,1fr);grid-template-areas:"k k" "hs side" "main main";padding:24px}.ns-hs{width:96px;height:120px}.ns-hs span{font-size:36px}.ns-wkh>div:last-child{padding-left:0;border-left:0;align-self:center}}
