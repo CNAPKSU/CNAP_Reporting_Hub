@@ -314,3 +314,13 @@ a.fp-name:hover{color:var(--purple);text-decoration:underline}
 .fp-qcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px;align-items:start}
 .fp-qcard .fp-qs{columns:auto;display:block}
 @media (max-width:640px){.fp-qcols{grid-template-columns:minmax(0,1fr)}}
+/* section rules as on the homepage (MW 2026-11-14): a hairline across the column, and the dark accent slides to its far end */
+.fp-sh{position:relative;border-top:1px solid var(--line);padding-top:28px}
+.fp-sh h2{padding-top:0}
+.fp-sh h2::before{display:none}
+.fp-sh::before{content:"";position:absolute;top:-1px;left:calc(100% - 40px);width:40px;height:2px;background:var(--ink)}
+@media (prefers-reduced-motion:no-preference){
+  .js-draw .fp-sh::before{left:0}
+  .js-draw .fp-sh.drawn::before{animation:fpslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+@keyframes fpslide{from{left:0}to{left:calc(100% - 40px)}}

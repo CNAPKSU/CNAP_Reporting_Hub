@@ -44,3 +44,8 @@
   b.addEventListener('click',function(){var open=!ds.every(function(d){return d.open;});ds.forEach(function(d){d.open=open;});sync();});
   ds.forEach(function(d){d.addEventListener('toggle',sync);});
 })();
+
+/* the section rule's accent slides once each heading comes into view, as on the homepage */
+(function(){try{if(!('IntersectionObserver' in window))return;document.documentElement.classList.add('js-draw');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('drawn');io.unobserve(e.target);}});},{rootMargin:'0px 0px -25% 0px'});
+  document.querySelectorAll('.fp-sh').forEach(function(el){io.observe(el);});}catch(e){}})();
