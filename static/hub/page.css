@@ -546,3 +546,6 @@ nav.fp-tabs span{font-size:13.5px;line-height:19px;color:var(--muted)}
 .fp-nw .fp-pts li{font-size:15px;color:var(--muted)}
 .fp-nw .fp-pts li::before{background:var(--line-2)}
 header .hn .hn-p{min-width:320px}
+@media (min-width:761px){.fp-labels dt{text-align:right}}
+/* No one-word last lines (MW 2026-11-15) */
+p,li,dd,figcaption,blockquote{text-wrap:pretty}
