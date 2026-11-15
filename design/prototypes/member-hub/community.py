@@ -123,7 +123,7 @@ AL=[('DO','t','Dr. David Osei','Pilot project leader, Grant Years 7 and 8','Asso
     ('AW','a','Dr. Aaron Whitfield','Pilot project leader, Grant Year 6','Research Scientist, a neurotechnology company','Moved into industry research in 2024',False)]
 alumni=''.join(f'''<li class="cm-al"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div class="cm-alb"><p class="cm-mn">{n}</p><p class="cm-alw">{w}</p><dl class="cm-ald"><div><dt>At CNAP</dt><dd>{c}</dd></div><div><dt>Funding after CNAP</dt><dd>{f}</dd></div></dl>{'<p class="cm-why">Happy to talk with new project leaders</p>' if ok else ''}</div>{f'<a class="btn sm" href="{intro(n)}">Ask for an introduction</a>' if ok else ''}</li>''' for i,t,n,c,w,f,ok in AL)
 
-SECS=[('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-alum','CNAP alumni'),('cm-ask','Ask the community'),('cm-ach','Recent achievements'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
+SECS=[('cm-ach','Recent achievements'),('cm-ask','Ask the community'),('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-alum','CNAP alumni'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
 spine=''.join(f'<li><a href="#{i}"><span class="n"><b>{n}</b></span><span>{t}</span></a></li>' for n,(i,t) in enumerate(SECS,1))
 SHARE=mt('cnap@ksu.edu','An achievement to share','\n'.join(['Name:','','The achievement (a paper, grant, talk, award, or milestone):','','A link, if there is one:','']),cc=None)
 
@@ -160,6 +160,18 @@ page=f'''<!doctype html>
         <ol>{spine}</ol>
       </nav>
       <div class="steps">
+        <section class="step cs" id="cm-ach" aria-labelledby="cm-ach-h">
+          <h2 id="cm-ach-h">Recent achievements</h2>
+          <div class="cs-b"><ul class="cm-acs">{ach}</ul><p class="meta">Have news of your own? <button type="button" class="t3" data-share>Share an achievement</button> and the CNAP team will post it here and in the Center’s reports.</p></div>
+        </section>
+        <section class="step cs" id="cm-ask" aria-labelledby="cm-ask-h">
+          <h2 id="cm-ask-h">Ask the community</h2>
+          <div class="cs-b"><p>Questions about methods, equipment, recruiting, and funding, answered by the members who have done it. Threads are visible only to CNAP members.</p>
+            <div class="cm-thbar"><div class="pf-filt cm-tf" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-t="m">Matched to you</button><button type="button" aria-pressed="false" data-t="u">Unanswered</button><button type="button" aria-pressed="false" data-t="a">All threads</button></div><button type="button" class="btn sm" data-compose>Start a conversation thread</button></div>
+            <ul class="cm-ths">{thr}</ul>
+            <p class="meta"><a class="t3" href="#">See all 14 threads</a></p>
+          </div>
+        </section>
         <section class="step cs" id="cm-first" aria-labelledby="cm-first-h">
           <h2 id="cm-first-h">Your first month</h2>
           <div class="cs-b"><p>Six conversations that make the rest of your award easier, best held in your first month.</p><ol class="cm-first">{first}</ol></div>
@@ -185,18 +197,6 @@ page=f'''<!doctype html>
         <section class="step cs" id="cm-alum" aria-labelledby="cm-alum-h">
           <h2 id="cm-alum-h">CNAP alumni</h2>
           <div class="cs-b"><p>Former project leaders who went on to independent funding. Many are glad to tell you how they got there, from their first submission to their first R01.</p><ul class="cm-als">{alumni}</ul></div>
-        </section>
-        <section class="step cs" id="cm-ask" aria-labelledby="cm-ask-h">
-          <h2 id="cm-ask-h">Ask the community</h2>
-          <div class="cs-b"><p>Questions about methods, equipment, recruiting, and funding, answered by the members who have done it. Threads are visible only to CNAP members.</p>
-            <div class="cm-thbar"><div class="pf-filt cm-tf" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-t="m">Matched to you</button><button type="button" aria-pressed="false" data-t="u">Unanswered</button><button type="button" aria-pressed="false" data-t="a">All threads</button></div><button type="button" class="btn sm" data-compose>Start a conversation thread</button></div>
-            <ul class="cm-ths">{thr}</ul>
-            <p class="meta"><a class="t3" href="#">See all 14 threads</a></p>
-          </div>
-        </section>
-        <section class="step cs" id="cm-ach" aria-labelledby="cm-ach-h">
-          <h2 id="cm-ach-h">Recent achievements</h2>
-          <div class="cs-b"><ul class="cm-acs">{ach}</ul><p class="meta">Have news of your own? <button type="button" class="t3" data-share>Share an achievement</button> and the CNAP team will post it here and in the Center’s reports.</p></div>
         </section>
         <section class="step cs" id="cm-ways" aria-labelledby="cm-ways-h">
           <h2 id="cm-ways-h">Ways to connect</h2>
