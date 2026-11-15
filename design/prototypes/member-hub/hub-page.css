@@ -551,3 +551,13 @@ header .hn .hn-p{min-width:320px}
 p,li,dd,figcaption,blockquote{text-wrap:pretty}
 /* Side cards stay in view while the page scrolls, when the window is tall enough to show them all (MW 2026-11-15) */
 @media (min-width:981px){.fp-body>.wrap>.fp-sidecol{position:sticky!important;top:min(96px,calc(100vh - var(--sch,0px) - 96px));align-self:start!important}}
+/* Seven questions: the card and Talk through a draft end on one line (MW 2026-11-15). Rows share the height evenly in each column. */
+@media (min-width:981px){
+.fp-weigh{align-items:stretch!important}
+.fp-qcard{display:flex;flex-direction:column}
+.fp-qcols{flex:1;align-items:stretch!important}
+.fp-qcols>.fp-qs{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:1fr;align-content:stretch}
+.fp-qcols>.fp-qs li{display:flex;flex-direction:column;justify-content:center}
+.fp-qcols:has(details[open])>.fp-qs{grid-auto-rows:auto}
+.fp-qcard .fp-qall{margin-top:16px;align-self:flex-start}
+}

@@ -2148,3 +2148,4 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .evs .ev-n{order:1}
 /* No one-word last lines (MW 2026-11-15) */
 p,li,dd,figcaption,blockquote{text-wrap:pretty}
+.sv-dkg{grid-template-columns:repeat(4,minmax(0,1fr))}@media (max-width:1100px){.sv-dkg{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:700px){.sv-dkg{grid-template-columns:minmax(0,1fr)}}

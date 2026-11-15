@@ -2187,3 +2187,5 @@ body.proto .trend .callouts { flex: 1 1 300px; grid-template-columns: minmax(0, 
 /* The three call-outs sit on a soft panel, as white cards, so they read as one group (MW 2026-11-12). */
 body.proto .trend .callouts { background: var(--px-brand-tint); border-radius: var(--px-r-lg); padding: var(--px-5); }
 body.proto .trend .callouts li { background: var(--px-surface); border-color: transparent; }
+/* My tasks (MW 2026-11-15): Show and Hide sit in the middle of each row, between its two lines, words aligned left in their column. The row's spacing is 48 pixels above the title and 12 below, so the label moves up by half the difference. */
+body.proto .px-roll > summary > .px-roll-cue { position: relative; top: -18px; justify-self: start; text-align: left; }
