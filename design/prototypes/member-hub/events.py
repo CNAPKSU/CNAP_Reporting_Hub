@@ -139,7 +139,7 @@ html=f'''<!doctype html>
 
   <section class="ev-ns" aria-labelledby="ns-h">
     <div class="wrap">
-      <div class="ev-nsh"><div><p class="eyebrow">Every Wednesday, 2:30 to 3:30 p.m.</p><h2 id="ns-h">NeuroSync Weekly Speaker Series</h2><p>Talks are in Leadership Room 127. Refreshments are provided, and every member is welcome.</p></div><a class="btn" href="{SPK}">Suggest a speaker</a></div>
+      <div class="ev-nsh"><div><p class="eyebrow">Every Wednesday, 2:30 to 3:30 p.m.</p><h2 id="ns-h"><a class="sh-link" href="neurosync.html">NeuroSync Weekly Speaker Series</a></h2><p>Talks are in Leadership Room 127. Refreshments are provided. CNAP members are expected to attend, and guests are welcome.</p></div><a class="btn" href="neurosync.html">The full schedule and past talks</a></div>
       <ol class="lu">{lu}</ol>
     </div>
   </section>
@@ -149,13 +149,13 @@ html=f'''<!doctype html>
       <div class="ev-svd" aria-hidden="true"><span>May</span><b>25</b><i>and</i><b>26</b><span>2027</span></div>
       <div>
         <p class="eyebrow">The Center’s main event of the year</p>
-        <h2 id="sv-h">The 2027 CNAP Site Visit</h2>
+        <h2 id="sv-h"><a class="sh-link" href="sitevisit.html">The 2027 CNAP Site Visit</a></h2>
         <ol class="agenda ev-agenda">
           <li><span class="ag-d">Tuesday, May 25<small>Daytime</small></span><span>Core tours, then primary project and pilot project presentations and updates.</span></li>
           <li><span class="ag-d">Tuesday, May 25<small>Evening</small></span><span>Keynote address and banquet.</span></li>
           <li><span class="ag-d">Wednesday, May 26<small>Morning, ending by noon</small></span><span>Poster session, open to everyone.</span></li>
         </ol>
-        <div class="ev-fa">{cal_links(sv).replace('class="ev-add"','class="ev-add ev-lg"').replace('>Google</a>','>Google Calendar</a>')}<a class="t3" href="index.html#ph-h">See the 2026 photographs</a></div>
+        <div class="ev-fa">{cal_links(sv).replace('class="ev-add"','class="ev-add ev-lg"').replace('>Google</a>','>Google Calendar</a>')}<a class="btn pri" href="sitevisit.html">The program, travel, and FAQ</a><a class="t3" href="index.html#ph-h">See the 2026 photographs</a></div>
       </div>
     </div>
   </section>
