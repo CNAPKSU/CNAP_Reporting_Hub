@@ -48,7 +48,7 @@
         <article><p class="sv-n num">02</p><h3>Science up close</h3><p>Hear where each project and core stands, walk through the labs, and see the work of two dozen students and trainees on the poster walls.</p></article>
         <article><p class="sv-n num">03</p><h3>The next generation</h3><p>Graduate students present alongside faculty, and the feedback from visiting experts shapes the projects that follow.</p></article>
       </div>
-      <ul class="sv-nums" aria-label="The 2026 Site Visit in numbers"><li><b class="num">56</b><span>Attendees in 2026</span></li><li><b class="num">24</b><span>Posters</span></li><li><b class="num">9</b><span>Speakers, including the keynote</span></li><li><b class="num">3</b><span>Research cores on tour</span></li><li><b class="num">4</b><span>Research and pilot projects</span></li></ul>
+      <ul class="sv-nums" aria-label="The 2026 Site Visit in numbers"><li><a href="#sv-heard"><b class="num">56</b><span>Attendees in 2026</span><em>What they said</em></a></li><li><a href="#sv-prog" data-day="2"><b class="num">24</b><span>Posters</span><em>The poster session</em></a></li><li><a href="#sv-prog"><b class="num">9</b><span>Speakers, including the keynote</span><em>The program</em></a></li><li><a href="index.html#cores-h"><b class="num">3</b><span>Research cores on tour</span><em>The cores</em></a></li><li><a href="research.html"><b class="num">4</b><span>Research and pilot projects</span><em>The projects</em></a></li></ul>
     </div>
   </section>
 
@@ -191,10 +191,14 @@
   <section class="sv-sec sv-heard" id="sv-heard" aria-labelledby="sv-heard-h">
     <div class="wrap">
       <header class="sv-sh"><h2 id="sv-heard-h">Last year’s feedback</h2><p>Twenty-three attendees, about half of those present, answered the survey after the 2026 Site Visit.</p></header>
-      <ul class="sv-hstats" aria-label="Survey results"><li><b class="num">100%</b><span>rated the overall experience excellent or good</span></li><li><b class="num">100%</b><span>rated the timing and pacing excellent</span></li><li><b class="num">21 of 21</b><span>said there was plenty or mostly enough time for discussion</span></li><li><b class="num">9 of 9</b><span>who commented on the new two-day schedule favored it</span></li></ul>
-      <div class="sv-hcols">
-        <div><p class="sv-ck2">In attendees’ words</p><div class="sv-quotes"><blockquote><p>“Other people should come to your Site Visit for the pure sake of seeing how to run a conference!”</p></blockquote><blockquote><p>“It gave breathing room. It also prevented Day 1 from feeling like a marathon.”</p></blockquote><blockquote><p>“It was nice to have time to walk around the museum and chat.”</p></blockquote></div></div>
-        <div><p class="sv-ck2">What changes for 2027</p><ul class="sv-chg"><li>More time for research, with methods and results, and shorter administrative updates</li><li>A longer poster session, with a break after the final talk</li><li>Reminders spaced evenly through the spring, and one simple RSVP</li><li>Free visitor parking in a nearby lot, which the office is looking into</li></ul></div>
+      <ul class="sv-nums sv-hstats2" aria-label="Survey results"><li><b class="num">100%</b><span>rated the overall experience excellent or good</span></li><li><b class="num">100%</b><span>rated the timing and pacing excellent</span></li><li><b class="num">21 of 21</b><span>said there was plenty or mostly enough time for discussion</span></li><li><b class="num">9 of 9</b><span>who commented on the new two-day schedule favored it</span></li></ul>
+      <div class="sv-qwrap">
+        <blockquote class="sv-q1"><p>“Other people should come to your Site Visit for the pure sake of seeing how to run a conference!”</p><footer>A 2026 attendee</footer></blockquote>
+        <div class="sv-q2"><blockquote><p>“It gave breathing room. It also prevented Day 1 from feeling like a marathon.”</p><footer>On the new two-day schedule</footer></blockquote><blockquote><p>“It was nice to have time to walk around the museum and chat.”</p><footer>On the banquet</footer></blockquote></div>
+      </div>
+      <div class="sv-hc-wrap">
+        <div class="sv-hc-head" aria-hidden="true"><p>What we heard</p><p>What changes for 2027</p></div>
+        <ul class="sv-hclist" aria-label="What we heard, and what changes for 2027"><li><p class="sv-hh">Outside the survey, two attendees asked for more science and shorter administrative updates.</p><p class="sv-hc">More time for research, including methods and results, and shorter administrative updates</p></li><li><p class="sv-hh">Several said the poster session felt short for the number of posters.</p><p class="sv-hc">A longer poster session, with a break after the final talk</p></li><li><p class="sv-hh">Reminder emails came unevenly, and the calendar RSVP repeated the registration.</p><p class="sv-hc">Reminders spaced evenly through the spring, and one RSVP on this page</p></li><li><p class="sv-hh">Two attendees had trouble paying at the campus parking garage.</p><p class="sv-hc">Free visitor parking in a nearby lot, which the office is looking into</p></li></ul>
       </div>
     </div>
   </section>
@@ -251,6 +255,7 @@
     var st=document.getElementById('sv-st');st.classList.add('is-done');document.getElementById('sv-st-t').textContent=v==='no'?'You told us you can’t attend. You can change that anytime.':'Your RSVP is in. You can change it anytime before the deadline.';
     f.hidden=true;done.hidden=false;done.focus();done.scrollIntoView({block:'start'});});
   document.getElementById('sv-edit').addEventListener('click',function(){done.hidden=true;f.hidden=false;f.querySelector('input').focus();});
+  document.querySelectorAll('[data-day]').forEach(function(a){a.addEventListener('click',function(){var t=document.getElementById('sv-t'+a.getAttribute('data-day'));if(t)t.click();});});
   var sp=document.querySelector('.sv-rail'),links=[].slice.call(sp.querySelectorAll('ol a')),secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));}),tr=sp.querySelector('.spine-track'),fl=sp.querySelector('.spine-fill'),ol=sp.querySelector('ol');
   function spy(){var y=innerHeight*.35,k=-1;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<y)k=i;});links.forEach(function(a,i){if(i===k)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');a.classList.toggle('done',i<k);});sp.classList.toggle('on',k>-1);}
   function track(){if(!tr||getComputedStyle(tr).display==='none')return;var o=ol.getBoundingClientRect().top;function dot(a){return a.getBoundingClientRect().top-o+parseFloat(getComputedStyle(a,'::before').top)+5;}var t=dot(links[0]),b=dot(links[links.length-1]);tr.style.top=(ol.offsetTop+t)+'px';tr.style.height=(b-t)+'px';var c=sp.querySelector('a[aria-current]');fl.style.height=c?(dot(c)-t)+'px':'0px';}
