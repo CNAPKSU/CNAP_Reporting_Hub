@@ -96,7 +96,23 @@ INV=f'''<article class="ns-fly" aria-labelledby="fly-h">
         <p class="ns-fq">Questions? <a href="mailto:mkwills@ksu.edu">mkwills@ksu.edu</a> · <a href="{gcal('2026-12-02','Machine learning for spike sorting')}" target="_blank" rel="noopener">Add to Google Calendar</a> · <a href="{ocal('2026-12-02','Machine learning for spike sorting')}" target="_blank" rel="noopener">Outlook</a></p>
       </article>'''
 
-wave='M0 60 '+' '.join(f'Q {x+15} {60-(38 if k%3==1 else 18 if k%3==0 else 28)*(1 if k%2==0 else -1)} {x+30} 60' for k,x in enumerate(range(0,1200,30)))
+import math as _m, random as _r
+_r.seed(11)
+def _trace():
+    pts=[];x=0.0;base=60
+    spikes={140,175,420,640,668,690,930,1110}
+    burst=(760,860)
+    while x<=1200:
+        xi=int(x)
+        if any(abs(xi-s)<1 for s in spikes):
+            pts+= [(x,base),(x+2,base-46),(x+4,base+14),(x+9,base+6),(x+14,base)];x+=14;continue
+        y=base+_r.uniform(-1.6,1.6)+1.8*_m.sin(x/9.0)
+        if burst[0]<x<burst[1]:
+            env=_m.sin(_m.pi*(x-burst[0])/(burst[1]-burst[0]))
+            y+=env*11*_m.sin(x*0.9)
+        pts.append((x,y));x+=2
+    return 'M'+' L'.join(f'{a:.1f} {b:.1f}' for a,b in pts)
+wave=_trace()
 
 page=f'''<!doctype html>
 <html lang="en">
