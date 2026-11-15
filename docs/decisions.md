@@ -769,3 +769,9 @@ Production needs new backend work that has not been built and needs approval: an
 MW: keep all of the app's reporting pages the same. My tasks (`templates/proto/tasks.html`), the respondent forms, the results pages, and My history keep their current design, last changed in 42eadc5 on November 9. The Member Hub prototype's `reporting.html` ("Your reporting, Amara") is a separate sketch. It does not replace the app's pages, and no redesign of them goes ahead without MW's approval.
 
 The prototype now uses copies of the app's reporting pages: My tasks (`reporting.html`), My history (`reporting-history.html`), and each form with its preview (`reporting-<id>.html`). They are made by `design/prototypes/member-hub/gen/rep.py` from the app as the fictional demo member Amara Okafor, with the app's own CSS and scripts. Saving, submitting, opting out, and autosave do nothing in the prototype, and each page says so when tried. The earlier sketch is kept as `reporting-sketch.html` and is no longer linked.
+
+## 2026-11-15 · Photos on funding news and events (prototype only, backend dependency)
+
+MW approved trying photos on the Funding news pinned cards and on events. The prototype shows labeled photo placeholders: a wide image at the top of each pinned card, and a small image beside each event (below it on phones). They are added by `design/prototypes/member-hub/gen/ph_inject.py` and styled by `fp-photos.css`. The app is unchanged.
+
+To show real photos, the app needs an optional image on `FundingNews` and `FundingEvent` (a migration), an upload field in the admin with alt text, and storage approved in the K-State security review. Photos must be ones CNAP may use, with no sponsor logos. Not built. Needs MW's approval before any migration.

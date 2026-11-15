@@ -1,0 +1,10 @@
+/* Photo placeholders on Funding news pinned cards and events (MW 2026-11-15). Prototype only: the app has no photo field yet. */
+.fp-pin{padding-top:0!important;overflow:hidden}
+.fp-pin-ph{position:relative;margin:0 -28px 6px;aspect-ratio:21/9;width:calc(100% + 56px);max-width:none;background:#eee}
+@media (max-width:760px){.fp-pin-ph{margin:0 -20px 6px;width:calc(100% + 40px)}}
+.fp-pin-ph img,.fp-ev-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fp-ev{grid-template-columns:72px minmax(0,1fr) 168px!important}
+.fp-ev-ph{position:relative;margin:0;width:168px;height:112px;border-radius:10px;overflow:hidden;background:#eee;align-self:start}
+.pp-tag{position:absolute;left:10px;top:10px;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.92);color:#6b6772;font:500 12px/16px "Inter Hub",system-ui,sans-serif}
+@media (max-width:760px){.fp-ev{grid-template-columns:56px minmax(0,1fr)!important}.fp-ev-ph{grid-column:2;width:100%;height:auto;aspect-ratio:16/9}}
+.fp-ev-ph{order:3}.fp-ev .fp-ev-t{order:2}.fp-ev .fp-ed{order:1}
