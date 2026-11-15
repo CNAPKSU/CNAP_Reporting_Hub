@@ -963,3 +963,6 @@ body.co-bn{--acc:var(--amber);--acc-ink:#5e3300;--acc-tint:#f5ece1}
 .st-body{gap:56px}
 .st-text{max-width:940px}
 @media (max-width:1100px){.st-text{max-width:none}}
+/* Story header (MW 2026-11-14): the title spans the picture's width, and the byline rule runs the full width too; the summary keeps a reading width */
+.st-h h1{max-width:none;font-size:clamp(38px,4.3vw,60px);line-height:1.08}
+.st-by{max-width:none}
