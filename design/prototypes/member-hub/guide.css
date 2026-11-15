@@ -2074,3 +2074,16 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 @media (min-width:1100px){.sv-askf{width:36px;padding:8px 2px;right:max(2px,calc((100vw - 1400px) / 4))}.sv-askf .pp-i{width:28px;height:28px;font-size:11.5px}.sv-askf h2{font-size:9.5px;line-height:12px}}
 @media (min-width:1100px){.sv-askf{right:max(2px,calc((100vw - 1360px) / 2 - 52px))}}
 @media (min-width:1100px){.sv-askf{right:max(2px,calc((max(40px,(100vw - 1400px) / 2) - 36px) / 2))}}
+/* Checklist left column: one sentence per line, key dates, and it stays in view (MW 2026-11-14) */
+.sv-you .sv-sh p+p{margin-top:4px}
+.sv-you .sv-yr{margin-top:6px!important}
+.sv-you .sv-ckp+.sv-yr{margin-top:20px!important}
+.sv-kd2{margin-top:32px;max-width:420px}
+.sv-kd2 .sv-ck2{margin:0 0 10px!important;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.sv-kdl{list-style:none;margin:0;padding:0;display:grid}
+.sv-kdl li{position:relative;display:grid;gap:2px;padding:10px 0 10px 22px;border-bottom:1px solid var(--line)}
+.sv-kdl li::before{content:"";position:absolute;left:2px;top:17px;width:8px;height:8px;border-radius:50%;background:var(--brass)}
+.sv-kdl b{font-weight:600;font-size:14.5px;color:var(--ink)}
+.sv-kdl span{font-size:14.5px;line-height:21px;color:var(--ink-2)}
+@media (min-width:981px){.sv-you .sv-sh{position:sticky;top:104px}}
+.sv-you .sv-yr a{margin-left:0}
