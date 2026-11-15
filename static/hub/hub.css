@@ -1409,7 +1409,7 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 .onb-band .sec{margin-top:0;padding-top:var(--sec)}
 .onb-band + .reel-band{margin-top:0;border-top:0}
 
-/* Funding and proposals sits on a warm cream band */
-.fund-band{margin-top:var(--sec);background:#f6f1e6;border-block:1px solid #ebe3d3;padding-bottom:var(--sec)}
+/* Funding and proposals sits on a pale blue-gray band */
+.fund-band{margin-top:var(--sec);background:#eef2f7;border-block:1px solid #dde5ee;padding-bottom:var(--sec)}
 .fund-band .sec{margin-top:0;padding-top:var(--sec)}
 .fund-band + .cal-band{margin-top:0}
