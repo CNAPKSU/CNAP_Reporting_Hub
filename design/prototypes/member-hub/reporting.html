@@ -1,89 +1,579 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Reporting · CNAP Member Hub</title>
-<link rel="stylesheet" href="guide.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My tasks · CNAP Member Hub</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app/css/app.css">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app/css/proto.css">
 </head>
-<body data-guide="reporting" class="rp-page">
-<a class="skip" href="#main">Skip to main content</a>
-<header class="hdr">
-  <div class="wrap">
-    <a class="brand" href="index.html"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="#512888"/><path d="M8.5 23.5c3.4-7.6 6.6-9.8 9.4-9.8 2.7 0 4.3 4.1 9.6 4.1" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="8.5" cy="23.5" r="2.4" fill="#fff"/><circle cx="27.5" cy="17.8" r="2.4" fill="#fff"/></svg><span><b>CNAP Member Hub</b><small>Kansas State University</small></span></a>
-    <nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="reporting.html" aria-current="page">Reporting</a><a href="research.html">Research</a><a href="events.html">Events</a><a href="funding.html">Funding</a><a href="community.html">Community</a><a href="index.html#cores-h">Resources</a></nav>
-    <div class="tools"><a class="mywork" href="reporting.html">My work <span class="count">4</span></a><span class="avatar" aria-label="Dr. Amara Okafor">AO</span></div>
-  </div>
-</header>
+<body class="proto">
 
-<main id="main">
-  <section class="rp-open" aria-labelledby="t">
-    <div class="wrap">
-      <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Reporting</span></nav>
-      <div class="rp-hero">
-        <div class="rp-hd">
-          <p class="for">Year 10 Fall reporting</p>
-          <h1 id="t">Your reporting, Amara</h1>
-          <p class="lead">What you report here goes into the Center’s annual Research Performance Progress Report (RPPR) to the National Institutes of Health (NIH). Other respondents never see your answers.</p>
-          <dl class="rp-facts">
-            <div><dt>Due</dt><dd>Monday, November 30<span>17 days left</span></dd></div>
-            <div><dt>Your answers cover</dt><dd>June 1 to November 30, 2026</dd></div>
-            <div><dt>Still to do</dt><dd>4 surveys and reports<span>About 1 hour in all</span></dd></div>
-          </dl>
-        </div>
-        <div class="rp-prog">
-          <div class="rp-ringwrap" role="img" aria-label="2 of 6 done: 1 submitted, 1 opted out, 4 still to do."><svg viewBox="0 0 120 120" class="rp-ring" aria-hidden="true"><circle cx="60" cy="60" r="52" class="r-bg"/><circle cx="60" cy="60" r="52" class="r-ok" pathLength="6" style="stroke-dasharray:1 6"/><circle cx="60" cy="60" r="52" class="r-opt" pathLength="6" style="stroke-dasharray:1 6;stroke-dashoffset:-1"/></svg><p><b class="num">2</b><span>of 6 done</span></p></div>
-          <ul class="rp-key"><li><i class="k-ok"></i>1 submitted</li><li><i class="k-opt"></i>1 opted out</li><li><i class="k-todo"></i>4 to do</li></ul>
-        </div>
-      </div>
-      <a class="rp-next" href="#form-preview">
-        <span class="rp-next-k">Pick up where you left off</span>
-        <span class="rp-next-n">Pilot Project Semiannual Progress Report</span>
-        <span class="rp-next-t">In progress. A 1–2 page upload, plus about 5 minutes.</span>
-        <span class="btn pri">Continue<svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></span>
-      </a>
+
+<div class="app">
+  <aside class="side"><button type="button" class="px-menu" aria-expanded="false" aria-controls="px-sidenav" onclick="var o=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',String(!o));this.closest('.side').classList.toggle('px-open',!o)">Menu</button>
+    <a class="brand" href="index.html" title="CNAP Member Hub home"><picture><source srcset="app/img/cnap-logo-on-purple.png" media="(prefers-color-scheme: dark)"><img class="brand-logo" src="app/img/cnap-logo.png" alt="CNAP Center: Cognitive and Neurobiological Approaches to Plasticity"></picture><span class="brand-hub">Member Hub</span><small>Kansas State University</small></a>
+    <a class="who" href="mentee-profile.html" title="Your profile">Amara Okafor<span>Pilot Project Leader · BN Core User · NI Core User</span></a>
+    <nav aria-label="Main" id="px-sidenav">
+      
+        <div class="navhead">My work</div>
+        <a href="reporting.html" aria-current="page" title="Your to-do list for the current reporting session: every form CNAP is asking you to fill in, with how long each takes and its due date. Your answers feed the Center’s NIH progress report. Click to start or continue a form.">My tasks</a>
+        <a href="reporting-history.html"  title="Everything you have submitted, grouped by reporting session, so you can look back at what you said. Click to open any past form.">My history</a>
+        <a href="#" data-proto  title="Your papers, talks, and grant proposals, from planned to published or awarded. CNAP reports them to NIH every year, so keeping them current saves you a scramble at report time. Click to add or update one.">Publications, talks, and grants</a>
+        <a href="funding.html"  title="Funding opportunities picked for you by the CNAP team, opportunities relevant to most members, funding news, and letters from the Center. Click to see them or suggest an opportunity.">Funding and news</a>
+        <a href="#" data-proto  title="What the Center learned from everyone’s answers: combined survey results and products, with no one’s individual answers shown. Click to see the latest results.">Center results</a>
+        
+        <a href="mentee-profile.html"  title="Your details for NIH reporting: department, eRA Commons ID, ORCID iD, and effort, plus your roles and documents on file. Click to check or update them.">Profile</a>
+      
+      
+    </nav>
+    <div class="foot">
+      <a href="#" data-proto>Change password</a>
+      <form method="post" action="#" data-proto-form><button type="submit">Log out</button></form>
     </div>
+  </aside>
+  <main id="main">
+    
+    
+    
+
+<div class="t3">
+
+
+  
+
+  
+  <header class="px-mast t3-mast">
+    <p class="px-eyebrow">Year 10 Fall</p>
+    <h1 class="px-title">Good morning, Amara.</h1>
+    <ul class="px-facts" aria-label="This reporting session">
+      <li><span class="px-label">Your answers cover <span class="whyq whyi" tabindex="0" role="note" aria-label="Describe everything since the last reporting session closed on May 31, 2026, through November 30, 2026.
+For example, a talk given on June 1 counts here, and a talk given on May 31 belongs to the last reporting session.
+If you left something out of an earlier reporting session, you can report it now.
+The surveys and reports open on October 15 and are due on November 30.">i<span class="whyb">Describe everything since the last reporting session closed on May 31, 2026, through November 30, 2026.
+For example, a talk given on June 1 counts here, and a talk given on May 31 belongs to the last reporting session.
+If you left something out of an earlier reporting session, you can report it now.
+The surveys and reports open on October 15 and are due on November 30.</span></span></span><span class="v">June 1 to November 30, 2026</span></li>
+      <li><span class="px-label">Due <span class="whyq whyi" tabindex="0" role="note" aria-label="Submit each survey and report by 5:00 PM Central Time on Monday, November 30.
+Until then, a reminder email comes every 4 days, listing only what is left.
+After the due date, the surveys and reports stay open until the evaluator closes the reporting session.">i<span class="whyb">Submit each survey and report by 5:00 PM Central Time on Monday, November 30.
+Until then, a reminder email comes every 4 days, listing only what is left.
+After the due date, the surveys and reports stay open until the evaluator closes the reporting session.</span></span></span><span class="v">Monday, November 30.<br>15 days left.</span></li>
+      <li><span class="px-label">To do <span class="whyq whyi" tabindex="0" role="note" aria-label="Each time is an estimate.
+Your answers save as you go, so you can finish across several sittings.
+A survey you don’t use has a one-click opt-out.">i<span class="whyb">Each time is an estimate.
+Your answers save as you go, so you can finish across several sittings.
+A survey you don’t use has a one-click opt-out.</span></span></span><span class="v">7 surveys, 2 reports, and 1 check-in.<br>About 1 hour 30 minutes in all.</span></li>
+    </ul>
+  </header>
+
+  
+
+  
+  
+  <section class="t3-top" aria-label="Reporting progress and your next survey or report">
+    <div class="t3-progress">
+      <h2 class="px-h2">Reporting progress</h2>
+      <p class="px-note t3-progress-sub">9 surveys, 2 reports, and 1 check-in for you to complete this reporting session.</p>
+      <div class="px-meter t3-meter" role="img" aria-label="2 submitted, 0 opted out, 10 still to do, out of 12.">
+        <span class="m-ok" style="width: 17%"></span><span class="m-opt" style="width: 0%"></span>
+      </div>
+      <dl class="t3-counts">
+        <div><dt><span class="px-key"><i class="k-ok"></i>Submitted</span></dt><dd class="px-num">2</dd></div>
+        <div><dt><span class="px-key"><i class="k-opt"></i>Opted out</span></dt><dd class="px-num">0</dd></div>
+        <div><dt><span class="px-key"><i class="k-todo"></i>Still to do</span></dt><dd class="px-num">10</dd></div>
+      </dl>
+    </div>
+    
+    <a class="t3-next" href="reporting-65.html">
+      <span class="px-label">Next up</span>
+      <span class="t3-next-name">Neuroinformatics (NI) Core Facility User Survey</span>
+      <span class="t3-next-time">About 15 minutes</span>
+      <span class="px-btn t3-next-btn">Continue<svg class="t3-arrow" viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></span>
+    </a>
+    
   </section>
+  
 
-  <div class="rp-body">
-    <div class="wrap">
-      <div class="rp-main">
-        <section class="rp-sec" aria-labelledby="todo-h">
-          <div class="rp-sh"><h2 id="todo-h">To do</h2><p>4 surveys and reports and 1 product review, grouped by what they are about.</p></div>
-          <div class="rp-g"><div class="rp-gh"><h3>Your CNAP grant</h3><p>These surveys and reports ask about your project and your mentoring relationship.</p></div><ul class="rp-list"><li class="rp-row"><div class="rp-m"><p class="rp-n">Pilot Project Semiannual Progress Report</p><p class="rp-c">Sleep-dependent memory consolidation in older adults</p></div><div class="rp-s"><span class="st st-on">In progress</span><span class="rp-t">1–2 page upload, plus 5 minutes</span></div><div class="rp-a"><a class="btn pri sm" href="#form-preview">Continue</a><a class="t3" href="#">Preview</a></div></li><li class="rp-row"><div class="rp-m"><p class="rp-n">Mentee Survey</p><p class="rp-c">Your mentoring with Dr. Elena Voss</p><p class="rp-x">Your answers are confidential. Your mentor never sees them.</p></div><div class="rp-s"><span class="st ">Not started</span><span class="rp-t">About 10 minutes</span></div><div class="rp-a"><a class="btn sm" href="#form-preview">Start</a><a class="t3" href="#">Preview</a></div></li></ul></div><div class="rp-g"><div class="rp-gh"><h3>NIH documents</h3><p>Collected once a year for the Center’s Research Performance Progress Report (RPPR) to NIH.</p></div><ul class="rp-list"><li class="rp-row"><div class="rp-m"><p class="rp-n">NIH Documents: Biosketch, Current and Pending (Other) Support, and Malign Foreign Talent Recruitment Program (MFTRP) Certification</p><p class="rp-c">Due Thursday, November 19</p><p class="rp-x rp-due">6 days left, earlier than the rest of your reporting</p></div><div class="rp-s"><span class="st ">Not started</span><span class="rp-t">1–3 PDF uploads</span></div><div class="rp-a"><a class="btn sm" href="#form-preview">Start</a><a class="t3" href="#">Preview</a></div></li></ul></div><div class="rp-g"><div class="rp-gh"><h3>Other Center features and services</h3><p>These surveys cover Center programs and events.</p></div><ul class="rp-list"><li class="rp-row"><div class="rp-m"><p class="rp-n">Team Synergy Survey</p><p class="rp-c">How well CNAP members work together across disciplines</p></div><div class="rp-s"><span class="st ">Not started</span><span class="rp-t">About 10 minutes</span></div><div class="rp-a"><a class="btn sm" href="#form-preview">Start</a><a class="t3" href="#">Preview</a></div></li></ul></div>
-          <div class="rp-g"><div class="rp-gh"><h3 id="prod-h">Publications, talks, and grants</h3><p>Keep your products up to date. These are the same records your mentor sees on your profile.</p></div>
-          <ul class="rp-list"><li class="rp-row"><div class="rp-m"><p class="rp-n">Review your publications, talks, and grants</p><p class="rp-c">3 products to review and 1 question to answer</p><p class="rp-x">Your journal article under review and your NIH R21 have new status questions.</p></div><div class="rp-s"><span class="st ">Not started</span><span class="rp-t">About 10 minutes</span></div><div class="rp-a"><a class="btn sm" href="#form-preview">Start</a><a class="t3" href="mentee-profile.html">See all products</a></div></li></ul></div>
-        </section>
+  
 
-        <section class="rp-sec" aria-labelledby="done-h">
-          <div class="rp-sh"><h2 id="done-h">Finished</h2><p>2 this session.</p></div>
-          <ul class="rp-list rp-done"><li class="rp-row"><div class="rp-m"><p class="rp-n">Behavioral Neuroscience (BN) Core Facility User Survey</p><p class="rp-c">Submitted Monday, November 9</p></div><div class="rp-s"><span class="st st-ok">Submitted</span><span class="rp-t">About 10 minutes</span></div><div class="rp-a"><a class="t3" href="#">View your answers</a></div></li><li class="rp-row"><div class="rp-m"><p class="rp-n">Cognitive Neuroscience (CN) Core User Survey</p><p class="rp-c">You told us you didn’t use this core this session</p></div><div class="rp-s"><span class="st st-opt">Opted out</span><span class="rp-t">Opted out November 9</span></div><div class="rp-a"><a class="t3" href="#">Change your answer</a></div></li></ul>
-        </section>
 
-        <section class="rp-sec" aria-labelledby="yr-h">
-          <div class="rp-sh"><h2 id="yr-h">Your year</h2><p>Every reporting session in Grant Year 10. A session that hasn’t opened shows what your current roles call for, so it can change if your roles change.</p></div>
-          <ol class="rp-yl"><li class="is-now"><span class="yl-dot" aria-hidden="true"></span><div><h3>Year 10 Fall <span class="st st-on">Open now</span></h3><p>Opened November 2. Due Monday, November 30.</p><p class="meta">Six surveys and reports, about 1 hour 20 minutes in all.</p></div></li><li class=""><span class="yl-dot" aria-hidden="true"></span><div><h3>Year 10 Spring <span class="st ">Not open yet</span></h3><p>Opens mid-April 2027. Due early May.</p><p class="meta">Expected for your roles: the Pilot Project Semiannual Progress Report, the Mentee Survey, and the core user surveys, about 1 hour.</p></div></li></ol>
-          <p class="rp-more"><a class="t3" href="#history">See everything you’ve submitted in past years</a></p>
-        </section>
+
+  
+  
+  <div class="px-rolls t3-rolls" data-rollgroup>
+    <div class="px-rollbar foldall taskfold"><button type="button" data-roll="open" title="Opens every section below at once.">Show all</button><button type="button" data-roll="close" title="Rolls every section below up to its heading.">Collapse all</button></div>
+
+    
+    <details class="px-roll" id="t3-todo">
+      <summary title="Your surveys and reports still to finish, grouped by what they are about. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h" id="t3-todo-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2"/><circle cx="5" cy="18" r="1.2"/></svg>To do</h2><span class="px-roll-meta"><b>10</b> to finish. About 1 hour 30 minutes in all.</span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
+      <div class="px-roll-body">
+        <p class="px-note t3-rollnote">Grouped by what they are about. Other respondents never see your answers.</p>
+        
+        
+        <div class="t3-group">
+          <div class="t3-ghead"><div><h3 class="px-h3 t3-gh"><svg class="gicon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3.5l3.2 1.6-3.6 7.2-3.2-1.6z"/><path d="M10.6 4.3l1-2"/><path d="M8.2 12.4l-.8 1.6"/><path d="M5 20h13"/><path d="M14.5 20a6.5 6.5 0 0 0 1.4-10.3"/><path d="M6 16.5h6.5"/></svg>Core facilities</h3><p class="px-note">Tell us about the cores you used.<br>Opt out of any you didn’t use in the last reporting session.</p></div><span class="px-label">2 surveys</span></div>
+          <ul class="t3-list px-surface">
+            
+<li class="t3-row used">
+  <div class="t3-main">
+    <p class="t3-name">Neuroinformatics (NI) Core Facility User Survey</p>
+    <p class="t3-meta"><span class="t3-pin">The core you used</span></p>
+    <p class="t3-sub">Started. Your answers are saved.</p>
+    
+    
+    <details class="px-more t3-about"><summary>About this survey</summary><div class="t3-aboutbody"><p>The Neuroinformatics Core provides shared computing and data storage on Beocat, classes and online help, and technical support from core staff.</p><p>This survey asks how well those resources supported your research, and how often you used them.</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="in_progress">In progress</span>
+    
+    <span class="t3-time">About 15 minutes</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small" href="reporting-65.html" title="Pick up where you left off. Your answers are saved." aria-label="Continue Neuroinformatics (NI) Core Facility User Survey">Continue</a></span>
+      <span class="t3-slot"><a class="px-link" href="reporting-65-preview.html" title="Read every question without answering." aria-label="Preview Neuroinformatics (NI) Core Facility User Survey">Preview</a></span>
+      <span class="t3-slot"><form method="post" action="#" data-proto-form><button class="px-link quietlink" type="submit" title="Didn’t use this core" aria-label="Opt out of Neuroinformatics (NI) Core Facility User Survey">Opt out</button></form></span>
+    
+  </div>
+</li>
+
+            <li class="t3-divider">Did you also use this core?</li>
+            
+<li class="t3-row">
+  <div class="t3-main">
+    <p class="t3-name">Cognitive Neuroscience (CN) Core User Survey</p>
+    <p class="t3-meta"></p>
+    
+    
+    
+    <details class="px-more t3-about"><summary>About this survey</summary><div class="t3-aboutbody"><p>The Cognitive Neuroscience Core provides electroencephalography (EEG) labs (Magstim/EGI and BioSemi), analysis computers and software, participant recruitment support, and a graduate research assistant.</p><p>This survey asks how well the core’s spaces, equipment, and support worked for you, and how often you used them.</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="not_started">Not started</span>
+    <span class="t3-time">About 15 minutes</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small" href="reporting-19.html" title="Open this survey and begin answering." aria-label="Start Cognitive Neuroscience (CN) Core User Survey">Start</a></span>
+      <span class="t3-slot"><a class="px-link" href="reporting-19-preview.html" title="Read every question without answering." aria-label="Preview Cognitive Neuroscience (CN) Core User Survey">Preview</a></span>
+      <span class="t3-slot"><form method="post" action="#" data-proto-form><button class="px-link quietlink" type="submit" title="Didn’t use this core" aria-label="Opt out of Cognitive Neuroscience (CN) Core User Survey">Opt out</button></form></span>
+    
+  </div>
+</li>
+
+          </ul>
+        </div>
+        
+        <div class="t3-group">
+          <div class="t3-ghead"><div><h3 class="px-h3 t3-gh"><svg class="gicon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21v-9"/><path d="M12 12c0-4 3-6 7-6 0 4-3 6-7 6z"/><path d="M12 15c0-3-2.5-5-6-5 0 3 2.5 5 6 5z"/></svg>Your CNAP grant</h3><p class="px-note">These surveys and reports ask about your project and your mentoring relationship.</p></div><span class="px-label">1 survey and 1 report</span></div>
+          <ul class="t3-list px-surface">
+            
+            
+            
+<li class="t3-row">
+  <div class="t3-main">
+    <p class="t3-name">Pilot Project Semiannual Progress Report</p>
+    <p class="t3-meta"></p>
+    
+    
+    
+    <details class="px-more t3-about"><summary>About this report</summary><div class="t3-aboutbody"><p>Your semiannual progress report summarizes your pilot project’s accomplishments, plans, and changes, including plans for grant submissions.</p><p>It feeds directly into the Center’s Research Performance Progress Report (RPPR) to NIH.</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="not_started">Not started</span>
+    <span class="t3-time">1–2-page upload, plus about 5 minutes of questions</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small" href="reporting-91.html" title="Open this report and begin answering." aria-label="Start Pilot Project Semiannual Progress Report">Start</a></span>
+      <span class="t3-slot"><a class="px-link" href="reporting-91-preview.html" title="Read every question without answering." aria-label="Preview Pilot Project Semiannual Progress Report">Preview</a></span>
+      <span class="t3-slot"></span>
+    
+  </div>
+</li>
+
+<li class="t3-row">
+  <div class="t3-main">
+    <p class="t3-name">Mentee Survey</p>
+    <p class="t3-meta"><span>Sleep-dependent memory consolidation in adolescent mice</span></p>
+    
+    
+    
+    <details class="px-more t3-about"><summary>About this survey</summary><div class="t3-aboutbody"><p>This survey asks about your mentoring relationship on your CNAP project: how available, helpful, and supportive your mentor or mentors have been.</p><p>It is used to strengthen the Center’s mentoring program.</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="not_started">Not started</span>
+    <span class="t3-time">About 10 minutes</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small" href="reporting-38.html" title="Open this survey and begin answering." aria-label="Start Mentee Survey">Start</a></span>
+      <span class="t3-slot"><a class="px-link" href="reporting-38-preview.html" title="Read every question without answering." aria-label="Preview Mentee Survey">Preview</a></span>
+      <span class="t3-slot"></span>
+    
+  </div>
+</li>
+
+          </ul>
+        </div>
+        
+        <div class="t3-group">
+          <div class="t3-ghead"><div><h3 class="px-h3 t3-gh"><svg class="gicon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h8l4 4v13h-12z"/><path d="M14.5 3.5v4h4"/><path d="M9 12h6M9 15h6M9 18h4"/></svg>NIH documents</h3><p class="px-note">These documents are collected once a year for the Center’s Research Performance Progress Report (RPPR) to NIH.</p></div><span class="px-label">1 report</span></div>
+          <ul class="t3-list px-surface">
+            
+            
+            
+<li class="t3-row">
+  <div class="t3-main">
+    <p class="t3-name">NIH Documents: Biosketch, Current and Pending (Other) Support, and Malign Foreign Talent Recruitment Program (MFTRP) Certification</p>
+    <p class="t3-meta"></p>
+    
+    
+    
+    <details class="px-more t3-about"><summary>About this report</summary><div class="t3-aboutbody"><p>Each year the Center reviews the Current and Pending (Other) Support of its Core Directors, Research Project Leaders, Pilot Project Leaders, and Program Director/Principal Investigator (PD/PI).</p><p>People named on the Notice of Award also give a biosketch and a Malign Foreign Talent Recruitment Program (MFTRP) certification for the Research Performance Progress Report (RPPR).</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="not_started">Not started</span>
+    <span class="t3-time">1–3 PDF uploads</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small" href="reporting-589.html" title="Open this report and begin answering." aria-label="Start NIH Documents: Biosketch, Current and Pending (Other) Support, and Malign Foreign Talent Recruitment Program (MFTRP) Certification">Start</a></span>
+      <span class="t3-slot"><a class="px-link" href="reporting-589-preview.html" title="Read every question without answering." aria-label="Preview NIH Documents: Biosketch, Current and Pending (Other) Support, and Malign Foreign Talent Recruitment Program (MFTRP) Certification">Preview</a></span>
+      <span class="t3-slot"></span>
+    
+  </div>
+</li>
+
+          </ul>
+        </div>
+        
+        <div class="t3-group">
+          <div class="t3-ghead"><div><h3 class="px-h3 t3-gh"><svg class="gicon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5h6v2.5H9z"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/></svg>Administrative Core</h3><p class="px-note">This survey asks how the Center’s administration is serving you.<br>Opt out if you didn’t use it in the last reporting session.</p></div><span class="px-label">1 survey</span></div>
+          <ul class="t3-list px-surface">
+            
+            
+            
+<li class="t3-row">
+  <div class="t3-main">
+    <p class="t3-name">Administrative Core Survey</p>
+    <p class="t3-meta"></p>
+    <p class="t3-sub">Started. Your answers are saved.</p>
+    
+    
+    <details class="px-more t3-about"><summary>About this survey</summary><div class="t3-aboutbody"><p>The Administrative Core runs the Center: budgets, communication, evaluation, and support for personnel.</p><p>This survey asks how well it is serving you.</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="in_progress">In progress</span>
+    
+    <span class="t3-time">About 10 minutes</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small" href="reporting-95.html" title="Pick up where you left off. Your answers are saved." aria-label="Continue Administrative Core Survey">Continue</a></span>
+      <span class="t3-slot"><a class="px-link" href="reporting-95-preview.html" title="Read every question without answering." aria-label="Preview Administrative Core Survey">Preview</a></span>
+      <span class="t3-slot"><form method="post" action="#" data-proto-form><button class="px-link quietlink" type="submit" title="Didn’t work with the Administrative Core" aria-label="Opt out of Administrative Core Survey">Opt out</button></form></span>
+    
+  </div>
+</li>
+
+          </ul>
+        </div>
+        
+        <div class="t3-group">
+          <div class="t3-ghead"><div><h3 class="px-h3 t3-gh"><svg class="gicon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/><circle cx="12" cy="14.5" r="1.4"/></svg>Other Center features and services</h3><p class="px-note">These surveys cover Center programs and events.<br>Opt out of any you didn’t use in the last reporting session.</p></div><span class="px-label">3 surveys</span></div>
+          <ul class="t3-list px-surface">
+            
+            
+            
+<li class="t3-row">
+  <div class="t3-main">
+    <p class="t3-name">Grant Writing Program Survey</p>
+    <p class="t3-meta"></p>
+    
+    
+    
+    <details class="px-more t3-about"><summary>About this survey</summary><div class="t3-aboutbody"><p>The grant writing program includes reviewer analysis, help preparing proposal materials, and grantsmanship training.</p><p>This survey asks whether it is helping you write and submit grants.</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="not_started">Not started</span>
+    <span class="t3-time">About 10 minutes</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small" href="reporting-115.html" title="Open this survey and begin answering." aria-label="Start Grant Writing Program Survey">Start</a></span>
+      <span class="t3-slot"><a class="px-link" href="reporting-115-preview.html" title="Read every question without answering." aria-label="Preview Grant Writing Program Survey">Preview</a></span>
+      <span class="t3-slot"><form method="post" action="#" data-proto-form><button class="px-link quietlink" type="submit" title="Didn’t use the grant writing program" aria-label="Opt out of Grant Writing Program Survey">Opt out</button></form></span>
+    
+  </div>
+</li>
+
+<li class="t3-row">
+  <div class="t3-main">
+    <p class="t3-name">Weekly NeuroSync Speaker Series Survey</p>
+    <p class="t3-meta"></p>
+    
+    
+    
+    <details class="px-more t3-about"><summary>About this survey</summary><div class="t3-aboutbody"><p>NeuroSync is the Center’s weekly speaker series.</p><p>Your ratings help choose speakers and topics, and decide how the series is run.</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="not_started">Not started</span>
+    <span class="t3-time">About 10 minutes</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small" href="reporting-45.html" title="Open this survey and begin answering." aria-label="Start Weekly NeuroSync Speaker Series Survey">Start</a></span>
+      <span class="t3-slot"><a class="px-link" href="reporting-45-preview.html" title="Read every question without answering." aria-label="Preview Weekly NeuroSync Speaker Series Survey">Preview</a></span>
+      <span class="t3-slot"><form method="post" action="#" data-proto-form><button class="px-link quietlink" type="submit" title="Didn’t attend" aria-label="Opt out of Weekly NeuroSync Speaker Series Survey">Opt out</button></form></span>
+    
+  </div>
+</li>
+
+<li class="t3-row">
+  <div class="t3-main">
+    <p class="t3-name">Team Synergy Survey</p>
+    <p class="t3-meta"></p>
+    
+    
+    
+    <details class="px-more t3-about"><summary>About this survey</summary><div class="t3-aboutbody"><p>This survey asks how well CNAP members work together across disciplines: communication, trust, clear roles, and whether CNAP has helped your research.</p><p>The Center reports on team science in its Research Performance Progress Report (RPPR) to NIH each year.</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="not_started">Not started</span>
+    <span class="t3-time">About 10 minutes</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small" href="reporting-155.html" title="Open this survey and begin answering." aria-label="Start Team Synergy Survey">Start</a></span>
+      <span class="t3-slot"><a class="px-link" href="reporting-155-preview.html" title="Read every question without answering." aria-label="Preview Team Synergy Survey">Preview</a></span>
+      <span class="t3-slot"><form method="post" action="#" data-proto-form><button class="px-link quietlink" type="submit" title="Not involved enough to answer" aria-label="Opt out of Team Synergy Survey">Opt out</button></form></span>
+    
+  </div>
+</li>
+
+          </ul>
+        </div>
+        
+        
+        <div class="t3-group">
+          <div class="t3-ghead"><div><h3 class="px-h3 t3-gh"><svg class="gicon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h10a3 3 0 0 1 3 3v12H8a3 3 0 0 1-3-3z"/><path d="M5 16.5a3 3 0 0 1 3-3h10"/></svg>Publications, talks, and grants</h3><p class="px-note">Keep your papers, presentations, and grant proposals up to date.</p></div></div>
+          <ul class="t3-list px-surface">
+            <li class="t3-row"><div class="t3-main"><p class="t3-name">Review your publications, talks, and grants</p>
+              <p class="t3-sub">2 products to review.</p></div>
+              <div class="t3-state"><span class="px-status" data-s="not_started">Not started</span><span class="t3-time">About 4 min</span></div>
+              <div class="t3-acts"><span class="t3-slot"><a class="px-btn small" href="#" data-proto title="Review your papers, presentations, and grant proposals.">Start</a></span><span class="t3-slot"></span><span class="t3-slot"></span></div></li>
+          </ul>
+        </div>
+        
       </div>
+    </details>
+    
 
-      <aside class="rp-side" aria-label="Help with reporting">
-        <div class="rp-card">
-          <h2>Helpful documents</h2>
-          <ul class="rp-docs"><li><a href="#">Progress report template</a><span>Word document</span></li><li><a href="#">How to write your progress summary</a><span>Two-page guide</span></li><li><a href="#">Acknowledging CNAP in your work</a><span>The grant citation, word for word</span></li></ul>
-        </div>
-        <div class="rp-card">
-          <h2>How reporting works</h2>
-          <ul class="rp-how"><li>Your answers save as you go. Leave and come back anytime before the due date.</li><li>Preview shows every question before you start.</li><li>If a survey doesn’t apply to you, opt out. That answer is useful too.</li></ul>
-          <p class="rp-ask">Questions? <a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a></p>
-        </div>
-      </aside>
+    
+    <details class="px-roll" id="t3-done">
+      <summary title="Surveys and reports you have submitted or opted out of this reporting session. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/></svg>Finished</h2><span class="px-roll-meta">2 surveys submitted or opted out</span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
+      <div class="px-roll-body">
+        <ul class="t3-list px-surface">
+<li class="t3-row">
+  <div class="t3-main">
+    <p class="t3-name">Behavioral Neuroscience (BN) Core Facility User Survey</p>
+    <p class="t3-meta"></p>
+    
+    
+    
+    <details class="px-more t3-about"><summary>About this survey</summary><div class="t3-aboutbody"><p>The Behavioral Neuroscience Core provides shared behavioral testing and animal research space, a core technician, and connections to campus services such as the Institutional Animal Care and Use Committee (IACUC), Comparative Medicine, and Environmental Health and Safety.</p><p>This survey asks how well those facilities and services worked for you, and how often you used them.</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="submitted">Submitted</span>
+    
+    <span class="t3-time">About 15 minutes</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small quiet" href="reporting-1.html" title="Read what you sent." aria-label="View Behavioral Neuroscience (BN) Core Facility User Survey">View</a></span><span class="t3-slot"></span><span class="t3-slot"></span>
+    
+  </div>
+</li>
+
+<li class="t3-row">
+  <div class="t3-main">
+    <p class="t3-name">CNAP Reporting Hub Survey</p>
+    <p class="t3-meta"></p>
+    
+    
+    
+    <details class="px-more t3-about"><summary>About this survey</summary><div class="t3-aboutbody"><p>The CNAP Reporting Hub is this site, where you complete your Center surveys and reports.</p><p>Please tell us what makes reporting easy or hard, so we can improve it.</p></div></details>
+  </div>
+  <div class="t3-state">
+    <span class="px-status" data-s="submitted">Submitted</span>
+    
+    <span class="t3-time">About 10 minutes</span>
+  </div>
+  <div class="t3-acts">
+    
+      <span class="t3-slot"><a class="px-btn small quiet" href="reporting-135.html" title="Read what you sent." aria-label="View CNAP Reporting Hub Survey">View</a></span><span class="t3-slot"></span><span class="t3-slot"></span>
+    
+  </div>
+</li>
+
+          
+        </ul>
+      </div>
+    </details>
+    
+
+    
+    <details class="px-roll t3-year" id="t3-year">
+      <summary title="Every reporting session this grant year, with its dates and what you will be asked to complete. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg>Your year</h2><span class="px-roll-meta">Year 10: 2 reporting sessions</span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
+      <div class="px-roll-body">
+        <p class="px-note t3-year-lede">Each reporting session this grant year, with its dates and what you will be asked to complete.<br>A reporting session that hasn’t opened yet shows what your current roles call for, so it can change if your roles change.</p>
+        <ol class="t3-yl">
+          <li class="t3-yl-i is-open is-current">
+            <span class="t3-yl-dot" aria-hidden="true"></span>
+            <div class="t3-yl-body">
+              <h3 class="t3-yl-name">Year 10 Fall <span class="px-status" data-s="progress">Open now</span></h3>
+              <p class="t3-yl-dates">Opens October 15, 2026.<br>Due November 30, 2026.</p>
+              
+              <p class="t3-yl-sum">9 surveys and 2 reports.<br>About 1 hour 50 minutes in all.</p>
+              <div class="scroll"><table class="t3-yl-tbl nosort"><thead><tr><th scope="col">Survey or report</th><th scope="col">About how long</th></tr></thead><tbody><tr><td><a class="px-link" href="reporting-1.html">Behavioral Neuroscience (BN) Core Facility User Survey</a></td><td>About 15 minutes</td></tr><tr><td><a class="px-link" href="reporting-65.html">Neuroinformatics (NI) Core Facility User Survey</a></td><td>About 15 minutes</td></tr><tr><td><a class="px-link" href="reporting-19.html">Cognitive Neuroscience (CN) Core User Survey</a></td><td>About 15 minutes</td></tr><tr><td><a class="px-link" href="reporting-45.html">Weekly NeuroSync Speaker Series Survey</a></td><td>About 10 minutes</td></tr><tr><td><a class="px-link" href="reporting-155.html">Team Synergy Survey</a></td><td>About 10 minutes</td></tr><tr><td><a class="px-link" href="reporting-95.html">Administrative Core Survey</a></td><td>About 10 minutes</td></tr><tr><td><a class="px-link" href="reporting-115.html">Grant Writing Program Survey</a></td><td>About 10 minutes</td></tr><tr><td><a class="px-link" href="reporting-135.html">CNAP Reporting Hub Survey</a></td><td>About 10 minutes</td></tr><tr><td><a class="px-link" href="reporting-38.html">Mentee Survey (Sleep-dependent memory consolidation in adolescent mice)</a></td><td>About 10 minutes</td></tr><tr><td><a class="px-link" href="reporting-91.html">Pilot Project Semiannual Progress Report (Sleep-dependent memory consolidation in adolescent mice)</a></td><td>1–2-page upload, plus about 5 minutes of questions</td></tr><tr><td><a class="px-link" href="reporting-589.html">NIH Documents: Biosketch, Current and Pending (Other) Support, and Malign Foreign Talent Recruitment Program (MFTRP) Certification</a></td><td>1–3 PDF uploads</td></tr></tbody></table></div>
+              
+            </div>
+          </li>
+          <li class="t3-yl-i is-coming">
+            <span class="t3-yl-dot" aria-hidden="true"></span>
+            <div class="t3-yl-body">
+              <h3 class="t3-yl-name">Year 10 Spring <span class="px-status" data-s="none">Not open yet</span></h3>
+              <p class="t3-yl-dates">Opens May 1, 2027.<br>Due May 31, 2027.</p>
+              
+              <p class="t3-yl-sum">9 surveys and 1 report.<br>About 1 hour 50 minutes in all.</p>
+              <div class="scroll"><table class="t3-yl-tbl nosort"><thead><tr><th scope="col">Survey or report</th><th scope="col">About how long</th></tr></thead><tbody><tr><td>Behavioral Neuroscience (BN) Core Facility User Survey</td><td>About 15 minutes</td></tr><tr><td>Neuroinformatics (NI) Core Facility User Survey</td><td>About 15 minutes</td></tr><tr><td>Cognitive Neuroscience (CN) Core User Survey</td><td>About 15 minutes</td></tr><tr><td>Weekly NeuroSync Speaker Series Survey</td><td>About 10 minutes</td></tr><tr><td>Team Synergy Survey</td><td>About 10 minutes</td></tr><tr><td>Administrative Core Survey</td><td>About 10 minutes</td></tr><tr><td>Grant Writing Program Survey</td><td>About 10 minutes</td></tr><tr><td>CNAP Reporting Hub Survey</td><td>About 10 minutes</td></tr><tr><td>Mentee Survey (Sleep-dependent memory consolidation in adolescent mice)</td><td>About 10 minutes</td></tr><tr><td>Pilot Project Semiannual Progress Report (Sleep-dependent memory consolidation in adolescent mice)</td><td>1–2-page upload, plus about 5 minutes of questions</td></tr></tbody></table></div>
+              
+            </div>
+          </li>
+        </ol>
+      </div>
+    </details>
+    
+
+    
+    <details class="px-roll t3-sow" id="t3-sow">
+      <summary title="What you committed to in your Statement of Work. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h" id="t3-sow-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg>Your commitments</h2><span class="px-roll-meta">From your Statement of Work · 1 excerpt</span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
+      <div class="px-roll-body">
+        <figure class="t3-quote"><blockquote>Deliver at least one presentation at a national or international conference that cites CNAP support during the pilot grant support period.<br>Submit at least one manuscript to a high-impact journal that cites CNAP support within six months of pilot grant completion.<br>Submit an extramural grant as lead principal investigator (PI) within one year of pilot grant completion.</blockquote><figcaption>From “Statement of Work, Year 10” · <a href="#" data-proto>Download it</a> · The full document is on <a href="mentee-profile.html">your profile</a>.</figcaption></figure>
+      </div>
+    </details>
+    
+
+
+    
+    <details class="px-roll" id="t3-docs">
+      <summary title="Guides and templates for this reporting session. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Helpful documents</h2><span class="px-roll-meta"><b>2</b> documents</span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
+      <div class="px-roll-body"><ul class="t3-docs"><li><a href="#" data-proto>How to sign with an Adobe digital signature</a> <span class="px-note">Step-by-step, for the MFTRP certification</span></li><li><a href="https://www.k-state.edu/cnap/">CNAP website</a> <span class="px-note">News, people, cores and events</span></li></ul></div>
+    </details>
+    
+  </div>
+
+  
+<section class="made" aria-label="What CNAP has produced this year">
+  <svg class="made-art neuromesh" viewBox="0 0 1000 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-linecap="round"><path d="M327 55Q228 89 187 184" stroke-width="2.2"/><path d="M327 55Q251 43 175 45" stroke-width="2.8"/><path d="M327 55Q355 116 372 180" stroke-width="2.8"/><path d="M648 32Q610 99 535 120" stroke-width="2.8"/><path d="M648 32Q661 85 677 138" stroke-width="1.6"/><path d="M648 32Q598 3 542 18" stroke-width="1.6"/><path d="M535 120Q605 138 677 138" stroke-width="1.6"/><path d="M535 120Q558 198 525 273" stroke-width="1.6"/><path d="M535 120Q546 69 542 18" stroke-width="2.2"/><path d="M67 162Q77 100 78 37" stroke-width="1.6"/><path d="M67 162Q125 186 187 184" stroke-width="2.2"/><path d="M67 162Q47 216 35 272" stroke-width="2.8"/><path d="M67 162Q77 238 138 283" stroke-width="1.6"/><path d="M78 37Q154 96 187 184" stroke-width="1.6"/><path d="M78 37Q129 17 175 45" stroke-width="2.2"/><path d="M426 258Q369 256 312 255" stroke-width="1.6"/><path d="M426 258Q479 239 525 273" stroke-width="2.8"/><path d="M426 258Q396 221 372 180" stroke-width="1.6"/><path d="M625 294Q692 230 677 138" stroke-width="2.8"/><path d="M625 294Q707 258 788 220" stroke-width="2.8"/><path d="M625 294Q572 296 525 273" stroke-width="2.8"/><path d="M967 24Q908 58 851 97" stroke-width="2.8"/><path d="M967 24Q955 120 944 217" stroke-width="2.2"/><path d="M967 24Q946 69 946 119" stroke-width="1.6"/><path d="M851 97Q791 143 788 220" stroke-width="2.2"/><path d="M851 97Q875 175 944 217" stroke-width="1.6"/><path d="M851 97Q856 203 842 308" stroke-width="1.6"/><path d="M851 97Q899 105 946 119" stroke-width="2.2"/><path d="M312 255Q256 208 187 184" stroke-width="1.6"/><path d="M312 255Q324 203 372 180" stroke-width="2.2"/><path d="M187 184Q166 116 175 45" stroke-width="2.8"/><path d="M187 184Q92 195 35 272" stroke-width="1.6"/><path d="M187 184Q139 222 138 283" stroke-width="1.6"/><path d="M677 138Q725 189 788 220" stroke-width="2.8"/><path d="M677 138Q593 97 542 18" stroke-width="1.6"/><path d="M788 220Q792 278 842 308" stroke-width="1.6"/><path d="M944 217Q880 248 842 308" stroke-width="1.6"/><path d="M944 217Q939 168 946 119" stroke-width="1.6"/><path d="M35 272Q89 258 138 283" stroke-width="2.2"/><path d="M327 55Q334 41 343 29" stroke-width="1"/><path d="M343 29Q344 20 350 14" stroke-width="0.6"/><path d="M327 55Q329 84 306 101" stroke-width="1"/><path d="M306 101Q307 116 294 125" stroke-width="0.6"/><path d="M327 55Q316 76 304 96" stroke-width="1"/><path d="M304 96Q306 100 309 103" stroke-width="0.6"/><path d="M327 55Q341 49 356 50" stroke-width="1"/><path d="M356 50Q360 51 364 54" stroke-width="0.6"/><path d="M327 55Q334 76 355 84" stroke-width="1"/><path d="M355 84Q359 87 360 92" stroke-width="0.6"/><path d="M648 32Q621 31 603 10" stroke-width="1"/><path d="M603 10Q591 3 579 -6" stroke-width="0.6"/><path d="M648 32Q672 48 700 57" stroke-width="1"/><path d="M700 57Q710 58 717 51" stroke-width="0.6"/><path d="M648 32Q674 42 698 54" stroke-width="1"/><path d="M698 54Q709 67 726 67" stroke-width="0.6"/><path d="M648 32Q646 46 645 61" stroke-width="1"/><path d="M645 61Q649 67 649 74" stroke-width="0.6"/><path d="M648 32Q664 34 678 42" stroke-width="1"/><path d="M678 42Q688 45 694 52" stroke-width="0.6"/><path d="M535 120Q532 102 519 89" stroke-width="1"/><path d="M519 89Q520 85 524 84" stroke-width="0.6"/><path d="M535 120Q506 118 476 118" stroke-width="1"/><path d="M476 118Q462 116 448 119" stroke-width="0.6"/><path d="M535 120Q522 100 507 81" stroke-width="1"/><path d="M507 81Q504 69 507 57" stroke-width="0.6"/><path d="M535 120Q544 135 542 152" stroke-width="1"/><path d="M542 152Q542 161 536 168" stroke-width="0.6"/><path d="M535 120Q566 129 594 116" stroke-width="1"/><path d="M594 116Q603 122 614 120" stroke-width="0.6"/><path d="M67 162Q70 177 81 186" stroke-width="1"/><path d="M81 186Q83 193 81 200" stroke-width="0.6"/><path d="M67 162Q69 180 69 197" stroke-width="1"/><path d="M69 197Q76 205 78 215" stroke-width="0.6"/><path d="M67 162Q96 157 124 148" stroke-width="1"/><path d="M124 148Q137 153 148 162" stroke-width="0.6"/><path d="M67 162Q60 173 51 182" stroke-width="1"/><path d="M51 182Q49 188 44 192" stroke-width="0.6"/><path d="M78 37Q86 24 83 9" stroke-width="1"/><path d="M83 9Q80 3 78 -4" stroke-width="0.6"/><path d="M78 37Q82 63 64 82" stroke-width="1"/><path d="M64 82Q57 93 44 97" stroke-width="0.6"/><path d="M78 37Q101 23 119 5" stroke-width="1"/><path d="M119 5Q132 0 145 -4" stroke-width="0.6"/><path d="M78 37Q83 62 69 83" stroke-width="1"/><path d="M69 83Q61 93 53 103" stroke-width="0.6"/><path d="M78 37Q56 48 34 59" stroke-width="1"/><path d="M34 59Q22 58 10 60" stroke-width="0.6"/><path d="M426 258Q445 243 447 218" stroke-width="1"/><path d="M447 218Q453 207 463 202" stroke-width="0.6"/><path d="M426 258Q441 259 455 264" stroke-width="1"/><path d="M455 264Q462 269 469 274" stroke-width="0.6"/><path d="M426 258Q413 238 393 224" stroke-width="1"/><path d="M393 224Q385 221 377 224" stroke-width="0.6"/><path d="M625 294Q645 271 676 271" stroke-width="1"/><path d="M676 271Q689 270 702 270" stroke-width="0.6"/><path d="M625 294Q627 266 645 243" stroke-width="1"/><path d="M645 243Q657 231 664 216" stroke-width="0.6"/><path d="M625 294Q602 314 572 308" stroke-width="1"/><path d="M572 308Q563 322 547 323" stroke-width="0.6"/><path d="M625 294Q615 281 603 271" stroke-width="1"/><path d="M603 271Q598 262 590 257" stroke-width="0.6"/><path d="M625 294Q614 284 603 274" stroke-width="1"/><path d="M603 274Q595 269 592 259" stroke-width="0.6"/><path d="M967 24Q959 8 951 -7" stroke-width="1"/><path d="M951 -7Q943 -13 942 -23" stroke-width="0.6"/><path d="M967 24Q985 21 992 4" stroke-width="1"/><path d="M992 4Q999 -4 1008 -12" stroke-width="0.6"/><path d="M967 24Q978 -3 992 -29" stroke-width="1"/><path d="M992 -29Q1000 -44 994 -59" stroke-width="0.6"/><path d="M851 97Q862 107 876 110" stroke-width="1"/><path d="M876 110Q883 112 890 113" stroke-width="0.6"/><path d="M851 97Q834 89 828 71" stroke-width="1"/><path d="M828 71Q823 62 814 59" stroke-width="0.6"/><path d="M851 97Q835 100 827 116" stroke-width="1"/><path d="M827 116Q819 120 813 127" stroke-width="0.6"/><path d="M312 255Q297 266 292 285" stroke-width="1"/><path d="M292 285Q292 290 296 295" stroke-width="0.6"/><path d="M312 255Q329 279 354 294" stroke-width="1"/><path d="M354 294Q357 300 359 306" stroke-width="0.6"/><path d="M312 255Q287 271 265 292" stroke-width="1"/><path d="M265 292Q259 305 247 313" stroke-width="0.6"/><path d="M312 255Q324 264 340 263" stroke-width="1"/><path d="M340 263Q348 267 354 275" stroke-width="0.6"/><path d="M187 184Q168 186 154 199" stroke-width="1"/><path d="M154 199Q147 208 136 207" stroke-width="0.6"/><path d="M187 184Q197 166 190 146" stroke-width="1"/><path d="M190 146Q187 136 193 128" stroke-width="0.6"/><path d="M187 184Q206 179 223 168" stroke-width="1"/><path d="M223 168Q228 170 234 172" stroke-width="0.6"/><path d="M187 184Q202 166 225 161" stroke-width="1"/><path d="M225 161Q231 150 242 144" stroke-width="0.6"/><path d="M677 138Q694 139 711 133" stroke-width="1"/><path d="M711 133Q718 132 726 132" stroke-width="0.6"/><path d="M677 138Q689 149 692 165" stroke-width="1"/><path d="M692 165Q693 172 690 178" stroke-width="0.6"/><path d="M677 138Q701 120 727 105" stroke-width="1"/><path d="M727 105Q726 89 738 79" stroke-width="0.6"/><path d="M677 138Q673 152 661 162" stroke-width="1"/><path d="M661 162Q658 167 659 173" stroke-width="0.6"/><path d="M677 138Q675 119 677 99" stroke-width="1"/><path d="M677 99Q675 89 677 79" stroke-width="0.6"/><path d="M788 220Q766 223 743 220" stroke-width="1"/><path d="M743 220Q733 216 722 219" stroke-width="0.6"/><path d="M788 220Q802 212 805 197" stroke-width="1"/><path d="M805 197Q808 192 811 187" stroke-width="0.6"/><path d="M788 220Q765 239 768 269" stroke-width="1"/><path d="M768 269Q767 283 774 295" stroke-width="0.6"/><path d="M525 273Q543 258 566 264" stroke-width="1"/><path d="M566 264Q575 269 585 274" stroke-width="0.6"/><path d="M525 273Q503 270 485 281" stroke-width="1"/><path d="M485 281Q473 283 468 295" stroke-width="0.6"/><path d="M525 273Q542 294 566 307" stroke-width="1"/><path d="M566 307Q577 318 575 333" stroke-width="0.6"/><path d="M525 273Q522 259 529 248" stroke-width="1"/><path d="M529 248Q532 243 532 237" stroke-width="0.6"/><path d="M175 45Q158 31 144 14" stroke-width="1"/><path d="M144 14Q140 13 137 11" stroke-width="0.6"/><path d="M175 45Q188 36 204 34" stroke-width="1"/><path d="M204 34Q213 27 220 20" stroke-width="0.6"/><path d="M175 45Q192 41 209 44" stroke-width="1"/><path d="M209 44Q217 41 225 37" stroke-width="0.6"/><path d="M372 180Q366 209 373 239" stroke-width="1"/><path d="M373 239Q378 249 382 259" stroke-width="0.6"/><path d="M372 180Q358 165 354 145" stroke-width="1"/><path d="M354 145Q349 135 350 125" stroke-width="0.6"/><path d="M372 180Q390 182 408 188" stroke-width="1"/><path d="M408 188Q417 188 424 183" stroke-width="0.6"/><path d="M372 180Q363 159 369 137" stroke-width="1"/><path d="M369 137Q379 130 382 117" stroke-width="0.6"/><path d="M372 180Q369 197 376 212" stroke-width="1"/><path d="M376 212Q379 219 383 226" stroke-width="0.6"/><path d="M944 217Q967 212 977 192" stroke-width="1"/><path d="M977 192Q982 188 982 182" stroke-width="0.6"/><path d="M944 217Q956 223 968 226" stroke-width="1"/><path d="M968 226Q976 228 981 234" stroke-width="0.6"/><path d="M944 217Q922 230 897 233" stroke-width="1"/><path d="M897 233Q893 246 882 254" stroke-width="0.6"/><path d="M35 272Q39 302 58 325" stroke-width="1"/><path d="M58 325Q73 338 84 354" stroke-width="0.6"/><path d="M35 272Q27 290 9 298" stroke-width="1"/><path d="M9 298Q11 307 10 315" stroke-width="0.6"/><path d="M35 272Q51 276 63 264" stroke-width="1"/><path d="M63 264Q70 263 74 257" stroke-width="0.6"/><path d="M842 308Q868 314 884 334" stroke-width="1"/><path d="M884 334Q896 338 905 345" stroke-width="0.6"/><path d="M842 308Q843 287 839 266" stroke-width="1"/><path d="M839 266Q833 257 829 246" stroke-width="0.6"/><path d="M842 308Q822 317 813 337" stroke-width="1"/><path d="M813 337Q817 347 811 357" stroke-width="0.6"/><path d="M842 308Q825 299 812 285" stroke-width="1"/><path d="M812 285Q810 285 809 286" stroke-width="0.6"/><path d="M542 18Q544 38 528 50" stroke-width="1"/><path d="M528 50Q521 53 516 58" stroke-width="0.6"/><path d="M542 18Q553 10 567 9" stroke-width="1"/><path d="M567 9Q571 14 578 14" stroke-width="0.6"/><path d="M542 18Q530 30 517 40" stroke-width="1"/><path d="M517 40Q511 43 504 41" stroke-width="0.6"/><path d="M542 18Q559 -3 559 -30" stroke-width="1"/><path d="M559 -30Q565 -43 576 -52" stroke-width="0.6"/><path d="M542 18Q529 33 526 52" stroke-width="1"/><path d="M526 52Q526 62 531 71" stroke-width="0.6"/><path d="M946 119Q926 133 906 146" stroke-width="1"/><path d="M906 146Q896 157 885 167" stroke-width="0.6"/><path d="M946 119Q956 129 968 136" stroke-width="1"/><path d="M968 136Q972 143 981 143" stroke-width="0.6"/><path d="M946 119Q960 110 976 114" stroke-width="1"/><path d="M976 114Q985 115 992 121" stroke-width="0.6"/><path d="M138 283Q144 257 166 243" stroke-width="1"/><path d="M166 243Q178 233 188 220" stroke-width="0.6"/><path d="M138 283Q127 307 103 319" stroke-width="1"/><path d="M103 319Q103 333 94 343" stroke-width="0.6"/><path d="M138 283Q152 265 172 253" stroke-width="1"/><path d="M172 253Q179 254 186 254" stroke-width="0.6"/><path d="M138 283Q137 310 145 336" stroke-width="1"/><path d="M145 336Q137 346 128 355" stroke-width="0.6"/><path d="M138 283Q161 264 161 234" stroke-width="1"/><path d="M161 234Q152 222 153 207" stroke-width="0.6"/></g><g fill="currentColor"><circle cx="327" cy="55" r="5.6"/><circle cx="648" cy="32" r="7.9"/><circle cx="535" cy="120" r="6.7"/><circle cx="67" cy="162" r="7.8"/><circle cx="78" cy="37" r="6.1"/><circle cx="426" cy="258" r="7.6"/><circle cx="625" cy="294" r="6.3"/><circle cx="967" cy="24" r="5.8"/><circle cx="851" cy="97" r="7.3"/><circle cx="312" cy="255" r="7.8"/><circle cx="187" cy="184" r="5.3"/><circle cx="677" cy="138" r="6.8"/><circle cx="788" cy="220" r="6.9"/><circle cx="525" cy="273" r="5.7"/><circle cx="175" cy="45" r="6.1"/><circle cx="372" cy="180" r="5.4"/><circle cx="944" cy="217" r="5.6"/><circle cx="35" cy="272" r="5.8"/><circle cx="842" cy="308" r="6.8"/><circle cx="542" cy="18" r="7.0"/><circle cx="946" cy="119" r="5.6"/><circle cx="138" cy="283" r="5.0"/></g></svg>
+  <h2 class="made-h">What CNAP has produced this year</h2>
+  <p class="made-sub">Year 10, since June 1, 2026</p>
+  <ul class="made-row">
+    <li><svg class="made-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h5M10 16h5"/></svg><span class="made-n" data-n="7">7</span><span class="made-l">papers published</span></li>
+    <li><svg class="made-i" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M9 21h6"/></svg><span class="made-n" data-n="6">6</span><span class="made-l">talks and posters</span></li>
+    <li><svg class="made-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 7l3 3M4 20h16"/></svg><span class="made-n" data-n="9">9</span><span class="made-l">proposals submitted</span></li>
+    <li><svg class="made-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="M8.5 13.5L7 21l5-2.5 5 2.5-1.5-7.5"/></svg><span class="made-n" data-n="2">2</span><span class="made-l">proposals awarded</span></li>
+  </ul>
+  
+  <button type="button" class="made-btn" aria-expanded="false" aria-controls="made-trend">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V13M9 20V8M14 20v-5M19 20V4"/></svg>
+    <span class="made-btn-t">See year by year</span>
+  </button>
+  <div class="made-trend" id="made-trend" hidden>
+    <div class="made-trend-in">
+      <p class="made-trend-h">This chart shows Year 9 to Year 10.<br>This year is the solid purple bar, and it’s still in progress.</p>
+      <ul class="made-charts">
+        <li><p class="made-ct">Papers published</p>
+          <ol class="bars" aria-label="Papers published by year">
+            <li class=""><span class="bn">4</span><span class="bb" style="--h: 57%"></span><span class="by"><span class="sr-only">Year </span>Y9</span></li>
+            <li class="now"><span class="bn">7</span><span class="bb" style="--h: 100%"></span><span class="by"><span class="sr-only">Year </span>Y10</span></li>
+          </ol>
+          <p class="made-ctot">11 in all</p></li>
+        <li><p class="made-ct">Talks and posters</p>
+          <ol class="bars" aria-label="Talks and posters by year">
+            <li class=""><span class="bn">0</span><span class="bb" style="--h: 0%"></span><span class="by"><span class="sr-only">Year </span>Y9</span></li>
+            <li class="now"><span class="bn">6</span><span class="bb" style="--h: 100%"></span><span class="by"><span class="sr-only">Year </span>Y10</span></li>
+          </ol>
+          <p class="made-ctot">6 in all</p></li>
+        <li><p class="made-ct">Proposals submitted</p>
+          <ol class="bars" aria-label="Proposals submitted by year">
+            <li class=""><span class="bn">4</span><span class="bb" style="--h: 44%"></span><span class="by"><span class="sr-only">Year </span>Y9</span></li>
+            <li class="now"><span class="bn">9</span><span class="bb" style="--h: 100%"></span><span class="by"><span class="sr-only">Year </span>Y10</span></li>
+          </ol>
+          <p class="made-ctot">13 in all</p></li>
+        <li><p class="made-ct">Proposals awarded</p>
+          <ol class="bars" aria-label="Proposals awarded by year">
+            <li class=""><span class="bn">0</span><span class="bb" style="--h: 0%"></span><span class="by"><span class="sr-only">Year </span>Y9</span></li>
+            <li class="now"><span class="bn">2</span><span class="bb" style="--h: 100%"></span><span class="by"><span class="sr-only">Year </span>Y10</span></li>
+          </ol>
+          <p class="made-ctot">2 in all</p></li>
+      </ul>
     </div>
   </div>
-</main>
+  
+  <p class="made-foot">These come from what members enter under Publications, talks, and grants, so yours count too.<br><a href="#" data-proto>See the full list</a></p>
+</section>
+<script>
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var els = document.querySelectorAll(".made-n[data-n]"); if (!els.length || !("IntersectionObserver" in window)) return;
+  var io = new IntersectionObserver(function (en) {
+    if (!en[0].isIntersecting) return; io.disconnect();
+    els.forEach(function (el) { var n = +el.dataset.n, t0 = null; if (!n) return;
+      function step(t) { t0 = t0 || t; var k = Math.min(1, (t - t0) / 900); el.textContent = Math.round(n * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); }
+      el.textContent = 0; requestAnimationFrame(step); });
+  }, { threshold: .4 });
+  io.observe(els[0].closest(".made"));
 
-<footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. The surveys and their names are real. The person, dates, and progress are fictional. In the Member Hub, this page lists your own assignments.</span></div></footer>
-<script src="guide.js"></script>
+})();
+(function () {
+  var b = document.querySelector(".made-btn"), t = document.getElementById("made-trend"); if (!b || !t) return;
+  b.addEventListener("click", function () {
+    var open = b.getAttribute("aria-expanded") === "true";
+    b.setAttribute("aria-expanded", String(!open));
+    b.querySelector(".made-btn-t").textContent = open ? "See year by year" : "Hide year by year";
+    if (open) { t.classList.remove("open"); setTimeout(function () { t.hidden = true; }, 380); }
+    else { t.hidden = false; requestAnimationFrame(function () { requestAnimationFrame(function () { t.classList.add("open"); }); }); }
+  });
+})();
+</script>
+
+</div>
+
+    
+  </main>
+</div>
+
+
+
+
+
+<script src="app/js/proto.js" defer></script>
+<script src="app/js/nview.js" defer></script>
+<script src="app/js/confetti.js" defer></script>
+<script src="app/js/sorttable.js" defer></script>
+<script src="app/js/foldall.js" defer></script>
+<script src="app/js/headhelp.js" defer></script>
+<script src="app/js/copytext.js" defer></script>
+<script src="app/js/pickfilter.js" defer></script>
+
+<script>document.querySelectorAll("form[data-proto-form]").forEach(function(f){f.addEventListener("submit",function(e){e.preventDefault();var n=f.querySelector(".proto-note-sub");if(!n){n=document.createElement("p");n.className="proto-note-sub";n.setAttribute("role","status");n.style.cssText="margin:12px 0 0;padding:10px 14px;border-radius:8px;background:#f1ecf8;color:#3c1d66;font-size:14px";f.appendChild(n);}n.textContent="Prototype copy of the app page. In the Member Hub app, this saves your answers. Here, nothing is sent.";});});document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();});a.title="Not part of the prototype";});</script>
 <script src="hubchrome.js" defer></script>
 </body>
 </html>

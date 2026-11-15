@@ -767,3 +767,5 @@ Production needs new backend work that has not been built and needs approval: an
 ## 2026-11-15 · The app's reporting pages stay as they are
 
 MW: keep all of the app's reporting pages the same. My tasks (`templates/proto/tasks.html`), the respondent forms, the results pages, and My history keep their current design, last changed in 42eadc5 on November 9. The Member Hub prototype's `reporting.html` ("Your reporting, Amara") is a separate sketch. It does not replace the app's pages, and no redesign of them goes ahead without MW's approval.
+
+The prototype now uses copies of the app's reporting pages: My tasks (`reporting.html`), My history (`reporting-history.html`), and each form with its preview (`reporting-<id>.html`). They are made by `design/prototypes/member-hub/gen/rep.py` from the app as the fictional demo member Amara Okafor, with the app's own CSS and scripts. Saving, submitting, opting out, and autosave do nothing in the prototype, and each page says so when tried. The earlier sketch is kept as `reporting-sketch.html` and is no longer linked.
