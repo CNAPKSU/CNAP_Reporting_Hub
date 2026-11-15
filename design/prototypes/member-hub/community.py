@@ -114,7 +114,16 @@ legend=''.join(f'<li><i class="cm-k-{g}"></i>{lbl}</li>' for g,lbl,_ in GROUPS)
 NET=f'''<figure class="cm-net"><svg viewBox="0 0 {W} {H}" role="img" aria-label="You at the center of the CNAP network of 61 members, with four members who share your interests nearest to you"><g class="cm-ls">{''.join(lines)}</g><g class="cm-outer">{dots}</g>{mnodes}<g class="cm-me2"><circle class="cm-halo" cx="{CX}" cy="{CY}" r="44"/><circle cx="{CX}" cy="{CY}" r="32"/><text x="{CX}" y="{CY+6}">AO</text></g></svg>
           <figcaption><span>You, the four members who share your interests, and 57 more across the Center.</span><ul class="cm-legend">{legend}</ul></figcaption></figure>'''
 
-SECS=[('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-ask','Ask the community'),('cm-ach','Recent achievements'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
+# CNAP alumni (fictional)
+AL=[('DO','t','Dr. David Osei','Pilot project leader, Grant Years 7 and 8','Associate Professor, Psychological Sciences, Kansas State University','First R01, National Institute on Aging, 2026',True),
+    ('ID','p','Dr. Inês Duarte','Research project leader, Grant Years 1 to 4','Professor, Psychological Sciences, Kansas State University','R01, National Institute of Neurological Disorders and Stroke, 2020',True),
+    ('LM','a','Dr. Leah Morgan','Research project leader, Grant Years 3 to 5','Associate Professor, Neuroscience, University of Nebraska','R01, National Institute of Mental Health, 2022',True),
+    ('MH','t','Dr. Marcus Hale','Pilot project leader, Grant Year 8','Assistant Professor, Kinesiology, Kansas State University','R21, National Institute on Drug Abuse, 2025',False),
+    ('SC','p','Dr. Sun-Mi Cho','Pilot project leader, Grant Years 5 and 6','Assistant Professor, Psychology, University of Colorado','K01, National Institute on Aging, 2023',True),
+    ('AW','a','Dr. Aaron Whitfield','Pilot project leader, Grant Year 6','Research Scientist, a neurotechnology company','Moved into industry research in 2024',False)]
+alumni=''.join(f'''<li class="cm-al"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div class="cm-alb"><p class="cm-mn">{n}</p><p class="cm-alw">{w}</p><dl class="cm-ald"><div><dt>At CNAP</dt><dd>{c}</dd></div><div><dt>Funding after CNAP</dt><dd>{f}</dd></div></dl>{'<p class="cm-why">Happy to talk with new project leaders</p>' if ok else ''}</div>{f'<a class="btn sm" href="{intro(n)}">Ask for an introduction</a>' if ok else ''}</li>''' for i,t,n,c,w,f,ok in AL)
+
+SECS=[('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-alum','CNAP alumni'),('cm-ask','Ask the community'),('cm-ach','Recent achievements'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
 spine=''.join(f'<li><a href="#{i}"><span class="n"><b>{n}</b></span><span>{t}</span></a></li>' for n,(i,t) in enumerate(SECS,1))
 SHARE=mt('cnap@ksu.edu','An achievement to share','\n'.join(['Name:','','The achievement (a paper, grant, talk, award, or milestone):','','A link, if there is one:','']),cc=None)
 
@@ -140,7 +149,7 @@ page=f'''<!doctype html>
         </div>
         {NET}
       </div>
-      <ul class="co-facts" aria-label="At a glance"><li><b class="num">61</b><span>Members</span></li><li><b class="num">3</b><span>Joined this month</span></li><li><b class="num">14</b><span>Open conversation threads</span></li><li><b class="num">2</b><span>Grants awarded this fall</span></li></ul>
+      <ul class="co-facts cm-facts" aria-label="At a glance"><li><b class="num">61</b><span>Members</span></li><li><b class="num">3</b><span>Joined this month</span></li><li><b class="num">14</b><span>Open conversation threads</span></li><li><b class="num">2</b><span>Grants awarded this fall</span></li><li><a href="#cm-alum"><b class="num">6</b><span>CNAP alumni</span></a></li></ul>
     </div>
   </section>
 
@@ -172,6 +181,10 @@ page=f'''<!doctype html>
             <ul class="cm-dir">{dirl}</ul>
             <p class="cm-none" hidden>No members match. Try a different word, or <button type="button" class="t3 cm-clear">show everyone</button>.</p>
           </div>
+        </section>
+        <section class="step cs" id="cm-alum" aria-labelledby="cm-alum-h">
+          <h2 id="cm-alum-h">CNAP alumni</h2>
+          <div class="cs-b"><p>Former project leaders who went on to independent funding. Many are glad to tell you how they got there, from their first submission to their first R01.</p><ul class="cm-als">{alumni}</ul></div>
         </section>
         <section class="step cs" id="cm-ask" aria-labelledby="cm-ask-h">
           <h2 id="cm-ask-h">Ask the community</h2>

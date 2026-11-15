@@ -1198,3 +1198,20 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .cm-mn2 text{paint-order:stroke;stroke:var(--surface);stroke-width:5px;stroke-linejoin:round}
 .cm-mn2 .cm-ini{stroke:none}
 .cm-l1{stroke-opacity:.55}
+/* CNAP alumni (MW 2026-11-14) */
+.cm-als{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.cm-al{display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:20px;align-items:start;padding:22px 24px}
+.cm-al+.cm-al{border-top:1px solid var(--line)}
+.cm-al .cm-mn{margin:0}
+.cm-alw{margin:2px 0 0;font-size:15px;line-height:22px;color:var(--ink-2)}
+.cm-ald{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px;margin:12px 0 0}
+.cm-ald dt{font-size:12.5px;font-weight:600;color:var(--muted)}
+.cm-ald dd{margin:2px 0 0;font-size:14.5px;line-height:21px;color:var(--ink)}
+.cm-al .cm-why{margin-top:12px;font-size:14.5px}
+@media (max-width:760px){.cm-al{grid-template-columns:60px minmax(0,1fr)}.cm-al .btn{grid-column:2;justify-self:start}.cm-ald{grid-template-columns:minmax(0,1fr)}}
+.cm-facts{grid-template-columns:repeat(5,minmax(0,1fr))}
+.cm-facts a{display:block;color:inherit;text-decoration:none}
+.cm-facts a span{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;color:var(--purple)}
+@media (max-width:980px){.cm-facts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.cm-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cm-facts li>a{display:flex;flex-direction:column;gap:4px}.cm-facts li>a span{color:var(--purple)}.cm-facts li>a:hover span{color:var(--purple-ink)}
