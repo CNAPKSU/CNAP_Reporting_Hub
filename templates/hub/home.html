@@ -38,7 +38,7 @@
           <span class="lab">Most urgent first</span>
           <h2 id="wk">Your week</h2>
           <div class="body">{% if roles %}<p class="roles">{% for r in roles %}{{ r }}{% if not forloop.last %}<br>{% endif %}{% endfor %}</p>{% endif %}</div>
-          <div class="act"><a class="btn" href="{% url 'portal:tasks' %}">Open My work</a></div>
+          <div class="act"><a class="btn" href="{% url 'portal:tasks' %}">See all my reporting assignments</a></div>
         </div>
         {% if rep %}{% if rep.todo %}<article class="bi" role="listitem">
           <span class="kind" style="color:var(--{{ rep.kind }})"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12.5V1.5M3 2h7.5l-1.6 2.6L10.5 7.2H3"/></svg>{{ rep.when }}</span>
@@ -203,7 +203,7 @@
             <p class="k-lab">Reporting</p>
             {% if rep %}<p class="k-date"><span class="k-num num">{{ rep.due.day }}</span><span class="k-wd">{{ rep.due|date:"l" }}<br>{{ rep.due|date:"F" }}</span></p>
             <p class="k-t">{{ rep.name }} is due.</p>
-            <a class="t3" href="{% url 'portal:tasks' %}">Open My work</a>{% else %}<p class="k-t">No reporting session is open for you.</p>{% endif %}
+            <a class="t3" href="{% url 'portal:tasks' %}">See all my reporting assignments</a>{% else %}<p class="k-t">No reporting session is open for you.</p>{% endif %}
           </div>
         </div>
       </div>
