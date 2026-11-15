@@ -755,3 +755,9 @@ Known trade-off kept: anyone can pause password sign-in for a username for 15 mi
 - Same view and data; the new routes only pass `part`. No model, permission, or form change. With the switch off, the two new addresses redirect to the matching section of the one original page.
 - The proposal writing toolkit has no content in the app yet; the section says so and points to cnap@ksu.edu. Toolkit content needs MW’s materials.
 - Homepage: Funding news and Proposal writing toolkit headings link to the new pages. Research at CNAP links in the prototype; in the app it waits for a Research page.
+
+## 2026-11-14 · Site Visit RSVP (prototype only, backend dependency)
+
+The prototype Site Visit page has a single RSVP form that replaces the calendar-invite RSVP, following the 2026 post-visit survey (duplicative RSVP, parking). It collects attendance (in person both days, one day, online, or not attending), Tuesday lunch and banquet, dietary needs, group photograph consent, parking, out-of-town lodging nights, and accessibility notes. In the prototype nothing is sent or stored, and the page says so.
+
+Production needs new backend work that has not been built and needs approval: an RSVP model tied to the member and the event year (a migration), a form view with editing until a deadline, an office export for headcounts, catering, and lodging, and a confirmation email. Photograph consent and dietary needs are personal data and need the K-State security review before real use.

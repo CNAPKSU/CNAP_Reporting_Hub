@@ -1628,3 +1628,48 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-meals dd{margin:0;color:var(--muted)}
 .sv-phh{margin:0 0 14px}
 @media (max-width:600px){.sv-meals>div{grid-template-columns:1fr;gap:4px}}
+/* Site Visit: last year's feedback (MW 2026-11-14) */
+.sv-stats>div{grid-template-columns:96px minmax(0,1fr)}
+.sv-stats dt{font:500 22px/1.2 var(--serif);color:var(--purple)}
+.sv-hd2{display:grid;gap:24px;min-width:0}
+.sv-quotes{display:grid;gap:16px}
+.sv-quotes blockquote{margin:0;padding:4px 0 4px 20px;border-left:2px solid var(--line)}
+.sv-quotes p{margin:0;font:400 19px/1.5 var(--serif);color:var(--ink)}
+.sv-chg{margin:8px 0 0;padding:0;list-style:none;display:grid}
+.sv-chg li{padding:12px 0 12px 22px;border-top:1px solid var(--line);position:relative;line-height:1.5}
+.sv-chg li::before{content:"";position:absolute;left:2px;top:21px;width:8px;height:8px;border-radius:50%;border:1.5px solid var(--purple)}
+@media (max-width:600px){.sv-stats>div{grid-template-columns:1fr}}
+/* Site Visit: RSVP (MW 2026-11-14). Prototype only, nothing is sent. */
+.sv-act{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.sv-rs{padding:28px;border-radius:12px;background:var(--paper);border:1px solid var(--line);min-width:0}
+.sv-rs form{display:grid;gap:26px}
+.sv-rs [data-inperson]{display:grid;gap:26px}
+.sv-rs fieldset{margin:0;padding:0;border:0;min-width:0}
+.sv-rs legend{padding:0;margin-bottom:10px;font:600 15px/22px var(--sans);color:var(--ink)}
+.sv-who-am{margin:0;padding-bottom:18px;border-bottom:1px solid var(--line);font-size:15px;color:var(--ink-2)}
+.sv-who-am span{color:var(--muted)}
+.sv-ops{display:grid;gap:8px}
+.sv-op{display:flex;gap:10px;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:15px}
+.sv-op:has(input:checked){border-color:var(--purple);background:var(--purple-tint);color:var(--purple-ink)}
+.sv-op input{accent-color:var(--purple);margin:0}
+.sv-chips{display:flex;flex-wrap:wrap;gap:8px}
+.sv-chip{position:relative;cursor:pointer}
+.sv-chip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.sv-chip span{display:inline-block;padding:7px 14px;border:1px solid var(--line-2);border-radius:999px;font-size:14.5px;color:var(--ink-2)}
+.sv-chip input:checked+span{border-color:var(--purple);background:var(--purple-tint);color:var(--purple-ink)}
+.sv-chip input:focus-visible+span{outline:2px solid var(--purple);outline-offset:2px}
+.sv-tx{display:grid;gap:6px;margin-top:12px;font-size:14.5px;color:var(--ink-2)}
+.sv-tx input,.sv-tx textarea{font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line-2);border-radius:8px;background:var(--paper);color:var(--ink);width:100%;box-sizing:border-box}
+.sv-hint{margin:8px 0 0;font-size:13.5px;line-height:20px;color:var(--muted)}
+.sv-rs-act{padding-top:6px;border-top:1px solid var(--line)}
+.sv-rs-act .btn{margin-top:18px}
+.sv-done{display:grid;gap:14px;outline:0}
+.sv-done h3{margin:0;font:400 28px/1.2 var(--serif)}
+.sv-done .sv-meals{margin:4px 0 0}
+.sv-done .btn{justify-self:start}
+.sv-rsvp .proto-note{margin:14px 0 0;font-size:13px;color:var(--muted)}
+.sv-rs [hidden],.sv-rs[hidden]{display:none!important}
+.sv-rsvp .sv-fine{margin-top:16px}
+.sv-rsvp .sv-sh{position:sticky;top:120px}
+@media (max-width:980px){.sv-rsvp .sv-sh{position:static}}
+.sv-rsvp .sv-sh p.sv-fine{margin-top:18px}
