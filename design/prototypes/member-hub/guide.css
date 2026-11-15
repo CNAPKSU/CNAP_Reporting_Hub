@@ -2021,3 +2021,7 @@ button.t3{border:0;background:none;padding:0;font:inherit;font-weight:500;color:
 .sv-glow .tr{opacity:.22}.sv-glow .tr2,.sv-glow .tr3{opacity:.28}
 .sv-hero .sv-dn{text-shadow:none}
 .sv-glow .tr{opacity:.3}.sv-glow .tr2,.sv-glow .tr3{opacity:.38}
+/* Venue photos, from the Center's 2026 planning document (MW 2026-11-14) */
+.sv-v{grid-template-columns:auto 112px minmax(0,1fr)!important;align-items:start}
+.sv-vph{width:112px;height:76px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+@media (max-width:520px){.sv-v{grid-template-columns:auto minmax(0,1fr)!important}.sv-vph{grid-column:2;width:100%;height:auto;aspect-ratio:2/1;max-width:100%}}
