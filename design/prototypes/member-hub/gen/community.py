@@ -82,7 +82,7 @@ W=[('Every Wednesday, 2:30 to 3:30 p.m.','NeuroSync Weekly Speaker Series','Talk
 ways=''.join(f'''<li><p class="cm-wk">{k}</p><p class="cm-wt">{t}</p><p class="cm-wd">{d}</p><a class="t3" href="{h}">{l}</a></li>''' for k,t,d,h,l in W)
 
 # 8. Announcements
-AN=[('12','November','CNAP Administrative Core','Reminder: Year 11 pilot letters of intent are due November 20','Letters are limited to one page. Please send yours to the Administrative Core by 5:00 p.m.',True),
+AN=[('12','November','CNAP Administrative Core','Reminder: Year 11 pilot full proposals are due November 20','Please send all proposal materials as one PDF to cnap@ksu.edu by 5:00 p.m. Central, in the order listed on pages 3 and 4 of the RFA.',True),
     ('9','November','CNAP Director','Welcome to our three newest graduate students','Please join us in welcoming the three students to the Cognitive Neuroscience Core this month.',False),
     ('4','November','CNAP Administrative Core','Updated travel and reimbursement guidelines','The attached guide replaces last year’s version and takes effect December 1.',True)]
 ann=''.join(f'''<li><span class="cm-ad2"><b>{d}</b>{m}</span><div><p class="cm-af">{f}</p><p class="cm-at2">{t}</p><p class="cm-ad3">{x}</p>{'<p class="cm-att">Attachment</p>' if a else ''}</div></li>''' for d,m,f,t,x,a in AN)

@@ -15,6 +15,7 @@ SHAPE={'ns':'<circle cx="5" cy="5" r="4"/>','ctr':'<path d="M5 .8 9.2 5 5 9.2.8 
 def mk(k): return f'<svg viewBox="0 0 10 10" class="emk k-{k}" aria-hidden="true">{SHAPE[k]}</svg>'
 NSLOC='Leadership Room 127'
 E=[# date,time,end,kind,title,detail,(enddate)
+ ('2026-10-16','5:00 p.m.','5:00 p.m.','due','Year 11 pilot letters of intent','Closed. Letters were due by 5:00 p.m. Central',None),
  ('2026-11-04','2:30 p.m.','3:30 p.m.','ns','Dopamine and the speed of choice','NeuroSync talk · '+NSLOC,None),
  ('2026-11-06','All day',None,'due','Pre-submission review requests','Send drafts to the Assistant Director for Grants and Contracts',None),
  ('2026-11-11','2:30 p.m.','3:30 p.m.','ns','Glia and the timing of plasticity','NeuroSync talk · '+NSLOC,None),
@@ -23,7 +24,7 @@ E=[# date,time,end,kind,title,detail,(enddate)
  ('2026-11-18','2:30 p.m.','3:30 p.m.','ns','Memory consolidation during sleep','Dr. Priya Raman · '+NSLOC,None),
  ('2026-11-18','4:00 p.m.','5:00 p.m.','cam','Campus seminar: Neural circuits of fear learning','From the K-State calendar',None),
  ('2026-11-19','12:00 p.m.','1:00 p.m.','ctr','Workshop: Writing a strong Specific Aims page','Grant writing workshop series',None),
- ('2026-11-20','All day',None,'due','Year 11 pilot letters of intent','One page, to the Administrative Core by 5:00 p.m.',None),
+ ('2026-11-20','5:00 p.m.','5:00 p.m.','due','Year 11 pilot full proposals','One compiled PDF to cnap@ksu.edu by 5:00 p.m. Central',None),
  ('2026-11-22','All week',None,'cam','Fall break, no classes','November 22 to 29','2026-11-29'),
  ('2026-11-26','All day',None,'cam','Thanksgiving, campus closed','November 26 and 27','2026-11-27'),
  ('2026-11-30','All day',None,'due','Fall reporting closes','Surveys and reports are due in the Member Hub',None),
@@ -32,7 +33,10 @@ E=[# date,time,end,kind,title,detail,(enddate)
  ('2026-12-10','3:30 p.m.','5:00 p.m.','ctr','Fall social for members and students','Every member, student, and core user is welcome',None),
  ('2026-12-11','All day',None,'cam','Last day of fall classes','From the K-State calendar',None),
  ('2026-12-14','All week',None,'cam','Final examinations','December 14 to 18','2026-12-18'),
+ ('2026-12-15','All day',None,'ctr','Pilot proposals go to the External Advisory Council','Scientific review is complete',None),
  ('2026-12-24','All day',None,'cam','Winter break, campus closed','December 24 to 31','2026-12-31'),
+ ('2027-01-08','All day',None,'ctr','Pilot award decisions go to NIGMS','For approval',None),
+ ('2027-06-01','All day',None,'ctr','Year 11 pilot awards begin','',None),
 ]
 def d(s): return dtm.date.fromisoformat(s)
 def t24(t):
@@ -128,7 +132,7 @@ html=f'''<!doctype html>
         <div class="rp-card">
           <h2>Key dates</h2>
           <ul class="kd">
-            <li class="k-due"><span class="kd-n">20</span><div><b>Year 11 pilot letters of intent</b><span>Friday, November 20</span></div></li>
+            <li class="k-due"><span class="kd-n">20</span><div><b>Year 11 pilot full proposals</b><span>Friday, November 20, by 5:00 p.m. Central</span></div></li>
             <li class="k-due"><span class="kd-n">30</span><div><b>Fall reporting closes</b><span>Monday, November 30</span></div></li>
             <li class="k-ctr"><span class="kd-n">25</span><div><b>2027 CNAP Site Visit</b><span>Tuesday and Wednesday, May 25 and 26</span></div></li>
           </ul>
