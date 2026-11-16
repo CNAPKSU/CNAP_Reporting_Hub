@@ -2656,3 +2656,12 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .al-ok{display:inline-flex;align-items:center;gap:8px;margin:0;font-size:15px;font-weight:600;color:var(--teal)}
 .al-ok::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px var(--teal-tint)}
 @media (max-width:760px){.al-path{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 44px auto}.al-gap::before{left:50%;right:auto;top:6px;bottom:12px;width:2px;height:auto;background:linear-gradient(var(--line-2),var(--teal))}.al-gap::after{left:50%;right:auto;top:auto;bottom:6px;transform:translateX(-50%) rotate(135deg)}.al-to b{font-size:24px;line-height:29px}}
+/* Alumni, third pass: larger labels, outlined email, evener path (MW 2026-11-15) */
+.al-path{grid-template-columns:minmax(0,1fr) 132px minmax(0,1.1fr)}
+.al-from .al-k,.al-to .al-k{font-size:14px;line-height:20px}
+.al-from b{font-size:19px;line-height:25px}
+.al-from span:last-child:not(.al-k),.al-to span:last-child:not(.al-k){font-size:16px;line-height:23px}
+.al-gap span{font-size:13.5px}
+.al-foot .btn{font-size:15px}
+.al-mail{background:var(--surface);border:1.5px solid var(--purple);color:var(--purple-ink);font-weight:600}
+.al-mail:hover{background:var(--purple-tint);color:var(--purple-ink)}

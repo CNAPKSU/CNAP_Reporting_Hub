@@ -195,7 +195,7 @@ def _gap(c,f):
 def _alum(i,t,n,c,w,f,ok):
     r,yrs=_split(c); aw,ag=_split(f)
     first=n.replace('Dr. ','').split()[0]
-    foot=(f'<div class="al-foot"><p class="al-ok">Happy to talk with new project leaders</p><div class="cm-acts"><button type="button" class="btn sm pri" data-direct="{n}">Email {first}</button>'
+    foot=(f'<div class="al-foot"><p class="al-ok">Happy to talk with new project leaders</p><div class="cm-acts"><button type="button" class="btn sm al-mail" data-direct="{n}">Email {first}</button>'
           f'<a class="btn sm" href="{intro(n)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></div>') if ok else ''
     return (f'<li class="al"><div class="al-head"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div><p class="al-n">{n}</p><p class="al-w">{w}</p></div></div>'
             f'<ol class="al-path" aria-label="Career path"><li class="al-from"><span class="al-k">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
