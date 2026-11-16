@@ -55,9 +55,9 @@ rows = (f'<li class="th-grp" data-gh="week"><h2>This week</h2><span>{len(week)} 
         + f'<li class="th-grp" data-gh="earlier"><h2>Earlier this fall</h2><span>{len(earlier)} threads</span></li>' + ''.join(row(*x) for x in earlier))
 unans = [x for x in T if x[7]]
 def spotcard(x):
-    return (f'<article class="th-spot"><p class="th-tp th-{TONE[x[2]]}">{x[2]}</p><h3><a href="#" data-proto title="{ONE}">{x[1]}</a></h3><p class="th-ex">{x[8]}</p>'
-            f'<div class="th-spf"><span class="th-who">{av(x[0], " sm")}<span>{BY[x[0]][2]}<small>{x[4]}</small></span></span>'
-            f'<a class="btn sm" href="#" data-proto title="{ONE}">Answer this thread</a></div></article>')
+    return (f'<li class="th-spot">{av(x[0])}<div class="th-spb"><p class="th-tp th-{TONE[x[2]]}">{x[2]}</p><h3><a href="#" data-proto title="{ONE}">{x[1]}</a></h3><p class="th-ex">{x[8]}</p>'
+            f'<p class="th-meta">Asked by {BY[x[0]][2]} · {x[4]}</p></div>'
+            f'<a class="btn" href="#" data-proto title="{ONE}">Answer this thread</a></li>')
 spot = ''.join(spotcard(x) for x in unans)
 topics = ''.join(f'<li><button type="button" class="th-topic" data-topic="{x}" aria-pressed="false"><span class="th-dot th-{TONE[x]}" aria-hidden="true"></span><span class="th-tn">{x}</span><span class="th-c">{sum(1 for t in T if t[2] == x)}</span></button></li>' for x in TOPICS)
 HELP = [('pr', 11), ('ev', 9), ('ms', 8), ('do', 7)]
@@ -110,7 +110,7 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
         <dl class="th-stats">
           <div><dt>Open threads</dt><dd class="num">{len(T)}</dd></div>
           <div><dt>Matched to you</dt><dd class="num">{n_m}</dd></div>
-          <div class="th-st-u"><dt>Waiting for a first answer</dt><dd class="num">{n_u}</dd></div>
+          <div class="th-st-u"><dt>Not answered yet</dt><dd class="num">{n_u}</dd></div>
         </dl>
       </div>
     </div>
@@ -118,13 +118,16 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
 
   <section class="th-wait" aria-labelledby="wait-h">
     <div class="wrap">
-      <div class="th-waith"><h2 id="wait-h">Waiting for a first answer</h2><p>One reply can save a colleague weeks. If you know something, please share it.</p></div>
-      <div class="th-spots">{spot}</div>
+      <div class="th-panel">
+        <div class="th-sech"><h2 id="wait-h">No one has answered these yet</h2><p>{["No","One","Two","Three","Four","Five"][n_u]} colleagues are still waiting for a reply. If you know something, please share it. One reply can save someone weeks.</p></div>
+        <ul class="th-spots">{spot}</ul>
+      </div>
     </div>
   </section>
 
   <div class="wrap th-cols">
     <div class="th-main">
+      <div class="th-sech"><h2>All threads</h2><p>Every conversation, newest activity first. Please filter, search, or pick a topic on the right.</p></div>
       <div class="th-bar">
         <div class="pf-filt cm-tf" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-t="a">All threads</button><button type="button" aria-pressed="false" data-t="m">Matched to you</button><button type="button" aria-pressed="false" data-t="u">Unanswered</button></div>
         <div class="th-find">

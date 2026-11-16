@@ -2329,3 +2329,24 @@ h3.th-t{color:inherit}
 @media (max-width:1000px){.th-hgrid{grid-template-columns:minmax(0,1fr)}.th-cols{grid-template-columns:minmax(0,1fr)}.th-side{position:static}}
 @media (max-width:1000px){.th-art{display:none}}
 @media (max-width:640px){.th-spots{grid-template-columns:minmax(0,1fr)}.th-stats{gap:8px}.th-stats>div{flex:1 1 0;min-width:0;padding:12px}.th-stats dt{font-size:12.5px;line-height:16px}.th-stats dd{font-size:30px}.th-row{grid-template-columns:36px minmax(0,1fr);gap:12px}.th-n{grid-column:2;flex-direction:row;align-items:baseline;gap:8px;padding:8px 12px;margin-top:4px;justify-self:start}.th-nn{font-size:20px}.th-stack{margin:0 0 0 6px}.th-row>.cm-av{margin-top:24px}.th-askp{font-size:15px}}
+
+/* Threads, third pass (MW 2026-11-15: headers too small, not enough padding, two columns confusing) */
+.th-wait{padding-block:64px 0}
+.th-panel{padding:32px 36px 12px;border:1px solid #e6d3a8;border-radius:16px;background:#fbf6ea}
+.th-sech{margin-bottom:20px}
+.th-sech h2{font:500 32px/38px var(--serif);letter-spacing:-.01em;margin:0;color:var(--ink)}
+.th-sech p{margin:8px 0 0;font-size:17px;line-height:26px;color:var(--ink-2);max-width:62ch}
+.th-spots{list-style:none;margin:0;padding:0;display:block}
+.th-spot{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:18px;align-items:center;padding:22px 0;border:0;border-top:1px solid #e6d3a8;border-radius:0;background:transparent}
+.th-spot>.cm-av{align-self:start;margin-top:26px}
+.th-spb{min-width:0}
+.th-spot h3{font:500 21px/28px var(--serif);margin:0}
+.th-spot .btn{white-space:nowrap}
+.th-cols{padding-block:72px 96px;gap:56px}
+.th-main .th-sech{margin-bottom:24px}
+.th-status{margin-top:24px}
+.th-grp{padding:36px 0 12px}
+.th-grp h2{font:500 24px/30px var(--serif)}
+.th-card{padding:24px 26px}
+.th-card h2{font:500 21px/27px var(--serif);margin-bottom:14px}
+@media (max-width:640px){.th-panel{padding:24px 18px 4px}.th-sech h2{font-size:26px;line-height:32px}.th-spot{grid-template-columns:36px minmax(0,1fr)}.th-spot .btn{grid-column:2;justify-self:start}.th-wait{padding-top:40px}}
