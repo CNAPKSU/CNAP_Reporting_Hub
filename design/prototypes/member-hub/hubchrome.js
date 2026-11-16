@@ -227,3 +227,46 @@
   setTimeout(run, 500);
 })();
 document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();});});
+
+/* Hover and focus descriptions in the Hub's own style, in place of the browser's plain white boxes (MW 2026-11-15) */
+(function () {
+  if (window.__hubTips) return; window.__hubTips = 1;
+  var st = document.createElement('style');
+  st.textContent = '.hub-tip{position:fixed;z-index:1000;max-width:min(300px,calc(100vw - 24px));padding:9px 12px;border-radius:10px;background:#22132f;color:#f6f2fa;'
+    + 'font:500 13.5px/19px "Inter Hub","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.005em;box-shadow:0 10px 28px -10px rgba(20,11,26,.55),0 0 0 1px rgba(255,255,255,.22);'
+    + 'pointer-events:none;opacity:0;transform:translateY(3px);transition:opacity .14s ease,transform .14s ease;text-wrap:pretty}'
+    + '.hub-tip.on{opacity:1;transform:none}'
+    + '.hub-tip::after{content:"";position:absolute;left:var(--ax,50%);width:10px;height:10px;background:inherit;transform:translateX(-50%) rotate(45deg);border-radius:2px}'
+    + '.hub-tip[data-side="top"]::after{bottom:-4px}.hub-tip[data-side="bottom"]::after{top:-4px}'
+    + '@media (prefers-reduced-motion:reduce){.hub-tip{transition:none}}';
+  document.head.appendChild(st);
+  var tip = document.createElement('div'); tip.className = 'hub-tip'; tip.setAttribute('role', 'tooltip'); tip.id = 'hub-tip';
+  var cur = null, timer = 0;
+  function host(el) { while (el && el.nodeType === 1) { if (el.hasAttribute && (el.hasAttribute('title') || el.hasAttribute('data-tip'))) return el; el = el.parentElement; } return null; }
+  function claim(el) { var t = el.getAttribute('title'); if (t) { el.setAttribute('data-tip', t); el.removeAttribute('title'); } return el.getAttribute('data-tip'); }
+  function show(el) {
+    var text = claim(el); if (!text) return;
+    if (!tip.parentNode) document.body.appendChild(tip);
+    cur = el; tip.textContent = text; tip.classList.remove('on'); tip.style.left = '0px'; tip.style.top = '0px';
+    el.setAttribute('aria-describedby', 'hub-tip');
+    var r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight, gap = 10;
+    var side = r.top - h - gap > 8 ? 'top' : 'bottom';
+    var cx = r.left + r.width / 2, left = Math.max(12, Math.min(innerWidth - w - 12, cx - w / 2));
+    var top = side === 'top' ? r.top - h - gap : r.bottom + gap;
+    tip.dataset.side = side; tip.style.left = left + 'px'; tip.style.top = top + 'px';
+    tip.style.setProperty('--ax', Math.max(14, Math.min(w - 14, cx - left)) + 'px');
+    requestAnimationFrame(function () { tip.classList.add('on'); });
+  }
+  function hide() { clearTimeout(timer); if (cur) cur.removeAttribute('aria-describedby'); cur = null; tip.classList.remove('on'); }
+  document.addEventListener('mouseover', function (e) {
+    var el = host(e.target); if (el === cur) return;
+    if (el) claim(el);
+    hide(); if (!el) return;
+    timer = setTimeout(function () { show(el); }, 350);
+  });
+  document.addEventListener('mouseout', function (e) { var el = host(e.target); if (el && el === cur && !el.contains(e.relatedTarget)) hide(); else if (el && !el.contains(e.relatedTarget)) clearTimeout(timer); });
+  document.addEventListener('focusin', function (e) { var el = host(e.target); if (el && e.target.matches && e.target.matches(':focus-visible')) show(el); });
+  document.addEventListener('focusout', hide);
+  addEventListener('scroll', hide, { passive: true });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+})();
