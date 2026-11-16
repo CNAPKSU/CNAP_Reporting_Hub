@@ -56,12 +56,12 @@ def page(k):
   </section>
   <div class="wrap tp-cols">
     <div class="tp-main">
-      <div class="tp-q">{body}</div>
+      <div class="tp-q" id="tp-question" data-rail="The question">{body}</div>
       {why}
-      <h2 class="tp-h" data-rh>{rep(n) if n else 'Replies'}</h2>
+      <h2 class="tp-h" data-rh id="tp-replies" data-rail="Replies">{rep(n) if n else 'Replies'}</h2>
       <ol class="tp-rs">{empty}{replies}</ol>
       <form class="tp-reply" id="reply" aria-labelledby="tp-rh">
-        <h2 class="tp-h" id="tp-rh">Your reply</h2>
+        <h2 class="tp-h" id="tp-rh" data-rail="Your reply">Your reply</h2>
         <label class="sr" for="tp-rt">Your reply</label>
         <textarea id="tp-rt" rows="4" placeholder="Please share what you know, or who to ask."></textarea>
         <p class="tp-note" role="status" hidden></p>
@@ -70,7 +70,7 @@ def page(k):
     </div>
     <aside class="tp-side" aria-label="About this thread">
       <div class="tp-card"><h2 class="tp-sh">In this thread</h2><ul class="tp-ppl">{people}</ul></div>
-      <div class="tp-card"><h2 class="tp-sh">Related threads</h2><ul class="tp-rel">{rel}</ul><a class="t3" href="threads.html">All threads</a></div>
+      <div class="tp-card"><h2 class="tp-sh" id="tp-related" data-rail="Related threads">Related threads</h2><ul class="tp-rel">{rel}</ul><a class="t3" href="threads.html">All threads</a></div>
     </aside>
   </div>
 </main>

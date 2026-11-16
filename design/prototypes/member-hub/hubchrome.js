@@ -311,20 +311,35 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
   };
 })();
 
-/* "On this page" dot rail for pages that do not have one yet, matching Home (MW 2026-11-15) */
+/* "On this page": one rail of dots on every page, in the same place, working the same way (MW 2026-11-15).
+   It replaces each page's own version on screens 1000px and wider. Narrower screens keep each page's own small-screen menu. */
 (function () {
   function build() {
-    if (document.querySelector('.otp, .spine, .hr-rail')) return;
-    if (document.body.classList.contains('proto') || document.querySelector('aside.side')) return; /* the app's reporting pages stay as they are */
+    if (document.querySelector('.hr-rail')) return;
     var main = document.querySelector('main'); if (!main) return;
-    var marked = [].slice.call(main.querySelectorAll('[data-rail]'));
-    var hs = marked.length ? marked : [].slice.call(main.querySelectorAll('h2')).filter(function (h) {
-      if (h.closest('dialog, aside, .th-side, .tp-side, [hidden], .cm-day, .ev-cal, .sr')) return false;
-      var t = h.textContent.trim(); return t && t.length < 60 && h.getClientRects().length;
-    });
-    if (hs.length < 3) return;
+    var items = [];
+    var own = document.querySelector('nav.otp, nav.spine');
+    if (own) {
+      [].slice.call(own.querySelectorAll('ol a[href^="#"]')).forEach(function (a) {
+        var t = document.querySelector(a.getAttribute('href')); if (!t) return;
+        var sp = a.querySelectorAll('span'); var label = (sp.length ? sp[sp.length - 1].textContent : a.textContent).replace(/\s+/g, ' ').trim();
+        items.push({ el: t, label: label });
+      });
+    }
+    if (!items.length) {
+      var marked = [].slice.call(main.querySelectorAll('[data-rail]'));
+      var hs = marked.length ? marked : [].slice.call(main.querySelectorAll('h2')).filter(function (h) {
+        if (h.closest('dialog, .th-side, .tp-side, [hidden], .cm-day, .ev-cal, .sr, .px-roll-body, details:not([open]) > :not(summary)')) return false;
+        var t = h.textContent.replace(/\s+/g, ' ').trim(); return t && t.length < 70 && h.getClientRects().length;
+      });
+      hs.forEach(function (h, i) { if (!h.id) h.id = 'sec-' + (i + 1); items.push({ el: h, label: h.getAttribute('data-rail') || h.textContent.replace(/\s+/g, ' ').trim().replace(/^\d+\s*/, '') }); });
+    }
+    if (items.length < 2) return;
+    var side = document.querySelector('aside.side');
     var st = document.createElement('style');
-    st.textContent = '.hr-rail{position:fixed;z-index:30;left:max(10px,env(safe-area-inset-left,0px));top:124px;width:28px;padding:10px 0;box-sizing:border-box;border-radius:12px;border:1px solid transparent;background:transparent;transition:width .2s ease,background-color .2s,box-shadow .2s,border-color .2s;font-family:"Inter Hub","Inter",system-ui,sans-serif}'
+    st.textContent = '@media (min-width:1000px){nav.otp,.otp-btn,nav.spine{display:none!important}}'
+      + '.hr-rail{position:fixed;z-index:30;left:calc(max(10px,env(safe-area-inset-left,0px)) + var(--hr-off,0px));top:124px;width:28px;padding:10px 0;box-sizing:border-box;border-radius:12px;border:1px solid transparent;background:transparent;'
+      + 'transition:width .2s ease,background-color .2s,box-shadow .2s,border-color .2s;font-family:"Inter Hub","Inter",system-ui,sans-serif}'
       + '.hr-rail ol{position:relative;list-style:none;margin:0;padding:0}'
       + '.hr-rail ol::before{content:"";position:absolute;left:13px;top:12px;bottom:12px;width:1px;background:var(--line-2,#d3cdc3)}'
       + '.hr-rail a{position:relative;display:block;height:26px;padding:3px 12px 3px 30px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:transparent;font-size:14px;line-height:20px;text-decoration:none}'
@@ -332,32 +347,41 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
       + '.hr-rail a.seen::before{border-color:var(--purple,#512888)}'
       + '.hr-rail a[aria-current="true"]::before{background:var(--purple,#512888);border-color:var(--purple,#512888);box-shadow:0 0 0 4px rgba(81,40,136,.14)}'
       + '.hr-rail .hr-h{display:none;margin:0 0 6px;padding:0 16px 10px 14px;border-bottom:1px solid var(--line,#e4e0d8);font:500 19px/24px "Lora Hub","Lora",Georgia,serif;color:var(--ink,#1d1b21)}'
-      + '.hr-rail:hover,.hr-rail:focus-within{width:250px;padding:16px 0 10px;background:var(--surface,#fff);border-color:var(--line,#e4e0d8);box-shadow:0 18px 40px -18px rgba(29,27,33,.3)}'
+      + '.hr-rail:hover,.hr-rail:focus-within{width:260px;padding:16px 0 10px;background:var(--surface,#fff);border-color:var(--line,#e4e0d8);box-shadow:0 18px 40px -18px rgba(29,27,33,.3)}'
       + '.hr-rail:hover .hr-h,.hr-rail:focus-within .hr-h{display:block}'
       + '.hr-rail:hover a,.hr-rail:focus-within a{color:var(--ink-2,#423e48);height:auto;white-space:normal;padding-top:6px;padding-bottom:6px}'
       + '.hr-rail:hover a:hover,.hr-rail:focus-within a:hover{color:var(--purple,#512888)}'
       + '.hr-rail:hover a[aria-current="true"],.hr-rail:focus-within a[aria-current="true"]{color:var(--purple-ink,#3c1d66);font-weight:600}'
       + '.hr-rail:hover a::before,.hr-rail:focus-within a::before{top:12px}'
-      + '.hr-rail.hr-wait{opacity:0;pointer-events:none}.hr-rail{transition:width .2s ease,background-color .2s,box-shadow .2s,border-color .2s,opacity .25s}'
-      + '@media (max-width:1180px){.hr-rail{display:none}}@media (prefers-reduced-motion:reduce){.hr-rail,.hr-rail a::before{transition:none}}';
+      + '@media (max-width:999px){.hr-rail{display:none}}@media (prefers-reduced-motion:reduce){.hr-rail,.hr-rail a::before{transition:none}}'
+      + '@keyframes hr-bounce{0%{transform:translateY(0)}25%{transform:translateY(-10px)}45%{transform:translateY(0)}62%{transform:translateY(-5px)}78%{transform:translateY(0)}100%{transform:translateY(0)}}'
+      + '.hr-bounce{animation:hr-bounce .8s cubic-bezier(.28,.84,.42,1)}@media (prefers-reduced-motion:reduce){.hr-bounce{animation:none}}';
     document.head.appendChild(st);
-    var nav = document.createElement('nav'); nav.className = 'hr-rail'; nav.setAttribute('aria-label', 'Sections on this page');
+    var nav = document.createElement('nav'); nav.className = 'hr-rail'; nav.setAttribute('aria-label', 'On this page');
+    var hh = document.createElement('p'); hh.className = 'hr-h'; hh.textContent = 'On this page';
     var ol = document.createElement('ol'), links = [];
-    hs.forEach(function (h, i) {
-      if (!h.id) h.id = 'sec-' + (i + 1);
+    var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    items.forEach(function (it) {
       var li = document.createElement('li'), a = document.createElement('a');
-      a.href = '#' + h.id; a.textContent = h.getAttribute('data-rail') || h.textContent.replace(/\s+/g, ' ').trim();
-      a.addEventListener('click', function (e) { e.preventDefault(); var y = h.getBoundingClientRect().top + scrollY - 110; scrollTo({ top: y, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); h.classList.remove('th-bounce'); setTimeout(function () { void h.offsetWidth; h.classList.add('th-bounce'); }, 450); });
+      if (!it.el.id) it.el.id = 'sec-' + (links.length + 1);
+      a.href = '#' + it.el.id; a.textContent = it.label;
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var tgt = it.el; if (tgt.tagName === 'DETAILS' && !tgt.open) tgt.open = true;
+        var y = tgt.getBoundingClientRect().top + scrollY - 110; scrollTo({ top: y, behavior: still ? 'auto' : 'smooth' });
+        var hd = tgt.matches('h1,h2,h3,h4') ? tgt : (tgt.querySelector('h1,h2,h3,h4') || tgt);
+        setTimeout(function () { hd.classList.remove('hr-bounce'); void hd.offsetWidth; hd.style.display = hd.style.display || ''; hd.classList.add('hr-bounce'); }, still ? 0 : 450);
+      });
       li.appendChild(a); ol.appendChild(li); links.push(a);
     });
-    var hh = document.createElement('p'); hh.className = 'hr-h'; hh.textContent = 'On this page';
     nav.appendChild(hh); nav.appendChild(ol); document.body.appendChild(nav);
+    function place() { nav.style.setProperty('--hr-off', side && getComputedStyle(side).display !== 'none' ? Math.max(0, side.getBoundingClientRect().right) + 'px' : '0px'); }
     function spy() {
-      nav.classList.toggle('hr-wait', scrollY < 260);
-      var cur = 0; hs.forEach(function (h, i) { if (h.getBoundingClientRect().top < 200) cur = i; });
-      links.forEach(function (a, i) { a.toggleAttribute('aria-current', i === cur); if (i === cur) a.setAttribute('aria-current', 'true'); a.classList.toggle('seen', i < cur); });
+      var cur = 0; items.forEach(function (it, i) { if (it.el.getBoundingClientRect().top < 220) cur = i; });
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = items.length - 1;
+      links.forEach(function (a, i) { if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); a.classList.toggle('seen', i < cur); });
     }
-    addEventListener('scroll', spy, { passive: true }); spy();
+    addEventListener('scroll', spy, { passive: true }); addEventListener('resize', function () { place(); spy(); }); place(); spy();
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 50); }); else setTimeout(build, 50);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 80); }); else setTimeout(build, 80);
 })();
