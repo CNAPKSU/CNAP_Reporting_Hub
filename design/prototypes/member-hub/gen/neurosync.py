@@ -54,6 +54,7 @@ for d in F26:
     t=fall26[k];k+=1
     f.append(('none',d,'No talk this week') if t is None else ('talk',d,t))
 SEM[1]=('f26','Fall 2026','This semester','Leadership Room 127',f)
+JOIN=mt('mkwills@ksu.edu','Please add me to the CNAP email list','\n'.join(['Name:','K-State email:','Department:','']),cc=None)
 SIGN=mt('cnap@ksu.edu','Presenting at NeuroSync','\n'.join(['Name:','Department:','','Working title:','','Dates that work for me:','']),cc=None)
 SUGG=mt('cnap@ksu.edu','NeuroSync speaker suggestion','\n'.join(['Speaker name and institution:','Research topic:','Why CNAP members would value the talk:','','Your name:','']),cc=None)
 IDEA=mt('cnap@ksu.edu','An idea for NeuroSync','\n'.join(['Name:','','My idea (a topic, a format, or a change to the series):','']),cc=None)
@@ -93,7 +94,7 @@ INV=f'''<article class="ns-fly" aria-labelledby="fly-h">
           <div><p class="ns-fl">Recognition</p><ul class="ns-rec"><li>Early Career Award, a national neuroscience society, 2024</li><li>Funded by the National Institutes of Health and the National Science Foundation</li></ul></div>
         </div>
         <dl class="ns-fly-w"><div><dt>When</dt><dd>Wednesday, December 2, 2026<br>2:30 to 3:30 p.m.</dd></div><div><dt>Where</dt><dd>{LOC}<br>Refreshments provided</dd></div><div><dt>Online</dt><dd>Zoom. The link is in the weekly email.</dd></div><div><dt>Hosted by</dt><dd>The CNAP Center. Invited by Dr. Priya Raman.</dd></div></dl>
-        <p class="ns-fq">Questions? <a href="mailto:mkwills@ksu.edu">mkwills@ksu.edu</a> · <a href="{gcal('2026-12-02','Machine learning for spike sorting')}" target="_blank" rel="noopener">Add to Google Calendar</a> · <a href="{ocal('2026-12-02','Machine learning for spike sorting')}" target="_blank" rel="noopener">Outlook</a> · <a href="neurosync-flyer.pdf" target="_blank" rel="noopener" data-flyer title="A letter-size PDF flyer for this talk, ready to print and post.">Flyer to print (PDF)</a></p>
+        <p class="ns-fq">Questions? <a href="mailto:mkwills@ksu.edu">mkwills@ksu.edu</a> · <a href="{gcal('2026-12-02','Machine learning for spike sorting')}" target="_blank" rel="noopener">Add to Google Calendar</a> · <a href="{ocal('2026-12-02','Machine learning for spike sorting')}" target="_blank" rel="noopener">Outlook</a> · <a href="neurosync-flyer.pdf" target="_blank" rel="noopener" data-flyer title="A letter-size PDF flyer for this talk, ready to print and post.">Flyer to print (PDF)</a> · <a href="{JOIN}" title="Opens an email to Morgan Wills at mkwills@ksu.edu asking to be added to the CNAP email list.">Join the email list</a></p>
       </article>'''
 
 import math as _m, random as _r
@@ -180,7 +181,8 @@ page=f'''<!doctype html>
 
   <section class="ns-sec ns-email" id="ns-email" aria-labelledby="ns-email-h">
     <div class="wrap ns-eg">
-      <div><header class="sv-sh"><h2 id="ns-email-h">This Week at NeuroSync</h2><p>Every Monday the CNAP team emails the week’s talk to all members: the speaker’s headshot and biography, the talk title and summary, and the room and time. Everything in the email is also on this page.</p></header></div>
+      <div><header class="sv-sh"><h2 id="ns-email-h">This Week at NeuroSync</h2><p>Every Monday the CNAP team emails the week’s talk to all members: the speaker’s headshot and biography, the talk title and summary, and the room and time. Everything in the email is also on this page.</p></header>
+        <div class="ns-listjoin"><a class="btn pri" href="{JOIN}" title="Opens an email to Morgan Wills at mkwills@ksu.edu asking to be added to the CNAP email list.">Join the email list</a><p>Not getting the Monday email? Ask Morgan Wills to add you, so you never miss a reminder.</p></div></div>
       <figure class="ns-mail" aria-label="A sketch of the weekly email">
         <p class="ns-mf">From CNAP · Monday</p>
         <p class="ns-ms">This Week at NeuroSync</p>

@@ -2883,3 +2883,11 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .ns-mailnote{margin:14px 0 0;font-size:13.5px;color:var(--muted)}.ns-mailnote a{color:inherit}
 /* A line and room between the invited speaker card and the semester tabs (MW 2026-11-15) */
 .ns-semh{margin:48px 0 16px;padding-top:28px;border-top:1px solid var(--line);font:500 20px/26px var(--serif);color:var(--ink)}
+.ns-listjoin{display:flex;align-items:center;flex-wrap:wrap;gap:12px 16px;margin-top:22px}.ns-listjoin p{margin:0;font-size:14px;color:var(--muted);max-width:40ch}
+
+.ns-three > .ns-mailnote{grid-column:1/-1}
+/* Join-the-email-list invitations (MW 2026-11-15) */
+.ns-todo{margin-top:20px}
+.ns-getmail,.an-join,.ev-list{margin:12px 0 0;font-size:13.5px;line-height:20px;color:var(--muted)}
+.ns-getmail a,.an-join a,.ev-list a{color:var(--purple-ink)}
+.ev-list{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}

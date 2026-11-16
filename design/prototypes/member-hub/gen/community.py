@@ -318,7 +318,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-ann" aria-labelledby="cm-ann-h">
           <h2 id="cm-ann-h">Announcements</h2>
-          <div class="cs-b"><p>Every email from the CNAP listserv, kept here so you can find any email again. Select an email to read the full message.</p>
+          <div class="cs-b"><p>Every email from the CNAP listserv, kept here so you can find any email again. Select an email to read the full message.</p><p class="an-join">Not getting these emails? <a href="mailto:mkwills@ksu.edu?subject=Please%20add%20me%20to%20the%20CNAP%20email%20list&amp;body=Name%3A%0AK-State%20email%3A%0ADepartment%3A%0A" title="Opens an email to Morgan Wills at mkwills@ksu.edu asking to be added to the CNAP email list.">Ask Morgan Wills to add you to the list</a>.</p>
             <div class="an-bar"><div class="pf-filt an-f" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-af="all">All</button><button type="button" aria-pressed="false" data-af="ac">Administrative Core</button><button type="button" aria-pressed="false" data-af="hb">Director</button><button type="button" aria-pressed="false" data-af="mw">Grants and Contracts</button><button type="button" aria-pressed="false" data-af="att">With attachments</button></div></div>
             <ul class="an-list">{ann}</ul>
             <p class="an-more"><button type="button" class="btn sm" data-older>Show {N_OLD} older emails</button></p></div>

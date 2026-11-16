@@ -142,6 +142,7 @@ html=f'''<!doctype html>
           <p class="ev-sub">Please add the Center calendar to Outlook or Google, so new events appear automatically. Your private meetings are never included.</p>
           <button type="button" class="btn ev-copyfeed">Copy calendar link</button>
           <p class="meta ev-feed-note">The subscription link is created when the Hub goes live.</p>
+            <p class="ev-sub ev-list">Reminders come by email too. <a href="mailto:mkwills@ksu.edu?subject=Please%20add%20me%20to%20the%20CNAP%20email%20list&amp;body=Name%3A%0AK-State%20email%3A%0ADepartment%3A%0A" title="Opens an email to Morgan Wills at mkwills@ksu.edu asking to be added to the CNAP email list.">Join the CNAP email list</a> to get the Monday NeuroSync email and Center announcements.</p>
         </div>
       </aside>
     </div>
