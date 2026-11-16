@@ -2665,3 +2665,6 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .al-foot .btn{font-size:15px}
 .al-mail{background:var(--surface);border:1.5px solid var(--purple);color:var(--purple-ink);font-weight:600}
 .al-mail:hover{background:var(--purple-tint);color:var(--purple-ink)}
+/* Profile view switch: the label sits above, the switch hugs its two buttons (MW 2026-11-15) */
+.pz-tl{flex-basis:auto;margin:26px 0 8px;padding:0;font-size:14px;font-weight:600;color:var(--ink-2)}
+.pz-tog{display:inline-flex;flex-wrap:nowrap;width:auto;margin-top:0;border-radius:999px}
