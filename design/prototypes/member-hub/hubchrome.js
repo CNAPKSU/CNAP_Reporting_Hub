@@ -7,6 +7,9 @@
     + '.hc-thread{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2,#d5d3d9);background:transparent;color:var(--purple-ink,#3c1d66);font:500 14.5px/1 var(--sans,system-ui,sans-serif);text-decoration:none;white-space:nowrap}'
     + '@media (min-width:1300px){.tools:has(.hc-thread:not([hidden])) .search{width:190px}}'
     + '.hc-thread:hover{background:var(--purple-tint,#efe8f8)}'
+    + 'header:has(.hn)>.wrap{max-width:none;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}'
+    + '.mywork{white-space:nowrap}'
+    + '.hc-thread{background:var(--purple,#512888);border-color:var(--purple,#512888);color:#fff;font-weight:600}.hc-thread:hover{background:var(--purple-ink,#3c1d66)}'
     + '.hc-thread svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}'
     + '.hc-thread.hc-icon span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.hc-thread.hc-icon{padding:0 11px}.hc-thread[hidden]{display:none}'
     + '.fbk-open{position:fixed;right:22px;bottom:22px;z-index:50;padding:10px 20px;border-radius:999px;border:0;background:var(--purple,#512888);color:#fff;font:600 14px/20px var(--sans,system-ui,sans-serif);box-shadow:0 8px 24px -8px rgba(60,29,102,.5);cursor:pointer}'
@@ -44,6 +47,7 @@
     a.title = 'Opens Threads: ask the CNAP community a question, look for a collaborator, or answer a colleague';
     if (/threads\.html$/.test(location.pathname)) a.addEventListener('click', function (e) { var d = document.querySelector('.cm-compose'); if (!d) return; e.preventDefault(); try { d.showModal(); } catch (x) { d.setAttribute('open', ''); } });
     a.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 3.5h11v7h-6l-3 2.5v-2.5h-2z"/></svg><span>Start a thread</span>';
+    a.setAttribute('aria-label', 'Start a thread');
     mw.parentNode.insertBefore(a, mw);
   }
 
@@ -84,8 +88,7 @@
     ['Research', 'research.html', [['Research stories', 'research.html', 'Work from the Center’s pilot projects, cores, and investigators'], ['Suggest a story', 'mailto:cnap@ksu.edu?subject=Story%20idea%20for%20Research%20at%20CNAP', 'Tell the CNAP team about a milestone, paper, or person to profile']]],
     ['Events', 'events.html', [['Events calendar', 'events.html', 'Every Center event, deadline, and campus date'], ['NeuroSync', 'neurosync.html', 'The Wednesday speaker series'], ['The 2027 Site Visit', 'sitevisit.html', 'May 25 and 26, 2027']]],
     ['Funding', 'funding.html', [['Funding opportunities', 'funding.html', 'Picked for you, and relevant to most members'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft'], ['Funding news', 'funding-news.html', 'News from sponsors, and events and talks']]],
-    ['Community', 'community.html', [['Community', 'community.html', 'Achievements, people, and ways to connect'], ['Member directory', 'community.html#cm-dir', 'Find a colleague or a type of expertise'], ['Alumni', 'community.html#cm-alum', 'Where former members are now']]],
-    ['Threads', 'threads.html', null],
+    ['Community', 'community.html', [['Community', 'community.html', 'Achievements, people, and ways to connect'], ['Threads', 'threads.html', 'Questions answered by members who have the experience'], ['Member directory', 'community.html#cm-dir', 'Find a colleague or a type of expertise'], ['Alumni', 'community.html#cm-alum', 'Where former members are now']]],
     ['Resources', 'core-bn.html', [['Behavioral Neuroscience Core', 'core-bn.html', 'Services, equipment, and how to book'], ['Cognitive Neuroscience Core', 'core-cn.html', 'Services, equipment, and how to book'], ['Neuroinformatics Core', 'core-ni.html', 'Data, analysis, and consultation'], ['Mentor guide', 'mentor.html', 'For mentors of CNAP investigators'], ['Mentee guide', 'mentee.html', 'For pilot and project investigators']]]
   ];
   var here = (location.pathname.split('/').pop() || 'index.html');
@@ -192,7 +195,7 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(); } });
   /* one fit for the whole ribbon: step down until nothing runs past the edge */
   var hdr = hn.closest('header');
-  var STEPS = ['f-thread-icon', 'f-tight', 'f-search-icon', 'f-thread-off', 'f-menu', 'f-mini', 'f-logo'];
+  var STEPS = ['f-tight', 'f-search-icon', 'f-thread-icon', 'f-thread-off', 'f-menu', 'f-mini', 'f-logo'];
   function over() {
     var w = document.documentElement.clientWidth, bad = false;
     hdr.querySelectorAll('.wrap > *, .tools > *').forEach(function (el) { if (el.offsetParent !== null && el.getBoundingClientRect().right > w - 8) bad = true; });
