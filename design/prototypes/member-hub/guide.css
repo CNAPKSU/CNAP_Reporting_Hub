@@ -2813,3 +2813,15 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
    of the heading, smaller and softer, so the intro reads as a note under the title. */
 .open-g .lead{margin-top:16px;max-width:44ch;font:400 18px/29px var(--serif);letter-spacing:.003em;color:color-mix(in srgb,var(--ink-2) 88%,var(--bg,#faf9f7))}
 @media (max-width:640px){.open-g .lead{font-size:17px;line-height:27px}}
+
+/* Research cores as a table (MW 2026-11-15: "make this a table") */
+.ct-wrap{margin:18px 0 6px;overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.ct{width:100%;border-collapse:collapse;font-size:14.5px;line-height:21px}
+.ct thead th{text-align:left;font-size:12.5px;font-weight:600;color:var(--muted);padding:10px 16px;background:color-mix(in srgb,var(--ink) 3%,var(--surface));border-bottom:1px solid var(--line)}
+.ct td,.ct tbody th{padding:12px 16px;vertical-align:top;text-align:left;border-top:1px solid var(--line)}
+.ct tbody tr:first-child td,.ct tbody tr:first-child th{border-top:0}
+.ct tbody th{font:500 16px/22px var(--serif);color:var(--ink);white-space:nowrap}
+.ct td{color:var(--ink-2)}
+.ct td:last-child{white-space:nowrap;color:var(--muted)}
+.ct th + td,.ct td + td,.ct thead th + th{border-left:1px solid var(--line)}
+@media (max-width:640px){.ct tbody th,.ct td:last-child{white-space:normal}}
