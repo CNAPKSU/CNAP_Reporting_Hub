@@ -2430,3 +2430,8 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .th-side .th-hc{font-size:12.5px}
 .th-side .th-hc b{display:inline;font:600 13px/1 var(--sans);color:var(--ink-2);margin-right:3px}
 .th-side .th-how ol{font-size:14px;line-height:21px;color:var(--muted);gap:6px}
+/* Threads side column: keep quiet type, bring back light boxes (MW 2026-11-15: "I like a version of the boxes") */
+.th-side{gap:14px}
+.th-side .th-card,.th-side .th-card:last-child{padding:16px 18px;margin:0;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.th-side .th-card h2{margin-bottom:8px}
+.th-side .th-topic{padding:0 6px;margin:0 -6px;width:calc(100% + 12px)}
