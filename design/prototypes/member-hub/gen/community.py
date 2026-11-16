@@ -71,7 +71,7 @@ skills=''.join(f'''<li><button type="button" class="cm-sk" data-skill="{s}"><spa
 
 # 4. Directory
 filt=''.join(f'<button type="button" aria-pressed="{"true" if k=="all" else "false"}" data-g="{k}">{l}</button>' for k,l in G)
-dirl=''.join(f'''<li class="cm-dr" data-g="{m[4]}" data-new="{'1' if m[7] else '0'}" data-s="{'|'.join(m[5])}" data-q="{(m[2]+' '+m[3]+' '+' '.join(m[5])).lower()}">{av(m[0])}<div class="cm-dm"><p class="cm-dn"><a class="mb-link" href="member-{m[0]}.html">{m[2]}</a>{' <span class="cm-new">New</span>' if m[7] else ''}</p><p class="cm-drl">{m[3]}</p></div><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in m[5])}</p><a class="t3" href="{intro(m[2])}">Ask for an introduction</a></li>''' for m in M)
+dirl=''.join(f'''<li class="cm-dr" data-g="{m[4]}" data-new="{'1' if m[7] else '0'}" data-s="{'|'.join(m[5])}" data-q="{(m[2]+' '+m[3]+' '+' '.join(m[5])).lower()}">{av(m[0])}<div class="cm-dm"><p class="cm-dn"><a class="mb-link" href="member-{m[0]}.html">{m[2]}</a>{' <span class="cm-new">New</span>' if m[7] else ''}</p><p class="cm-drl">{m[3]}</p></div><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in m[5])}</p><span class="cm-dra"><button type="button" class="t3" data-direct="{m[2]}">Email {m[2].replace('Dr. ','').split()[0]}</button><span class="cm-or">or</span><a class="t3" href="{intro(m[2])}" title="Starts an email asking the CNAP team to introduce you.">ask for an introduction</a></span></li>''' for m in M)
 
 # 5. Ask the community
 T=[('jl','Looking for an EEG collaborator','4 replies','Active today',True,'You record sleep EEG in your pilot project.',False),
