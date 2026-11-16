@@ -375,13 +375,25 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
       li.appendChild(a); ol.appendChild(li); links.push(a);
     });
     nav.appendChild(hh); nav.appendChild(ol); document.body.appendChild(nav);
-    function place() { nav.style.setProperty('--hr-off', side && getComputedStyle(side).display !== 'none' ? Math.max(0, side.getBoundingClientRect().right) + 'px' : '0px'); }
+    /* Place: centered in the left margin, starting at the top of the first section under the hero, then holding 124px from the top as you scroll (MW 2026-11-15) */
+    var hero = (function () { var f = main.firstElementChild; while (f && (f.offsetHeight < 40 || f.matches('nav, script, style, aside, dialog') || /fixed|sticky/.test(getComputedStyle(f).position))) f = f.nextElementSibling; return f; })();
+    if (side) hero = null;
+    var hdr = document.querySelector('header'); 
+    function place() {
+      var gl = side && getComputedStyle(side).display !== 'none' ? Math.max(0, side.getBoundingClientRect().right) : 0;
+      var ref = items[0].el, w = ref.closest('.wrap') || ref, cs = getComputedStyle(w);
+      var cl = w.getBoundingClientRect().left + (w === ref ? 0 : parseFloat(cs.paddingLeft) || 0);
+      var x = Math.max(gl + 8, Math.round((gl + cl) / 2 - 14));
+      var floor = 124;
+      var y = hero ? Math.max(floor, Math.round(hero.getBoundingClientRect().bottom + 40)) : Math.max(floor, Math.round(main.getBoundingClientRect().top + 40));
+      nav.style.left = x + 'px'; nav.style.top = y + 'px';
+    }
     function spy() {
       var cur = 0; items.forEach(function (it, i) { if (it.el.getBoundingClientRect().top < 220) cur = i; });
       if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = items.length - 1;
       links.forEach(function (a, i) { if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); a.classList.toggle('seen', i < cur); });
     }
-    addEventListener('scroll', spy, { passive: true }); addEventListener('resize', function () { place(); spy(); }); place(); spy();
+    addEventListener('scroll', function () { place(); spy(); }, { passive: true }); addEventListener('resize', function () { place(); spy(); }); place(); spy(); setTimeout(place, 400);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 80); }); else setTimeout(build, 80);
 })();

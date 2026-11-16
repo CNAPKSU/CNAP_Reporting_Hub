@@ -42,7 +42,19 @@ FIRST=[
  ('Roxana Ortiz, Grant Specialist and Accountant','Set up your budget, purchasing, and travel reimbursements before your first expense.',mt('roxana@ksu.edu','Budget and purchasing setup','\n'.join(['Name:','Department:','Project title:','','Questions about my budget or purchasing:',''])),'Email Roxana','roxana@ksu.edu'),
  ('The research cores you will use','Meet with the staff of each core you will use before you book time: a tour of the Behavioral Neuroscience Core, or a consultation with the Cognitive Neuroscience or Neuroinformatics Core. The core directors walk you through the equipment, the training you need, and how to schedule.','index.html#cores-h','See the research cores',None),
 ]
-first=''.join(f'''<li><span class="cm-n" aria-hidden="true">{i}</span><div><p class="cm-ft">{t}</p><p class="cm-fd">{d}</p><p class="cm-fa"><a href="{h}">{l}</a>{f'<a class="cm-em" href="mailto:{e}">{e}</a>' if e else ''}</p></div></li>''' for i,(t,d,h,l,e) in enumerate(FIRST,1))
+# who/icon and when for each first-month conversation
+FWHO=[('grp','Week 1'),('ev','Week 1'),('HB','Week 2'),('MW','Week 2'),('RO','Before your first expense'),('core','Before you book core time')]
+ICON={'grp':'<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="7" cy="7" r="2.6"/><circle cx="13.5" cy="7.5" r="2.2"/><path d="M2.5 16c.7-3 2.4-4.3 4.5-4.3s3.8 1.3 4.5 4.3M12.5 11.7c2 0 3.5 1.2 4 3.8"/></svg>',
+      'core':'<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 2.5v5L3.5 15a1.6 1.6 0 001.4 2.5h10.2a1.6 1.6 0 001.4-2.5l-4-7.5v-5"/><path d="M6.5 2.5h7M5.5 12.5h9"/></svg>'}
+TONE={'HB':'p','MW':'t','RO':'a'}
+def _fwho(k):
+    if k in ICON: return f'<span class="ff-ic" aria-hidden="true">{ICON[k]}</span>'
+    if k in BY: return av(k,' lg')
+    return f'<span class="cm-av av-{TONE[k]} lg" aria-hidden="true">{k}</span>'
+first=''.join(f'''<li class="ff" data-k="ff{i}"><div class="ff-top"><span class="ff-n" aria-hidden="true">{i}</span><span class="ff-when">{FWHO[i-1][1]}</span></div>
+  <div class="ff-who">{_fwho(FWHO[i-1][0])}</div><p class="cm-ft">{t}</p><p class="cm-fd">{d}</p>
+  <p class="cm-fa"><a href="{h}">{l}</a>{f'<a class="cm-em" href="mailto:{e}">{e}</a>' if e else ''}</p>
+  <button type="button" class="ff-done" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Mark as done</span></button></li>''' for i,(t,d,h,l,e) in enumerate(FIRST,1))
 
 # 2. Members who share your interests
 MATCH=[('jl','You both record sleep EEG, and Jordan is looking for a collaborator.'),('pr','Priya studies memory consolidation during sleep and speaks at NeuroSync on November 18.'),('ms','Maya studies working memory in older adults in the core you use.'),('om','Omar joined this month and studies sleep in rodent models.')]
@@ -51,7 +63,7 @@ match=''.join(f'''<li class="cm-mc">{av(k,' lg')}<p class="cm-mn">{BY[k][2]}</p>
 # 3. Who knows what
 SK=['EEG','Sleep','Memory','Eye tracking','Rodent behavior','Electrophysiology','TMS','Imaging','High-performance computing','Statistics','Grant writing','Aging']
 def who(s): return [m[0] for m in M if s in m[5]]
-skills=''.join(f'''<li><button type="button" class="cm-stk" data-skill="{s}"><span class="cm-stkn">{s}</span><span class="cm-stack">{''.join(av(k,' sm') for k in who(s)[:4])}</span><span class="cm-stkc">{len(who(s))} member{'s' if len(who(s))!=1 else ''}</span></button></li>''' for s in SK)
+skills=''.join(f'''<li><button type="button" class="cm-sk" data-skill="{s}"><span class="cm-skn">{s}</span><span class="cm-stack">{''.join(av(k,' sm') for k in who(s)[:4])}</span><span class="cm-skc">{len(who(s))} member{'s' if len(who(s))!=1 else ''}</span></button></li>''' for s in SK)
 
 # 4. Directory
 filt=''.join(f'<button type="button" aria-pressed="{"true" if k=="all" else "false"}" data-g="{k}">{l}</button>' for k,l in G)
@@ -82,10 +94,50 @@ W=[('Every Wednesday, 2:30 to 3:30 p.m.','NeuroSync Weekly Speaker Series','Talk
 ways=''.join(f'''<li><p class="cm-wk">{k}</p><p class="cm-wt">{t}</p><p class="cm-wd">{d}</p><a class="t3" href="{h}">{l}</a></li>''' for k,t,d,h,l in W)
 
 # 8. Announcements
-AN=[('12','November','CNAP Administrative Core','Reminder: Year 11 pilot full proposals are due November 20','Please send all proposal materials as one PDF to cnap@ksu.edu by 5:00 p.m. Central, in the order listed on pages 3 and 4 of the RFA.',True),
-    ('9','November','CNAP Director','Welcome to our three newest graduate students','Please join us in welcoming the three students to the Cognitive Neuroscience Core this month.',False),
-    ('4','November','CNAP Administrative Core','Updated travel and reimbursement guidelines','The attached guide replaces last year’s version and takes effect December 1.',True)]
-ann=''.join(f'''<li><span class="cm-ad2"><b>{d}</b>{m}</span><div><p class="cm-af">{f}</p><p class="cm-at2">{t}</p><p class="cm-ad3">{x}</p>{'<p class="cm-att">Attachment</p>' if a else ''}</div></li>''' for d,m,f,t,x,a in AN)
+# 8. Announcements: the listserv emails, as an inbox (MW 2026-11-15: "unimpressive design")
+# date, sender key, subject, preview, body paragraphs, attachment (name, size) or None, action note or None
+SND={'ac':('AC','CNAP Administrative Core','a'),'hb':('HB','Heather Bailey, Director','p'),'mw':('MW','Morgan Wills, Grants and Contracts','t')}
+AN=[('November 12','ac','Reminder: Year 11 pilot full proposals are due November 20',
+     'Please send all proposal materials as one PDF to cnap@ksu.edu by 5:00 p.m. Central.',
+     ['Please send all proposal materials as one compiled PDF to cnap@ksu.edu by 5:00 p.m. Central on Friday, November 20.','Arrange the contents in the order listed on pages 3 and 4 of the RFA. If the file is too large to attach, please share it with a cloud link such as OneDrive.'],
+     ('Year 11 pilot RFA.pdf','412 KB'),'Due Friday, November 20'),
+    ('November 9','hb','Welcome to our three newest graduate students',
+     'Please join us in welcoming the three students to the Cognitive Neuroscience Core this month.',
+     ['Please join us in welcoming Kira Bauer, Nadia Ahmed, and Omar Mendes, who joined the Cognitive Neuroscience Core this month.','You can find their interests on the Community page. If your work overlaps, please say hello.'],None,None),
+    ('November 4','ac','Updated travel and reimbursement guidelines',
+     'The attached guide replaces last year’s version and takes effect December 1.',
+     ['The attached guide replaces last year’s version and takes effect December 1.','The main change: please sign the front of each receipt before you send it to Roxana Ortiz.'],
+     ('Travel and reimbursement guide 2026.pdf','236 KB'),None),
+    ('October 28','mw','Pre-submission review: request by November 6',
+     'If you would like a review of a draft before a spring deadline, please send it by November 6.',
+     ['If you would like a review of a draft before a spring deadline, please send it to Morgan Wills by November 6.','Reviews take about two weeks. Please include the funding opportunity and your deadline.'],None,None),
+    ('October 20','ac','NeuroSync schedule for the rest of the fall',
+     'Talks continue each Wednesday at 2:30 p.m. in Leadership Room 127, with a break on November 25.',
+     ['Talks continue each Wednesday at 2:30 p.m. in Leadership Room 127. There is no talk on November 25.','The full schedule is on the NeuroSync page.'],('NeuroSync fall schedule.pdf','118 KB'),None),
+    ('October 14','hb','Year 10 progress report: thank you',
+     'Thank you to every project leader and core director for your sections of the progress report.',
+     ['Thank you to every project leader and core director for your sections of the Year 10 progress report. It went to NIGMS on schedule.'],None,None),
+    ('October 6','ac','Fall reporting opens in the Member Hub',
+     'Fall surveys and reports are open now and close Monday, November 30.',
+     ['Fall surveys and reports are open in the Member Hub and close Monday, November 30.','Most people need about an hour and a half in all. You can save and come back.'],None,None),
+    ('September 29','mw','Letters of intent: Year 11 pilot projects',
+     'Letters of intent for Year 11 pilot projects are due October 16 at 5:00 p.m. Central.',
+     ['Letters of intent for Year 11 pilot projects are due October 16 at 5:00 p.m. Central.','Please include the project title, an abstract of up to 500 words, your proposed mentors, and three to five recommended reviewers.'],('Year 11 pilot RFA.pdf','412 KB'),None)]
+def _ann(i,x):
+    d,k,t,pv,body,att,act=x
+    ini,who,tone=SND[k]
+    attc=(f'<div class="an-file"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2.5h7l3.5 3.5v11.5H5z"/><path d="M12 2.5V6h3.5"/></svg><span><b>{att[0]}</b><small>PDF, {att[1]}</small></span>'
+          f'<a class="t3" href="#" data-proto title="In the Member Hub, this opens the attachment. Not part of the prototype.">Open</a></div>') if att else ''
+    clip='<svg class="an-clip" viewBox="0 0 16 16" aria-label="Has an attachment" role="img"><path d="M10.5 4.5l-5 5a1.8 1.8 0 002.5 2.5l5.5-5.5a3 3 0 00-4.2-4.2L3.8 7.8"/></svg>' if att else ''
+    tag=f'<span class="an-act">{act}</span>' if act else ''
+    reply=mt('cnap@ksu.edu','Re: '+t,'')
+    return (f'<li class="an{" an-due" if act else ""}" data-from="{k}" data-att="{"1" if att else "0"}"{" hidden data-older" if i>=4 else ""}><details{" open" if i==0 else ""}><summary>'
+            f'<span class="cm-av av-{tone}" aria-hidden="true">{ini}</span>'
+            f'<span class="an-m"><span class="an-top"><span class="an-from">{who}</span><span class="an-date">{d}</span></span>'
+            f'<span class="an-subj">{t}{clip}</span><span class="an-pv">{pv}</span>{tag}</span></summary>'
+            f'<div class="an-body">{"".join(f"<p>{p}</p>" for p in body)}{attc}<p class="an-foot"><a class="t3" href="{reply}">Reply to the CNAP team</a></p></div></details></li>')
+ann=''.join(_ann(i,x) for i,x in enumerate(AN))
+N_OLD=len(AN)-4
 
 
 import math,random
@@ -127,8 +179,8 @@ def _split(x):
 def _path(c,f):
     r,yrs=_split(c); aw,ag=_split(f)
     return (f'<ol class="cm-path" aria-label="Career path">'
-            f'<li class="cm-st"><span class="cm-stk">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
-            f'<li class="cm-st cm-st2"><span class="cm-stk">After CNAP</span><b>{aw}</b>{f"<span>{ag}</span>" if ag else ""}</li></ol>')
+            f'<li class="cm-st"><span class="al-k">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
+            f'<li class="cm-st cm-st2"><span class="al-k">After CNAP</span><b>{aw}</b>{f"<span>{ag}</span>" if ag else ""}</li></ol>')
 alumni=''.join(f'''<li class="cm-al"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div class="cm-alb"><p class="cm-mn">{n}</p><p class="cm-alw">{w}</p>{_path(c,f)}{'<p class="cm-ok">Happy to talk with new project leaders</p>' if ok else ''}</div>{f'<a class="btn sm" href="{intro(n)}">Ask for an introduction</a>' if ok else ''}</li>''' for i,t,n,c,w,f,ok in AL)
 
 SECS=[('cm-ach','Recent achievements'),('cm-ask','Ask the community'),('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-alum','CNAP alumni'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
@@ -182,7 +234,9 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-first" aria-labelledby="cm-first-h">
           <h2 id="cm-first-h">Your first month</h2>
-          <div class="cs-b"><p>Six conversations that make the rest of your award easier, best held in your first month.</p><ol class="cm-first">{first}</ol></div>
+          <div class="cs-b"><div class="ff-head"><p>Six conversations that make the rest of your award easier, best held in your first month.</p>
+            <div class="ff-prog" role="status"><span class="ff-bar" aria-hidden="true"><span></span></span><span><b data-ffn>0</b> of 6 done</span></div></div>
+            <ol class="ff-grid">{first}</ol></div>
         </section>
         <section class="step cs" id="cm-match" aria-labelledby="cm-match-h">
           <h2 id="cm-match-h">Members who share your interests</h2>
@@ -190,14 +244,14 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-know" aria-labelledby="cm-know-h">
           <h2 id="cm-know-h">Member interests and expertise</h2>
-          <div class="cs-b"><p>Methods and topics members have listed on member profiles. Please select a topic to see who knows the topic in the directory.</p><ul class="cm-stks">{skills}</ul></div>
+          <div class="cs-b"><p>Methods and topics members have listed on member profiles. Please select a topic to see who knows the topic in the directory.</p><ul class="cm-sks">{skills}</ul></div>
         </section>
         <section class="step cs" id="cm-dir" aria-labelledby="cm-dir-h">
           <h2 id="cm-dir-h">Member directory</h2>
           <div class="cs-b">
             <div class="cm-tools"><label class="cm-search"><span class="sr">Search members</span><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg><input type="search" placeholder="Search by name, role, or method" data-dirq></label><p class="cm-count" role="status"><span data-dirn>{len(M)}</span> members shown</p></div>
             <div class="pf-filt cm-filt" role="group" aria-label="Show">{filt}</div>
-            <p class="cm-stkill-on" hidden><span data-sm>Showing members who know <b data-skn></b>.</span> <button type="button" class="t3 cm-clear">Show everyone</button></p>
+            <p class="cm-skill-on" hidden><span data-sm>Showing members who know <b data-skn></b>.</span> <button type="button" class="t3 cm-clear">Show everyone</button></p>
             <ul class="cm-dir">{dirl}</ul>
             <p class="cm-none" hidden>No members match. Try a different word, or <button type="button" class="t3 cm-clear">show everyone</button>.</p>
           </div>
@@ -212,11 +266,14 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-ann" aria-labelledby="cm-ann-h">
           <h2 id="cm-ann-h">Announcements</h2>
-          <div class="cs-b"><p>Emails from the CNAP listserv, kept here so you can find each email again.</p><ul class="cm-ann">{ann}</ul><p class="meta"><a class="t3" href="#" data-proto title="Thread pages are not part of the prototype yet.">All announcements</a></p></div>
+          <div class="cs-b"><p>Every email from the CNAP listserv, kept here so you can find it again. Select one to read it.</p>
+            <div class="an-bar"><div class="pf-filt an-f" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-af="all">All</button><button type="button" aria-pressed="false" data-af="ac">Administrative Core</button><button type="button" aria-pressed="false" data-af="hb">Director</button><button type="button" aria-pressed="false" data-af="mw">Grants and Contracts</button><button type="button" aria-pressed="false" data-af="att">With attachments</button></div></div>
+            <ul class="an-list">{ann}</ul>
+            <p class="an-more"><button type="button" class="btn sm" data-older>Show {N_OLD} older emails</button></p></div>
         </section>
         <section class="step cs" id="cm-priv" aria-labelledby="cm-priv-h">
           <h2 id="cm-priv-h">Your profile and privacy</h2>
-          <div class="cs-b"><div class="cm-priv"><div><p class="cm-pk">Other members see</p><ul class="dots"><li>Your name, role, and department</li><li>The research interests and methods you list</li><li>The publications, talks, and grants you choose to show</li></ul></div><div><p class="cm-pk">Other members never see</p><ul class="dots"><li>Your Mentee Survey answers, which stay confidential</li><li>Your reporting and the reporting status</li><li>Funding opportunities picked for you, and letters from the Center</li><li>The publications, talks, and grants you choose to keep private</li></ul></div></div><p><a class="btn" href="mentee-profile.html">Review your profile</a></p></div>
+          <div class="cs-b"><div class="pv-grid"><div class="pv-see"><p class="pv-k"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8s2.4-4.5 6.5-4.5S14.5 8 14.5 8s-2.4 4.5-6.5 4.5S1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg>What other members see</p><div class="pv-card" aria-label="Your profile as other members see it"><div class="pv-ch"><span class="cm-av av-p lg" aria-hidden="true">AO</span><div><p class="pv-n">Dr. Amara Okafor</p><p class="pv-r">Pilot project leader, Psychological Sciences</p></div></div><p class="cm-chips"><span>Sleep</span><span>Memory</span><span>Aging</span><span>EEG</span></p><p class="pv-sh">Shown on your profile: 3 publications and 1 talk</p></div><p class="pv-note">Your name, role, department, research interests, and the work you choose to show.</p></div><div class="pv-priv"><p class="pv-k"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>What stays private</p><ul class="pv-list"><li><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg><span><b>Your Mentee Survey answers.</b> They stay confidential.</span></li><li><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg><span><b>Your reporting</b> and whether it is done.</span></li><li><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg><span><b>Funding picked for you,</b> and letters from the Center.</span></li><li><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg><span><b>Work you keep private.</b> Publications, talks, and grants you choose not to show.</span></li></ul></div></div><div class="pv-foot"><a class="btn pri" href="mentee-profile.html">Review your profile</a><p>You choose what to show, and you can change it any time.</p></div></div>
         </section>
       </div>
       <aside class="co-rail" aria-label="Your community profile"><div class="co-rc cm-me"><p class="co-rk">Your community profile</p><span class="cm-av av-p lg" aria-hidden="true">AO</span><p class="co-pn">Dr. Amara Okafor</p><p class="pp-r">Pilot project leader, Grant Year 10</p><p class="cm-chips"><span>Sleep</span><span>Memory</span><span>Aging</span><span>EEG</span></p><dl class="co-rd"><div><dt>Mentor</dt><dd>Dr. Elena Voss</dd></div><div><dt>Cores you use</dt><dd><a href="core-cn.html">Cognitive Neuroscience</a> and <a href="core-ni.html">Neuroinformatics</a></dd></div></dl><a class="t3" href="mentee-profile.html">Review your profile</a></div></aside>
@@ -256,15 +313,24 @@ page=f'''<!doctype html>
 <script src="guide.js"></script>
 <script>
 (function(){{
-  var rows=[].slice.call(document.querySelectorAll('.cm-dr')),q=document.querySelector('[data-dirq]'),n=document.querySelector('[data-dirn]'),none=document.querySelector('.cm-none'),gb=document.querySelectorAll('.cm-filt button'),son=document.querySelector('.cm-stkill-on'),skn=document.querySelector('[data-skn]'),g='all',skill='';
+  var rows=[].slice.call(document.querySelectorAll('.cm-dr')),q=document.querySelector('[data-dirq]'),n=document.querySelector('[data-dirn]'),none=document.querySelector('.cm-none'),gb=document.querySelectorAll('.cm-filt button'),son=document.querySelector('.cm-skill-on'),skn=document.querySelector('[data-skn]'),g='all',skill='';
   function apply(){{var t=(q.value||'').trim().toLowerCase(),c=0;rows.forEach(function(r){{var ok=(g==='all'||r.dataset.g===g)&&(!t||r.dataset.q.indexOf(t)>-1)&&(!skill||r.dataset.s.split('|').indexOf(skill)>-1);r.hidden=!ok;if(ok)c++;}});n.textContent=c;none.hidden=c>0;son.hidden=!skill;skn.textContent=skill;}}
   q.addEventListener('input',apply);
   var onlyNew=false;var a0=apply;apply=function(){{a0();if(onlyNew){{var c=0;rows.forEach(function(r){{if(r.dataset.new!=='1')r.hidden=true;if(!r.hidden)c++;}});n.textContent=c;son.hidden=false;son.querySelector('[data-sm]').textContent='Showing the three members who joined this month.';}}}};
   document.querySelector('[data-newonly]').addEventListener('click',function(){{onlyNew=true;skill='';q.value='';g='all';apply();}});
   document.querySelectorAll('.cm-clear').forEach(function(b){{b.addEventListener('click',function(){{onlyNew=false;son.querySelector('[data-sm]').innerHTML='Showing members who know <b data-skn></b>.';skn=son.querySelector('[data-skn]');apply();}});}});
   gb.forEach(function(b){{b.addEventListener('click',function(){{g=b.dataset.g;gb.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});apply();}});}});
-  document.querySelectorAll('.cm-stk').forEach(function(b){{b.addEventListener('click',function(){{skill=b.dataset.skill;g='all';gb.forEach(function(o){{o.setAttribute('aria-pressed',o.dataset.g==='all')}});q.value='';apply();document.getElementById('cm-dir').scrollIntoView({{behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}});}});}});
+  document.querySelectorAll('.cm-sk').forEach(function(b){{b.addEventListener('click',function(){{skill=b.dataset.skill;g='all';gb.forEach(function(o){{o.setAttribute('aria-pressed',o.dataset.g==='all')}});q.value='';apply();document.getElementById('cm-dir').scrollIntoView({{behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}});}});}});
   document.querySelectorAll('.cm-clear').forEach(function(b){{b.addEventListener('click',function(){{skill='';q.value='';g='all';gb.forEach(function(o){{o.setAttribute('aria-pressed',o.dataset.g==='all')}});apply();}});}});
+  (function(){{var items=[].slice.call(document.querySelectorAll('.an')),fb=document.querySelectorAll('.an-f button'),more=document.querySelector('[data-older]'),showOld=false,f='all';
+    function ap(){{items.forEach(function(li){{var ok=f==='all'||(f==='att'?li.dataset.att==='1':li.dataset.from===f);li.hidden=!ok||(!showOld&&f==='all'&&li.hasAttribute('data-older'));}});more.hidden=showOld||f!=='all';}}
+    fb.forEach(function(b){{b.addEventListener('click',function(){{f=b.dataset.af;fb.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});ap();}});}});
+    more.addEventListener('click',function(){{showOld=true;ap();var first=items.filter(function(l){{return l.hasAttribute('data-older')}})[0];if(first)first.querySelector('summary').focus();}});ap();}})();
+  (function(){{var cards=[].slice.call(document.querySelectorAll('.ff')),n=document.querySelector('[data-ffn]'),bar=document.querySelector('.ff-bar span');
+    function upd(){{var c=cards.filter(function(x){{return x.classList.contains('is-done')}}).length;n.textContent=c;bar.style.width=(c/cards.length*100)+'%';}}
+    cards.forEach(function(card){{var b=card.querySelector('.ff-done'),k=card.dataset.k,on=false;try{{on=localStorage.getItem(k)==='1'}}catch(e){{}}
+      function set(v){{card.classList.toggle('is-done',v);b.setAttribute('aria-pressed',v);b.querySelector('span').textContent=v?'Done':'Mark as done';try{{localStorage.setItem(k,v?'1':'0')}}catch(e){{}}upd();}}
+      set(on);b.addEventListener('click',function(){{set(!card.classList.contains('is-done'));}});}});}})();
   var th=[].slice.call(document.querySelectorAll('.cm-th')),tb=document.querySelectorAll('.cm-tf button');
   function tf(k){{th.forEach(function(r){{r.hidden=k==='m'?r.dataset.m!=='1':k==='u'?r.dataset.u!=='1':false;}});}}
   tb.forEach(function(b){{b.addEventListener('click',function(){{tb.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});tf(b.dataset.t);}});}});tf('m');
