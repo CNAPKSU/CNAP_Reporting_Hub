@@ -348,7 +348,7 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
       + '.hr-rail a[aria-current="true"]::before{background:var(--purple,#512888);border-color:var(--purple,#512888);box-shadow:0 0 0 4px rgba(81,40,136,.14)}'
       + '.hr-rail .hr-h{display:none;margin:0 0 6px;padding:0 16px 10px 14px;border-bottom:1px solid var(--line,#e4e0d8);font:500 19px/24px "Lora Hub","Lora",Georgia,serif;color:var(--ink,#1d1b21)}'
       + '.hr-rail:hover,.hr-rail:focus-within{width:260px;padding:16px 0 10px;background:var(--surface,#fff);border-color:var(--line,#e4e0d8);box-shadow:0 18px 40px -18px rgba(29,27,33,.3)}'
-      + '.hr-rail:hover .hr-h,.hr-rail:focus-within .hr-h{display:block}'
+      + '.hr-rail:hover .hr-h,.hr-rail:focus-within .hr-h{display:block}nav.hr-rail a.hr-h{height:auto;padding:0 16px 10px 14px;color:var(--ink,#1d1b21)!important;font:500 19px/24px "Lora Hub","Lora",Georgia,serif!important;white-space:normal}nav.hr-rail a.hr-h::before{display:none}nav.hr-rail a.hr-h::after{content:"";display:inline-block;width:7px;height:7px;margin-left:10px;border-left:1.6px solid currentColor;border-top:1.6px solid currentColor;transform:translateY(-1px) rotate(45deg);opacity:.6}nav.hr-rail a.hr-h:hover{color:var(--purple,#512888)!important}'
       + '.hr-rail:hover a,.hr-rail:focus-within a{color:var(--ink-2,#423e48);height:auto;white-space:normal;padding-top:6px;padding-bottom:6px}'
       + '.hr-rail:hover a:hover,.hr-rail:focus-within a:hover{color:var(--purple,#512888)}'
       + '.hr-rail:hover a[aria-current="true"],.hr-rail:focus-within a[aria-current="true"]{color:var(--purple-ink,#3c1d66);font-weight:600}'
@@ -363,7 +363,7 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
       + '.hr-bounce{animation:hr-bounce .8s cubic-bezier(.28,.84,.42,1)}@media (prefers-reduced-motion:reduce){.hr-bounce{animation:none}}';
     document.head.appendChild(st);
     var nav = document.createElement('nav'); nav.className = 'hr-rail'; nav.setAttribute('aria-label', 'On this page');
-    var hh = document.createElement('p'); hh.className = 'hr-h'; hh.textContent = 'On this page';
+    var hh = document.createElement('a'); hh.className = 'hr-h'; hh.href = '#'; hh.textContent = 'On this page'; hh.setAttribute('aria-label', 'On this page: back to the top'); hh.addEventListener('click', function (e) { e.preventDefault(); scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' }); var h1 = main.querySelector('h1'); if (h1) setTimeout(function () { h1.classList.remove('hr-bounce'); void h1.offsetWidth; h1.classList.add('hr-bounce'); }, still ? 0 : 500); });
     var ol = document.createElement('ol'), links = [];
     var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
     items.forEach(function (it) {
