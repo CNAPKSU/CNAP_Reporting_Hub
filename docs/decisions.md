@@ -793,3 +793,5 @@ To show real photos, the app needs an optional image on `FundingNews` and `Fundi
 - Events opens on a Calendar view (Home's calendar, copied by `gen/evcal.py`), with a List toggle for the existing agenda. The menu item is "Events calendar."
 - The 2026 Site Visit photographs have their own page, `sitevisit-2026.html`, with placeholders only. Home and Site Visit link to it, which ends the loop between the two pages.
 - Home has two preview scenarios, "New project leader" and "New mentor." Both move Getting started up, just under Your week.
+
+- Following a thread (recommended Nov 15). Following means one email a day when a followed thread has new replies, and the new replies show on Home. Starting a thread or replying follows it automatically. The prototype shows a confirmation for each and sends nothing. Dependency: the app needs thread models, a follow table, a daily digest job, and a Home panel. Not built; needs approval.

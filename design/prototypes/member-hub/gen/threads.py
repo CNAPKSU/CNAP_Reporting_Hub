@@ -51,7 +51,7 @@ def page(k):
       <p class="th-tp th-{TONE[tp]}">{tp}</p>
       <h1 id="t">{t}</h1>
       <div class="tp-byrow"><div class="tp-by">{av(k)}<p><b>{asker[2]}</b><span>{asker[3]} · Started {STARTED_ON[k]} · <span data-rc>{rep(n)}</span></span></p></div>
-        <button type="button" class="th-fol tp-fol" aria-pressed="{'true' if fol else 'false'}" title="Follow this thread to find it under Following on the Threads page."><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h8v11l-4-3-4 3z"/></svg><span>{'Following' if fol else 'Follow'}</span></button></div>
+        <button type="button" class="th-fol tp-fol" aria-pressed="{'true' if fol else 'false'}" title="Follow this thread to get one email a day when it has new replies."><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h8v11l-4-3-4 3z"/></svg><span>{'Following' if fol else 'Follow'}</span></button></div>
     </div>
   </section>
   <div class="wrap tp-cols">
@@ -88,10 +88,10 @@ def page(k):
     var li=document.createElement('li');li.className='tp-r tp-new';
     li.innerHTML='<span class="cm-av av-p" aria-hidden="true">AO</span><div class="tp-rb"><p class="tp-rh"><b>You</b><span>Pilot project leader</span><span>Just now</span></p><p class="tp-rt"></p></div>';
     li.querySelector('.tp-rt').textContent=v;list.appendChild(li);n++;rh.textContent=label(n);rc.textContent=label(n);ta.value='';
-    note.textContent='Your reply is posted below. In the prototype, it disappears when you leave the page.';note.hidden=false;
+    note.textContent='Your reply is posted below. In the prototype, it disappears when you leave the page.';note.hidden=false;if(fb.getAttribute('aria-pressed')!=='true'){{fb.setAttribute('aria-pressed','true');fb.querySelector('span').textContent='Following';}}if(window.hubToast)hubToast('<b>Your reply is posted.</b> You now follow this thread, so you’ll hear about new replies.');
     li.scrollIntoView({{block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}});
   }});
-  var fb=document.querySelector('.tp-fol');fb.addEventListener('click',function(){{var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';}});
+  var fb=document.querySelector('.tp-fol');fb.addEventListener('click',function(){{var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';if(window.hubToast)hubToast(on?'<b>Following.</b> You’ll get one email a day when this thread has new replies, and they’ll show on your Home page. In the prototype, nothing is sent.':'<b>Unfollowed.</b> You won’t hear about new replies to this thread.');}});
   if(location.hash==='#reply'){{setTimeout(function(){{ta.focus();}},300);}}
 }})();
 </script>

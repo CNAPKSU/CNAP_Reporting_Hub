@@ -58,7 +58,7 @@ def row(k, t, tp, r, a, mt_, w, un, ex, rs, grp):
     why = f'<p class="th-why"><b>Matched to you.</b> {w}</p>' if w else ''
     mine = f'<p class="th-mine">You replied to this thread.</p>' if k in MINE else ''
     fol = k in FOLLOW
-    fb = (f'<button type="button" class="th-fol" aria-pressed="{"true" if fol else "false"}" title="Follow this thread to find it under Following.">'
+    fb = (f'<button type="button" class="th-fol" aria-pressed="{"true" if fol else "false"}" title="Follow this thread to get one email a day when it has new replies.">'
           f'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h8v11l-4-3-4 3z"/></svg><span>{"Following" if fol else "Follow"}</span></button>')
     return (f'<li class="th-row{" th-un" if un else ""}" data-m="{"1" if mt_ else "0"}" data-u="{"1" if un else "0"}" data-tp="{tp}" data-g="{grp}" data-r="{r}" data-s="{STARTED[k]}" data-me="{"1" if k in MINE else "0"}" data-f="{"1" if fol else "0"}" data-q="{q}">'
             f'{av(k)}<div class="th-body"><p class="th-tp th-{TONE[tp]}">{tp}</p><h3 class="th-t"><a href="{href}"{pa}>{t}</a></h3><p class="th-ex">{ex}</p>'
@@ -115,7 +115,7 @@ SCRIPT = '''<script>
   document.querySelector('[data-clear]').addEventListener('click',function(){topic='';apply();});
   q.addEventListener('input',apply);
   var fc=document.querySelector('[data-fc]');function fcount(){fc.textContent=rows.filter(function(r){return r.dataset.f==='1';}).length;}fcount();
-  rows.forEach(function(r){var fb=r.querySelector('.th-fol');fb.addEventListener('click',function(){var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';r.dataset.f=on?'1':'0';fcount();if(k==='f')apply();});});
+  rows.forEach(function(r){var fb=r.querySelector('.th-fol');fb.addEventListener('click',function(){var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';r.dataset.f=on?'1':'0';fcount();if(k==='f')apply();if(window.hubToast)hubToast(on?'<b>Following.</b> You’ll get one email a day when this thread has new replies, and they’ll show on your Home page. In the prototype, nothing is sent.':'<b>Unfollowed.</b> You won’t hear about new replies to this thread.');});});
   var sb=document.getElementById('th-sortb'),sm=document.getElementById('th-sortm'),opts=[].slice.call(sm.querySelectorAll('[role=option]')),sl=document.querySelector('[data-sortl]');
   function openM(o){sm.hidden=!o;sb.setAttribute('aria-expanded',o);if(o){(sm.querySelector('[aria-selected=true]')||opts[0]).focus();}}
   function pick(li){sortv=li.dataset.v;opts.forEach(function(x){x.setAttribute('aria-selected',x===li)});sl.textContent=li.firstChild.textContent;openM(false);sb.focus();apply();}
@@ -129,12 +129,12 @@ SCRIPT = '''<script>
     ti.removeAttribute('aria-invalid');
     var kind=(dlg.querySelector('input[name=kind]:checked')||{}).value||'other',TP={funding:'Funding',expertise:'Finding a collaborator',student:'Hiring',other:'Your question'}[kind];
     var li=document.createElement('li');li.className='th-row th-un th-newrow';li.dataset.m='0';li.dataset.u='1';li.dataset.me='1';li.dataset.f='1';li.dataset.tp=TP;li.dataset.g='week';li.dataset.r='0';li.dataset.s='0';li.dataset.i='-1';li.dataset.q=(v+' '+(de.value||'')).toLowerCase();
-    li.innerHTML='<span class="cm-av av-p" aria-hidden="true">AO</span><div class="th-body"><p class="th-tp th-p"></p><h3 class="th-t"></h3><p class="th-ex"></p><div class="th-foot"><p class="th-meta">You · No replies yet · Just now</p></div><p class="th-mine">You started this thread. In the prototype, it disappears when you leave the page.</p></div><div class="th-n th-n0"><span class="th-nn">0</span><span class="th-nl">New</span></div>';
+    li.innerHTML='<span class="cm-av av-p" aria-hidden="true">AO</span><div class="th-body"><p class="th-tp th-p"></p><h3 class="th-t"></h3><p class="th-ex"></p><div class="th-foot"><p class="th-meta">You · No replies yet · Just now</p></div><p class="th-mine">You started this thread, so you follow it. In the prototype, it disappears when you leave the page.</p></div><div class="th-n th-n0"><span class="th-nn">0</span><span class="th-nl">New</span></div>';
     li.querySelector('.th-tp').textContent=TP;li.querySelector('.th-t').textContent=v;li.querySelector('.th-ex').textContent=de.value||'';
     var gw=list.querySelector('[data-gh=week]');gw.after(li);rows.unshift(li);
     ti.value='';de.value='';try{dlg.close();}catch(x){dlg.removeAttribute('open');}
     k='a';topic='';q.value='';tb.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.t==='a')});apply();
-    document.getElementById('th-all').scrollIntoView({behavior:'auto'});li.classList.add('th-flash');
+    document.getElementById('th-all').scrollIntoView({behavior:'auto'});li.classList.add('th-flash');fcount();if(window.hubToast)hubToast('<b>Your thread is posted.</b> You follow it, so you’ll hear when someone replies.');
   });
   var af=document.querySelector('.th-ask');af.addEventListener('submit',function(e){e.preventDefault();var v=document.getElementById('th-askq').value.trim();try{dlg.showModal();}catch(x){dlg.setAttribute('open','')}dlg.querySelector('.cm-note').hidden=true;var ti=dlg.querySelector('#cmc-t');if(ti){ti.value=v;(v?dlg.querySelector('#cmc-d'):ti).focus();}});
 })();

@@ -270,3 +270,24 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
   addEventListener('scroll', hide, { passive: true });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
 })();
+
+/* A small confirmation that says what just happened (MW 2026-11-15) */
+(function () {
+  if (window.hubToast) return;
+  var st = document.createElement('style');
+  st.textContent = '.hub-toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:1001;max-width:min(460px,calc(100vw - 32px));padding:12px 16px 12px 14px;border-radius:12px;background:#22132f;color:#fff;'
+    + 'font:500 14.5px/21px "Inter Hub","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 16px 36px -14px rgba(20,11,26,.6),0 0 0 1px rgba(255,255,255,.12);'
+    + 'display:flex;gap:10px;align-items:flex-start;transform:translate(-50%,12px);opacity:0;transition:opacity .18s ease,transform .18s ease}'
+    + '.hub-toast.on{opacity:1;transform:translate(-50%,0)}.hub-toast b{font-weight:700}'
+    + '.hub-toast svg{flex:none;width:18px;height:18px;margin-top:1px;fill:none;stroke:#d4bdf6;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}'
+    + '@media (prefers-reduced-motion:reduce){.hub-toast{transition:none}}';
+  document.head.appendChild(st);
+  var el = document.createElement('div'); el.className = 'hub-toast'; el.setAttribute('role', 'status'); el.setAttribute('aria-live', 'polite');
+  var t = 0;
+  window.hubToast = function (html) {
+    if (!el.parentNode) document.body.appendChild(el);
+    el.innerHTML = '<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3L14 5.5"/></svg><span>' + html + '</span>';
+    el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
+    clearTimeout(t); t = setTimeout(function () { el.classList.remove('on'); }, 4200);
+  };
+})();
