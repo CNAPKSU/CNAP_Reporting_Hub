@@ -2766,3 +2766,18 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .pf-side .pf-c{padding:24px 26px 26px}
 @media (max-width:640px){.pf-c{padding:22px 18px 24px}.pr-rows > li{grid-template-columns:1fr}.pr-rows > li > *{padding:6px 14px}.pr-rows > li > .pr-d{padding-top:12px}.pr-rows > li > .pr-s{padding-bottom:12px;flex-direction:row;flex-wrap:wrap}.pr-b,.pr-s{border-left:0}}
 .pr-s .st{white-space:nowrap}
+
+/* Guide heroes: the steps, listed under the lead (MW 2026-11-15: "awkward with a big white space").
+   Each row jumps to its step and shows a check once the step is marked read. */
+.hs{margin-top:28px;max-width:520px}
+.hs-h{margin:0 0 8px;font-size:14px;font-weight:600;color:var(--ink-2)}
+.hs ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.hs li{border-bottom:1px solid var(--line)}
+.hs a{display:grid;grid-template-columns:26px minmax(0,1fr) auto;align-items:center;gap:12px;padding:9px 4px;color:var(--ink);text-decoration:none;font-size:15px;line-height:21px}
+.hs a:hover .hs-t{color:var(--acc-ink);text-decoration:underline;text-underline-offset:3px}
+.hs-n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--acc) 45%,transparent);color:var(--acc-ink);font-size:12.5px;font-weight:600}
+.hs-m{font-size:13px;color:var(--muted)}
+.hs a.done .hs-n{background:var(--acc);border-color:var(--acc);color:transparent;position:relative}
+.hs a.done .hs-n::after{content:"";position:absolute;width:10px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-1px) rotate(-45deg)}
+.hs a.done .hs-t{color:var(--muted)}
+.open-g > .who{align-self:start}
