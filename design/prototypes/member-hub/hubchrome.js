@@ -353,6 +353,11 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
       + '.hr-rail:hover a:hover,.hr-rail:focus-within a:hover{color:var(--purple,#512888)}'
       + '.hr-rail:hover a[aria-current="true"],.hr-rail:focus-within a[aria-current="true"]{color:var(--purple-ink,#3c1d66);font-weight:600}'
       + '.hr-rail:hover a::before,.hr-rail:focus-within a::before{top:12px}'
+      + 'nav.hr-rail a,nav.hr-rail a:visited{color:transparent!important;text-decoration:none!important;box-shadow:none!important;background:none!important;font-weight:400!important}'
+      + 'nav.hr-rail:hover a,nav.hr-rail:focus-within a{color:var(--ink-2,#423e48)!important}'
+      + 'nav.hr-rail:hover a:hover,nav.hr-rail:focus-within a:hover{color:var(--purple,#512888)!important}'
+      + 'nav.hr-rail:hover a[aria-current="true"],nav.hr-rail:focus-within a[aria-current="true"]{color:var(--purple-ink,#3c1d66)!important;font-weight:600!important}'
+      + 'nav.hr-rail a:focus-visible{outline:2px solid var(--purple,#512888);outline-offset:-2px;border-radius:6px}'
       + '@media (max-width:999px){.hr-rail{display:none}}@media (prefers-reduced-motion:reduce){.hr-rail,.hr-rail a::before{transition:none}}'
       + '@keyframes hr-bounce{0%{transform:translateY(0)}25%{transform:translateY(-10px)}45%{transform:translateY(0)}62%{transform:translateY(-5px)}78%{transform:translateY(0)}100%{transform:translateY(0)}}'
       + '.hr-bounce{animation:hr-bounce .8s cubic-bezier(.28,.84,.42,1)}@media (prefers-reduced-motion:reduce){.hr-bounce{animation:none}}';
