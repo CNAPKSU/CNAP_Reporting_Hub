@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import sitevisit_views
+from . import clicks, sitevisit_views
 from . import funding_views as fv
 from . import outcome_views as ov
 from . import views
@@ -20,6 +20,8 @@ urlpatterns = [
     path("tasks/current-pending/<int:pk>/", views.cp_check, name="cp_check"),
     path("documents/<int:pk>/", views.helpful_doc, name="helpful_doc"),
     path("history/", views.history, name="history"),
+    path("hub/count/", clicks.count, name="home_link_count"),  # MW 2026-11-15, anonymous counts only
+    path("hub/link-counts/", clicks.report, name="home_link_counts"),
     path("site-visit/rsvp/", sitevisit_views.rsvp, name="sitevisit_rsvp"),  # MW 2026-11-15
     path("site-visit/rsvps/", sitevisit_views.staff_list, name="sitevisit_rsvps"),
     path("results/", views.center_results, name="center_results"),

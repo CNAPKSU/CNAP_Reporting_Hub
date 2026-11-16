@@ -8,7 +8,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -142,19 +142,44 @@ def _summary(r):
     return lines
 
 
+# The two Site Visit days for the calendar file (MW 2026-11-15: the confirmation email carries a calendar file)
+ICS_DAYS = [("20270525T084000", "20270525T210000", "2027 CNAP Site Visit, day 1"), ("20270526T084000", "20270526T123000", "2027 CNAP Site Visit, day 2")]
+
+
+def calendar_file(r):
+    """A small .ics file with both Site Visit days, in Central time, for Outlook, Google Calendar, or Apple Calendar."""
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//CNAP Member Hub//Site Visit RSVP//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"]
+    for i, (start, end, title) in enumerate(ICS_DAYS, start=1):
+        lines += [
+            "BEGIN:VEVENT",
+            f"UID:cnap-site-visit-{r.year}-day{i}-person{r.person_id}@cnap.k-state.edu",
+            "DTSTAMP:" + r.updated_at.strftime("%Y%m%dT%H%M%SZ"),
+            f"DTSTART;TZID=America/Chicago:{start}",
+            f"DTEND;TZID=America/Chicago:{end}",
+            f"SUMMARY:{title}",
+            "LOCATION:Kansas State University\\, Manhattan\\, Kansas",
+            "DESCRIPTION:The program and your RSVP are in the CNAP Member Hub.",
+            "END:VEVENT",
+        ]
+    lines.append("END:VCALENDAR")
+    return "\r\n".join(lines) + "\r\n"
+
+
 def _confirm(r):
     email = r.person.primary_email
     if not email:
         return
-    send_mail(
+    msg = EmailMessage(
         subject=f"Your RSVP for the {r.year} CNAP Site Visit",
-        message=render_to_string(
+        body=render_to_string(
             "email/sitevisit_rsvp.txt",
-            {"r": r, "lines": _summary(r), "dates": DATES, "poster_by": POSTER_BY, "url": settings.SITE_URL + reverse("portal:sitevisit_rsvp")},
+            {"r": r, "lines": _summary(r), "dates": DATES, "poster_by": POSTER_BY, "url": settings.SITE_URL + reverse("portal:sitevisit_rsvp"), "ics": r.attend != "no"},
         ),
-        from_email=None,
-        recipient_list=[email],
+        to=[email],
     )
+    if r.attend != "no":
+        msg.attach(f"cnap-site-visit-{r.year}.ics", calendar_file(r), "text/calendar")
+    msg.send()
 
 
 def staff_list(request):

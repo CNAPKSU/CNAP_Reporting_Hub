@@ -7,7 +7,9 @@ Your answers:
 {% endfor %}{% if r.poster == "yes" and not r.poster_title %}
 Please add your poster information by {{ poster_by }}.
 {% endif %}
-To change any answer, please return to your RSVP:
+{% if ics %}The attached calendar file adds both days to Outlook, Google Calendar, or Apple Calendar.
+
+{% endif %}To change any answer, please return to your RSVP:
 {{ url }}
 
 Questions go to Morgan Wills at mkwills@ksu.edu.

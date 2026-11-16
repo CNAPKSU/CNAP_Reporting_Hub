@@ -46,6 +46,9 @@ def test_member_rsvps_gets_email_and_can_change_it(center, client):
     assert rsvp.meals == ["lunch", "dinner"] and rsvp.photo_ok is True and rsvp.parking is True
     assert rsvp.hotel_nights == ["mon"] and rsvp.poster == "yes" and rsvp.poster_title == "A fictional poster"
     assert len(mail.outbox) == 1 and "Vegetarian" in mail.outbox[0].body
+    name, ics, kind = mail.outbox[0].attachments[0]
+    assert name == "cnap-site-visit-2027.ics" and kind == "text/calendar"
+    assert ics.count("BEGIN:VEVENT") == 2 and "DTSTART;TZID=America/Chicago:20270525T084000" in ics
     assert AuditLog.objects.filter(action=AuditLog.Action.CREATE, entity_id=rsvp.pk).exists()
     # change to Zoom: in-person answers are cleared, and there is still one RSVP
     client.post("/site-visit/rsvp/", BASE | {"attend": "zoom"})

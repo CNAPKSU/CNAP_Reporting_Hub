@@ -373,5 +373,14 @@
 {{ cal.data|json_script:"hub-cal" }}
 <script src="{% static 'hub/hub.js' %}" defer></script>
 <script src="{% static 'js/dropclose.js' %}" defer></script>
+<script>
+/* Anonymous counts of Home link selections (MW 2026-11-15, approved). Sends only "section: link". */
+(function(){if(!navigator.sendBeacon)return;var url="{% url 'portal:home_link_count' %}";
+document.addEventListener('click',function(e){var a=e.target.closest('main a[href]');if(!a)return;
+  var sec=a.closest('section,aside,.mine,header');var h=sec&&sec.querySelector('h2,h3,.eyebrow');
+  var label=(a.getAttribute('aria-label')||a.textContent||'').replace(/\s+/g,' ').trim().slice(0,70);
+  var where=h?h.textContent.replace(/\s+/g,' ').trim().slice(0,60):'Home';if(!label)return;
+  var d=new FormData();d.append('k',where+': '+label);try{navigator.sendBeacon(url,d);}catch(x){}},true);})();
+</script>
 </body>
 </html>
