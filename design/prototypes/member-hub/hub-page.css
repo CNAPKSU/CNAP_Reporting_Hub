@@ -583,3 +583,10 @@ p,li,dd,figcaption,blockquote{text-wrap:pretty}
 .fp-tbl thead th{padding:10px 16px;background:color-mix(in srgb,var(--ink) 3%,var(--surface));border-bottom:1px solid var(--line)}
 .fp-tbl tbody tr:first-child th,.fp-tbl tbody tr:first-child td{border-top:0}
 .fp-tbl th+td,.fp-tbl td+td,.fp-tbl thead th+th{border-left:1px solid var(--line)}
+/* Links to NIH and NIGMS pages in the IDeA section (MW 2026-11-15: "link up this page massively") */
+.fp-idea a,.fp-sh p a{color:var(--purple-ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--purple) 40%,transparent)}
+.fp-idea a:hover,.fp-sh p a:hover{text-decoration-color:var(--purple);text-decoration-thickness:1.5px}
+.fp-ic h3 a{color:inherit;text-decoration-color:color-mix(in srgb,var(--purple) 30%,transparent)}
+.fp-tbl tbody th a{color:inherit}
+.fp-ic-next a{color:inherit!important}
+.fp-tbl td a{white-space:nowrap}
