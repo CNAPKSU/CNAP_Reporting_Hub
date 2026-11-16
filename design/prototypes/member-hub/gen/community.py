@@ -19,7 +19,7 @@ M=[
  ('lp','LP','Dr. Lena Park','Pilot project leader','investigators',['Motor learning','TMS'],'a',False),
  ('rg','RG','Dr. Rosa García','Research project leader','investigators',['Imaging','High-performance computing'],'t',False),
  ('hc','HC','Dr. Hannah Cole','Investigator','investigators',['Statistics','Bayesian models'],'p',False),
- ('ev','EV','Dr. Elena Voss','Mentor, your mentor','mentors',['Memory','Plasticity','Sleep','Grant writing'],'p',False),
+ ('ev','EV','Dr. Elena Voss','Your mentor','mentors',['Memory','Plasticity','Sleep','Grant writing'],'p',False),
  ('sr','SR','Dr. Samuel Reyes','Mentor','mentors',['Fear learning','Rodent behavior','Electrophysiology'],'a',False),
  ('ms','MS','Dr. Maya Singh','Cognitive Neuroscience Core','core',['Working memory','Aging','EEG','Eye tracking'],'t',False),
  ('wz','WZ','Dr. Wei Zhang','Neuroinformatics Core','core',['Data pipelines','Imaging','High-performance computing','Statistics'],'p',False),

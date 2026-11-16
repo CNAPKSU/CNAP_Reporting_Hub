@@ -2413,3 +2413,20 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 @keyframes th-bounce{0%{transform:translateY(0)}25%{transform:translateY(-10px)}45%{transform:translateY(0)}62%{transform:translateY(-5px)}78%{transform:translateY(0)}90%{transform:translateY(-2px)}100%{transform:translateY(0)}}
 .th-bounce{animation:th-bounce .8s cubic-bezier(.28,.84,.42,1);display:inline-block}
 @media (prefers-reduced-motion:reduce){.th-bounce{animation:none;text-decoration:underline;text-decoration-color:var(--brass);text-underline-offset:6px}}
+
+/* Threads side column, quieter (MW 2026-11-15: "more demure") */
+.th-side{gap:0}
+.th-side .th-card{padding:0 0 22px;margin-bottom:22px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent}
+.th-side .th-card:last-child{border-bottom:0;margin-bottom:0}
+.th-side .th-card h2{font:600 14px/20px var(--sans);color:var(--muted);margin:0 0 10px}
+.th-side .th-topic{min-height:34px;padding:0 8px;font-size:14.5px;font-weight:400;color:var(--ink-2)}
+.th-side .th-topic[aria-pressed="true"]{font-weight:600}
+.th-side .th-c{font-size:13px}
+.th-side .th-help li{padding:7px 0}
+.th-side .th-help li+li{border-top:0}
+.th-side .th-hp{font-size:14px}
+.th-side .th-hp b{font-weight:500}
+.th-side .th-hp small{font-size:12.5px}
+.th-side .th-hc{font-size:12.5px}
+.th-side .th-hc b{display:inline;font:600 13px/1 var(--sans);color:var(--ink-2);margin-right:3px}
+.th-side .th-how ol{font-size:14px;line-height:21px;color:var(--muted);gap:6px}
