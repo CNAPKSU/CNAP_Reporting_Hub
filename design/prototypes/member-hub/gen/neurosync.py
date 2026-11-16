@@ -169,10 +169,11 @@ page=f'''<!doctype html>
     <div class="wrap">
       <header class="sv-sh"><h2 id="ns-join-h">Be part of NeuroSync</h2></header>
       <div class="ns-three">
-        <article><p class="sv-n num">01</p><h3>Present your work</h3><p>Project leaders, core staff, and trainees are welcome to present. A NeuroSync talk is a good place to try out a conference talk or a job talk.</p><a class="btn pri" href="{SIGN}">Sign up to present</a></article>
-        <article><p class="sv-n num">02</p><h3>Suggest a speaker</h3><p>Know a researcher whose work CNAP members should hear? The CNAP team handles the invitation and the visit.</p><a class="btn" href="{SUGG}">Suggest a speaker</a></article>
-        <article><p class="sv-n num">03</p><h3>Share an idea</h3><p>A topic, a format, or a change to the series. Ideas from members shape each semester’s schedule.</p><a class="btn" href="{IDEA}">Send an idea</a></article>
+        <article><p class="sv-n num">01</p><h3>Present your work</h3><p>Project leaders, core staff, and trainees are welcome to present. A NeuroSync talk is a good place to try out a conference talk or a job talk.</p><a class="btn pri" href="{SIGN}" title="Opens an email to the CNAP team at cnap@ksu.edu, with a few lines to fill in.">Sign up to present</a></article>
+        <article><p class="sv-n num">02</p><h3>Suggest a speaker</h3><p>Know a researcher whose work CNAP members should hear? The CNAP team handles the invitation and the visit.</p><a class="btn" href="{SUGG}" title="Opens an email to the CNAP team at cnap@ksu.edu, with a few lines to fill in.">Suggest a speaker</a></article>
+        <article><p class="sv-n num">03</p><h3>Share an idea</h3><p>A topic, a format, or a change to the series. Ideas from members shape each semester’s schedule.</p><a class="btn" href="{IDEA}" title="Opens an email to the CNAP team at cnap@ksu.edu, with a few lines to fill in.">Send an idea</a></article>
       </div>
+      <p class="ns-mailnote">Each button opens an email to the CNAP team at <a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a>, with a few lines to fill in.</p>
     </div>
   </section>
 
