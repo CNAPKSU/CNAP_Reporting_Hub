@@ -17,44 +17,54 @@ def hdr(title):
     return head.replace('<title>Community · CNAP Member Hub</title>', f'<title>{title} · CNAP Member Hub</title>')
 exec(open('/tmp/claude-0/hubproto/gen/threads_list.py').read())
 
-# The sample thread
-R = [
- ('pr', 'Monday', 'I record sleep EEG in older adults, and our protocols are close to yours. I would be glad to compare montages and scoring rules. Our lab scores slow oscillations and spindles separately, which might help with your coupling question.'),
- ('ms', 'Monday', 'The Cognitive Neuroscience Core has two 64-channel systems that can run overnight. If you and a collaborator want to share a protocol, I can set up a joint booking so both studies use the same caps and settings.'),
- ('wz', 'Yesterday', 'If you end up pooling data across two labs, the Neuroinformatics Core can build one preprocessing pipeline for both, so the spindle detection is identical. Please send me the file formats when you know them.'),
- ('ev', 'Today', 'Jordan, Priya’s work on memory and sleep in aging would fit your aims well. I am happy to join a first meeting if that helps.'),
-]
+# One page per thread (MW 2026-11-15: "click on any possible link ... and it does the thing it implies")
+C.BY['ao'] = ('ao', 'AO', 'Dr. Amara Okafor', 'Pilot project leader, you', 'investigators', [], 'p', False)
+BYT = {x[0]: x for x in T}
 def reply(k, when, txt):
     m = BY[k]
-    return (f'<li class="tp-r">{av(k)}<div class="tp-rb"><p class="tp-rh"><b>{m[2]}</b><span>{m[3]}</span><span>{when}</span></p>'
-            f'<p class="tp-rt">{txt}</p>'+('' if k=='ev' else f'<p class="tp-ra"><a class="t3" href="{intro(m[2])}">Ask for an introduction</a></p>')+'</div></li>')
-replies = ''.join(reply(*r) for r in R)
-people = ''.join(f'<li>{av(k," sm")}<span>{BY[k][2]}</span></li>' for k in ['jl'] + [r[0] for r in R])
-rel = ''.join(f'<li><a href="#" data-proto title="{ONE}">{t}</a><span>{rep(r)}</span></li>' for k, t, tp, r, *_ in T if k in ('ms', 'pr', 'lp'))
+    who = 'You' if k == 'ao' else m[2]
+    act = '' if k in ('ao', 'ev') else f'<p class="tp-ra"><a class="t3" href="{intro(m[2])}" title="Starts an email to the CNAP team asking for an introduction to {m[2]}.">Ask for an introduction</a></p>'
+    return (f'<li class="tp-r">{av(k)}<div class="tp-rb"><p class="tp-rh"><b>{who}</b><span>{m[3]}</span><span>{when}</span></p>'
+            f'<p class="tp-rt">{txt}</p>{act}</div></li>')
 
-thread = hdr('Looking for an EEG collaborator') + f'''<main id="main">
+def page(k):
+    x = BYT[k]; t, tp, n, w = x[1], x[2], x[3], x[6]
+    asker = BY[k]
+    rs = REPLIES[k]
+    replies = ''.join(reply(*r) for r in rs)
+    ppl = [k] + [r[0] for r in rs]
+    seen = []
+    for p_ in ppl:
+        if p_ not in seen: seen.append(p_)
+    people = ''.join(f'<li>{av(p_, " sm")}<span>{"You" if p_ == "ao" else BY[p_][2]}</span></li>' for p_ in seen)
+    same = [y for y in T if y[2] == tp and y[0] != k]
+    other = [y for y in T if y[2] != tp and y[0] != k]
+    rel = ''.join(f'<li><a href="{url(y[0])}">{y[1]}</a><span>{rep(y[3])}</span></li>' for y in (same + other)[:3])
+    body = ''.join(f'<p>{p_}</p>' for p_ in BODY[k])
+    why = f'<p class="cm-why tp-why">{w[0].upper() + w[1:]} This thread was matched to you.</p>' if w else ''
+    fol = k in FOLLOW
+    empty = '<li class="tp-empty"><p>No one has answered yet. If you know something, or know who to ask, please reply below.</p></li>' if n == 0 else ''
+    return hdr(t) + f"""<main id="main">
   <section class="co-open tp-open" aria-labelledby="t">
     <div class="wrap">
-      <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="community.html">Community</a><span aria-hidden="true">/</span><a href="threads.html">Threads</a><span aria-hidden="true">/</span><span aria-current="page">Looking for an EEG collaborator</span></nav>
-      <p class="for">Finding a collaborator</p>
-      <h1 id="t">Looking for an EEG collaborator</h1>
-      <div class="tp-by">{av('jl')}<p><b>Dr. Jordan Lee</b><span>Pilot project leader · Started November 9 · 4 replies</span></p></div>
+      <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="community.html">Community</a><span aria-hidden="true">/</span><a href="threads.html">Threads</a><span aria-hidden="true">/</span><span aria-current="page">{t}</span></nav>
+      <p class="th-tp th-{TONE[tp]}">{tp}</p>
+      <h1 id="t">{t}</h1>
+      <div class="tp-byrow"><div class="tp-by">{av(k)}<p><b>{asker[2]}</b><span>{asker[3]} · Started {STARTED_ON[k]} · <span data-rc>{rep(n)}</span></span></p></div>
+        <button type="button" class="th-fol tp-fol" aria-pressed="{'true' if fol else 'false'}" title="Follow this thread to find it under Following on the Threads page."><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h8v11l-4-3-4 3z"/></svg><span>{'Following' if fol else 'Follow'}</span></button></div>
     </div>
   </section>
   <div class="wrap tp-cols">
     <div class="tp-main">
-      <div class="tp-q">
-        <p>My pilot project records overnight EEG to see how sleep spindles relate to memory the next morning. For the R01, I would like to extend the study to adults over 65, and I am looking for a collaborator who already works with older participants.</p>
-        <p>Ideally, someone who records sleep EEG or studies memory in aging, and who would consider a shared protocol. Please reply here, or ask the CNAP team for an introduction.</p>
-      </div>
-      <p class="cm-why tp-why">You record sleep EEG in your pilot project, so this thread was matched to you.</p>
-      <h2 class="tp-h">4 replies</h2>
-      <ol class="tp-rs">{replies}</ol>
-      <form class="tp-reply" aria-labelledby="tp-rh">
+      <div class="tp-q">{body}</div>
+      {why}
+      <h2 class="tp-h" data-rh>{rep(n) if n else 'Replies'}</h2>
+      <ol class="tp-rs">{empty}{replies}</ol>
+      <form class="tp-reply" id="reply" aria-labelledby="tp-rh">
         <h2 class="tp-h" id="tp-rh">Your reply</h2>
         <label class="sr" for="tp-rt">Your reply</label>
         <textarea id="tp-rt" rows="4" placeholder="Please share what you know, or who to ask."></textarea>
-        <p class="tp-note" role="status" hidden>Prototype only. In the Member Hub, your reply posts here, and Dr. Jordan Lee is told about the reply.</p>
+        <p class="tp-note" role="status" hidden></p>
         <div class="tp-fb"><button type="submit" class="btn pri">Post your reply</button><span class="meta">Visible to CNAP members only.</span></div>
       </form>
     </div>
@@ -67,11 +77,28 @@ thread = hdr('Looking for an EEG collaborator') + f'''<main id="main">
 
 {foot}
 <script>
-(function(){{var f=document.querySelector('.tp-reply');f.addEventListener('submit',function(e){{e.preventDefault();f.querySelector('.tp-note').hidden=false;}});}})();
+(function(){{
+  var f=document.querySelector('.tp-reply'),ta=document.getElementById('tp-rt'),note=f.querySelector('.tp-note'),list=document.querySelector('.tp-rs'),
+      rh=document.querySelector('[data-rh]'),rc=document.querySelector('[data-rc]'),n={n};
+  function label(c){{return c===0?'No replies yet':(c===1?'1 reply':c+' replies');}}
+  f.addEventListener('submit',function(e){{
+    e.preventDefault();var v=ta.value.trim();
+    if(!v){{note.textContent='Please write your reply first.';note.hidden=false;ta.focus();return;}}
+    var em=list.querySelector('.tp-empty');if(em)em.remove();
+    var li=document.createElement('li');li.className='tp-r tp-new';
+    li.innerHTML='<span class="cm-av av-p" aria-hidden="true">AO</span><div class="tp-rb"><p class="tp-rh"><b>You</b><span>Pilot project leader</span><span>Just now</span></p><p class="tp-rt"></p></div>';
+    li.querySelector('.tp-rt').textContent=v;list.appendChild(li);n++;rh.textContent=label(n);rc.textContent=label(n);ta.value='';
+    note.textContent='Your reply is posted below. In the prototype, it disappears when you leave the page.';note.hidden=false;
+    li.scrollIntoView({{block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}});
+  }});
+  var fb=document.querySelector('.tp-fol');fb.addEventListener('click',function(){{var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';}});
+  if(location.hash==='#reply'){{setTimeout(function(){{ta.focus();}},300);}}
+}})();
 </script>
 <script src="hubchrome.js" defer></script>
 </body>
 </html>
-'''
-open(V + 'thread.html', 'w').write(thread)
-print('ok')
+"""
+for x in T:
+    open(V + url(x[0]), 'w').write(page(x[0]))
+print('ok', len(T), 'thread pages')

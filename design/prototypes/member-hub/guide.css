@@ -2398,3 +2398,13 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .th-sortm li[aria-selected="true"]{color:var(--purple-ink)}
 .th-sortm li[aria-selected="true"]::before{content:"";position:absolute;left:13px;top:15px;width:9px;height:5px;border-left:2px solid var(--purple);border-bottom:2px solid var(--purple);transform:rotate(-45deg)}
 @media (max-width:640px){.th-sortm{left:0;right:auto}}
+
+/* Thread pages, working (MW 2026-11-15) */
+.tp-open .th-tp{margin-top:6px}
+.tp-byrow{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin-top:16px}
+.tp-byrow .tp-by{margin-top:0}
+.tp-empty p{margin:0;padding:18px 20px;border:1px dashed #e6d3a8;border-radius:12px;background:#fbf6ea;color:var(--ink-2);font-size:16px;line-height:24px}
+.tp-new{animation:tp-in .5s ease}
+@keyframes tp-in{from{background:var(--purple-tint)}to{background:transparent}}
+.th-flash{animation:tp-in 1.2s ease}
+@media (prefers-reduced-motion:reduce){.tp-new,.th-flash{animation:none}}

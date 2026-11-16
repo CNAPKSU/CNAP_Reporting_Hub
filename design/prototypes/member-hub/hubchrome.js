@@ -184,7 +184,7 @@
       var ab = document.createElement('button'); ab.type = 'button'; ab.className = 'hn-av'; ab.textContent = av.textContent.trim(); ab.setAttribute('aria-expanded', 'false'); ab.setAttribute('aria-controls', 'hn-acct'); ab.setAttribute('aria-label', (av.getAttribute('aria-label') || 'Your account') + ': profile and settings');
       var ap = document.createElement('div'); ap.className = 'hn-p'; ap.id = 'hn-acct'; ap.hidden = true;
       var nm = (av.getAttribute('aria-label') || '').split(':')[0];
-      ap.innerHTML = (nm ? '<p class="hn-who">' + nm + '<span>Signed in</span></p>' : '') + '<a href="mentee-profile.html">Your profile</a><a href="#" data-proto>Change password</a><a href="#" data-proto class="hn-sep">Log out</a>';
+      ap.innerHTML = (nm ? '<p class="hn-who">' + nm + '<span>Signed in</span></p>' : '') + '<a href="mentee-profile.html">Your profile</a><a href="#" data-proto title="Not part of the prototype.">Change password</a><a href="#" data-proto class="hn-sep" title="Not part of the prototype.">Log out</a>';
       ap.querySelectorAll('[data-proto]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); a.title = 'Not part of the prototype'; });
       ab.addEventListener('click', function (e) { e.stopPropagation(); var open = ab.getAttribute('aria-expanded') === 'true'; closeAll(); if (!open) { ap.hidden = false; ab.setAttribute('aria-expanded', 'true'); } });
       panels.push({ b: ab, p: ap });

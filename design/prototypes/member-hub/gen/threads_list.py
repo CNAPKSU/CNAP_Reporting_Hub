@@ -31,6 +31,13 @@ T = [
  ('ev', 'How often do you meet with your mentee in the first year?', 'Mentoring', 8, 'Active October 21', False, '', False,
   'I meet my mentee every two weeks. Curious how other mentors pace the first year of a pilot.', ['sr', 'do', 'pr', 'hc'], 'earlier'),
 ]
+exec(open('/tmp/claude-0/hubproto/gen/thread_data.py').read())
+def _uniq(xs):
+    o = []
+    for x in xs:
+        if x not in o and x != 'ao': o.append(x)
+    return o
+T = [(k, t, tp, len(REPLIES[k]), a, mt_, w, len(REPLIES[k]) == 0, ex, _uniq([r[0] for r in REPLIES[k]]), g) for (k, t, tp, r, a, mt_, w, un, ex, rs, g) in T]
 # days since the thread started; threads Amara (the viewer) started or replied to; threads she follows
 STARTED = {'jl': 6, 'kb': 0, 'lp': 9, 'rg': 3, 'hc': 12, 'pr': 5, 'sr': 14, 'om': 10, 'ms': 16, 'do': 21, 'na': 17, 'wz': 30, 'tb': 22, 'ev': 40}
 MINE = {'lp', 'hc', 'do'}
@@ -40,8 +47,8 @@ TOPICS = sorted(set(t[2] for t in T))
 def rep(n): return 'No replies yet' if n == 0 else ('1 reply' if n == 1 else f'{n} replies')
 
 def row(k, t, tp, r, a, mt_, w, un, ex, rs, grp):
-    href = 'thread.html' if k == 'jl' else '#'
-    pa = '' if k == 'jl' else f' data-proto title="{ONE}"'
+    href = url(k)
+    pa = ''
     q = (t + ' ' + BY[k][2] + ' ' + tp + ' ' + ex).lower().replace('"', '')
     stack = ''.join(av(x, ' sm') for x in rs[:3])
     if un:
@@ -63,9 +70,9 @@ rows = (f'<li class="th-grp" data-gh="week"><h2>This week</h2><span>{len(week)} 
         + f'<li class="th-grp" data-gh="earlier"><h2>Earlier this fall</h2><span>{len(earlier)} threads</span></li>' + ''.join(row(*x) for x in earlier))
 unans = [x for x in T if x[7]]
 def spotcard(x):
-    return (f'<li class="th-spot">{av(x[0])}<div class="th-spb"><p class="th-tp th-{TONE[x[2]]}">{x[2]}</p><h3><a href="#" data-proto title="{ONE}">{x[1]}</a></h3><p class="th-ex">{x[8]}</p>'
+    return (f'<li class="th-spot">{av(x[0])}<div class="th-spb"><p class="th-tp th-{TONE[x[2]]}">{x[2]}</p><h3><a href="{url(x[0])}">{x[1]}</a></h3><p class="th-ex">{x[8]}</p>'
             f'<p class="th-meta">Asked by {BY[x[0]][2]} · {x[4]}</p></div>'
-            f'<a class="btn" href="#" data-proto title="{ONE}">Answer this thread</a></li>')
+            f'<a class="btn" href="{url(x[0])}#reply">Answer this thread</a></li>')
 spot = ''.join(spotcard(x) for x in unans)
 topics = ''.join(f'<li><button type="button" class="th-topic" data-topic="{x}" aria-pressed="false"><span class="th-dot th-{TONE[x]}" aria-hidden="true"></span><span class="th-tn">{x}</span><span class="th-c">{sum(1 for t in T if t[2] == x)}</span></button></li>' for x in TOPICS)
 HELP = [('pr', 11), ('ev', 9), ('ms', 8), ('do', 7)]
@@ -110,7 +117,19 @@ SCRIPT = '''<script>
   opts.forEach(function(li,i){li.addEventListener('click',function(){pick(li);});li.addEventListener('keydown',function(e){if(e.key==='ArrowDown'){e.preventDefault();opts[Math.min(i+1,opts.length-1)].focus();}else if(e.key==='ArrowUp'){e.preventDefault();opts[Math.max(i-1,0)].focus();}else if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(li);}else if(e.key==='Escape'){openM(false);sb.focus();}});});
   document.addEventListener('click',function(e){if(!sm.hidden&&!e.target.closest('.th-sort'))openM(false);});
   var dlg=document.querySelector('.cm-compose');document.querySelectorAll('[data-compose]').forEach(function(b){b.addEventListener('click',function(){try{dlg.showModal();}catch(e){dlg.setAttribute('open','')}dlg.querySelector('.cm-note').hidden=true;});});
-  dlg.querySelector('[data-post]').addEventListener('click',function(){dlg.querySelector('.cm-note').hidden=false;});
+  dlg.querySelector('[data-post]').addEventListener('click',function(){
+    var ti=dlg.querySelector('#cmc-t'),de=dlg.querySelector('#cmc-d'),v=(ti.value||'').trim();
+    if(!v){ti.focus();ti.setAttribute('aria-invalid','true');var nt=dlg.querySelector('.cm-note');nt.textContent='Please write your question first.';nt.hidden=false;return;}
+    ti.removeAttribute('aria-invalid');
+    var kind=(dlg.querySelector('input[name=kind]:checked')||{}).value||'other',TP={funding:'Funding',expertise:'Finding a collaborator',student:'Hiring',other:'Your question'}[kind];
+    var li=document.createElement('li');li.className='th-row th-un th-newrow';li.dataset.m='0';li.dataset.u='1';li.dataset.me='1';li.dataset.f='1';li.dataset.tp=TP;li.dataset.g='week';li.dataset.r='0';li.dataset.s='0';li.dataset.i='-1';li.dataset.q=(v+' '+(de.value||'')).toLowerCase();
+    li.innerHTML='<span class="cm-av av-p" aria-hidden="true">AO</span><div class="th-body"><p class="th-tp th-p"></p><h3 class="th-t"></h3><p class="th-ex"></p><div class="th-foot"><p class="th-meta">You · No replies yet · Just now</p></div><p class="th-mine">You started this thread. In the prototype, it disappears when you leave the page.</p></div><div class="th-n th-n0"><span class="th-nn">0</span><span class="th-nl">New</span></div>';
+    li.querySelector('.th-tp').textContent=TP;li.querySelector('.th-t').textContent=v;li.querySelector('.th-ex').textContent=de.value||'';
+    var gw=list.querySelector('[data-gh=week]');gw.after(li);rows.unshift(li);
+    ti.value='';de.value='';try{dlg.close();}catch(x){dlg.removeAttribute('open');}
+    k='a';topic='';q.value='';tb.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.t==='a')});apply();
+    document.getElementById('th-all').scrollIntoView({behavior:'auto'});li.classList.add('th-flash');
+  });
   var af=document.querySelector('.th-ask');af.addEventListener('submit',function(e){e.preventDefault();var v=document.getElementById('th-askq').value.trim();try{dlg.showModal();}catch(x){dlg.setAttribute('open','')}dlg.querySelector('.cm-note').hidden=true;var ti=dlg.querySelector('#cmc-t');if(ti){ti.value=v;(v?dlg.querySelector('#cmc-d'):ti).focus();}});
 })();
 </script>'''
