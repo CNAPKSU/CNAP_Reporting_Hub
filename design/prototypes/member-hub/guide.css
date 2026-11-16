@@ -2794,3 +2794,22 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .year-h p.rib-key{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:13.5px;color:var(--muted)}
 .rib-sw{flex:none;width:28px;height:9px;border-radius:999px;background:color-mix(in srgb,var(--acc) 30%,transparent)}
 @media (max-width:980px){.year-h p.rib-key{display:none}}
+
+/* Step list, quieter (MW 2026-11-15: "more sophisticated looking text and demurer"). Hairline card,
+   no shadow, serif numerals in thin rings, plain minute counts. */
+.hs{background:transparent;box-shadow:none;border-color:color-mix(in srgb,var(--ink) 12%,transparent);padding:16px 12px 10px}
+.hs-h{margin:0 8px 6px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.hs-h b{font:400 17px/22px var(--serif);letter-spacing:.005em}
+.hs-h span{font-size:12.5px;letter-spacing:.01em}
+.hs ol{gap:0}
+.hs a{padding:8px 8px;font-size:14.5px;line-height:20px;color:var(--ink-2);gap:14px;grid-template-columns:24px minmax(0,1fr) auto}
+.hs a:hover{background:color-mix(in srgb,var(--acc) 4%,transparent)}
+.hs a:hover .hs-t{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:color-mix(in srgb,var(--acc) 45%,transparent)}
+.hs-n{width:22px;height:22px;background:none;border:1px solid color-mix(in srgb,var(--acc) 35%,transparent);font:400 13px/1 var(--serif);color:var(--acc-ink)}
+.hs-m{background:none;padding:0;font-size:12.5px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.hs a.done .hs-n{background:none;border-color:var(--acc)}
+.hs a.done .hs-n::after{width:9px;height:5px;border-color:var(--acc)}
+/* Guide intros, quieter (MW 2026-11-15: "more sophisticated looking text and demurer"): the serif
+   of the heading, smaller and softer, so the intro reads as a note under the title. */
+.open-g .lead{margin-top:16px;max-width:44ch;font:400 18px/29px var(--serif);letter-spacing:.003em;color:color-mix(in srgb,var(--ink-2) 88%,var(--bg,#faf9f7))}
+@media (max-width:640px){.open-g .lead{font-size:17px;line-height:27px}}
