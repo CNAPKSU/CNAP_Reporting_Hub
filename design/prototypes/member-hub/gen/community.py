@@ -61,7 +61,7 @@ first=''.join(f'<section class="ff-wk" aria-label="{g}"><div class="ff-wkh"><p c
 
 # 2. Members who share your interests
 MATCH=[('jl','You both record sleep EEG, and Jordan is looking for a collaborator.'),('pr','Priya studies memory consolidation during sleep and speaks at NeuroSync on November 18.'),('ms','Maya studies working memory in older adults in the core you use.'),('om','Omar joined this month and studies sleep in rodent models.')]
-match=''.join(f'''<li class="cm-mc">{av(k,' lg')}<p class="cm-mn">{BY[k][2]}</p><p class="cm-mr">{BY[k][3]}</p><p class="cm-why">{w}</p><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in BY[k][5])}</p><div class="cm-acts"><button type="button" class="btn sm pri" data-direct="{BY[k][2]}">Email {BY[k][2].replace('Dr. ','').split()[0]}</button><a class="btn sm" href="{intro(BY[k][2])}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></li>''' for k,w in MATCH)
+match=''.join(f'''<li class="cm-mc">{av(k,' lg')}<p class="cm-mn"><a class="mb-link" href="member-{k}.html">{BY[k][2]}</a></p><p class="cm-mr">{BY[k][3]}</p><p class="cm-why">{w}</p><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in BY[k][5])}</p><div class="cm-acts"><button type="button" class="btn sm pri" data-direct="{BY[k][2]}">Email {BY[k][2].replace('Dr. ','').split()[0]}</button><a class="btn sm" href="{intro(BY[k][2])}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></li>''' for k,w in MATCH)
 
 # 3. Who knows what
 SK=['EEG','Sleep','Memory','Eye tracking','Rodent behavior','Electrophysiology','TMS','Imaging','High-performance computing','Statistics','Grant writing','Aging']
@@ -70,7 +70,7 @@ skills=''.join(f'''<li><button type="button" class="cm-sk" data-skill="{s}"><spa
 
 # 4. Directory
 filt=''.join(f'<button type="button" aria-pressed="{"true" if k=="all" else "false"}" data-g="{k}">{l}</button>' for k,l in G)
-dirl=''.join(f'''<li class="cm-dr" data-g="{m[4]}" data-new="{'1' if m[7] else '0'}" data-s="{'|'.join(m[5])}" data-q="{(m[2]+' '+m[3]+' '+' '.join(m[5])).lower()}">{av(m[0])}<div class="cm-dm"><p class="cm-dn">{m[2]}{' <span class="cm-new">New</span>' if m[7] else ''}</p><p class="cm-drl">{m[3]}</p></div><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in m[5])}</p><a class="t3" href="{intro(m[2])}">Ask for an introduction</a></li>''' for m in M)
+dirl=''.join(f'''<li class="cm-dr" data-g="{m[4]}" data-new="{'1' if m[7] else '0'}" data-s="{'|'.join(m[5])}" data-q="{(m[2]+' '+m[3]+' '+' '.join(m[5])).lower()}">{av(m[0])}<div class="cm-dm"><p class="cm-dn"><a class="mb-link" href="member-{m[0]}.html">{m[2]}</a>{' <span class="cm-new">New</span>' if m[7] else ''}</p><p class="cm-drl">{m[3]}</p></div><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in m[5])}</p><a class="t3" href="{intro(m[2])}">Ask for an introduction</a></li>''' for m in M)
 
 # 5. Ask the community
 T=[('jl','Looking for an EEG collaborator','4 replies','Active today',True,'You record sleep EEG in your pilot project.',False),
@@ -197,7 +197,7 @@ def _alum(i,t,n,c,w,f,ok):
     first=n.replace('Dr. ','').split()[0]
     foot=(f'<div class="al-foot"><p class="al-ok">Happy to talk with new project leaders</p><div class="cm-acts"><button type="button" class="btn sm al-mail" data-direct="{n}">Email {first}</button>'
           f'<a class="btn sm" href="{intro(n)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></div>') if ok else ''
-    return (f'<li class="al"><div class="al-head"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div><p class="al-n">{n}</p><p class="al-w">{w}</p></div></div>'
+    return (f'<li class="al"><div class="al-head"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div><p class="al-n"><a class="mb-link" href="member-{i.lower()}.html">{n}</a></p><p class="al-w">{w}</p></div></div>'
             f'<ol class="al-path" aria-label="Career path"><li class="al-from"><span class="al-k">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
             '<li class="al-gap" aria-hidden="true"></li>'
             f'<li class="al-to"><span class="al-k">After CNAP</span><b>{aw}</b>{f"<span>{ag}</span>" if ag else ""}</li></ol>{foot}</li>')
