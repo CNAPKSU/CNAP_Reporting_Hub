@@ -60,7 +60,7 @@ first=''.join(f'<section class="ff-wk" aria-label="{g}"><div class="ff-wkh"><p c
 
 # 2. Members who share your interests
 MATCH=[('jl','You both record sleep EEG, and Jordan is looking for a collaborator.'),('pr','Priya studies memory consolidation during sleep and speaks at NeuroSync on November 18.'),('ms','Maya studies working memory in older adults in the core you use.'),('om','Omar joined this month and studies sleep in rodent models.')]
-match=''.join(f'''<li class="cm-mc">{av(k,' lg')}<p class="cm-mn">{BY[k][2]}</p><p class="cm-mr">{BY[k][3]}</p><p class="cm-why">{w}</p><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in BY[k][5])}</p><a class="btn sm" href="{intro(BY[k][2])}">Ask for an introduction</a></li>''' for k,w in MATCH)
+match=''.join(f'''<li class="cm-mc">{av(k,' lg')}<p class="cm-mn">{BY[k][2]}</p><p class="cm-mr">{BY[k][3]}</p><p class="cm-why">{w}</p><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in BY[k][5])}</p><div class="cm-acts"><button type="button" class="btn sm pri" data-direct="{BY[k][2]}">Email {BY[k][2].replace('Dr. ','').split()[0]}</button><a class="btn sm" href="{intro(BY[k][2])}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></li>''' for k,w in MATCH)
 
 # 3. Who knows what
 SK=['EEG','Sleep','Memory','Eye tracking','Rodent behavior','Electrophysiology','TMS','Imaging','High-performance computing','Statistics','Grant writing','Aging']
@@ -183,7 +183,7 @@ def _path(c,f):
     return (f'<ol class="cm-path" aria-label="Career path">'
             f'<li class="cm-st"><span class="al-k">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
             f'<li class="cm-st cm-st2"><span class="al-k">After CNAP</span><b>{aw}</b>{f"<span>{ag}</span>" if ag else ""}</li></ol>')
-alumni=''.join(f'''<li class="cm-al"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div class="cm-alb"><p class="cm-mn">{n}</p><p class="cm-alw">{w}</p>{_path(c,f)}{'<p class="cm-ok">Happy to talk with new project leaders</p>' if ok else ''}</div>{f'<a class="btn sm" href="{intro(n)}">Ask for an introduction</a>' if ok else ''}</li>''' for i,t,n,c,w,f,ok in AL)
+alumni=''.join(f'''<li class="cm-al"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div class="cm-alb"><p class="cm-mn">{n}</p><p class="cm-alw">{w}</p>{_path(c,f)}{'<p class="cm-ok">Happy to talk with new project leaders</p>' if ok else ''}</div>{f'<div class="cm-acts"><button type="button" class="btn sm pri" data-direct="{n}">Email {n.replace("Dr. ","").split()[0]}</button><a class="btn sm" href="{intro(n)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div>' if ok else ''}</li>''' for i,t,n,c,w,f,ok in AL)
 
 SECS=[('cm-ach','Recent achievements'),('cm-ask','Ask the community'),('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-alum','CNAP alumni'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
 spine=''.join(f'<li><a href="#{i}"><span class="n"><b>{n}</b></span><span>{t}</span></a></li>' for n,(i,t) in enumerate(SECS,1))
@@ -242,7 +242,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-match" aria-labelledby="cm-match-h">
           <h2 id="cm-match-h">Members who share your interests</h2>
-          <div class="cs-b"><p>Matched on the interests in your profile: sleep, memory, aging, and EEG. The CNAP team makes the introduction, so nobody gets a cold email.</p><ul class="cm-mcs">{match}</ul></div>
+          <div class="cs-b"><p>Matched on the interests in your profile: sleep, memory, aging, and EEG. Email them directly, or ask the CNAP team to introduce you if you would rather not write out of the blue.</p><ul class="cm-mcs">{match}</ul></div>
         </section>
         <section class="step cs" id="cm-know" aria-labelledby="cm-know-h">
           <h2 id="cm-know-h">Member interests and expertise</h2>
@@ -356,6 +356,7 @@ page=f'''<!doctype html>
   (function(){{var card=document.querySelector('.pz-card'),bs=document.querySelectorAll('[data-pz]'),say=document.querySelector('.pz-say');
     bs.forEach(function(b){{b.addEventListener('click',function(){{var v=b.dataset.pz;card.dataset.view=v;bs.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});
       card.querySelector('.pz-badge').lastChild.textContent=v==='me'?'Your view':'Visible to members';say.textContent=v==='me'?'This is what you and the CNAP team see. The locked rows never appear to other members.':'This is what other CNAP members see.';}});}});}})();
+  document.querySelectorAll('[data-direct]').forEach(function(b){{b.addEventListener('click',function(){{var n=b.dataset.direct;if(window.hubToast)hubToast('<b>In the Member Hub, this starts an email to '+n+'.</b> The members here are fictional, so nothing opens in the prototype.');}});}});
   var th=[].slice.call(document.querySelectorAll('.cm-th')),tb=document.querySelectorAll('.cm-tf button');
   function tf(k){{th.forEach(function(r){{r.hidden=k==='m'?r.dataset.m!=='1':k==='u'?r.dataset.u!=='1':false;}});}}
   tb.forEach(function(b){{b.addEventListener('click',function(){{tb.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});tf(b.dataset.t);}});}});tf('m');

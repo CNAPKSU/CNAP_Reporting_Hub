@@ -2627,3 +2627,7 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .ff-wk+.ff-wk{padding-top:22px;border-top:1px solid var(--line)}
 @media (max-width:900px){.ff-wk{grid-template-columns:minmax(0,1fr);gap:10px}.ff-wkh{position:static}}
 @media (max-width:640px){.ff-wk .ff-grid{grid-template-columns:minmax(0,1fr)}}
+/* Reach out directly, or ask the CNAP team for an introduction (MW 2026-11-15) */
+.cm-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cm-al>.cm-acts{flex-direction:column;align-items:stretch}
+.cm-mc .cm-acts{margin-top:auto}
