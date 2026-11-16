@@ -89,7 +89,7 @@
     ['Events', 'events.html', [['Events calendar', 'events.html', 'Every Center event, deadline, and campus date'], ['NeuroSync', 'neurosync.html', 'The Wednesday speaker series'], ['The 2027 Site Visit', 'sitevisit.html', 'May 25 and 26, 2027']]],
     ['Funding', 'funding.html', [['Funding opportunities', 'funding.html', 'Picked for you, and relevant to most members'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft'], ['Funding news', 'funding-news.html', 'News from sponsors, and events and talks']]],
     ['Community', 'community.html', [['Community', 'community.html', 'Achievements, people, and ways to connect'], ['Threads', 'threads.html', 'Questions answered by members who have the experience'], ['Member directory', 'community.html#cm-dir', 'Find a colleague or a type of expertise'], ['Alumni', 'community.html#cm-alum', 'Where former members are now']]],
-    ['Resources', 'core-bn.html', [['Behavioral Neuroscience Core', 'core-bn.html', 'Services, equipment, and how to book'], ['Cognitive Neuroscience Core', 'core-cn.html', 'Services, equipment, and how to book'], ['Neuroinformatics Core', 'core-ni.html', 'Data, analysis, and consultation'], ['Mentor guide', 'mentor.html', 'For mentors of CNAP investigators'], ['Mentee guide', 'mentee.html', 'For pilot and project investigators']]]
+    ['Resources', 'core-bn.html', [['Behavioral Neuroscience Core', 'core-bn.html', 'Services, equipment, and how to book'], ['Cognitive Neuroscience Core', 'core-cn.html', 'Services, equipment, and how to book'], ['Neuroinformatics Core', 'core-ni.html', 'Data, analysis, and consultation'], ['Mentor guide', 'mentor.html', 'For mentors of CNAP investigators'], ['Mentee guide', 'mentee.html', 'For pilot and project investigators'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft']]]
   ];
   var here = (location.pathname.split('/').pop() || 'index.html');
   if (/^reporting-\d+/.test(here)) here = 'reporting.html';
@@ -149,7 +149,7 @@
   var panels = [];
   function closeAll(except) { panels.forEach(function (x) { if (x !== except) { x.p.hidden = true; x.b.setAttribute('aria-expanded', 'false'); } }); }
   MAP.forEach(function (sec, i) {
-    var it = document.createElement('div'); it.className = 'hn-it' + (inSec(sec) ? ' is-here' : '');
+    var here1 = inSec(sec) && !hn.querySelector('.is-here'); var it = document.createElement('div'); it.className = 'hn-it' + (here1 ? ' is-here' : '');
     if (!sec[2]) {
       var a = document.createElement('a'); a.className = 'hn-b'; a.href = sec[1]; a.textContent = sec[0];
       if (here === sec[1]) a.setAttribute('aria-current', 'page');
