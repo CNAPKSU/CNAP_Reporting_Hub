@@ -73,8 +73,13 @@ def _label_minutes(label):
     return int(nums[-1]) if nums else 0
 
 
-def todo_summary(surveys, reports, checkins=0):
-    """ "3 surveys and 2 reports" (MW 2026-11-07): respondents see surveys and reports, never "forms"."""
+def todo_summary(surveys, reports, checkins=0, words=False):
+    """ "3 surveys and 2 reports" (MW 2026-11-07): respondents see surveys and reports, never "forms".
+
+    words=True writes counts up to twelve as words ("four surveys"), for a sentence that starts with the count.
+    """
+    from apps.common.templatetags.cnap import numword
+
     parts = []
     for n, one, many in (
         (surveys, "survey", "surveys"),
@@ -82,7 +87,7 @@ def todo_summary(surveys, reports, checkins=0):
         (checkins, "check-in", "check-ins"),
     ):
         if n:
-            parts.append(f"{n} {one if n == 1 else many}")
+            parts.append(f"{numword(n) if words else n} {one if n == 1 else many}")
     if len(parts) <= 2:
         return " and ".join(parts)
     return ", ".join(parts[:-1]) + ", and " + parts[-1]

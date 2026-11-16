@@ -111,6 +111,8 @@ def reporting(person):
     due = timezone.localtime(period.due_at).date()
     days = (due - today).days
     left = presenters.todo_summary(t["todo_surveys"], t["todo_reports"])
+    left_words = presenters.todo_summary(t["todo_surveys"], t["todo_reports"], words=True)
+    left_n = (t["todo_surveys"] or 0) + (t["todo_reports"] or 0)
     return {
         "period": period,
         "name": f"{period.name} reporting",
@@ -118,6 +120,7 @@ def reporting(person):
         "todo": t["todo"],
         "done_n": t["done_n"],
         "left": left,
+        "left_sentence": f"{left_words[:1].upper()}{left_words[1:]} {'is' if left_n == 1 else 'are'} left",
         "time": duration(t["minutes_left"]) if t["minutes_left"] else "",
         "due": due,
         "due_words": _wmd(due),

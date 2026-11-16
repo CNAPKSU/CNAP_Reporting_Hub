@@ -26,7 +26,7 @@
       <h1 id="hi">{{ greeting }}, {{ person.first_name }}.</h1>
       {% if rep or ns_soon %}<p class="line">{% if rep %}{% if rep.todo %}<a href="#wk">{{ rep.name }} {{ rep.closes }}</a>.{% else %}<a href="#wk">Your {{ rep.name }} is complete</a>.{% endif %}{% endif %}{% if rep and ns_soon %}<br>{% endif %}{% if ns_soon %}On {{ ns_soon.weekday }}, <a href="#ev-h">NeuroSync welcomes {{ ns_soon.speaker.full_name }}</a>.{% endif %}</p>{% endif %}
       {% if rep and rep.todo %}<div class="rcue">
-        <a class="rcue-btn" href="{% url 'portal:tasks' %}"><span class="rcue-ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="rcue-p" cx="18" cy="18" r="15" pathLength="{{ rep.total }}" style="stroke-dasharray:{{ rep.done_n }} {{ rep.total }}"/></svg><span class="num">{{ rep.done_n }}/{{ rep.total }}</span></span><span class="rcue-t"><b>Continue your {{ rep.name }}</b><span>{{ rep.left|capfirst }} left{% if rep.time %}, {{ rep.time }}{% endif %}. Closes {{ rep.due_words }}.</span></span><span class="rcue-go" aria-hidden="true"></span></a>
+        <a class="rcue-btn" href="{% url 'portal:tasks' %}"><span class="rcue-ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="rcue-p" cx="18" cy="18" r="15" pathLength="{{ rep.total }}" style="stroke-dasharray:{{ rep.done_n }} {{ rep.total }}"/></svg><span class="num">{{ rep.done_n }}/{{ rep.total }}</span></span><span class="rcue-t"><b>Continue your {{ rep.name }}</b><span>{{ rep.left_sentence }}{% if rep.time %}, {{ rep.time }} in all{% endif %}. Reporting closes {{ rep.due_words }}.</span></span><span class="rcue-go" aria-hidden="true"></span></a>
       </div>{% endif %}
     </div>
   </section>
