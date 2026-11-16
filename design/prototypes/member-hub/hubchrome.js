@@ -453,3 +453,61 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
   go();addEventListener('load',function(){go();setTimeout(go,120);});
   addEventListener('pageshow',function(e){if(e.persisted)go();});
 })();
+
+/* Search on every page (MW 2026-11-15). Finds pages, sections, people, threads, and dates from the prototype's
+   own list (search-index.js). Press / or select Search CNAP. */
+(function(){
+  if(window.__hubSearch)return;window.__hubSearch=1;
+  var css='.hs-btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 10px 0 12px;border:1px solid var(--line-2,#ddd6cc);border-radius:10px;background:var(--surface,#fff);color:var(--ink-2,#4a4352);font:inherit;font-size:14px;cursor:pointer;text-decoration:none}'
+   +'.hs-btn:hover{border-color:var(--purple,#512888);color:var(--purple-ink,#3c1d66)}.hs-btn kbd{font:600 11px/1 inherit;padding:3px 6px;border:1px solid var(--line-2,#ddd6cc);border-radius:5px;color:var(--muted,#6b6475)}'
+   +'@media (max-width:1440px){.hs-btn .st,.hs-btn kbd{display:none}.hs-btn{width:38px;padding:0;justify-content:center}}'+'.hs-in input::-webkit-search-cancel-button{display:none}'
+   +'.hs-ov{position:fixed;inset:0;z-index:300;background:rgba(20,11,26,.45);display:flex;align-items:flex-start;justify-content:center;padding:10vh 16px 16px}'
+   +'.hs-ov[hidden]{display:none}.hs-box{width:min(640px,100%);max-height:76vh;display:flex;flex-direction:column;background:var(--surface,#fff);border-radius:14px;box-shadow:0 24px 60px rgba(20,11,26,.35);overflow:hidden}'
+   +'.hs-in{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line,#ece6dc)}.hs-in svg{flex:none;color:var(--muted,#6b6475)}'
+   +'.hs-in input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:17px;background:transparent;color:var(--ink,#1f1a24)}'
+   +'.hs-in button{border:0;background:none;color:var(--muted,#6b6475);font:inherit;font-size:13px;cursor:pointer}'
+   +'.hs-res{list-style:none;margin:0;padding:6px;overflow:auto}.hs-res li a{display:grid;grid-template-columns:76px minmax(0,1fr);gap:2px 12px;padding:9px 10px;border-radius:8px;color:var(--ink,#1f1a24);text-decoration:none}'
+   +'.hs-res li a[aria-selected="true"],.hs-res li a:hover{background:var(--purple-tint,#efe8f8)}.hs-res .k{grid-row:span 2;font-size:12px;font-weight:600;color:var(--purple-ink,#3c1d66);padding-top:2px}'
+   +'.hs-res b{font-weight:500}.hs-res small{color:var(--muted,#6b6475);font-size:12.5px}.hs-none,.hs-hint{padding:18px 16px;color:var(--muted,#6b6475);font-size:14px;margin:0}';
+  var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+  var ov=document.createElement('div');ov.className='hs-ov';ov.hidden=true;ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Search CNAP');
+  ov.innerHTML='<div class="hs-box"><div class="hs-in"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><label class="sr" for="hs-q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">Search CNAP</label><input id="hs-q" type="search" autocomplete="off" placeholder="Find a person, a deadline, or a page"><button type="button" data-hs-close>Close</button></div><p class="hs-hint">Try “NeuroSync”, “pilot proposals”, “Maya Singh”, or “Site Visit”.</p><ul class="hs-res" role="listbox" aria-label="Results"></ul></div>';
+  function mount(){document.body.appendChild(ov);}
+  if(document.body)mount();else document.addEventListener('DOMContentLoaded',mount);
+  var q=ov.querySelector('input'),res=ov.querySelector('.hs-res'),hint=ov.querySelector('.hs-hint'),sel=-1,last=null;
+  function load(cb){if(window.HUB_SEARCH)return cb();var s=document.createElement('script');s.src='search-index.js';s.onload=cb;s.onerror=function(){hint.textContent='Search isn’t available on this page.';};document.head.appendChild(s);}
+  function norm(x){return (x||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+  function render(){
+    var v=norm(q.value.trim());res.innerHTML='';sel=-1;
+    if(!v){hint.hidden=false;hint.textContent='Try “NeuroSync”, “pilot proposals”, “Maya Singh”, or “Site Visit”.';return;}
+    var words=v.split(/\s+/),out=[];
+    (window.HUB_SEARCH||[]).forEach(function(it){var t=norm(it.t),d=norm(it.d),sc=0,ok=true;
+      words.forEach(function(w){if(t.indexOf(w)>-1)sc+=t.indexOf(w)===0?3:2;else if(d.indexOf(w)>-1)sc+=1;else ok=false;});
+      if(ok){if(it.k==='Page'||it.k==='Person')sc+=1;out.push([sc,it]);}});
+    out.sort(function(a,b){return b[0]-a[0];});out=out.slice(0,12);
+    if(!out.length){hint.hidden=false;hint.textContent='Nothing matches “'+q.value.trim()+'”. Please try fewer or different words.';return;}
+    hint.hidden=true;
+    out.forEach(function(p,i){var it=p[1],li=document.createElement('li'),a=document.createElement('a');a.href=it.u;a.setAttribute('role','option');a.id='hs-o'+i;
+      a.innerHTML='<span class="k"></span><b></b><small></small>';a.querySelector('.k').textContent=it.k;a.querySelector('b').textContent=it.t;a.querySelector('small').textContent=it.d||'';li.appendChild(a);res.appendChild(li);});
+  }
+  function move(d){var as=res.querySelectorAll('a');if(!as.length)return;sel=(sel+d+as.length)%as.length;as.forEach(function(a,i){a.setAttribute('aria-selected',i===sel);});as[sel].scrollIntoView({block:'nearest'});q.setAttribute('aria-activedescendant',as[sel].id);}
+  function open(){last=document.activeElement;load(function(){render();});ov.hidden=false;q.value='';render();setTimeout(function(){q.focus();},20);}
+  function close(){ov.hidden=true;if(last&&last.focus)last.focus();}
+  window.hubSearchOpen=open;
+  q.addEventListener('input',render);
+  q.addEventListener('keydown',function(e){if(e.key==='ArrowDown'){e.preventDefault();move(1);}else if(e.key==='ArrowUp'){e.preventDefault();move(-1);}else if(e.key==='Enter'){var as=res.querySelectorAll('a');var a=as[sel>-1?sel:0];if(a){e.preventDefault();location.href=a.href;}}});
+  ov.addEventListener('click',function(e){if(e.target===ov||e.target.closest('[data-hs-close]'))close();});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&!ov.hidden){close();return;}
+    var t=e.target;if(e.key==='/'&&!e.metaKey&&!e.ctrlKey&&ov.hidden&&!(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)))){e.preventDefault();open();}
+  });
+  function wire(){
+    var ex=document.querySelector('header a.search');
+    if(ex){ex.removeAttribute('data-proto');ex.removeAttribute('title');ex.setAttribute('href','#');ex.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();open();},true);return;}
+    var tools=document.querySelector('header .tools');if(!tools||tools.querySelector('.hs-btn'))return;
+    var b=document.createElement('button');b.type='button';b.className='hs-btn';b.setAttribute('aria-label','Search people, events, resources, and funding');
+    b.innerHTML='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><span class="st">Search CNAP</span><kbd>/</kbd>';
+    b.addEventListener('click',open);tools.insertBefore(b,tools.firstChild);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wire);else wire();
+})();
