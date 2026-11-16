@@ -1475,6 +1475,19 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .keys .kd-s{font-size:16px;line-height:25px}
 .keys .kd-l{margin-top:2px}
 .keys .kd-l .t3{font-size:16px}
+
+/* Your week reads as the section's heading, above the cards (MW 2026-11-15: "not totally clear that this is a header") */
+@media (min-width:900px){
+.brief{grid-template-columns:repeat(3,minmax(0,1fr))!important;grid-template-rows:auto auto auto 1fr auto!important}
+.brief .bi:not(.intro){grid-row:2 / span 4!important}
+.brief .bi.intro{grid-column:1 / -1!important;grid-row:1!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;column-gap:40px!important;row-gap:6px!important;align-items:end!important;padding:0 0 26px!important;margin:0 0 36px!important;border:0!important;border-bottom:1px solid var(--line)!important}
+.brief .bi.intro::before,.brief .bi.intro::after{display:none!important}
+.brief .bi.intro h2{grid-column:1;grid-row:1;font:500 40px/46px var(--serif)!important;letter-spacing:-.02em;margin:0}
+.brief .bi.intro .lab{grid-column:1;grid-row:2;order:0;font-size:15px;color:var(--muted)}
+.brief .bi.intro .body{grid-column:2;grid-row:1 / span 2;align-self:end;text-align:right;max-width:none}
+.brief .bi.intro .roles{font-size:14px;line-height:21px;color:var(--muted)}
+.brief .bi.intro .body::before{content:"Your roles";display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:2px}
+}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -1567,7 +1580,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
     <div class="wrap">
       <div class="brief" role="list" aria-label="Your week, most urgent first">
         <div class="bi intro" role="listitem">
-          <span class="lab">Most urgent first</span>
+          <span class="lab">Most urgent first, left to right</span>
           <h2 id="wk">Your week</h2>
           <div class="body"><p class="roles" data-unless="roles admin">Pilot Project Leader<br>Behavioral Neuroscience Core user<br>Mentored by Dr. Elena Voss</p><div data-when="roles" hidden><p class="roles">Pilot Project Leader<br>Mentor to two pilot leaders</p><details class="more-roles"><summary>3 more roles</summary><p class="roles">Behavioral Neuroscience Core user<br>Neuroinformatics Core user<br>NeuroSync planning group</p></details></div><p class="roles" data-when="admin" hidden>Center administrator<br>Cognitive Neuroscience Core user<br>NeuroSync planning group</p></div>
         </div>
