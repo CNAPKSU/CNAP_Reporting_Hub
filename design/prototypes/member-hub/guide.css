@@ -2869,3 +2869,4 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 /* Directory contact pair, quieter (MW 2026-11-15: "too loud"): both links the same size and weight */
 .cm-dr .cm-dra .t3,.cm-dr .cm-dra button.t3{font-size:14px;font-weight:500;color:var(--purple-ink);text-decoration-thickness:1px;text-underline-offset:3px}
 .cm-dr .cm-dra .cm-or{font-size:13px;color:var(--muted)}
+.cm-dr .cm-dra{gap:5px}.cm-dr .cm-dra .t3,.cm-dr .cm-dra button.t3{font-size:12.5px;font-weight:400;color:var(--ink-2);text-decoration-color:color-mix(in srgb,var(--purple) 35%,transparent)}.cm-dr .cm-dra .t3:hover,.cm-dr .cm-dra button.t3:hover{color:var(--purple-ink)}.cm-dr .cm-dra .cm-or{font-size:12px}
