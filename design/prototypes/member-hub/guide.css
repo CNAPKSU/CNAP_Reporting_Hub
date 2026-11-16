@@ -2408,3 +2408,8 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 @keyframes tp-in{from{background:var(--purple-tint)}to{background:transparent}}
 .th-flash{animation:tp-in 1.2s ease}
 @media (prefers-reduced-motion:reduce){.tp-new,.th-flash{animation:none}}
+
+/* The heading you land on bounces, so you know you are in the right place (MW 2026-11-15) */
+@keyframes th-bounce{0%{transform:translateY(0)}25%{transform:translateY(-10px)}45%{transform:translateY(0)}62%{transform:translateY(-5px)}78%{transform:translateY(0)}90%{transform:translateY(-2px)}100%{transform:translateY(0)}}
+.th-bounce{animation:th-bounce .8s cubic-bezier(.28,.84,.42,1);display:inline-block}
+@media (prefers-reduced-motion:reduce){.th-bounce{animation:none;text-decoration:underline;text-decoration-color:var(--brass);text-underline-offset:6px}}

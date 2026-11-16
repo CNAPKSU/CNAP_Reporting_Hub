@@ -104,7 +104,13 @@ SCRIPT = '''<script>
     tps.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.topic===topic);});
   }
   tb.forEach(function(b){b.addEventListener('click',function(){k=b.dataset.t;tb.forEach(function(o){o.setAttribute('aria-pressed',o===b)});apply();});});
-  document.querySelectorAll('[data-jump]').forEach(function(j){j.addEventListener('click',function(){k=j.dataset.jump;topic='';q.value='';tb.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.t===k)});apply();document.getElementById('th-all').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});});
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function land(h){var y=h.getBoundingClientRect().top+scrollY-110;scrollTo({top:y,behavior:still?'auto':'smooth'});
+    var go=function(){h.classList.remove('th-bounce');void h.offsetWidth;h.classList.add('th-bounce');};var t0=Date.now(),last=-1;
+    (function wait(){if(Math.abs(scrollY-last)<1||Date.now()-t0>1200){go();return;}last=scrollY;setTimeout(wait,80);})();}
+  document.querySelectorAll('[data-jump]').forEach(function(j){j.addEventListener('click',function(){
+    if(j.dataset.jump==='u'){land(document.getElementById('wait-h'));return;}
+    k=j.dataset.jump;topic='';q.value='';tb.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.t===k)});apply();land(document.querySelector('#th-all h2'));});});
   tps.forEach(function(b){b.addEventListener('click',function(){topic=topic===b.dataset.topic?'':b.dataset.topic;apply();});});
   document.querySelector('[data-clear]').addEventListener('click',function(){topic='';apply();});
   q.addEventListener('input',apply);
@@ -148,7 +154,7 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
         <div class="th-stats" role="group" aria-label="Jump to threads">
           <button type="button" data-jump="a" title="Shows every open thread in the list below."><span class="th-sl">Open threads</span><span class="th-sn num">{len(T)}</span></button>
           <button type="button" data-jump="m" title="Shows the threads matched to your research interests."><span class="th-sl">Matched to you</span><span class="th-sn num">{n_m}</span></button>
-          <button type="button" class="th-st-u" data-jump="u" title="Shows the threads no one has answered yet."><span class="th-sl">Not answered yet</span><span class="th-sn num">{n_u}</span></button>
+          <button type="button" class="th-st-u" data-jump="u" title="Jumps to the threads no one has answered yet."><span class="th-sl">Not answered yet</span><span class="th-sn num">{n_u}</span></button>
         </div>
       </div>
     </div>
