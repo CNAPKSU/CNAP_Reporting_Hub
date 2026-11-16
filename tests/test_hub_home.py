@@ -180,3 +180,23 @@ def test_funding_page_is_unchanged_with_the_switch_off(client, center):
     # The separate pages exist only in the Hub design; with the switch off they lead back to the one page.
     assert client.get("/funding/news/").url == "/funding/#s-news"
     assert client.get("/funding/resources/").url == "/funding/#s-before"
+
+
+def test_ribbon_menus_list_only_pages_the_app_has(client, django_user_model):
+    """MW 2026-11-15, approved build: the top ribbon. Each menu link resolves to a page that exists."""
+    from django.core.management import call_command
+    from django.test import override_settings
+
+    call_command("seed", "--fictional", verbosity=0)
+    from apps.accounts.models import User
+
+    client.force_login(User.objects.get(username="okafor"))
+    with override_settings(UI_PROTOTYPE=True, UI_PROTOTYPE_ONLY=True):
+        html = client.get("/").content.decode()
+        assert "{#" not in html and "MW 2026-11-15" not in html  # template comments never show
+        assert 'class="nav hn-app"' in html and 'aria-controls="rb-fund"' in html and 'aria-controls="rb-rep"' in html
+        import re
+
+        for href in set(re.findall(r'<div class="rb-p"[^>]*>(.*?)</div>', html, re.S)):
+            for u in re.findall(r'href="([^"#]+)"', href):
+                assert client.get(u).status_code == 200, u

@@ -1433,3 +1433,23 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 /* NeuroSync corners (MW 2026-11-14): every corner sits 24px from its content, with room between the title block and the poster so the inner corners never touch */
 .ns-band [aria-labelledby="ev-h"] > .sh{margin-bottom:80px}
 .brief .bi .act .btn{white-space:nowrap}
+
+/* Top ribbon menus in the app (MW 2026-11-15, approved build). Matches the prototype's ribbon. */
+.hn-app{align-items:stretch}
+.hn-app .rb-it{position:relative;display:flex}
+.hn-app .rb-b{display:flex;align-items:center;gap:6px;min-height:72px;padding:0 12px;border:0;background:none;font:inherit;font-size:15px;font-weight:500;color:var(--ink-2);cursor:pointer;box-shadow:inset 0 -2px 0 transparent}
+.hn-app .rb-b svg{width:10px;height:6px;fill:none;stroke:currentColor;stroke-width:1.6;transition:transform .15s}
+.hn-app .rb-b:hover{color:var(--ink);box-shadow:inset 0 -2px 0 var(--line-2)}
+.hn-app .rb-b[aria-expanded="true"] svg{transform:rotate(180deg)}
+.hn-app .rb-it.is-here>.rb-b{color:var(--purple);box-shadow:inset 0 -2px 0 var(--purple)}
+.hn-app .rb-b:focus-visible{outline:2px solid var(--purple);outline-offset:-4px;border-radius:6px}
+.hn-app .rb-p{position:absolute;top:calc(100% - 6px);left:0;z-index:60;min-width:300px;padding:8px;background:var(--surface,#fff);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 34px rgba(40,20,70,.14)}
+.hn-app .rb-p[hidden]{display:none}
+.hn-app .rb-p a{display:flex;flex-direction:column;gap:2px;min-height:0;padding:10px 12px;border-radius:8px;box-shadow:none;color:var(--ink);text-decoration:none}
+.hn-app .rb-p a+a{border-top:1px solid var(--line);border-top-left-radius:0;border-top-right-radius:0}
+.hn-app .rb-p a:hover,.hn-app .rb-p a:focus-visible{background:var(--purple-tint,#efe8f8);box-shadow:none}
+.hn-app .rb-p b{font-weight:500;font-size:15px}
+.hn-app .rb-p small{font-size:13px;color:var(--muted)}
+@media (min-width:1024px) and (max-width:1120px){.hn-app .rb-b{padding:0 7px;font-size:14px}}
+@media (prefers-reduced-motion:reduce){.hn-app .rb-b svg{transition:none}}
+.hn-app .rb-p a{align-items:flex-start;text-align:left;justify-content:flex-start}

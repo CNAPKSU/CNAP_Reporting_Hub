@@ -2,7 +2,30 @@
 <header class="hdr">
   <div class="wrap">
     <a class="brand" href="{% url 'home' %}"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="#512888"/><path d="M8.5 23.5c3.4-7.6 6.6-9.8 9.4-9.8 2.7 0 4.3 4.1 9.6 4.1" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="8.5" cy="23.5" r="2.4" fill="#fff"/><circle cx="27.5" cy="17.8" r="2.4" fill="#fff"/></svg><span><b>{{ platform_name }}</b><small>Kansas State University</small></span></a>
-    <nav class="nav" aria-label="Main"><a href="{% url 'home' %}"{% if active == 'home' %} aria-current="page"{% endif %}>Home</a><a href="{% url 'portal:tasks' %}"{% if active == 'reporting' %} aria-current="page"{% endif %}>Reporting</a><a href="{% url 'home' %}#res-h">Research</a><a href="{% url 'home' %}#cal-h">Events</a><a href="{% url 'portal:funding' %}"{% if active == 'funding' %} aria-current="page"{% endif %}>Funding</a><a href="{% url 'home' %}#com-h">Community</a><a href="{% url 'home' %}#cores-h">Resources</a></nav>
+    {# MW 2026-11-15, approved build: the prototype ribbon. Menus list only pages the app has; other sections go to their part of Home. #}
+    <nav class="nav hn-app" aria-label="Main">
+      <a href="{% url 'home' %}"{% if active == 'home' %} aria-current="page"{% endif %}>Home</a>
+      <div class="rb-it{% if active == 'reporting' %} is-here{% endif %}">
+        <button type="button" class="rb-b" aria-expanded="false" aria-controls="rb-rep">Reporting<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
+        <div class="rb-p" id="rb-rep" hidden>
+          <a href="{% url 'portal:tasks' %}"><b>My tasks</b><small>Surveys and reports due this session</small></a>
+          <a href="{% url 'portal:outcomes' %}"><b>Publications, talks, and grants</b><small>Record a paper, a presentation, or a proposal</small></a>
+          <a href="{% url 'portal:history' %}"><b>My history</b><small>Everything you have submitted</small></a>
+        </div>
+      </div>
+      <a href="{% url 'home' %}#res-h">Research</a>
+      <a href="{% url 'home' %}#cal-h">Events</a>
+      <div class="rb-it{% if active == 'funding' %} is-here{% endif %}">
+        <button type="button" class="rb-b" aria-expanded="false" aria-controls="rb-fund">Funding<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
+        <div class="rb-p" id="rb-fund" hidden>
+          <a href="{% url 'portal:funding' %}"><b>Funding opportunities</b><small>Picked for you, and relevant to most members</small></a>
+          <a href="{% url 'portal:funding_resources' %}"><b>Grant resources and toolkit</b><small>Weigh an opportunity and get help with a draft</small></a>
+          <a href="{% url 'portal:funding_news' %}"><b>Funding news</b><small>News from sponsors, and events and talks</small></a>
+        </div>
+      </div>
+      <a href="{% url 'home' %}#com-h">Community</a>
+      <a href="{% url 'home' %}#cores-h">Resources</a>
+    </nav>
     <div class="tools">
       {% if is_admin %}<a class="mywork" href="{% url 'manage:home' %}" style="border-style:dashed">Administration</a>{% endif %}
       <a class="mywork" href="{% url 'portal:tasks' %}">My work{% if rep %} <span class="count"{% if not rep.todo %} style="background:var(--green)"{% endif %}>{{ rep.todo }}</span>{% endif %}</a>
@@ -20,3 +43,14 @@
     </div>
   </div>
 </header>
+<script>
+/* Ribbon menus (MW 2026-11-15): open on click or Enter, close on a click anywhere else or Escape. */
+(function(){var its=[].slice.call(document.querySelectorAll('.hn-app .rb-it'));if(!its.length)return;
+function shut(except){its.forEach(function(it){if(it===except)return;it.querySelector('.rb-b').setAttribute('aria-expanded','false');it.querySelector('.rb-p').hidden=true;});}
+its.forEach(function(it){var b=it.querySelector('.rb-b'),p=it.querySelector('.rb-p');
+  b.addEventListener('click',function(e){e.stopPropagation();var open=b.getAttribute('aria-expanded')!=='true';shut(it);b.setAttribute('aria-expanded',String(open));p.hidden=!open;if(open){var a=p.querySelector('a');if(a&&e.detail===0)a.focus();}});
+  p.addEventListener('keydown',function(e){var as=[].slice.call(p.querySelectorAll('a')),i=as.indexOf(document.activeElement);
+    if(e.key==='ArrowDown'){e.preventDefault();as[(i+1)%as.length].focus();}else if(e.key==='ArrowUp'){e.preventDefault();as[(i-1+as.length)%as.length].focus();}});});
+document.addEventListener('click',function(e){if(!e.target.closest('.hn-app .rb-it'))shut();});
+document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;var o=document.querySelector('.hn-app .rb-b[aria-expanded="true"]');shut();if(o)o.focus();});})();
+</script>
