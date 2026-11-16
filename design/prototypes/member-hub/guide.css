@@ -2617,3 +2617,13 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .pz-n{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pz-only{padding-left:23px}
 .pz-priv{background:linear-gradient(90deg,#f6f1fc 0%,#fbf9fd 100%)}
+/* Your first month, grouped by week: one row per week (MW 2026-11-15) */
+.ff-weeks{display:grid;gap:22px}
+.ff-wk{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;align-items:start}
+.ff-wkh{position:sticky;top:96px;padding-top:6px}
+.ff-wkt{margin:0;font:500 22px/28px var(--serif);color:var(--purple-ink)}
+.ff-wks{margin:4px 0 0;font-size:14px;line-height:20px;color:var(--muted)}
+.ff-wk .ff-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ff-wk+.ff-wk{padding-top:22px;border-top:1px solid var(--line)}
+@media (max-width:900px){.ff-wk{grid-template-columns:minmax(0,1fr);gap:10px}.ff-wkh{position:static}}
+@media (max-width:640px){.ff-wk .ff-grid{grid-template-columns:minmax(0,1fr)}}
