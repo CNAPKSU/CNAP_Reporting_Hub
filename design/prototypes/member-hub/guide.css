@@ -2863,3 +2863,6 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .pg-jd{gap:8px}.pg-jd + .pg-jd{padding-left:14px}
 .pg-jump a{padding:0 6px 0 13px;font-size:14px}
 .pg-gh h3,.pg-dh{scroll-margin-top:110px}@media (max-width:900px){.pg-gh h3,.pg-dh{scroll-margin-top:96px}}
+/* Hero text spans the collage's height (MW 2026-11-15): breadcrumb level with the collage's top,
+   buttons level with its bottom, the title and intro centered between. */
+@media (min-width:901px){.pg-hgrid{align-items:stretch}.pg-collage{margin-top:0}.pg-hl{display:flex;flex-direction:column}.pg-hero .crumb{margin-bottom:28px}.pg-hero .pg-kick{margin-top:auto}.pg-hero .pg-act{margin-top:auto;padding-top:28px}}
