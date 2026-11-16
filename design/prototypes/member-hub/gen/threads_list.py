@@ -145,7 +145,7 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
       <section class="th-card" aria-labelledby="tp-h"><h2 id="tp-h">Topics</h2><ul class="th-topics">{topics}</ul></section>
       <section class="th-card" aria-labelledby="hp-h"><h2 id="hp-h">Most helpful this fall</h2><ul class="th-help">{helpful}</ul></section>
       <section class="th-card th-how" aria-labelledby="how-h"><h2 id="how-h">How threads work</h2>
-        <ol><li>Only CNAP members can see threads.</li><li>Members with matching interests get a note about your question.</li><li>The CNAP team reads every thread and answers questions meant for the office.</li></ol></section>
+        <ol><li>Only CNAP members can see threads.</li><li>Members with matching interests get a note about your question.</li><li>The CNAP team aims to read every thread, and joins in when the team can help.</li></ol></section>
     </aside>
   </div>
 </main>
