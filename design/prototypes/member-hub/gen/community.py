@@ -251,7 +251,7 @@ page=f'''<!doctype html>
           <p class="for">The people of CNAP</p>
           <h1 id="t">Community</h1>
           <p class="lead">Who works on what, who to ask, and where to meet. Start here to find a collaborator, a second opinion on your methods, or someone who has navigated a similar challenge.</p>
-          <div class="co-act"><button type="button" class="btn pri" data-compose>Start a conversation thread</button><button type="button" class="btn" data-share>Share an achievement</button></div>
+          <div class="co-act"><button type="button" class="btn pri" data-compose>Start a conversation thread</button><button type="button" class="btn" data-share>Share an achievement</button><a class="btn" href="#cm-ways" data-jumpto title="Jumps to Ways to connect on this page.">Ways to connect</a></div>
         </div>
         {NET}
       </div>
@@ -410,6 +410,7 @@ page=f'''<!doctype html>
   (function(){{var cs=[].slice.call(document.querySelectorAll('.sp')),fb=document.querySelectorAll('.sp-f button'),n=document.querySelector('[data-spn]');
     fb.forEach(function(b){{b.addEventListener('click',function(){{var f=b.dataset.sf,c=0;fb.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});cs.forEach(function(x){{var ok=f==='all'||x.dataset.se===f;x.hidden=!ok;if(ok)c++;}});n.textContent=c;}});}});
     document.querySelectorAll('[data-rec]').forEach(function(b){{b.addEventListener('click',function(){{if(window.hubToast)hubToast('<b>In the Member Hub, this opens the recording of “'+b.dataset.rec+'.”</b> The recordings are not part of the prototype.');}});}});}})();
+  document.querySelectorAll('[data-jumpto]').forEach(function(a){{a.addEventListener('click',function(e){{var t=document.querySelector(a.getAttribute('href'));if(!t)return;e.preventDefault();var h=t.querySelector('h2')||t;scrollTo({{top:h.getBoundingClientRect().top+scrollY-110,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}});setTimeout(function(){{h.classList.remove('hr-bounce');void h.offsetWidth;h.classList.add('hr-bounce');}},500);}});}});
   var th=[].slice.call(document.querySelectorAll('.cm-th')),tb=document.querySelectorAll('.cm-tf button');
   function tf(k){{th.forEach(function(r){{r.hidden=k==='m'?r.dataset.m!=='1':k==='u'?r.dataset.u!=='1':false;}});}}
   tb.forEach(function(b){{b.addEventListener('click',function(){{tb.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});tf(b.dataset.t);}});}});tf('m');
