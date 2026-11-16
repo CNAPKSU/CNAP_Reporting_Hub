@@ -604,5 +604,15 @@ def questions_post(request):
                 old=old,
                 new={"title": q.title, "text": q.text},
             )
+    # MW 2026-11-15: staff can add a question here, so a new question needs no code change or data script
+    new_title = request.POST.get("new_title", "").strip()
+    new_text = request.POST.get("new_text", "").strip()
+    if new_title and new_text:
+        last = FundingQuestion.objects.active().order_by("-position").first()
+        q = FundingQuestion.objects.create(position=(last.position + 1) if last else 1, title=new_title[:120], text=new_text)
+        record_event(request.user, AuditLog.Action.CREATE, q, new={"title": q.title, "text": q.text})
+    elif new_title or new_text:
+        messages.error(request, "To add a question, please fill in both the short title and the question.")
+        return redirect(_tab_url("questions"))
     messages.success(request, "Saved.")
     return redirect(_tab_url("questions"))

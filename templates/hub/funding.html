@@ -30,7 +30,7 @@
             <div><dt>Events and talks</dt><dd><a href="#s-events">{{ events|length }} coming up</a></dd></div>
           </dl>
           {% elif part == "resources" %}<h1 id="t">Grant resources</h1>
-          <p class="fp-lead">Help with a proposal from start to finish: seven questions for weighing an opportunity, a one-on-one consultation on a draft, and a proposal writing toolkit.</p>
+          <p class="fp-lead">Help with a proposal from start to finish: {{ questions|length|numword }} questions for weighing an opportunity, a one-on-one consultation on a draft, and a proposal writing toolkit.</p>
           <dl class="fp-facts">
             <div><dt>Before you apply</dt><dd>{{ questions|length }} question{{ questions|length|pluralize }} to weigh</dd></div>
             <div><dt>Consultations</dt><dd>One on one, by email request</dd></div>
@@ -47,7 +47,7 @@
       </div>
       <nav class="fp-tabs" aria-label="Funding pages">
         <a href="{% url 'portal:funding' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "opportunities" %} aria-current="page"{% endif %}><b>Funding opportunities</b><span>Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, and relevant to most members</span></a>
-        <a href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "resources" %} aria-current="page"{% endif %}><b>Grant resources</b><span>The seven questions, a consultation, and the toolkit</span></a>
+        <a href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "resources" %} aria-current="page"{% endif %}><b>Grant resources</b><span>The {{ questions|length|numword }} questions, a consultation, and the toolkit</span></a>
         <a href="{% url 'portal:funding_news' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "news" %} aria-current="page"{% endif %}><b>Funding news</b><span>News from sponsors, and events and talks</span></a>
       </nav>
     </div>
@@ -89,7 +89,7 @@
         </section>
         {% elif part == "resources" %}
         <section class="fp-sec" id="s-before" aria-labelledby="s-before-h">
-          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {% if questions|length == 7 %}seven{% else %}{{ questions|length }}{% endif %} questions before starting an application.</p><p>Please select a question to read the full question.</p></div>
+          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {{ questions|length|numword }} questions before starting an application.</p><p>Please select a question to read the full question.</p></div>
           <div class="fp-weigh">
             <div class="fp-qcard">
               <div class="fp-qcols"><ol class="fp-qs">{% for q in questions|slice:":4" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol><ol class="fp-qs" start="5">{% for q in questions|slice:"4:" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter|add:4 }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol></div>
@@ -194,7 +194,7 @@
         {% if part == "opportunities" %}<p class="fp-who">The opportunities picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, letters, and suggestions are visible only to {% if acting_for_other %}{{ who }}, the people entering for {{ who }},{% else %}you, anyone entering for you,{% endif %} and the CNAP office.<br>Nothing on this page is shared outside CNAP.</p>{% endif %}
       </div>
       <div class="fp-sidecol">
-        {% if part == "opportunities" %}<aside class="fp-weighcard" aria-label="Before you apply"><p class="fp-for">Before you apply</p><p class="fp-wt">Weigh every opportunity with the seven questions.</p><a class="fp-btn" href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}#s-before" title="Opens the seven questions in Grant resources.">See the seven questions</a></aside>{% endif %}
+        {% if part == "opportunities" %}<aside class="fp-weighcard" aria-label="Before you apply"><p class="fp-for">Before you apply</p><p class="fp-wt">Weigh every opportunity with the {{ questions|length|numword }} questions.</p><a class="fp-btn" href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}#s-before" title="Opens the {{ questions|length|numword }} questions in Grant resources.">See the {{ questions|length|numword }} questions</a></aside>{% endif %}
         {% if part != "resources" %}<aside class="fp-consult" aria-label="Help with a proposal">
           <p class="fp-for">Writing a proposal?</p>
           <p class="fp-ct">Talk through a draft, one on one, with the Assistant Director for Grants and Contracts.</p>

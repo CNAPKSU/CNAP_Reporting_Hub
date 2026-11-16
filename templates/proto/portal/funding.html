@@ -31,13 +31,13 @@
   </nav>
   <div class="px-onpage-main">
     {% if from_not_funded %}<div class="px-callout fv-msg" role="status"><p>The CNAP team will follow up with you personally.</p></div>{% endif %}
-    <p class="fv-intro">Before you apply holds seven questions for weighing any funding opportunity.<br>The CNAP team picks the opportunities in Picked for you.<br>Relevant to most members lists opportunities for most CNAP members.</p>
+    <p class="fv-intro">Before you apply holds {{ questions|length|numword }} questions for weighing any funding opportunity.<br>The CNAP team picks the opportunities in Picked for you.<br>Relevant to most members lists opportunities for most CNAP members.</p>
 
     <div class="px-rolls" data-rollgroup>
     <div class="px-rollbar foldall"><button type="button" data-roll="open" title="Opens every section below at once.">Show all</button><button type="button" data-roll="close" title="Rolls every section below up to its heading.">Collapse all</button></div>
 
     <details class="px-roll" id="s-before" open>
-      <summary title="Seven questions for weighing any funding opportunity. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="5" cy="7" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="5" cy="17" r="1"/></svg>Before you apply</h2><span class="px-roll-figs"><span><b>{{ questions|length }}</b> questions to weigh each opportunity</span></span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
+      <summary title="{{ questions|length|numword|capfirst }} questions for weighing any funding opportunity. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7h11M9 12h11M9 17h11"/><circle cx="5" cy="7" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="5" cy="17" r="1"/></svg>Before you apply</h2><span class="px-roll-figs"><span><b>{{ questions|length }}</b> questions to weigh each opportunity</span></span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
       <div class="px-roll-body">
         <p class="fv-lead">Weigh every funding opportunity with these {{ questions|length }} questions before starting an application.<br>The CNAP team can talk through any of the questions with you.</p>
         {% include "proto/portal/_funding_questions.html" %}

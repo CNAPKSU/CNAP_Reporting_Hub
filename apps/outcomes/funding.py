@@ -39,7 +39,8 @@ from .models import (
 FIXTURE = Path(settings.BASE_DIR) / "fixtures" / "funding" / "opportunities.json"
 UPDATES = Path(settings.BASE_DIR) / "fixtures" / "funding" / "kstate_updates.json"
 
-# MW's seven questions for weighing any funding opportunity (2026-11-10). Seeded once; MW edits them in the Hub.
+# MW's questions for weighing any funding opportunity (seven on 2026-11-10, the eighth added 2026-11-15).
+# Seeded once; MW edits them in the Hub, and adds or retires them there.
 QUESTIONS = [
     ("Eligibility", "Are you eligible for the funding opportunity?"),
     (
@@ -71,6 +72,11 @@ QUESTIONS = [
         "Do you have the equipment and infrastructure necessary to make a strong pitch for your proposed project?\n"
         "Do you need to source other cores or resources outside of K-State?",
     ),
+    (  # MW 2026-11-15: approved as the eighth question
+        "Timeline and approvals",
+        "Is there enough time before the deadline for K-State's internal routing?\n"
+        "Is the call a limited submission that needs an internal selection first?",
+    ),
 ]
 
 # MW's approved opening (2026-11-10). One sentence per line on the page and in the email.
@@ -92,7 +98,7 @@ STALE_DAYS = 90
 
 
 def load_questions(stdout=None):
-    """Seed MW's seven questions once. Later edits are MW's, so existing questions are never overwritten."""
+    """Seed MW's questions once. Later edits are MW's, so existing questions are never overwritten."""
     if FundingQuestion.objects.exists():
         return 0
     for i, (title, text) in enumerate(QUESTIONS, start=1):

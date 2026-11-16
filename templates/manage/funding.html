@@ -110,6 +110,9 @@
       {% for q in questions %}<fieldset class="fm-q"><legend class="px-h3">Question {{ forloop.counter }}</legend>
         <div class="fv-field"><label for="qt-{{ q.pk }}">Short title</label><input id="qt-{{ q.pk }}" name="title_{{ q.pk }}" value="{{ q.title }}" maxlength="120"></div>
         <div class="fv-field"><label for="qx-{{ q.pk }}">Question</label><textarea id="qx-{{ q.pk }}" name="text_{{ q.pk }}" rows="3">{{ q.text }}</textarea></div></fieldset>{% endfor %}
+      <fieldset class="fm-q"><legend class="px-h3">Add a question</legend><p class="px-note">Leave both boxes empty to add nothing. A new question goes at the end of the list.</p>
+        <div class="fv-field"><label for="qt-new">Short title</label><input id="qt-new" name="new_title" maxlength="120"></div>
+        <div class="fv-field"><label for="qx-new">Question</label><textarea id="qx-new" name="new_text" rows="3"></textarea></div></fieldset>
       <div><button class="btn small ghost" type="submit" title="Saves the questions. Members see the change right away.">Save</button></div>
     </form>{% else %}{% include "proto/portal/_funding_questions.html" %}{% endif %}
   </section>
