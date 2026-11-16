@@ -4,7 +4,7 @@ from mail import *
 V='/tmp/claude-0/hubproto/v4/'
 mentor=open(V+'mentor.html').read()
 hdr=mentor[mentor.index('<a class="skip"'):mentor.index('<main id="main">')]
-hdr=hdr.replace('My work <span class="count">2</span></a><span class="avatar" aria-label="Dr. Elena Voss">EV</span>','My work <span class="count">4</span></a><span class="avatar" aria-label="Dr. Amara Okafor">AO</span>')
+hdr=hdr.replace('My reporting <span class="count">2</span></a><span class="avatar" aria-label="Dr. Elena Voss">EV</span>','My reporting <span class="count">4</span></a><span class="avatar" aria-label="Dr. Amara Okafor">AO</span>')
 hdr=hdr.replace('<a href="index.html#cores-h">Resources</a>','<a href="index.html#cores-h" aria-current="page">Resources</a>').replace('<a href="index.html#wk">Reporting</a>','<a href="reporting.html">Reporting</a>').replace('<a href="index.html#res-h">Research</a>','<a href="research.html">Research</a>').replace('<a href="index.html#cal-h">Events</a>','<a href="events.html">Events</a>').replace('<a class="mywork" href="index.html#wk">','<a class="mywork" href="reporting.html">')
 
 def page(code,cls,title,name,mission,facts,actions,sections,contact_note,rail=''):

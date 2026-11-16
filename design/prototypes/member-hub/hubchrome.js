@@ -1,5 +1,5 @@
 /* Shared prototype chrome for every Member Hub page (MW 2026-11-14):
-   1. "Start a thread" in the top ribbon, next to My work.
+   1. "Start a thread" in the top ribbon, next to My reporting.
    2. The Page feedback button and dialog, matching the Django app's _feedback.html.
    Prototype only: the feedback dialog sends nothing. */
 (function () {
