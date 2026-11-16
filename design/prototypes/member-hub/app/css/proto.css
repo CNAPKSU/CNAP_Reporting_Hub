@@ -2193,3 +2193,5 @@ body.proto .trend .callouts li { background: var(--px-surface); border-color: tr
 body.proto .px-roll > summary > .px-roll-cue { position: relative; top: -18px; justify-self: start; text-align: left; }
 /* MW 2026-11-15: closed rows have even padding now, so the Show label needs no lift */
 body.proto .px-rolls:not(.r90-partbody .px-rolls) > details.px-roll:not([open]) > summary > .px-roll-cue { top: 0; }
+/* MW 2026-11-15: on wide screens, center the page in the space beside the side menu, so the extra room sits evenly on both sides */
+@media (min-width: 1500px) { body.proto main#main { margin-left: auto; margin-right: auto; width: 100%; } }
