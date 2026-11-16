@@ -2737,30 +2737,26 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 @media (max-width:640px){.sp-grid{grid-template-columns:minmax(0,1fr)}}
 .cm-dra{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;white-space:nowrap}.cm-dra button.t3{background:none;border:0;padding:0;cursor:pointer;font:inherit;font-weight:600}
 
-/* Mentee profile, more room (MW 2026-11-15: "more space, dividing lines ... reduce cognitive load").
-   Cards breathe, products are grouped under their year, and each list item sits between clear lines. */
-.pf-stats{margin-bottom:32px}
-.pf-stats li{padding:22px 24px;gap:4px}
-.pf-cols{gap:28px}
-.pf-main,.pf-side{gap:28px}
-.pf-c{padding:30px 34px 32px;border-radius:12px}
-.pf-c h2{margin-bottom:10px}
-.pf-c > .meta{max-width:62ch;margin:6px 0 4px;line-height:1.55}
-.pf-ch{margin-bottom:4px;gap:14px 20px}
-.pr{margin-top:8px}
-.pr > .pr-yr{display:block;padding:30px 0 10px;border-top:0}
-.pr > .pr-yr:first-child{padding-top:18px}
-.pr-yr h3{margin:0;font:500 20px/26px var(--serif);color:var(--acc-ink);padding-bottom:10px;border-bottom:2px solid color-mix(in srgb,var(--acc) 30%,transparent)}
-.pr > li[data-k]{padding:22px 0;gap:8px 24px;grid-template-columns:110px minmax(0,1fr) auto}
-.pr-yr + li[data-k]{border-top:0}
+/* Mentee profile spacing (MW 2026-11-15). Moderate room, and each year heading sits close to the
+   records it owns: the dividing line runs ABOVE the year, never between the year and its rows. */
+.pf-stats{margin-bottom:28px}
+.pf-stats li{padding:20px 22px;gap:3px}
+.pf-cols,.pf-main,.pf-side{gap:24px}
+.pf-c{padding:26px 30px 28px;border-radius:12px}
+.pf-c > .meta{max-width:64ch;margin:4px 0 0;line-height:1.55}
+.pf-ch{margin-bottom:4px;gap:12px 20px}
+.pr{margin-top:6px}
+.pr > .pr-yr{display:block;margin-top:26px;padding:16px 0 2px;border-top:2px solid var(--ink-2)}
+.pr > .pr-yr:first-child{margin-top:16px}
+.pr-yr h3{margin:0;font:500 21px/26px var(--serif);color:var(--acc-ink)}
+.pr > li[data-k]{padding:16px 0;gap:6px 22px;grid-template-columns:110px minmax(0,1fr) auto}
+.pr-yr + li[data-k]{border-top:0;padding-top:10px}
 .pr-d{font-weight:600;color:var(--ink-2)}
-.pr-b{gap:5px}
-.pr-b b{font-size:16.5px;line-height:24px}
-.pr-s{gap:8px}
-.pf-ms li{padding:20px 0;gap:6px}
+.pr-b{gap:4px}
+.pr-b b{font-size:16px;line-height:23px}
+.pr-s{gap:6px}
+.pf-ms li{padding:16px 0;gap:5px}
 .pf-ms li .st{justify-self:start}
-.pf-c > .meta:last-child{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
-.pf-side .pf-c{padding:26px 28px 28px}
-.pf-log li,.pf-rep li{padding-top:14px;padding-bottom:14px}
-@media (max-width:640px){.pf-c{padding:22px 20px 24px}.pr > li[data-k]{grid-template-columns:1fr;gap:6px}}
-.pf-c > .meta:last-child{max-width:none}
+.pf-c > .meta:last-child{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);max-width:none}
+.pf-side .pf-c{padding:24px 26px 26px}
+@media (max-width:640px){.pf-c{padding:22px 20px 24px}.pr > li[data-k]{grid-template-columns:1fr;gap:4px}}
