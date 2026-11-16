@@ -52,10 +52,11 @@ def _fwho(k):
     if k in ICON: return f'<span class="ff-ic" aria-hidden="true">{ICON[k]}</span>'
     if k in BY: return av(k,' lg')
     return f'<span class="cm-av av-{TONE[k]} lg" aria-hidden="true">{k}</span>'
-_cards=[f'''<li class="ff" data-k="ff{i}"><div class="ff-top"><span class="ff-n" aria-hidden="true">{i}</span>{'' if FWHO[i-1][1].startswith('Week') else '<span class="ff-when">'+FWHO[i-1][1]+'</span>'}</div>
-  <div class="ff-who">{_fwho(FWHO[i-1][0])}</div><p class="cm-ft">{t}</p><p class="cm-fd">{d}</p>
-  <p class="cm-fa"><a href="{h}">{l}</a>{f'<a class="cm-em" href="mailto:{e}">{e}</a>' if e else ''}</p>
-  <button type="button" class="ff-done" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Mark as done</span></button></li>''' for i,(t,d,h,l,e) in enumerate(FIRST,1)]
+_cards=[f'''<li class="ff" data-k="ff{i}"><div class="ff-hd"><span class="ff-who">{_fwho(FWHO[i-1][0])}<span class="ff-n" aria-label="Step {i}">{i}</span></span>
+  <div class="ff-tt"><p class="cm-ft">{t}</p>{'' if FWHO[i-1][1].startswith('Week') else '<span class="ff-when">'+FWHO[i-1][1]+'</span>'}</div></div>
+  <p class="cm-fd">{d}</p>
+  <div class="ff-ft"><p class="cm-fa"><a href="{h}">{l}</a>{f'<a class="cm-em" href="mailto:{e}">{e}</a>' if e else ''}</p>
+  <button type="button" class="ff-done" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Mark as done</span></button></div></li>''' for i,(t,d,h,l,e) in enumerate(FIRST,1)]
 FGRP=[('Week 1','Meet the people closest to your project.',[0,1]),('Week 2','Meet the CNAP office.',[2,3]),('Before you start','Set up your budget and core time before your first expense or booking.',[4,5])]
 first=''.join(f'<section class="ff-wk" aria-label="{g}"><div class="ff-wkh"><p class="ff-wkt">{g}</p><p class="ff-wks">{sub}</p></div><ol class="ff-grid">{"".join(_cards[j] for j in ix)}</ol></section>' for g,sub,ix in FGRP)
 

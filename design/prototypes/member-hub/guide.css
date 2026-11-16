@@ -2693,3 +2693,17 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .mb-body>section{max-width:900px}
 .cm-cap{display:block;text-align:center}
 @media (max-width:520px){.cm-cap br{display:none}.cm-cap{text-wrap:balance}}
+/* First-month cards: number sits on the photo, title beside it, actions on one line (MW 2026-11-15) */
+.ff{gap:10px;padding:18px 20px}
+.ff-hd{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center}
+.ff-who{position:relative;margin:0;line-height:0}
+.ff-who .cm-av.lg,.ff-ic{width:52px;height:52px;font-size:18px}
+.ff-ic svg{width:24px;height:24px}
+.ff-n{position:absolute;right:-4px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:var(--surface);box-shadow:0 0 0 2px var(--surface),inset 0 0 0 1.5px var(--purple);font:600 12px/22px var(--sans);display:grid;place-items:center;color:var(--purple)}
+.ff-tt{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
+.ff .cm-ft{margin:0}
+.ff .cm-fd{margin:0}
+.ff-ft{display:flex;align-items:center;justify-content:space-between;gap:8px 12px;flex-wrap:wrap;margin-top:auto;padding-top:10px;border-top:1px solid var(--line)}
+.ff .cm-fa{margin:0;padding:0}
+.ff-done{margin:0}
+.ff.is-done .ff-n{background:var(--teal);box-shadow:0 0 0 2px var(--surface);color:#fff}
