@@ -2350,3 +2350,25 @@ h3.th-t{color:inherit}
 .th-card{padding:24px 26px}
 .th-card h2{font:500 21px/27px var(--serif);margin-bottom:14px}
 @media (max-width:640px){.th-panel{padding:24px 18px 4px}.th-sech h2{font-size:26px;line-height:32px}.th-spot{grid-template-columns:36px minmax(0,1fr)}.th-spot .btn{grid-column:2;justify-self:start}.th-wait{padding-top:40px}}
+
+/* Threads ask box: a real field, and only the button acts (MW 2026-11-15) */
+.th-ask{cursor:default}
+.th-ask:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35)}
+.th-ask:focus-within{border-color:#fff;background:rgba(255,255,255,.12)}
+input.th-askp{border:0;background:transparent;color:#fff;font:400 16px var(--sans);min-height:40px;padding:0;outline:none}
+input.th-askp::placeholder{color:rgba(255,255,255,.78)}
+button.th-askb{border:0;cursor:pointer;font-family:var(--sans)}
+button.th-askb:hover{background:#efe6fc}
+button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+/* Threads counts are buttons that filter the list (MW 2026-11-15) */
+.th-stats button{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:132px;padding:16px 18px;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:#24152f;color:#fff;font:inherit;text-align:left;cursor:pointer;transition:border-color .15s,background-color .15s,transform .15s}
+.th-stats button:hover{border-color:rgba(255,255,255,.7);background:#2e1c3b;transform:translateY(-1px)}
+.th-stats button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.th-sl{font-size:14px;line-height:19px;font-weight:600;color:#fff;white-space:nowrap}
+.th-sl::after{content:"";display:inline-block;width:6px;height:6px;margin-left:8px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:translateY(-3px) rotate(45deg);opacity:.75}
+.th-sn{font:500 40px/1 var(--serif);color:#fff}
+.th-stats button.th-st-u{border-color:#d9b469;background:#33242a}
+.th-stats button.th-st-u:hover{background:#3d2b2e}
+.th-st-u .th-sn{color:#f2d9a4}
+@media (max-width:640px){.th-stats button{flex:1 1 0;min-width:0;padding:12px}.th-sl{font-size:12.5px;line-height:16px}.th-sn{font-size:30px}}

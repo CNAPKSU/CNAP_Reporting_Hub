@@ -88,11 +88,13 @@ SCRIPT = '''<script>
     tps.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.topic===topic);});
   }
   tb.forEach(function(b){b.addEventListener('click',function(){k=b.dataset.t;tb.forEach(function(o){o.setAttribute('aria-pressed',o===b)});apply();});});
+  document.querySelectorAll('[data-jump]').forEach(function(j){j.addEventListener('click',function(){k=j.dataset.jump;topic='';q.value='';tb.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.t===k)});apply();document.getElementById('th-all').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});});
   tps.forEach(function(b){b.addEventListener('click',function(){topic=topic===b.dataset.topic?'':b.dataset.topic;apply();});});
   document.querySelector('[data-clear]').addEventListener('click',function(){topic='';apply();});
   q.addEventListener('input',apply);srt.addEventListener('change',apply);
   var dlg=document.querySelector('.cm-compose');document.querySelectorAll('[data-compose]').forEach(function(b){b.addEventListener('click',function(){try{dlg.showModal();}catch(e){dlg.setAttribute('open','')}dlg.querySelector('.cm-note').hidden=true;});});
   dlg.querySelector('[data-post]').addEventListener('click',function(){dlg.querySelector('.cm-note').hidden=false;});
+  var af=document.querySelector('.th-ask');af.addEventListener('submit',function(e){e.preventDefault();var v=document.getElementById('th-askq').value.trim();try{dlg.showModal();}catch(x){dlg.setAttribute('open','')}dlg.querySelector('.cm-note').hidden=true;var ti=dlg.querySelector('#cmc-t');if(ti){ti.value=v;(v?dlg.querySelector('#cmc-d'):ti).focus();}});
 })();
 </script>'''
 
@@ -105,13 +107,13 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
         <div class="th-hl">
           <h1 id="t">Threads</h1>
           <p class="th-lead">Ask the people who have done it before. Methods, equipment, recruiting, and funding, answered by CNAP members. Only members can see threads.</p>
-          <button type="button" class="th-ask" data-compose><span class="cm-av av-p" aria-hidden="true">AO</span><span class="th-askp">What would you like to ask the Center?</span><span class="th-askb">Start a thread</span></button>
+          <form class="th-ask" role="search" aria-label="Start a thread"><span class="cm-av av-p" aria-hidden="true">AO</span><label class="sr" for="th-askq">Your question</label><input id="th-askq" class="th-askp" type="text" placeholder="What would you like to ask the Center?" autocomplete="off"><button type="submit" class="th-askb">Start a thread</button></form>
         </div>
-        <dl class="th-stats">
-          <div><dt>Open threads</dt><dd class="num">{len(T)}</dd></div>
-          <div><dt>Matched to you</dt><dd class="num">{n_m}</dd></div>
-          <div class="th-st-u"><dt>Not answered yet</dt><dd class="num">{n_u}</dd></div>
-        </dl>
+        <div class="th-stats" role="group" aria-label="Jump to threads">
+          <button type="button" data-jump="a" title="Shows every open thread in the list below."><span class="th-sl">Open threads</span><span class="th-sn num">{len(T)}</span></button>
+          <button type="button" data-jump="m" title="Shows the threads matched to your research interests."><span class="th-sl">Matched to you</span><span class="th-sn num">{n_m}</span></button>
+          <button type="button" class="th-st-u" data-jump="u" title="Shows the threads no one has answered yet."><span class="th-sl">Not answered yet</span><span class="th-sn num">{n_u}</span></button>
+        </div>
       </div>
     </div>
   </section>
@@ -126,7 +128,7 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
   </section>
 
   <div class="wrap th-cols">
-    <div class="th-main">
+    <div class="th-main" id="th-all">
       <div class="th-sech"><h2>All threads</h2><p>Every conversation, newest activity first. Please filter, search, or pick a topic on the right.</p></div>
       <div class="th-bar">
         <div class="pf-filt cm-tf" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-t="a">All threads</button><button type="button" aria-pressed="false" data-t="m">Matched to you</button><button type="button" aria-pressed="false" data-t="u">Unanswered</button></div>
