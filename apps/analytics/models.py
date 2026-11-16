@@ -262,13 +262,17 @@ class HomeLinkCount(models.Model):
     no address is stored, so the counts can't say who selected what."""
 
     day = models.DateField()
-    key = models.CharField(max_length=160, help_text="The Home section and the link, such as funding: Grant resources.")
+    key = models.CharField(
+        max_length=160, help_text="The Home section and the link, such as funding: Grant resources."
+    )
     count = models.PositiveIntegerField(default=0)
 
     class Meta:
         db_table = "home_link_counts"
         ordering = ["-day", "key"]
-        constraints = [models.UniqueConstraint(fields=["day", "key"], name="one_count_per_link_per_day")]
+        constraints = [
+            models.UniqueConstraint(fields=["day", "key"], name="one_count_per_link_per_day")
+        ]
 
     def __str__(self):
         return f"{self.day} {self.key}: {self.count}"

@@ -486,7 +486,9 @@ def news_post(request, pk=None):
         messages.success(request, "Pinned." if n.pinned else "Unpinned.")
         return redirect(_tab_url("news"))
     if n and action == "find_photo":
-        return _find_photo(request, n, n.source_url, reverse("manage:funding_news_edit", args=[n.pk]))
+        return _find_photo(
+            request, n, n.source_url, reverse("manage:funding_news_edit", args=[n.pk])
+        )
     if n and action == "archive":
         n.archived_at = timezone.now()
         n.save(update_fields=["archived_at", "updated_at"])
@@ -600,7 +602,9 @@ def _photo(request, obj, source_url):
     credit = request.POST.get("photo_credit", "").strip()[:200]
     approved = bool(request.POST.get("photo_approved")) and bool(url)
     if obj is not None and obj.photo_url and url != obj.photo_url:
-        approved = bool(request.POST.get("photo_approved")) and request.POST.get("photo_seen") == url
+        approved = (
+            bool(request.POST.get("photo_approved")) and request.POST.get("photo_seen") == url
+        )
     return {"photo_url": url, "photo_alt": alt, "photo_credit": credit, "photo_approved": approved}
 
 
@@ -613,14 +617,22 @@ def _find_photo(request, obj, source_url, back):
     except Exception:  # the page may be down or refuse the request
         url, alt = "", ""
     if not url:
-        messages.error(request, "That page doesn’t name a preview photo. Paste an image address yourself, or leave the photo empty.")
+        messages.error(
+            request,
+            "That page doesn’t name a preview photo. Paste an image address yourself, or leave the photo empty.",
+        )
         return redirect(back)
     obj.photo_url, obj.photo_approved = url, False
     if alt and not obj.photo_alt:
         obj.photo_alt = alt[:300]
     obj.save(update_fields=["photo_url", "photo_alt", "photo_approved", "updated_at"])
-    record_event(request.user, AuditLog.Action.UPDATE, obj, new={"photo_url": url, "photo_approved": False})
-    messages.success(request, "Found the article’s photo. Please check the photo, add the credit, and tick Approve before members see the photo.")
+    record_event(
+        request.user, AuditLog.Action.UPDATE, obj, new={"photo_url": url, "photo_approved": False}
+    )
+    messages.success(
+        request,
+        "Found the article’s photo. Please check the photo, add the credit, and tick Approve before members see the photo.",
+    )
     return redirect(back)
 
 
@@ -649,10 +661,16 @@ def questions_post(request):
     new_text = request.POST.get("new_text", "").strip()
     if new_title and new_text:
         last = FundingQuestion.objects.active().order_by("-position").first()
-        q = FundingQuestion.objects.create(position=(last.position + 1) if last else 1, title=new_title[:120], text=new_text)
-        record_event(request.user, AuditLog.Action.CREATE, q, new={"title": q.title, "text": q.text})
+        q = FundingQuestion.objects.create(
+            position=(last.position + 1) if last else 1, title=new_title[:120], text=new_text
+        )
+        record_event(
+            request.user, AuditLog.Action.CREATE, q, new={"title": q.title, "text": q.text}
+        )
     elif new_title or new_text:
-        messages.error(request, "To add a question, please fill in both the short title and the question.")
+        messages.error(
+            request, "To add a question, please fill in both the short title and the question."
+        )
         return redirect(_tab_url("questions"))
     messages.success(request, "Saved.")
     return redirect(_tab_url("questions"))

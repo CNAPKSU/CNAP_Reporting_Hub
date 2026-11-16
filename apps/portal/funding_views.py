@@ -36,6 +36,7 @@ def _owner(request):
 def _merge_repeats(groups):
     """Show a repeating event once, with its other dates listed under it (MW 2026-11-15: less to read).
     Display only. Nothing is stored or changed."""
+
     def merge(items):
         out, seen = [], {}
         for e in items:

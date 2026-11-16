@@ -405,7 +405,10 @@ def test_staff_can_add_a_question_and_members_see_the_count(center, client):
     funding.load_questions()
     before = FundingQuestion.objects.active().count()
     _login(client, "mwills")
-    r = client.post("/manage/funding/questions/do/", {"new_title": "A fictional extra question", "new_text": "Is this a test?"})
+    r = client.post(
+        "/manage/funding/questions/do/",
+        {"new_title": "A fictional extra question", "new_text": "Is this a test?"},
+    )
     assert r.status_code == 302
     assert FundingQuestion.objects.active().count() == before + 1
     q = FundingQuestion.objects.active().order_by("-position").first()

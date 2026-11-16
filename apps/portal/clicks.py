@@ -49,4 +49,8 @@ def report(request):
     for r in HomeLinkCount.objects.filter(day__gte=since):
         totals[r.key] += r.count
     rows = sorted(totals.items(), key=lambda kv: (-kv[1], kv[0]))
-    return render(request, "manage/home_link_counts.html", {"rows": rows, "days": days, "since": since, "total": sum(totals.values())})
+    return render(
+        request,
+        "manage/home_link_counts.html",
+        {"rows": rows, "days": days, "since": since, "total": sum(totals.values())},
+    )

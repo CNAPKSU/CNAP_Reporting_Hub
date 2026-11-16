@@ -19,7 +19,9 @@ urlpatterns = [
     path("tasks/current-pending/<int:pk>/", views.cp_check, name="cp_check"),
     path("documents/<int:pk>/", views.helpful_doc, name="helpful_doc"),
     path("history/", views.history, name="history"),
-    path("hub/count/", clicks.count, name="home_link_count"),  # MW 2026-11-15, anonymous counts only
+    path(
+        "hub/count/", clicks.count, name="home_link_count"
+    ),  # MW 2026-11-15, anonymous counts only
     path("hub/link-counts/", clicks.report, name="home_link_counts"),
     path("site-visit/rsvp/", sitevisit_views.rsvp, name="sitevisit_rsvp"),  # MW 2026-11-15
     path("site-visit/rsvps/", sitevisit_views.staff_list, name="sitevisit_rsvps"),
@@ -32,7 +34,9 @@ urlpatterns = [
     # publications and grants (self-entry)
     path("outcomes/", ov.home, name="outcomes"),
     path("funding/", fv.page, name="funding"),  # MW 2026-11-10
-    path("funding/resources/", fv.page, {"part": "resources"}, name="funding_resources"),  # MW 2026-11-14
+    path(
+        "funding/resources/", fv.page, {"part": "resources"}, name="funding_resources"
+    ),  # MW 2026-11-14
     path("funding/news/", fv.page, {"part": "news"}, name="funding_news"),  # MW 2026-11-14
     path("funding/suggest/", fv.suggest, name="funding_suggest"),
     path("funding/letter/<int:pk>/", fv.letter, name="funding_letter"),

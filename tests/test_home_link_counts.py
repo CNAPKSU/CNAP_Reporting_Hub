@@ -19,7 +19,12 @@ def test_counts_are_anonymous_and_add_up(center, client):
         assert client.post("/hub/count/", {"k": "Funding: Grant resources"}).status_code == 204
     row = HomeLinkCount.objects.get(key="Funding: Grant resources")
     assert row.count == 3
-    assert {f.name for f in HomeLinkCount._meta.fields} == {"id", "day", "key", "count"}  # nothing about the person
+    assert {f.name for f in HomeLinkCount._meta.fields} == {
+        "id",
+        "day",
+        "key",
+        "count",
+    }  # nothing about the person
 
 
 def test_signed_out_and_junk_are_not_counted(center, client):

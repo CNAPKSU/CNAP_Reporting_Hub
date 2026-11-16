@@ -44,7 +44,11 @@ def test_member_rsvps_gets_email_and_can_change_it(center, client):
     assert r.status_code == 302
     rsvp = SiteVisitRSVP.objects.get(person=u.person, year=2027)
     assert rsvp.meals == ["lunch", "dinner"] and rsvp.photo_ok is True and rsvp.parking is True
-    assert rsvp.hotel_nights == ["mon"] and rsvp.poster == "yes" and rsvp.poster_title == "A fictional poster"
+    assert (
+        rsvp.hotel_nights == ["mon"]
+        and rsvp.poster == "yes"
+        and rsvp.poster_title == "A fictional poster"
+    )
     assert len(mail.outbox) == 1 and "Vegetarian" in mail.outbox[0].body
     name, ics, kind = mail.outbox[0].attachments[0]
     assert name == "cnap-site-visit-2027.ics" and kind == "text/calendar"
@@ -54,7 +58,12 @@ def test_member_rsvps_gets_email_and_can_change_it(center, client):
     client.post("/site-visit/rsvp/", BASE | {"attend": "zoom"})
     rsvp.refresh_from_db()
     assert SiteVisitRSVP.objects.filter(person=u.person).count() == 1
-    assert rsvp.attend == "zoom" and rsvp.meals == [] and rsvp.hotel_nights == [] and rsvp.photo_ok is None
+    assert (
+        rsvp.attend == "zoom"
+        and rsvp.meals == []
+        and rsvp.hotel_nights == []
+        and rsvp.photo_ok is None
+    )
     page = client.get("/site-visit/rsvp/").content.decode()
     assert "You RSVPed" in page and "Save my changes" in page
 
@@ -62,9 +71,13 @@ def test_member_rsvps_gets_email_and_can_change_it(center, client):
 @override_settings(UI_PROTOTYPE=True, UI_PROTOTYPE_ONLY=True)
 def test_long_abstract_and_missing_attendance_are_refused(center, client):
     u = _login(client, "okafor")
-    page = client.post("/site-visit/rsvp/", BASE | {"poster_abstract": "word " * 151}).content.decode()
+    page = client.post(
+        "/site-visit/rsvp/", BASE | {"poster_abstract": "word " * 151}
+    ).content.decode()
     assert "Please shorten the abstract" in page
-    page = client.post("/site-visit/rsvp/", {k: v for k, v in BASE.items() if k != "attend"}).content.decode()
+    page = client.post(
+        "/site-visit/rsvp/", {k: v for k, v in BASE.items() if k != "attend"}
+    ).content.decode()
     assert "Please choose how you will attend" in page
     assert not SiteVisitRSVP.objects.filter(person=u.person).exists()
 

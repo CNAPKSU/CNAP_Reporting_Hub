@@ -23,19 +23,38 @@ DATES = "Tuesday and Wednesday, May 25 and 26, 2027"
 CLOSES = date(2027, 3, 25)
 POSTER_BY = "Friday, April 23, 2027"
 PARTS = [
-    ("tue-am", "Tuesday, 8:40 a.m. to 1:15 p.m.", "Breakfast, the Center overview, core updates and discussion, group photographs, and lunch"),
+    (
+        "tue-am",
+        "Tuesday, 8:40 a.m. to 1:15 p.m.",
+        "Breakfast, the Center overview, core updates and discussion, group photographs, and lunch",
+    ),
     ("tue-tours", "Tuesday, 1:30 to 2:30 p.m.", "Guided tours of the cores and the CONNECT Lab"),
     ("tue-eac", "Tuesday, 2:45 to 4:00 p.m.", "Advisory committee meeting, closed session"),
     ("tue-eve", "Tuesday, 6:00 to 9:00 p.m.", "Keynote address and banquet"),
-    ("wed-am", "Wednesday, 8:40 to 11:20 a.m.", "Breakfast, then the research project and pilot project presentations"),
+    (
+        "wed-am",
+        "Wednesday, 8:40 to 11:20 a.m.",
+        "Breakfast, then the research project and pilot project presentations",
+    ),
     ("wed-posters", "Wednesday, 11:30 a.m. to 12:30 p.m.", "Poster session"),
 ]
-MEALS = [("lunch", "Tuesday lunch, about halfway through the morning program"), ("dinner", "Tuesday dinner, the keynote address and banquet")]
+MEALS = [
+    ("lunch", "Tuesday lunch, about halfway through the morning program"),
+    ("dinner", "Tuesday dinner, the keynote address and banquet"),
+]
 NIGHTS = [("mon", "Monday night, May 24"), ("tue", "Tuesday night, May 25")]
 CONNECTIONS = [
-    "University or departmental leadership", "New or interested", "General member", "Mentor", "Pilot project leader",
-    "Primary research project leader", "Core director", "External Advisory Committee member", "Graduate student",
-    "Postdoctoral fellow", "Other",
+    "University or departmental leadership",
+    "New or interested",
+    "General member",
+    "Mentor",
+    "Pilot project leader",
+    "Primary research project leader",
+    "Core director",
+    "External Advisory Committee member",
+    "Graduate student",
+    "Postdoctoral fellow",
+    "Other",
 ]
 
 
@@ -62,7 +81,9 @@ def rsvp(request):
             errors.append("Please choose how you will attend.")
         abstract = p.get("poster_abstract", "").strip()
         if _words(abstract) > 150:
-            errors.append(f"Please shorten the abstract to 150 words. It has {_words(abstract)} now.")
+            errors.append(
+                f"Please shorten the abstract to 150 words. It has {_words(abstract)} now."
+            )
         if not errors:
             here = attend == "person"
             data = dict(
@@ -73,7 +94,9 @@ def rsvp(request):
                 photo_ok=_yesno(p.get("photo_ok")) if here else None,
                 parking={"drive": True, "nodrive": False}.get(p.get("parking")) if here else None,
                 hotel_nights=[k for k, _ in NIGHTS if here and k in p.getlist("hotel_nights")],
-                poster=p.get("poster", "") if attend != "no" and p.get("poster") in SiteVisitRSVP.Poster.values else "",
+                poster=p.get("poster", "")
+                if attend != "no" and p.get("poster") in SiteVisitRSVP.Poster.values
+                else "",
                 poster_title=p.get("poster_title", "").strip(),
                 poster_authors=p.get("poster_authors", "").strip()[:500],
                 poster_affiliation=p.get("poster_affiliation", "").strip()[:300],
@@ -83,7 +106,9 @@ def rsvp(request):
                 note=p.get("note", "").strip(),
             )
             if data["poster"] not in ("yes", "done"):
-                data.update(poster_title="", poster_authors="", poster_affiliation="", poster_abstract="")
+                data.update(
+                    poster_title="", poster_authors="", poster_affiliation="", poster_abstract=""
+                )
             if existing:
                 old = {k: getattr(existing, k) for k in data}
                 for k, v in data.items():
@@ -95,7 +120,9 @@ def rsvp(request):
                 r = SiteVisitRSVP.objects.create(person=me, year=YEAR, **data)
                 record_event(request.user, AuditLog.Action.CREATE, r, new=data)
             _confirm(r)
-            messages.success(request, "Thank you. Your RSVP is saved, and a confirmation email is on the way.")
+            messages.success(
+                request, "Thank you. Your RSVP is saved, and a confirmation email is on the way."
+            )
             return redirect(reverse("portal:sitevisit_rsvp") + "#done")
     from . import hub
 
@@ -105,7 +132,8 @@ def rsvp(request):
         {
             **hub.chrome(request),
             "r": existing,
-            "attend_now": (request.POST.get("attend") if errors else None) or (existing.attend if existing else "person"),
+            "attend_now": (request.POST.get("attend") if errors else None)
+            or (existing.attend if existing else "person"),
             "post": request.POST if errors else None,
             "errors": errors,
             "closed": closed,
@@ -125,12 +153,26 @@ def _summary(r):
     label = dict((k, f"{d}: {t}") for k, d, t in PARTS)
     lines = [f"How you will attend: {r.get_attend_display()}"]
     if r.attend == "person":
-        lines.append("Parts of the program: " + ("; ".join(label[k] for k in r.parts) or "None chosen"))
+        lines.append(
+            "Parts of the program: " + ("; ".join(label[k] for k in r.parts) or "None chosen")
+        )
         lines.append("Meals: " + (", ".join(dict(MEALS)[k] for k in r.meals) or "Neither"))
         lines.append("Dietary needs: " + (r.diet or "None"))
-        lines.append("Photographs: " + {True: "Yes, you may use my image", False: "No, please don’t use my image", None: "Not answered"}[r.photo_ok])
-        lines.append("Parking: " + {True: "Needs parking", False: "No parking needed", None: "Not answered"}[r.parking])
-        lines.append("Hotel nights: " + (", ".join(dict(NIGHTS)[k] for k in r.hotel_nights) or "None"))
+        lines.append(
+            "Photographs: "
+            + {
+                True: "Yes, you may use my image",
+                False: "No, please don’t use my image",
+                None: "Not answered",
+            }[r.photo_ok]
+        )
+        lines.append(
+            "Parking: "
+            + {True: "Needs parking", False: "No parking needed", None: "Not answered"}[r.parking]
+        )
+        lines.append(
+            "Hotel nights: " + (", ".join(dict(NIGHTS)[k] for k in r.hotel_nights) or "None")
+        )
     if r.poster:
         lines.append("Poster session: " + r.get_poster_display())
     if r.poster_title:
@@ -143,12 +185,21 @@ def _summary(r):
 
 
 # The two Site Visit days for the calendar file (MW 2026-11-15: the confirmation email carries a calendar file)
-ICS_DAYS = [("20270525T084000", "20270525T210000", "2027 CNAP Site Visit, day 1"), ("20270526T084000", "20270526T123000", "2027 CNAP Site Visit, day 2")]
+ICS_DAYS = [
+    ("20270525T084000", "20270525T210000", "2027 CNAP Site Visit, day 1"),
+    ("20270526T084000", "20270526T123000", "2027 CNAP Site Visit, day 2"),
+]
 
 
 def calendar_file(r):
     """A small .ics file with both Site Visit days, in Central time, for Outlook, Google Calendar, or Apple Calendar."""
-    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//CNAP Member Hub//Site Visit RSVP//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"]
+    lines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//CNAP Member Hub//Site Visit RSVP//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+    ]
     for i, (start, end, title) in enumerate(ICS_DAYS, start=1):
         lines += [
             "BEGIN:VEVENT",
@@ -173,7 +224,14 @@ def _confirm(r):
         subject=f"Your RSVP for the {r.year} CNAP Site Visit",
         body=render_to_string(
             "email/sitevisit_rsvp.txt",
-            {"r": r, "lines": _summary(r), "dates": DATES, "poster_by": POSTER_BY, "url": settings.SITE_URL + reverse("portal:sitevisit_rsvp"), "ics": r.attend != "no"},
+            {
+                "r": r,
+                "lines": _summary(r),
+                "dates": DATES,
+                "poster_by": POSTER_BY,
+                "url": settings.SITE_URL + reverse("portal:sitevisit_rsvp"),
+                "ics": r.attend != "no",
+            },
         ),
         to=[email],
     )
@@ -193,11 +251,47 @@ def staff_list(request):
         resp = HttpResponse(content_type="text/csv")
         resp["Content-Disposition"] = f'attachment; filename="site-visit-{YEAR}-rsvps.csv"'
         w = csv.writer(resp)
-        w.writerow(["Name", "Email", "Attending", "Lunch", "Dinner", "Dietary needs", "Photographs OK", "Parking", "Monday night", "Tuesday night", "Poster", "Poster title", "Name tag", "Connection", "Anything else", "Updated"])
+        w.writerow(
+            [
+                "Name",
+                "Email",
+                "Attending",
+                "Lunch",
+                "Dinner",
+                "Dietary needs",
+                "Photographs OK",
+                "Parking",
+                "Monday night",
+                "Tuesday night",
+                "Poster",
+                "Poster title",
+                "Name tag",
+                "Connection",
+                "Anything else",
+                "Updated",
+            ]
+        )
         for r in rs:
-            w.writerow([r.person.full_name, r.person.primary_email, r.get_attend_display(), "lunch" in r.meals, "dinner" in r.meals, r.diet,
-                        {True: "Yes", False: "No", None: ""}[r.photo_ok], {True: "Yes", False: "No", None: ""}[r.parking],
-                        "mon" in r.hotel_nights, "tue" in r.hotel_nights, r.get_poster_display() if r.poster else "", r.poster_title, r.name_tag, r.connection, r.note, r.updated_at.date()])
+            w.writerow(
+                [
+                    r.person.full_name,
+                    r.person.primary_email,
+                    r.get_attend_display(),
+                    "lunch" in r.meals,
+                    "dinner" in r.meals,
+                    r.diet,
+                    {True: "Yes", False: "No", None: ""}[r.photo_ok],
+                    {True: "Yes", False: "No", None: ""}[r.parking],
+                    "mon" in r.hotel_nights,
+                    "tue" in r.hotel_nights,
+                    r.get_poster_display() if r.poster else "",
+                    r.poster_title,
+                    r.name_tag,
+                    r.connection,
+                    r.note,
+                    r.updated_at.date(),
+                ]
+            )
         return resp
     counts = {
         "person": sum(r.attend == "person" for r in rs),
@@ -211,4 +305,6 @@ def staff_list(request):
         "posters": sum(r.poster in ("yes", "done") for r in rs),
         "diet": sum(bool(r.diet) for r in rs),
     }
-    return render(request, "manage/sitevisit_rsvps.html", {"rs": rs, "counts": counts, "year": YEAR})
+    return render(
+        request, "manage/sitevisit_rsvps.html", {"rs": rs, "counts": counts, "year": YEAR}
+    )

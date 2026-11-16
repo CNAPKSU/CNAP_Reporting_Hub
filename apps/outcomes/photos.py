@@ -12,7 +12,7 @@ _META = re.compile(r"<meta\b[^>]*>", re.I)
 
 
 def _attr(tag, name):
-    m = re.search(r'\b' + name + r'\s*=\s*("([^"]*)"|\'([^\']*)\')', tag, re.I)
+    m = re.search(r"\b" + name + r'\s*=\s*("([^"]*)"|\'([^\']*)\')', tag, re.I)
     return unescape(m.group(2) if m.group(2) is not None else m.group(3)) if m else ""
 
 
@@ -30,7 +30,13 @@ def parse_preview(html, base_url):
     found = {}
     for tag in _META.findall(html):
         key = (_attr(tag, "property") or _attr(tag, "name")).lower()
-        if key in ("og:image", "og:image:url", "twitter:image", "og:image:alt", "twitter:image:alt"):
+        if key in (
+            "og:image",
+            "og:image:url",
+            "twitter:image",
+            "og:image:alt",
+            "twitter:image:alt",
+        ):
             found.setdefault(key, _attr(tag, "content"))
     img = found.get("og:image") or found.get("og:image:url") or found.get("twitter:image") or ""
     alt = found.get("og:image:alt") or found.get("twitter:image:alt") or ""
