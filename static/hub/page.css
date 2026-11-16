@@ -572,3 +572,14 @@ p,li,dd,figcaption,blockquote{text-wrap:pretty}
 .fp-sidecol .fp-consult .fp-btn.pri{background:var(--surface);color:var(--purple);border:1px solid var(--line)}
 .fp-sidecol .fp-consult .fp-btn.pri:hover{background:var(--surface);color:var(--purple-ink);border-color:var(--purple)}
 .fp-sidecol .fp-asks a{font-size:14px;line-height:20px;font-weight:400;padding:9px 0}
+
+/* NIH opportunities for IDeA states (MW 2026-11-15): one column, every card the same width, each with
+   the purple top bar; a line under each card title; tables framed, with lines between columns. */
+.fp-idea{grid-template-columns:minmax(0,1fr)}
+.fp-ic,.fp-ic-lead{grid-column:1/-1;box-shadow:inset 0 3px 0 var(--purple),var(--sh)}
+.fp-ic h3{padding-bottom:12px;margin-bottom:2px;border-bottom:1px solid var(--line)}
+.fp-tbl{border:1px solid var(--line);border-radius:8px}
+.fp-tbl th,.fp-tbl td{padding:12px 16px}
+.fp-tbl thead th{padding:10px 16px;background:color-mix(in srgb,var(--ink) 3%,var(--surface));border-bottom:1px solid var(--line)}
+.fp-tbl tbody tr:first-child th,.fp-tbl tbody tr:first-child td{border-top:0}
+.fp-tbl th+td,.fp-tbl td+td,.fp-tbl thead th+th{border-left:1px solid var(--line)}
