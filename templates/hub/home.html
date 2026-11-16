@@ -26,7 +26,7 @@
       <h1 id="hi">{{ greeting }}, {{ person.first_name }}.</h1>
       {% if rep or ns_soon %}<p class="line">{% if rep %}{% if rep.todo %}<a href="#wk">{{ rep.name }} {{ rep.closes }}</a>.{% else %}<a href="#wk">Your {{ rep.name }} is complete</a>.{% endif %}{% endif %}{% if rep and ns_soon %}<br>{% endif %}{% if ns_soon %}On {{ ns_soon.weekday }}, <a href="#ev-h">NeuroSync welcomes {{ ns_soon.speaker.full_name }}</a>.{% endif %}</p>{% endif %}
       {% if rep and rep.todo %}<div class="rcue">
-        <a class="rcue-btn" href="{% url 'portal:tasks' %}"><span class="rcue-ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="rcue-p" cx="18" cy="18" r="15" pathLength="{{ rep.total }}" style="stroke-dasharray:{{ rep.done_n }} {{ rep.total }}"/></svg><span class="num">{{ rep.done_n }}/{{ rep.total }}</span></span><span class="rcue-t"><b>Continue your {{ rep.name }}</b><span>{{ rep.left_sentence }}{% if rep.time %}, {{ rep.time }} in all{% endif %}. Reporting closes {{ rep.due_words }}.</span></span><span class="rcue-go" aria-hidden="true"></span></a>
+        <a class="rcue-btn" href="{% url 'portal:tasks' %}"><span class="rcue-ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="rcue-p" cx="18" cy="18" r="15" pathLength="{{ rep.total }}" style="stroke-dasharray:{{ rep.done_n }} {{ rep.total }}"/></svg><span class="num">{{ rep.done_n }}/{{ rep.total }}</span></span><span class="rcue-t"><b>Continue your {{ rep.name }}</b><span>{{ rep.left_sentence }}{% if rep.time %}, totaling {{ rep.time }}{% endif %}. Reporting closes {{ rep.due_words }}.</span></span><span class="rcue-go" aria-hidden="true"></span></a>
       </div>{% endif %}
     </div>
   </section>
@@ -42,7 +42,7 @@
         {% if rep %}{% if rep.todo %}<article class="bi" role="listitem">
           <span class="kind" style="color:var(--{{ rep.kind }})"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12.5V1.5M3 2h7.5l-1.6 2.6L10.5 7.2H3"/></svg>{{ rep.when }}</span>
           <h3><a href="{% url 'portal:tasks' %}">{{ rep.name }}</a></h3>
-          <div class="body"><p>Closes {{ rep.due_words }}. {{ rep.left|capfirst }} {% if rep.todo == 1 %}is{% else %}are{% endif %} left{% if rep.time %}, {{ rep.time }} in all{% endif %}.</p><div class="prog"><span class="bar" aria-hidden="true"><i style="width:{% widthratio rep.done_n rep.total 100 %}%"></i></span><span>{{ rep.done_n }} of {{ rep.total }} submitted</span></div></div>
+          <div class="body"><p>Closes {{ rep.due_words }}. {{ rep.left|capfirst }} {% if rep.todo == 1 %}is{% else %}are{% endif %} left{% if rep.time %}, totaling {{ rep.time }}{% endif %}.</p><div class="prog"><span class="bar" aria-hidden="true"><i style="width:{% widthratio rep.done_n rep.total 100 %}%"></i></span><span>{{ rep.done_n }} of {{ rep.total }} submitted</span></div></div>
           <div class="act"><a class="btn pri" href="{% url 'portal:tasks' %}">Continue reporting</a></div>
         </article>{% else %}<article class="bi" role="listitem">
           <span class="kind" style="color:var(--green)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"/></svg>{{ rep.period.name }} reporting complete</span>

@@ -120,7 +120,7 @@ def reporting(person):
         "todo": t["todo"],
         "done_n": t["done_n"],
         "left": left,
-        "left_sentence": f"{left_words[:1].upper()}{left_words[1:]} {'is' if left_n == 1 else 'are'} left",
+        "left_sentence": f"{left_words[:1].upper()}{left_words[1:]} {'remains' if left_n == 1 else 'remain'}",
         "time": duration(t["minutes_left"]) if t["minutes_left"] else "",
         "due": due,
         "due_words": _wmd(due),
