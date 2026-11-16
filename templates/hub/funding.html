@@ -98,13 +98,13 @@
             <aside class="fp-help-card" id="s-consult" aria-labelledby="s-consult-h">
               <h3 id="s-consult-h">Talk through a draft</h3>
               <p>Unsure about one of the questions? The Assistant Director for Grants and Contracts meets one on one with CNAP members about proposals.</p>
-              <p>Please bring a specific aims page, a budget question, or an opportunity you are still weighing.</p>
+              <p>Optional: you’re welcome to bring a specific aims page, a budget question, or an opportunity you are still weighing.</p>
               <a class="fp-btn pri" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a>
             </aside>
           </div>
         </section>
         <section class="fp-sec" id="s-milestones" aria-labelledby="s-milestones-h">
-          <div class="fp-sh"><h2 id="s-milestones-h">What the funding labels mean</h2><p>Each opportunity carries one of three milestone labels. The labels show how an award relates to the R01 milestone: independent funding through an R01 or an equivalent award, which every CNAP project leader works toward.</p></div>
+          <div class="fp-sh"><h2 id="s-milestones-h">What the funding labels mean</h2><p>Each opportunity on the <a href="{% url 'portal:funding' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}">Funding opportunities</a> page carries one of these three labels beside its name. The labels show how an award relates to the R01 milestone: independent funding through an R01 or an equivalent award, which every CNAP project leader works toward.</p></div>
           <dl class="fp-labels">
             <div><dt><span class="fp-st ok">Counts toward the R01 milestone</span></dt><dd>The award is an R01 or an equivalent award. Winning the award meets the milestone.</dd></div>
             <div id="bridge"><dt><span class="fp-st">Bridge funding</span></dt><dd>A smaller or shorter award that keeps your research going and builds preliminary data on the way to an R01-equivalent award. Bridge funding doesn’t meet the milestone by itself, but bridge funding can strengthen your next application.</dd></div>
