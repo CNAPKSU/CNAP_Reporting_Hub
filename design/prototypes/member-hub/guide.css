@@ -2785,7 +2785,7 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .hs a.done .hs-n::after{content:"";position:absolute;width:11px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-1px) rotate(-45deg)}
 .hs a.done .hs-t{color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.hs a{transition:none}}
-.open-g > .who{align-self:start}
+.open-g > .who{align-self:center}  /* MW 2026-11-15: sits in the middle of the hero when the left column is taller */
 
 /* Year ribbon: the bars are the reporting windows (MW 2026-11-15: "why do some dates have a long
    dark purple line?"). The bars are lighter so they read as a span of time, not a marker, and each
