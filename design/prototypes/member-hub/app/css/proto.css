@@ -2195,3 +2195,11 @@ body.proto .px-roll > summary > .px-roll-cue { position: relative; top: -18px; j
 body.proto .px-rolls:not(.r90-partbody .px-rolls) > details.px-roll:not([open]) > summary > .px-roll-cue { top: 0; }
 /* MW 2026-11-15: on wide screens, center the page in the space beside the side menu, so the extra room sits evenly on both sides */
 @media (min-width: 1500px) { body.proto main#main { margin-left: auto; margin-right: auto; width: 100%; } }
+
+/* MW 2026-11-15 ("why are there two lines here"): the masthead already ends in a line, so the
+   Show all / Collapse all bar right under it drops its own top line. */
+body.proto .px-mast + .px-rolls > .foldall:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+
+/* MW 2026-11-15 ("the current year used to be a white with glowing. I liked that"): this year's bar
+   is white again, with a purple edge and a soft purple glow so it reads on the light page. */
+body.proto .bars li.now .bb { background: #fff; box-shadow: inset 0 0 0 1.5px var(--px-brand), 0 0 0 4px color-mix(in srgb, var(--px-brand) 12%, transparent), 0 0 18px color-mix(in srgb, var(--px-brand) 38%, transparent); }
