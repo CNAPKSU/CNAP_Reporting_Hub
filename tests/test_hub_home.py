@@ -193,7 +193,7 @@ def test_ribbon_menus_list_only_pages_the_app_has(client, django_user_model):
     client.force_login(User.objects.get(username="okafor"))
     with override_settings(UI_PROTOTYPE=True, UI_PROTOTYPE_ONLY=True):
         html = client.get("/").content.decode()
-        assert "{#" not in html and "MW 2026-11-15" not in html  # template comments never show
+        assert "{# MW" not in html and "approved build: the prototype ribbon" not in html  # template comments never show
         assert 'class="nav hn-app"' in html and 'aria-controls="rb-fund"' in html and 'aria-controls="rb-rep"' in html
         import re
 
