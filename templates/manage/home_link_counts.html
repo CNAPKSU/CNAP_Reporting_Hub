@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Home link use · {{ platform_name }}{% endblock %}
+{% block content %}
+{# MW 2026-11-15, approved: anonymous counts of Home link selections. No names, sessions, or addresses are kept. #}
+<div class="head"><div><h1>Which Home links members use</h1><p>{{ total }} selection{{ total|pluralize }} in the last {{ days }} days, since {{ since|date:"F j" }}. Counts only: the Hub doesn’t record who selected a link. Show the last <a href="?days=7">7</a>, <a href="?days=30">30</a>, or <a href="?days=90">90</a> days.</p></div></div>
+<div class="panel"><table class="tbl"><thead><tr><th scope="col">Home section and link</th><th scope="col">Selections</th></tr></thead><tbody>
+{% for k, n in rows %}<tr><th scope="row">{{ k }}</th><td>{{ n }}</td></tr>{% empty %}<tr><td colspan="2">No selections counted yet.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

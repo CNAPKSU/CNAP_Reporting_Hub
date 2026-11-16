@@ -736,3 +736,98 @@ Known trade-off kept: anyone can pause password sign-in for a username for 15 mi
 - 2026-11-10: MW approved four additions ("yes to all"): (1) public K-State and NIH items as starting data (`fixtures/funding/kstate_updates.json`, loaded by `seed` and `seed_funding`, each item added once); (2) a K-State Research Weekly heading: a new `funding_bulletins` table (one row per newsletter issue), linked from news, opportunities, and events. On the funding page, each issue's news and events sit first under "From K-State Research Weekly," with the issue date and a link to the full issue, and everything else follows under "From other sources." An opportunity from an issue shows a From row. (3) Events and talks: a new `funding_events` table, a section on the funding page showing events until their last day, and an Events and talks tab for the CNAP office. (4) A weekly scheduled task on Wednesday afternoons, when Research Weekly comes out, that drafts items for MW's approval. Migration outcomes 0018.
 - 2026-11-10: MW's list of funding search sites (Grants.gov, NSF, the Department of Energy Office of Science, the NIH Guide, the US Department of Agriculture's National Institute of Food and Agriculture, and K-State's funding pages) become the first Resources entries when Resources is built, and sources the Wednesday task checks.
 - 2026-11-10: The Opportunities and matches tab names the members each opportunity is picked for, with a By member view.
+
+## CNAP Member Hub homepage (2026-11-13)
+
+- 2026-11-13: MW renamed the app the CNAP Member Hub ("more than reporting now"). Every screen, email, document footer, and the admin site now say CNAP Member Hub. Two places keep "CNAP Reporting Hub" on purpose, because they name a survey about the site: the technology survey's description (`ts_reporting_hub`) and its task group label. Survey wording only changes with MW's approval.
+- 2026-11-13: MW approved building the homepage prototype into the app on `feature/cnap-ui-redesign`, so reviewers see it with real sign-in. It is one more screen in the redesign switch (key `hub`), and it is off unless `UI_PROTOTYPE` is on. It only reads records: no migrations, no new permissions, and a test confirms it writes nothing. Details, the sample sections, and the backend each one needs are in `docs/member-hub-homepage.md`.
+- 2026-11-13: Sections the app has no records for (research stories, the toolkit's links, community, the listserv, site-visit photographs) keep the prototype's fictional content under a visible "Sample content" note, following the rule that fictional content is clearly identified. Buttons for features that don't exist yet were removed or pointed to the cores' real pages, so nothing claims to work when it doesn't.
+- 2026-11-13: Administrators get a Center reporting card in Your week, counted the way the administrator home counts it (exempt assignments left out). Members don't see it.
+- 2026-11-13: The page-feedback button and dialog moved into `templates/_feedback.html`, so the homepage, which doesn't use the sidebar layout, keeps it. The sidebar pages are unchanged.
+- 2026-11-14: MW approved two wording fixes in the mentoring forms, to match the writing rules: "Please add one entry for each meeting during the reporting period." became "Add one entry for each meeting during the reporting period." in both mentor reports, and the Mentor Questionnaire's item 8 uses a curly apostrophe ("I add value to my mentees’ work."). The loader makes these new form versions. Anyone who already started keeps the version they began, and past responses are unchanged. `fixtures/forms/source/CNAP_Forms_Reconstructed.md` still records the original Piestar wording.
+- 2026-11-14: MW asked for the Funding and proposals page in the Member Hub design. The app's existing Funding and news page (built 2026-11-10) now renders in that design when the redesign switch is on (`hub/funding.html`, SCREENS key `funding`). Same view, data, sections, suggestion form, letters, and permissions. With the switch off, or with "Current" chosen, the page is exactly `proto/portal/funding.html`. The Hub header is shared through `templates/hub/_header.html`, and `apps/portal/hub.chrome()` gives non-home pages the header's context (reads records only). Styles and behavior for inner pages: `static/hub/page.css` and `page.js`.
+- 2026-11-14: The homepage's Book a time email now opens with a subject and lines to fill in (name, department, proposal and funding agency, deadline, help wanted, good times). It still goes to `EVALUATOR_EMAIL`.
+- 2026-11-14: In the Hub design the members' funding page is named "Funding and proposals," matching the homepage band, whose title now links to the page (MW asked Claude to pick). The menu label stays "Funding." The switch-off page and the CNAP office's "Funding and news" pages keep their names.
+
+## 2026-11-14 — Funding split into three pages in the Member Hub design (MW)
+- MW: “funding opportunities is one page, grant resources (proposal writing toolkit could be the same page as the grant resources) is a separate page, and funding news should all be separate pages.”
+- /funding/ is Funding opportunities (picked for you, relevant to most members, letters, suggest). /funding/resources/ is Grant resources (the seven questions, Talk through a draft, Proposal writing toolkit). /funding/news/ is Funding news (news, events and talks).
+- Same view and data; the new routes only pass `part`. No model, permission, or form change. With the switch off, the two new addresses redirect to the matching section of the one original page.
+- The proposal writing toolkit has no content in the app yet; the section says so and points to cnap@ksu.edu. Toolkit content needs MW’s materials.
+- Homepage: Funding news and Proposal writing toolkit headings link to the new pages. Research at CNAP links in the prototype; in the app it waits for a Research page.
+
+## 2026-11-14 · Site Visit RSVP (prototype only, backend dependency)
+
+The prototype Site Visit page has one RSVP form built from the questions in the 2026 Qualtrics registration survey: how the member will attend (in person, Zoom, or unable), the parts of the visit they plan to attend, meals for a headcount, dietary restrictions, consent for photographs and video, poster session registration, a name for the name tag, and their connection to CNAP. The same skip logic applies: Zoom and unable responses skip the in-person questions. Name and email come from the Hub profile instead of being typed again. Two questions are new and need MW's approval: parking (from the 2026 feedback) and accessibility needs. In the prototype nothing is sent or stored, and the page says so.
+
+After submitting, the page shows the confirmation email the member would receive: a thank-you, the dates and place, the program at a glance, a summary of their answers, and a calendar file (.ics) with both days and a reminder the day before each. In the prototype the calendar file downloads from the page.
+
+Production needs new backend work that has not been built and needs approval: an RSVP model tied to the member and the event year (a migration), a form view with editing until a deadline, an office export for headcounts and catering, and an automatic confirmation email with the .ics attachment sent through K-State mail. Photograph consent and dietary needs are personal data and need the K-State security review before real use.
+
+## 2026-11-15 · The app's reporting pages stay as they are
+
+MW: keep all of the app's reporting pages the same. My tasks (`templates/proto/tasks.html`), the respondent forms, the results pages, and My history keep their current design, last changed in 42eadc5 on November 9. The Member Hub prototype's `reporting.html` ("Your reporting, Amara") is a separate sketch. It does not replace the app's pages, and no redesign of them goes ahead without MW's approval.
+
+The prototype now uses copies of the app's reporting pages: My tasks (`reporting.html`), My history (`reporting-history.html`), and each form with its preview (`reporting-<id>.html`). They are made by `design/prototypes/member-hub/gen/rep.py` from the app as the fictional demo member Amara Okafor, with the app's own CSS and scripts. Saving, submitting, opting out, and autosave do nothing in the prototype, and each page says so when tried. The earlier sketch is kept as `reporting-sketch.html` and is no longer linked.
+
+## 2026-11-15 · Photos on funding news and events (prototype only, backend dependency)
+
+MW approved trying photos on the Funding news pinned cards and on events. The prototype shows labeled photo placeholders: a wide image at the top of each pinned card, and a small image beside each event (below it on phones). They are added by `design/prototypes/member-hub/gen/ph_inject.py` and styled by `fp-photos.css`. The app is unchanged.
+
+To show real photos, the app needs an optional image on `FundingNews` and `FundingEvent` (a migration), an upload field in the admin with alt text, and storage approved in the K-State security review. Photos must be ones CNAP may use, with no sponsor logos. Not built. Needs MW's approval before any migration.
+
+## 2026-11-15 · Decisions from MW, one by one
+
+- Directions say "Please." This replaces the earlier rule that directions never start with it.
+- The Funding pages keep their three cards. Other tabs keep the segmented style.
+- Two columns are the exception: a table pairing each item with its answer may sit side by side, and stacks on phones.
+- Approved to build, each with a migration: an optional photo with credit and description on funding news items and events, the offer of a story's own preview photo that a person approves, and the Site Visit RSVP (saved responses, editing until March 25, the confirmation email with a calendar file, and an office export). Also approved: the new top ribbon in the app's header.
+- Site Visit: 20-minute slots split 15 to present, 3 for questions, and 2 to change presenters. Slides anytime before, or the morning of. Poster registration closes April 23. Anyone from out of town may request a hotel room. Parking and accessibility questions stay.
+- My tasks: Show and Hide sit in the middle of each row.
+- "All core services" stays on the app's home page, linking to the cores on the CNAP website until the app has its own Resources pages.
+- The old "Mentor Guide · CNAP Member Hub" artifact is kept.
+
+## 2026-11-15 (evening): Threads, Events calendar, 2026 photographs
+
+- Threads get their own pages in the prototype: `threads.html` (every thread, with filters, topic, and search) and `thread.html` (one sample thread). Community keeps a short preview. Dependency: threads in the app need new models, views, and notifications. Not built in the app; needs approval.
+- Events opens on a Calendar view (Home's calendar, copied by `gen/evcal.py`), with a List toggle for the existing agenda. The menu item is "Events calendar."
+- The 2026 Site Visit photographs have their own page, `sitevisit-2026.html`, with placeholders only. Home and Site Visit link to it, which ends the loop between the two pages.
+- Home has two preview scenarios, "New project leader" and "New mentor." Both move Getting started up, just under Your week.
+
+- Following a thread (recommended Nov 15). Following means one email a day when a followed thread has new replies, and the new replies show on Home. Starting a thread or replying follows it automatically. The prototype shows a confirmation for each and sends nothing. Dependency: the app needs thread models, a follow table, a daily digest job, and a Home panel. Not built; needs approval.
+- Thread emails (Nov 15, MW agreed). The default is one email a week, sent only when there are new replies. Members can choose once a day, only their own questions, or no emails. The first reply to your own question comes right away unless you chose no emails. A thread with no replies after a week gets one email suggesting a next step. Every email has a one-click Unfollow for each thread, a link to stop all thread emails, and a link to change how often. Owners can mark a thread as answered, which stops its emails. Dependency: email settings on the member, a digest job, and signed one-click unfollow links. Not built; needs approval.
+- First-month checklist (Nov 15). In the prototype, "Mark as done" is remembered in that one browser only. In the app, each item's done state should be saved on the member's record, so the state follows the member to any device, and so the CNAP team can see who still needs an onboarding meeting. Dependency: a small onboarding-progress model, which needs a migration. Not built; needs approval.
+
+## 2026-11-15 — Foreign components plan in the Hub (MW chose option B)
+
+From CNAP's Plan for Preventing Foreign Co-Author Publications on IDeA Grants:
+
+- **Written guidance on the website:** Grant resources has a section, "Collaborators and co-authors abroad" (`#s-foreign`), with NIH's notices (NOT-OD-26-026, NOT-OD-26-084).
+- **Onboarding:** the mentee guide (Approvals before you begin) has a to-do item, and the mentor guide (Your role) has a note about flagging foreign co-authors when reviewing manuscripts. The guides are prototype pages.
+- **Publication reporting:** the publication form in the app shows a reminder at the point of reporting (`templates/portal/outcome_form.html`, publications only, not declined). This replaces the plan's "Piestar" reminder. MW approved this change to a reporting page. No survey question or reporting requirement changed.
+- **Listserv reminder:** a sample announcement in Community (prototype). Real reminders go out through the listserv as before.
+- **Administrative review before the RPPR:** stays a staff procedure. The Hub doesn't automate it.
+
+## 2026-11-15 — Eighth Before you apply question
+
+"Timeline and approvals" added to the seed list (`apps/outcomes/funding.py`). Seeding never overwrites, so an existing database gets the question when staff add it on the staff questions form, which now has an "Add a question" box. Every page that counts the questions now uses the real count in words (the `numword` filter).
+
+## 2026-11-15 — Dependencies, not built
+
+- **Search in the app:** the prototype's search box works on its own list of pages and people. Search in the app needs a backend search over members, events, funding, and pages.
+- **Counting Home link clicks:** needs a small new table for anonymous click counts, which means a database migration. It needs MW's approval before it's built.
+- **NeuroSync flyer in the app:** each week's flyer generated from that week's talk. Not built. The prototype has one sample PDF.
+- **NeuroSync sign-up forms:** the three NeuroSync buttons are emails for now. Real forms would be new app work.
+
+## 2026-11-15 — Site Visit RSVP in the app (approved build, with migration)
+
+`SiteVisitRSVP` (migration `outcomes/0019_site_visit_rsvp`). This is a new table only; no existing table or record changes. One RSVP a year per person. The person can change it until the RSVP closes (March 25, 2027). Every save is audit-logged and sends a confirmation email that repeats the answers. Answers that only apply in person (meals, rooms, parking, photographs) are cleared when someone switches to Zoom or "unable to attend". Administrators see counts and every RSVP at `/site-visit/rsvps/` (linked in the staff side menu), with a CSV download. Pages: `/site-visit/rsvp/`, linked from Home. The Site Visit dates and program blocks live in `apps/portal/sitevisit_views.py` until the Site Visit has its own records.
+Not built: the calendar (.ics) file in the confirmation email, and a separate poster-only form after the RSVP closes.
+
+## 2026-11-15 — Article photos on funding news and events (approved build, with migration)
+
+There are four new fields on `FundingNewsItem` and `FundingEvent`: image address, description, credit, and approved. They come from the `ArticlePhoto` mixin (migration `outcomes/0020_article_photos`). No existing data changes; every new field is blank or false by default.
+- The staff form adds a "Find the article’s photo" button. It reads the preview image that the article's own page names (og:image or twitter:image) and saves it unapproved.
+- Members see a photo only after a person ticks "Approve: I checked this photo, and CNAP may show it". Changing the image address without viewing the new photo clears the approval.
+- The credit shows under the photo as "Photo: …".
+- Not built: uploading a photo file. That needs file storage on K-State's hosting. For now the photo is shown from its own address.

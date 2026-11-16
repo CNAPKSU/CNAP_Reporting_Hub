@@ -882,7 +882,37 @@ class FundingSuggestion(TimestampedModel):
         ]
 
 
-class FundingNewsItem(ArchivableModel):
+class ArticlePhoto(models.Model):
+    """A photo for a funding news item or event (MW 2026-11-15, approved build with its migration). The photo is
+    shown only after a person on the CNAP team approves the photo, so nothing is shown automatically."""
+
+    photo_url = models.URLField(
+        max_length=1000,
+        blank=True,
+        help_text="The address of the image, often found on the article's page.",
+    )
+    photo_alt = models.CharField(
+        max_length=300,
+        blank=True,
+        help_text="A short description of the photo, for people who can't see it.",
+    )
+    photo_credit = models.CharField(
+        max_length=200, blank=True, help_text="Who took the photo or owns the photo."
+    )
+    photo_approved = models.BooleanField(
+        default=False,
+        help_text="A person approved showing the photo, and checked that CNAP may show it.",
+    )
+
+    class Meta:
+        abstract = True
+
+    @property
+    def show_photo(self):
+        return bool(self.photo_approved and self.photo_url)
+
+
+class FundingNewsItem(ArticlePhoto, ArchivableModel):
     """A funding news item MW posts: a summary in her own words with the source link."""
 
     headline = models.CharField(max_length=300)
@@ -952,7 +982,7 @@ class FundingFollowUp(TimestampedModel):
         ]
 
 
-class FundingEvent(ArchivableModel):
+class FundingEvent(ArticlePhoto, ArchivableModel):
     """A research event or talk on the funding page (MW 2026-11-10): office hours, information sessions,
     seminars, symposia. Shown until its last day passes."""
 
@@ -989,3 +1019,56 @@ class FundingEvent(ArchivableModel):
     @property
     def last_day(self):
         return self.ends_on or self.starts_on
+
+
+class SiteVisitRSVP(TimestampedModel):
+    """One person's RSVP for one year's Site Visit (MW 2026-11-15, approved build with its migration).
+    The fields follow the RSVP form in the prototype's Site Visit page."""
+
+    class Attend(models.TextChoices):
+        PERSON = "person", "In person"
+        ZOOM = "zoom", "On Zoom"
+        NO = "no", "Unable to attend"
+
+    class Poster(models.TextChoices):
+        YES = "yes", "Yes"
+        NO = "no", "No"
+        DONE = "done", "Already registered"
+        LATER = "later", "Plans to register later"
+        MAYBE = "maybe", "Maybe, wants more information"
+
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="site_visit_rsvps")
+    year = models.PositiveSmallIntegerField(
+        help_text="The calendar year of the Site Visit, such as 2027."
+    )
+    attend = models.CharField(max_length=10, choices=Attend.choices)
+    parts = models.JSONField(
+        default=list, blank=True, help_text="The program blocks the person plans to attend."
+    )
+    meals = models.JSONField(default=list, blank=True, help_text="lunch, dinner")
+    diet = models.TextField(blank=True)
+    photo_ok = models.BooleanField(
+        null=True, blank=True, help_text="May CNAP use images that include the person."
+    )
+    parking = models.BooleanField(null=True, blank=True, help_text="Needs parking.")
+    hotel_nights = models.JSONField(default=list, blank=True, help_text="mon, tue")
+    poster = models.CharField(max_length=10, choices=Poster.choices, blank=True)
+    poster_title = models.TextField(blank=True)
+    poster_authors = models.CharField(max_length=500, blank=True)
+    poster_affiliation = models.CharField(max_length=300, blank=True)
+    poster_abstract = models.TextField(blank=True)
+    name_tag = models.CharField(
+        max_length=80, blank=True, help_text="A different first name for the name tag."
+    )
+    connection = models.CharField(max_length=80, blank=True)
+    note = models.TextField(blank=True, help_text="Accessibility needs, or anything else.")
+
+    class Meta:
+        db_table = "site_visit_rsvps"
+        ordering = ["-year", "person__last_name"]
+        constraints = [
+            models.UniqueConstraint(fields=["person", "year"], name="one_rsvp_per_person_per_year")
+        ]
+
+    def __str__(self):
+        return f"{self.person} · {self.year} · {self.get_attend_display()}"

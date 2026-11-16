@@ -1590,6 +1590,8 @@ body.proto .r90 .px-section details.r90-partroll > summary.px-section-head { pad
 body.proto .r90 .r90-partbody > :first-child, body.proto .r90 .r90-partbody > .r90-secs > :first-child:not(.px-rollbar) { margin-top: 0; }
 body.proto .r90 details.r90-sec > summary, body.proto .r90 .r90-partbody details.px-roll > summary { padding: var(--px-sub) var(--px-3) var(--px-3) !important; }
 body.proto .px-rolls:not(.r90-partbody .px-rolls) > details.px-roll > summary { padding: var(--px-sec) var(--px-3) var(--px-3) !important; }
+/* MW 2026-11-15: a closed row centers its text; an open row keeps the larger gap above its heading */
+body.proto .px-rolls:not(.r90-partbody .px-rolls) > details.px-roll:not([open]) > summary { padding-top: calc((var(--px-sec) + var(--px-3)) / 2) !important; padding-bottom: calc((var(--px-sec) + var(--px-3)) / 2) !important; }
 body.proto .r90 details.r90-sec > .px-roll-body, body.proto details.px-roll > .px-roll-body { padding-top: var(--px-2); }
 body.proto .r90 details.r90-sec > summary .px-roll-cue, body.proto .r90 .r90-partbody details.px-roll > summary .px-roll-cue { margin-top: calc(var(--px-sub) - var(--px-5) + 14px); }
 body.proto .lch .lch-tools { margin-top: var(--px-2); }
@@ -2187,3 +2189,17 @@ body.proto .trend .callouts { flex: 1 1 300px; grid-template-columns: minmax(0, 
 /* The three call-outs sit on a soft panel, as white cards, so they read as one group (MW 2026-11-12). */
 body.proto .trend .callouts { background: var(--px-brand-tint); border-radius: var(--px-r-lg); padding: var(--px-5); }
 body.proto .trend .callouts li { background: var(--px-surface); border-color: transparent; }
+/* My tasks (MW 2026-11-15): Show and Hide sit in the middle of each row, between its two lines, words aligned left in their column. The row's spacing is 48 pixels above the title and 12 below, so the label moves up by half the difference. */
+body.proto .px-roll > summary > .px-roll-cue { position: relative; top: -18px; justify-self: start; text-align: left; }
+/* MW 2026-11-15: closed rows have even padding now, so the Show label needs no lift */
+body.proto .px-rolls:not(.r90-partbody .px-rolls) > details.px-roll:not([open]) > summary > .px-roll-cue { top: 0; }
+/* MW 2026-11-15: on wide screens, center the page in the space beside the side menu, so the extra room sits evenly on both sides */
+@media (min-width: 1500px) { body.proto main#main { margin-left: auto; margin-right: auto; width: 100%; } }
+
+/* MW 2026-11-15 ("why are there two lines here"): the masthead already ends in a line, so the
+   Show all / Collapse all bar right under it drops its own top line. */
+body.proto .px-mast + .px-rolls > .foldall:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+
+/* MW 2026-11-15 ("the current year used to be a white with glowing. I liked that"): this year's bar
+   is white again, with a purple edge and a soft purple glow so it reads on the light page. */
+body.proto .bars li.now .bb { background: #fff; box-shadow: inset 0 0 0 1.5px var(--px-brand), 0 0 0 4px color-mix(in srgb, var(--px-brand) 12%, transparent), 0 0 18px color-mix(in srgb, var(--px-brand) 38%, transparent); }

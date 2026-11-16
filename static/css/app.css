@@ -2067,3 +2067,10 @@ details > summary + * { margin-top: 12px; }
 .resgroup-t { margin: 0 0 8px; font-weight: 600; font-size: .9rem; }
 .resgroup .checkgrid { margin: 0; }
 .side .foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+
+/* MW 2026-11-15: foreign components reminder on the publication form */
+.fc-note{margin-top:12px;padding:10px 14px;border-left:3px solid var(--purple,#512888);background:#f6f2fb;border-radius:6px;line-height:1.5}
+
+/* Staff photo fields for funding news and events (MW 2026-11-15) */
+.ap-fs{border:1px solid var(--line,#e5e0d8);border-radius:10px;padding:14px 16px;display:grid;gap:10px}
+.ap-prev{margin:0;max-width:320px}.ap-prev img{display:block;width:100%;border-radius:8px}.ap-prev figcaption{font-size:13px;margin-top:4px}

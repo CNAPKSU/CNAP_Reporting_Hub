@@ -1,0 +1,10 @@
+{# A pinned funding news item as a feature card (MW 2026-11-14). The first summary line leads; the rest are points, with any beyond two folded away (MW 2026-11-15: less to read). #}
+<li class="fp-pin">
+  <p class="fp-nmeta">{% if n.date_text %}{{ n.date_text }}{% elif n.news_date %}{{ n.news_date|date:"F j, Y" }}{% else %}Not dated{% endif %}{% if n.bulletin %}<span class="fp-nsrc">{{ n.bulletin.name }}</span>{% endif %}</p>
+  <h3 class="fp-pin-h">{{ n.headline }}</h3>
+  {% if n.show_photo %}<figure class="fp-photo"><img src="{{ n.photo_url }}" alt="{{ n.photo_alt }}" loading="lazy">{% if n.photo_credit %}<figcaption>Photo: {{ n.photo_credit }}</figcaption>{% endif %}</figure>{% endif %}
+  {% if n.summary %}{% with lines=n.summary.strip.splitlines %}<p class="fp-nlead">{{ lines.0 }}</p>
+  {% if lines|length > 1 %}<ul class="fp-pts">{% for line in lines|slice:"1:3" %}{% if line.strip %}<li>{{ line }}</li>{% endif %}{% endfor %}</ul>{% endif %}
+  {% if lines|length > 3 %}<details class="fp-more"><summary>{{ lines|length|add:"-3" }} more point{{ lines|length|add:"-3"|pluralize }}</summary><ul class="fp-pts">{% for line in lines|slice:"3:" %}{% if line.strip %}<li>{{ line }}</li>{% endif %}{% endfor %}</ul></details>{% endif %}{% endwith %}{% endif %}
+  {% if n.source_url %}<a class="fp-go" href="{{ n.source_url }}" target="_blank" rel="noopener" title="Opens the source in a new tab.">Read the source<span>{{ n.source_name|default:"the announcement" }}</span></a>{% endif %}
+</li>

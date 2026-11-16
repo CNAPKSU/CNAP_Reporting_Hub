@@ -77,7 +77,7 @@
         },
         {
           "code": "item_08",
-          "prompt": "I add value to my mentees' work.",
+          "prompt": "I add value to my mentees’ work.",
           "type": "likert",
           "answer_set": "Agreement",
           "measure": "mentor_08",

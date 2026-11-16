@@ -19,6 +19,7 @@
       <div class="fv-field"><label for="ev-host">Host <span class="fv-opt">(optional)</span></label><input id="ev-host" name="host" value="{{ e.host }}" maxlength="200"></div>
       <div class="fv-field"><label for="ev-sum">About <span class="fv-opt">(optional)</span></label><p class="fv-help">One or two sentences, one per line.</p><textarea id="ev-sum" name="summary" rows="3">{{ e.summary }}</textarea></div>
       <div class="fv-field"><label for="ev-url">Link to the details <span class="fv-opt">(optional)</span></label><input id="ev-url" name="url" value="{{ e.url }}" maxlength="500"></div>
+      {% include "manage/_article_photo_fields.html" with obj=e src=e.url %}
       {% include "manage/_funding_issue_field.html" with obj=e %}
       {% if can_manage %}<div class="fm-acts"><button class="btn small ghost" type="submit" title="Saves the event. Members see it right away.">{% if e %}Save{% else %}Add the event{% endif %}</button></div>{% endif %}
     </div>

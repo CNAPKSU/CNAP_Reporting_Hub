@@ -5,7 +5,7 @@
 <div class="o36 aso">
   <a class="px-link p21-back" href="{% url 'portal:outcomes' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}">Back to today</a>
   <header class="px-mast p21-mast">
-    <p class="px-eyebrow">My work</p>
+    <p class="px-eyebrow">My reporting</p>
     <h1 class="px-title">Publications, talks, and grants as of {{ day|date:"F j, Y" }}</h1>
     <p class="p21-purpose">Where {% if acting_for_other %}{{ owner }}’s{% else %}your{% endif %} papers, proposals, and talks stood at the end of {{ day|date:"l, F j, Y" }}.<br>Each step uses the date {% if acting_for_other %}{{ owner.first_name }}{% else %}you{% endif %} gave for it, or the day it was entered in the Hub.<br>This view is read-only.</p>
     {% include "proto/_asof_form.html" %}

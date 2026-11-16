@@ -667,3 +667,30 @@ def resource_groups(field):
     if rest:
         out.append(("More", rest))
     return out
+
+
+_NUMWORDS = [
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "eleven",
+    "twelve",
+]
+
+
+@register.filter
+def numword(value):
+    """3 -> "three", for counts written out in running text (MW 2026-11-15). Counts above twelve stay as digits."""
+    try:
+        n = int(value)
+    except (TypeError, ValueError):
+        return value
+    return _NUMWORDS[n] if 0 <= n < len(_NUMWORDS) else n

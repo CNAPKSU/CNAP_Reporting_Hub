@@ -33,8 +33,28 @@ def _owner(request):
     return (me if me in owners else owners[0]), owners
 
 
+def _merge_repeats(groups):
+    """Show a repeating event once, with its other dates listed under it (MW 2026-11-15: less to read).
+    Display only. Nothing is stored or changed."""
+
+    def merge(items):
+        out, seen = [], {}
+        for e in items:
+            key = (e.title, e.place, e.time_text, e.host, e.summary, e.ends_on is None)
+            if key in seen and e.ends_on is None:
+                seen[key].also.append(e)
+                continue
+            e.also = []
+            seen[key] = e
+            out.append(e)
+        return out
+
+    loose, issues = groups
+    return merge(loose), [{**g, "items": merge(g["items"])} for g in issues]
+
+
 @login_required
-def page(request):
+def page(request, part="opportunities"):
     owner, owners = _owner(request)
     picked = funding.picked_for(owner)
     everyone = funding.for_everyone()
@@ -44,10 +64,22 @@ def page(request):
     letters = funding.letters_for(owner)
     nxt = funding.next_deadline(picked + everyone)
     tpl = prototype.template(request, "funding", "proto/portal/funding.html")
+    if part != "opportunities" and not tpl.startswith("hub/"):
+        # Separate pages exist only in the Member Hub design (MW 2026-11-14). With the switch off, the one page keeps every section.
+        anchor = {"resources": "s-before", "news": "s-news"}[part]
+        q = f"?for={owner.pk}" if owner.pk != request.user.person.pk else ""
+        return redirect(f"{reverse('portal:funding')}{q}#{anchor}")
+    chrome = {}
+    if tpl.startswith("hub/"):
+        from . import hub
+
+        chrome = hub.chrome(request)  # the Hub header (MW 2026-11-14)
     return render(
         request,
         tpl,
         {
+            **chrome,
+            "part": part,
             "owner": owner,
             "owners": owners,
             "acting_for_other": owner.pk != request.user.person.pk,
@@ -60,7 +92,7 @@ def page(request):
             "news": news,
             "news_groups": funding.grouped(news),
             "events": events,
-            "event_groups": funding.grouped(events),
+            "event_groups": _merge_repeats(funding.grouped(events)),
             "n_pinned": sum(1 for n in news if n.pinned),
             "letters": letters,
             "suggestions": sugs,

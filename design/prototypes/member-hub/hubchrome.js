@@ -1,0 +1,513 @@
+/* Shared prototype chrome for every Member Hub page (MW 2026-11-14):
+   1. "Start a thread" in the top ribbon, next to My reporting.
+   2. The Page feedback button and dialog, matching the Django app's _feedback.html.
+   Prototype only: the feedback dialog sends nothing. */
+(function () {
+  var css = ''
+    + '.hc-thread{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2,#d5d3d9);background:transparent;color:var(--purple-ink,#3c1d66);font:500 14.5px/1 var(--sans,system-ui,sans-serif);text-decoration:none;white-space:nowrap}'
+    + '@media (min-width:1300px){.tools:has(.hc-thread:not([hidden])) .search{width:190px}}'
+    + '.hc-thread:hover{background:var(--purple-tint,#efe8f8)}'
+    + 'header:has(.hn)>.wrap{max-width:none;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}'
+    + '.mywork{white-space:nowrap}'
+    + '.hc-thread{background:var(--purple,#512888);border-color:var(--purple,#512888);color:#fff;font-weight:600}.hc-thread:hover{background:var(--purple-ink,#3c1d66)}header .hc-thread,header .hc-thread:hover,header .hc-thread:focus-visible,header .hc-thread:visited{color:#fff!important}'
+    + '.hc-thread svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}'
+    + '.hc-thread.hc-icon span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.hc-thread.hc-icon{padding:0 11px}.hc-thread[hidden]{display:none}'
+    + '.fbk-open{position:fixed;right:22px;bottom:22px;z-index:50;padding:10px 20px;border-radius:999px;border:0;background:var(--purple,#512888);color:#fff;font:600 14px/20px var(--sans,system-ui,sans-serif);box-shadow:0 8px 24px -8px rgba(60,29,102,.5);cursor:pointer}'
+    + '.fbk-open:hover{background:var(--purple-ink,#3c1d66)}'
+    + '@media (max-width:980px){.fbk-open{bottom:calc(78px + env(safe-area-inset-bottom,0px));right:16px}}'
+    + 'dialog.fbk{border:0;border-radius:12px;padding:26px 28px;width:min(520px,calc(100vw - 32px));box-shadow:0 18px 50px rgba(31,27,41,.25);font:400 15px/22px var(--sans,system-ui,sans-serif);color:var(--ink,#1d1b21);background:var(--paper,#fff)}'
+    + 'dialog.fbk::backdrop{background:rgba(31,27,41,.35)}'
+    + '.fbk h2{margin:0 0 6px;font:500 22px/28px var(--serif,Georgia,serif)}'
+    + '.fbk p{margin:0}.fbk .fbk-sub{color:var(--muted,#6b6772);font-size:14px}'
+    + '.fbk fieldset{border:0;padding:0;margin:14px 0}'
+    + '.fbk-topics{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}'
+    + '.fbk-topics legend,.fbk-rate legend{font-weight:600;margin-bottom:6px;font-size:14px}'
+    + '.fbk-topics label{display:flex;gap:8px;align-items:center;font-size:14px}'
+    + '.fbk-topics input{accent-color:var(--purple,#512888)}'
+    + '.fbk-rate{display:flex;gap:8px}.fbk-rate label{cursor:pointer}.fbk-rate input{position:absolute;opacity:0}'
+    + '.fbk-rate span{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line,#e6e3ea);font-weight:600}'
+    + '.fbk-rate input:checked+span{background:var(--purple,#512888);color:#fff;border-color:var(--purple,#512888)}'
+    + '.fbk-rate input:focus-visible+span{outline:2px solid var(--purple,#512888);outline-offset:2px}'
+    + '.fbk label.fbk-l{display:block;font-weight:600;font-size:14px}'
+    + '.fbk textarea{width:100%;box-sizing:border-box;margin-top:6px;padding:10px 12px;border:1px solid var(--line-2,#d5d3d9);border-radius:8px;font:inherit;background:var(--paper,#fff);color:inherit}'
+    + '.fbk-msg{min-height:1.2em;margin-top:8px!important;color:var(--purple,#512888);font-size:14px}'
+    + '.fbk-row{display:flex;gap:10px;margin-top:12px}'
+    + '.fbk-row button{min-height:42px;padding:0 18px;border-radius:8px;font:500 15px/1 var(--sans,system-ui,sans-serif);cursor:pointer;border:1px solid var(--line-2,#d5d3d9);background:var(--surface,#fff);color:var(--ink,#1d1b21)}'
+    + '.fbk-row .fbk-send{background:var(--purple,#512888);border-color:var(--purple,#512888);color:#fff}'
+    + '.fbk-proto{margin-top:10px!important;font-size:12.5px;color:var(--muted,#6b6772)}'
+    + '@media (max-width:560px){.fbk-topics{grid-template-columns:1fr}}';
+  var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+
+  /* 1. Start a thread, in the ribbon */
+  var mw = document.querySelector('a.mywork:not([hidden])');
+  if (mw && !document.querySelector('.hc-thread')) {
+    var a = document.createElement('a');
+    a.className = 'hc-thread';
+    a.href = 'threads.html';
+    a.title = 'Opens Threads: ask the CNAP community a question, look for a collaborator, or answer a colleague';
+    if (/threads\.html$/.test(location.pathname)) a.addEventListener('click', function (e) { var d = document.querySelector('.cm-compose'); if (!d) return; e.preventDefault(); try { d.showModal(); } catch (x) { d.setAttribute('open', ''); } });
+    a.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 3.5h11v7h-6l-3 2.5v-2.5h-2z"/></svg><span>Start a thread</span>';
+    a.setAttribute('aria-label', 'Start a thread');
+    mw.parentNode.insertBefore(a, mw);
+  }
+
+  /* 2. Page feedback */
+  if (document.querySelector('.fbk-open')) return;
+  var b = document.createElement('button');
+  b.type = 'button'; b.className = 'fbk-open'; b.setAttribute('aria-haspopup', 'dialog');
+  b.title = 'Tell us how this page could be better: its design, its wording, its logic, its speed, or a fun idea.';
+  b.textContent = 'Page feedback';
+  var topics = [['design', 'Design and look'], ['clarity', 'Clarity of wording or directions'], ['logic', 'Logic or flow'], ['speed', 'Speed and efficiency'], ['fun', 'Fun and motivating touches'], ['broken', 'Something is broken'], ['other', 'Something else']];
+  var d = document.createElement('dialog');
+  d.className = 'fbk'; d.setAttribute('aria-labelledby', 'fbk-h');
+  d.innerHTML = '<form method="dialog" class="fbk-form"><h2 id="fbk-h">How could this page be better?</h2>'
+    + '<p class="fbk-sub">Your note goes to the CNAP evaluation team, along with the page you are on.</p><p class="fbk-sub">Big ideas and small fixes are equally welcome.</p>'
+    + '<fieldset class="fbk-topics"><legend>What is the note about?</legend>' + topics.map(function (t) { return '<label><input type="radio" name="topic" value="' + t[0] + '"> ' + t[1] + '</label>'; }).join('') + '</fieldset>'
+    + '<fieldset class="fbk-rate"><legend>How is this page overall? (optional)</legend>' + [1, 2, 3, 4, 5].map(function (n) { return '<label title="' + (n === 1 ? 'Poor' : n === 5 ? 'Excellent' : n + ' of 5') + '"><input type="radio" name="rating" value="' + n + '"><span>' + n + '</span></label>'; }).join('') + '</fieldset>'
+    + '<label class="fbk-l" for="fbk-c">Your note</label><textarea id="fbk-c" name="comment" rows="4" placeholder="For example: the dates on this page are hard to find."></textarea>'
+    + '<p class="fbk-msg" role="status"></p>'
+    + '<div class="fbk-row"><button type="button" class="fbk-send">Send my note</button><button type="button" class="fbk-close">Cancel</button></div>'
+    + '<p class="fbk-proto">Prototype. In the Hub, this note is saved for the evaluation team. Here, nothing is sent.</p></form>';
+  document.body.appendChild(b); document.body.appendChild(d);
+  var msg = d.querySelector('.fbk-msg');
+  b.addEventListener('click', function () { msg.textContent = ''; if (d.showModal) d.showModal(); else d.setAttribute('open', ''); });
+  d.querySelector('.fbk-close').addEventListener('click', function () { d.close ? d.close() : d.removeAttribute('open'); });
+  d.querySelector('.fbk-send').addEventListener('click', function () {
+    var f = d.querySelector('form'), topic = f.querySelector('input[name="topic"]:checked');
+    if (!topic || !f.comment.value.trim()) { msg.textContent = 'Choose what it is about and write a few words.'; return; }
+    msg.textContent = 'Thank you. In the prototype, nothing was sent.';
+    f.reset(); setTimeout(function () { d.close ? d.close() : d.removeAttribute('open'); }, 1600);
+  });
+})();
+
+/* Site navigation (MW 2026-11-15): every page has a home under one top-ribbon item, shown in a dropdown. */
+(function () {
+  var MAP = [
+    ['Home', 'index.html', null],
+    ['Reporting', 'reporting.html', [['My tasks', 'reporting.html', 'Surveys and reports due this session'], ['My history', 'reporting-history.html', 'Everything you have submitted']]],
+    ['Research', 'research.html', [['Research stories', 'research.html', 'Work from the Center’s pilot projects, cores, and investigators'], ['Suggest a story', 'mailto:cnap@ksu.edu?subject=Story%20idea%20for%20Research%20at%20CNAP', 'Tell the CNAP team about a milestone, paper, or person to profile']]],
+    ['Events', 'events.html', [['Events calendar', 'events.html', 'Every Center event, deadline, and campus date'], ['NeuroSync', 'neurosync.html', 'The Wednesday speaker series'], ['The 2027 Site Visit', 'sitevisit.html', 'May 25 and 26, 2027'], ['2026 Site Visit photographs', 'sitevisit-2026.html', '48 photographs from last May']]],
+    ['Funding', 'funding.html', [['Funding opportunities', 'funding.html', 'Picked for you, and relevant to most members'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft'], ['Funding news', 'funding-news.html', 'News from sponsors, and events and talks']]],
+    ['Community', 'community.html', [['Community', 'community.html', 'Achievements, people, and ways to connect'], ['Threads', 'threads.html', 'Questions answered by members who have the experience'], ['Member directory', 'community.html#cm-dir', 'Find a colleague or a type of expertise'], ['Alumni', 'community.html#cm-alum', 'Where former members are now']]],
+    ['Resources', 'core-bn.html', [['Behavioral Neuroscience Core', 'core-bn.html', 'Services, equipment, and how to book'], ['Cognitive Neuroscience Core', 'core-cn.html', 'Services, equipment, and how to book'], ['Neuroinformatics Core', 'core-ni.html', 'Data, analysis, and consultation'], ['Mentor guide', 'mentor.html', 'For mentors of CNAP investigators'], ['Mentee guide', 'mentee.html', 'For pilot and project investigators'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft']]]
+  ];
+  var here = (location.pathname.split('/').pop() || 'index.html');
+  if (/^reporting-\d+/.test(here)) here = 'reporting.html';
+  if (here === 'thread.html') here = 'threads.html';
+  function inSec(sec) { return sec[1] === here || (sec[2] || []).some(function (x) { return x[1].split('#')[0] === here; }); }
+  var css = ''
+    + '.hn{display:flex;gap:4px;margin-left:12px;position:relative}'
+    + '.hn-it{position:relative}'
+    + '.hn-b,.hn a.hn-b{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;color:var(--ink-2,#45414c);font:500 15px/1.2 var(--sans,system-ui,sans-serif);cursor:pointer;white-space:nowrap}'
+    + '.hn-b:hover{background:var(--band,#f2efe9);color:var(--ink,#1d1b21)}'
+    + '.hn-b:focus-visible{outline:2px solid var(--purple,#512888);outline-offset:2px}'
+    + '.hn-b[aria-current="page"],.hn-it.is-here>.hn-b{color:var(--purple,#512888);background:var(--purple-tint,#efe8f8)}'
+    + '.hn-b svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:1.8;transition:transform .15s}'
+    + '.hn-b[aria-expanded="true"] svg{transform:rotate(180deg)}'
+    + '.hn-p{position:absolute;left:0;top:calc(100% + 8px);z-index:80;min-width:250px;padding:8px;border-radius:12px;background:var(--surface,#fff);border:1px solid var(--line,#e6e3ea);box-shadow:0 18px 40px -16px rgba(40,20,70,.3)}'
+    + '.hn-p[hidden]{display:none}'
+    + '.hn-p a{display:block;padding:9px 12px;border-radius:8px;color:var(--ink,#1d1b21);text-decoration:none;font:400 15px/1.3 var(--sans,system-ui,sans-serif)}'
+    + '.hn-p a:hover,.hn-p a:focus-visible{background:var(--band,#f2efe9);outline:0}'
+    + '.hn-p a[aria-current="page"]{color:var(--purple,#512888);font-weight:600;background:var(--purple-tint,#efe8f8)}'
+    + '.hn-p a.hn-sep{margin-top:6px;border-top:1px solid var(--line,#e6e3ea);border-radius:0 0 8px 8px;padding-top:12px}'
+    + '.hn-m{display:none}'
+    + '@media (min-width:981px) and (max-width:1120px){.hn{gap:0;margin-left:4px}.hn-b,.hn a.hn-b{padding:8px 8px;font-size:14px}}'
+    + '.hn-mp{position:fixed;left:0;right:0;top:64px;bottom:0;z-index:90;overflow:auto;padding:12px max(16px,env(safe-area-inset-left,0px)) 40px;background:var(--surface,#fff)}'
+    + '.hn-mp h3{margin:16px 12px 4px;font:600 13px/18px var(--sans,system-ui,sans-serif);color:var(--muted,#6b6772)}'
+    + '.hn-mp a{display:block;padding:12px;border-bottom:1px solid var(--line,#e6e3ea);color:var(--ink,#1d1b21);text-decoration:none;font-size:16px}'
+    + '.hn-mp a[aria-current="page"]{color:var(--purple,#512888);font-weight:600}'
+    + 'header .brand span,header .brand b{white-space:nowrap}@media (max-width:420px){header .brand small{display:none}}'
+    + 'header.f-thread-icon .hc-thread span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}header.f-thread-icon .hc-thread{padding:0 11px}'
+    + 'header.f-tight .hn{gap:0;margin-left:4px}header.f-tight .hn-b{padding:8px 7px!important;font-size:14px!important}header.f-tight .wrap{gap:16px}'
+    + 'header.f-search-icon .search{width:44px!important;padding:0!important;justify-content:center}header.f-search-icon .search>:not(svg){display:none}'
+    + 'header.f-thread-off .hc-thread{display:none}'
+    + 'header.f-menu .hn{display:none!important}header.f-menu .hn-m{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:8px;border:1px solid var(--line-2,#d5d3d9);font:500 15px/1 var(--sans,system-ui,sans-serif);color:var(--ink,#1d1b21);cursor:pointer}'
+    + 'header.f-mini .brand small,header.f-mini .mywork{display:none!important}header.f-mini .wrap{gap:10px}'
+    + 'header.f-logo .brand>span{display:none}'
+    + 'header .hn .hn-p{min-width:320px;padding:6px;display:grid;gap:2px}'
+    + 'header .hn .hn-p[hidden],.hn-acct .hn-p[hidden]{display:none!important}'
+    + 'header .hn .hn-p a,header .hn .hn-p a:hover{display:grid;gap:1px;padding:10px 14px 10px 16px;border-radius:8px;border:0;box-shadow:none;text-decoration:none;background:transparent;position:relative}'
+    + 'header .hn .hn-p a b{font:500 15px/21px var(--sans,system-ui,sans-serif);color:var(--ink,#1d1b21)}'
+    + 'header .hn .hn-p a small{font:400 13px/18px var(--sans,system-ui,sans-serif);color:var(--muted,#6b6772)}'
+    + 'header .hn .hn-p a:hover,header .hn .hn-p a:focus-visible{background:var(--band,#f2efe9)}'
+    + 'header .hn .hn-p a+a{margin-top:0}header .hn .hn-p a+a::before{content:"";position:absolute;left:16px;right:14px;top:-1px;height:1px;background:var(--line,#e6e3ea)}'
+    + 'header .hn .hn-p a:hover::before,header .hn .hn-p a:hover+a::before,header .hn .hn-p a[aria-current="page"]::before,header .hn .hn-p a[aria-current="page"]+a::before{opacity:0}'
+    + 'header .hn .hn-p a[aria-current="page"]{background:var(--purple-tint,#efe8f8);box-shadow:inset 3px 0 0 var(--purple,#512888)}'
+    + 'header .hn .hn-p a[aria-current="page"] b{color:var(--purple-ink,#3c1d66);font-weight:600}'
+    + 'header .hn .hn-p a.hn-gap{margin-top:8px}header .hn .hn-p a.hn-gap::before{top:-5px;left:6px;right:6px;background:var(--line-2,#d5d3d9)}'
+    + '.hn-acct{position:relative}'
+    + '.hn-acct>.hn-av{all:unset;box-sizing:border-box;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--purple-tint,#efe8f8);color:var(--purple-ink,#3c1d66);font:600 14px/1 var(--sans,system-ui,sans-serif);cursor:pointer}'
+    + '.hn-acct>.hn-av:focus-visible{outline:2px solid var(--purple,#512888);outline-offset:2px}'
+    + '.hn-acct .hn-p{left:auto;right:0}'
+    + '.hn-acct .hn-who{margin:4px 12px 8px;font:500 15px/1.3 var(--sans,system-ui,sans-serif);color:var(--ink,#1d1b21)}.hn-acct .hn-who span{display:block;font-size:13px;color:var(--muted,#6b6772);font-weight:400}';
+  var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+  var chev = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg>';
+  var nav = document.querySelector('header nav[aria-label="Main"]');
+  if (!nav) return;
+  var hn = document.createElement('nav'); hn.className = 'hn nav'; hn.setAttribute('aria-label', 'Main');
+  var panels = [];
+  function closeAll(except) { panels.forEach(function (x) { if (x !== except) { x.p.hidden = true; x.b.setAttribute('aria-expanded', 'false'); } }); }
+  MAP.forEach(function (sec, i) {
+    var here1 = inSec(sec) && !hn.querySelector('.is-here'); var it = document.createElement('div'); it.className = 'hn-it' + (here1 ? ' is-here' : '');
+    if (!sec[2]) {
+      var a = document.createElement('a'); a.className = 'hn-b'; a.href = sec[1]; a.textContent = sec[0];
+      if (here === sec[1]) a.setAttribute('aria-current', 'page');
+      it.appendChild(a);
+    } else {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'hn-b'; b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', 'hn-p' + i);
+      b.innerHTML = sec[0] + chev;
+      var p = document.createElement('div'); p.className = 'hn-p'; p.id = 'hn-p' + i; p.hidden = true;
+      sec[2].forEach(function (x, k) { var a = document.createElement('a'); a.href = x[1]; a.innerHTML = '<b></b><small></small>'; a.firstChild.textContent = x[0]; a.lastChild.textContent = x[2] || ''; if (x[1] === here) a.setAttribute('aria-current', 'page'); if (sec[0] === 'Resources' && k === 3) a.className = 'hn-gap'; p.appendChild(a); });
+      b.addEventListener('click', function (e) { e.stopPropagation(); var open = b.getAttribute('aria-expanded') === 'true'; closeAll(); if (!open) { p.hidden = false; b.setAttribute('aria-expanded', 'true'); } });
+      panels.push({ b: b, p: p });
+      it.appendChild(b); it.appendChild(p);
+    }
+    hn.appendChild(it);
+  });
+  nav.parentNode.replaceChild(hn, nav);
+  /* phones: one menu with every group */
+  var tools = document.querySelector('header .tools');
+  if (tools) {
+    var mb = document.createElement('button'); mb.type = 'button'; mb.className = 'hn-m'; mb.textContent = 'Menu'; mb.setAttribute('aria-expanded', 'false');
+    var mp = document.createElement('div'); mp.className = 'hn-mp'; mp.hidden = true;
+    MAP.forEach(function (sec) {
+      var h = document.createElement('h3'); h.textContent = sec[0]; mp.appendChild(h);
+      (sec[2] || [[sec[0], sec[1]]]).forEach(function (x) { var a = document.createElement('a'); a.href = x[1]; a.textContent = x[0]; if (x[1] === here) a.setAttribute('aria-current', 'page'); mp.appendChild(a); });
+    });
+    mb.addEventListener('click', function () { var o = mb.getAttribute('aria-expanded') === 'true'; mp.style.top = Math.max(0, mb.closest('header').getBoundingClientRect().bottom) + 'px'; mb.setAttribute('aria-expanded', String(!o)); mp.hidden = o; mb.textContent = o ? 'Menu' : 'Close'; });
+    tools.insertBefore(mb, tools.firstChild); document.body.appendChild(mp);
+    /* account menu on the initials */
+    var av = tools.querySelector('.avatar');
+    if (av && !av.getAttribute('aria-controls')) {
+      var wrap = document.createElement('div'); wrap.className = 'hn-acct';
+      var ab = document.createElement('button'); ab.type = 'button'; ab.className = 'hn-av'; ab.textContent = av.textContent.trim(); ab.setAttribute('aria-expanded', 'false'); ab.setAttribute('aria-controls', 'hn-acct'); ab.setAttribute('aria-label', (av.getAttribute('aria-label') || 'Your account') + ': profile and settings');
+      var ap = document.createElement('div'); ap.className = 'hn-p'; ap.id = 'hn-acct'; ap.hidden = true;
+      var nm = (av.getAttribute('aria-label') || '').split(':')[0];
+      ap.innerHTML = (nm ? '<p class="hn-who">' + nm + '<span>Signed in</span></p>' : '') + '<a href="mentee-profile.html">Your profile</a><a href="#" data-proto title="Not part of the prototype.">Change password</a><a href="#" data-proto class="hn-sep" title="Not part of the prototype.">Log out</a>';
+      ap.querySelectorAll('[data-proto]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); a.title = 'Not part of the prototype'; });
+      ab.addEventListener('click', function (e) { e.stopPropagation(); var open = ab.getAttribute('aria-expanded') === 'true'; closeAll(); if (!open) { ap.hidden = false; ab.setAttribute('aria-expanded', 'true'); } });
+      panels.push({ b: ab, p: ap });
+      wrap.appendChild(ab); wrap.appendChild(ap); av.parentNode.replaceChild(wrap, av);
+    }
+  }
+  document.addEventListener('click', function (e) { if (!e.target.closest('.hn-p')) closeAll(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeAll(); } });
+  /* one fit for the whole ribbon: step down until nothing runs past the edge */
+  var hdr = hn.closest('header');
+  var STEPS = ['f-tight', 'f-search-icon', 'f-thread-icon', 'f-thread-off', 'f-menu', 'f-mini', 'f-logo'];
+  function over() {
+    var w = document.documentElement.clientWidth, bad = false;
+    hdr.querySelectorAll('.wrap > *, .tools > *').forEach(function (el) { if (el.offsetParent !== null && el.getBoundingClientRect().right > w - 8) bad = true; });
+    return bad || hdr.scrollWidth > hdr.clientWidth + 1;
+  }
+  function fit() {
+    STEPS.forEach(function (c) { hdr.classList.remove(c); });
+    if (innerWidth <= 980) hdr.classList.add('f-menu');
+    for (var i = 0; i < STEPS.length && over(); i++) hdr.classList.add(STEPS[i]);
+  }
+  fit(); addEventListener('resize', fit); addEventListener('load', fit); setTimeout(fit, 300);
+})();
+
+/* Every link has a hover description (CNAP Hub Design Rules, Buttons and links). Links without one get a plain description of where they go. */
+(function () {
+  var NAMES = {'index.html':'Home','reporting.html':'My tasks in Reporting','reporting-history.html':'My history in Reporting','research.html':'Research at CNAP','story.html':'the research story','events.html':'Events','neurosync.html':'NeuroSync','sitevisit.html':'the 2027 Site Visit page','funding.html':'Funding opportunities','funding-resources.html':'Grant resources','funding-news.html':'Funding news','community.html':'Community','threads.html':'Threads','thread.html':'the thread','core-bn.html':'the Behavioral Neuroscience Core page','core-cn.html':'the Cognitive Neuroscience Core page','core-ni.html':'the Neuroinformatics Core page','mentor.html':'the mentor guide','mentee.html':'the mentee guide','mentee-profile.html':'the profile page'};
+  function run() {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      if (a.title || a.getAttribute('aria-describedby')) return;
+      var h = a.getAttribute('href') || '', t = '';
+      if (/^mailto:/.test(h)) t = 'Starts an email to ' + h.slice(7).split('?')[0] + '.';
+      else if (/^https?:/.test(h)) { try { t = 'Opens ' + new URL(h).hostname.replace(/^www\./, '') + ' in a new tab.'; } catch (e) {} }
+      else if (h.charAt(0) === '#' && h.length > 1) { var el = document.getElementById(h.slice(1)); var hd = el && (el.querySelector('h2,h3') || el); if (hd && hd.textContent.trim()) t = 'Goes to ' + hd.textContent.trim().replace(/\s+/g, ' ').slice(0, 60) + ' on this page.'; }
+      else { var f = h.split('#')[0].split('?')[0]; if (NAMES[f]) t = 'Opens ' + NAMES[f] + '.'; }
+      if (t) a.title = t;
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+  setTimeout(run, 500);
+})();
+document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();});});
+
+/* Hover and focus descriptions in the Hub's own style, in place of the browser's plain white boxes (MW 2026-11-15) */
+(function () {
+  if (window.__hubTips) return; window.__hubTips = 1;
+  var st = document.createElement('style');
+  st.textContent = '.hub-tip{position:fixed;z-index:1000;max-width:min(300px,calc(100vw - 24px));padding:9px 12px;border-radius:10px;background:#22132f;color:#f6f2fa;'
+    + 'font:500 13.5px/19px "Inter Hub","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.005em;box-shadow:0 10px 28px -10px rgba(20,11,26,.55),0 0 0 1px rgba(255,255,255,.22);'
+    + 'pointer-events:none;opacity:0;transform:translateY(3px);transition:opacity .14s ease,transform .14s ease;text-wrap:pretty}'
+    + '.hub-tip.on{opacity:1;transform:none}'
+    + '.hub-tip::after{content:"";position:absolute;left:var(--ax,50%);width:10px;height:10px;background:inherit;transform:translateX(-50%) rotate(45deg);border-radius:2px}'
+    + '.hub-tip[data-side="top"]::after{bottom:-4px}.hub-tip[data-side="bottom"]::after{top:-4px}'
+    + '@media (prefers-reduced-motion:reduce){.hub-tip{transition:none}}';
+  document.head.appendChild(st);
+  var tip = document.createElement('div'); tip.className = 'hub-tip'; tip.setAttribute('role', 'tooltip'); tip.id = 'hub-tip';
+  var cur = null, timer = 0;
+  function host(el) { if (el && el.closest && el.closest('.hr-rail, .otp, .spine')) return null; while (el && el.nodeType === 1) { if (el.hasAttribute && (el.hasAttribute('title') || el.hasAttribute('data-tip'))) return el; el = el.parentElement; } return null; }
+  function claim(el) { var t = el.getAttribute('title'); if (t) { el.setAttribute('data-tip', t); el.removeAttribute('title'); } return el.getAttribute('data-tip'); }
+  function show(el) {
+    var text = claim(el); if (!text) return;
+    if (!tip.parentNode) document.body.appendChild(tip);
+    cur = el; tip.textContent = text; tip.classList.remove('on'); tip.style.left = '0px'; tip.style.top = '0px';
+    el.setAttribute('aria-describedby', 'hub-tip');
+    var r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight, gap = 10;
+    var side = r.top - h - gap > 8 ? 'top' : 'bottom';
+    var cx = r.left + r.width / 2, left = Math.max(12, Math.min(innerWidth - w - 12, cx - w / 2));
+    var top = side === 'top' ? r.top - h - gap : r.bottom + gap;
+    tip.dataset.side = side; tip.style.left = left + 'px'; tip.style.top = top + 'px';
+    tip.style.setProperty('--ax', Math.max(14, Math.min(w - 14, cx - left)) + 'px');
+    requestAnimationFrame(function () { tip.classList.add('on'); });
+  }
+  function hide() { clearTimeout(timer); if (cur) cur.removeAttribute('aria-describedby'); cur = null; tip.classList.remove('on'); }
+  document.addEventListener('mouseover', function (e) {
+    var el = host(e.target); if (el === cur) return;
+    if (el) claim(el);
+    hide(); if (!el) return;
+    timer = setTimeout(function () { show(el); }, 350);
+  });
+  document.addEventListener('mouseout', function (e) { var el = host(e.target); if (el && el === cur && !el.contains(e.relatedTarget)) hide(); else if (el && !el.contains(e.relatedTarget)) clearTimeout(timer); });
+  document.addEventListener('focusin', function (e) { var el = host(e.target); if (el && e.target.matches && e.target.matches(':focus-visible')) show(el); });
+  document.addEventListener('focusout', hide);
+  addEventListener('scroll', hide, { passive: true });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+})();
+
+/* A small confirmation that says what just happened (MW 2026-11-15) */
+(function () {
+  if (window.hubToast) return;
+  var st = document.createElement('style');
+  st.textContent = '.hub-toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:1001;max-width:min(460px,calc(100vw - 32px));padding:12px 16px 12px 14px;border-radius:12px;background:#22132f;color:#fff;'
+    + 'font:500 14.5px/21px "Inter Hub","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 16px 36px -14px rgba(20,11,26,.6),0 0 0 1px rgba(255,255,255,.12);'
+    + 'display:flex;gap:10px;align-items:flex-start;transform:translate(-50%,12px);opacity:0;transition:opacity .18s ease,transform .18s ease}'
+    + '.hub-toast.on{opacity:1;transform:translate(-50%,0)}.hub-toast b{font-weight:700}'
+    + '.hub-toast svg{flex:none;width:18px;height:18px;margin-top:1px;fill:none;stroke:#d4bdf6;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}'
+    + '@media (prefers-reduced-motion:reduce){.hub-toast{transition:none}}';
+  document.head.appendChild(st);
+  var el = document.createElement('div'); el.className = 'hub-toast'; el.setAttribute('role', 'status'); el.setAttribute('aria-live', 'polite');
+  var t = 0;
+  window.hubToast = function (html) {
+    if (!el.parentNode) document.body.appendChild(el);
+    el.innerHTML = '<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9.5l3.2 3L14 5.5"/></svg><span>' + html + '</span>';
+    el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
+    clearTimeout(t); t = setTimeout(function () { el.classList.remove('on'); }, 4200);
+  };
+})();
+
+/* Thread email preferences (prototype: kept in this browser only). MW 2026-11-15: let people choose how often, and unfollow from the email. */
+(function () {
+  var LAB = { daily: 'one email a day', weekly: 'one email a week', mine: 'emails only about your own questions', none: 'no emails' };
+  window.hubThreadPref = function (v) {
+    try { if (v) localStorage.setItem('hub-thread-mail', v); return localStorage.getItem('hub-thread-mail') || 'weekly'; } catch (e) { return v || 'weekly'; }
+  };
+  var CH = ' <a href="threads.html#th-mail" style="color:#d4bdf6;text-decoration:underline;text-underline-offset:3px">Change</a>';
+  window.hubThreadMsg = function (kind) {
+    var p = hubThreadPref(), l = LAB[p];
+    var tail = p === 'none' ? ' You chose no emails, so please check Threads for replies.' : p === 'mine' ? ' You chose emails only about your own questions, so this thread won’t email you.' : ' You’ll hear about new replies in ' + l + ', and they show on your Home page.';
+    if (kind === 'follow') return '<b>Following.</b>' + tail + CH;
+    if (kind === 'unfollow') return '<b>Unfollowed.</b> You won’t hear about new replies to this thread.';
+    if (kind === 'reply') return '<b>Your reply is posted.</b> You now follow this thread.' + tail + CH;
+    if (kind === 'post') return '<b>Your thread is posted.</b> ' + (p === 'none' ? 'You chose no emails, so please check Threads for replies.' : 'We’ll email you when someone first replies' + (p === 'daily' || p === 'weekly' ? ', then ' + l + ' after that.' : '.')) + CH;
+    if (kind === 'saved') return '<b>Saved.</b> ' + (p === 'none' ? 'No thread emails. New replies still show on your Home page.' : 'You’ll get ' + l + '. The first reply to your own question still comes right away.' ) + ' In the prototype, nothing is sent.';
+    return '';
+  };
+})();
+
+/* "On this page": one rail of dots on every page, in the same place, working the same way (MW 2026-11-15).
+   It replaces each page's own version on screens 1000px and wider. Narrower screens keep each page's own small-screen menu. */
+(function () {
+  function build() {
+    if (document.querySelector('.hr-rail')) return;
+    var main = document.querySelector('main'); if (!main) return;
+    var items = [];
+    var own = document.querySelector('nav.otp, nav.spine');
+    if (own) {
+      [].slice.call(own.querySelectorAll('ol a[href^="#"]')).forEach(function (a) {
+        var t = document.querySelector(a.getAttribute('href')); if (!t) return;
+        var sp = a.querySelectorAll('span'); var label = (sp.length ? sp[sp.length - 1].textContent : a.textContent).replace(/\s+/g, ' ').trim();
+        items.push({ el: t, label: label });
+      });
+    }
+    if (!items.length) {
+      var marked = [].slice.call(main.querySelectorAll('[data-rail]'));
+      var hs = marked.length ? marked : [].slice.call(main.querySelectorAll('h2')).filter(function (h) {
+        if (h.closest('dialog, .th-side, .tp-side, [hidden], .cm-day, .ev-cal, .sr, .px-roll-body, details:not([open]) > :not(summary)')) return false;
+        var t = h.textContent.replace(/\s+/g, ' ').trim(); return t && t.length < 70 && h.getClientRects().length;
+      });
+      hs.forEach(function (h, i) { if (!h.id) h.id = 'sec-' + (i + 1); items.push({ el: h, label: h.getAttribute('data-rail') || h.textContent.replace(/\s+/g, ' ').trim().replace(/^\d+\s*/, '') }); });
+    }
+    if (items.length < 2) return;
+    var side = document.querySelector('aside.side');
+    var st = document.createElement('style');
+    st.textContent = '@media (min-width:1000px){nav.otp,.otp-btn,nav.spine{display:none!important}}'
+      + '.hr-rail{position:fixed;z-index:30;left:calc(max(10px,env(safe-area-inset-left,0px)) + var(--hr-off,0px));top:124px;width:28px;padding:10px 0;box-sizing:border-box;border-radius:12px;border:1px solid transparent;background:transparent;'
+      + 'transition:width .2s ease,background-color .2s,box-shadow .2s,border-color .2s;font-family:"Inter Hub","Inter",system-ui,sans-serif}'
+      + '.hr-rail ol{position:relative;list-style:none;margin:0;padding:0}'
+      + '.hr-rail ol::before{content:"";position:absolute;left:13px;top:12px;bottom:12px;width:1px;background:var(--line-2,#d3cdc3)}'
+      + '.hr-rail a{position:relative;display:block;height:26px;padding:3px 12px 3px 30px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:transparent;font-size:14px;line-height:20px;text-decoration:none}'
+      + '.hr-rail a::before{content:"";position:absolute;left:9px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--surface,#fff);border:1.5px solid var(--line-2,#d3cdc3);transition:all .25s}'
+      + '.hr-rail a.seen::before{border-color:var(--purple,#512888)}'
+      + '.hr-rail a[aria-current="true"]::before{background:var(--purple,#512888);border-color:var(--purple,#512888);box-shadow:0 0 0 4px rgba(81,40,136,.14)}'
+      + '.hr-rail .hr-h{display:none;margin:0 0 6px;padding:0 16px 10px 14px;border-bottom:1px solid var(--line,#e4e0d8);font:500 19px/24px "Lora Hub","Lora",Georgia,serif;color:var(--ink,#1d1b21)}'
+      + '.hr-rail:hover,.hr-rail:focus-within{width:260px;padding:16px 0 10px;background:var(--surface,#fff);border-color:var(--line,#e4e0d8);box-shadow:0 18px 40px -18px rgba(29,27,33,.3)}'
+      + '.hr-rail:hover .hr-h,.hr-rail:focus-within .hr-h{display:block}nav.hr-rail a.hr-h{height:auto;padding:0 16px 10px 14px;color:var(--ink,#1d1b21)!important;font:500 19px/24px "Lora Hub","Lora",Georgia,serif!important;white-space:normal}nav.hr-rail a.hr-h::before{display:none}nav.hr-rail a.hr-h::after{content:"";display:inline-block;width:7px;height:7px;margin-left:10px;border-left:1.6px solid currentColor;border-top:1.6px solid currentColor;transform:translateY(-1px) rotate(45deg);opacity:.6}nav.hr-rail a.hr-h:hover{color:var(--purple,#512888)!important}'
+      + '.hr-rail:hover a,.hr-rail:focus-within a{color:var(--ink-2,#423e48);height:auto;white-space:normal;padding-top:6px;padding-bottom:6px}'
+      + '.hr-rail:hover a:hover,.hr-rail:focus-within a:hover{color:var(--purple,#512888)}'
+      + '.hr-rail:hover a[aria-current="true"],.hr-rail:focus-within a[aria-current="true"]{color:var(--purple-ink,#3c1d66);font-weight:600}'
+      + '.hr-rail:hover a::before,.hr-rail:focus-within a::before{top:12px}'
+      + 'nav.hr-rail a,nav.hr-rail a:visited{color:transparent!important;text-decoration:none!important;box-shadow:none!important;background:none!important;font-weight:400!important}'
+      + 'nav.hr-rail:hover a,nav.hr-rail:focus-within a{color:var(--ink-2,#423e48)!important}'
+      + 'nav.hr-rail:hover a:hover,nav.hr-rail:focus-within a:hover{color:var(--purple,#512888)!important}'
+      + 'nav.hr-rail:hover a[aria-current="true"],nav.hr-rail:focus-within a[aria-current="true"]{color:var(--purple-ink,#3c1d66)!important;font-weight:600!important}'
+      + 'nav.hr-rail a:focus-visible{outline:2px solid var(--purple,#512888);outline-offset:-2px;border-radius:6px}'
+      + '@media (max-width:999px){.hr-rail{display:none}}@media (prefers-reduced-motion:reduce){.hr-rail,.hr-rail a::before{transition:none}}'
+      + '@keyframes hr-bounce{0%{transform:translateY(0)}25%{transform:translateY(-10px)}45%{transform:translateY(0)}62%{transform:translateY(-5px)}78%{transform:translateY(0)}100%{transform:translateY(0)}}'
+      + '.hr-bounce{animation:hr-bounce .8s cubic-bezier(.28,.84,.42,1)}@media (prefers-reduced-motion:reduce){.hr-bounce{animation:none}}';
+    document.head.appendChild(st);
+    var nav = document.createElement('nav'); nav.className = 'hr-rail'; nav.setAttribute('aria-label', 'On this page');
+    var hh = document.createElement('a'); hh.className = 'hr-h'; hh.href = '#'; hh.textContent = 'On this page'; hh.setAttribute('aria-label', 'On this page: back to the top'); hh.addEventListener('click', function (e) { e.preventDefault(); scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' }); var h1 = main.querySelector('h1'); if (h1) setTimeout(function () { h1.classList.remove('hr-bounce'); void h1.offsetWidth; h1.classList.add('hr-bounce'); }, still ? 0 : 500); });
+    var ol = document.createElement('ol'), links = [];
+    var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    items.forEach(function (it) {
+      var li = document.createElement('li'), a = document.createElement('a');
+      if (!it.el.id) it.el.id = 'sec-' + (links.length + 1);
+      a.href = '#' + it.el.id; a.textContent = it.label;
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var tgt = it.el; if (tgt.tagName === 'DETAILS' && !tgt.open) tgt.open = true;
+        var y = tgt.getBoundingClientRect().top + scrollY - 110; scrollTo({ top: y, behavior: still ? 'auto' : 'smooth' });
+        var hd = tgt.matches('h1,h2,h3,h4') ? tgt : (tgt.querySelector('h1,h2,h3,h4') || tgt);
+        setTimeout(function () { hd.classList.remove('hr-bounce'); void hd.offsetWidth; hd.style.display = hd.style.display || ''; hd.classList.add('hr-bounce'); }, still ? 0 : 450);
+      });
+      li.appendChild(a); ol.appendChild(li); links.push(a);
+    });
+    nav.appendChild(hh); nav.appendChild(ol); document.body.appendChild(nav);
+    /* Place: centered in the left margin, starting at the top of the first section under the hero, then holding 124px from the top as you scroll (MW 2026-11-15) */
+    var hero = (function () { var f = main.firstElementChild; while (f && (f.offsetHeight < 40 || f.matches('nav, script, style, aside, dialog') || /fixed|sticky/.test(getComputedStyle(f).position))) f = f.nextElementSibling; return f; })();
+    if (side) hero = null;
+    var hdr = document.querySelector('header'); 
+    function place() {
+      var gl = side && getComputedStyle(side).display !== 'none' ? Math.max(0, side.getBoundingClientRect().right) : 0;
+      var ref = items[0].el, w = ref.closest('.wrap') || ref, cs = getComputedStyle(w);
+      var cl = w.getBoundingClientRect().left + (w === ref ? 0 : parseFloat(cs.paddingLeft) || 0);
+      var x = Math.max(gl + 8, Math.round((gl + cl) / 2 - 14));
+      var floor = 124;
+      var y = hero ? Math.max(floor, Math.round(hero.getBoundingClientRect().bottom + 40)) : Math.max(floor, Math.round(main.getBoundingClientRect().top + 40));
+      nav.style.left = x + 'px'; nav.style.top = y + 'px';
+    }
+    function spy() {
+      var cur = 0; items.forEach(function (it, i) { if (it.el.getBoundingClientRect().top < 220) cur = i; });
+      if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) cur = items.length - 1;
+      links.forEach(function (a, i) { if (i === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); a.classList.toggle('seen', i < cur); });
+    }
+    addEventListener('scroll', function () { place(); spy(); }, { passive: true }); addEventListener('resize', function () { place(); spy(); }); place(); spy(); setTimeout(place, 400);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 80); }); else setTimeout(build, 80);
+})();
+
+/* Small dropdowns (a <details> that shows a note or a short list) close when you click anywhere
+   else on the page, click the open text itself, or press Escape, as well as on their own arrow.
+   MW 2026-11-15 design rule. Page sections (.px-roll, .panel and similar) and dropdowns that hold
+   form fields stay open until their own title is clicked, so no answer is hidden mid-entry.
+   Add data-keep-open to any <details> that should not close this way. */
+(function () {
+  if (window.__dropClose) return; window.__dropClose = 1;
+  var SKIP = '.px-roll,.panel,.dashsec,.cntsec,.r90-partroll,.lgroup,.em-roll,[data-keep-open]';
+  function small(d) { return !d.matches(SKIP) && !d.querySelector('input,select,textarea'); }
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!(t instanceof Element)) return;
+    document.querySelectorAll('details[open]').forEach(function (d) {
+      if (!small(d)) return;
+      var s = d.querySelector(':scope > summary');
+      if (s && s.contains(t)) return;                          // its own arrow toggles as usual
+      if (d.contains(t)) {
+        if (t.closest('details') !== d) return;                // a click inside a dropdown nested in this one
+        if (t.closest('a,button,label,input,select,textarea,[tabindex]')) return;
+        if (String(window.getSelection ? window.getSelection() : '').trim()) return;  // keep it open while text is being selected
+      }
+      d.open = false;
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape' || document.querySelector('dialog[open]')) return;
+    var open = [].filter.call(document.querySelectorAll('details[open]'), small);
+    if (!open.length) return;
+    var last = open[open.length - 1], s = last.querySelector(':scope > summary');
+    var hadFocus = last.contains(document.activeElement);
+    open.forEach(function (d) { d.open = false; });
+    if (hadFocus && s) s.focus();
+  });
+})();
+
+/* Every page opens at its top (MW 2026-11-15: "it goes to the middle of the page instead of the top ...
+   make sure that isn't happening anywhere"). A link with a #section still lands on that section, and
+   Back still returns to where the reader was. */
+(function(){
+  if(window.__hubTop)return;window.__hubTop=1;
+  var nav=null;try{nav=performance.getEntriesByType('navigation')[0];}catch(e){}
+  if(nav&&nav.type==='back_forward')return;
+  try{if('scrollRestoration' in history)history.scrollRestoration='manual';}catch(e){}
+  function go(){
+    var id=location.hash&&decodeURIComponent(location.hash.slice(1)),el=id&&document.getElementById(id);
+    if(el){el.scrollIntoView({block:'start'});return;}
+    window.scrollTo(0,0);try{document.scrollingElement.scrollTop=0;}catch(e){}
+  }
+  go();addEventListener('load',function(){go();setTimeout(go,120);});
+  addEventListener('pageshow',function(e){if(e.persisted)go();});
+})();
+
+/* Search on every page (MW 2026-11-15). Finds pages, sections, people, threads, and dates from the prototype's
+   own list (search-index.js). Press / or select Search CNAP. */
+(function(){
+  if(window.__hubSearch)return;window.__hubSearch=1;
+  var css='.hs-btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 10px 0 12px;border:1px solid var(--line-2,#ddd6cc);border-radius:10px;background:var(--surface,#fff);color:var(--ink-2,#4a4352);font:inherit;font-size:14px;cursor:pointer;text-decoration:none}'
+   +'.hs-btn:hover{border-color:var(--purple,#512888);color:var(--purple-ink,#3c1d66)}.hs-btn kbd{font:600 11px/1 inherit;padding:3px 6px;border:1px solid var(--line-2,#ddd6cc);border-radius:5px;color:var(--muted,#6b6475)}'
+   +'@media (max-width:1440px){.hs-btn .st,.hs-btn kbd{display:none}.hs-btn{width:38px;padding:0;justify-content:center}}'+'.hs-in input::-webkit-search-cancel-button{display:none}'
+   +'.hs-ov{position:fixed;inset:0;z-index:300;background:rgba(20,11,26,.45);display:flex;align-items:flex-start;justify-content:center;padding:10vh 16px 16px}'
+   +'.hs-ov[hidden]{display:none}.hs-box{width:min(640px,100%);max-height:76vh;display:flex;flex-direction:column;background:var(--surface,#fff);border-radius:14px;box-shadow:0 24px 60px rgba(20,11,26,.35);overflow:hidden}'
+   +'.hs-in{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line,#ece6dc)}.hs-in svg{flex:none;color:var(--muted,#6b6475)}'
+   +'.hs-in input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:17px;background:transparent;color:var(--ink,#1f1a24)}'
+   +'.hs-in button{border:0;background:none;color:var(--muted,#6b6475);font:inherit;font-size:13px;cursor:pointer}'
+   +'.hs-res{list-style:none;margin:0;padding:6px;overflow:auto}.hs-res li a{display:grid;grid-template-columns:76px minmax(0,1fr);gap:2px 12px;padding:9px 10px;border-radius:8px;color:var(--ink,#1f1a24);text-decoration:none}'
+   +'.hs-res li a[aria-selected="true"],.hs-res li a:hover{background:var(--purple-tint,#efe8f8)}.hs-res .k{grid-row:span 2;font-size:12px;font-weight:600;color:var(--purple-ink,#3c1d66);padding-top:2px}'
+   +'.hs-res b{font-weight:500}.hs-res small{color:var(--muted,#6b6475);font-size:12.5px}.hs-none,.hs-hint{padding:18px 16px;color:var(--muted,#6b6475);font-size:14px;margin:0}';
+  var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+  var ov=document.createElement('div');ov.className='hs-ov';ov.hidden=true;ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Search CNAP');
+  ov.innerHTML='<div class="hs-box"><div class="hs-in"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><label class="sr" for="hs-q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">Search CNAP</label><input id="hs-q" type="search" autocomplete="off" placeholder="Find a person, a deadline, or a page"><button type="button" data-hs-close>Close</button></div><p class="hs-hint">Try “NeuroSync”, “pilot proposals”, “Maya Singh”, or “Site Visit”.</p><ul class="hs-res" role="listbox" aria-label="Results"></ul></div>';
+  function mount(){document.body.appendChild(ov);}
+  if(document.body)mount();else document.addEventListener('DOMContentLoaded',mount);
+  var q=ov.querySelector('input'),res=ov.querySelector('.hs-res'),hint=ov.querySelector('.hs-hint'),sel=-1,last=null;
+  function load(cb){if(window.HUB_SEARCH)return cb();var s=document.createElement('script');s.src='search-index.js';s.onload=cb;s.onerror=function(){hint.textContent='Search isn’t available on this page.';};document.head.appendChild(s);}
+  function norm(x){return (x||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+  function render(){
+    var v=norm(q.value.trim());res.innerHTML='';sel=-1;
+    if(!v){hint.hidden=false;hint.textContent='Try “NeuroSync”, “pilot proposals”, “Maya Singh”, or “Site Visit”.';return;}
+    var words=v.split(/\s+/),out=[];
+    (window.HUB_SEARCH||[]).forEach(function(it){var t=norm(it.t),d=norm(it.d),sc=0,ok=true;
+      words.forEach(function(w){if(t.indexOf(w)>-1)sc+=t.indexOf(w)===0?3:2;else if(d.indexOf(w)>-1)sc+=1;else ok=false;});
+      if(ok){if(it.k==='Page'||it.k==='Person')sc+=1;out.push([sc,it]);}});
+    out.sort(function(a,b){return b[0]-a[0];});out=out.slice(0,12);
+    if(!out.length){hint.hidden=false;hint.textContent='Nothing matches “'+q.value.trim()+'”. Please try fewer or different words.';return;}
+    hint.hidden=true;
+    out.forEach(function(p,i){var it=p[1],li=document.createElement('li'),a=document.createElement('a');a.href=it.u;a.setAttribute('role','option');a.id='hs-o'+i;
+      a.innerHTML='<span class="k"></span><b></b><small></small>';a.querySelector('.k').textContent=it.k;a.querySelector('b').textContent=it.t;a.querySelector('small').textContent=it.d||'';li.appendChild(a);res.appendChild(li);});
+  }
+  function move(d){var as=res.querySelectorAll('a');if(!as.length)return;sel=(sel+d+as.length)%as.length;as.forEach(function(a,i){a.setAttribute('aria-selected',i===sel);});as[sel].scrollIntoView({block:'nearest'});q.setAttribute('aria-activedescendant',as[sel].id);}
+  function open(){last=document.activeElement;load(function(){render();});ov.hidden=false;q.value='';render();setTimeout(function(){q.focus();},20);}
+  function close(){ov.hidden=true;if(last&&last.focus)last.focus();}
+  window.hubSearchOpen=open;
+  q.addEventListener('input',render);
+  q.addEventListener('keydown',function(e){if(e.key==='ArrowDown'){e.preventDefault();move(1);}else if(e.key==='ArrowUp'){e.preventDefault();move(-1);}else if(e.key==='Enter'){var as=res.querySelectorAll('a');var a=as[sel>-1?sel:0];if(a){e.preventDefault();location.href=a.href;}}});
+  ov.addEventListener('click',function(e){if(e.target===ov||e.target.closest('[data-hs-close]'))close();});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&!ov.hidden){close();return;}
+    var t=e.target;if(e.key==='/'&&!e.metaKey&&!e.ctrlKey&&ov.hidden&&!(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)))){e.preventDefault();open();}
+  });
+  function wire(){
+    var ex=document.querySelector('header a.search');
+    if(ex){ex.removeAttribute('data-proto');ex.removeAttribute('title');ex.setAttribute('href','#');ex.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();open();},true);return;}
+    var tools=document.querySelector('header .tools');if(!tools||tools.querySelector('.hs-btn'))return;
+    var b=document.createElement('button');b.type='button';b.className='hs-btn';b.setAttribute('aria-label','Search people, events, resources, and funding');
+    b.innerHTML='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><span class="st">Search CNAP</span><kbd>/</kbd>';
+    b.addEventListener('click',open);tools.insertBefore(b,tools.firstChild);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wire);else wire();
+})();

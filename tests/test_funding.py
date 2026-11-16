@@ -245,7 +245,7 @@ def test_the_catalog_and_questions_load_twice_without_duplicates(db):
     funding.load_catalog()
     funding.load_questions()
     n, q = FundingOpportunity.objects.count(), FundingQuestion.objects.count()
-    assert n == 28 and q == 7
+    assert n == 28 and q == len(funding.QUESTIONS) == 8
     assert funding.load_catalog() == 0 and funding.load_questions() == 0
     assert FundingOpportunity.objects.count() == n and FundingQuestion.objects.count() == q
     assert not FundingMatch.objects.exists()  # the catalog never seeds matches
@@ -398,3 +398,33 @@ def test_events_and_new_issues_are_added_by_the_cnap_office_only(client, center)
     client.post("/manage/funding/events/new/do/", bad)
     assert not FundingEvent.objects.filter(title="A fictional backward event").exists()
     assert client.get("/manage/funding/?tab=events").status_code == 200
+
+
+def test_staff_can_add_a_question_and_members_see_the_count(center, client):
+    """MW 2026-11-15: an eighth question, added from the staff questions form; the pages count it in words."""
+    funding.load_questions()
+    before = FundingQuestion.objects.active().count()
+    _login(client, "mwills")
+    r = client.post(
+        "/manage/funding/questions/do/",
+        {"new_title": "A fictional extra question", "new_text": "Is this a test?"},
+    )
+    assert r.status_code == 302
+    assert FundingQuestion.objects.active().count() == before + 1
+    q = FundingQuestion.objects.active().order_by("-position").first()
+    assert q.title == "A fictional extra question"
+    assert AuditLog.objects.filter(action=AuditLog.Action.CREATE, entity_id=q.pk).exists()
+    # one box filled is refused, and nothing is added
+    client.post("/manage/funding/questions/do/", {"new_title": "Only a title"})
+    assert FundingQuestion.objects.active().count() == before + 1
+
+
+def test_grant_resources_explains_collaborators_abroad(center, client):
+    """MW 2026-11-15: the plan's written guidance, on Grant resources."""
+    from django.test import override_settings
+
+    _login(client, "okafor")
+    with override_settings(UI_PROTOTYPE=True, UI_PROTOTYPE_ONLY=True):
+        html = client.get("/funding/resources/").content.decode()
+    assert 'id="s-foreign"' in html and "Collaborators and co-authors abroad" in html
+    assert "NOT-OD-26-026" in html and "no subawards" in html

@@ -1,0 +1,22 @@
+/* Photo placeholders on Funding news pinned cards and events (MW 2026-11-15). Prototype only: the app has no photo field yet. */
+.fp-pin{padding-top:0!important;overflow:hidden}
+.fp-pin-ph{position:relative;margin:0 -28px 6px;aspect-ratio:21/9;width:calc(100% + 56px);max-width:none;background:#eee}
+@media (max-width:760px){.fp-pin-ph{margin:0 -20px 6px;width:calc(100% + 40px)}}
+.fp-pin-ph img,.fp-ev-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fp-ev{grid-template-columns:72px minmax(0,1fr) 168px!important}
+.fp-ev-ph{position:relative;margin:0;width:168px;height:112px;border-radius:10px;overflow:hidden;background:#eee;align-self:start}
+.pp-tag{position:absolute;left:10px;top:10px;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.92);color:#6b6772;font:500 12px/16px "Inter Hub",system-ui,sans-serif}
+@media (max-width:760px){.fp-ev{grid-template-columns:56px minmax(0,1fr)!important}.fp-ev-ph{grid-column:2;width:100%;height:auto;aspect-ratio:16/9}}
+.fp-ev-ph{order:3}.fp-ev .fp-ev-t{order:2}.fp-ev .fp-ed{order:1}
+
+/* News items: dividing lines and a photo slot from the article (MW 2026-11-15) */
+.fp-nw{grid-template-columns:172px minmax(0,1fr) 200px!important;column-gap:24px!important;padding:24px 0!important;box-shadow:none!important;border-top:1px solid var(--line)}
+.fp-issue+.fp-nw,.fp-news>.fp-nw:first-child{border-top:0}
+.fp-nw .fp-ndt{order:1;padding-right:20px;border-right:1px solid var(--line);align-self:stretch;margin:0}
+.fp-nw .fp-nb{order:2;min-width:0}
+.fp-n-ph{order:3;position:relative;margin:0;width:200px;height:134px;border-radius:10px;overflow:hidden;background:#eee;align-self:start}
+.fp-n-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fp-issue{padding-top:22px;border-top:1px solid var(--line-2,#d3cdc3)}
+.fp-news>.fp-issue:first-child{border-top:0}
+.fp-nw .fp-ndt{white-space:nowrap}
+@media (max-width:900px){.fp-nw{grid-template-columns:minmax(0,1fr)!important;row-gap:10px!important}.fp-nw .fp-ndt{border-right:0;padding-right:0}.fp-n-ph{width:100%;height:auto;aspect-ratio:16/9}}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% load cnap %}
+{% block title %}Site Visit RSVPs · {{ platform_name }}{% endblock %}
+{% block content %}
+{# MW 2026-11-15, approved build: what the CNAP team needs for catering, rooms, parking, and posters. #}
+<div class="head"><div><h1>{{ year }} Site Visit RSVPs</h1><p>{{ rs|length }} RSVP{{ rs|length|pluralize }} so far. <a href="?format=csv">Download every RSVP as a spreadsheet (CSV)</a></p></div></div>
+<div class="panel"><ul class="sv-counts">
+  <li><b>{{ counts.person }}</b> in person</li><li><b>{{ counts.zoom }}</b> on Zoom</li><li><b>{{ counts.no }}</b> unable to attend</li>
+  <li><b>{{ counts.lunch }}</b> Tuesday lunch</li><li><b>{{ counts.dinner }}</b> banquet</li><li><b>{{ counts.diet }}</b> with dietary needs</li>
+  <li><b>{{ counts.mon }}</b> Monday night rooms</li><li><b>{{ counts.tue }}</b> Tuesday night rooms</li><li><b>{{ counts.parking }}</b> need parking</li><li><b>{{ counts.posters }}</b> posters</li>
+</ul></div>
+<div class="panel"><table class="tbl"><thead><tr><th scope="col">Name</th><th scope="col">Attending</th><th scope="col">Meals</th><th scope="col">Dietary needs</th><th scope="col">Rooms</th><th scope="col">Poster</th><th scope="col">Updated</th></tr></thead><tbody>
+{% for r in rs %}<tr><th scope="row">{{ r.person.full_name }}{% if r.name_tag %}<br><small>Name tag: {{ r.name_tag }}</small>{% endif %}</th><td>{{ r.get_attend_display }}</td><td>{{ r.meals|join:", "|default:"None" }}</td><td>{{ r.diet|default:"" }}</td><td>{{ r.hotel_nights|join:", "|default:"" }}</td><td>{% if r.poster %}{{ r.get_poster_display }}{% endif %}{% if r.poster_title %}<br><small>{{ r.poster_title }}</small>{% endif %}</td><td>{{ r.updated_at|date:"M j" }}</td></tr>
+{% empty %}<tr><td colspan="7">No RSVPs yet.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

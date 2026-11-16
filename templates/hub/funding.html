@@ -1,0 +1,237 @@
+{% load static cnap %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{% if part == "news" %}Funding news{% elif part == "resources" %}Grant resources{% else %}Funding opportunities{% endif %} · {{ platform_name }}</title>
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32.png' %}">
+<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+<link rel="stylesheet" href="{% static 'hub/hub.css' %}">
+<link rel="stylesheet" href="{% static 'hub/page.css' %}">
+</head>
+<body class="hub-page fp-page">
+{# Funding and proposals (formerly Funding and news) in the Member Hub design (MW 2026-11-14). The same view, data, form, letters, and permissions as proto/portal/funding.html; only the presentation changes. #}
+{% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
+<a class="skip" href="#main">Skip to main content</a>
+{% include "hub/_header.html" with active="funding" %}
+{% with who=owner.first_name %}
+<main id="main">
+  <section class="fp-open" aria-labelledby="t">
+    <div class="wrap">
+      <nav class="fp-crumb" aria-label="Breadcrumb"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span>{% if part == "opportunities" %}<span aria-current="page">Funding opportunities</span>{% else %}<a href="{% url 'portal:funding' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}">Funding</a><span aria-hidden="true">/</span><span aria-current="page">{% if part == "news" %}Funding news{% else %}Grant resources{% endif %}</span>{% endif %}</nav>
+      <div class="fp-hero">
+        <div class="fp-hd">
+          <p class="fp-for">{% if acting_for_other %}Funding for {{ owner }}{% else %}Your funding{% endif %}</p>
+          {% if part == "news" %}<h1 id="t">Funding news</h1>
+          <p class="fp-lead">Funding news the CNAP team summarized from sponsors and K-State newsletters, and research events and talks coming up at K-State and online.</p>
+          <dl class="fp-facts">
+            {% if n_pinned %}<div><dt>Pinned by the CNAP office</dt><dd><a href="#s-pinned">{{ n_pinned }} news item{{ n_pinned|pluralize }}</a></dd></div>{% endif %}
+            <div><dt>Latest news</dt><dd><a href="#s-news">{{ news|length }} news item{{ news|length|pluralize }}</a></dd></div>
+            <div><dt>Events and talks</dt><dd><a href="#s-events">{{ events|length }} coming up</a></dd></div>
+          </dl>
+          {% elif part == "resources" %}<h1 id="t">Grant resources</h1>
+          <p class="fp-lead">Help with a proposal from start to finish: {{ questions|length|numword }} questions for weighing an opportunity, a one-on-one consultation on a draft, and a proposal writing toolkit.</p>
+          <dl class="fp-facts">
+            <div><dt>Before you apply</dt><dd>{{ questions|length }} question{{ questions|length|pluralize }} to weigh</dd></div>
+            <div><dt>Consultations</dt><dd>One on one, by email request</dd></div>
+          </dl>
+          {% else %}<h1 id="t">Funding opportunities</h1>
+          <p class="fp-lead">Opportunities the CNAP team picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, opportunities relevant to most members, letters from the Center, and a way to suggest an opportunity.</p>
+          <dl class="fp-facts">
+            <div><dt>Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</dt><dd>{{ picked|length }} opportunit{{ picked|length|pluralize:"y,ies" }}</dd></div>
+            <div><dt>Relevant to most members</dt><dd>{{ everyone|length }} opportunit{{ everyone|length|pluralize:"y,ies" }}</dd></div>
+            <div><dt>Next deadline</dt><dd>{% if next_deadline %}{{ next_deadline|date:"F j, Y" }}{% else %}None listed{% endif %}</dd></div>
+          </dl>{% endif %}
+        </div>
+
+      </div>
+      <nav class="fp-tabs" aria-label="Funding pages">
+        <a href="{% url 'portal:funding' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "opportunities" %} aria-current="page"{% endif %}><b>Funding opportunities</b><span>Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, and relevant to most members</span></a>
+        <a href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "resources" %} aria-current="page"{% endif %}><b>Grant resources</b><span>The {{ questions|length|numword }} questions, a consultation, and the toolkit</span></a>
+        <a href="{% url 'portal:funding_news' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "news" %} aria-current="page"{% endif %}><b>Funding news</b><span>News from sponsors, and events and talks</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="fp-body">
+    <div class="wrap">
+
+
+      <nav class="spine" aria-label="Sections on this page">
+        <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
+        <ol>
+          {% if part == "news" %}{% if n_pinned %}<li><a href="#s-pinned">Pinned by the CNAP office</a></li>{% endif %}<li><a href="#s-news">Latest news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-milestones">What the funding labels mean</a></li><li><a href="#s-idea">NIH opportunities for IDeA states</a></li><li><a href="#s-foreign">Collaborators and co-authors abroad</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
+        </ol>
+      </nav>
+      <div class="fp-main">
+        {% if messages %}<ul class="fp-msgs" role="status">{% for m in messages %}<li class="{{ m.tags }}">{{ m|stack }}</li>{% endfor %}</ul>{% endif %}
+        {% if from_not_funded %}<p class="fp-msg" role="status">The CNAP team will follow up with you personally.</p>{% endif %}
+        {% if part == "news" %}
+        {% if n_pinned %}<section class="fp-sec" id="s-pinned" aria-labelledby="s-pinned-h">
+          <div class="fp-sh"><h2 id="s-pinned-h">Pinned by the CNAP office</h2><p>The news the CNAP team thinks every member should see first.</p></div>
+          <ul class="fp-pins">{% for n in news %}{% if n.pinned %}{% include "hub/_funding_pin.html" %}{% endif %}{% endfor %}</ul>
+        </section>
+        {% endif %}<section class="fp-sec" id="s-news" aria-labelledby="s-news-h">
+          <div class="fp-sh"><h2 id="s-news-h">Latest news</h2><p>{{ news|length }} item{{ news|length|pluralize }}, summarized by the CNAP team and grouped by where each one appeared.</p></div>
+          {% if news %}{% with loose=news_groups.0 issues=news_groups.1 %}
+          <ul class="fp-news">
+          {% for g in issues %}{% for n in g.items %}{% if not n.pinned %}{% ifchanged %}<li class="fp-issue">{% include "hub/_funding_issue_head.html" with b=g.b %}</li>{% endifchanged %}{% include "hub/_funding_news.html" %}{% endif %}{% endfor %}{% endfor %}
+          {% for n in loose %}{% if not n.pinned %}{% ifchanged %}<li class="fp-issue"><h3>From other sources</h3></li>{% endifchanged %}{% include "hub/_funding_news.html" %}{% endif %}{% endfor %}
+          </ul>
+          {% endwith %}{% else %}<div class="fp-empty"><p>No funding news yet.</p><p>New items appear here as the CNAP team posts them.</p></div>{% endif %}
+        </section>
+        <section class="fp-sec" id="s-events" aria-labelledby="s-events-h">
+          <div class="fp-sh"><h2 id="s-events-h">Events and talks</h2><p>{{ events|length }} coming up at K-State and online.</p></div>
+          {% if events %}{% with loose=event_groups.0 issues=event_groups.1 %}
+          {% for g in issues %}<div class="fp-issue">{% include "hub/_funding_issue_head.html" with b=g.b %}</div><ul class="fp-evs">{% for e in g.items %}{% include "hub/_funding_event.html" %}{% endfor %}</ul>{% endfor %}
+          {% if loose %}{% if issues %}<div class="fp-issue"><h3>From other sources</h3></div>{% endif %}<ul class="fp-evs">{% for e in loose %}{% include "hub/_funding_event.html" %}{% endfor %}</ul>{% endif %}
+          {% endwith %}{% else %}<div class="fp-empty"><p>No events are listed right now.</p><p>Events appear here as the CNAP team adds them.</p></div>{% endif %}
+        </section>
+        {% elif part == "resources" %}
+        <section class="fp-sec" id="s-before" aria-labelledby="s-before-h">
+          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {{ questions|length|numword }} questions before starting an application.</p><p>Please select a question to read the full question.</p></div>
+          <div class="fp-weigh">
+            <div class="fp-qcard">
+              <div class="fp-qcols"><ol class="fp-qs">{% for q in questions|slice:":4" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol><ol class="fp-qs" start="5">{% for q in questions|slice:"4:" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter|add:4 }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol></div>
+              <button type="button" class="fp-qall" data-qall aria-expanded="false">Show all questions</button>
+            </div>
+            <aside class="fp-help-card" id="s-consult" aria-labelledby="s-consult-h">
+              <h3 id="s-consult-h">Talk through a draft</h3>
+              <p>Unsure about one of the questions? The Assistant Director for Grants and Contracts meets one on one with CNAP members about proposals.</p>
+              <p>Optional: you’re welcome to bring a specific aims page, a budget question, or an opportunity you are still weighing.</p>
+              <a class="fp-btn pri" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a>
+            </aside>
+          </div>
+        </section>
+        <section class="fp-sec" id="s-milestones" aria-labelledby="s-milestones-h">
+          <div class="fp-sh"><h2 id="s-milestones-h">What the funding labels mean</h2><p>Each opportunity on the <a href="{% url 'portal:funding' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}">Funding opportunities</a> page carries one of these three labels beside its name. The labels show how an award relates to the R01 milestone: independent funding through an R01 or an equivalent award, which every CNAP project leader works toward.</p></div>
+          <dl class="fp-labels">
+            <div><dt><span class="fp-st ok">Counts toward the R01 milestone</span></dt><dd>The award is an R01 or an equivalent award. Winning the award meets the milestone.</dd></div>
+            <div id="bridge"><dt><span class="fp-st">Bridge funding</span></dt><dd>A smaller or shorter award that keeps your research going and builds preliminary data on the way to an R01-equivalent award. Bridge funding doesn’t meet the milestone by itself, but bridge funding can strengthen your next application.</dd></div>
+            <div><dt><span class="fp-st">Please ask your program officer</span></dt><dd>Whether the award counts toward the R01 milestone depends on the award’s terms. Please ask your program officer and the CNAP team before you apply.</dd></div>
+          </dl>
+        </section>
+        <section class="fp-sec" id="s-idea" aria-labelledby="s-idea-h">
+          <div class="fp-sh"><h2 id="s-idea-h">NIH opportunities for IDeA states</h2><p>Beyond the Center’s own award, the <a href="https://nigms.nih.gov/" target="_blank" rel="noopener">National Institute of General Medical Sciences (NIGMS)</a> offers co-funding to investigators in <a href="https://nigms.nih.gov/Research/DRCB/IDeA/Pages/default.aspx" target="_blank" rel="noopener">Institutional Development Award (IDeA)</a> states such as Kansas, along with capacity-building, training, and Support for Research Excellence programs. NIH also funds research instruments through separate S10 grants.</p><p>Opportunity numbers and dates change every cycle. Please confirm each one on <a href="https://www.grants.gov/" target="_blank" rel="noopener">Grants.gov</a> or in NIH’s <a href="https://grants.nih.gov/funding/explore-nih-opportunities" target="_blank" rel="noopener">Explore NIH Opportunities</a> tool before you plan around the opportunity. Since fiscal year 2026, NIH posts its Notices of Funding Opportunity (NOFOs) there rather than in the <a href="https://grants.nih.gov/funding/nih-guide-for-grants-and-contracts" target="_blank" rel="noopener">NIH Guide for Grants and Contracts</a> (<a href="https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-143.html" target="_blank" rel="noopener">NOT-OD-25-143</a>).</p></div>
+          <div class="fp-idea">
+            <article class="fp-ic fp-ic-lead">
+              <p class="fp-for">For an unfunded R01, R15, or R35</p>
+              <h3><a href="https://nigms.nih.gov/Research/DRCB/IDeA/Pages/IDeA-Co-funding.aspx" target="_blank" rel="noopener" title="Opens the NIGMS IDeA Co-Funding page.">IDeA research project grant co-funding</a></h3>
+              <p>NIGMS co-funds strong applications that align with NIH priorities but were not selected for funding, when the investigators and performance sites are in IDeA-eligible states.</p>
+              <div class="fp-tbl"><table><thead><tr><th scope="col">Topic</th><th scope="col">Details</th></tr></thead><tbody><tr><th scope="row">Applications</th><td>R01, R15, and NIGMS <a href="https://nigms.nih.gov/Research/mechanisms/MIRA/Pages/default.aspx" target="_blank" rel="noopener">Maximizing Investigators’ Research Award (MIRA)</a> R35 applications, assigned to any NIH institute.</td></tr><tr><th scope="row">Investigators</th><td>A single principal investigator. Applications with multiple principal investigators are not eligible. The investigator and every performance site must be in an IDeA-eligible state.</td></tr><tr><th scope="row">Timing</th><td>Considers applications from the three prior council rounds, starting in May. For fiscal year 2026, those were May 2025, October 2025, and January 2026.</td></tr><tr><th scope="row">Nomination</th><td>The institute that reviewed the application makes the nomination.</td></tr><tr><th scope="row">Funding</th><td>NIGMS pays up to $350,000 a year for the first two years. The $350,000 is total costs: direct and indirect costs together.</td></tr></tbody></table></div>
+              <p class="fp-ic-next">If your application scored well but was not funded, talk with the program officer assigned to the application and with that institute’s <a href="https://nigms.nih.gov/Research/DRCB/IDeA/Pages/ic-idea-co-funding-coordinators.aspx" target="_blank" rel="noopener">IDeA co-funding coordinator</a>.</p>
+            </article>
+            <article class="fp-ic">
+              <h3>Instrumentation grants (S10)</h3>
+              <p>Separate from co-funding. These NIH grants pay for research instruments, and the NIH <a href="https://orip.nih.gov/" target="_blank" rel="noopener">Office of Research Infrastructure Programs (ORIP)</a> runs them.</p>
+              <div class="fp-tbl"><table><thead><tr><th scope="col">Program</th><th scope="col">Award range</th><th scope="col">Notes</th></tr></thead><tbody>
+                <tr><th scope="row"><a href="https://simpler.grants.gov/opportunity/ca93b895-6ca4-4379-b016-ff97bbb6ce41" target="_blank" rel="noopener" title="Opens the PAR-27-067 funding opportunity.">Resource-Limited Institutions</a><span>PAR-27-067</span></th><td>$25,000 to $250,000</td><td>For institutions with limited resources. First due July 2, 2026.</td></tr>
+                <tr><th scope="row"><a href="https://grants.nih.gov/grants/guide/pa-files/PAR-24-265.html" target="_blank" rel="noopener" title="Opens the PAR-24-265 funding opportunity.">Shared Instrumentation</a><span>PAR-24-265</span></th><td>$25,000 minimum, no maximum</td><td>One high-priced instrument or an integrated system.</td></tr>
+                <tr><th scope="row"><a href="https://grants.nih.gov/grants/guide/pa-files/PAR-24-264.html" target="_blank" rel="noopener" title="Opens the PAR-24-264 funding opportunity.">High-End Instrumentation</a><span>PAR-24-264</span></th><td>$75,000 to $2,000,000</td><td>One high-priced instrument or an integrated system.</td></tr>
+              </tbody></table></div>
+            </article>
+            <article class="fp-ic">
+              <h3>Capacity building</h3>
+              <div class="fp-tbl"><table><thead><tr><th scope="col">Program</th><th scope="col">Opportunity</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row"><a href="https://nigms.nih.gov/Research/mechanisms/Pages/bre-spad" target="_blank" rel="noopener">Biomedical Research Environment and Sponsored Programs Administration Development (BRE-SPAD)</a></th><td><a href="https://simpler.grants.gov/opportunity/356902" target="_blank" rel="noopener" title="Opens the PAR-24-268 funding opportunity.">PAR-24-268</a></td><td>Helps institutions with limited resources strengthen the research environment, sponsored programs, and pilot project programs. Next due January 27, 2027.</td></tr></tbody></table></div>
+            </article>
+            <article class="fp-ic">
+              <h3>Training grants</h3>
+              <div class="fp-tbl"><table><thead><tr><th scope="col">Program</th><th scope="col">Opportunity</th><th scope="col">Notes</th></tr></thead><tbody>
+                <tr><th scope="row"><a href="https://www.nigms.nih.gov/training/instpredoc/Pages/default" target="_blank" rel="noopener">Predoctoral training (T32), basic biomedical sciences</a></th><td><a href="https://simpler.grants.gov/opportunity/350485" target="_blank" rel="noopener" title="Opens the PAR-23-228 funding opportunity.">PAR-23-228</a></td><td>Includes the Trans-Departmental Basic Biomedical Sciences area. Due September 25, 2026.</td></tr>
+                <tr><th scope="row">Medical Scientist Training Program (MSTP, T32)</th><td><a href="https://grants.nih.gov/grants/guide/pa-files/PAR-24-128.html" target="_blank" rel="noopener" title="Opens the PAR-24-128 funding opportunity.">PAR-24-128</a></td><td>Dual-degree training, including the AHeAD program area. Due September 25, 2026.</td></tr>
+                <tr><th scope="row">Research education (R25)</th><td><a href="https://grants.nih.gov/grants/guide/pa-files/PA-27-034.html" target="_blank" rel="noopener">PA-27-034</a>, <a href="https://grants.nih.gov/grants/guide/pa-files/PA-27-035.html" target="_blank" rel="noopener">PA-27-035</a>, and <a href="https://grants.nih.gov/grants/guide/pa-files/PA-27-036.html" target="_blank" rel="noopener">PA-27-036</a></td><td>Courses and methods, mentoring and networks, and research experiences.</td></tr>
+              </tbody></table></div>
+            </article>
+            <article class="fp-ic">
+              <h3><a href="https://nigms.nih.gov/about/overview/Pages/SuRE" target="_blank" rel="noopener" title="Opens the NIGMS SuRE program page.">Support for Research Excellence (SuRE)</a></h3>
+              <p>For faculty research at institutions that award science degrees and receive limited NIH support.</p>
+              <div class="fp-tbl"><table><thead><tr><th scope="col">Program</th><th scope="col">Opportunity</th><th scope="col">Who or what it is for</th></tr></thead><tbody><tr><th scope="row">SuRE R16</th><td><a href="https://grants.nih.gov/grants/guide/pa-files/PAR-24-144.html" target="_blank" rel="noopener" title="Opens the PAR-24-144 funding opportunity.">PAR-24-144</a></td><td>Faculty not currently funded by an NIH research project grant.</td></tr><tr><th scope="row">SuRE-First R16</th><td><a href="https://grants.nih.gov/grants/guide/pa-files/PAR-24-145.html" target="_blank" rel="noopener" title="Opens the PAR-24-145 funding opportunity.">PAR-24-145</a></td><td>Investigators who have never held an independent external research grant.</td></tr><tr><th scope="row">SuRE Resource Center U24</th><td><a href="https://grants.nih.gov/grants/guide/pa-files/PAR-21-227.html" target="_blank" rel="noopener" title="Opens the PAR-21-227 funding opportunity.">PAR-21-227</a></td><td>Capacity building, outreach, and training.</td></tr></tbody></table></div>
+            </article>
+            <article class="fp-ic">
+              <h3>Administrative supplements</h3>
+              <div class="fp-tbl"><table><thead><tr><th scope="col">Program</th><th scope="col">Opportunity</th><th scope="col">Notes</th></tr></thead><tbody><tr><th scope="row">Administrative supplements to an existing award</th><td><a href="https://simpler.grants.gov/opportunity/360368" target="_blank" rel="noopener" title="Opens the PA-26-001 funding opportunity.">PA-26-001</a></td><td>NIGMS announces the institute’s areas of interest as <a href="https://grants.nih.gov/funding/find-a-fit-for-your-research/highlighted-topics" target="_blank" rel="noopener">Highlighted Topics</a>, not as notices of special interest. NIH’s <a href="https://grants.nih.gov/funding/find-a-fit-for-your-research/nih-institutes-centers-offices/nigms" target="_blank" rel="noopener">NIGMS funding page</a> shows the topics NIGMS leads.</td></tr></tbody></table></div>
+              <p class="fp-ic-note">NIGMS is releasing fewer, simpler NOFOs, and release can be slower than in past years. NIGMS cannot discuss dates for unpublished opportunities, so watch <a href="https://www.grants.gov/" target="_blank" rel="noopener">Grants.gov</a>, including its forecasts, and <a href="https://grants.nih.gov/funding/explore-nih-opportunities" target="_blank" rel="noopener">Explore NIH Opportunities</a>.</p>
+            </article>
+          </div>
+        </section>
+        <section class="fp-sec" id="s-foreign" aria-labelledby="s-foreign-h">
+          {# MW 2026-11-15: from CNAP's plan for foreign components on IDeA grants (the plan's written guidance on the CNAP website) #}
+          <div class="fp-sh"><h2 id="s-foreign-h">Collaborators and co-authors abroad</h2><p>NIH counts significant work by a collaborator at a foreign institution as a foreign component. Under IDeA awards such as CNAP’s, a foreign component needs NIH’s approval before the work happens, and only K-State’s Signing Official can ask NIH for that approval.</p></div>
+          <div class="fp-idea"><article class="fp-ic">
+            <h3>What this means for your CNAP-supported work</h3>
+            <div class="fp-tbl"><table><thead><tr><th scope="col">When</th><th scope="col">What to do</th></tr></thead><tbody>
+              <tr><th scope="row">Before you add a collaborator or co-author at a foreign institution</th><td>Please talk with the CNAP team first, at <a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a>. The CNAP team works with K-State’s Sponsored Programs Administration on anything that needs NIH approval.</td></tr>
+              <tr><th scope="row">When you report a publication</th><td>The publication form reminds you to tell the CNAP team about any co-author at a foreign institution.</td></tr>
+              <tr><th scope="row">Before the Center’s annual progress report to NIH</th><td>The CNAP team reviews every publication and other product for foreign co-authors before the products go into the report.</td></tr>
+              <tr><th scope="row">Spending CNAP funds</th><td>CNAP funds never go to a foreign institution: no subawards, no subcontracts, and no other payments.</td></tr>
+            </tbody></table></div>
+            <p class="fp-ic-note">NIH’s notices: <a href="https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-026.html" target="_blank" rel="noopener">NOT-OD-26-026</a> and <a href="https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-084.html" target="_blank" rel="noopener">NOT-OD-26-084, the reminder of what counts as a foreign component</a>. NIH also explains <a href="https://grants.nih.gov/news-events/nih-extramural-nexus-news/2026/06/acknowledging-foreign-components-throughout-nih-application-and-award-processes" target="_blank" rel="noopener">how to acknowledge foreign components</a>.</p>
+          </article></div>
+        </section>
+        <section class="fp-sec" id="s-toolkit" aria-labelledby="s-toolkit-h">
+          <div class="fp-sh"><h2 id="s-toolkit-h">Proposal writing toolkit</h2><p>Templates, examples, and guides for writing a proposal.</p></div>
+          <div class="fp-empty"><p>The CNAP team is preparing the toolkit.</p><p>Until the toolkit is posted, email <a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a> for a template or an example.</p></div>
+        </section>
+        {% else %}
+        <section class="fp-sec" id="s-for" aria-labelledby="s-for-h">
+          <div class="fp-sh"><h2 id="s-for-h">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</h2><p>{{ picked|length }} opportunit{{ picked|length|pluralize:"y,ies" }}{% if picked_next %}. Next deadline {{ picked_next|date:"F j, Y" }}{% endif %}.</p></div>
+          {% if picked %}<ul class="fp-ops">{% for r in picked %}{% include "hub/_funding_row.html" with mode="picked" %}{% endfor %}</ul>
+          {% else %}<div class="fp-empty"><p>The CNAP team adds opportunities picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %} here.</p><p>Everything below is open to all CNAP members.</p></div>{% endif %}
+        </section>
+        
+        <section class="fp-sec" id="s-most" aria-labelledby="s-most-h">
+          <div class="fp-sh"><h2 id="s-most-h">Relevant to most members</h2><p>{{ everyone|length }} opportunit{{ everyone|length|pluralize:"y,ies" }}{% if everyone_next %}. Next deadline {{ everyone_next|date:"F j, Y" }}{% endif %}.</p><p>Please check each opportunity’s eligibility before applying.</p></div>
+          {% if everyone %}<ul class="fp-ops">{% for r in everyone %}{% include "hub/_funding_row.html" with mode="everyone" %}{% endfor %}</ul>
+          {% else %}<div class="fp-empty"><p>No opportunities are listed yet.</p><p>The CNAP team adds new opportunities as they are announced.</p></div>{% endif %}
+        </section>
+        <section class="fp-sec" id="s-letters" aria-labelledby="s-letters-h">
+          <div class="fp-sh"><h2 id="s-letters-h">Letters from the Center</h2><p>{{ letters|length }} letter{{ letters|length|pluralize }} from the CNAP team.</p></div>
+          {% if letters %}<ul class="fp-list">{% for f in letters %}<li><a class="fp-name" href="{% url 'portal:funding_letter' f.pk %}" title="Opens the full letter.">{{ f.name }}</a><span class="fp-meta">Sent {{ f.sent_at|date:"F j, Y" }} by the CNAP evaluation team</span></li>{% endfor %}</ul>
+          {% else %}<div class="fp-empty"><p>No letters yet.</p><p>A letter from the CNAP team appears here after the letter is sent.</p></div>{% endif %}
+        </section>
+        <section class="fp-sec" id="s-suggest" aria-labelledby="s-suggest-h">
+          <div class="fp-sh"><h2 id="s-suggest-h">Suggest an opportunity</h2><p>Please send the CNAP team a funding opportunity worth a look.</p><p>The team reviews each suggestion before the opportunity appears on any page.</p></div>
+          <form class="fp-form" method="post" action="{% url 'portal:funding_suggest' %}">{% csrf_token %}<input type="hidden" name="for" value="{{ owner.pk }}">
+            <div class="fp-field"><label for="s-name">Opportunity name</label><input id="s-name" name="name" type="text" maxlength="300" required></div>
+            <div class="fp-field"><label for="s-sponsor">Sponsor <span class="fp-opt">(optional)</span></label><input id="s-sponsor" name="sponsor" type="text" maxlength="300"></div>
+            <div class="fp-field"><label for="s-url">Link to the announcement <span class="fp-opt">(optional)</span></label><p class="fp-help">Paste the full web address of the sponsor’s announcement.</p><input id="s-url" name="url" type="text" inputmode="url" maxlength="500"></div>
+            <div class="fp-field"><label for="s-dl">Deadline <span class="fp-opt">(optional)</span></label><p class="fp-help">Please write the date out, such as March 1, 2027.</p><input id="s-dl" name="deadline_text" type="text" maxlength="200"></div>
+            <div class="fp-field"><label for="s-why">Why the opportunity is worth a look <span class="fp-opt">(optional)</span></label><textarea id="s-why" name="why" rows="3"></textarea></div>
+            <label class="fp-choice" for="s-all"><input id="s-all" name="for_everyone" type="checkbox" value="1"><span>The opportunity could help other CNAP members too.</span></label>
+            <div><button class="fp-btn" type="submit" title="Sends the suggestion to the CNAP team for review.">Send the suggestion</button></div>
+          </form>
+          {% if suggestions %}<h3 class="fp-sub">Suggestions sent</h3>
+          <ul class="fp-list">{% for s in suggestions %}<li><span class="fp-name fp-name-t">{{ s.name }}</span><span class="fp-chips"><span class="fp-st{% if s.status == 'added' %} ok{% elif s.status == 'to_review' %} on{% endif %}">{{ s.get_status_display }}</span></span>{% if s.note_to_person %}<span class="fp-meta">{{ s.note_to_person|linebreaksbr }}</span>{% endif %}</li>{% endfor %}</ul>{% endif %}
+        </section>
+        {% endif %}
+
+        {% if part == "opportunities" %}<p class="fp-who">The opportunities picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, letters, and suggestions are visible only to {% if acting_for_other %}{{ who }}, the people entering for {{ who }},{% else %}you, anyone entering for you,{% endif %} and the CNAP office.<br>Nothing on this page is shared outside CNAP.</p>{% endif %}
+      </div>
+      <div class="fp-sidecol">
+        {% if part == "opportunities" %}<aside class="fp-weighcard" aria-label="Before you apply"><p class="fp-for">Before you apply</p><p class="fp-wt">Weigh every opportunity with the {{ questions|length|numword }} questions.</p><a class="fp-btn" href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}#s-before" title="Opens the {{ questions|length|numword }} questions in Grant resources.">See the {{ questions|length|numword }} questions</a></aside>{% endif %}
+        {% if part != "resources" %}<aside class="fp-consult" aria-label="Help with a proposal">
+          <p class="fp-for">Writing a proposal?</p>
+          <p class="fp-ct">Talk through a draft, one on one, with the Assistant Director for Grants and Contracts.</p>
+          <a class="fp-btn pri" href="mailto:{{ evaluator_email }}?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Opens an email to the Assistant Director for Grants and Contracts, with lines to fill in.">Book a time</a>
+        </aside>{% endif %}
+<aside class="fp-askcard" aria-labelledby="ask-h">
+          <p class="fp-for" id="ask-h">Ask the community</p>
+          <p class="fp-wt">Someone at CNAP may already know. Start a conversation thread to:</p>
+          <ul class="fp-asks">
+            <li><a href="{% url 'home' %}#com-h" data-thread="funding">Ask if a colleague has familiarity with a given call</a></li>
+            <li><a href="{% url 'home' %}#com-h" data-thread="expertise">Find a collaborator or a type of expertise</a></li>
+            <li><a href="{% url 'home' %}#com-h" data-thread="student">Post a graduate student position</a></li>
+          </ul>
+        </aside>
+
+      </div>
+    </div>
+  </div>
+</main>
+{% endwith %}
+<footer class="fp-foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><a href="mailto:cnap@ksu.edu" title="Opens an email to the CNAP team.">cnap@ksu.edu</a></div></footer>
+{% include "_feedback.html" %}
+<script src="{% static 'hub/page.js' %}" defer></script>
+<script src="{% static 'js/dropclose.js' %}" defer></script>
+</body>
+</html>

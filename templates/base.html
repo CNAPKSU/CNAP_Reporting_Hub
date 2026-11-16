@@ -18,11 +18,11 @@
 {% if user.is_authenticated %}
 <div class="app">
   <aside class="side">{% if request.proto_active %}<button type="button" class="px-menu" aria-expanded="false" aria-controls="px-sidenav" onclick="var o=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',String(!o));this.closest('.side').classList.toggle('px-open',!o)">Menu</button>{% endif %}
-    <a class="brand" href="{% url 'home' %}" title="CNAP Reporting Hub home"><picture><source srcset="{% static 'img/cnap-logo-on-purple.png' %}" media="(prefers-color-scheme: dark)"><img class="brand-logo" src="{% static 'img/cnap-logo.png' %}" alt="CNAP Center: Cognitive and Neurobiological Approaches to Plasticity"></picture><span class="brand-hub">Reporting Hub</span><small>Kansas State University</small></a>
+    <a class="brand" href="{% url 'home' %}" title="CNAP Member Hub home"><picture><source srcset="{% static 'img/cnap-logo-on-purple.png' %}" media="(prefers-color-scheme: dark)"><img class="brand-logo" src="{% static 'img/cnap-logo.png' %}" alt="CNAP Center: Cognitive and Neurobiological Approaches to Plasticity"></picture><span class="brand-hub">Member Hub</span><small>Kansas State University</small></a>
     {% if has_cnap_roles %}<a class="who" href="{% url 'portal:profile' %}" title="Your profile">{{ user.person.first_name|default:user.username }} {{ user.person.last_name }}<span>{{ access_label }}</span></a>{% else %}<div class="who">{{ user.person.first_name|default:user.username }} {{ user.person.last_name }}<span>{{ access_label }}</span></div>{% endif %}
     <nav aria-label="Main"{% if request.proto_active %} id="px-sidenav"{% endif %}>
       {% if has_cnap_roles %}
-        <div class="navhead">My work</div>
+        <div class="navhead">My reporting</div>
         <a href="{% url 'portal:tasks' %}" {% nav_current 'tasks' 'form' 'preview' %} title="Your to-do list for the current reporting session: every form CNAP is asking you to fill in, with how long each takes and its due date. Your answers feed the Center’s NIH progress report. Click to start or continue a form.">My tasks</a>
         <a href="{% url 'portal:history' %}" {% nav_current 'history' %} title="Everything you have submitted, grouped by reporting session, so you can look back at what you said. Click to open any past form.">My history</a>
         {% if keeps_outcomes %}<a href="{% url 'portal:outcomes' %}" {% nav_current 'outcomes' 'outcome_new' 'outcome_update' 'presentation_new' 'presentation_edit' %} title="Your papers, talks, and grant proposals, from planned to published or awarded. CNAP reports them to NIH every year, so keeping them current saves you a scramble at report time. Click to add or update one.">Publications, talks, and grants</a>{% endif %}
@@ -40,6 +40,8 @@
         {% url 'manage:longitudinal' as u_long %}{% if u_long %}<a href="{{ u_long }}" {% nav_current 'longitudinal' 'snapshot' %} title="Every form’s averages across all years, side by side, for spotting long-term trends. Click to compare years.">Year over year</a>{% endif %}
         <a href="{% url 'manage:people' %}" {% nav_current 'people' 'person' 'person_new' %} title="Everyone the Center works with, and the roles that decide which forms each person receives. Why: correct roles mean the right forms reach the right people, and correct IDs feed RPPR D.1. Click to find, add, or edit a person.">People</a>
         <a href="{% url 'manage:speakers' %}" {% nav_current 'speakers' %} title="The NeuroSync talk schedule. Each speaker receives the Speaker Survey automatically when their talk ends. Click to add talks, one at a time or a whole semester from Excel.">NeuroSync speakers</a>
+        <a href="{% url 'portal:sitevisit_rsvps' %}" {% nav_current 'sitevisit_rsvps' %} title="Every RSVP for the 2027 Site Visit, with counts for meals, rooms, parking, and posters, and a spreadsheet download.">Site Visit RSVPs</a>
+        <a href="{% url 'portal:home_link_counts' %}" {% nav_current 'home_link_counts' %} title="Which Home links members select, counted without names, so the CNAP team can keep what members use.">Home link use</a>
         <a href="{% url 'manage:projects' %}" {% nav_current 'projects' 'project' 'project_new' %} title="CNAP’s research projects, pilot projects, and cores: their teams, effort, eRA Commons IDs, and core RRIDs. Why: these decide credits, forms, and RPPR D.1. Click to see or edit them.">Projects and cores</a>
         <a href="{% url 'manage:outcomes' %}" {% nav_current 'outcomes' 'publication_new' 'publication_edit' 'grant_new' 'grant_edit' %} title="The Center’s products: papers, talks, and grant proposals, with acknowledgment checks, counts, the RPPR lists, the site-visit tables, and reminders. Click to check and report them.">Publications, talks, and grants</a>
         <a href="{% url 'manage:funding_manage' %}" {% nav_current 'funding_manage' 'funding_followup' 'funding_opportunity' 'funding_opportunity_new' 'funding_news_edit' 'funding_news_new' 'funding_event_new' 'funding_event_edit' %} title="Follow-up letters after a proposal is not funded, the funding opportunity catalog and each person’s matches, members’ suggestions, funding news, and events and talks. Nothing is emailed until you select Send.">Funding and news</a>
@@ -105,59 +107,7 @@
   </main>
 </div>
 {% if request.proto_screen and not proto_only %}<style>.protoswitch{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:#17141f;color:#fff;font:600 12px/1 "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.18)}.protoswitch span{padding:0 10px;opacity:.7}.protoswitch a{padding:7px 12px;border-radius:999px;color:#fff;text-decoration:none}.protoswitch a[aria-current]{background:#fff;color:#17141f}.protoswitch a:focus-visible{outline:2px solid #c9adf5;outline-offset:2px}</style><div class="protoswitch" role="group" aria-label="Design preview"><span>Design preview</span><a href="{% url 'ui_switch' 'before' %}?next={{ request.get_full_path|urlencode }}"{% if not request.proto_active %} aria-current="true"{% endif %}>Current</a><a href="{% url 'ui_switch' 'after' %}?next={{ request.get_full_path|urlencode }}"{% if request.proto_active %} aria-current="true"{% endif %}>Prototype</a></div>{% endif %}
-<button type="button" class="fbk-open" aria-haspopup="dialog" title="Tell us how this page could be better: its design, its wording, its logic, its speed, or a fun idea. Your note goes to the CNAP evaluation team, with the page it came from.">Page feedback</button>
-<dialog class="fbk" aria-labelledby="fbk-h">
-  <form method="dialog" class="fbk-form">
-    <h2 id="fbk-h">How could this page be better?</h2>
-    <p class="small muted">{{ "Your note goes to the CNAP evaluation team, along with the page you are on. Big ideas and small fixes are equally welcome."|stack }}</p>
-    <fieldset class="fbk-topics"><legend class="small">What is it about?</legend>
-      <label><input type="radio" name="topic" value="design"> Design and look</label>
-      <label><input type="radio" name="topic" value="clarity"> Clarity of wording or directions</label>
-      <label><input type="radio" name="topic" value="logic"> Logic or flow</label>
-      <label><input type="radio" name="topic" value="speed"> Speed and efficiency</label>
-      <label><input type="radio" name="topic" value="fun"> Fun and motivating touches</label>
-      <label><input type="radio" name="topic" value="broken"> Something is broken</label>
-      <label><input type="radio" name="topic" value="other"> Something else</label>
-    </fieldset>
-    <fieldset class="fbk-rate"><legend class="small">How is this page overall? (optional)</legend>
-      {% for n in "12345" %}<label title="{% if n == '1' %}Poor{% elif n == '5' %}Excellent{% else %}{{ n }} of 5{% endif %}"><input type="radio" name="rating" value="{{ n }}"><span>{{ n }}</span></label>{% endfor %}
-    </fieldset>
-    <label class="small" for="fbk-c">Your note</label>
-    <textarea id="fbk-c" name="comment" rows="4" placeholder="For example: the dates on this page are hard to find."></textarea>
-    <p class="small fbk-msg" role="status"></p>
-    <div class="fieldrow"><button type="button" class="btn fbk-send" title="Sends your note to the CNAP evaluation team.">Send my note</button><button type="button" class="btn ghost fbk-close" title="Closes this box without sending anything.">Cancel</button></div>
-  </form>
-</dialog>
-<script>
-(function () {
-  var open = document.querySelector(".fbk-open"), dlg = document.querySelector("dialog.fbk");
-  if (!open || !dlg || !dlg.showModal) return;
-  var msg = dlg.querySelector(".fbk-msg");
-  open.addEventListener("click", function () { msg.textContent = ""; dlg.showModal(); });
-  dlg.querySelector(".fbk-close").addEventListener("click", function () { dlg.close(); });
-  dlg.querySelector(".fbk-send").addEventListener("click", function () {
-    var f = dlg.querySelector("form"), topic = f.querySelector('input[name="topic"]:checked');
-    var comment = f.comment.value.trim();
-    if (!topic || !comment) { msg.textContent = "Choose what it is about and write a few words."; return; }
-    var body = new URLSearchParams();
-    body.set("topic", topic.value);
-    body.set("comment", comment);
-    var r = f.querySelector('input[name="rating"]:checked');
-    if (r) body.set("rating", r.value);
-    body.set("path", location.pathname + location.search);
-    body.set("page_title", document.title);
-    var tok = document.cookie.match(/csrftoken=([^;]+)/);
-    fetch("{% url 'page_feedback' %}", { method: "POST", credentials: "same-origin", body: body,
-      headers: { "X-CSRFToken": tok ? tok[1] : "" } })
-      .then(function (res) { return res.json(); })
-      .then(function (d) {
-        if (d.ok) { msg.textContent = "Thank you! Your note is on its way."; f.reset(); setTimeout(function () { dlg.close(); }, 1400); }
-        else msg.textContent = d.error || "That did not send. Try again.";
-      })
-      .catch(function () { msg.textContent = "That did not send. Try again."; });
-  });
-})();
-</script>
+{% include "_feedback.html" %}
 {% else %}
 <div class="anon"><main id="main">
   {% if messages %}<ul class="messages">{% for m in messages %}<li class="{{ m.tags }}">{% if 'encourage' in m.tags %}{{ m|stack }}{% else %}{{ m|stack }}{% endif %}{% if 'funding' in m.tags %}<br><a href="{% url 'portal:funding' %}" title="Opens your Funding and news page: options picked for you, opportunities relevant to most members, and funding news.">Open Funding and news</a>{% endif %}</li>{% endfor %}</ul>{% endif %}
@@ -172,6 +122,7 @@
 <script src="{% static 'js/headhelp.js' %}" defer></script>
 <script src="{% static 'js/copytext.js' %}" defer></script>
 <script src="{% static 'js/pickfilter.js' %}" defer></script>
+<script src="{% static 'js/dropclose.js' %}" defer></script>
 {% if request.proto_admin and not request.proto_own %}<script src="{% static 'js/proto.js' %}" defer></script>{% endif %}
 </body>
 </html>

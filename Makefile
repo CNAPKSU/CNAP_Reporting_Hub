@@ -14,7 +14,7 @@ down:           ## Stop everything (data stays in the volumes)
 migrate:        ## Apply database migrations
 	$(COMPOSE) exec web python manage.py migrate
 
-seed:           ## Load roles, relationship types, scales and fictional sample data
+seed:           ## Load reference data only: roles, relationship types, scales (the fictional center needs seed --fictional)
 	$(COMPOSE) exec web python manage.py seed
 
 superuser:      ## Create the first administrator account

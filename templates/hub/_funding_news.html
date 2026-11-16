@@ -1,0 +1,11 @@
+{# One funding news item in the Member Hub design (MW 2026-11-14). The date sits in its own column; the first summary line leads and the rest fold away (MW 2026-11-15: less to read). #}
+<li class="fp-nw">
+  <p class="fp-ndt">{% if n.date_text %}{{ n.date_text }}{% elif n.news_date %}{{ n.news_date|date:"F j, Y" }}{% else %}Not dated{% endif %}</p>
+  <div class="fp-nb">
+    <h3 class="fp-nh">{{ n.headline }}</h3>
+    {% if n.show_photo %}<figure class="fp-photo"><img src="{{ n.photo_url }}" alt="{{ n.photo_alt }}" loading="lazy">{% if n.photo_credit %}<figcaption>Photo: {{ n.photo_credit }}</figcaption>{% endif %}</figure>{% endif %}
+    {% if n.summary %}{% with lines=n.summary.strip.splitlines %}<p class="fp-nlead">{{ lines.0 }}</p>
+    {% if lines|length == 2 %}<ul class="fp-pts fp-pts1"><li>{{ lines.1 }}</li></ul>{% elif lines|length > 2 %}<details class="fp-more"><summary>{{ lines|length|add:"-1" }} more point{{ lines|length|add:"-1"|pluralize }}</summary><ul class="fp-pts">{% for line in lines|slice:"1:" %}{% if line.strip %}<li>{{ line }}</li>{% endif %}{% endfor %}</ul></details>{% endif %}{% endwith %}{% endif %}
+    {% if n.source_url %}<a class="fp-src" href="{{ n.source_url }}" target="_blank" rel="noopener" title="Opens the source in a new tab.">Source: {{ n.source_name|default:"the original announcement" }}</a>{% endif %}
+  </div>
+</li>

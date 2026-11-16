@@ -1,0 +1,26 @@
+/* The Member Hub top ribbon on the app's reporting pages (MW 2026-11-15): the top ribbon leads back to the
+   larger Hub; the app's left ribbon keeps everything about reporting. Scoped to .hdr so the app's styles stay as they are. */
+.hdr{--purple:#512888;--purple-ink:#3c1d66;--purple-tint:#efe8f8;--ink:#1d1b21;--ink-2:#45414c;--muted:#6b6772;--line-2:#d5d3d9;--band:#f2efe9;--surface:#fff;--sans:"Inter Hub","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  position:sticky;top:0;z-index:60;background:rgba(250,249,247,.96);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid #e6e3ea;font-family:var(--sans)}
+.hdr .wrap{display:flex;align-items:center;gap:28px;min-height:64px;max-width:none;margin:0;padding:0 max(20px,env(safe-area-inset-right,0px)) 0 max(20px,env(safe-area-inset-left,0px))}
+.hdr .brand{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
+.hdr .brand b{display:block;font:600 16px/1.2 var(--sans)}
+.hdr .brand small{display:block;font-size:12.5px;color:var(--muted)}
+.hdr .nav{display:flex;gap:4px;margin-left:12px}
+.hdr .nav a{padding:8px 12px;border-radius:8px;color:var(--ink-2);text-decoration:none;font-weight:500;font-size:15px}
+.hdr .nav a:hover{background:var(--band);color:var(--ink)}
+.hdr .nav a[aria-current="page"]{color:var(--purple);background:var(--purple-tint)}
+.hdr .tools{margin-left:auto;display:flex;align-items:center;gap:12px}
+.hdr .mywork{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:1px solid var(--line-2);border-radius:8px;color:var(--ink);text-decoration:none;font-weight:500;font-size:15px;background:var(--surface)}
+.hdr .mywork .count{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--purple);color:#fff;font-size:12px;font-weight:600}
+.hdr .avatar{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--purple-tint);color:var(--purple-ink);font-weight:600;font-size:14px}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:12px;z-index:100;background:#fff;padding:10px 14px;border-radius:8px}
+@media (min-width:981px) and (max-width:1120px){.hdr .nav{gap:0;margin-left:4px}.hdr .nav a{padding:8px 8px;font-size:14px}}
+@media (max-width:980px){.hdr .nav{display:none}.hdr{position:relative}}
+@media (max-width:640px){.hdr .brand small,.hdr .mywork{display:none}}
+/* the app's left ribbon sits under the top ribbon */
+@media (min-width:981px){body.proto .app>.side{top:65px;height:calc(100vh - 65px)}}
+.hdr .brand{margin:0;padding:0;flex-direction:row;align-items:center;font-size:inherit}.hdr .brand svg{width:36px;height:36px;flex:none}.hdr .wrap>*{margin-top:0;margin-bottom:0}
+.hdr a.brand,.hdr a.brand:hover{border:0;text-decoration:none;box-shadow:none;padding-bottom:0}
+.hdr .brand span{white-space:nowrap}
+@media (max-width:640px){.hdr .wrap{gap:12px}.hdr .hc-thread span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.hdr .hc-thread{padding:0 11px}}
