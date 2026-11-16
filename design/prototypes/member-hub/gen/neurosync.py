@@ -152,6 +152,7 @@ page=f'''<!doctype html>
     <div class="wrap">
       <header class="sv-sh"><h2 id="ns-sched-h">The schedule</h2><p>Talks run every Wednesday of the fall and spring semesters, except the first week of classes, breaks, the last week of classes, and finals. Spring 2027 sign-up is open now.</p></header>
       {INV}
+      <h3 class="ns-semh">Talks by semester</h3>
       <div class="sv-days ns-semtabs" role="tablist" aria-label="Semester">{tabs}</div>
       {panels}
     </div>

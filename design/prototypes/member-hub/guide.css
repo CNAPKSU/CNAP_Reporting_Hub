@@ -2881,3 +2881,5 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .sp-a .t3,.sp-a button.t3{font-size:12.5px;font-weight:400;line-height:18px;color:var(--ink-2);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--purple) 35%,transparent);background:none;border:0;padding:0}
 .sp-a .t3:hover,.sp-a button.t3:hover{color:var(--purple-ink);text-decoration-color:var(--purple)}
 .ns-mailnote{margin:14px 0 0;font-size:13.5px;color:var(--muted)}.ns-mailnote a{color:inherit}
+/* A line and room between the invited speaker card and the semester tabs (MW 2026-11-15) */
+.ns-semh{margin:48px 0 16px;padding-top:28px;border-top:1px solid var(--line);font:500 20px/26px var(--serif);color:var(--ink)}
