@@ -1,3 +1,4 @@
+import re
 import sys
 sys.path.insert(0,'/tmp/claude-0/hubproto/gen')
 from mail import mt
@@ -183,7 +184,24 @@ def _path(c,f):
     return (f'<ol class="cm-path" aria-label="Career path">'
             f'<li class="cm-st"><span class="al-k">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
             f'<li class="cm-st cm-st2"><span class="al-k">After CNAP</span><b>{aw}</b>{f"<span>{ag}</span>" if ag else ""}</li></ol>')
-alumni=''.join(f'''<li class="cm-al"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div class="cm-alb"><p class="cm-mn">{n}</p><p class="cm-alw">{w}</p>{_path(c,f)}{'<p class="cm-ok">Happy to talk with new project leaders</p>' if ok else ''}</div>{f'<div class="cm-acts"><button type="button" class="btn sm pri" data-direct="{n}">Email {n.replace("Dr. ","").split()[0]}</button><a class="btn sm" href="{intro(n)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div>' if ok else ''}</li>''' for i,t,n,c,w,f,ok in AL)
+def _last_year(c):
+    nums=[int(x) for x in re.findall(r'\d+',c)]
+    return 2016+max(nums) if nums else None
+def _gap(c,f):
+    y=re.findall(r'(20\d\d)',f); ly=_last_year(c)
+    if not y or not ly: return ''
+    g=int(y[-1])-ly
+    return 'The same year' if g<=0 else ('1 year later' if g==1 else f'{g} years later')
+def _alum(i,t,n,c,w,f,ok):
+    r,yrs=_split(c); aw,ag=_split(f)
+    first=n.replace('Dr. ','').split()[0]
+    foot=(f'<div class="al-foot"><p class="al-ok">Happy to talk with new project leaders</p><div class="cm-acts"><button type="button" class="btn sm pri" data-direct="{n}">Email {first}</button>'
+          f'<a class="btn sm" href="{intro(n)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></div>') if ok else ''
+    return (f'<li class="al"><div class="al-head"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div><p class="al-n">{n}</p><p class="al-w">{w}</p></div></div>'
+            f'<ol class="al-path" aria-label="Career path"><li class="al-from"><span class="al-k">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
+            f'<li class="al-gap" aria-label="{_gap(c,f)}"><span>{_gap(c,f)}</span></li>'
+            f'<li class="al-to"><span class="al-k">After CNAP</span><b>{aw}</b>{f"<span>{ag}</span>" if ag else ""}</li></ol>{foot}</li>')
+alumni=''.join(_alum(*x) for x in AL)
 
 SECS=[('cm-ach','Recent achievements'),('cm-ask','Ask the community'),('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-alum','CNAP alumni'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
 spine=''.join(f'<li><a href="#{i}"><span class="n"><b>{n}</b></span><span>{t}</span></a></li>' for n,(i,t) in enumerate(SECS,1))
@@ -260,7 +278,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-alum" aria-labelledby="cm-alum-h">
           <h2 id="cm-alum-h">CNAP alumni</h2>
-          <div class="cs-b"><p>Former project leaders who went on to independent funding. Many alumni are glad to tell you how each career progressed, from the first submission to the first R01.</p><ul class="cm-als">{alumni}</ul></div>
+          <div class="cs-b"><p>Former project leaders who went on to independent funding. Many alumni are glad to tell you how each career progressed, from the first submission to the first R01.</p><ul class="al-list">{alumni}</ul></div>
         </section>
         <section class="step cs" id="cm-ways" aria-labelledby="cm-ways-h">
           <h2 id="cm-ways-h">Ways to connect</h2>
