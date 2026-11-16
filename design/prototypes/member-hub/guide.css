@@ -2825,3 +2825,5 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .ct td:last-child{white-space:nowrap;color:var(--muted)}
 .ct th + td,.ct td + td,.ct thead th + th{border-left:1px solid var(--line)}
 @media (max-width:640px){.ct tbody th,.ct td:last-child{white-space:normal}}
+/* Site Visit photos hero, taller (MW 2026-11-15: "stretch out the hero here a bit to be taller") */
+@media (min-width:901px){.pg-hero{padding-block:48px 72px}.pg-hgrid{align-items:center}.pg-collage{height:clamp(380px,36vw,500px);margin-top:20px}}
