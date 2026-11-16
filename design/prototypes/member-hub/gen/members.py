@@ -55,7 +55,7 @@ def page(d):
     <div class="wrap">
       <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="community.html">Community</a><span aria-hidden="true">/</span><a href="community.html#cm-dir">Member directory</a><span aria-hidden="true">/</span><span aria-current="page">{name}</span></nav>
       <div class="mb-top">{av}<div><h1 id="t">{name}</h1><p class="mb-role">{where}</p>{'<span class="cm-new">New this month</span>' if d['new'] else ''}</div>
-        <div class="cm-acts mb-acts"><button type="button" class="btn pri" data-direct="{name}">Email {first}</button><a class="btn" href="{C.intro(name)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></div>
+        <div class="cm-acts mb-acts"><button type="button" class="btn pri" data-direct="{name}">Email {first}</button><span class="cm-or">or</span><a class="btn" href="{C.intro(name)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></div>
     </div>
   </section>
   <div class="wrap mb-body">

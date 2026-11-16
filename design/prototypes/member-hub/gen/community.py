@@ -62,7 +62,7 @@ first=''.join(f'<section class="ff-wk" aria-label="{g}"><div class="ff-wkh"><p c
 
 # 2. Members who share your interests
 MATCH=[('jl','You both record sleep EEG, and Jordan is looking for a collaborator.'),('pr','Priya studies memory consolidation during sleep and speaks at NeuroSync on November 18.'),('ms','Maya studies working memory in older adults in the core you use.'),('om','Omar joined this month and studies sleep in rodent models.')]
-match=''.join(f'''<li class="cm-mc">{av(k,' lg')}<p class="cm-mn"><a class="mb-link" href="member-{k}.html">{BY[k][2]}</a></p><p class="cm-mr">{BY[k][3]}</p><p class="cm-why">{w}</p><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in BY[k][5])}</p><div class="cm-acts"><button type="button" class="btn sm pri" data-direct="{BY[k][2]}">Email {BY[k][2].replace('Dr. ','').split()[0]}</button><a class="btn sm" href="{intro(BY[k][2])}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></li>''' for k,w in MATCH)
+match=''.join(f'''<li class="cm-mc">{av(k,' lg')}<p class="cm-mn"><a class="mb-link" href="member-{k}.html">{BY[k][2]}</a></p><p class="cm-mr">{BY[k][3]}</p><p class="cm-why">{w}</p><p class="cm-chips">{''.join(f'<span>{x}</span>' for x in BY[k][5])}</p><div class="cm-acts"><button type="button" class="btn sm pri" data-direct="{BY[k][2]}">Email {BY[k][2].replace('Dr. ','').split()[0]}</button><span class="cm-or">or</span><a class="btn sm" href="{intro(BY[k][2])}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></li>''' for k,w in MATCH)
 
 # 3. Who knows what
 SK=['EEG','Sleep','Memory','Eye tracking','Rodent behavior','Electrophysiology','TMS','Imaging','High-performance computing','Statistics','Grant writing','Aging']
@@ -197,7 +197,7 @@ def _alum(i,t,n,c,w,f,ok):
     r,yrs=_split(c); aw,ag=_split(f)
     first=n.replace('Dr. ','').split()[0]
     foot=(f'<div class="al-foot"><p class="al-ok">Happy to talk with new project leaders</p><div class="cm-acts"><button type="button" class="btn sm al-mail" data-direct="{n}">Email {first}</button>'
-          f'<a class="btn sm" href="{intro(n)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></div>') if ok else ''
+          f'<span class="cm-or">or</span><a class="btn sm" href="{intro(n)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></div>') if ok else ''
     return (f'<li class="al"><div class="al-head"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div><p class="al-n"><a class="mb-link" href="member-{i.lower()}.html">{n}</a></p><p class="al-w">{w}</p></div></div>'
             f'<ol class="al-path" aria-label="Career path"><li class="al-from"><span class="al-k">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
             '<li class="al-gap" aria-hidden="true"></li>'

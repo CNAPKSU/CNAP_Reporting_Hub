@@ -2707,3 +2707,5 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .ff .cm-fa{margin:0;padding:0}
 .ff-done{margin:0}
 .ff.is-done .ff-n{background:var(--teal);box-shadow:0 0 0 2px var(--surface);color:#fff}
+.cm-or{font-size:14px;color:var(--muted);padding:0 2px}
+.cm-al>.cm-acts .cm-or{align-self:center}
