@@ -199,7 +199,7 @@ def _alum(i,t,n,c,w,f,ok):
           f'<a class="btn sm" href="{intro(n)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></div>') if ok else ''
     return (f'<li class="al"><div class="al-head"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div><p class="al-n">{n}</p><p class="al-w">{w}</p></div></div>'
             f'<ol class="al-path" aria-label="Career path"><li class="al-from"><span class="al-k">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
-            f'<li class="al-gap" aria-label="{_gap(c,f)}"><span>{_gap(c,f)}</span></li>'
+            '<li class="al-gap" aria-hidden="true"></li>'
             f'<li class="al-to"><span class="al-k">After CNAP</span><b>{aw}</b>{f"<span>{ag}</span>" if ag else ""}</li></ol>{foot}</li>')
 alumni=''.join(_alum(*x) for x in AL)
 
@@ -278,7 +278,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-alum" aria-labelledby="cm-alum-h">
           <h2 id="cm-alum-h">CNAP alumni</h2>
-          <div class="cs-b"><p>Former project leaders who went on to independent funding. Many alumni are glad to tell you how each career progressed, from the first submission to the first R01.</p><ul class="al-list">{alumni}</ul></div>
+          <div class="cs-b"><p>Former project leaders, and where their work has taken them. Each alumnus chooses what appears here, and can change or remove it at any time.</p><ul class="al-list">{alumni}</ul></div>
         </section>
         <section class="step cs" id="cm-ways" aria-labelledby="cm-ways-h">
           <h2 id="cm-ways-h">Ways to connect</h2>

@@ -2668,3 +2668,4 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 /* Profile view switch: the label sits above, the switch hugs its two buttons (MW 2026-11-15) */
 .pz-tl{flex-basis:auto;margin:26px 0 8px;padding:0;font-size:14px;font-weight:600;color:var(--ink-2)}
 .pz-tog{display:inline-flex;flex-wrap:nowrap;width:auto;margin-top:0;border-radius:999px}
+.al-path{grid-template-columns:minmax(0,1fr) 56px minmax(0,1.1fr)}
