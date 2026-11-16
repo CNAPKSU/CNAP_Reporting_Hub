@@ -18,6 +18,7 @@
       <div class="fv-field"><label for="nw-src">Source name <span class="fv-opt">(optional)</span></label><input id="nw-src" name="source_name" value="{{ n.source_name }}" maxlength="200"></div>
       <div class="fv-field"><label for="nw-url">Link to the source <span class="fv-opt">(optional)</span></label><input id="nw-url" name="source_url" value="{{ n.source_url }}" maxlength="500"></div>
       {% include "manage/_funding_issue_field.html" with obj=n %}
+      {% include "manage/_article_photo_fields.html" with obj=n src=n.source_url %}
       <label class="fv-choice"><input type="checkbox" name="pinned" value="1"{% if n.pinned %} checked{% endif %}> Pin the item, so it shows first</label>
       {% if can_manage %}<div><button class="btn small ghost" type="submit" title="Saves the news item. Members see it right away.">{% if n %}Save{% else %}Add the news item{% endif %}</button></div>{% endif %}
     </div>

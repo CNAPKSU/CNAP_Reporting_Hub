@@ -1,0 +1,10 @@
+{# MW 2026-11-15, approved build: the photo for a news item or event. Members see the photo only after a person approves it. Pass obj and src (the article's link). #}
+<fieldset class="fv-field ap-fs"><legend class="px-h3">Photo <span class="fv-opt">(optional)</span></legend>
+  <p class="fv-help">Members see the photo only after you tick Approve. Please use a photo CNAP may show, such as one from a K-State, NIH, or sponsor page, and give the credit.</p>
+  {% if obj.photo_url %}<figure class="ap-prev"><img src="{{ obj.photo_url }}" alt="{{ obj.photo_alt }}" loading="lazy"><figcaption>{% if obj.photo_approved %}Approved. Members see this photo.{% else %}Not approved yet. Members don’t see this photo.{% endif %}</figcaption></figure>{% endif %}
+  {% if obj and src and can_manage %}<p><button class="btn small ghost" type="submit" name="action" value="find_photo" formnovalidate title="Looks up the photo the article's page offers for link previews. You approve the photo before members see it.">Find the article’s photo</button></p>{% endif %}
+  <div class="fv-field"><label for="ap-url">Image address</label><input id="ap-url" name="photo_url" value="{{ obj.photo_url }}" maxlength="1000"><input type="hidden" name="photo_seen" value="{{ obj.photo_url }}"></div>
+  <div class="fv-field"><label for="ap-alt">Description, for people who can’t see the photo</label><input id="ap-alt" name="photo_alt" value="{{ obj.photo_alt }}" maxlength="300"></div>
+  <div class="fv-field"><label for="ap-cr">Credit</label><input id="ap-cr" name="photo_credit" value="{{ obj.photo_credit }}" maxlength="200" placeholder="For example, Kansas State University"></div>
+  <label class="fv-choice"><input type="checkbox" name="photo_approved" value="1"{% if obj.photo_approved %} checked{% endif %}> Approve: I checked this photo, and CNAP may show it</label>
+</fieldset>

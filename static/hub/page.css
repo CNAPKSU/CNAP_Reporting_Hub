@@ -628,3 +628,8 @@ p,li,dd,figcaption,blockquote{text-wrap:pretty}
 .sv-have,.sv-closed{margin:0 0 18px;padding:12px 16px;border-radius:10px;background:var(--purple-tint);color:var(--purple-ink)}
 .sv-errs{margin:0 0 18px;padding:12px 16px;border-radius:10px;background:#fbebeb;color:#7a1d16}.sv-errs ul{margin:6px 0 0;padding-left:20px}
 .sv-page .fp-body .wrap.sv-rsvp-app{display:block;max-width:760px;margin-left:auto;margin-right:auto}.sv-page .fp-msgs{margin-bottom:16px}
+
+/* Article photos (MW 2026-11-15, approved build): shown only after a person approves the photo */
+.fp-photo{margin:10px 0 6px;max-width:420px}
+.fp-photo img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:var(--line)}
+.fp-photo figcaption{margin-top:4px;font-size:12px;color:var(--muted)}

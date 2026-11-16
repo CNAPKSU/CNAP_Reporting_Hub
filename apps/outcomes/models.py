@@ -882,7 +882,25 @@ class FundingSuggestion(TimestampedModel):
         ]
 
 
-class FundingNewsItem(ArchivableModel):
+class ArticlePhoto(models.Model):
+    """A photo for a funding news item or event (MW 2026-11-15, approved build with its migration). The photo is
+    shown only after a person on the CNAP team approves the photo, so nothing is shown automatically."""
+
+    photo_url = models.URLField(max_length=1000, blank=True, help_text="The address of the image, often found on the article's page.")
+    photo_alt = models.CharField(max_length=300, blank=True, help_text="A short description of the photo, for people who can't see it.")
+    photo_credit = models.CharField(max_length=200, blank=True, help_text="Who took the photo or owns the photo.")
+    photo_approved = models.BooleanField(default=False, help_text="A person approved showing the photo, and checked that CNAP may show it.")
+
+    class Meta:
+        abstract = True
+
+    @property
+    def show_photo(self):
+        return bool(self.photo_approved and self.photo_url)
+
+
+
+class FundingNewsItem(ArticlePhoto, ArchivableModel):
     """A funding news item MW posts: a summary in her own words with the source link."""
 
     headline = models.CharField(max_length=300)
@@ -952,7 +970,7 @@ class FundingFollowUp(TimestampedModel):
         ]
 
 
-class FundingEvent(ArchivableModel):
+class FundingEvent(ArticlePhoto, ArchivableModel):
     """A research event or talk on the funding page (MW 2026-11-10): office hours, information sessions,
     seminars, symposia. Shown until its last day passes."""
 

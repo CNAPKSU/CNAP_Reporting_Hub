@@ -7,6 +7,7 @@
       <li><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.8V8l2.2 1.4"/></svg><span class="sr">When: </span>{% if e.ends_on %}{{ e.starts_on|date:"F j" }} to {{ e.ends_on|date:"F j, Y" }}{% else %}{{ e.starts_on|date:"l, F j" }}{% endif %}{% if e.time_text %}, {{ e.time_text }}{% endif %}</li>
       {% if e.place %}<li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C3.5 9.8 8 14 8 14z"/><circle cx="8" cy="6.5" r="1.6"/></svg><span class="sr">Where: </span>{{ e.place }}</li>{% endif %}
     </ul>
+    {% if e.show_photo %}<figure class="fp-photo"><img src="{{ e.photo_url }}" alt="{{ e.photo_alt }}" loading="lazy">{% if e.photo_credit %}<figcaption>Photo: {{ e.photo_credit }}</figcaption>{% endif %}</figure>{% endif %}
     {% if e.summary %}<p class="fp-evd">{{ e.summary|linebreaksbr }}</p>{% endif %}
     {% if e.also %}<p class="fp-also"><span>Also on</span>{% for x in e.also %}<b>{{ x.starts_on|date:"l, F j" }}</b>{% endfor %}</p>{% endif %}
     {% if e.host %}<p class="fp-host">Hosted by {{ e.host }}</p>{% endif %}

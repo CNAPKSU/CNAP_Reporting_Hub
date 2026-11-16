@@ -823,3 +823,11 @@ From CNAP's Plan for Preventing Foreign Co-Author Publications on IDeA Grants:
 
 `SiteVisitRSVP` (migration `outcomes/0019_site_visit_rsvp`). This is a new table only; no existing table or record changes. One RSVP a year per person. The person can change it until the RSVP closes (March 25, 2027). Every save is audit-logged and sends a confirmation email that repeats the answers. Answers that only apply in person (meals, rooms, parking, photographs) are cleared when someone switches to Zoom or "unable to attend". Administrators see counts and every RSVP at `/site-visit/rsvps/` (linked in the staff side menu), with a CSV download. Pages: `/site-visit/rsvp/`, linked from Home. The Site Visit dates and program blocks live in `apps/portal/sitevisit_views.py` until the Site Visit has its own records.
 Not built: the calendar (.ics) file in the confirmation email, and a separate poster-only form after the RSVP closes.
+
+## 2026-11-15 — Article photos on funding news and events (approved build, with migration)
+
+There are four new fields on `FundingNewsItem` and `FundingEvent`: image address, description, credit, and approved. They come from the `ArticlePhoto` mixin (migration `outcomes/0020_article_photos`). No existing data changes; every new field is blank or false by default.
+- The staff form adds a "Find the article’s photo" button. It reads the preview image that the article's own page names (og:image or twitter:image) and saves it unapproved.
+- Members see a photo only after a person ticks "Approve: I checked this photo, and CNAP may show it". Changing the image address without viewing the new photo clears the approval.
+- The credit shows under the photo as "Photo: …".
+- Not built: uploading a photo file. That needs file storage on K-State's hosting. For now the photo is shown from its own address.
