@@ -2435,3 +2435,22 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .th-side .th-card,.th-side .th-card:last-child{padding:16px 18px;margin:0;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 .th-side .th-card h2{margin-bottom:8px}
 .th-side .th-topic{padding:0 6px;margin:0 -6px;width:calc(100% + 12px)}
+
+/* Thread email settings and sample email (MW 2026-11-15) */
+.th-mf{border:0;margin:0;padding:0;display:grid;gap:2px}
+.th-mf label{display:flex;gap:10px;align-items:flex-start;padding:7px 6px;margin:0 -6px;border-radius:8px;cursor:pointer;font-size:14.5px;color:var(--ink)}
+.th-mf label:hover{background:var(--lilac)}
+.th-mf input{margin-top:3px;accent-color:var(--purple)}
+.th-mf small{display:block;font-size:12.5px;line-height:17px;color:var(--muted)}
+.th-mnote{margin:10px 0 6px;font-size:13px;line-height:19px;color:var(--muted)}
+.th-mail .t3{font-size:14px;min-height:32px}
+.th-done svg{fill:none!important}
+.th-answered .th-n{border-color:var(--green);background:#e9f3ef}
+.th-sample .cm-form{max-width:520px}
+.th-se-meta{margin:0 0 14px;font-size:13px;line-height:19px;color:var(--muted)}
+.th-se-item{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-top:1px solid var(--line);font-size:14.5px}
+.th-se-item>span{color:var(--muted);font-size:13.5px}
+.th-se-item p{margin:6px 0 0;font-size:14px}
+.th-se-sep{color:var(--line-2);margin:0 6px}
+.th-se-foot{margin:12px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:13px;line-height:19px;color:var(--muted)}
+.th-sample a{color:var(--purple)}

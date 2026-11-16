@@ -114,8 +114,13 @@ SCRIPT = '''<script>
   tps.forEach(function(b){b.addEventListener('click',function(){topic=topic===b.dataset.topic?'':b.dataset.topic;apply();});});
   document.querySelector('[data-clear]').addEventListener('click',function(){topic='';apply();});
   q.addEventListener('input',apply);
+  var pref=window.hubThreadPref?hubThreadPref():'weekly';document.querySelectorAll('input[name=tmail]').forEach(function(r){r.checked=r.value===pref;r.addEventListener('change',function(){hubThreadPref(r.value);hubToast(hubThreadMsg('saved'));});});
+  var sd=document.querySelector('.th-sample');document.querySelector('[data-sample]').addEventListener('click',function(){try{sd.showModal();}catch(x){sd.setAttribute('open','')}sd.querySelector('.cm-note').hidden=true;var d=hubThreadPref()==='daily';sd.querySelector('[data-seh]').textContent=d?'New replies today':'New replies this week';sd.querySelector('[data-sef]').textContent=d?'once a day':'once a week';});
+  sd.querySelectorAll('[data-unf]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var n=sd.querySelector('.cm-note');n.textContent='In a real email, this link unfollows in one click, with no sign-in. Nothing changes in the prototype.';n.hidden=false;});});
+  sd.querySelector('[data-closeme]').addEventListener('click',function(e){e.preventDefault();try{sd.close();}catch(x){sd.removeAttribute('open')}document.getElementById('th-mail').scrollIntoView({block:'center'});});
+  if(location.hash==='#th-mail'){setTimeout(function(){var m=document.getElementById('th-mail');m.scrollIntoView({block:'center'});m.classList.add('th-flash');},300);}
   var fc=document.querySelector('[data-fc]');function fcount(){fc.textContent=rows.filter(function(r){return r.dataset.f==='1';}).length;}fcount();
-  rows.forEach(function(r){var fb=r.querySelector('.th-fol');fb.addEventListener('click',function(){var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';r.dataset.f=on?'1':'0';fcount();if(k==='f')apply();if(window.hubToast)hubToast(on?'<b>Following.</b> You’ll get one email a day when this thread has new replies, and they’ll show on your Home page. In the prototype, nothing is sent.':'<b>Unfollowed.</b> You won’t hear about new replies to this thread.');});});
+  rows.forEach(function(r){var fb=r.querySelector('.th-fol');fb.addEventListener('click',function(){var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';r.dataset.f=on?'1':'0';fcount();if(k==='f')apply();if(window.hubToast)hubToast(hubThreadMsg(on?'follow':'unfollow'));});});
   var sb=document.getElementById('th-sortb'),sm=document.getElementById('th-sortm'),opts=[].slice.call(sm.querySelectorAll('[role=option]')),sl=document.querySelector('[data-sortl]');
   function openM(o){sm.hidden=!o;sb.setAttribute('aria-expanded',o);if(o){(sm.querySelector('[aria-selected=true]')||opts[0]).focus();}}
   function pick(li){sortv=li.dataset.v;opts.forEach(function(x){x.setAttribute('aria-selected',x===li)});sl.textContent=li.firstChild.textContent;openM(false);sb.focus();apply();}
@@ -129,12 +134,13 @@ SCRIPT = '''<script>
     ti.removeAttribute('aria-invalid');
     var kind=(dlg.querySelector('input[name=kind]:checked')||{}).value||'other',TP={funding:'Funding',expertise:'Finding a collaborator',student:'Hiring',other:'Your question'}[kind];
     var li=document.createElement('li');li.className='th-row th-un th-newrow';li.dataset.m='0';li.dataset.u='1';li.dataset.me='1';li.dataset.f='1';li.dataset.tp=TP;li.dataset.g='week';li.dataset.r='0';li.dataset.s='0';li.dataset.i='-1';li.dataset.q=(v+' '+(de.value||'')).toLowerCase();
-    li.innerHTML='<span class="cm-av av-p" aria-hidden="true">AO</span><div class="th-body"><p class="th-tp th-p"></p><h3 class="th-t"></h3><p class="th-ex"></p><div class="th-foot"><p class="th-meta">You · No replies yet · Just now</p></div><p class="th-mine">You started this thread, so you follow it. In the prototype, it disappears when you leave the page.</p></div><div class="th-n th-n0"><span class="th-nn">0</span><span class="th-nl">New</span></div>';
+    li.innerHTML='<span class="cm-av av-p" aria-hidden="true">AO</span><div class="th-body"><p class="th-tp th-p"></p><h3 class="th-t"></h3><p class="th-ex"></p><div class="th-foot"><p class="th-meta">You · No replies yet · Just now</p><button type="button" class="th-fol th-done" aria-pressed="false" title="Mark your question as answered. The emails stop, and others see it is resolved."><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Mark as answered</span></button></div><p class="th-mine">You started this thread, so you follow it. In the prototype, it disappears when you leave the page.</p></div><div class="th-n th-n0"><span class="th-nn">0</span><span class="th-nl">New</span></div>';
+    var dn=li.querySelector('.th-done');dn.addEventListener('click',function(){var on=dn.getAttribute('aria-pressed')!=='true';dn.setAttribute('aria-pressed',on);dn.querySelector('span').textContent=on?'Answered':'Mark as answered';li.classList.toggle('th-answered',on);if(window.hubToast)hubToast(on?'<b>Marked as answered.</b> The emails about this thread stop, and others see it is resolved.':'<b>Reopened.</b> You’ll hear about new replies again.');});
     li.querySelector('.th-tp').textContent=TP;li.querySelector('.th-t').textContent=v;li.querySelector('.th-ex').textContent=de.value||'';
     var gw=list.querySelector('[data-gh=week]');gw.after(li);rows.unshift(li);
     ti.value='';de.value='';try{dlg.close();}catch(x){dlg.removeAttribute('open');}
     k='a';topic='';q.value='';tb.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.t==='a')});apply();
-    document.getElementById('th-all').scrollIntoView({behavior:'auto'});li.classList.add('th-flash');fcount();if(window.hubToast)hubToast('<b>Your thread is posted.</b> You follow it, so you’ll hear when someone replies.');
+    document.getElementById('th-all').scrollIntoView({behavior:'auto'});li.classList.add('th-flash');fcount();if(window.hubToast)hubToast(hubThreadMsg('post'));
   });
   var af=document.querySelector('.th-ask');af.addEventListener('submit',function(e){e.preventDefault();var v=document.getElementById('th-askq').value.trim();try{dlg.showModal();}catch(x){dlg.setAttribute('open','')}dlg.querySelector('.cm-note').hidden=true;var ti=dlg.querySelector('#cmc-t');if(ti){ti.value=v;(v?dlg.querySelector('#cmc-d'):ti).focus();}});
 })();
@@ -192,6 +198,16 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
     <aside class="th-side" aria-label="Topics and people">
       <section class="th-card" aria-labelledby="tp-h"><h2 id="tp-h">Topics</h2><ul class="th-topics">{topics}</ul></section>
       <section class="th-card" aria-labelledby="hp-h"><h2 id="hp-h">Most helpful this fall</h2><ul class="th-help">{helpful}</ul></section>
+      <section class="th-card th-mail" id="th-mail" aria-labelledby="mail-h"><h2 id="mail-h">Your thread emails</h2>
+        <fieldset class="th-mf"><legend class="sr">How often should we email you about threads?</legend>
+          <label><input type="radio" name="tmail" value="weekly"><span>Once a week<small>A summary of new replies, if there are any.</small></span></label>
+          <label><input type="radio" name="tmail" value="daily"><span>Once a day<small>Only on days with new replies.</small></span></label>
+          <label><input type="radio" name="tmail" value="mine"><span>Only my own questions<small>Replies to threads you started.</small></span></label>
+          <label><input type="radio" name="tmail" value="none"><span>No emails<small>New replies still show on your Home page.</small></span></label>
+        </fieldset>
+        <p class="th-mnote">Unless you choose no emails, the first reply to your own question comes right away. Every email has an Unfollow link for each thread.</p>
+        <button type="button" class="t3" data-sample>See a sample email</button>
+      </section>
       <section class="th-card th-how" aria-labelledby="how-h"><h2 id="how-h">How threads work</h2>
         <ol><li>Only CNAP members can see threads.</li><li>Members with matching interests get a note about your question.</li><li>The CNAP team aims to read every thread, and joins in when the team can help.</li></ol></section>
     </aside>
@@ -199,6 +215,17 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
 </main>
 
 {compose}
+<dialog class="cm-compose th-sample" aria-labelledby="se-h">
+  <form method="dialog" class="cm-form">
+    <p class="th-se-meta">From: CNAP Member Hub<br>Subject: 3 new replies in threads you follow</p>
+    <h2 id="se-h" data-seh>New replies this week</h2>
+    <div class="th-se-item"><b>Looking for an EEG collaborator</b><span>2 new replies, from Dr. Wei Zhang and Dr. Elena Voss</span><p><a href="thread.html">Read the replies</a> <span class="th-se-sep">|</span> <a href="#" data-unf>Unfollow this thread</a></p></div>
+    <div class="th-se-item"><b>Sharing EEG caps between studies</b><span>1 new reply, from Dr. Maya Singh</span><p><a href="thread-ms.html">Read the reply</a> <span class="th-se-sep">|</span> <a href="#" data-unf>Unfollow this thread</a></p></div>
+    <p class="th-se-foot">You get this email <span data-sef>once a week</span> because you follow these threads. <a href="threads.html#th-mail" data-closeme>Change how often</a>, or <a href="#" data-unf>stop all thread emails</a>.</p>
+    <p class="cm-note" role="status" hidden></p>
+    <div class="cm-fb"><button type="submit" value="cancel" class="btn">Close</button></div>
+  </form>
+</dialog>
 {foot}
 {SCRIPT}
 <script src="hubchrome.js" defer></script>

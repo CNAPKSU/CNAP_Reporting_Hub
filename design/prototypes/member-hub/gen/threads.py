@@ -88,10 +88,10 @@ def page(k):
     var li=document.createElement('li');li.className='tp-r tp-new';
     li.innerHTML='<span class="cm-av av-p" aria-hidden="true">AO</span><div class="tp-rb"><p class="tp-rh"><b>You</b><span>Pilot project leader</span><span>Just now</span></p><p class="tp-rt"></p></div>';
     li.querySelector('.tp-rt').textContent=v;list.appendChild(li);n++;rh.textContent=label(n);rc.textContent=label(n);ta.value='';
-    note.textContent='Your reply is posted below. In the prototype, it disappears when you leave the page.';note.hidden=false;if(fb.getAttribute('aria-pressed')!=='true'){{fb.setAttribute('aria-pressed','true');fb.querySelector('span').textContent='Following';}}if(window.hubToast)hubToast('<b>Your reply is posted.</b> You now follow this thread, so you’ll hear about new replies.');
+    note.textContent='Your reply is posted below. In the prototype, it disappears when you leave the page.';note.hidden=false;if(fb.getAttribute('aria-pressed')!=='true'){{fb.setAttribute('aria-pressed','true');fb.querySelector('span').textContent='Following';}}if(window.hubToast)hubToast(hubThreadMsg('reply'));
     li.scrollIntoView({{block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}});
   }});
-  var fb=document.querySelector('.tp-fol');fb.addEventListener('click',function(){{var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';if(window.hubToast)hubToast(on?'<b>Following.</b> You’ll get one email a day when this thread has new replies, and they’ll show on your Home page. In the prototype, nothing is sent.':'<b>Unfollowed.</b> You won’t hear about new replies to this thread.');}});
+  var fb=document.querySelector('.tp-fol');fb.addEventListener('click',function(){{var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';if(window.hubToast)hubToast(hubThreadMsg(on?'follow':'unfollow'));}});
   if(location.hash==='#reply'){{setTimeout(function(){{ta.focus();}},300);}}
 }})();
 </script>

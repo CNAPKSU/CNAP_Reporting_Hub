@@ -291,3 +291,22 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
     clearTimeout(t); t = setTimeout(function () { el.classList.remove('on'); }, 4200);
   };
 })();
+
+/* Thread email preferences (prototype: kept in this browser only). MW 2026-11-15: let people choose how often, and unfollow from the email. */
+(function () {
+  var LAB = { daily: 'one email a day', weekly: 'one email a week', mine: 'emails only about your own questions', none: 'no emails' };
+  window.hubThreadPref = function (v) {
+    try { if (v) localStorage.setItem('hub-thread-mail', v); return localStorage.getItem('hub-thread-mail') || 'weekly'; } catch (e) { return v || 'weekly'; }
+  };
+  var CH = ' <a href="threads.html#th-mail" style="color:#d4bdf6;text-decoration:underline;text-underline-offset:3px">Change</a>';
+  window.hubThreadMsg = function (kind) {
+    var p = hubThreadPref(), l = LAB[p];
+    var tail = p === 'none' ? ' You chose no emails, so please check Threads for replies.' : p === 'mine' ? ' You chose emails only about your own questions, so this thread won’t email you.' : ' You’ll hear about new replies in ' + l + ', and they show on your Home page.';
+    if (kind === 'follow') return '<b>Following.</b>' + tail + CH;
+    if (kind === 'unfollow') return '<b>Unfollowed.</b> You won’t hear about new replies to this thread.';
+    if (kind === 'reply') return '<b>Your reply is posted.</b> You now follow this thread.' + tail + CH;
+    if (kind === 'post') return '<b>Your thread is posted.</b> ' + (p === 'none' ? 'You chose no emails, so please check Threads for replies.' : 'We’ll email you when someone first replies' + (p === 'daily' || p === 'weekly' ? ', then ' + l + ' after that.' : '.')) + CH;
+    if (kind === 'saved') return '<b>Saved.</b> ' + (p === 'none' ? 'No thread emails. New replies still show on your Home page.' : 'You’ll get ' + l + '. The first reply to your own question still comes right away.' ) + ' In the prototype, nothing is sent.';
+    return '';
+  };
+})();
