@@ -895,6 +895,19 @@ The core report for one core user survey in one reporting session (MW 2026-11-08
 
 Constraints: `core_reports_unique`
 
+### `home_link_counts` — HomeLinkCount
+
+How often each Home link is selected, per day (MW 2026-11-15, approved). Counts only: no person, no session, no address is stored, so the counts can't say who selected what.
+
+| Column | Type | Null | Notes |
+| --- | --- | --- | --- |
+| id | BigAutoField | no | unique |
+| day | DateField | no |  |
+| key | CharField | no | The Home section and the link, such as funding: Grant resources. |
+| count | PositiveIntegerField | no |  |
+
+Constraints: `one_count_per_link_per_day`
+
 ## Outcomes (`outcomes`)
 
 ### `publications` — Publication
@@ -1358,6 +1371,10 @@ A funding news item MW posts: a summary in her own words with the source link.
 | created_at | DateTimeField | no |  |
 | updated_at | DateTimeField | no |  |
 | archived_at | DateTimeField | yes |  |
+| photo_url | CharField | no | The address of the image, often found on the article's page. |
+| photo_alt | CharField | no | A short description of the photo, for people who can't see it. |
+| photo_credit | CharField | no | Who took the photo or owns the photo. |
+| photo_approved | BooleanField | no | A person approved showing the photo, and checked that CNAP may show it. |
 | headline | CharField | no |  |
 | news_date | DateField | yes |  |
 | date_text | CharField | no | Shown when there is no single day. |
@@ -1403,6 +1420,10 @@ A research event or talk on the funding page (MW 2026-11-10): office hours, info
 | created_at | DateTimeField | no |  |
 | updated_at | DateTimeField | no |  |
 | archived_at | DateTimeField | yes |  |
+| photo_url | CharField | no | The address of the image, often found on the article's page. |
+| photo_alt | CharField | no | A short description of the photo, for people who can't see it. |
+| photo_credit | CharField | no | Who took the photo or owns the photo. |
+| photo_approved | BooleanField | no | A person approved showing the photo, and checked that CNAP may show it. |
 | title | CharField | no |  |
 | starts_on | DateField | no |  |
 | ends_on | DateField | yes | Only for events that run several days. |
@@ -1415,6 +1436,35 @@ A research event or talk on the funding page (MW 2026-11-10): office hours, info
 | posted_by_id | FK → users | yes |  |
 
 Constraints: `funding_events_ends_after_start`
+
+### `site_visit_rsvps` — SiteVisitRSVP
+
+One person's RSVP for one year's Site Visit (MW 2026-11-15, approved build with its migration). The fields follow the RSVP form in the prototype's Site Visit page.
+
+| Column | Type | Null | Notes |
+| --- | --- | --- | --- |
+| id | BigAutoField | no | unique |
+| created_at | DateTimeField | no |  |
+| updated_at | DateTimeField | no |  |
+| person_id | FK → people | no |  |
+| year | PositiveSmallIntegerField | no | The calendar year of the Site Visit, such as 2027. |
+| attend | CharField | no | person, zoom, no |
+| parts | JSONField | no | The program blocks the person plans to attend. |
+| meals | JSONField | no | lunch, dinner |
+| diet | TextField | no |  |
+| photo_ok | BooleanField | yes | May CNAP use images that include the person. |
+| parking | BooleanField | yes | Needs parking. |
+| hotel_nights | JSONField | no | mon, tue |
+| poster | CharField | no | yes, no, done, later, maybe |
+| poster_title | TextField | no |  |
+| poster_authors | CharField | no |  |
+| poster_affiliation | CharField | no |  |
+| poster_abstract | TextField | no |  |
+| name_tag | CharField | no | A different first name for the name tag. |
+| connection | CharField | no |  |
+| note | TextField | no | Accessibility needs, or anything else. |
+
+Constraints: `one_rsvp_per_person_per_year`
 
 ## Audit log (`audit`)
 

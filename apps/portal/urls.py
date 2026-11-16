@@ -1,9 +1,8 @@
 from django.urls import path
 
-from . import clicks, sitevisit_views
+from . import clicks, sitevisit_views, views
 from . import funding_views as fv
 from . import outcome_views as ov
-from . import views
 
 app_name = "portal"
 
