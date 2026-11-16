@@ -35,19 +35,24 @@ for day, date, gs in DAYS:
     body += f'<section class="pg-day" aria-labelledby="{did}"><h2 class="pg-dh" id="{did}">{day}<span>{date}</span></h2>{"".join(group(*g) for g in gs)}</section>'
 jump = ''.join(f'<li><a href="#pg-{t.lower().replace(" ", "-")}">{t}</a></li>' for _, _, gs in DAYS for t, _, _, _ in gs)
 page = head + f'''<main id="main">
-  <section class="co-open tp-open" aria-labelledby="t">
-    <div class="wrap">
-      <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="sitevisit.html">Site Visit</a><span aria-hidden="true">/</span><span aria-current="page">2026 photographs</span></nav>
-      <div class="tp-hd">
-        <div>
-          <h1 id="t">The 2026 Site Visit</h1>
-          <p class="lead">{total} photographs from May 27 and 28 in Manhattan, Kansas, in the order of the program.</p>
-        </div>
-        <div class="pg-act"><a class="btn pri" href="sitevisit.html">Plan for the 2027 Site Visit</a><a class="btn" href="{SHARE}">Share your photographs</a></div>
+  <section class="pg-hero" aria-labelledby="t">
+    <div class="wrap pg-hgrid">
+      <div class="pg-hl">
+        <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="sitevisit.html">Site Visit</a><span aria-hidden="true">/</span><span aria-current="page">2026 photographs</span></nav>
+        <p class="pg-kick">May 27 and 28, 2026 · Manhattan, Kansas</p>
+        <h1 id="t">The 2026 Site Visit, in photographs</h1>
+        <p class="pg-lead">{total} photographs from two days of core tours, project presentations, the keynote and banquet, and the poster session, in the order of the program.</p>
+        <div class="pg-act"><a class="btn pg-pri" href="sitevisit.html">Plan for the 2027 Site Visit</a><a class="btn pg-sec" href="{SHARE}">Share your photographs</a></div>
       </div>
-      <ul class="pg-jump" aria-label="Jump to">{jump}</ul>
+      <div class="pg-collage" aria-hidden="true">
+        <figure class="pg-c1"><img src="img/reel-1.jpg" alt=""><figcaption>Poster session</figcaption></figure>
+        <figure class="pg-c2"><img src="img/reel-2.jpg" alt=""><figcaption>Core tours</figcaption></figure>
+        <figure class="pg-c3"><img src="img/reel-3.jpg" alt=""><figcaption>Keynote address</figcaption></figure>
+        <span class="pg-ph">Photo placeholders</span>
+      </div>
     </div>
   </section>
+  <nav class="pg-jumpbar" aria-label="Jump to a part of the program"><div class="wrap"><ul class="pg-jump">{jump}</ul></div></nav>
   <div class="wrap pg-body">{body}</div>
 </main>
 

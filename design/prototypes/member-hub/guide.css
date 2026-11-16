@@ -2454,3 +2454,26 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .th-se-sep{color:var(--line-2);margin:0 6px}
 .th-se-foot{margin:12px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:13px;line-height:19px;color:var(--muted)}
 .th-sample a{color:var(--purple)}
+
+/* 2026 photographs hero (MW 2026-11-15: "is this the best we can do") */
+.pg-hero{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 85% 10%,#2a1838 0%,#1a0f22 58%,#140b1a 100%);color:#fff;padding-block:28px 64px}
+.pg-hgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:center}
+.pg-hl{min-width:0}
+.pg-hero .crumb a,.pg-hero .crumb span{color:rgba(255,255,255,.88)}
+.pg-kick{margin:36px 0 0;font-size:15px;font-weight:600;color:#e8c98a}
+.pg-hero h1{margin:10px 0 0;font:500 clamp(40px,4.6vw,58px)/1.06 var(--serif);letter-spacing:-.02em;color:#fff;text-wrap:balance}
+.pg-lead{margin:18px 0 0;font-size:18px;line-height:28px;color:#fff;max-width:48ch}
+.pg-act{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.pg-hero .btn.pg-pri{background:#fff;border-color:#fff;color:var(--purple-ink)}
+.pg-hero .btn.pg-pri:hover{background:#efe6fc;color:var(--purple-ink)}
+.pg-hero .btn.pg-sec{background:transparent;border-color:rgba(255,255,255,.55);color:#fff}
+.pg-hero .btn.pg-sec:hover{border-color:#fff;background:rgba(255,255,255,.08);color:#fff}
+.pg-collage{position:relative;display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:1fr 1fr;gap:12px;height:clamp(300px,30vw,400px);margin-top:36px}
+.pg-collage figure{position:relative;margin:0;border-radius:14px;overflow:hidden;background:#2e1c3b;min-width:0}
+.pg-c1{grid-row:1 / span 2}
+.pg-collage img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9)}
+.pg-collage figcaption{position:absolute;left:12px;bottom:12px;padding:3px 10px;border-radius:10px;background:rgba(20,11,26,.7);color:#fff;font-size:13px;font-weight:600}
+.pg-ph{position:absolute;right:10px;top:10px;padding:2px 8px;border-radius:8px;background:rgba(20,11,26,.6);color:rgba(255,255,255,.9);font-size:12px}
+.pg-jumpbar{position:sticky;top:var(--hdr-h,72px);z-index:20;background:rgba(250,249,247,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding-block:12px}
+.pg-jumpbar .pg-jump{margin:0}
+@media (max-width:900px){.pg-hgrid{grid-template-columns:minmax(0,1fr);gap:28px}.pg-collage{height:260px;margin-top:0}.pg-jumpbar{position:static}}

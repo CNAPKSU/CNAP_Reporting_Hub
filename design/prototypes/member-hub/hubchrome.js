@@ -315,6 +315,7 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
 (function () {
   function build() {
     if (document.querySelector('.otp, .spine, .hr-rail')) return;
+    if (document.body.classList.contains('proto') || document.querySelector('aside.side')) return; /* the app's reporting pages stay as they are */
     var main = document.querySelector('main'); if (!main) return;
     var marked = [].slice.call(main.querySelectorAll('[data-rail]'));
     var hs = marked.length ? marked : [].slice.call(main.querySelectorAll('h2')).filter(function (h) {
@@ -337,6 +338,7 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
       + '.hr-rail:hover a:hover,.hr-rail:focus-within a:hover{color:var(--purple,#512888)}'
       + '.hr-rail:hover a[aria-current="true"],.hr-rail:focus-within a[aria-current="true"]{color:var(--purple-ink,#3c1d66);font-weight:600}'
       + '.hr-rail:hover a::before,.hr-rail:focus-within a::before{top:12px}'
+      + '.hr-rail.hr-wait{opacity:0;pointer-events:none}.hr-rail{transition:width .2s ease,background-color .2s,box-shadow .2s,border-color .2s,opacity .25s}'
       + '@media (max-width:1180px){.hr-rail{display:none}}@media (prefers-reduced-motion:reduce){.hr-rail,.hr-rail a::before{transition:none}}';
     document.head.appendChild(st);
     var nav = document.createElement('nav'); nav.className = 'hr-rail'; nav.setAttribute('aria-label', 'Sections on this page');
@@ -351,6 +353,7 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
     var hh = document.createElement('p'); hh.className = 'hr-h'; hh.textContent = 'On this page';
     nav.appendChild(hh); nav.appendChild(ol); document.body.appendChild(nav);
     function spy() {
+      nav.classList.toggle('hr-wait', scrollY < 260);
       var cur = 0; hs.forEach(function (h, i) { if (h.getBoundingClientRect().top < 200) cur = i; });
       links.forEach(function (a, i) { a.toggleAttribute('aria-current', i === cur); if (i === cur) a.setAttribute('aria-current', 'true'); a.classList.toggle('seen', i < cur); });
     }
