@@ -40,8 +40,9 @@
   if (mw && !document.querySelector('.hc-thread')) {
     var a = document.createElement('a');
     a.className = 'hc-thread';
-    a.href = 'community.html?t=other#cm-ask';
-    a.title = 'Ask the CNAP community a question, look for a collaborator, or post a position';
+    a.href = 'threads.html';
+    a.title = 'Opens Threads: ask the CNAP community a question, look for a collaborator, or answer a colleague';
+    if (/threads\.html$/.test(location.pathname)) a.addEventListener('click', function (e) { var d = document.querySelector('.cm-compose'); if (!d) return; e.preventDefault(); try { d.showModal(); } catch (x) { d.setAttribute('open', ''); } });
     a.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 3.5h11v7h-6l-3 2.5v-2.5h-2z"/></svg><span>Start a thread</span>';
     mw.parentNode.insertBefore(a, mw);
   }
@@ -83,7 +84,8 @@
     ['Research', 'research.html', [['Research stories', 'research.html', 'Work from the Center’s pilot projects, cores, and investigators'], ['Suggest a story', 'mailto:cnap@ksu.edu?subject=Story%20idea%20for%20Research%20at%20CNAP', 'Tell the CNAP team about a milestone, paper, or person to profile']]],
     ['Events', 'events.html', [['Events calendar', 'events.html', 'Every Center event, deadline, and campus date'], ['NeuroSync', 'neurosync.html', 'The Wednesday speaker series'], ['The 2027 Site Visit', 'sitevisit.html', 'May 25 and 26, 2027']]],
     ['Funding', 'funding.html', [['Funding opportunities', 'funding.html', 'Picked for you, and relevant to most members'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft'], ['Funding news', 'funding-news.html', 'News from sponsors, and events and talks']]],
-    ['Community', 'community.html', [['Community', 'community.html', 'Achievements, people, and ways to connect'], ['Threads', 'threads.html', 'Questions answered by members who have the experience'], ['Member directory', 'community.html#cm-dir', 'Find a colleague or a type of expertise'], ['Alumni', 'community.html#cm-alum', 'Where former members are now']]],
+    ['Community', 'community.html', [['Community', 'community.html', 'Achievements, people, and ways to connect'], ['Member directory', 'community.html#cm-dir', 'Find a colleague or a type of expertise'], ['Alumni', 'community.html#cm-alum', 'Where former members are now']]],
+    ['Threads', 'threads.html', null],
     ['Resources', 'core-bn.html', [['Behavioral Neuroscience Core', 'core-bn.html', 'Services, equipment, and how to book'], ['Cognitive Neuroscience Core', 'core-cn.html', 'Services, equipment, and how to book'], ['Neuroinformatics Core', 'core-ni.html', 'Data, analysis, and consultation'], ['Mentor guide', 'mentor.html', 'For mentors of CNAP investigators'], ['Mentee guide', 'mentee.html', 'For pilot and project investigators']]]
   ];
   var here = (location.pathname.split('/').pop() || 'index.html');
@@ -147,7 +149,7 @@
     var it = document.createElement('div'); it.className = 'hn-it' + (inSec(sec) ? ' is-here' : '');
     if (!sec[2]) {
       var a = document.createElement('a'); a.className = 'hn-b'; a.href = sec[1]; a.textContent = sec[0];
-      if (here === 'index.html') a.setAttribute('aria-current', 'page');
+      if (here === sec[1]) a.setAttribute('aria-current', 'page');
       it.appendChild(a);
     } else {
       var b = document.createElement('button'); b.type = 'button'; b.className = 'hn-b'; b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', 'hn-p' + i);
