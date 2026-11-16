@@ -590,3 +590,20 @@ p,li,dd,figcaption,blockquote{text-wrap:pretty}
 .fp-tbl tbody th a{color:inherit}
 .fp-ic-next a{color:inherit!important}
 .fp-tbl td a{white-space:nowrap}
+
+/* Funding heroes on a dark ground (MW 2026-11-15: "give this a black background"), the same near-black
+   plum as the Site Visit photographs page, so the three funding pages open the same way. */
+.fp-page .fp-open{background:radial-gradient(120% 90% at 85% 10%,#2a1838 0%,#1a0f22 58%,#140b1a 100%);border-bottom:0;color:#fff;padding-bottom:40px}
+.fp-page .fp-open .fp-crumb,.fp-page .fp-open .fp-crumb a{color:rgba(255,255,255,.82)}
+.fp-page .fp-open .fp-crumb a:hover{color:#fff}
+.fp-page .fp-open .fp-crumb span[aria-hidden]{color:rgba(255,255,255,.4)}
+.fp-page .fp-open .fp-hd .fp-for{color:#e9c98f}
+.fp-page .fp-open h1{color:#fff}
+.fp-page .fp-open .fp-lead{color:rgba(255,255,255,.86)}
+.fp-page .fp-open .fp-facts{background:none}
+.fp-page .fp-open .fp-facts div,.fp-page .fp-open .fp-facts div+div{border-color:rgba(255,255,255,.18)}
+.fp-page .fp-open .fp-facts div{box-shadow:1px 0 0 rgba(255,255,255,.18)!important}
+.fp-page .fp-open .fp-facts div:last-child{box-shadow:none!important}
+.fp-page .fp-open .fp-facts dt{color:rgba(255,255,255,.7)}
+.fp-page .fp-open .fp-facts dd{color:#fff}
+.fp-page .fp-open .fp-facts a{color:#fff}

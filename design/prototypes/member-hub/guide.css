@@ -2866,3 +2866,6 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 /* Hero text spans the collage's height (MW 2026-11-15): breadcrumb level with the collage's top,
    buttons level with its bottom, the title and intro centered between. */
 @media (min-width:901px){.pg-hgrid{align-items:stretch}.pg-collage{margin-top:0}.pg-hl{display:flex;flex-direction:column}.pg-hero .crumb{margin-bottom:28px}.pg-hero .pg-kick{margin-top:auto}.pg-hero .pg-act{margin-top:auto;padding-top:28px}}
+/* Directory contact pair, quieter (MW 2026-11-15: "too loud"): both links the same size and weight */
+.cm-dr .cm-dra .t3,.cm-dr .cm-dra button.t3{font-size:14px;font-weight:500;color:var(--purple-ink);text-decoration-thickness:1px;text-underline-offset:3px}
+.cm-dr .cm-dra .cm-or{font-size:13px;color:var(--muted)}
