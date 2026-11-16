@@ -2891,3 +2891,9 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .ns-getmail,.an-join,.ev-list{margin:12px 0 0;font-size:13.5px;line-height:20px;color:var(--muted)}
 .ns-getmail a,.an-join a,.ev-list a{color:var(--purple-ink)}
 .ev-list{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+/* Home NeuroSync links, quiet and in line (MW 2026-11-15) */
+.spk-act.spk-quiet{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.spk-quiet a{font-size:13px;color:var(--ink-2);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--purple) 35%,transparent)}
+.spk-quiet a:hover{color:var(--purple-ink);text-decoration-color:var(--purple)}
+.spk-quiet span{color:var(--muted);font-size:12px}
+.spk-act.spk-quiet a{font-size:13px!important;font-weight:400!important;color:var(--ink-2)!important}.spk-act.spk-quiet a:hover{color:var(--purple-ink)!important}p.ns-getmail{font-size:12.5px!important;color:var(--muted)!important;margin-top:6px!important}p.ns-getmail a{color:var(--ink-2)!important;text-decoration-color:color-mix(in srgb,var(--purple) 35%,transparent)}
