@@ -34,7 +34,7 @@ for day, date, gs in DAYS:
     did = 'pg-' + day.lower().replace(' ', '')
     body += f'<section class="pg-day" aria-labelledby="{did}"><h2 class="pg-dh" id="{did}">{day}<span>{date}</span></h2>{"".join(group(*g) for g in gs)}</section>'
 # MW 2026-11-15: "give this a little more pizzazz so people don't overlook it": grouped by day, with photo counts, and the part on screen lights up
-jump = ''.join(f'<li class="pg-jd"><span class="pg-jdl">{day}</span><ul>' + ''.join(f'<li><a href="#pg-{t.lower().replace(" ", "-")}"><span>{t}</span><b class="num" aria-label="{n} photographs">{n}</b></a></li>' for t, n, _, _ in gs) + '</ul></li>' for day, _, gs in DAYS)
+jump = ''.join(f'<li class="pg-jd"><span class="pg-jdl">{day}<small>{date.split(", ")[1]}</small></span><ul>' + ''.join(f'<li><a href="#pg-{t.lower().replace(" ", "-")}"><span>{t}</span><b class="num" aria-label="{n} photographs">{n}</b></a></li>' for t, n, _, _ in gs) + '</ul></li>' for day, date, gs in DAYS)
 page = head + f'''<main id="main">
   <section class="pg-hero" aria-labelledby="t">
     <div class="wrap pg-hgrid">

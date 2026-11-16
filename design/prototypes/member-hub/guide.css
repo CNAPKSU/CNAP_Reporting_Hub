@@ -2897,3 +2897,19 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .spk-quiet a:hover{color:var(--purple-ink);text-decoration-color:var(--purple)}
 .spk-quiet span{color:var(--muted);font-size:12px}
 .spk-act.spk-quiet a{font-size:13px!important;font-weight:400!important;color:var(--ink-2)!important}.spk-act.spk-quiet a:hover{color:var(--purple-ink)!important}p.ns-getmail{font-size:12.5px!important;color:var(--muted)!important;margin-top:6px!important}p.ns-getmail a{color:var(--ink-2)!important;text-decoration-color:color-mix(in srgb,var(--purple) 35%,transparent)}
+
+/* Jump bar, redesigned (MW 2026-11-16: "the intro text is out of line"): "Jump to" is set in the same
+   face and size as the buttons and centered on them, with a line after it; each day's label stacks
+   the day over its date, so every piece of text in the bar sits on one center line. */
+.pg-jumpbar .wrap{align-items:center;gap:0}
+.pg-jl{font:600 14px/20px var(--sans,inherit);color:var(--purple-ink);letter-spacing:.01em;padding-right:18px;margin-right:18px;border-right:1px solid color-mix(in srgb,var(--purple) 25%,transparent);align-self:stretch;display:flex;align-items:center}
+.pg-jumpbar .pg-jump{align-items:center;gap:10px 22px}
+.pg-jd{align-items:center;gap:12px}
+.pg-jd + .pg-jd{padding-left:22px}
+.pg-jdl{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;font-size:13px;line-height:16px;font-weight:700;letter-spacing:.01em}
+.pg-jdl small{font-size:12px;line-height:15px;font-weight:500;color:var(--muted,#6b6475)}
+@media (max-width:700px){.pg-jl{border-right:0;padding-right:0;margin:0 0 10px;width:100%}}
+@media (max-width:700px){.pg-jd + .pg-jd{padding-left:0}.pg-jumpbar .pg-jump{gap:14px}}
+
+/* Follow button sits left-aligned under the question (MW 2026-11-16) */
+.tp-q .tp-folrow{margin:6px 0 0;font:inherit}
