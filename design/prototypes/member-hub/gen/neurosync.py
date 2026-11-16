@@ -93,7 +93,7 @@ INV=f'''<article class="ns-fly" aria-labelledby="fly-h">
           <div><p class="ns-fl">Recognition</p><ul class="ns-rec"><li>Early Career Award, a national neuroscience society, 2024</li><li>Funded by the National Institutes of Health and the National Science Foundation</li></ul></div>
         </div>
         <dl class="ns-fly-w"><div><dt>When</dt><dd>Wednesday, December 2, 2026<br>2:30 to 3:30 p.m.</dd></div><div><dt>Where</dt><dd>{LOC}<br>Refreshments provided</dd></div><div><dt>Online</dt><dd>Zoom. The link is in the weekly email.</dd></div><div><dt>Hosted by</dt><dd>The CNAP Center. Invited by Dr. Priya Raman.</dd></div></dl>
-        <p class="ns-fq">Questions? <a href="mailto:mkwills@ksu.edu">mkwills@ksu.edu</a> · <a href="{gcal('2026-12-02','Machine learning for spike sorting')}" target="_blank" rel="noopener">Add to Google Calendar</a> · <a href="{ocal('2026-12-02','Machine learning for spike sorting')}" target="_blank" rel="noopener">Outlook</a></p>
+        <p class="ns-fq">Questions? <a href="mailto:mkwills@ksu.edu">mkwills@ksu.edu</a> · <a href="{gcal('2026-12-02','Machine learning for spike sorting')}" target="_blank" rel="noopener">Add to Google Calendar</a> · <a href="{ocal('2026-12-02','Machine learning for spike sorting')}" target="_blank" rel="noopener">Outlook</a> · <a href="neurosync-flyer.pdf" target="_blank" rel="noopener" data-flyer title="A letter-size PDF flyer for this talk, ready to print and post.">Flyer to print (PDF)</a></p>
       </article>'''
 
 import math as _m, random as _r
@@ -207,6 +207,8 @@ page=f'''<!doctype html>
   if('IntersectionObserver' in window){{document.documentElement.classList.add('sv-js');var io=new IntersectionObserver(function(es){{es.forEach(function(e){{if(e.isIntersecting){{e.target.classList.add('in');io.unobserve(e.target);}}}});}},{{rootMargin:'0px 0px -20% 0px'}});document.querySelectorAll('.sv-sh').forEach(function(el){{io.observe(el);}});}}
 }})();
 </script>
+<script>(function(){{var a=document.querySelector('[data-flyer]');if(!a||!window.claude||!window.claude.use)return;var dl=null;window.claude.use('downloads').then(function(d){{dl=d;}}).catch(function(){{}});
+a.addEventListener('click',function(e){{if(!dl)return;e.preventDefault();fetch(a.getAttribute('href')).then(function(r){{if(!r.ok)throw 0;return r.blob();}}).then(function(b){{return dl.save({{filename:'NeuroSync flyer, December 2, 2026.pdf',data:b}});}}).catch(function(){{}});}});}})();</script>
 <script src="hubchrome.js" defer></script>
 </body>
 </html>
