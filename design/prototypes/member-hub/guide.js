@@ -47,3 +47,10 @@ var b64=window.CNAP_MEETING_LOG;var p=b64?Promise.resolve(Uint8Array.from(atob(b
   function done(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1800);}
   function sel(){var r=document.createRange();r.selectNodeContents(p);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected. Press Ctrl+C';}
   try{navigator.clipboard.writeText(t).then(done,sel);}catch(e){sel();}});});})();
+
+/* Guide heroes (MW 2026-11-15: "pull the paragraph and the box over the line of CNAP"): the intro and
+   the step list end where the title's longest line ends. */
+(function(){var h=document.querySelector('.open-g h1');if(!h)return;var els=[].slice.call(document.querySelectorAll('.open-g .lead,.open-g .hs'));
+function fit(){var r=document.createRange();r.selectNodeContents(h);var w=0,tops={};[].forEach.call(r.getClientRects(),function(x){w=Math.max(w,x.width);tops[Math.round(x.top)]=1;});if(Object.keys(tops).length>1)w=h.parentNode.clientWidth;
+  var narrow=innerWidth<760;els.forEach(function(e){e.style.maxWidth=narrow?'':Math.round(Math.max(w,360))+'px';e.style.width=narrow?'':'100%';});}
+fit();addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);addEventListener('load',fit);})();
