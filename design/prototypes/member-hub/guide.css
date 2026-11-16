@@ -2827,3 +2827,9 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 @media (max-width:640px){.ct tbody th,.ct td:last-child{white-space:normal}}
 /* Site Visit photos hero, taller (MW 2026-11-15: "stretch out the hero here a bit to be taller") */
 @media (min-width:901px){.pg-hero{padding-block:48px 72px}.pg-hgrid{align-items:center}.pg-collage{height:clamp(380px,36vw,500px);margin-top:20px}}
+/* More room between the hero's parts (MW 2026-11-15: "give this more space between sections too") */
+.pg-hero .crumb{margin-bottom:36px}
+.pg-hero .pg-kick{margin:0 0 14px}
+.pg-hero h1{margin-top:0}
+.pg-hero .pg-lead{margin-top:22px;line-height:1.6}
+.pg-hero .pg-act{margin-top:34px}
