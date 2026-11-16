@@ -33,7 +33,8 @@ body = ''
 for day, date, gs in DAYS:
     did = 'pg-' + day.lower().replace(' ', '')
     body += f'<section class="pg-day" aria-labelledby="{did}"><h2 class="pg-dh" id="{did}">{day}<span>{date}</span></h2>{"".join(group(*g) for g in gs)}</section>'
-jump = ''.join(f'<li><a href="#pg-{t.lower().replace(" ", "-")}">{t}</a></li>' for _, _, gs in DAYS for t, _, _, _ in gs)
+# MW 2026-11-15: "give this a little more pizzazz so people don't overlook it": grouped by day, with photo counts, and the part on screen lights up
+jump = ''.join(f'<li class="pg-jd"><span class="pg-jdl">{day}</span><ul>' + ''.join(f'<li><a href="#pg-{t.lower().replace(" ", "-")}"><span>{t}</span><b class="num" aria-label="{n} photographs">{n}</b></a></li>' for t, n, _, _ in gs) + '</ul></li>' for day, _, gs in DAYS)
 page = head + f'''<main id="main">
   <section class="pg-hero" aria-labelledby="t">
     <div class="wrap pg-hgrid">
@@ -52,11 +53,14 @@ page = head + f'''<main id="main">
       </div>
     </div>
   </section>
-  <nav class="pg-jumpbar" aria-label="Jump to a part of the program"><div class="wrap"><ul class="pg-jump">{jump}</ul></div></nav>
+  <nav class="pg-jumpbar" aria-label="Jump to a part of the program"><div class="wrap"><p class="pg-jl">Jump to</p><ul class="pg-jump">{jump}</ul></div></nav>
   <div class="wrap pg-body">{body}</div>
 </main>
 
 {foot}
+<script>(function(){{var as=[].slice.call(document.querySelectorAll('.pg-jump a')),ss=as.map(function(a){{return document.getElementById(a.getAttribute('href').slice(1));}});
+function spy(){{var y=innerHeight*.35,cur=-1;ss.forEach(function(h,i){{if(h&&h.getBoundingClientRect().top<y)cur=i;}});as.forEach(function(a,i){{a.classList.toggle('on',i===cur);if(i===cur)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');}});}}
+addEventListener('scroll',spy,{{passive:true}});spy();}})();</script>
 <script src="hubchrome.js" defer></script>
 </body>
 </html>

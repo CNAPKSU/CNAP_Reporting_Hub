@@ -2833,3 +2833,20 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .pg-hero h1{margin-top:0}
 .pg-hero .pg-lead{margin-top:22px;line-height:1.6}
 .pg-hero .pg-act{margin-top:34px}
+/* Photos jump bar with more presence (MW 2026-11-15): a lavender band with a purple edge, the parts
+   grouped by day with photo counts, and the part on screen filled in purple. */
+.pg-jumpbar{background:color-mix(in srgb,#efe8f8 92%,transparent);border-top:3px solid var(--purple);border-bottom:1px solid color-mix(in srgb,var(--purple) 22%,transparent);box-shadow:0 6px 18px rgba(40,20,70,.08);padding-block:14px}
+.pg-jumpbar .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.pg-jl{margin:0;font:500 18px/24px var(--serif);color:var(--purple-ink)}
+.pg-jumpbar .pg-jump{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:0}
+.pg-jd{display:flex;align-items:center;gap:10px}
+.pg-jd + .pg-jd{padding-left:18px;border-left:1px solid color-mix(in srgb,var(--purple) 25%,transparent)}
+.pg-jdl{font-size:12.5px;font-weight:700;color:var(--purple-ink);letter-spacing:.02em}
+.pg-jd ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pg-jump a{gap:8px;min-height:36px;padding:0 6px 0 14px;border:1px solid color-mix(in srgb,var(--purple) 28%,transparent);background:#fff;font-weight:500;transition:background .15s,border-color .15s,color .15s}
+.pg-jump a b{display:inline-grid;place-items:center;min-width:24px;height:24px;padding:0 6px;border-radius:12px;background:color-mix(in srgb,var(--purple) 12%,#fff);color:var(--purple-ink);font-size:12px;font-weight:700}
+.pg-jump a:hover{border-color:var(--purple);background:#faf7fe}
+.pg-jump a.on{background:var(--purple);border-color:var(--purple);color:#fff}
+.pg-jump a.on b{background:rgba(255,255,255,.22);color:#fff}
+@media (prefers-reduced-motion:reduce){.pg-jump a{transition:none}}
+@media (max-width:700px){.pg-jd + .pg-jd{padding-left:0;border-left:0}.pg-jd{flex-wrap:wrap}}
