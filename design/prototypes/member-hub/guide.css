@@ -2716,3 +2716,22 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .al-to b{font:500 19px/25px var(--serif);color:var(--ink)}
 .al-to span:last-child:not(.al-k){color:var(--ink-2)}
 .al-path{grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr)}
+
+/* Past outside speakers on Community (MW 2026-11-15) */
+.sp-bar{display:flex;align-items:center;justify-content:space-between;gap:10px 20px;flex-wrap:wrap;margin:16px 0 14px}
+.sp-c{margin:0;font-size:14px;color:var(--muted)}
+.sp-c b{color:var(--ink)}
+.sp-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.sp{display:flex;flex-direction:column;gap:8px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.sp-hd{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center}
+.sp-n{margin:0;font:500 18px/24px var(--serif);color:var(--ink)}
+.sp-i{margin:2px 0 0;font-size:13.5px;line-height:19px;color:var(--muted)}
+.sp-t{margin:6px 0 0;font:500 16.5px/23px var(--serif);color:var(--ink-2);text-wrap:balance}
+.sp-m{display:flex;align-items:center;gap:8px;margin:0;font-size:13.5px;color:var(--muted)}
+.sp-tag{padding:1px 9px;border-radius:12px;font-size:12.5px;font-weight:700}
+.sp-ns{background:var(--purple-tint);color:var(--purple-ink)}
+.sp-col{background:var(--teal-tint);color:var(--teal)}
+.sp-a{display:flex;flex-direction:column;align-items:flex-start;gap:0;margin-top:auto;padding-top:8px;border-top:1px solid var(--line)}
+.sp-a .t3{font-size:14px;min-height:34px}
+@media (max-width:1100px){.sp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.sp-grid{grid-template-columns:minmax(0,1fr)}}

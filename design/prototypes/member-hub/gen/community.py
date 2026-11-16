@@ -206,7 +206,30 @@ def _alum(i,t,n,c,w,f,ok):
             f'<li class="al-to"><span class="al-k">Now</span><b>{NOW[i][0]}</b><span>{NOW[i][1]}</span></li></ol>{foot}</li>')
 alumni=''.join(_alum(*x) for x in AL)
 
-SECS=[('cm-ach','Recent achievements'),('cm-ask','Ask the community'),('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-alum','CNAP alumni'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
+
+# Past outside speakers (MW 2026-11-15). NeuroSync names come from the prototype's NeuroSync schedule; colloquium speakers are fictional too.
+SPK=[('JW','t','Dr. Julian West','University of Kansas','Psychological Sciences','Fear, safety, and the amygdala','ns','Fall 2026'),
+ ('KR','a','Dr. Kendra Ross','Wichita State University','Psychology','Habits, goals, and the striatum','ns','Fall 2026'),
+ ('CB','a','Dr. Claire Bennett','University of Missouri','Psychology','Dopamine and the speed of choice','ns','Fall 2026'),
+ ('AL','p','Dr. Alicia Lowe','University of Iowa','Neuroscience','Sleep spindles across the lifespan','col','Fall 2026'),
+ ('BM','t','Dr. Ben Moreau','University of Kansas','Biomedical Engineering','Wearable EEG outside the lab','ns','Spring 2026'),
+ ('FB','p','Dr. Felix Brandt','Creighton University','Psychology','Reward, effort, and fatigue','ns','Spring 2026'),
+ ('RN','a','Dr. Rafael Nunes','Washington University in St. Louis','Psychological and Brain Sciences','How memories change when they are recalled','col','Spring 2026'),
+ ('MT','t','Dr. Mei Tanaka','University of Nebraska','Psychology','Attention in children with ADHD','ns','Fall 2025'),
+ ('AK','p','Dr. Anna Kowal','University of Kansas Medical Center','Neurology','Recovery of movement after stroke','ns','Fall 2025'),
+ ('GH','a','Dr. Grace Hollis','University of Colorado Boulder','Integrative Physiology','Exercise, inflammation, and the aging brain','col','Fall 2025'),
+ ('RA','t','Dr. Ruth Adler','Oklahoma State University','Psychology','Social stress in adolescent rats','ns','Spring 2025'),
+ ('VC','p','Dr. Victor Castillo','University of Texas at Austin','Neuroscience','Plasticity in the adult visual cortex','col','Spring 2025')]
+SER={'ns':'NeuroSync','col':'Colloquium'}
+def _spk(x):
+    i,t,n,inst,dept,ti,se,sem=x
+    connect=mt('cnap@ksu.edu','Connecting with '+n,'\n'.join(['Name:','','I would like to connect with '+n+' ('+inst+') because:','']),cc=None)
+    return (f'<li class="sp" data-se="{se}"><div class="sp-hd"><span class="cm-av av-{t}" aria-hidden="true">{i}</span><div><p class="sp-n">{n}</p><p class="sp-i">{inst}<br>{dept}</p></div></div>'
+            f'<p class="sp-t">{ti}</p><p class="sp-m"><span class="sp-tag sp-{se}">{SER[se]}</span>{sem}</p>'
+            f'<div class="sp-a"><button type="button" class="t3" data-rec="{ti}">Watch the recording</button><a class="t3" href="{connect}" title="Starts an email asking the CNAP team to connect you with this speaker.">Ask to be connected</a></div></li>')
+speakers=''.join(_spk(x) for x in SPK)
+
+SECS=[('cm-ach','Recent achievements'),('cm-ask','Ask the community'),('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-alum','CNAP alumni'),('cm-spk','Past outside speakers'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]
 spine=''.join(f'<li><a href="#{i}"><span class="n"><b>{n}</b></span><span>{t}</span></a></li>' for n,(i,t) in enumerate(SECS,1))
 SHARE=mt('cnap@ksu.edu','An achievement to share','\n'.join(['Name:','','The achievement (a paper, grant, talk, award, or milestone):','','A link, if there is one:','']),cc=None)
 
@@ -282,6 +305,12 @@ page=f'''<!doctype html>
         <section class="step cs" id="cm-alum" aria-labelledby="cm-alum-h">
           <h2 id="cm-alum-h">CNAP alumni</h2>
           <div class="cs-b"><p>Former project leaders, and where each one’s research has led. Each alumnus chooses what appears here, and can change or remove the entry at any time.</p><ul class="al-list">{alumni}</ul></div>
+        </section>
+        <section class="step cs" id="cm-spk" aria-labelledby="cm-spk-h">
+          <h2 id="cm-spk-h">Past outside speakers</h2>
+          <div class="cs-b"><p>Researchers from other institutions who have spoken at NeuroSync or the CNAP Colloquium. Many are glad to hear from CNAP members, and the CNAP team can put you in touch.</p>
+            <div class="sp-bar"><div class="pf-filt sp-f" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-sf="all">All</button><button type="button" aria-pressed="false" data-sf="ns">NeuroSync</button><button type="button" aria-pressed="false" data-sf="col">Colloquium</button></div><p class="sp-c" role="status"><b data-spn>12</b> speakers</p></div>
+            <ul class="sp-grid">{speakers}</ul></div>
         </section>
         <section class="step cs" id="cm-ways" aria-labelledby="cm-ways-h">
           <h2 id="cm-ways-h">Ways to connect</h2>
@@ -378,6 +407,9 @@ page=f'''<!doctype html>
     bs.forEach(function(b){{b.addEventListener('click',function(){{var v=b.dataset.pz;card.dataset.view=v;bs.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});
       card.querySelector('.pz-badge').lastChild.textContent=v==='me'?'Your view':'Visible to members';say.textContent=v==='me'?'This is your own view. The locked rows never appear to other members.':'This is what other CNAP members see.';}});}});}})();
   document.querySelectorAll('[data-direct]').forEach(function(b){{b.addEventListener('click',function(){{var n=b.dataset.direct;if(window.hubToast)hubToast('<b>In the Member Hub, this starts an email to '+n+'.</b> The members here are fictional, so nothing opens in the prototype.');}});}});
+  (function(){{var cs=[].slice.call(document.querySelectorAll('.sp')),fb=document.querySelectorAll('.sp-f button'),n=document.querySelector('[data-spn]');
+    fb.forEach(function(b){{b.addEventListener('click',function(){{var f=b.dataset.sf,c=0;fb.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});cs.forEach(function(x){{var ok=f==='all'||x.dataset.se===f;x.hidden=!ok;if(ok)c++;}});n.textContent=c;}});}});
+    document.querySelectorAll('[data-rec]').forEach(function(b){{b.addEventListener('click',function(){{if(window.hubToast)hubToast('<b>In the Member Hub, this opens the recording of “'+b.dataset.rec+'.”</b> The recordings are not part of the prototype.');}});}});}})();
   var th=[].slice.call(document.querySelectorAll('.cm-th')),tb=document.querySelectorAll('.cm-tf button');
   function tf(k){{th.forEach(function(r){{r.hidden=k==='m'?r.dataset.m!=='1':k==='u'?r.dataset.u!=='1':false;}});}}
   tb.forEach(function(b){{b.addEventListener('click',function(){{tb.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});tf(b.dataset.t);}});}});tf('m');
