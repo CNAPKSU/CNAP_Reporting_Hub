@@ -32,7 +32,7 @@ def page(d):
     k, name = d['k'], d['name']
     first = name.replace('Dr. ', '').split()[0]
     av = f'<span class="cm-av av-{d["tone"]} lg" aria-hidden="true">{d["ini"]}</span>'
-    where = d['alum'][1] if d['alum'] else d['role']
+    where = ('CNAP alumnus, ' + {'At K-State':'Kansas State University'}.get(C.NOW[d['ini']][0], C.NOW[d['ini']][0]) + ', ' + C.NOW[d['ini']][1]) if d['alum'] else d['role']
     chips = ''.join(f'<span>{x}</span>' for x in d['ints'])
     started = [(kk, TT[kk][0]) for kk in TT if kk == k]
     replied = [(kk, TT[kk][0]) for kk, rs in REPLIES.items() if any(r[0] == k for r in rs) and kk in TT]
@@ -45,9 +45,9 @@ def page(d):
     if d['alum']:
         c, w, f, ok = d['alum']
         r, yrs = C._split(c); aw, ag = C._split(f)
-        alum = (f'<section class="mb-sec" aria-labelledby="mb-path"><h2 id="mb-path" data-rail="At CNAP and after">At CNAP and after</h2>'
+        alum = (f'<section class="mb-sec" aria-labelledby="mb-path"><h2 id="mb-path" data-rail="At CNAP and now">At CNAP and now</h2>'
                 f'<ol class="al-path"><li class="al-from"><span class="al-k">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li><li class="al-gap" aria-hidden="true"></li>'
-                f'<li class="al-to"><span class="al-k">After CNAP</span><b>{aw}</b>{f"<span>{ag}</span>" if ag else ""}</li></ol>'
+                f'<li class="al-to"><span class="al-k">Now</span><b>{C.NOW[d["ini"]][0]}</b><span>{C.NOW[d["ini"]][1]}</span></li></ol>'
                 + ('<p class="al-ok" style="margin-top:14px">Happy to talk with new project leaders</p>' if ok else '') + '</section>')
     ints = f'<section class="mb-sec" aria-labelledby="mb-int"><h2 id="mb-int" data-rail="Interests and methods">Interests and methods</h2><p class="cm-chips mb-chips">{chips}</p></section>' if chips else ''
     return head.replace('<title>Community · CNAP Member Hub</title>', f'<title>{name} · CNAP Member Hub</title>') + f'''<main id="main" class="mb-page">

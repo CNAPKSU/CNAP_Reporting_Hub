@@ -25,7 +25,7 @@ M=[
  ('ms','MS','Dr. Maya Singh','Cognitive Neuroscience Core','core',['Working memory','Aging','EEG','Eye tracking'],'t',False),
  ('wz','WZ','Dr. Wei Zhang','Neuroinformatics Core','core',['Data pipelines','Imaging','High-performance computing','Statistics'],'p',False),
  ('tb','TB','Tom Brandt','Behavioral Neuroscience Core','core',['Electrophysiology','Rodent behavior'],'a',False),
- ('do','DO','Dr. David Osei','Pilot project alumnus, R01 funded','alumni',['Aging','Cognition','Grant writing'],'t',False),
+ ('do','DO','Dr. David Osei','Pilot project alumnus','alumni',['Aging','Cognition','Grant writing'],'t',False),
 ]
 BY={m[0]:m for m in M}
 G=[('all','Everyone'),('investigators','Project leaders'),('mentors','Mentors'),('core','Core staff'),('students','Students'),('alumni','Alumni')]
@@ -193,15 +193,17 @@ def _gap(c,f):
     if not y or not ly: return ''
     g=int(y[-1])-ly
     return 'The same year' if g<=0 else ('1 year later' if g==1 else f'{g} years later')
+NOW={'DO':('At K-State','Psychological Sciences'),'ID':('At K-State','Psychological Sciences'),'LM':('University of Nebraska','Neuroscience'),
+     'MH':('At K-State','Kinesiology'),'SC':('University of Colorado','Psychology'),'AW':('In industry','Neurotechnology')}
 def _alum(i,t,n,c,w,f,ok):
     r,yrs=_split(c); aw,ag=_split(f)
     first=n.replace('Dr. ','').split()[0]
     foot=(f'<div class="al-foot"><p class="al-ok">Happy to talk with new project leaders</p><div class="cm-acts"><button type="button" class="btn sm al-mail" data-direct="{n}">Email {first}</button>'
           f'<span class="cm-or">or</span><a class="btn sm" href="{intro(n)}" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></div>') if ok else ''
-    return (f'<li class="al"><div class="al-head"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div><p class="al-n"><a class="mb-link" href="member-{i.lower()}.html">{n}</a></p><p class="al-w">{w}</p></div></div>'
+    return (f'<li class="al"><div class="al-head"><span class="cm-av av-{t} lg" aria-hidden="true">{i}</span><div><p class="al-n"><a class="mb-link" href="member-{i.lower()}.html">{n}</a></p></div></div>'
             f'<ol class="al-path" aria-label="Career path"><li class="al-from"><span class="al-k">At CNAP</span><b>{r}</b>{f"<span>{yrs}</span>" if yrs else ""}</li>'
             '<li class="al-gap" aria-hidden="true"></li>'
-            f'<li class="al-to"><span class="al-k">After CNAP</span><b>{aw}</b>{f"<span>{ag}</span>" if ag else ""}</li></ol>{foot}</li>')
+            f'<li class="al-to"><span class="al-k">Now</span><b>{NOW[i][0]}</b><span>{NOW[i][1]}</span></li></ol>{foot}</li>')
 alumni=''.join(_alum(*x) for x in AL)
 
 SECS=[('cm-ach','Recent achievements'),('cm-ask','Ask the community'),('cm-first','Your first month'),('cm-match','Members who share your interests'),('cm-know','Member interests and expertise'),('cm-dir','Member directory'),('cm-alum','CNAP alumni'),('cm-ways','Ways to connect'),('cm-ann','Announcements'),('cm-priv','Your profile and privacy')]

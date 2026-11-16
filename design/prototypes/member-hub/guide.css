@@ -2710,3 +2710,9 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .cm-or{font-size:14px;color:var(--muted);padding:0 2px}
 .cm-al>.cm-acts .cm-or{align-self:center}
 .cm-or{font-size:12.5px!important;padding:0!important;margin:0 -2px}
+/* Alumni "Now": where they are, not what they won, so the box is calm (MW 2026-11-15) */
+.al-to{background:var(--teal-tint);color:var(--ink)}
+.al-to .al-k{color:var(--teal)}
+.al-to b{font:500 19px/25px var(--serif);color:var(--ink)}
+.al-to span:last-child:not(.al-k){color:var(--ink-2)}
+.al-path{grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr)}
