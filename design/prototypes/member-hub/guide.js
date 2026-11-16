@@ -52,5 +52,6 @@ var b64=window.CNAP_MEETING_LOG;var p=b64?Promise.resolve(Uint8Array.from(atob(b
    the step list end where the title's longest line ends. */
 (function(){var h=document.querySelector('.open-g h1');if(!h)return;var els=[].slice.call(document.querySelectorAll('.open-g .lead,.open-g .hs'));
 function fit(){var r=document.createRange();r.selectNodeContents(h);var w=0,tops={};[].forEach.call(r.getClientRects(),function(x){w=Math.max(w,x.width);tops[Math.round(x.top)]=1;});if(Object.keys(tops).length>1)w=h.parentNode.clientWidth;
-  var narrow=innerWidth<760;els.forEach(function(e){e.style.maxWidth=narrow?'':Math.round(Math.max(w,360))+'px';e.style.width=narrow?'':'100%';});}
+  var narrow=innerWidth<760,inset=Math.round(parseFloat(getComputedStyle(h).fontSize)*.045);/* the serif M starts a few pixels in from its box, so the intro and list step in to line up with its stem */
+  els.forEach(function(e){e.style.marginLeft=inset+'px';e.style.maxWidth=narrow?'':Math.round(Math.max(w,360)-inset)+'px';e.style.width=narrow?'':'100%';});}
 fit();addEventListener('resize',fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);addEventListener('load',fit);})();
