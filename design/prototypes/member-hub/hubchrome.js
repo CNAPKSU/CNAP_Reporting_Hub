@@ -242,7 +242,7 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
   document.head.appendChild(st);
   var tip = document.createElement('div'); tip.className = 'hub-tip'; tip.setAttribute('role', 'tooltip'); tip.id = 'hub-tip';
   var cur = null, timer = 0;
-  function host(el) { while (el && el.nodeType === 1) { if (el.hasAttribute && (el.hasAttribute('title') || el.hasAttribute('data-tip'))) return el; el = el.parentElement; } return null; }
+  function host(el) { if (el && el.closest && el.closest('.hr-rail, .otp, .spine')) return null; while (el && el.nodeType === 1) { if (el.hasAttribute && (el.hasAttribute('title') || el.hasAttribute('data-tip'))) return el; el = el.parentElement; } return null; }
   function claim(el) { var t = el.getAttribute('title'); if (t) { el.setAttribute('data-tip', t); el.removeAttribute('title'); } return el.getAttribute('data-tip'); }
   function show(el) {
     var text = claim(el); if (!text) return;
@@ -309,4 +309,52 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
     if (kind === 'saved') return '<b>Saved.</b> ' + (p === 'none' ? 'No thread emails. New replies still show on your Home page.' : 'You’ll get ' + l + '. The first reply to your own question still comes right away.' ) + ' In the prototype, nothing is sent.';
     return '';
   };
+})();
+
+/* "On this page" dot rail for pages that do not have one yet, matching Home (MW 2026-11-15) */
+(function () {
+  function build() {
+    if (document.querySelector('.otp, .spine, .hr-rail')) return;
+    var main = document.querySelector('main'); if (!main) return;
+    var marked = [].slice.call(main.querySelectorAll('[data-rail]'));
+    var hs = marked.length ? marked : [].slice.call(main.querySelectorAll('h2')).filter(function (h) {
+      if (h.closest('dialog, aside, .th-side, .tp-side, [hidden], .cm-day, .ev-cal, .sr')) return false;
+      var t = h.textContent.trim(); return t && t.length < 60 && h.getClientRects().length;
+    });
+    if (hs.length < 3) return;
+    var st = document.createElement('style');
+    st.textContent = '.hr-rail{position:fixed;z-index:30;left:max(10px,env(safe-area-inset-left,0px));top:124px;width:28px;padding:10px 0;box-sizing:border-box;border-radius:12px;border:1px solid transparent;background:transparent;transition:width .2s ease,background-color .2s,box-shadow .2s,border-color .2s;font-family:"Inter Hub","Inter",system-ui,sans-serif}'
+      + '.hr-rail ol{position:relative;list-style:none;margin:0;padding:0}'
+      + '.hr-rail ol::before{content:"";position:absolute;left:13px;top:12px;bottom:12px;width:1px;background:var(--line-2,#d3cdc3)}'
+      + '.hr-rail a{position:relative;display:block;height:26px;padding:3px 12px 3px 30px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:transparent;font-size:14px;line-height:20px;text-decoration:none}'
+      + '.hr-rail a::before{content:"";position:absolute;left:9px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--surface,#fff);border:1.5px solid var(--line-2,#d3cdc3);transition:all .25s}'
+      + '.hr-rail a.seen::before{border-color:var(--purple,#512888)}'
+      + '.hr-rail a[aria-current="true"]::before{background:var(--purple,#512888);border-color:var(--purple,#512888);box-shadow:0 0 0 4px rgba(81,40,136,.14)}'
+      + '.hr-rail .hr-h{display:none;margin:0 0 6px;padding:0 16px 10px 14px;border-bottom:1px solid var(--line,#e4e0d8);font:500 19px/24px "Lora Hub","Lora",Georgia,serif;color:var(--ink,#1d1b21)}'
+      + '.hr-rail:hover,.hr-rail:focus-within{width:250px;padding:16px 0 10px;background:var(--surface,#fff);border-color:var(--line,#e4e0d8);box-shadow:0 18px 40px -18px rgba(29,27,33,.3)}'
+      + '.hr-rail:hover .hr-h,.hr-rail:focus-within .hr-h{display:block}'
+      + '.hr-rail:hover a,.hr-rail:focus-within a{color:var(--ink-2,#423e48);height:auto;white-space:normal;padding-top:6px;padding-bottom:6px}'
+      + '.hr-rail:hover a:hover,.hr-rail:focus-within a:hover{color:var(--purple,#512888)}'
+      + '.hr-rail:hover a[aria-current="true"],.hr-rail:focus-within a[aria-current="true"]{color:var(--purple-ink,#3c1d66);font-weight:600}'
+      + '.hr-rail:hover a::before,.hr-rail:focus-within a::before{top:12px}'
+      + '@media (max-width:1180px){.hr-rail{display:none}}@media (prefers-reduced-motion:reduce){.hr-rail,.hr-rail a::before{transition:none}}';
+    document.head.appendChild(st);
+    var nav = document.createElement('nav'); nav.className = 'hr-rail'; nav.setAttribute('aria-label', 'Sections on this page');
+    var ol = document.createElement('ol'), links = [];
+    hs.forEach(function (h, i) {
+      if (!h.id) h.id = 'sec-' + (i + 1);
+      var li = document.createElement('li'), a = document.createElement('a');
+      a.href = '#' + h.id; a.textContent = h.getAttribute('data-rail') || h.textContent.replace(/\s+/g, ' ').trim();
+      a.addEventListener('click', function (e) { e.preventDefault(); var y = h.getBoundingClientRect().top + scrollY - 110; scrollTo({ top: y, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); h.classList.remove('th-bounce'); setTimeout(function () { void h.offsetWidth; h.classList.add('th-bounce'); }, 450); });
+      li.appendChild(a); ol.appendChild(li); links.push(a);
+    });
+    var hh = document.createElement('p'); hh.className = 'hr-h'; hh.textContent = 'On this page';
+    nav.appendChild(hh); nav.appendChild(ol); document.body.appendChild(nav);
+    function spy() {
+      var cur = 0; hs.forEach(function (h, i) { if (h.getBoundingClientRect().top < 200) cur = i; });
+      links.forEach(function (a, i) { a.toggleAttribute('aria-current', i === cur); if (i === cur) a.setAttribute('aria-current', 'true'); a.classList.toggle('seen', i < cur); });
+    }
+    addEventListener('scroll', spy, { passive: true }); spy();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(build, 50); }); else setTimeout(build, 50);
 })();

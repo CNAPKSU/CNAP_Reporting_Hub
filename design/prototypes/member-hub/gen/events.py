@@ -105,7 +105,7 @@ html=f'''<!doctype html>
       <div class="ev-feat">
         <div class="ev-poster" aria-hidden="true"><span class="p-day">Wednesday</span><span class="p-num">18</span><span class="p-mon">November</span></div>
         <div class="ev-ft">
-          <p class="eyebrow">This week at NeuroSync</p>
+          <p class="eyebrow" data-rail="This week at NeuroSync" id="ev-this">This week at NeuroSync</p>
           <h2>Memory consolidation during sleep</h2>
           <p class="ev-who"><b>Dr. Priya Raman</b>, Department of Psychological Sciences</p>
           <p class="ev-desc">How slow waves and sleep spindles decide which memories last, in younger and older adults.</p>
@@ -119,7 +119,7 @@ html=f'''<!doctype html>
   <div class="ev-body">
     <div class="wrap">
       <div class="ev-main">
-        <div class="ev-mode" role="group" aria-label="Show the calendar as"><button type="button" data-mode="month" aria-pressed="true">Calendar</button><button type="button" data-mode="list" aria-pressed="false">List</button></div>
+        <div class="ev-mode" data-rail="Calendar" id="ev-calh" role="group" aria-label="Show the calendar as"><button type="button" data-mode="month" aria-pressed="true">Calendar</button><button type="button" data-mode="list" aria-pressed="false">List</button></div>
         <div class="ev-cal" id="ev-month">{CALMK}</div>
         <div id="ev-list" hidden>
         <div class="ev-bar"><div class="ev-filt" role="group" aria-label="Show">{F}</div><p class="ev-tz">Central Time</p></div>
@@ -130,7 +130,7 @@ html=f'''<!doctype html>
       </div>
       <aside class="ev-side" aria-label="Key dates and NeuroSync">
         <div class="rp-card">
-          <h2>Key dates</h2>
+          <h2 data-rail="Key dates" id="ev-keys">Key dates</h2>
           <ul class="kd">
             <li class="k-due"><span class="kd-n">20</span><div><b>Year 11 pilot full proposals</b><span>Friday, November 20, by 5:00 p.m. Central</span></div></li>
             <li class="k-due"><span class="kd-n">30</span><div><b>Fall reporting closes</b><span>Monday, November 30</span></div></li>
@@ -138,7 +138,7 @@ html=f'''<!doctype html>
           </ul>
         </div>
         <div class="rp-card">
-          <h2>Subscribe</h2>
+          <h2 data-rail="Subscribe" id="ev-sub">Subscribe</h2>
           <p class="ev-sub">Please add the Center calendar to Outlook or Google, so new events appear automatically. Your private meetings are never included.</p>
           <button type="button" class="btn ev-copyfeed">Copy calendar link</button>
           <p class="meta ev-feed-note">The subscription link is created when the Hub goes live.</p>
@@ -149,7 +149,7 @@ html=f'''<!doctype html>
 
   <section class="ev-ns" aria-labelledby="ns-h">
     <div class="wrap">
-      <div class="ev-nsh"><div><p class="eyebrow">Every Wednesday, 2:30 to 3:30 p.m.</p><h2 id="ns-h"><a class="sh-link" href="neurosync.html">NeuroSync Weekly Speaker Series</a></h2><p>Talks are in Leadership Room 127. Refreshments are provided. CNAP members are expected to attend, and guests are welcome.</p></div><a class="btn" href="neurosync.html">The full schedule and past talks</a></div>
+      <div class="ev-nsh"><div><p class="eyebrow">Every Wednesday, 2:30 to 3:30 p.m.</p><h2 id="ns-h" data-rail="NeuroSync"><a class="sh-link" href="neurosync.html">NeuroSync Weekly Speaker Series</a></h2><p>Talks are in Leadership Room 127. Refreshments are provided. CNAP members are expected to attend, and guests are welcome.</p></div><a class="btn" href="neurosync.html">The full schedule and past talks</a></div>
       <ol class="lu">{lu}</ol>
     </div>
   </section>
@@ -159,7 +159,7 @@ html=f'''<!doctype html>
       <div class="ev-svd" aria-hidden="true"><span>May</span><b>25</b><i>and</i><b>26</b><span>2027</span></div>
       <div>
         <p class="eyebrow">The Center’s main event of the year</p>
-        <h2 id="sv-h"><a class="sh-link" href="sitevisit.html">The 2027 CNAP Site Visit</a></h2>
+        <h2 id="sv-h" data-rail="The 2027 Site Visit"><a class="sh-link" href="sitevisit.html">The 2027 CNAP Site Visit</a></h2>
         <ol class="agenda ev-agenda">
           <li><span class="ag-d">Tuesday, May 25<small>Daytime</small></span><span>Core tours, then primary project and pilot project presentations and updates.</span></li>
           <li><span class="ag-d">Tuesday, May 25<small>Evening</small></span><span>Keynote address and banquet.</span></li>

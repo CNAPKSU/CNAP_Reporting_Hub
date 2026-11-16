@@ -4,7 +4,7 @@ sys.path.insert(0, '/tmp/claude-0/hubproto/gen')
 from mail import mt
 V = '/tmp/claude-0/hubproto/v4/'
 src = open(V + 'threads.html').read()
-head = src[:src.index('<main id="main">')].replace('<title>Threads · CNAP Member Hub</title>', '<title>2026 Site Visit Photographs · CNAP Member Hub</title>').replace(' aria-current="page"', '')
+head = src[:src.index('<main id="main"')].replace('<title>Threads · CNAP Member Hub</title>', '<title>2026 Site Visit Photographs · CNAP Member Hub</title>').replace(' aria-current="page"', '')
 foot = src[src.index('<footer class="foot">'):src.index('</footer>', src.index('<footer class="foot">')) + 9]
 foot = foot[:foot.index('<span>Prototype')] + '<span>Prototype. Every photograph here is a placeholder. The real gallery comes from the CNAP team’s 2026 photographs.</span></div></footer>'
 SHARE = mt('cnap@ksu.edu', 'Photographs from the 2026 Site Visit', '\n'.join(['Name:', '', 'What the photographs show:', '', 'A link to the photographs, or attach them:', '']), cc=None)
@@ -27,7 +27,7 @@ def group(t, n, img, d):
         else:
             tiles += f'<li class="pg-t" aria-hidden="true"></li>'
     gid = 'pg-' + t.lower().replace(' ', '-')
-    return (f'<section class="pg-g" aria-labelledby="{gid}"><header class="pg-gh"><h3 id="{gid}">{t}</h3><p>{d} {n} photographs.</p></header>'
+    return (f'<section class="pg-g" aria-labelledby="{gid}"><header class="pg-gh"><h3 id="{gid}" data-rail="{t}">{t}</h3><p>{d} {n} photographs.</p></header>'
             f'<ul class="pg-grid" aria-label="{n} placeholder photographs of {t.lower()}">{tiles}</ul></section>')
 body = ''
 for day, date, gs in DAYS:
