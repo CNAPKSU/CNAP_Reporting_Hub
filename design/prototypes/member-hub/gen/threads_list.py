@@ -43,6 +43,10 @@ STARTED = {'jl': 6, 'kb': 0, 'lp': 9, 'rg': 3, 'hc': 12, 'pr': 5, 'sr': 14, 'om'
 MINE = {'lp', 'hc', 'do'}
 FOLLOW = {'jl', 'ms', 'pr'}
 TONE = {'Finding a collaborator': 'p', 'Methods and equipment': 't', 'Recruiting': 'a', 'Statistics': 'g', 'Funding': 'b', 'Events and groups': 'l', 'Hiring': 'a', 'Mentoring': 'p'}
+import os as _os
+def ML(k):  # MW 2026-11-15: every member name links to that member's profile, when the profile exists
+    n = BY[k][2]
+    return f'<a class="mb-link" href="member-{k}.html">{n}</a>' if _os.path.exists(V + f'member-{k}.html') else n
 TOPICS = sorted(set(t[2] for t in T))
 def rep(n): return 'No replies yet' if n == 0 else ('1 reply' if n == 1 else f'{n} replies')
 
@@ -62,7 +66,7 @@ def row(k, t, tp, r, a, mt_, w, un, ex, rs, grp):
           f'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h8v11l-4-3-4 3z"/></svg><span>{"Following" if fol else "Follow"}</span></button>')
     return (f'<li class="th-row{" th-un" if un else ""}" data-m="{"1" if mt_ else "0"}" data-u="{"1" if un else "0"}" data-tp="{tp}" data-g="{grp}" data-r="{r}" data-s="{STARTED[k]}" data-me="{"1" if k in MINE else "0"}" data-f="{"1" if fol else "0"}" data-q="{q}">'
             f'{av(k)}<div class="th-body"><p class="th-tp th-{TONE[tp]}">{tp}</p><h3 class="th-t"><a href="{href}"{pa}>{t}</a></h3><p class="th-ex">{ex}</p>'
-            f'<div class="th-foot"><p class="th-meta">{BY[k][2]} · {rep(r)} · {a}</p>{fb}</div>{why}{mine}</div>{right}</li>')
+            f'<div class="th-foot"><p class="th-meta">{ML(k)} · {rep(r)} · {a}</p>{fb}</div>{why}{mine}</div>{right}</li>')
 
 week = [x for x in T if x[10] == 'week']
 earlier = [x for x in T if x[10] == 'earlier']
@@ -71,12 +75,12 @@ rows = (f'<li class="th-grp" data-gh="week"><h2>This week</h2><span>{len(week)} 
 unans = [x for x in T if x[7]]
 def spotcard(x):
     return (f'<li class="th-spot">{av(x[0])}<div class="th-spb"><p class="th-tp th-{TONE[x[2]]}">{x[2]}</p><h3><a href="{url(x[0])}">{x[1]}</a></h3><p class="th-ex">{x[8]}</p>'
-            f'<p class="th-meta">Asked by {BY[x[0]][2]} · {x[4]}</p></div>'
+            f'<p class="th-meta">Asked by {ML(x[0])} · {x[4]}</p></div>'
             f'<a class="btn" href="{url(x[0])}#reply">Answer this thread</a></li>')
 spot = ''.join(spotcard(x) for x in unans)
 topics = ''.join(f'<li><button type="button" class="th-topic" data-topic="{x}" aria-pressed="false"><span class="th-dot th-{TONE[x]}" aria-hidden="true"></span><span class="th-tn">{x}</span><span class="th-c">{sum(1 for t in T if t[2] == x)}</span></button></li>' for x in TOPICS)
 HELP = [('pr', 11), ('ev', 9), ('ms', 8), ('do', 7)]
-helpful = ''.join(f'<li>{av(k, " sm")}<span class="th-hp"><b>{BY[k][2]}</b><small>{BY[k][3]}</small></span><span class="th-hc"><b>{n}</b> replies</span></li>' for k, n in HELP)
+helpful = ''.join(f'<li>{av(k, " sm")}<span class="th-hp"><b>{ML(k)}</b><small>{BY[k][3]}</small></span><span class="th-hc"><b>{n}</b> replies</span></li>' for k, n in HELP)
 n_m = sum(1 for t in T if t[5])
 n_u = len(unans)
 

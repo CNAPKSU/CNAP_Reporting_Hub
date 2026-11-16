@@ -22,7 +22,7 @@ C.BY['ao'] = ('ao', 'AO', 'Dr. Amara Okafor', 'Pilot project leader, you', 'inve
 BYT = {x[0]: x for x in T}
 def reply(k, when, txt):
     m = BY[k]
-    who = 'You' if k == 'ao' else m[2]
+    who = 'You' if k == 'ao' else ML(k)
     act = '' if k in ('ao', 'ev') else f'<p class="tp-ra"><a class="t3" href="{intro(m[2])}" title="Starts an email to the CNAP team asking for an introduction to {m[2]}.">Ask for an introduction</a></p>'
     return (f'<li class="tp-r">{av(k)}<div class="tp-rb"><p class="tp-rh"><b>{who}</b><span>{m[3]}</span><span>{when}</span></p>'
             f'<p class="tp-rt">{txt}</p>{act}</div></li>')
@@ -36,7 +36,7 @@ def page(k):
     seen = []
     for p_ in ppl:
         if p_ not in seen: seen.append(p_)
-    people = ''.join(f'<li>{av(p_, " sm")}<span>{"You" if p_ == "ao" else BY[p_][2]}</span></li>' for p_ in seen)
+    people = ''.join(f'<li>{av(p_, " sm")}<span>{"You" if p_ == "ao" else ML(p_)}</span></li>' for p_ in seen)
     same = [y for y in T if y[2] == tp and y[0] != k]
     other = [y for y in T if y[2] != tp and y[0] != k]
     rel = ''.join(f'<li><a href="{url(y[0])}">{y[1]}</a><span>{rep(y[3])}</span></li>' for y in (same + other)[:3])
@@ -50,7 +50,7 @@ def page(k):
       <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="community.html">Community</a><span aria-hidden="true">/</span><a href="threads.html">Threads</a><span aria-hidden="true">/</span><span aria-current="page">{t}</span></nav>
       <p class="th-tp th-{TONE[tp]}">{tp}</p>
       <h1 id="t">{t}</h1>
-      <div class="tp-byrow"><div class="tp-by">{av(k)}<p><b>{asker[2]}</b><span>{asker[3]} · Started {STARTED_ON[k]} · <span data-rc>{rep(n)}</span></span></p></div>
+      <div class="tp-byrow"><div class="tp-by">{av(k)}<p><b>{ML(k)}</b><span>{asker[3]} · Started {STARTED_ON[k]} · <span data-rc>{rep(n)}</span></span></p></div>
         <button type="button" class="th-fol tp-fol" aria-pressed="{'true' if fol else 'false'}" title="Follow this thread to get one email a day when it has new replies."><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h8v11l-4-3-4 3z"/></svg><span>{'Following' if fol else 'Follow'}</span></button></div>
     </div>
   </section>
