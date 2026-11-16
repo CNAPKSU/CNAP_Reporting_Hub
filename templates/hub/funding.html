@@ -60,7 +60,7 @@
       <nav class="spine" aria-label="Sections on this page">
         <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
         <ol>
-          {% if part == "news" %}{% if n_pinned %}<li><a href="#s-pinned">Pinned by the CNAP office</a></li>{% endif %}<li><a href="#s-news">Latest news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-milestones">What the funding labels mean</a></li><li><a href="#s-idea">NIH opportunities for IDeA states</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
+          {% if part == "news" %}{% if n_pinned %}<li><a href="#s-pinned">Pinned by the CNAP office</a></li>{% endif %}<li><a href="#s-news">Latest news</a></li><li><a href="#s-events">Events and talks</a></li>{% elif part == "resources" %}<li><a href="#s-before">Before you apply</a></li><li><a href="#s-milestones">What the funding labels mean</a></li><li><a href="#s-idea">NIH opportunities for IDeA states</a></li><li><a href="#s-foreign">Collaborators and co-authors abroad</a></li><li><a href="#s-toolkit">Proposal writing toolkit</a></li>{% else %}<li><a href="#s-for">Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</a></li><li><a href="#s-most">Relevant to most members</a></li><li><a href="#s-letters">Letters from the Center</a></li><li><a href="#s-suggest">Suggest an opportunity</a></li>{% endif %}
         </ol>
       </nav>
       <div class="fp-main">
@@ -153,6 +153,20 @@
               <p class="fp-ic-note">NIGMS is releasing fewer, simpler NOFOs, and release can be slower than in past years. NIGMS cannot discuss dates for unpublished opportunities, so watch <a href="https://www.grants.gov/" target="_blank" rel="noopener">Grants.gov</a>, including its forecasts, and <a href="https://grants.nih.gov/funding/explore-nih-opportunities" target="_blank" rel="noopener">Explore NIH Opportunities</a>.</p>
             </article>
           </div>
+        </section>
+        <section class="fp-sec" id="s-foreign" aria-labelledby="s-foreign-h">
+          {# MW 2026-11-15: from CNAP's plan for foreign components on IDeA grants (the plan's written guidance on the CNAP website) #}
+          <div class="fp-sh"><h2 id="s-foreign-h">Collaborators and co-authors abroad</h2><p>NIH counts significant work by a collaborator at a foreign institution as a foreign component. Under IDeA awards such as CNAP’s, a foreign component needs NIH’s approval before the work happens, and only K-State’s Signing Official can ask NIH for that approval.</p></div>
+          <div class="fp-idea"><article class="fp-ic">
+            <h3>What this means for your CNAP-supported work</h3>
+            <div class="fp-tbl"><table><thead><tr><th scope="col">When</th><th scope="col">What to do</th></tr></thead><tbody>
+              <tr><th scope="row">Before you add a collaborator or co-author at a foreign institution</th><td>Please talk with the CNAP team first, at <a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a>. The CNAP team works with K-State’s Sponsored Programs Administration on anything that needs NIH approval.</td></tr>
+              <tr><th scope="row">When you report a publication</th><td>The publication form reminds you to tell the CNAP team about any co-author at a foreign institution.</td></tr>
+              <tr><th scope="row">Before the Center’s annual progress report to NIH</th><td>The CNAP team reviews every publication and other product for foreign co-authors before the products go into the report.</td></tr>
+              <tr><th scope="row">Spending CNAP funds</th><td>CNAP funds never go to a foreign institution: no subawards, no subcontracts, and no other payments.</td></tr>
+            </tbody></table></div>
+            <p class="fp-ic-note">NIH’s notices: <a href="https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-026.html" target="_blank" rel="noopener">NOT-OD-26-026</a> and <a href="https://grants.nih.gov/grants/guide/notice-files/NOT-OD-26-084.html" target="_blank" rel="noopener">NOT-OD-26-084, the reminder of what counts as a foreign component</a>. NIH also explains <a href="https://grants.nih.gov/news-events/nih-extramural-nexus-news/2026/06/acknowledging-foreign-components-throughout-nih-application-and-award-processes" target="_blank" rel="noopener">how to acknowledge foreign components</a>.</p>
+          </article></div>
         </section>
         <section class="fp-sec" id="s-toolkit" aria-labelledby="s-toolkit-h">
           <div class="fp-sh"><h2 id="s-toolkit-h">Proposal writing toolkit</h2><p>Templates, examples, and guides for writing a proposal.</p></div>

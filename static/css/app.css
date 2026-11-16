@@ -2067,3 +2067,6 @@ details > summary + * { margin-top: 12px; }
 .resgroup-t { margin: 0 0 8px; font-weight: 600; font-size: .9rem; }
 .resgroup .checkgrid { margin: 0; }
 .side .foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+
+/* MW 2026-11-15: foreign components reminder on the publication form */
+.fc-note{margin-top:12px;padding:10px 14px;border-left:3px solid var(--purple,#512888);background:#f6f2fb;border-radius:6px;line-height:1.5}

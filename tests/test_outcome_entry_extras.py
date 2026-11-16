@@ -89,3 +89,11 @@ def test_talk_location_has_parts(client, center):
         t.location == "Kansas State University, Manhattan, Kansas, United States"
         and t.city == "Manhattan"
     )
+
+
+def test_publication_form_reminds_about_foreign_coauthors(client, center):
+    """MW 2026-11-15, CNAP's foreign components plan: a reminder at the point of reporting a publication."""
+    _login(client, "okafor")
+    page = client.get("/outcomes/new/pub/").content.decode()
+    assert "A co-author at a foreign institution?" in page
+    assert "/funding/resources/#s-foreign" in page

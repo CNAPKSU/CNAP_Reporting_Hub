@@ -797,3 +797,24 @@ To show real photos, the app needs an optional image on `FundingNews` and `Fundi
 - Following a thread (recommended Nov 15). Following means one email a day when a followed thread has new replies, and the new replies show on Home. Starting a thread or replying follows it automatically. The prototype shows a confirmation for each and sends nothing. Dependency: the app needs thread models, a follow table, a daily digest job, and a Home panel. Not built; needs approval.
 - Thread emails (Nov 15, MW agreed). The default is one email a week, sent only when there are new replies. Members can choose once a day, only their own questions, or no emails. The first reply to your own question comes right away unless you chose no emails. A thread with no replies after a week gets one email suggesting a next step. Every email has a one-click Unfollow for each thread, a link to stop all thread emails, and a link to change how often. Owners can mark a thread as answered, which stops its emails. Dependency: email settings on the member, a digest job, and signed one-click unfollow links. Not built; needs approval.
 - First-month checklist (Nov 15). In the prototype, "Mark as done" is remembered in that one browser only. In the app, each item's done state should be saved on the member's record, so the state follows the member to any device, and so the CNAP team can see who still needs an onboarding meeting. Dependency: a small onboarding-progress model, which needs a migration. Not built; needs approval.
+
+## 2026-11-15 — Foreign components plan in the Hub (MW chose option B)
+
+From CNAP's Plan for Preventing Foreign Co-Author Publications on IDeA Grants:
+
+- **Written guidance on the website:** Grant resources has a section, "Collaborators and co-authors abroad" (`#s-foreign`), with NIH's notices (NOT-OD-26-026, NOT-OD-26-084).
+- **Onboarding:** the mentee guide (Approvals before you begin) has a to-do item, and the mentor guide (Your role) has a note about flagging foreign co-authors when reviewing manuscripts. The guides are prototype pages.
+- **Publication reporting:** the publication form in the app shows a reminder at the point of reporting (`templates/portal/outcome_form.html`, publications only, not declined). This replaces the plan's "Piestar" reminder. MW approved this change to a reporting page. No survey question or reporting requirement changed.
+- **Listserv reminder:** a sample announcement in Community (prototype). Real reminders go out through the listserv as before.
+- **Administrative review before the RPPR:** stays a staff procedure. The Hub doesn't automate it.
+
+## 2026-11-15 — Eighth Before you apply question
+
+"Timeline and approvals" added to the seed list (`apps/outcomes/funding.py`). Seeding never overwrites, so an existing database gets the question when staff add it on the staff questions form, which now has an "Add a question" box. Every page that counts the questions now uses the real count in words (the `numword` filter).
+
+## 2026-11-15 — Dependencies, not built
+
+- **Search in the app:** the prototype's search box works on its own list of pages and people. Search in the app needs a backend search over members, events, funding, and pages.
+- **Counting Home link clicks:** needs a small new table for anonymous click counts, which means a database migration. It needs MW's approval before it's built.
+- **NeuroSync flyer in the app:** each week's flyer generated from that week's talk. Not built. The prototype has one sample PDF.
+- **NeuroSync sign-up forms:** the three NeuroSync buttons are emails for now. Real forms would be new app work.

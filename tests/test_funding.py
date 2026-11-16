@@ -414,3 +414,14 @@ def test_staff_can_add_a_question_and_members_see_the_count(center, client):
     # one box filled is refused, and nothing is added
     client.post("/manage/funding/questions/do/", {"new_title": "Only a title"})
     assert FundingQuestion.objects.active().count() == before + 1
+
+
+def test_grant_resources_explains_collaborators_abroad(center, client):
+    """MW 2026-11-15: the plan's written guidance, on Grant resources."""
+    from django.test import override_settings
+
+    _login(client, "okafor")
+    with override_settings(UI_PROTOTYPE=True, UI_PROTOTYPE_ONLY=True):
+        html = client.get("/funding/resources/").content.decode()
+    assert 'id="s-foreign"' in html and "Collaborators and co-authors abroad" in html
+    assert "NOT-OD-26-026" in html and "no subawards" in html
