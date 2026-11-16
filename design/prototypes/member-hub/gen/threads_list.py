@@ -31,6 +31,10 @@ T = [
  ('ev', 'How often do you meet with your mentee in the first year?', 'Mentoring', 8, 'Active October 21', False, '', False,
   'I meet my mentee every two weeks. Curious how other mentors pace the first year of a pilot.', ['sr', 'do', 'pr', 'hc'], 'earlier'),
 ]
+# days since the thread started; threads Amara (the viewer) started or replied to; threads she follows
+STARTED = {'jl': 6, 'kb': 0, 'lp': 9, 'rg': 3, 'hc': 12, 'pr': 5, 'sr': 14, 'om': 10, 'ms': 16, 'do': 21, 'na': 17, 'wz': 30, 'tb': 22, 'ev': 40}
+MINE = {'lp', 'hc', 'do'}
+FOLLOW = {'jl', 'ms', 'pr'}
 TONE = {'Finding a collaborator': 'p', 'Methods and equipment': 't', 'Recruiting': 'a', 'Statistics': 'g', 'Funding': 'b', 'Events and groups': 'l', 'Hiring': 'a', 'Mentoring': 'p'}
 TOPICS = sorted(set(t[2] for t in T))
 def rep(n): return 'No replies yet' if n == 0 else ('1 reply' if n == 1 else f'{n} replies')
@@ -45,9 +49,13 @@ def row(k, t, tp, r, a, mt_, w, un, ex, rs, grp):
     else:
         right = f'<div class="th-n"><span class="th-nn">{r}</span><span class="th-nl">{"reply" if r == 1 else "replies"}</span><span class="th-stack" aria-hidden="true">{stack}</span></div>'
     why = f'<p class="th-why"><b>Matched to you.</b> {w}</p>' if w else ''
-    return (f'<li class="th-row{" th-un" if un else ""}" data-m="{"1" if mt_ else "0"}" data-u="{"1" if un else "0"}" data-tp="{tp}" data-g="{grp}" data-r="{r}" data-q="{q}">'
+    mine = f'<p class="th-mine">You replied to this thread.</p>' if k in MINE else ''
+    fol = k in FOLLOW
+    fb = (f'<button type="button" class="th-fol" aria-pressed="{"true" if fol else "false"}" title="Follow this thread to find it under Following.">'
+          f'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h8v11l-4-3-4 3z"/></svg><span>{"Following" if fol else "Follow"}</span></button>')
+    return (f'<li class="th-row{" th-un" if un else ""}" data-m="{"1" if mt_ else "0"}" data-u="{"1" if un else "0"}" data-tp="{tp}" data-g="{grp}" data-r="{r}" data-s="{STARTED[k]}" data-me="{"1" if k in MINE else "0"}" data-f="{"1" if fol else "0"}" data-q="{q}">'
             f'{av(k)}<div class="th-body"><p class="th-tp th-{TONE[tp]}">{tp}</p><h3 class="th-t"><a href="{href}"{pa}>{t}</a></h3><p class="th-ex">{ex}</p>'
-            f'<p class="th-meta">{BY[k][2]} · {rep(r)} · {a}</p>{why}</div>{right}</li>')
+            f'<div class="th-foot"><p class="th-meta">{BY[k][2]} · {rep(r)} · {a}</p>{fb}</div>{why}{mine}</div>{right}</li>')
 
 week = [x for x in T if x[10] == 'week']
 earlier = [x for x in T if x[10] == 'earlier']
@@ -74,14 +82,15 @@ ART = '''<svg class="th-art" viewBox="0 0 600 320" aria-hidden="true" preserveAs
 SCRIPT = '''<script>
 (function(){
   var list=document.querySelector('.th-list'),rows=[].slice.call(list.querySelectorAll('.th-row')),grps=[].slice.call(list.querySelectorAll('.th-grp')),
-      tb=document.querySelectorAll('.cm-tf button'),k='a',topic='',q=document.getElementById('th-q'),srt=document.getElementById('th-sort'),
+      tb=document.querySelectorAll('.cm-tf button'),k='a',topic='',q=document.getElementById('th-q'),sortv='recent',
       n=document.querySelector('[data-n]'),nl=document.querySelector('[data-nl]'),clr=document.querySelector('.th-clear'),tpn=document.querySelector('[data-tpn]'),none=document.querySelector('.th-none'),
       tps=[].slice.call(document.querySelectorAll('.th-topic'));
   rows.forEach(function(r,i){r.dataset.i=i;});
   function apply(){
     var t=(q.value||'').trim().toLowerCase(),c=0;
-    rows.forEach(function(r){var ok=(k==='m'?r.dataset.m==='1':k==='u'?r.dataset.u==='1':true)&&(!topic||r.dataset.tp===topic)&&(!t||r.dataset.q.indexOf(t)>-1);r.hidden=!ok;if(ok)c++;});
-    if(srt.value==='replies'){grps.forEach(function(g){g.hidden=true;});rows.slice().sort(function(a,b){return b.dataset.r-a.dataset.r;}).forEach(function(r){list.appendChild(r);});}
+    rows.forEach(function(r){var ok=(k==='m'?r.dataset.m==='1':k==='u'?r.dataset.u==='1':k==='me'?r.dataset.me==='1':k==='f'?r.dataset.f==='1':true)&&(!topic||r.dataset.tp===topic)&&(!t||r.dataset.q.indexOf(t)>-1);r.hidden=!ok;if(ok)c++;});
+    var cmp={replies:function(a,b){return b.dataset.r-a.dataset.r;},fewest:function(a,b){return a.dataset.r-b.dataset.r||a.dataset.s-b.dataset.s;},'new':function(a,b){return a.dataset.s-b.dataset.s;}}[sortv];
+    if(cmp){grps.forEach(function(g){g.hidden=true;});rows.slice().sort(cmp).forEach(function(r){list.appendChild(r);});}
     else{grps.forEach(function(g){list.appendChild(g);var mine=rows.filter(function(r){return r.dataset.g===g.dataset.gh;}).sort(function(a,b){return a.dataset.i-b.dataset.i;});mine.forEach(function(r){list.appendChild(r);});
       var v=mine.filter(function(r){return !r.hidden;}).length;g.hidden=!v;g.querySelector('span').textContent=v+(v===1?' thread':' threads');});}
     n.textContent=c;nl.textContent=c===1?'thread':'threads';clr.hidden=!topic;tpn.textContent=topic;none.hidden=c>0;
@@ -91,7 +100,15 @@ SCRIPT = '''<script>
   document.querySelectorAll('[data-jump]').forEach(function(j){j.addEventListener('click',function(){k=j.dataset.jump;topic='';q.value='';tb.forEach(function(o){o.setAttribute('aria-pressed',o.dataset.t===k)});apply();document.getElementById('th-all').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});});});
   tps.forEach(function(b){b.addEventListener('click',function(){topic=topic===b.dataset.topic?'':b.dataset.topic;apply();});});
   document.querySelector('[data-clear]').addEventListener('click',function(){topic='';apply();});
-  q.addEventListener('input',apply);srt.addEventListener('change',apply);
+  q.addEventListener('input',apply);
+  var fc=document.querySelector('[data-fc]');function fcount(){fc.textContent=rows.filter(function(r){return r.dataset.f==='1';}).length;}fcount();
+  rows.forEach(function(r){var fb=r.querySelector('.th-fol');fb.addEventListener('click',function(){var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';r.dataset.f=on?'1':'0';fcount();if(k==='f')apply();});});
+  var sb=document.getElementById('th-sortb'),sm=document.getElementById('th-sortm'),opts=[].slice.call(sm.querySelectorAll('[role=option]')),sl=document.querySelector('[data-sortl]');
+  function openM(o){sm.hidden=!o;sb.setAttribute('aria-expanded',o);if(o){(sm.querySelector('[aria-selected=true]')||opts[0]).focus();}}
+  function pick(li){sortv=li.dataset.v;opts.forEach(function(x){x.setAttribute('aria-selected',x===li)});sl.textContent=li.firstChild.textContent;openM(false);sb.focus();apply();}
+  sb.addEventListener('click',function(e){e.stopPropagation();openM(sm.hidden);});
+  opts.forEach(function(li,i){li.addEventListener('click',function(){pick(li);});li.addEventListener('keydown',function(e){if(e.key==='ArrowDown'){e.preventDefault();opts[Math.min(i+1,opts.length-1)].focus();}else if(e.key==='ArrowUp'){e.preventDefault();opts[Math.max(i-1,0)].focus();}else if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(li);}else if(e.key==='Escape'){openM(false);sb.focus();}});});
+  document.addEventListener('click',function(e){if(!sm.hidden&&!e.target.closest('.th-sort'))openM(false);});
   var dlg=document.querySelector('.cm-compose');document.querySelectorAll('[data-compose]').forEach(function(b){b.addEventListener('click',function(){try{dlg.showModal();}catch(e){dlg.setAttribute('open','')}dlg.querySelector('.cm-note').hidden=true;});});
   dlg.querySelector('[data-post]').addEventListener('click',function(){dlg.querySelector('.cm-note').hidden=false;});
   var af=document.querySelector('.th-ask');af.addEventListener('submit',function(e){e.preventDefault();var v=document.getElementById('th-askq').value.trim();try{dlg.showModal();}catch(x){dlg.setAttribute('open','')}dlg.querySelector('.cm-note').hidden=true;var ti=dlg.querySelector('#cmc-t');if(ti){ti.value=v;(v?dlg.querySelector('#cmc-d'):ti).focus();}});
@@ -131,10 +148,16 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
     <div class="th-main" id="th-all">
       <div class="th-sech"><h2>All threads</h2><p>Every conversation, newest activity first. Please filter, search, or pick a topic on the right.</p></div>
       <div class="th-bar">
-        <div class="pf-filt cm-tf" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-t="a">All threads</button><button type="button" aria-pressed="false" data-t="m">Matched to you</button><button type="button" aria-pressed="false" data-t="u">Unanswered</button></div>
+        <div class="pf-filt cm-tf th-tf" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-t="a">All threads</button><button type="button" aria-pressed="false" data-t="m">Matched to you</button><button type="button" aria-pressed="false" data-t="u">Unanswered</button><button type="button" aria-pressed="false" data-t="me">My threads</button><button type="button" aria-pressed="false" data-t="f">Following <span class="th-fc" data-fc></span></button></div>
         <div class="th-find">
           <label class="th-search" for="th-q"><span class="sr">Search threads</span><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><input id="th-q" type="search" placeholder="Search a method, a person, or a word"></label>
-          <label class="th-sortl" for="th-sort"><span class="sr">Sort threads</span><select id="th-sort"><option value="recent">Most recent activity</option><option value="replies">Most replies</option></select></label>
+          <div class="th-sort"><button type="button" class="th-sortb" id="th-sortb" aria-haspopup="listbox" aria-expanded="false" aria-controls="th-sortm"><span class="th-sortk">Sort:</span> <span data-sortl>Most recent activity</span><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></button>
+            <ul class="th-sortm" id="th-sortm" role="listbox" aria-labelledby="th-sortb" hidden>
+              <li role="option" aria-selected="true" data-v="recent" tabindex="-1">Most recent activity<small>Threads with new replies first</small></li>
+              <li role="option" aria-selected="false" data-v="new" tabindex="-1">Newest first<small>Questions asked most recently</small></li>
+              <li role="option" aria-selected="false" data-v="replies" tabindex="-1">Most replies<small>The busiest conversations</small></li>
+              <li role="option" aria-selected="false" data-v="fewest" tabindex="-1">Fewest replies<small>Questions that most need an answer</small></li>
+            </ul></div>
         </div>
       </div>
       <p class="th-status" role="status"><span data-n>{len(T)}</span> <span data-nl>threads</span><span class="th-clear" hidden> in <b data-tpn></b>. <button type="button" class="t3" data-clear>Show every topic</button></span></p>
