@@ -295,7 +295,7 @@ page=f'''<!doctype html>
           <h2 id="cm-priv-h">Your profile and privacy</h2>
           <div class="cs-b"><div class="pz">
             <div class="pz-intro">
-              <p class="pz-lead">Your profile has two sides. Members see what helps them find you. Everything about your reporting and your funding stays between you and the CNAP team.</p>
+              <p class="pz-lead">Other members see your name, role, interests, and the work you choose to show. Your reporting, your survey answers, and the funding picked for you are never shown to them.</p>
               <div class="pz-tog" role="group" aria-label="See your profile as"><span class="pz-tl">See your profile as</span><button type="button" data-pz="member" aria-pressed="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8s2.4-4.5 6.5-4.5S14.5 8 14.5 8s-2.4 4.5-6.5 4.5S1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg>A member</button><button type="button" data-pz="me" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>You</button></div>
               <p class="pz-say" role="status">This is what other CNAP members see.</p>
               <p class="pz-cta"><a class="btn pri" href="mentee-profile.html">Review your profile</a><span>You choose what to show, and you can change it any time.</span></p>
@@ -307,10 +307,10 @@ page=f'''<!doctype html>
               <div class="pz-row"><span class="pz-l">Mentor</span><span class="pz-v">Dr. Elena Voss</span></div>
               <div class="pz-hidden"><span><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg></span>4 more things are hidden from other members.</div>
               <div class="pz-privs">
-                <div class="pz-row pz-priv"><span class="pz-l"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>Mentee Survey answers</span><span class="pz-v">Confidential</span><span class="pz-only">Only you and the CNAP team</span></div>
-                <div class="pz-row pz-priv"><span class="pz-l"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>Reporting</span><span class="pz-v">2 of 6 done this fall</span><span class="pz-only">Only you and the CNAP team</span></div>
-                <div class="pz-row pz-priv"><span class="pz-l"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>Funding picked for you</span><span class="pz-v">3 matches</span><span class="pz-only">Only you and the CNAP team</span></div>
-                <div class="pz-row pz-priv"><span class="pz-l"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>Work you keep private</span><span class="pz-v">1 grant</span><span class="pz-only">Only you and the CNAP team</span></div>
+                <div class="pz-row pz-priv"><span class="pz-l"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>Mentee Survey answers</span><span class="pz-v">Confidential</span><span class="pz-only">Never shown to other members</span></div>
+                <div class="pz-row pz-priv"><span class="pz-l"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>Reporting</span><span class="pz-v">2 of 6 done this fall</span><span class="pz-only">Never shown to other members</span></div>
+                <div class="pz-row pz-priv"><span class="pz-l"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>Funding picked for you</span><span class="pz-v">3 matches</span><span class="pz-only">Never shown to other members</span></div>
+                <div class="pz-row pz-priv"><span class="pz-l"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>Work you keep private</span><span class="pz-v">1 grant</span><span class="pz-only">Never shown to other members</span></div>
               </div>
             </div>
           </div></div>
@@ -373,7 +373,7 @@ page=f'''<!doctype html>
       set(on);b.addEventListener('click',function(){{set(!card.classList.contains('is-done'));}});}});}})();
   (function(){{var card=document.querySelector('.pz-card'),bs=document.querySelectorAll('[data-pz]'),say=document.querySelector('.pz-say');
     bs.forEach(function(b){{b.addEventListener('click',function(){{var v=b.dataset.pz;card.dataset.view=v;bs.forEach(function(o){{o.setAttribute('aria-pressed',o===b)}});
-      card.querySelector('.pz-badge').lastChild.textContent=v==='me'?'Your view':'Visible to members';say.textContent=v==='me'?'This is what you and the CNAP team see. The locked rows never appear to other members.':'This is what other CNAP members see.';}});}});}})();
+      card.querySelector('.pz-badge').lastChild.textContent=v==='me'?'Your view':'Visible to members';say.textContent=v==='me'?'This is your own view. The locked rows never appear to other members.':'This is what other CNAP members see.';}});}});}})();
   document.querySelectorAll('[data-direct]').forEach(function(b){{b.addEventListener('click',function(){{var n=b.dataset.direct;if(window.hubToast)hubToast('<b>In the Member Hub, this starts an email to '+n+'.</b> The members here are fictional, so nothing opens in the prototype.');}});}});
   var th=[].slice.call(document.querySelectorAll('.cm-th')),tb=document.querySelectorAll('.cm-tf button');
   function tf(k){{th.forEach(function(r){{r.hidden=k==='m'?r.dataset.m!=='1':k==='u'?r.dataset.u!=='1':false;}});}}
