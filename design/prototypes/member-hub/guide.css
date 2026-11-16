@@ -2691,3 +2691,5 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 @media (max-width:760px){.mb-top{grid-template-columns:auto minmax(0,1fr)}.mb-acts{grid-column:1 / -1;justify-self:start}}
 .mb-body{max-width:none}
 .mb-body>section{max-width:900px}
+.cm-cap{display:block;text-align:center}
+@media (max-width:520px){.cm-cap br{display:none}.cm-cap{text-wrap:balance}}

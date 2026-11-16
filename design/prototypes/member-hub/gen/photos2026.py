@@ -10,7 +10,7 @@ foot = foot[:foot.index('<span>Prototype')] + '<span>Prototype. Every photograph
 SHARE = mt('cnap@ksu.edu', 'Photographs from the 2026 Site Visit', '\n'.join(['Name:', '', 'What the photographs show:', '', 'A link to the photographs, or attach them:', '']), cc=None)
 DAYS = [
  ('Day 1', 'Wednesday, May 27', [
-   ('Core tours', 8, 'reel-2.jpg', 'The research cores open their labs.'),
+   ('Core tours', 8, 'reel-2.jpg', 'The research cores open the labs to visitors.'),
    ('Project presentations', 14, 'reel-5.jpg', 'Every project leader presents progress.'),
    ('Keynote address', 4, 'reel-3.jpg', 'Before the banquet.'),
    ('Banquet', 8, 'reel-4.jpg', 'At the Beach Museum of Art.')]),

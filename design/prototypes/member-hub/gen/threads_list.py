@@ -8,7 +8,7 @@ T = [
   'Reflections from lenses throw off calibration for about a third of my participants. Has anyone found settings or a routine that works?', [], 'week'),
  ('lp', 'Recruiting older adults: what has worked?', 'Recruiting', 3, 'Active yesterday', True, 'Your study recruits adults over 65.', False,
   'Flyers at the library brought in two people in a month. I would love to hear what has worked for other labs in Manhattan.', ['ms', 'pr', 'do'], 'week'),
- ('rg', 'Who has used the Beocat cluster for imaging?', 'Methods and equipment', 0, 'Started Wednesday', True, 'Your team moved its analysis pipeline onto Beocat.', True,
+ ('rg', 'Who has used the Beocat cluster for imaging?', 'Methods and equipment', 0, 'Started Wednesday', True, 'Your team moved your analysis pipeline onto Beocat.', True,
   'I am moving fMRI preprocessing onto Beocat and would like to hear how others set up storage and job arrays.', [], 'week'),
  ('hc', 'Office hours for mixed-effects models in R', 'Statistics', 6, 'Active Monday', False, '', False,
   'I am holding open office hours on Tuesdays this month for anyone fitting mixed-effects models. Bring your data and your questions.', ['jl', 'lp', 'na', 'om'], 'week'),
@@ -154,7 +154,7 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
       <div class="th-hgrid">
         <div class="th-hl">
           <h1 id="t">Threads</h1>
-          <p class="th-lead">Ask the people who have done it before. Methods, equipment, recruiting, and funding, answered by CNAP members. Only members can see threads.</p>
+          <p class="th-lead">Ask the colleagues who have already faced the same question. Methods, equipment, recruiting, and funding, answered by CNAP members. Only members can see threads.</p>
           <form class="th-ask" role="search" aria-label="Start a thread"><span class="cm-av av-p" aria-hidden="true">AO</span><label class="sr" for="th-askq">Your question</label><input id="th-askq" class="th-askp" type="text" placeholder="What would you like to ask the Center?" autocomplete="off"><button type="submit" class="th-askb">Start a thread</button></form>
         </div>
         <div class="th-stats" role="group" aria-label="Jump to threads">
@@ -169,7 +169,7 @@ listpage = hdr('Threads') + f'''<main id="main" class="th-page">
   <section class="th-wait" aria-labelledby="wait-h">
     <div class="wrap">
       <div class="th-panel">
-        <div class="th-sech"><h2 id="wait-h">No one has answered these yet</h2><p>{["No","One","Two","Three","Four","Five"][n_u]} colleagues are still waiting for a reply. If you know something, please share it. One reply can save someone weeks.</p></div>
+        <div class="th-sech"><h2 id="wait-h">No one has answered these yet</h2><p>{["No","One","Two","Three","Four","Five"][n_u]} colleagues are still waiting for a reply. If you know something, please share what you know. One reply can save someone weeks.</p></div>
         <ul class="th-spots">{spot}</ul>
       </div>
     </div>

@@ -56,7 +56,7 @@ _cards=[f'''<li class="ff" data-k="ff{i}"><div class="ff-top"><span class="ff-n"
   <div class="ff-who">{_fwho(FWHO[i-1][0])}</div><p class="cm-ft">{t}</p><p class="cm-fd">{d}</p>
   <p class="cm-fa"><a href="{h}">{l}</a>{f'<a class="cm-em" href="mailto:{e}">{e}</a>' if e else ''}</p>
   <button type="button" class="ff-done" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg><span>Mark as done</span></button></li>''' for i,(t,d,h,l,e) in enumerate(FIRST,1)]
-FGRP=[('Week 1','Meet the people closest to your project.',[0,1]),('Week 2','Meet the CNAP office.',[2,3]),('Before you start','Set up money and equipment before you need them.',[4,5])]
+FGRP=[('Week 1','Meet the people closest to your project.',[0,1]),('Week 2','Meet the CNAP office.',[2,3]),('Before you start','Set up your budget and core time before your first expense or booking.',[4,5])]
 first=''.join(f'<section class="ff-wk" aria-label="{g}"><div class="ff-wkh"><p class="ff-wkt">{g}</p><p class="ff-wks">{sub}</p></div><ol class="ff-grid">{"".join(_cards[j] for j in ix)}</ol></section>' for g,sub,ix in FGRP)
 
 # 2. Members who share your interests
@@ -167,7 +167,7 @@ dots=''.join(f'<circle class="cm-g-{g}" cx="{x:.1f}" cy="{y:.1f}" r="{4.5 if g!=
 mnodes=''.join(f'<g class="cm-mn2" style="--d:{.25*i+.6}s"><circle cx="{x:.1f}" cy="{y:.1f}" r="21"/><text class="cm-ini" x="{x:.1f}" y="{y+5:.1f}">{BY[k][1]}</text><text class="cm-nm" x="{x:.1f}" y="{y+37:.1f}">{nm}</text><text class="cm-wy" x="{x:.1f}" y="{y+51:.1f}">{why}</text></g>' for i,(k,nm,why,x,y) in enumerate(mpos))
 legend=''.join(f'<li><i class="cm-k-{g}"></i>{lbl}</li>' for g,lbl,_ in GROUPS)
 NET=f'''<figure class="cm-net"><svg viewBox="0 0 {W} {H}" role="img" aria-label="You at the center of the CNAP network of 61 members, with four members who share your interests nearest to you"><g class="cm-ls">{''.join(lines)}</g><g class="cm-outer">{dots}</g>{mnodes}<g class="cm-me2"><circle class="cm-halo" cx="{CX}" cy="{CY}" r="44"/><circle cx="{CX}" cy="{CY}" r="32"/><text x="{CX}" y="{CY+6}">AO</text></g></svg>
-          <figcaption><span>You, the four members who share your interests, and 57 more across the Center.</span><ul class="cm-legend">{legend}</ul></figcaption></figure>'''
+          <figcaption><span class="cm-cap">You, the four members who share your interests,<br>and 57 more across the Center.</span><ul class="cm-legend">{legend}</ul></figcaption></figure>'''
 
 # CNAP alumni (fictional)
 AL=[('DO','t','Dr. David Osei','Pilot project leader, Grant Years 7 and 8','Associate Professor, Psychological Sciences, Kansas State University','First R01, National Institute on Aging, 2026',True),
@@ -242,7 +242,7 @@ page=f'''<!doctype html>
       <div class="steps">
         <section class="step cs" id="cm-ach" aria-labelledby="cm-ach-h">
           <h2 id="cm-ach-h">Recent achievements</h2>
-          <div class="cs-b"><ul class="cm-acs">{ach}</ul><p class="meta">Have news of your own? <button type="button" class="t3" data-share>Share an achievement</button> and the CNAP team will post it here and in the Center’s reports.</p></div>
+          <div class="cs-b"><ul class="cm-acs">{ach}</ul><p class="meta">Have news of your own? <button type="button" class="t3" data-share>Share an achievement</button> and the CNAP team will post the achievement here and in the Center’s reports.</p></div>
         </section>
         <section class="step cs" id="cm-ask" aria-labelledby="cm-ask-h">
           <h2 id="cm-ask-h">Ask the community</h2>
@@ -260,7 +260,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-match" aria-labelledby="cm-match-h">
           <h2 id="cm-match-h">Members who share your interests</h2>
-          <div class="cs-b"><p>Matched on the interests in your profile: sleep, memory, aging, and EEG. Email them directly, or ask the CNAP team to introduce you if you would rather not write out of the blue.</p><ul class="cm-mcs">{match}</ul></div>
+          <div class="cs-b"><p>Matched on the interests in your profile: sleep, memory, aging, and EEG. Email these members directly, or ask the CNAP team to introduce you if you would rather not write out of the blue.</p><ul class="cm-mcs">{match}</ul></div>
         </section>
         <section class="step cs" id="cm-know" aria-labelledby="cm-know-h">
           <h2 id="cm-know-h">Member interests and expertise</h2>
@@ -278,7 +278,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-alum" aria-labelledby="cm-alum-h">
           <h2 id="cm-alum-h">CNAP alumni</h2>
-          <div class="cs-b"><p>Former project leaders, and where their work has taken them. Each alumnus chooses what appears here, and can change or remove it at any time.</p><ul class="al-list">{alumni}</ul></div>
+          <div class="cs-b"><p>Former project leaders, and where each one’s research has led. Each alumnus chooses what appears here, and can change or remove the entry at any time.</p><ul class="al-list">{alumni}</ul></div>
         </section>
         <section class="step cs" id="cm-ways" aria-labelledby="cm-ways-h">
           <h2 id="cm-ways-h">Ways to connect</h2>
@@ -286,7 +286,7 @@ page=f'''<!doctype html>
         </section>
         <section class="step cs" id="cm-ann" aria-labelledby="cm-ann-h">
           <h2 id="cm-ann-h">Announcements</h2>
-          <div class="cs-b"><p>Every email from the CNAP listserv, kept here so you can find it again. Select one to read it.</p>
+          <div class="cs-b"><p>Every email from the CNAP listserv, kept here so you can find any email again. Select an email to read the full message.</p>
             <div class="an-bar"><div class="pf-filt an-f" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-af="all">All</button><button type="button" aria-pressed="false" data-af="ac">Administrative Core</button><button type="button" aria-pressed="false" data-af="hb">Director</button><button type="button" aria-pressed="false" data-af="mw">Grants and Contracts</button><button type="button" aria-pressed="false" data-af="att">With attachments</button></div></div>
             <ul class="an-list">{ann}</ul>
             <p class="an-more"><button type="button" class="btn sm" data-older>Show {N_OLD} older emails</button></p></div>
@@ -295,10 +295,10 @@ page=f'''<!doctype html>
           <h2 id="cm-priv-h">Your profile and privacy</h2>
           <div class="cs-b"><div class="pz">
             <div class="pz-intro">
-              <p class="pz-lead">Other members see your name, role, interests, and the work you choose to show. Your reporting, your survey answers, and the funding picked for you are never shown to them.</p>
+              <p class="pz-lead">Other members see your name, role, interests, and the work you choose to show. Your reporting, your survey answers, and the funding picked for you are never shown to other members.</p>
               <p class="pz-tl" id="pz-tl">See your profile as</p><div class="pz-tog" role="group" aria-labelledby="pz-tl"><button type="button" data-pz="member" aria-pressed="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8s2.4-4.5 6.5-4.5S14.5 8 14.5 8s-2.4 4.5-6.5 4.5S1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg>A member</button><button type="button" data-pz="me" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2"/></svg>You</button></div>
               <p class="pz-say" role="status">This is what other CNAP members see.</p>
-              <p class="pz-cta"><a class="btn pri" href="mentee-profile.html">Review your profile</a><span>You choose what to show, and you can change it any time.</span></p>
+              <p class="pz-cta"><a class="btn pri" href="mentee-profile.html">Review your profile</a><span>You choose what to show, and you can change your choices any time.</span></p>
             </div>
             <div class="pz-card" data-view="member">
               <div class="pz-head"><span class="cm-av av-p lg" aria-hidden="true">AO</span><div><p class="pz-n">Dr. Amara Okafor</p><p class="pz-r">Pilot project leader, Psychological Sciences</p></div><span class="pz-badge"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8s2.4-4.5 6.5-4.5S14.5 8 14.5 8s-2.4 4.5-6.5 4.5S1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg>Visible to members</span></div>
@@ -346,7 +346,7 @@ page=f'''<!doctype html>
     <div class="cm-newfields" hidden><label for="cms-t">What happened</label><input id="cms-t" type="text" placeholder="For example: my R21 was funded by the National Institute on Aging"><label for="cms-l">A link <span class="cm-opt">(optional)</span></label><input id="cms-l" type="text" inputmode="url"></div>
     <label for="cms-n">A sentence for members <span class="cm-opt">(optional)</span></label><textarea id="cms-n" rows="2" placeholder="What it means for your project, or who helped"></textarea>
     <p class="cm-note" role="status" hidden>Prototype only. In the Member Hub, the CNAP team reviews your achievement, posts the achievement in Community, and adds the achievement to the Center’s reports.</p>
-    <div class="cm-fb"><button type="submit" value="cancel" class="btn">Cancel</button><button type="button" class="btn pri" data-sendach>Share it</button></div>
+    <div class="cm-fb"><button type="submit" value="cancel" class="btn">Cancel</button><button type="button" class="btn pri" data-sendach>Share the achievement</button></div>
   </form>
 </dialog>
 <footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. The members, threads, and achievements are fictional. The Director, the Assistant Director for Grants and Contracts, and the Grant Specialist are real staff. Posting threads isn’t connected yet.</span></div></footer>
