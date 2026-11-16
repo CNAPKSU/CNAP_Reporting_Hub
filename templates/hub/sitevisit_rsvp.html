@@ -1,0 +1,94 @@
+{% load static cnap %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Site Visit RSVP · {{ platform_name }}</title>
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32.png' %}">
+<link rel="stylesheet" href="{% static 'hub/hub.css' %}">
+<link rel="stylesheet" href="{% static 'hub/page.css' %}">
+</head>
+<body class="hub-page fp-page sv-page">
+{# MW 2026-11-15, approved build: the Site Visit RSVP, following the prototype's form. One RSVP a year per person. #}
+{% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
+<a class="skip" href="#main">Skip to main content</a>
+{% include "hub/_header.html" with active="events" %}
+<main id="main">
+  <section class="fp-open" aria-labelledby="t">
+    <div class="wrap">
+      <nav class="fp-crumb" aria-label="Breadcrumb"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><span aria-current="page">Site Visit RSVP</span></nav>
+      <div class="fp-hero"><div class="fp-hd">
+        <p class="fp-for">{{ dates }} · Manhattan, Kansas</p>
+        <h1 id="t">RSVP for the {{ year }} Site Visit</h1>
+        <p class="fp-lead">One form covers attendance, meals, photographs, parking, hotel nights, and the poster session. A confirmation email repeats your answers.{% if not closed %} You can change your RSVP here until {{ closes|date:"l, F j" }}.{% endif %}</p>
+      </div></div>
+    </div>
+  </section>
+  <div class="fp-body"><div class="wrap sv-rsvp-app">
+    {% if messages %}<ul class="fp-msgs" role="status" id="done">{% for m in messages %}<li class="{{ m.tags }}">{{ m }}</li>{% endfor %}</ul>{% endif %}
+    {% if errors %}<div class="sv-errs" role="alert"><p><b>Please check your RSVP.</b></p><ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul></div>{% endif %}
+    {% if closed %}<p class="sv-closed">The RSVP closed on {{ closes|date:"l, F j" }}. To change your RSVP, please email Morgan Wills at mkwills@ksu.edu.</p>{% endif %}
+    {% if r %}<p class="sv-have">You RSVPed: <b>{{ r.get_attend_display }}</b>. Last changed {{ r.updated_at|date:"F j" }}.{% if not closed %} Change any answer below and save again.{% endif %}</p>{% endif %}
+    <form method="post" class="sv-appform" novalidate{% if closed %} inert{% endif %}>{% csrf_token %}
+      {% with a=attend_now %}
+      <fieldset><legend>How will you attend?</legend><div class="sv-ops">
+        <label class="sv-op"><input type="radio" name="attend" value="person"{% if a == "person" %} checked{% endif %}><span>I will attend in person</span></label>
+        <label class="sv-op"><input type="radio" name="attend" value="zoom"{% if a == "zoom" %} checked{% endif %}><span>I will attend on Zoom</span></label>
+        <label class="sv-op"><input type="radio" name="attend" value="no"{% if a == "no" %} checked{% endif %}><span>I am unable to attend</span></label>
+      </div></fieldset>
+      {% endwith %}
+      <div data-show="person">
+        <fieldset><legend>Which parts of the Site Visit do you plan to attend?</legend><div class="sv-ops">
+          {% for k, d, t in parts %}<label class="sv-op sv-op2"><input type="checkbox" name="parts" value="{{ k }}"{% if not r or k in r.parts %} checked{% endif %}><span><b>{{ d }}</b><em>{{ t }}</em></span></label>{% endfor %}
+        </div></fieldset>
+        <fieldset><legend>Which meals do you plan to attend?</legend><div class="sv-ops">
+          {% for k, l in meals %}<label class="sv-op"><input type="checkbox" name="meals" value="{{ k }}"{% if not r or k in r.meals %} checked{% endif %}><span>{{ l }}</span></label>{% endfor %}
+        </div><p class="sv-hint">This gives the caterers a headcount. Breakfast needs no RSVP. Leave both unchecked for neither.</p></fieldset>
+        <label class="sv-tx"><b>It is our pleasure to accommodate your dietary restrictions. Please describe your dietary restrictions, or leave this blank.</b><textarea name="diet" rows="2">{{ r.diet }}</textarea></label>
+        <fieldset><legend>CNAP will have a photographer and videographer at the event. May we use photographs or videos that include your image in public materials, such as our website, presentation slides, social media, or promotional content?</legend><div class="sv-ops sv-row">
+          <label class="sv-op"><input type="radio" name="photo_ok" value="yes"{% if r.photo_ok is True %} checked{% endif %}><span>Yes</span></label>
+          <label class="sv-op"><input type="radio" name="photo_ok" value="no"{% if r.photo_ok is False %} checked{% endif %}><span>No</span></label>
+        </div><p class="sv-hint">Your participation is not affected if you prefer to opt out.</p></fieldset>
+        <fieldset><legend>Will you need parking?</legend><div class="sv-ops">
+          <label class="sv-op"><input type="radio" name="parking" value="drive"{% if r.parking is True %} checked{% endif %}><span>I’ll drive and need parking</span></label>
+          <label class="sv-op"><input type="radio" name="parking" value="nodrive"{% if r.parking is False %} checked{% endif %}><span>I won’t need parking</span></label>
+        </div></fieldset>
+        <fieldset><legend>Traveling from out of town? Which nights do you need a hotel room?</legend><div class="sv-ops">
+          {% for k, l in nights %}<label class="sv-op"><input type="checkbox" name="hotel_nights" value="{{ k }}"{% if k in r.hotel_nights %} checked{% endif %}><span>{{ l }}</span></label>{% endfor %}
+        </div><p class="sv-hint">Please leave both unchecked if you don’t need a room. Roxana Ortiz confirms each room by email.</p></fieldset>
+      </div>
+      <div data-show="person zoom">
+        <fieldset><legend>Would you like to register for the poster session on Wednesday?</legend><div class="sv-ops">
+          <label class="sv-op"><input type="radio" name="poster" value="yes"{% if r.poster == "yes" %} checked{% endif %}><span>Yes</span></label>
+          <label class="sv-op"><input type="radio" name="poster" value="no"{% if r.poster == "no" %} checked{% endif %}><span>No</span></label>
+          <label class="sv-op"><input type="radio" name="poster" value="done"{% if r.poster == "done" %} checked{% endif %}><span>I’ve already registered</span></label>
+          <label class="sv-op"><input type="radio" name="poster" value="later"{% if r.poster == "later" %} checked{% endif %}><span>I plan to register later</span></label>
+          <label class="sv-op"><input type="radio" name="poster" value="maybe"{% if r.poster == "maybe" %} checked{% endif %}><span>Maybe. Please send more information first.</span></label>
+        </div></fieldset>
+        <div class="sv-pfields" data-show-poster>
+          <p class="sv-hint">Please add your poster by {{ poster_by }}. You can leave these blank and come back.</p>
+          <label class="sv-tx"><span>Poster title</span><textarea name="poster_title" rows="2">{{ r.poster_title }}</textarea></label>
+          <label class="sv-tx"><span>Authors, first name followed by last name</span><input type="text" name="poster_authors" value="{{ r.poster_authors }}" autocomplete="off"></label>
+          <label class="sv-tx"><span>Affiliation, the university followed by the department</span><input type="text" name="poster_affiliation" value="{{ r.poster_affiliation }}" placeholder="Kansas State University, Department of Psychological Sciences" autocomplete="off"></label>
+          <label class="sv-tx"><span>Abstract, up to 150 words</span><textarea name="poster_abstract" rows="6" data-wc>{{ r.poster_abstract }}</textarea><small class="sv-wc" aria-live="polite"></small></label>
+        </div>
+        <label class="sv-tx"><span>A different first name for your name tag, if you’d like one</span><input type="text" name="name_tag" value="{{ r.name_tag }}" placeholder="For example, Mike instead of Michael" autocomplete="off"></label>
+      </div>
+      <label class="sv-tx"><span>Your connection to CNAP</span><select name="connection">{% for c in connections %}<option{% if c == r.connection %} selected{% endif %}>{{ c }}</option>{% endfor %}</select></label>
+      <label class="sv-tx"><b>Accessibility needs, or anything else we should know</b><textarea name="note" rows="2">{{ r.note }}</textarea></label>
+      {% if not closed %}<div class="sv-act"><button class="fp-btn pri" type="submit">{% if r %}Save my changes{% else %}Send my RSVP{% endif %}</button><span class="sv-hint">Questions go to Morgan Wills at mkwills@ksu.edu.</span></div>{% endif %}
+    </form>
+  </div></div>
+</main>
+<footer class="fp-foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a></div></footer>
+<script>
+(function(){var f=document.querySelector('.sv-appform');if(!f)return;
+function sync(){var a=(f.querySelector('input[name=attend]:checked')||{}).value||'person';
+  f.querySelectorAll('[data-show]').forEach(function(el){el.hidden=el.dataset.show.split(' ').indexOf(a)<0;});
+  var p=(f.querySelector('input[name=poster]:checked')||{}).value;var pf=f.querySelector('[data-show-poster]');if(pf)pf.hidden=!(p==='yes'||p==='done');}
+f.addEventListener('change',sync);sync();
+var ab=f.querySelector('[data-wc]');if(ab){var out=ab.parentNode.querySelector('.sv-wc');function wc(){var n=ab.value.trim()?ab.value.trim().split(/\s+/).length:0;out.textContent=n+' of 150 words';out.classList.toggle('over',n>150);}ab.addEventListener('input',wc);wc();}})();
+</script>
+<script src="{% static 'js/dropclose.js' %}" defer></script>
+</body>
+</html>

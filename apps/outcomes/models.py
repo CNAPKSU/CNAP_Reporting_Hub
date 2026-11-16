@@ -989,3 +989,46 @@ class FundingEvent(ArchivableModel):
     @property
     def last_day(self):
         return self.ends_on or self.starts_on
+
+
+class SiteVisitRSVP(TimestampedModel):
+    """One person's RSVP for one year's Site Visit (MW 2026-11-15, approved build with its migration).
+    The fields follow the RSVP form in the prototype's Site Visit page."""
+
+    class Attend(models.TextChoices):
+        PERSON = "person", "In person"
+        ZOOM = "zoom", "On Zoom"
+        NO = "no", "Unable to attend"
+
+    class Poster(models.TextChoices):
+        YES = "yes", "Yes"
+        NO = "no", "No"
+        DONE = "done", "Already registered"
+        LATER = "later", "Plans to register later"
+        MAYBE = "maybe", "Maybe, wants more information"
+
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="site_visit_rsvps")
+    year = models.PositiveSmallIntegerField(help_text="The calendar year of the Site Visit, such as 2027.")
+    attend = models.CharField(max_length=10, choices=Attend.choices)
+    parts = models.JSONField(default=list, blank=True, help_text="The program blocks the person plans to attend.")
+    meals = models.JSONField(default=list, blank=True, help_text="lunch, dinner")
+    diet = models.TextField(blank=True)
+    photo_ok = models.BooleanField(null=True, blank=True, help_text="May CNAP use images that include the person.")
+    parking = models.BooleanField(null=True, blank=True, help_text="Needs parking.")
+    hotel_nights = models.JSONField(default=list, blank=True, help_text="mon, tue")
+    poster = models.CharField(max_length=10, choices=Poster.choices, blank=True)
+    poster_title = models.TextField(blank=True)
+    poster_authors = models.CharField(max_length=500, blank=True)
+    poster_affiliation = models.CharField(max_length=300, blank=True)
+    poster_abstract = models.TextField(blank=True)
+    name_tag = models.CharField(max_length=80, blank=True, help_text="A different first name for the name tag.")
+    connection = models.CharField(max_length=80, blank=True)
+    note = models.TextField(blank=True, help_text="Accessibility needs, or anything else.")
+
+    class Meta:
+        db_table = "site_visit_rsvps"
+        ordering = ["-year", "person__last_name"]
+        constraints = [models.UniqueConstraint(fields=["person", "year"], name="one_rsvp_per_person_per_year")]
+
+    def __str__(self):
+        return f"{self.person} · {self.year} · {self.get_attend_display()}"

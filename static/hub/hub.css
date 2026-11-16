@@ -1453,3 +1453,4 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 @media (min-width:1024px) and (max-width:1120px){.hn-app .rb-b{padding:0 7px;font-size:14px}}
 @media (prefers-reduced-motion:reduce){.hn-app .rb-b svg{transition:none}}
 .hn-app .rb-p a{align-items:flex-start;text-align:left;justify-content:flex-start}
+.sv-next{margin-top:10px;font-size:15px}.sv-next a{color:var(--purple-ink)}

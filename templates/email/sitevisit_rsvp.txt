@@ -1,0 +1,16 @@
+{% autoescape off %}Dear {{ r.person.first_name }},
+
+Thank you for your RSVP for the {{ r.year }} CNAP Site Visit, {{ dates }}, in Manhattan, Kansas.
+
+Your answers:
+{% for l in lines %}- {{ l }}
+{% endfor %}{% if r.poster == "yes" and not r.poster_title %}
+Please add your poster information by {{ poster_by }}.
+{% endif %}
+To change any answer, please return to your RSVP:
+{{ url }}
+
+Questions go to Morgan Wills at mkwills@ksu.edu.
+
+The CNAP team
+{% endautoescape %}

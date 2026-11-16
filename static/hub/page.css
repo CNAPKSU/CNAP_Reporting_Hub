@@ -607,3 +607,24 @@ p,li,dd,figcaption,blockquote{text-wrap:pretty}
 .fp-page .fp-open .fp-facts dt{color:rgba(255,255,255,.7)}
 .fp-page .fp-open .fp-facts dd{color:#fff}
 .fp-page .fp-open .fp-facts a{color:#fff}
+
+/* Site Visit RSVP in the app (MW 2026-11-15, approved build) */
+.sv-rsvp-app{max-width:760px}
+.sv-appform{display:grid;gap:22px;padding:28px;background:var(--surface);border-radius:12px;box-shadow:var(--sh)}
+.sv-appform fieldset{border:0;margin:0;padding:0;min-width:0}
+.sv-appform legend{font-weight:600;font-size:16px;line-height:24px;margin-bottom:10px}
+.sv-appform [hidden]{display:none!important}
+.sv-ops{display:grid;gap:8px}.sv-ops.sv-row{grid-auto-flow:column;justify-content:start;gap:12px}
+.sv-op{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;line-height:22px}
+.sv-op:has(input:checked){border-color:var(--purple);background:var(--purple-tint)}
+.sv-op input{margin-top:4px;accent-color:var(--purple)}
+.sv-op2 span{display:flex;flex-direction:column}.sv-op2 em{font-style:normal;color:var(--muted);font-size:14px}
+.sv-tx{display:grid;gap:6px}.sv-tx b,.sv-tx>span{font-weight:600;font-size:15px}
+.sv-tx input,.sv-tx textarea,.sv-tx select{font:inherit;padding:10px 12px;border:1px solid var(--line-2);border-radius:8px;background:var(--surface);width:100%}
+.sv-hint{margin:8px 0 0;font-size:13.5px;color:var(--muted)}
+.sv-wc{font-size:13px;color:var(--muted)}.sv-wc.over{color:#a1261c;font-weight:600}
+.sv-pfields{display:grid;gap:14px;margin-top:6px;padding:16px;border-left:3px solid var(--purple);background:#faf7fe;border-radius:8px}
+.sv-act{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.sv-have,.sv-closed{margin:0 0 18px;padding:12px 16px;border-radius:10px;background:var(--purple-tint);color:var(--purple-ink)}
+.sv-errs{margin:0 0 18px;padding:12px 16px;border-radius:10px;background:#fbebeb;color:#7a1d16}.sv-errs ul{margin:6px 0 0;padding-left:20px}
+.sv-page .fp-body .wrap.sv-rsvp-app{display:block;max-width:760px;margin-left:auto;margin-right:auto}.sv-page .fp-msgs{margin-bottom:16px}

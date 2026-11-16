@@ -818,3 +818,8 @@ From CNAP's Plan for Preventing Foreign Co-Author Publications on IDeA Grants:
 - **Counting Home link clicks:** needs a small new table for anonymous click counts, which means a database migration. It needs MW's approval before it's built.
 - **NeuroSync flyer in the app:** each week's flyer generated from that week's talk. Not built. The prototype has one sample PDF.
 - **NeuroSync sign-up forms:** the three NeuroSync buttons are emails for now. Real forms would be new app work.
+
+## 2026-11-15 — Site Visit RSVP in the app (approved build, with migration)
+
+`SiteVisitRSVP` (migration `outcomes/0019_site_visit_rsvp`). This is a new table only; no existing table or record changes. One RSVP a year per person. The person can change it until the RSVP closes (March 25, 2027). Every save is audit-logged and sends a confirmation email that repeats the answers. Answers that only apply in person (meals, rooms, parking, photographs) are cleared when someone switches to Zoom or "unable to attend". Administrators see counts and every RSVP at `/site-visit/rsvps/` (linked in the staff side menu), with a CSV download. Pages: `/site-visit/rsvp/`, linked from Home. The Site Visit dates and program blocks live in `apps/portal/sitevisit_views.py` until the Site Visit has its own records.
+Not built: the calendar (.ics) file in the confirmation email, and a separate poster-only form after the RSVP closes.

@@ -28,7 +28,7 @@
     </nav>
     <div class="tools">
       {% if is_admin %}<a class="mywork" href="{% url 'manage:home' %}" style="border-style:dashed">Administration</a>{% endif %}
-      <a class="mywork" href="{% url 'portal:tasks' %}">My work{% if rep %} <span class="count"{% if not rep.todo %} style="background:var(--green)"{% endif %}>{{ rep.todo }}</span>{% endif %}</a>
+      <a class="mywork" href="{% url 'portal:tasks' %}">My reporting{% if rep %} <span class="count"{% if not rep.todo %} style="background:var(--green)"{% endif %}>{{ rep.todo }}</span>{% endif %}</a>
       <div class="acct">
         <button type="button" class="avatar" aria-expanded="false" aria-controls="acct-menu" aria-label="{{ person.full_name }}: profile and settings">{{ initials }}</button>
         <div class="acct-menu" id="acct-menu">
