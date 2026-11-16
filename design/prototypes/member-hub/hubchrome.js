@@ -437,3 +437,20 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
     if (hadFocus && s) s.focus();
   });
 })();
+
+/* Every page opens at its top (MW 2026-11-15: "it goes to the middle of the page instead of the top ...
+   make sure that isn't happening anywhere"). A link with a #section still lands on that section, and
+   Back still returns to where the reader was. */
+(function(){
+  if(window.__hubTop)return;window.__hubTop=1;
+  var nav=null;try{nav=performance.getEntriesByType('navigation')[0];}catch(e){}
+  if(nav&&nav.type==='back_forward')return;
+  try{if('scrollRestoration' in history)history.scrollRestoration='manual';}catch(e){}
+  function go(){
+    var id=location.hash&&decodeURIComponent(location.hash.slice(1)),el=id&&document.getElementById(id);
+    if(el){el.scrollIntoView({block:'start'});return;}
+    window.scrollTo(0,0);try{document.scrollingElement.scrollTop=0;}catch(e){}
+  }
+  go();addEventListener('load',function(){go();setTimeout(go,120);});
+  addEventListener('pageshow',function(e){if(e.persisted)go();});
+})();

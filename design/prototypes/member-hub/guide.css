@@ -2850,3 +2850,16 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .pg-jump a.on b{background:rgba(255,255,255,.22);color:#fff}
 @media (prefers-reduced-motion:reduce){.pg-jump a{transition:none}}
 @media (max-width:700px){.pg-jd + .pg-jd{padding-left:0;border-left:0}.pg-jd{flex-wrap:wrap}}
+/* Taller jump bar (MW 2026-11-15: "give this row more height") */
+.pg-jumpbar{padding-block:22px}
+.pg-jump a{min-height:42px;padding:0 7px 0 16px;border-radius:21px;font-size:14.5px}
+.pg-jump a b{min-width:26px;height:26px;border-radius:13px}
+.pg-jl{font-size:19px}
+/* Section links land below the sticky header and jump bar, not under them */
+.pg-gh h3,.pg-dh{scroll-margin-top:200px}
+@media (max-width:900px){.pg-gh h3,.pg-dh{scroll-margin-top:96px}}
+.pg-jumpbar .wrap{gap:14px}
+.pg-jumpbar .pg-jump{gap:8px 14px}
+.pg-jd{gap:8px}.pg-jd + .pg-jd{padding-left:14px}
+.pg-jump a{padding:0 6px 0 13px;font-size:14px}
+.pg-gh h3,.pg-dh{scroll-margin-top:110px}@media (max-width:900px){.pg-gh h3,.pg-dh{scroll-margin-top:96px}}
