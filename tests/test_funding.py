@@ -361,8 +361,11 @@ def test_kstate_updates_load_once_and_sit_under_the_research_weekly_heading(clie
     from apps.outcomes.models import FundingBulletin, FundingEvent
 
     assert funding.load_updates() == 0  # seed already loaded them; nothing twice
-    b = FundingBulletin.objects.get(name="K-State Research Weekly")
+    issues = FundingBulletin.objects.filter(name="K-State Research Weekly")
+    assert issues.count() == 2  # the November 4 and November 18, 2026, issues
+    b = issues.get(issue_date=dt.date(2026, 11, 4))
     assert b.news.exists() and b.events.exists() and b.opportunities.exists()
+    assert issues.get(issue_date=dt.date(2026, 11, 18)).news.exists()
     _login(client, "okafor")
     html = unescape(client.get("/funding/").content.decode())
     assert "From K-State Research Weekly" in html and "Read the full issue" in html
