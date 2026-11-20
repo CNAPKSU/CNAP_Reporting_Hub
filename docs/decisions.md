@@ -831,3 +831,13 @@ There are four new fields on `FundingNewsItem` and `FundingEvent`: image address
 - Members see a photo only after a person ticks "Approve: I checked this photo, and CNAP may show it". Changing the image address without viewing the new photo clears the approval.
 - The credit shows under the photo as "Photo: …".
 - Not built: uploading a photo file. That needs file storage on K-State's hosting. For now the photo is shown from its own address.
+
+## 2026-11-20 — Funding updates and the first Proposal writing toolkit content (MW approved in chat)
+
+- MW approved the week's drafts from the Wednesday task and asked for them on the site. Added to `fixtures/funding/kstate_updates.json` (loaded once by `seed` and `seed_funding`, never overwriting MW's edits):
+  - a K-State Research Weekly issue for November 18, 2026;
+  - eight news items: the NIH draft data and safety monitoring policy (Federal Register, November 17, 2026), the NSF Major Research Instrumentation update (from the November 18 issue), and K-State News stories on Stephanie Hall, Katsura Asano, Carl Ade, the Center on Emerging and Zoonotic Infectious Diseases, the Logan intergenerational study, and Erika Geisbrecht;
+  - two events: the Research Roundup Session (December 9, 2026) and the 25th Annual K-INBRE Symposium (January 16 and 17, 2027).
+- Already in the fixture, so not added again: the Denver Brown and Atom Grants news, the Higuchi awards, Ad Astra, and the December 3 and 17 office hours.
+- Held back for MW's decision, not added: the NIH parent K extension (dates not yet confirmed on NIH's own page), the CDC youth violence R01 forecast (Grants.gov and CDC give different due dates), Grad Edge, and NSF BIO virtual office hours (dates unconfirmed).
+- The Proposal writing toolkit on Grant resources (`hub/funding.html`, `#s-toolkit`) now has content instead of the empty note: MW's effort conversion table (`static/forms/Effort_Conversion_Table.xlsx`, her working file with the sheet renamed and the sample inputs cleared) and eight K-State research support links. This is template content, not the `funding_resources` table, which is still to be designed and shown to MW before it is built.
