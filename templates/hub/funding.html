@@ -170,7 +170,29 @@
         </section>
         <section class="fp-sec" id="s-toolkit" aria-labelledby="s-toolkit-h">
           <div class="fp-sh"><h2 id="s-toolkit-h">Proposal writing toolkit</h2><p>Templates, examples, and guides for writing a proposal.</p></div>
-          <div class="fp-empty"><p>The CNAP team is preparing the toolkit.</p><p>Until the toolkit is posted, email <a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a> for a template or an example.</p></div>
+          {# MW 2026-11-20: the effort conversion table (MW's working file) and K-State research support pages #}
+          <div class="fp-idea">
+            <article class="fp-ic" id="s-toolkit-cnap">
+              <h3>From the CNAP team</h3>
+              <div class="fp-tbl"><table><thead><tr><th scope="col">Resource</th><th scope="col">What it’s for</th></tr></thead><tbody>
+                <tr><th scope="row"><a href="{% static 'forms/Effort_Conversion_Table.xlsx' %}" download title="Downloads the effort conversion table, an Excel file.">Effort conversion table</a><span>Excel file</span></th><td>Convert percent effort to the calendar, academic, or summer months that NIH applications and progress reports ask for. Enter a percentage or a number of months in the colored boxes, and the table converts it both ways.</td></tr>
+              </tbody></table></div>
+            </article>
+            <article class="fp-ic" id="s-toolkit-kstate">
+              <h3>K-State research support</h3>
+              <div class="fp-tbl"><table><thead><tr><th scope="col">Resource</th><th scope="col">What it’s for</th></tr></thead><tbody>
+                <tr><th scope="row"><a href="https://www.k-state.edu/research/about/supporting-orgs/ord/index.html" target="_blank" rel="noopener">Office of Research Development</a></th><td>Help finding funding, planning a proposal, and meeting NIH and National Science Foundation requirements, including reviews of data management, facilities, and postdoctoral mentoring plans. Contact the office at least three months before your deadline.</td></tr>
+                <tr><th scope="row"><a href="https://www.k-state.edu/research/faculty/proposal/budgets/" target="_blank" rel="noopener">Proposal budgets</a></th><td>K-State’s current fringe benefit rates, facilities and administrative cost rates, 2026 budget worksheets, and templates for subaward, collaborator, and matching letters. Confirm current graduate assistant salaries, tuition, and postdoctoral salaries with the Office of Sponsored Programs, since the posted rate sheet uses older figures.</td></tr>
+                <tr><th scope="row"><a href="https://www.k-state.edu/research/faculty/proposal/prepare/frequently-used-info/index.html" target="_blank" rel="noopener">Frequently used proposal information</a></th><td>The institutional identifiers, assurance numbers, and official addresses that applications ask for.</td></tr>
+                <tr><th scope="row"><a href="https://www.k-state.edu/research/faculty/funding/internal-grants/ad-astra-awards/" target="_blank" rel="noopener">Ad Astra internal awards</a></th><td>K-State seed funding, including $25,000 Launch Awards to collect preliminary data for an external grant. The next deadline is March 1, 2027.</td></tr>
+                <tr><th scope="row"><a href="https://fundingconnect.engg.ksu.edu/fundconn.php" target="_blank" rel="noopener">The Funding Connection</a></th><td>The Office of Research Development’s weekly list of funding opportunities, searchable by field, deadline, and career stage, with filters for postdoctoral researchers, students, and new investigators.</td></tr>
+                <tr><th scope="row"><a href="https://atomgrants.com/signin" target="_blank" rel="noopener">Atom Grants</a></th><td>Free weekly funding alerts matched to your research. Sign in with your K-State account.</td></tr>
+                <tr><th scope="row"><a href="https://guides.lib.k-state.edu/es" target="_blank" rel="noopener">Evidence synthesis support</a></th><td>K-State Libraries librarians help plan the searches for a systematic or scoping review.</td></tr>
+                <tr><th scope="row"><a href="https://www.k-state.edu/research/faculty/proposal/prepare/writing/index.html" target="_blank" rel="noopener">Grant writing guides</a></th><td>Short guides on proposal terms, budgets, data management plans, and how the National Science Foundation reviews proposals, including a set written for postdoctoral researchers and graduate students.</td></tr>
+              </tbody></table></div>
+            </article>
+          </div>
+          <p class="fp-ic-note">For a template or an example the toolkit doesn’t have yet, email <a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a>.</p>
         </section>
         {% else %}
         <section class="fp-sec" id="s-for" aria-labelledby="s-for-h">
