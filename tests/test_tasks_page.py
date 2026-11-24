@@ -109,3 +109,37 @@ def test_started_form_shows_sections_done(client, okafor):
     )
     html = client.get("/tasks/").content.decode()
     assert "sections.<br>Your answers are saved." in _row(html, a)
+
+
+def _next_card(html):
+    i = html.index('class="welcome-next"')
+    return html[i : html.index("</a>", i)]
+
+
+def test_next_up_finishes_a_started_survey_first_then_the_publications_review(client, okafor):
+    """Next up (MW 2026-11-24): a started survey first; otherwise the publications review; otherwise the first task."""
+    from django.urls import reverse
+
+    from apps.portal.outcome_views import task_item
+
+    person = okafor.person
+    mine = Assignment.objects.filter(person=person, reporting_period__status="open")
+    mine.update(status="not_started")
+    client.force_login(okafor)
+
+    html = client.get("/tasks/").content.decode()
+    card = _next_card(html)
+    oc = task_item(person, ReportingPeriod.objects.get(status="open"))
+    if oc and not oc["done"]:
+        assert reverse("portal:outcomes") in card
+        assert "publications, talks, and grants" in card
+    else:
+        assert "/tasks/" in card and "Start" in card
+
+    a = next(x for x in mine if f"/tasks/{x.pk}/" in html)
+    rs.save_draft(a, okafor, {})
+    a.refresh_from_db()
+    assert a.status == "in_progress"
+    card = _next_card(client.get("/tasks/").content.decode())
+    assert f"/tasks/{a.pk}/" in card
+    assert "Continue" in card
