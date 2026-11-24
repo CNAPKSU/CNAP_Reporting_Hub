@@ -51,7 +51,9 @@ def test_page_wording(client, okafor):
 def test_section_progress_counts_only_finished_sections(okafor):
     a = next(
         x
-        for x in Assignment.objects.filter(person=okafor.person, status="not_started")
+        for x in Assignment.objects.filter(person=okafor.person, status="not_started").order_by(
+            "pk"
+        )
         if len(FormSchema(x.form_version).visible_sections({})) > 2
     )
     s = FormSchema(a.form_version)
@@ -66,6 +68,7 @@ def test_section_progress_counts_only_finished_sections(okafor):
         if not sec.is_repeatable
         and not (optq and sec.pk == optq.form_section_id)
         and any(q.question_type != QuestionType.INSTRUCTIONS for q in sec.questions.all())
+        and not any(q.question_type == QuestionType.FILE for q in sec.questions.all())
     )
     post = {
         f"q-{q.code}": _value(q)
@@ -80,7 +83,9 @@ def test_section_progress_counts_only_finished_sections(okafor):
 def test_started_form_shows_sections_done(client, okafor):
     a = next(
         x
-        for x in Assignment.objects.filter(person=okafor.person, status="not_started")
+        for x in Assignment.objects.filter(person=okafor.person, status="not_started").order_by(
+            "pk"
+        )
         if len(FormSchema(x.form_version).visible_sections({})) > 2
     )
     rs.save_draft(a, okafor, {})
@@ -97,6 +102,8 @@ def test_started_form_shows_sections_done(client, okafor):
         if not x.is_repeatable
         and not (s.optout_question and x.pk == s.optout_question.form_section_id)
         and any(q.question_type != QuestionType.INSTRUCTIONS for q in x.questions.all())
+        # a section finished by typing alone: an upload section is not done until a file comes (CI flake, 2026-11-24)
+        and not any(q.question_type == QuestionType.FILE for q in x.questions.all())
     )
     rs.save_draft(
         a,
