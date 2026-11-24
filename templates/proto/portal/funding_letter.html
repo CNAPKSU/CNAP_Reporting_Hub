@@ -7,9 +7,9 @@
   {% if preview %}<div class="px-callout warn fv-msg" role="status"><p><strong>Preview.</strong><br>The letter has not been sent.<br>{{ f.person }} sees the page only after the CNAP office selects Send.</p></div>{% endif %}
   <header class="px-mast p21-mast fv-mast">
     {% include "proto/_mast_art.html" %}
-    <p class="px-eyebrow">Letters from the Center</p>
+    <p class="px-eyebrow">Messages to you from the Center</p>
     <h1 class="px-title">{{ name }}</h1>
-    <p class="p21-purpose">This letter follows the decision on the proposal, with options picked for {{ first }} and the support the CNAP team offers.</p>
+    <p class="p21-purpose">This message follows the decision on the proposal, with options picked for {{ first }} and the support the CNAP team offers.</p>
     <ul class="px-facts">
       <li><span class="px-label">Proposal</span><span class="v">{% if f.grant.mechanism %}{{ f.grant.mechanism }} {% endif %}{{ f.grant.version_label }}{% if f.grant.funding_agency %}, {{ f.grant.funding_agency }}{% endif %}</span></li>
       <li><span class="px-label">Decision</span><span class="v">Not funded</span></li>
@@ -36,7 +36,7 @@
     <div class="px-rollbar foldall"><button type="button" data-roll="open" title="Opens every section below at once.">Show all</button><button type="button" data-roll="close" title="Rolls every section below up to its heading.">Collapse all</button></div>
 
     <details class="px-roll" id="l-note" open>
-      <summary title="The letter from the CNAP team. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h10l4 4v11H5z"/><path d="M15 4.5v4h4M8 12.5h8M8 15.5h6"/></svg>A note from the CNAP team</h2><span class="px-roll-figs"><span>From the CNAP evaluation team</span></span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
+      <summary title="The message from the CNAP team. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h10l4 4v11H5z"/><path d="M15 4.5v4h4M8 12.5h8M8 15.5h6"/></svg>A note from the CNAP team</h2><span class="px-roll-figs"><span>From the CNAP evaluation team</span></span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
       <div class="px-roll-body fv-letter">
         <p>Dear {{ first }},</p>
         <p>{{ opening|linebreaksbr }}</p>
@@ -74,7 +74,7 @@
 
     <details class="px-roll" id="l-help" open>
       <summary title="Grant-writing support from the CNAP team. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V6.5a1.5 1.5 0 0 1 3 0V11M10 10.5V5a1.5 1.5 0 0 1 3 0v5.5M13 10.5V6a1.5 1.5 0 0 1 3 0v6M16 12V9.5a1.5 1.5 0 0 1 3 0V14c0 3.6-2.6 6.5-6.5 6.5-2.5 0-4-1-5.3-2.7L4.5 14a1.5 1.5 0 0 1 2.3-1.9L7 12.5"/></svg>Support from the CNAP team</h2><span class="px-roll-figs"><span><b>{{ supports|length }}</b> services</span></span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
-      <div class="px-roll-body"><ul class="fv-plain">{% for s in supports %}<li>{{ s }}</li>{% endfor %}</ul><p class="fv-lead fv-after">Reply to the letter’s email to arrange any of the {{ supports|length }} services.</p></div>
+      <div class="px-roll-body"><ul class="fv-plain">{% for s in supports %}<li>{{ s }}</li>{% endfor %}</ul><p class="fv-lead fv-after">Reply to the email to arrange any of the {{ supports|length }} services.</p></div>
     </details>
 
     {% if all_news %}<details class="px-roll" id="l-news">

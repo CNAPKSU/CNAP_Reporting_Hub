@@ -25,7 +25,7 @@
       <li><a href="#s-most" data-onpage title="Go to the section Relevant to most members.">Relevant to most members</a></li>
       <li><a href="#s-news" data-onpage title="Go to the section Funding news.">Funding news</a></li>
       <li><a href="#s-events" data-onpage title="Go to the section Events and talks.">Events and talks</a></li>
-      <li><a href="#s-letters" data-onpage title="Go to the section Letters from the Center.">Letters from the Center</a></li>
+      <li><a href="#s-letters" data-onpage title="Go to the section Messages to you from the Center.">Messages to you from the Center</a></li>
       <li><a href="#s-suggest" data-onpage title="Go to the section Suggest an opportunity.">Suggest an opportunity</a></li>
     </ol>
   </nav>
@@ -82,10 +82,10 @@
     </details>
 
     <details class="px-roll" id="s-letters" open>
-      <summary title="Letters the CNAP team has sent {% if acting_for_other %}{{ owner.first_name }}{% else %}you{% endif %}. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="1.5"/><path d="M4 7l8 6 8-6"/></svg>Letters from the Center</h2><span class="px-roll-figs"><span><b>{{ letters|length }}</b> letter{{ letters|length|pluralize }}</span></span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
+      <summary title="Messages the CNAP team has sent {% if acting_for_other %}{{ owner.first_name }}{% else %}you{% endif %}. Click to open or close."><span class="px-roll-t"><h2 class="px-h2 px-roll-h"><svg class="px-roll-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="1.5"/><path d="M4 7l8 6 8-6"/></svg>Messages to you from the Center</h2><span class="px-roll-figs"><span><b>{{ letters|length }}</b> letter{{ letters|length|pluralize }}</span></span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
       <div class="px-roll-body">
-        {% if letters %}<ul class="fv-recs">{% for f in letters %}<li class="fv-rec"><span class="fv-name"><a class="px-link" href="{% url 'portal:funding_letter' f.pk %}" title="Opens the full letter.">{{ f.name }}</a></span><dl class="fv-kv"><dt>Sent</dt><dd>{{ f.sent_at|date:"F j, Y" }}</dd><dt>From</dt><dd>The CNAP evaluation team</dd></dl></li>{% endfor %}</ul>
-        {% else %}<p class="px-note">No letters yet.</p>{% endif %}
+        {% if letters %}<ul class="fv-recs">{% for f in letters %}<li class="fv-rec"><span class="fv-name"><a class="px-link" href="{% url 'portal:funding_letter' f.pk %}" title="Opens the full message.">{{ f.name }}</a></span><dl class="fv-kv"><dt>Sent</dt><dd>{{ f.sent_at|date:"F j, Y" }}</dd><dt>From</dt><dd>The CNAP evaluation team</dd></dl></li>{% endfor %}</ul>
+        {% else %}<p class="px-note">No messages yet.</p>{% endif %}
       </div>
     </details>
 
@@ -108,7 +108,7 @@
     </details>
     </div>
 
-    <p class="fv-who">The opportunities picked for {% if acting_for_other %}{{ owner.first_name }}{% else %}you{% endif %}, letters, and suggestions are visible only to {% if acting_for_other %}{{ owner.first_name }}, the people entering for {{ owner.first_name }},{% else %}you, anyone entering for you,{% endif %} and the CNAP office.<br>Nothing on this page is shared outside CNAP.</p>
+    <p class="fv-who">The opportunities picked for {% if acting_for_other %}{{ owner.first_name }}{% else %}you{% endif %}, messages, and suggestions are visible only to {% if acting_for_other %}{{ owner.first_name }}, the people entering for {{ owner.first_name }},{% else %}you, anyone entering for you,{% endif %} and the CNAP office.<br>Nothing on this page is shared outside CNAP.</p>
   </div>
   </div>
 </div>
