@@ -637,3 +637,9 @@ p,li,dd,figcaption,blockquote{text-wrap:pretty}
 /* Section notes under funding headings: smaller and quieter, one line each where it fits (MW 2026-11-24) */
 .fp-sh p{margin-top:10px;font-size:14.5px;line-height:22px;letter-spacing:.005em;color:var(--muted);max-width:none}
 .fp-sh p+p{margin-top:0}
+
+/* Quieter subtext under section headings, and a quieter footer, everywhere (MW 2026-11-24) */
+.sh p,.sv-sh p,.rp-sh p,.th-sech p{margin-top:10px;font-size:15px;line-height:23px;letter-spacing:.005em;color:var(--muted)}
+.foot p,.foot span{font-size:13.5px;line-height:21px;color:var(--muted)}
+.foot nav a{font-size:14px;color:var(--muted)}
+.foot nav a:hover{color:var(--purple)}

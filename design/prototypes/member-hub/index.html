@@ -1499,6 +1499,12 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
 
 /* "Your week" cards rise, draw their corners and slide their bars only once the section is on screen (MW 2026-11-24) */
 .js-draw .brief:not(.drawn) .bi,.js-draw .brief:not(.drawn) .bi::before,.js-draw .brief:not(.drawn) .bi::after{animation-play-state:paused}
+
+/* Quieter subtext under section headings, and a quieter footer, everywhere (MW 2026-11-24) */
+.sh p,.sv-sh p,.rp-sh p,.th-sech p{margin-top:10px;font-size:15px;line-height:23px;letter-spacing:.005em;color:var(--muted)}
+.foot p,.foot span{font-size:13.5px;line-height:21px;color:var(--muted)}
+.foot nav a{font-size:14px;color:var(--muted)}
+.foot nav a:hover{color:var(--purple)}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>

@@ -2913,3 +2913,9 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 
 /* Follow button sits left-aligned under the question (MW 2026-11-16) */
 .tp-q .tp-folrow{margin:6px 0 0;font:inherit}
+
+/* Quieter subtext under section headings, and a quieter footer, everywhere (MW 2026-11-24) */
+.sh p,.sv-sh p,.rp-sh p,.th-sech p{margin-top:10px;font-size:15px;line-height:23px;letter-spacing:.005em;color:var(--muted)}
+.foot p,.foot span{font-size:13.5px;line-height:21px;color:var(--muted)}
+.foot nav a{font-size:14px;color:var(--muted)}
+.foot nav a:hover{color:var(--purple)}
