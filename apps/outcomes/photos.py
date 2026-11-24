@@ -9,6 +9,12 @@ from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
 _META = re.compile(r"<meta\b[^>]*>", re.I)
+_IMG = re.compile(r"<img\b[^>]*>", re.I)
+# A site's all-purpose share picture says nothing about the article, so it counts as no photo (MW 2026-11-24, from a
+# test run on K-State News: one article named its own photo, another only the site's "Web-Link-Image.jpg").
+_GENERIC = re.compile(
+    r"(web[-_]?link[-_]?image|default|placeholder|logo|social[-_]?share|share[-_]?image)", re.I
+)
 
 
 def _attr(tag, name):
@@ -40,4 +46,25 @@ def parse_preview(html, base_url):
             found.setdefault(key, _attr(tag, "content"))
     img = found.get("og:image") or found.get("og:image:url") or found.get("twitter:image") or ""
     alt = found.get("og:image:alt") or found.get("twitter:image:alt") or ""
-    return (urljoin(base_url, img) if img else ""), alt
+    if not img or _GENERIC.search(img.rsplit("/", 1)[-1]):
+        return "", ""
+    img = urljoin(base_url, img)
+    if not alt:
+        alt = _alt_from_article(html, base_url, img)
+    return img, alt
+
+
+def _alt_from_article(html, base_url, img):
+    """No description in the header: borrow the alt text of the article's own picture, the same file or one from
+    the same folder (K-State News keeps a crop for sharing beside the article's photo)."""
+    folder = img.rsplit("/", 1)[0] + "/"
+    near = ""
+    for tag in _IMG.findall(html):
+        src, alt = urljoin(base_url, _attr(tag, "src")), _attr(tag, "alt").strip()
+        if not alt:
+            continue
+        if src == img:
+            return alt
+        if not near and src.startswith(folder):
+            near = alt
+    return near
