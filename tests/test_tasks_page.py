@@ -51,7 +51,9 @@ def test_page_wording(client, okafor):
 def test_section_progress_counts_only_finished_sections(okafor):
     a = next(
         x
-        for x in Assignment.objects.filter(person=okafor.person, status="not_started")
+        for x in Assignment.objects.filter(person=okafor.person, status="not_started").order_by(
+            "pk"
+        )
         if len(FormSchema(x.form_version).visible_sections({})) > 2
     )
     s = FormSchema(a.form_version)
@@ -66,6 +68,7 @@ def test_section_progress_counts_only_finished_sections(okafor):
         if not sec.is_repeatable
         and not (optq and sec.pk == optq.form_section_id)
         and any(q.question_type != QuestionType.INSTRUCTIONS for q in sec.questions.all())
+        and not any(q.question_type == QuestionType.FILE for q in sec.questions.all())
     )
     post = {
         f"q-{q.code}": _value(q)
@@ -80,7 +83,9 @@ def test_section_progress_counts_only_finished_sections(okafor):
 def test_started_form_shows_sections_done(client, okafor):
     a = next(
         x
-        for x in Assignment.objects.filter(person=okafor.person, status="not_started")
+        for x in Assignment.objects.filter(person=okafor.person, status="not_started").order_by(
+            "pk"
+        )
         if len(FormSchema(x.form_version).visible_sections({})) > 2
     )
     rs.save_draft(a, okafor, {})
@@ -97,6 +102,8 @@ def test_started_form_shows_sections_done(client, okafor):
         if not x.is_repeatable
         and not (s.optout_question and x.pk == s.optout_question.form_section_id)
         and any(q.question_type != QuestionType.INSTRUCTIONS for q in x.questions.all())
+        # a section finished by typing alone: an upload section is not done until a file comes (CI flake, 2026-11-24)
+        and not any(q.question_type == QuestionType.FILE for q in x.questions.all())
     )
     rs.save_draft(
         a,
@@ -109,3 +116,38 @@ def test_started_form_shows_sections_done(client, okafor):
     )
     html = client.get("/tasks/").content.decode()
     assert "sections.<br>Your answers are saved." in _row(html, a)
+
+
+def _next_card(html):
+    i = html.index('class="welcome-next"')
+    return html[i : html.index("</a>", i)]
+
+
+def test_next_up_finishes_a_started_survey_first_then_the_publications_review(client, okafor):
+    """Next up (MW 2026-11-24): a started survey first; otherwise the publications review; otherwise the first task."""
+    from django.urls import reverse
+
+    from apps.portal.outcome_views import task_item
+
+    person = okafor.person
+    mine = Assignment.objects.filter(person=person, reporting_period__status="open")
+    fresh = list(mine.filter(status="not_started").order_by("pk"))
+    mine.filter(status="in_progress").update(status="not_started")
+    client.force_login(okafor)
+
+    html = client.get("/tasks/").content.decode()
+    card = _next_card(html)
+    oc = task_item(person, ReportingPeriod.objects.get(status="open"))
+    if oc and not oc["done"]:
+        assert reverse("portal:outcomes") in card
+        assert "publications, talks, and grants" in card
+    else:
+        assert "/tasks/" in card and "Start" in card
+
+    a = next(x for x in fresh if f"/tasks/{x.pk}/" in html)
+    rs.save_draft(a, okafor, {})
+    a.refresh_from_db()
+    assert a.status == "in_progress"
+    card = _next_card(client.get("/tasks/").content.decode())
+    assert f"/tasks/{a.pk}/" in card
+    assert "Continue" in card

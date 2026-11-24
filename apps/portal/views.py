@@ -91,6 +91,17 @@ def tasks(request):
 
     oc = task_item(person, period)
     ctx["outcome"] = oc
+    # Next up (MW 2026-11-24): finish what you started first; otherwise the publications review, which leads the
+    # list; otherwise the first task in page order.
+    rows = [r for g in ctx["groups"] for r in (g["used"] + g["rows"]) if not r.get("preview_only")]
+    started = next((r for r in rows if r["a"].status == "in_progress"), None)
+    ctx["next_outcome"] = None
+    if started:
+        ctx["first_up"] = started
+    elif oc and not oc["done"]:
+        ctx["next_outcome"] = next((i for i in oc["items"] if not i["done"]), None)
+        if ctx["next_outcome"]:
+            ctx["first_up"] = None
     from apps.outcomes import cpcheck
 
     ctx["cp_check"] = cpcheck.pending_for(person)

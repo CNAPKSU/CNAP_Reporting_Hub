@@ -1,39 +1,135 @@
-# A public test copy of the CNAP Reporting Hub on Render, outside K-State (MW 2026-11-09).
-# Fictional data only. Not for real CNAP data. Uses Render's free plan: the site sleeps after
-# 15 minutes without visitors and wakes in about a minute; the free database lasts 30 days.
-services:
-  - type: web
-    name: cnap-hub-test
-    runtime: docker
-    plan: free
-    dockerCommand: >
-      sh -c "python manage.py migrate --noinput &&
-             python manage.py seed --fictional &&
-             python manage.py collectstatic --noinput &&
-             gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2"
+# The live CNAP Member Hub on Render (MW 2026-11-24). Render reads this file when you choose
+# New -> Blueprint and pick this repository. It creates the website, the database, a disk for uploaded
+# files, and the scheduled e-mail jobs. Render asks for each value marked "sync: false" once, at setup.
+#
+# Real data. Never run "seed --fictional" here: the start command loads reference data only.
+# Changes reach the live site only when MW approves a merge into main (autoDeploy follows main).
+envVarGroups:
+  - name: cnap-hub-settings
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: config.settings.demo
+        value: config.settings.prod
       - key: SECRET_KEY
         generateValue: true
-      - key: DATABASE_URL
-        fromDatabase:
-          name: cnap-hub-test-db
-          property: connectionString
       - key: ALLOWED_HOSTS
         value: .onrender.com
       - key: CSRF_TRUSTED_ORIGINS
         value: https://*.onrender.com
       - key: SITE_URL
-        value: https://cnap-hub-test.onrender.com
+        value: https://cnap-hub.onrender.com
       - key: UI_PROTOTYPE
+        value: "true"
+      - key: UI_PROTOTYPE_ONLY
         value: "true"
       - key: SSO_ENABLED
         value: "false"
+      - key: TIME_ZONE
+        value: America/Chicago
+      - key: EVALUATOR_EMAIL
+        value: mkwills@ksu.edu
+      # Postmark's SMTP address with the server token as user and password:
+      # smtp+tls://TOKEN:TOKEN@smtp.postmarkapp.com:587
+      - key: EMAIL_URL
+        sync: false
+      # For example: CNAP Member Hub <hub@your-domain>, an address Postmark has verified
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
+      - key: PUBMED_CONTACT_EMAIL
+        value: cnap@ksu.edu
+
+services:
+  - type: web
+    name: cnap-hub
+    runtime: docker
+    plan: starter
+    branch: main
+    autoDeploy: true
+    healthCheckPath: /healthz
+    disk:
+      name: media
+      mountPath: /data/media
+      sizeGB: 5
+    dockerCommand: >
+      sh -c "python manage.py migrate --noinput &&
+             python manage.py seed &&
+             python manage.py ensure_admin &&
+             python manage.py collectstatic --noinput &&
+             gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --timeout 60"
+    envVars:
+      - fromGroup: cnap-hub-settings
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cnap-hub-db
+          property: connectionString
       - key: MEDIA_ROOT
-        value: /tmp/media
+        value: /data/media
+      # The first administrator. The account is created once; it signs in with an e-mailed link.
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_FIRST_NAME
+        sync: false
+      - key: ADMIN_LAST_NAME
+        sync: false
+
+  - type: cron
+    name: cnap-hub-outcome-reminders
+    runtime: docker
+    plan: starter
+    branch: main
+    schedule: "0 13 * * *" # 7:00 a.m. Central standard time (Render runs cron in UTC)
+    dockerCommand: python manage.py send_outcome_reminders
+    envVars:
+      - fromGroup: cnap-hub-settings
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cnap-hub-db
+          property: connectionString
+
+  - type: cron
+    name: cnap-hub-period-emails
+    runtime: docker
+    plan: starter
+    branch: main
+    schedule: "0 14 * * *" # 8:00 a.m. Central standard time
+    dockerCommand: python manage.py send_scheduled_emails
+    envVars:
+      - fromGroup: cnap-hub-settings
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cnap-hub-db
+          property: connectionString
+
+  - type: cron
+    name: cnap-hub-speaker-surveys
+    runtime: docker
+    plan: starter
+    branch: main
+    schedule: "*/10 * * * *"
+    dockerCommand: python manage.py send_speaker_surveys
+    envVars:
+      - fromGroup: cnap-hub-settings
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cnap-hub-db
+          property: connectionString
+
+  - type: cron
+    name: cnap-hub-clear-sessions
+    runtime: docker
+    plan: starter
+    branch: main
+    schedule: "0 9 * * *" # 3:00 a.m. Central standard time
+    dockerCommand: python manage.py clearsessions
+    envVars:
+      - fromGroup: cnap-hub-settings
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cnap-hub-db
+          property: connectionString
+
 databases:
-  - name: cnap-hub-test-db
-    plan: free
+  - name: cnap-hub-db
+    plan: basic-256mb
     databaseName: cnap
     user: cnap
+    postgresMajorVersion: "16"

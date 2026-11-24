@@ -14,7 +14,16 @@ admin.site.index_title = "Administration"
 
 from apps.common import prototype as ui_prototype  # noqa: E402
 
+
+def healthz(request):
+    """The host's health check (Render): plain HTTP, no sign-in, no database work."""
+    from django.http import HttpResponse
+
+    return HttpResponse("ok", content_type="text/plain")
+
+
 urlpatterns = [
+    path("healthz", healthz, name="healthz"),
     path("ui-preview/<str:view>/", ui_prototype.switch, name="ui_switch"),
     path("admin/login/", account_views.admin_login),
     path("admin/", admin.site.urls),

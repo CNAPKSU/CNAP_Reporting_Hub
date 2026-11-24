@@ -12,7 +12,7 @@ Options picked for you:
 Funding news:
 {% for n in news %}- {{ n.headline }}.
 {% endfor %}{% endif %}
-Read the full letter:
+Read the full message:
 {{ url }}
 {% if with_link %}
 The link signs you in to the CNAP Member Hub.

@@ -2203,3 +2203,44 @@ body.proto .px-mast + .px-rolls > .foldall:first-child { border-top: 0; padding-
 /* MW 2026-11-15 ("the current year used to be a white with glowing. I liked that"): this year's bar
    is white again, with a purple edge and a soft purple glow so it reads on the light page. */
 body.proto .bars li.now .bb { background: #fff; box-shadow: inset 0 0 0 1.5px var(--px-brand), 0 0 0 4px color-mix(in srgb, var(--px-brand) 12%, transparent), 0 0 18px color-mix(in srgb, var(--px-brand) 38%, transparent); }
+
+/* Task rows follow the width of the list, not the window (MW 2026-11-24 review): with the side menu open on a
+   small laptop or a half-width window, the row stacks before the name column gets squeezed. */
+body.proto .t3-list { container-type: inline-size; }
+body.proto .t3-row > * { min-width: 0; }
+@container (max-width: 700px) {
+  body.proto .t3-row { grid-template-columns: 1fr; gap: var(--px-3); }
+  body.proto .t3-state { grid-auto-flow: column; justify-content: start; align-items: center; gap: var(--px-3); }
+  body.proto .t3-acts { justify-content: start; }
+  body.proto .t3-slot:empty { display: none; }
+}
+@container (max-width: 380px) {
+  body.proto .t3-acts { display: flex; flex-wrap: wrap; gap: var(--px-2) var(--px-4); }
+  body.proto .t3-slot { flex: 0 0 auto; }
+  body.proto .t3-slot:first-child { flex-basis: 100%; }
+}
+
+/* Under the Member Hub header (MW 2026-11-24 review): on phones and tablets the reporting pages show one header,
+   not two. The reporting menu becomes a slim "My reporting" row that scrolls with the page. */
+@media (max-width: 860px) {
+  body.proto .hdr ~ .app .side { position: static; padding: 8px var(--px-4); }
+  body.proto .hdr ~ .app .side .brand { display: none; }
+  body.proto .hdr ~ .app .side::before { content: "My reporting"; grid-column: 1; grid-row: 1; font: 600 var(--px-fs-sm)/1.2 var(--px-sans); color: var(--px-ink-2); }
+  body.proto .hdr ~ .app .px-menu { font-size: 0; gap: 0; }
+  body.proto .hdr ~ .app .px-menu::after { content: "Pages"; font: 600 var(--px-fs-sm)/1 var(--px-sans); }
+}
+
+/* Surveys follow the room they have, not the window (MW 2026-11-24 review): beside the side menu on a tablet in
+   landscape or a half-width window, the section list moves above the form so the rating scales keep their width. */
+body.proto main { container-type: inline-size; container-name: pmain; }
+@container pmain (max-width: 900px) {
+  body.proto .p21-layout { grid-template-columns: minmax(0, 1fr); gap: var(--px-5); }
+  body.proto .p21-nav { position: static; padding: var(--px-3) var(--px-4); background: var(--px-surface); border: 1px solid var(--px-line); border-radius: var(--px-r); max-width: 100%; box-sizing: border-box; }
+  body.proto .p21-nav ol { display: flex; flex-wrap: wrap; gap: 4px 8px; border-left: 0; min-width: 0; }
+  body.proto .p21-nav a { border-left: 0; padding: 6px 8px; border-radius: var(--px-r-sm); }
+  body.proto .p21-nav a.on { background: var(--px-brand-tint); }
+  body.proto .p21-layout::before { display: none; }
+}
+body.proto .filezone, body.proto .filezone-t, body.proto .filezone-s { max-width: 100%; overflow-wrap: anywhere; }
+body.proto .filezone input[type=file] { max-width: 100%; }
+body.proto .filezone { grid-template-columns: minmax(0, 1fr); }

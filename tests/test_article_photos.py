@@ -112,3 +112,18 @@ def test_event_photo_fields_save(center, client):
     )
     e = FundingEvent.objects.get(title="A fictional talk")
     assert e.photo_url == "https://example.org/e.jpg" and e.photo_approved
+
+
+def test_parse_preview_skips_a_sites_generic_share_picture():
+    html = '<meta property="og:image" content="https://www.k-state.edu/home/images/Web-Link-Image.jpg">'
+    assert photos.parse_preview(html, "https://www.k-state.edu/news/a.html") == ("", "")
+
+
+def test_parse_preview_borrows_alt_text_from_the_articles_photo_in_the_same_folder():
+    html = (
+        '<meta property="og:image" content="/news/images/2026/10/x/share.jpg">'
+        '<img src="/news/images/2026/10/x/main.jpg" alt="A purple exercise monitor on a wrist.">'
+    )
+    img, alt = photos.parse_preview(html, "https://www.k-state.edu/news/articles/x.html")
+    assert img == "https://www.k-state.edu/news/images/2026/10/x/share.jpg"
+    assert alt == "A purple exercise monitor on a wrist."

@@ -28,6 +28,11 @@
     <span class="wn-t">{{ first_up.name }}</span>
     <span class="wn-m">{{ first_up.time }}</span>
     <span class="wn-b">{% if first_up.a.status == 'in_progress' %}Continue{% else %}Start{% endif %}</span>
+  </a>{% elif next_outcome and not period.in_preview %}<a class="welcome-next" href="{% url 'portal:outcomes' %}?for={{ next_outcome.owner.pk }}">
+    <span class="wn-l">Next up</span>
+    <span class="wn-t">{% if next_outcome.self %}Review your publications, talks, and grants{% else %}Review publications, talks, and grants for {{ next_outcome.owner }}{% endif %}</span>
+    <span class="wn-m">About {{ outcome.minutes }} minutes</span>
+    <span class="wn-b">Start</span>
   </a>{% endif %}
 </header>
 {% if sow_excerpts %}<details class="sowbox"><summary>Your commitments, from your Statement of Work</summary>
@@ -59,6 +64,12 @@
 <details class="panel donebox todobox"><summary title="The forms you still need to fill in this reporting session, grouped by what they are about. Click to open the list or roll it back up.">To do ({% if cp_check %}{{ todo|add:1 }}{% else %}{{ todo }}{% endif %})</summary>
   <p class="small muted">{{ "Your forms are grouped by what they are about. Click a group to open it, or use Show all."|stack }}</p>
   <div class="scroll"><table class="tasks" title="Your open forms for this reporting session, grouped by what they are about."><thead class="vh"><tr><th>Form</th><th>Actions</th><th></th><th></th><th>About how long it takes</th></tr></thead><tbody>
+  {% if outcome and not outcome.done %}
+    <tr class="gap" aria-hidden="true"><td colspan="5"></td></tr>
+    <tr class="grouphead"><td colspan="5"><div class="gh"><div><h3>{% group_icon 'outcomes' %}Publications, talks, and grants</h3><p>{{ "Keep your papers, presentations, and grant proposals up to date."|stack }}</p></div></div></td></tr>
+    {% for i in outcome.items %}{% if not i.done %}<tr class="openrow"><td><strong>{% if i.self %}Review your publications, talks, and grants{% else %}Review publications, talks, and grants for {{ i.owner }}{% endif %}</strong><div class="small muted">{% if i.n_review %}You have {{ i.n_review }} product{{ i.n_review|pluralize }} to review{% if i.n_ask %} and {% endif %}{% else %}You have {% endif %}{% if i.n_ask %}{{ i.n_ask }} question{{ i.n_ask|pluralize }} to answer{% endif %}.</div></td>
+      <td class="acts">{% if period.in_preview %}<span class="small muted">This opens when the reporting session starts.</span>{% else %}<a class="btn small" href="{% url 'portal:outcomes' %}?for={{ i.owner.pk }}">Start</a>{% endif %}</td><td class="acts"></td><td class="acts"></td><td class="mins"><span>About {{ outcome.minutes }} min</span></td></tr>{% endif %}{% endfor %}
+  {% endif %}
   {% if cp_check %}{% include "portal/_cp_rows.html" %}{% endif %}
   {% for g in groups %}
     <tr class="gap" aria-hidden="true"><td colspan="5"></td></tr>
@@ -67,12 +78,6 @@
     {% if g.used and g.rows %}<tr class="subhead"><td colspan="5">{% if g.rows|length == 1 %}Did you also use this core?{% else %}Did you also use these cores?{% endif %}</td></tr>{% endif %}
     {% for r in g.rows %}{% include "portal/_task_row.html" %}{% endfor %}
   {% endfor %}
-  {% if outcome and not outcome.done %}
-    <tr class="gap" aria-hidden="true"><td colspan="5"></td></tr>
-    <tr class="grouphead"><td colspan="5"><div class="gh"><div><h3>{% group_icon 'outcomes' %}Publications, talks, and grants</h3><p>{{ "Keep your papers, presentations, and grant proposals up to date."|stack }}</p></div></div></td></tr>
-    {% for i in outcome.items %}{% if not i.done %}<tr class="openrow"><td><strong>{% if i.self %}Review your publications, talks, and grants{% else %}Review publications, talks, and grants for {{ i.owner }}{% endif %}</strong><div class="small muted">{% if i.n_review %}You have {{ i.n_review }} product{{ i.n_review|pluralize }} to review{% if i.n_ask %} and {% endif %}{% else %}You have {% endif %}{% if i.n_ask %}{{ i.n_ask }} question{{ i.n_ask|pluralize }} to answer{% endif %}.</div></td>
-      <td class="acts">{% if period.in_preview %}<span class="small muted">This opens when the reporting session starts.</span>{% else %}<a class="btn small" href="{% url 'portal:outcomes' %}?for={{ i.owner.pk }}">Start</a>{% endif %}</td><td class="acts"></td><td class="acts"></td><td class="mins"><span>About {{ outcome.minutes }} min</span></td></tr>{% endif %}{% endfor %}
-  {% endif %}
   </tbody></table></div>
 </details>
 {% endif %}

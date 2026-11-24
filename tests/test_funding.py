@@ -214,7 +214,7 @@ def test_send_emails_once_with_delegates_copied_and_a_sign_in_link(client, cente
     msg = mail.outbox[0]
     assert msg.to == [okafor.primary_email] and varga.primary_email in msg.cc
     assert msg.subject == f.name
-    assert "Read the full letter" in msg.alternatives[0][0]
+    assert "Read the full message" in msg.alternatives[0][0]
     assert f"/funding/letter/{f.pk}/" in msg.body
     f.refresh_from_db()
     assert f.status == "sent" and f.sent_at and okafor.primary_email in f.sent_to

@@ -81,6 +81,9 @@ tbody tr:hover td{background:#f6f4f0}
 .space div{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
 .space i{display:block;background:var(--purple-tint);border:1px solid #d9cdea}
 @media (max-width:760px){.sec{grid-template-columns:minmax(0,1fr);gap:20px}.sw,.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}.row{grid-template-columns:minmax(0,1fr);gap:6px}.wrap{padding-left:20px;padding-right:20px}}
+
+/* small screens: wide specimens scroll inside their own box instead of widening the page (MW 2026-11-24 review) */
+@media (max-width:1100px){.wrap > section,.wrap > div{max-width:100%}[style*="display:flex"],.tabs{flex-wrap:wrap}html,body{overflow-x:clip}}
 </style>
 </head>
 <body>
@@ -172,7 +175,7 @@ tbody tr:hover td{background:#f6f4f0}
       <div><p class="lab" style="margin-bottom:8px">Global · six destinations, search, My reporting, and the profile menu. The dashed Administration link appears only for administrators.</p>
         <div style="display:flex;align-items:center;gap:24px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 16px;min-height:60px;flex-wrap:wrap">
           <b style="font-weight:600">CNAP Member Hub</b>
-          <span style="display:flex;gap:16px;font-size:15px;font-weight:500;color:var(--ink-2)"><span style="color:var(--purple);box-shadow:inset 0 -2px 0 var(--purple);padding:18px 0">Home</span><span style="padding:18px 0">Research</span><span style="padding:18px 0">Funding</span><span style="padding:18px 0">Events</span><span style="padding:18px 0">Community</span><span style="padding:18px 0">Resources</span></span>
+          <span style="display:flex;flex-wrap:wrap;column-gap:16px;font-size:15px;font-weight:500;color:var(--ink-2)"><span style="color:var(--purple);box-shadow:inset 0 -2px 0 var(--purple);padding:18px 0">Home</span><span style="padding:18px 0">Research</span><span style="padding:18px 0">Funding</span><span style="padding:18px 0">Events</span><span style="padding:18px 0">Community</span><span style="padding:18px 0">Resources</span></span>
           <span style="margin-left:auto;display:flex;gap:10px;align-items:center;font-size:14px"><span style="padding:8px 12px;border-radius:10px;background:var(--sunken);color:var(--muted)">Search CNAP</span><span style="padding:8px 12px;border-radius:10px;border:1px solid var(--line-2)">My reporting 4</span><span style="padding:8px 12px;border-radius:10px;border:1px dashed var(--line-2);color:var(--ink-2)">Administration</span></span>
         </div></div>
       <div><p class="lab" style="margin-bottom:8px">Contextual · tabs within a section, such as Funding</p><nav class="tabs" aria-label="Example tabs"><a href="#" aria-current="page">Picked for you</a><a href="#">All opportunities</a><a href="#">News</a><a href="#">Suggest an opportunity</a></nav></div>

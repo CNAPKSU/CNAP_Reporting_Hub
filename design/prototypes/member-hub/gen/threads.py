@@ -50,13 +50,12 @@ def page(k):
       <nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><a href="community.html">Community</a><span aria-hidden="true">/</span><a href="threads.html">Threads</a><span aria-hidden="true">/</span><span aria-current="page">{t}</span></nav>
       <p class="th-tp th-{TONE[tp]}">{tp}</p>
       <h1 id="t">{t}</h1>
-      <div class="tp-byrow"><div class="tp-by">{av(k)}<p><b>{ML(k)}</b><span>{asker[3]} · Started {STARTED_ON[k]} · <span data-rc>{rep(n)}</span></span></p></div>
-        <button type="button" class="th-fol tp-fol" aria-pressed="{'true' if fol else 'false'}" title="Follow this thread to get one email a day when it has new replies."><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h8v11l-4-3-4 3z"/></svg><span>{'Following' if fol else 'Follow'}</span></button></div>
+      <div class="tp-byrow"><div class="tp-by">{av(k)}<p><b>{ML(k)}</b><span>{asker[3]} · Started {STARTED_ON[k]} · <span data-rc>{rep(n)}</span></span></p></div></div>
     </div>
   </section>
   <div class="wrap tp-cols">
     <div class="tp-main">
-      <div class="tp-q" id="tp-question" data-rail="The question">{body}</div>
+      <div class="tp-q" id="tp-question" data-rail="The question">{body}<p class="tp-folrow"><button type="button" class="th-fol tp-fol" aria-pressed="{'true' if fol else 'false'}" title="Follow this thread to get one email a day when it has new replies."><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h8v11l-4-3-4 3z"/></svg><span>{'Following' if fol else 'Follow'}</span></button></p></div>
       {why}
       <h2 class="tp-h" data-rh id="tp-replies" data-rail="Replies">{rep(n) if n else 'Replies'}</h2>
       <ol class="tp-rs">{empty}{replies}</ol>
