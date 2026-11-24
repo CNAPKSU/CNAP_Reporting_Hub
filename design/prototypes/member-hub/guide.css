@@ -2919,3 +2919,23 @@ button.th-askb:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .foot p,.foot span{font-size:13.5px;line-height:21px;color:var(--muted)}
 .foot nav a{font-size:14px;color:var(--muted)}
 .foot nav a:hover{color:var(--purple)}
+
+/* Responsive review (MW 2026-11-24): grid columns may shrink below their content's natural width, so nothing
+   pushes past the screen; long words in headings break instead of running off the edge. */
+.ev-main > *,.cal > *,.co-hero > *,.cs-b > *{min-width:0}
+h1,h2,h3{overflow-wrap:break-word}
+.cm-search,.cm-search input{max-width:100%}
+@media (max-width:760px){.ac-pop{position:fixed;left:16px;right:16px;top:auto;bottom:16px;width:auto}}
+@media (max-width:640px){.crumb [aria-current="page"]{display:none}.crumb span[aria-hidden="true"]:nth-last-child(2){display:none}}
+
+/* the career path stacks on phones again; later desktop tweaks had overridden it (MW 2026-11-24 review) */
+@media (max-width:760px){.al-path{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 44px auto}.al-gap::before{left:50%;right:auto;top:6px;bottom:12px;width:2px;height:auto;background:linear-gradient(var(--line-2),var(--teal))}.al-gap::after{left:50%;right:auto;top:auto;bottom:6px;transform:translateX(-50%) rotate(135deg)}.al-to b{font-size:24px;line-height:29px}}
+/* the events calendar is one column on phones, so its twelve-column gaps never push it past the screen */
+@media (max-width:640px){.cal{grid-template-columns:minmax(0,1fr);column-gap:0}.cal > *{grid-column:1 / -1}}
+/* the date line wraps on small phones instead of running past the card */
+@media (max-width:760px){.ev-poster{flex-wrap:wrap;row-gap:0}}
+@media (max-width:420px){.ev-poster .p-day{font-size:20px}.ev-poster .p-num{font-size:52px}.ev-poster .p-mon{font-size:20px}}
+
+/* Phones and small tablets: Page feedback becomes a small round button, so it never covers what someone is reading
+   (MW 2026-11-24 review). The words stay as its name for screen readers. */
+@media (max-width:760px){.fbk-open.fbk-open{width:44px;height:44px;min-width:0;padding:0!important;overflow:hidden;font-size:0!important;line-height:0;color:transparent!important;display:grid;place-items:center}.fbk-open.fbk-open::before{content:"";width:20px;height:20px;background:#fff;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 5h16v11H9l-5 4z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 5h16v11H9l-5 4z'/%3E%3C/svg%3E") center/contain no-repeat}}
