@@ -36,7 +36,7 @@
             <div><dt>Consultations</dt><dd>One on one, by email request</dd></div>
           </dl>
           {% else %}<h1 id="t">Funding opportunities</h1>
-          <p class="fp-lead">Opportunities the CNAP team picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, opportunities relevant to most members, letters from the Center, and a way to suggest an opportunity.</p>
+          <p class="fp-lead">Funding opportunities the CNAP team matched to {% if acting_for_other %}{{ who }}’s{% else %}your{% endif %} research, opportunities that fit the research of most members, letters from the CNAP team with next steps after a proposal is not funded, and a form to suggest an opportunity.</p>
           <dl class="fp-facts">
             <div><dt>Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}</dt><dd>{{ picked|length }} opportunit{{ picked|length|pluralize:"y,ies" }}</dd></div>
             <div><dt>Relevant to most members</dt><dd>{{ everyone|length }} opportunit{{ everyone|length|pluralize:"y,ies" }}</dd></div>
@@ -46,7 +46,7 @@
 
       </div>
       <nav class="fp-tabs" aria-label="Funding pages">
-        <a href="{% url 'portal:funding' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "opportunities" %} aria-current="page"{% endif %}><b>Funding opportunities</b><span>Picked for {% if acting_for_other %}{{ who }}{% else %}you{% endif %}, and relevant to most members</span></a>
+        <a href="{% url 'portal:funding' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "opportunities" %} aria-current="page"{% endif %}><b>Funding opportunities</b><span>Matched to {% if acting_for_other %}{{ who }}’s{% else %}your{% endif %} research, and for most members</span></a>
         <a href="{% url 'portal:funding_resources' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "resources" %} aria-current="page"{% endif %}><b>Grant resources</b><span>The {{ questions|length|numword }} questions, a consultation, and the toolkit</span></a>
         <a href="{% url 'portal:funding_news' %}{% if acting_for_other %}?for={{ owner.pk }}{% endif %}"{% if part == "news" %} aria-current="page"{% endif %}><b>Funding news</b><span>News from sponsors, and events and talks</span></a>
       </nav>
@@ -89,7 +89,7 @@
         </section>
         {% elif part == "resources" %}
         <section class="fp-sec" id="s-before" aria-labelledby="s-before-h">
-          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {{ questions|length|numword }} questions before starting an application.</p><p>Please select a question to read the full question.</p></div>
+          <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {{ questions|length|numword }} questions before starting an application.</p><p>Select to view the full question.</p></div>
           <div class="fp-weigh">
             <div class="fp-qcard">
               <div class="fp-qcols"><ol class="fp-qs">{% for q in questions|slice:":4" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol><ol class="fp-qs" start="5">{% for q in questions|slice:"4:" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter|add:4 }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol></div>

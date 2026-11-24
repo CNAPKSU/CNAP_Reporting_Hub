@@ -1454,3 +1454,6 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 @media (prefers-reduced-motion:reduce){.hn-app .rb-b svg{transition:none}}
 .hn-app .rb-p a{align-items:flex-start;text-align:left;justify-content:flex-start}
 .sv-next{margin-top:10px;font-size:15px}.sv-next a{color:var(--purple-ink)}
+
+/* "Your week" cards rise, draw their corners and slide their bars only once the section is on screen (MW 2026-11-24) */
+.js-draw .brief:not(.drawn) .bi,.js-draw .brief:not(.drawn) .bi::before,.js-draw .brief:not(.drawn) .bi::after{animation-play-state:paused}

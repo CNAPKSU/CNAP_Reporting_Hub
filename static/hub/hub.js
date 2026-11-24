@@ -18,7 +18,7 @@
 
 
   /* corner rules: draw in once their section is on screen */
-  try{if('IntersectionObserver' in window){document.documentElement.classList.add('js-draw');var dio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('drawn');dio.unobserve(e.target);}});},{rootMargin:'0px 0px -25% 0px'});document.querySelectorAll('.ns-band,.cx,.sh').forEach(function(el){dio.observe(el);});}}catch(e){}
+  try{if('IntersectionObserver' in window){document.documentElement.classList.add('js-draw');var dio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('drawn');dio.unobserve(e.target);}});},{rootMargin:'0px 0px -40% 0px'});document.querySelectorAll('.ns-band,.cx,.sh,.brief').forEach(function(el){dio.observe(el);});}}catch(e){}
   /* calendar: dates come from the Hub (reporting sessions, NeuroSync talks, funding deadlines, and research events) */
   if(document.getElementById('hub-cal'))try{
   var KIND={ns:'NeuroSync',ctr:'Center event',due:'Deadline',you:'Your meeting · only you see this',cam:'K-State'};

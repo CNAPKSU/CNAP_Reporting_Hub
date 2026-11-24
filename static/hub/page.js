@@ -47,7 +47,7 @@
 
 /* the section rule's accent slides once each heading comes into view, as on the homepage */
 (function(){try{if(!('IntersectionObserver' in window))return;document.documentElement.classList.add('js-draw');
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('drawn');io.unobserve(e.target);}});},{rootMargin:'0px 0px -25% 0px'});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('drawn');io.unobserve(e.target);}});},{rootMargin:'0px 0px -40% 0px'});
   document.querySelectorAll('.fp-sh').forEach(function(el){io.observe(el);});}catch(e){}})();
 
 /* Side cards stay in view (MW 2026-11-15). A column taller than the window scrolls until its last card shows, then holds. */

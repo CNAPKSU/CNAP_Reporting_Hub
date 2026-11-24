@@ -87,7 +87,7 @@
     ['Reporting', 'reporting.html', [['My tasks', 'reporting.html', 'Surveys and reports due this session'], ['My history', 'reporting-history.html', 'Everything you have submitted']]],
     ['Research', 'research.html', [['Research stories', 'research.html', 'Work from the Center’s pilot projects, cores, and investigators'], ['Suggest a story', 'mailto:cnap@ksu.edu?subject=Story%20idea%20for%20Research%20at%20CNAP', 'Tell the CNAP team about a milestone, paper, or person to profile']]],
     ['Events', 'events.html', [['Events calendar', 'events.html', 'Every Center event, deadline, and campus date'], ['NeuroSync', 'neurosync.html', 'The Wednesday speaker series'], ['The 2027 Site Visit', 'sitevisit.html', 'May 25 and 26, 2027'], ['2026 Site Visit photographs', 'sitevisit-2026.html', '48 photographs from last May']]],
-    ['Funding', 'funding.html', [['Funding opportunities', 'funding.html', 'Picked for you, and relevant to most members'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft'], ['Funding news', 'funding-news.html', 'News from sponsors, and events and talks']]],
+    ['Funding', 'funding.html', [['Funding opportunities', 'funding.html', 'Matched to your research, and for most members'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft'], ['Funding news', 'funding-news.html', 'News from sponsors, and events and talks']]],
     ['Community', 'community.html', [['Community', 'community.html', 'Achievements, people, and ways to connect'], ['Threads', 'threads.html', 'Questions answered by members who have the experience'], ['Member directory', 'community.html#cm-dir', 'Find a colleague or a type of expertise'], ['Alumni', 'community.html#cm-alum', 'Where former members are now']]],
     ['Resources', 'core-bn.html', [['Behavioral Neuroscience Core', 'core-bn.html', 'Services, equipment, and how to book'], ['Cognitive Neuroscience Core', 'core-cn.html', 'Services, equipment, and how to book'], ['Neuroinformatics Core', 'core-ni.html', 'Data, analysis, and consultation'], ['Mentor guide', 'mentor.html', 'For mentors of CNAP investigators'], ['Mentee guide', 'mentee.html', 'For pilot and project investigators'], ['Grant resources and toolkit', 'funding-resources.html', 'Weigh an opportunity and get help with a draft']]]
   ];
@@ -315,6 +315,8 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
 (function () {
   function build() {
     if (document.querySelector('.hr-rail')) return;
+    /* Surveys and reports keep their own "In this survey" menu, which shows progress, so they get no second menu (MW 2026-11-24) */
+    if (document.querySelector('.p21-nav')) return;
     var main = document.querySelector('main'); if (!main) return;
     var items = [];
     var own = document.querySelector('nav.otp, nav.spine');
@@ -390,6 +392,9 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
       var x = Math.max(gl + 8, Math.round((gl + cl) / 2 - 14));
       var floor = 124;
       var y = hero ? Math.max(floor, Math.round(hero.getBoundingClientRect().bottom + 40)) : Math.max(floor, Math.round(main.getBoundingClientRect().top + 40));
+      /* Never cover the page: if the margin is too narrow for the dots, hide them (MW 2026-11-24) */
+      var edge = Infinity; [].slice.call(main.querySelectorAll(':scope > *, :scope > * > *')).forEach(function (el) { var r = el.getBoundingClientRect(); if (!(r.width > 0 && r.height > 0 && r.left > gl + 2)) return; var c = getComputedStyle(el), boxed = c.backgroundColor !== 'rgba(0, 0, 0, 0)' || parseFloat(c.borderLeftWidth) > 0 || c.boxShadow !== 'none'; edge = Math.min(edge, r.left + (boxed ? 0 : parseFloat(c.paddingLeft) || 0)); });
+      nav.style.visibility = (x + 28 > edge) ? 'hidden' : '';
       nav.style.left = x + 'px'; nav.style.top = y + 'px';
     }
     function spy() {
