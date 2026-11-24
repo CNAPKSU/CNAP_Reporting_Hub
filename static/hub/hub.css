@@ -1463,3 +1463,9 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 .foot p,.foot span{font-size:13.5px;line-height:21px;color:var(--muted)}
 .foot nav a{font-size:14px;color:var(--muted)}
 .foot nav a:hover{color:var(--purple)}
+
+/* The greeting's lines, quieter (MW 2026-11-24): a slightly smaller size, and a fine, faint underline that only
+   fills in on hover, so the links read as part of the sentence. */
+.greet .line{font-size:18px;line-height:31px;letter-spacing:.002em}
+.greet .line a{color:var(--greet-ink);text-decoration-thickness:1px;text-underline-offset:6px;text-decoration-color:color-mix(in srgb,var(--greet-ink) 22%,transparent);transition:text-decoration-color .2s}
+.greet .line a:hover{text-decoration-color:color-mix(in srgb,var(--greet-ink) 70%,transparent)}

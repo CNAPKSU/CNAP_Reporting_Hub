@@ -56,6 +56,13 @@
       <span class="t3-next-time">{{ first_up.time }}</span>
       <span class="px-btn t3-next-btn">{% if first_up.a.status == 'in_progress' %}Continue{% else %}Start{% endif %}<svg class="t3-arrow" viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></span>
     </a>
+    {% elif next_outcome and not period.in_preview %}
+    <a class="t3-next" href="{% url 'portal:outcomes' %}?for={{ next_outcome.owner.pk }}">
+      <span class="px-label">Next up</span>
+      <span class="t3-next-name">{% if next_outcome.self %}Review your publications, talks, and grants{% else %}Review publications, talks, and grants for {{ next_outcome.owner }}{% endif %}</span>
+      <span class="t3-next-time">About {{ outcome.minutes }} minutes</span>
+      <span class="px-btn t3-next-btn">Start<svg class="t3-arrow" viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg></span>
+    </a>
     {% elif not todo and not cp_check %}
     <div class="t3-next done"><span class="px-label">All set</span><span class="t3-next-name">You’re all set for {{ period.short_label }}.</span><span class="t3-next-time">Everything you sent feeds the Center’s Research Performance Progress Report (RPPR) to NIH. We’ll email you when the next reporting session opens.</span></div>
     {% endif %}

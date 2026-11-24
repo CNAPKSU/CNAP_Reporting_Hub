@@ -28,6 +28,11 @@
     <span class="wn-t">{{ first_up.name }}</span>
     <span class="wn-m">{{ first_up.time }}</span>
     <span class="wn-b">{% if first_up.a.status == 'in_progress' %}Continue{% else %}Start{% endif %}</span>
+  </a>{% elif next_outcome and not period.in_preview %}<a class="welcome-next" href="{% url 'portal:outcomes' %}?for={{ next_outcome.owner.pk }}">
+    <span class="wn-l">Next up</span>
+    <span class="wn-t">{% if next_outcome.self %}Review your publications, talks, and grants{% else %}Review publications, talks, and grants for {{ next_outcome.owner }}{% endif %}</span>
+    <span class="wn-m">About {{ outcome.minutes }} minutes</span>
+    <span class="wn-b">Start</span>
   </a>{% endif %}
 </header>
 {% if sow_excerpts %}<details class="sowbox"><summary>Your commitments, from your Statement of Work</summary>
