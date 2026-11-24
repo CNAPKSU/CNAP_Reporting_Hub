@@ -131,7 +131,8 @@ def test_next_up_finishes_a_started_survey_first_then_the_publications_review(cl
 
     person = okafor.person
     mine = Assignment.objects.filter(person=person, reporting_period__status="open")
-    mine.update(status="not_started")
+    fresh = list(mine.filter(status="not_started").order_by("pk"))
+    mine.filter(status="in_progress").update(status="not_started")
     client.force_login(okafor)
 
     html = client.get("/tasks/").content.decode()
@@ -143,7 +144,7 @@ def test_next_up_finishes_a_started_survey_first_then_the_publications_review(cl
     else:
         assert "/tasks/" in card and "Start" in card
 
-    a = next(x for x in mine if f"/tasks/{x.pk}/" in html)
+    a = next(x for x in fresh if f"/tasks/{x.pk}/" in html)
     rs.save_draft(a, okafor, {})
     a.refresh_from_db()
     assert a.status == "in_progress"

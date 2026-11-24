@@ -2219,3 +2219,13 @@ body.proto .t3-row > * { min-width: 0; }
   body.proto .t3-slot { flex: 0 0 auto; }
   body.proto .t3-slot:first-child { flex-basis: 100%; }
 }
+
+/* Under the Member Hub header (MW 2026-11-24 review): on phones and tablets the reporting pages show one header,
+   not two. The reporting menu becomes a slim "My reporting" row that scrolls with the page. */
+@media (max-width: 860px) {
+  body.proto .hdr ~ .app .side { position: static; padding: 8px var(--px-4); }
+  body.proto .hdr ~ .app .side .brand { display: none; }
+  body.proto .hdr ~ .app .side::before { content: "My reporting"; grid-column: 1; grid-row: 1; font: 600 var(--px-fs-sm)/1.2 var(--px-sans); color: var(--px-ink-2); }
+  body.proto .hdr ~ .app .px-menu { font-size: 0; gap: 0; }
+  body.proto .hdr ~ .app .px-menu::after { content: "Pages"; font: 600 var(--px-fs-sm)/1 var(--px-sans); }
+}
