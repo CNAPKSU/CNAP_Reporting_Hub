@@ -633,3 +633,7 @@ p,li,dd,figcaption,blockquote{text-wrap:pretty}
 .fp-photo{margin:10px 0 6px;max-width:420px}
 .fp-photo img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:var(--line)}
 .fp-photo figcaption{margin-top:4px;font-size:12px;color:var(--muted)}
+
+/* Section notes under funding headings: smaller and quieter, one line each where it fits (MW 2026-11-24) */
+.fp-sh p{margin-top:10px;font-size:14.5px;line-height:22px;letter-spacing:.005em;color:var(--muted);max-width:none}
+.fp-sh p+p{margin-top:0}
