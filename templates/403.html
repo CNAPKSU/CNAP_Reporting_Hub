@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{# Any refused page (PermissionDenied) says why, in the app's design, in place of the server's bare "403 Forbidden" (MW 2026-11-25). #}
+{% block title %}Not available | {{ platform_name }}{% endblock %}
+{% block content %}
+<section class="card" style="max-width:640px">
+  <h1>This page isn’t available to you</h1>
+  <p>{% if exception %}{{ exception }}{% else %}Your account doesn’t have access to this page.{% endif %}</p>
+  <p>If you think you should have access, write to <a href="mailto:{{ evaluator_email }}">{{ evaluator_email }}</a>.</p>
+  <p><a class="btn" href="{% url 'home' %}">Go to Home</a></p>
+</section>
+{% endblock %}

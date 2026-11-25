@@ -259,3 +259,42 @@ def test_final_records_can_be_viewed_and_edited_without_duplicates(client, cente
     assert GrantSubmission.objects.filter(resubmission_of=g).count() == 1
     g.refresh_from_db()
     assert g.decision_comments == "Added later" and g.status == "not_funded"
+
+
+def test_hub_menu_offers_outcomes_only_where_they_open(client, center):
+    """MW 2026-11-25: the Hub's Reporting menu offered Publications, talks, and grants to everyone, and
+    people who keep none got the server's bare "403 Forbidden". Now the menu follows base.html: your
+    own page if you keep outcomes, the Center's list if you are an administrator, nothing otherwise;
+    and a refused page says why in the app's design."""
+    from django.test import override_settings
+    from django.urls import reverse
+
+    from apps.accounts import access
+    from apps.outcomes.services import owners_for
+    from apps.people.models import Person
+
+    own, center_list = reverse("portal:outcomes"), reverse("manage:outcomes")
+    with override_settings(UI_PROTOTYPE=True, UI_PROTOTYPE_ONLY=True):
+        login(client, "okafor")
+        html = client.get(reverse("portal:hub_events")).content.decode()
+        assert f'href="{own}"' in html
+
+        admin = next(
+            u for u in User.objects.filter(person__isnull=False) if access.can_view_admin(u)
+        )
+        client.force_login(admin)
+        html = client.get(reverse("portal:hub_events")).content.decode()
+        expected = own if owners_for(admin.person) else center_list
+        assert f'href="{expected}"><b>Publications, talks, and grants</b>' in html
+
+        nobody = Person.objects.create(first_name="No", last_name="Outcomes")
+        client.force_login(
+            User.objects.create_user(username="nooutcomes", password="x", person=nobody)
+        )
+        html = client.get(reverse("portal:hub_events")).content.decode()
+        assert "Publications, talks, and grants" not in html
+        r = client.get(own)
+        assert r.status_code == 403
+        page = r.content.decode()
+        assert "This page isn’t available to you" in page
+        assert "kept by project leaders and the people they choose" in page
