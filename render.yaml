@@ -63,12 +63,16 @@ services:
           property: connectionString
       - key: MEDIA_ROOT
         value: /data/media
-      # The first administrator. The account is created once; it signs in with an e-mailed link.
+      # The first administrator. The account is created once.
       - key: ADMIN_EMAIL
         sync: false
       - key: ADMIN_FIRST_NAME
         sync: false
       - key: ADMIN_LAST_NAME
+        sync: false
+      # Administrators sign in with a password, never an e-mailed link. Set this once, sign in, change the password
+      # under Change password, then delete this value in Render.
+      - key: ADMIN_PASSWORD
         sync: false
 
   - type: cron

@@ -12,6 +12,7 @@
     <div class="field"><label for="id_password">Password<input type="password" name="password" id="id_password" autocomplete="current-password" required></label></div>
     <input type="hidden" name="next" value="{{ next }}">
     <div class="actions"><button class="btn" type="submit">Sign in</button><a href="{% url 'link_request' %}">Email me a sign-in link</a></div>
+    <p class="small muted">Not a member yet? <a href="{% url 'request_access' %}">Request access</a></p>
   </form>
   <p class="small muted">{{ "Not at K-State? Use an emailed sign-in link. K-State single sign-on will replace passwords once K-State IT approves it."|stack }}</p>
 </div>

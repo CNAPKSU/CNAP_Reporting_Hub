@@ -27,8 +27,9 @@ plus Postmark (about $15 a month). Check Render's pricing page before signing up
    - `EMAIL_URL`: `smtp+tls://TOKEN:TOKEN@smtp.postmarkapp.com:587` (the Postmark token twice).
    - `DEFAULT_FROM_EMAIL`: for example `CNAP Member Hub <the verified address>`.
    - `ADMIN_EMAIL`, `ADMIN_FIRST_NAME`, `ADMIN_LAST_NAME`: MW's own, for the first administrator account.
-4. Wait for the first deploy (about 5 minutes). Open `https://cnap-hub.onrender.com`, choose "E-mail me a sign-in
-   link," and sign in.
+4. Wait for the first deploy (about 5 minutes). Administrators never sign in by e-mailed link, so add
+   `ADMIN_PASSWORD` to the cnap-hub service once, sign in at `https://cnap-hub.onrender.com` with ADMIN_EMAIL and that
+   password, change it under Change password, and delete `ADMIN_PASSWORD` from Render.
 5. Later, a domain: buy it, add it under the website's Settings → Custom Domains, then add the domain to
    `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`, and `SITE_URL` in the `cnap-hub-settings` group.
 
@@ -37,7 +38,7 @@ plus Postmark (about $15 a month). Check Render's pricing page before signing up
 - **Data approval (assumed until MW says otherwise):** profiles, publications, talks, and grants go in first.
   Reporting sessions, including confidential mentoring surveys, stay closed until K-State agrees the data can live
   outside K-State. Nothing opens a survey until an administrator opens a reporting session.
-- **Accounts:** add people under Manage → People. Each person signs in with an e-mailed link.
+- **Accounts:** add people under Manage → People. Members sign in with an e-mailed link; administrators use a password.
 - **Older records:** an administrator can enter publications, talks, and grants for any person ("entering for").
   A bulk import from earlier exports is a separate build (docs/legacy-product-exports.md).
 - **Never** run `seed --fictional` on Render.

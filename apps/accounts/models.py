@@ -208,3 +208,36 @@ class LinkRequest(models.Model):
     class Meta:
         db_table = "link_requests"
         indexes = [models.Index(fields=["ip", "at"])]
+
+
+class AccessRequest(TimestampedModel):
+    """Someone asking to join the Member Hub (MW 2026-11-24). Nothing is created until an administrator approves;
+    approving makes the person and e-mails a sign-in link. The request is kept as the record of who decided."""
+
+    class Status(models.TextChoices):
+        PENDING = "pending", "Waiting for review"
+        APPROVED = "approved", "Approved"
+        DECLINED = "declined", "Declined"
+
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254)
+    department = models.CharField(max_length=200, blank=True)
+    connection = models.CharField(max_length=300, blank=True)
+    note = models.TextField(blank=True)
+    ip = models.GenericIPAddressField(null=True, blank=True)
+    status = models.CharField(max_length=10, choices=Status.choices, default=Status.PENDING)
+    decided_at = models.DateTimeField(null=True, blank=True)
+    decided_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
+    )
+    person = models.ForeignKey(
+        Person, null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
+    )
+
+    class Meta:
+        db_table = "access_requests"
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} <{self.email}>"

@@ -1,8 +1,11 @@
 """Create the first administrator from settings, once (MW 2026-11-24, Render launch).
 
 Reads ADMIN_EMAIL, ADMIN_FIRST_NAME, and ADMIN_LAST_NAME from the environment. Safe to run on every start: an
-existing account is left as it is, apart from making sure it holds the Administrator role. No password is set;
-the administrator signs in with an emailed sign-in link, or sets a password from that link.
+existing account is left as it is, apart from making sure it holds the Administrator role.
+
+Administrators never sign in by emailed link (apps/accounts/signin.py), so the first one needs a password: set
+ADMIN_PASSWORD once, sign in, change it under Change password, then delete ADMIN_PASSWORD from the host. The
+password is only ever set on an account that has no usable password yet, so a later start never overwrites one.
 """
 
 import os
@@ -40,6 +43,11 @@ class Command(BaseCommand):
             user.set_unusable_password()
             user.save(update_fields=["password"])
             self.stdout.write(f"ensure_admin: created {email}.")
+        password = os.environ.get("ADMIN_PASSWORD", "")
+        if password and not user.has_usable_password():
+            user.set_password(password)
+            user.save(update_fields=["password"])
+            self.stdout.write(f"ensure_admin: set the first password for {email}.")
         role = ApplicationRole.objects.get(code=ApplicationRole.Code.ADMINISTRATOR)
         UserRole.objects.get_or_create(user=user, role=role, scope_core=None)
         self.stdout.write(f"ensure_admin: {email} is an administrator.")

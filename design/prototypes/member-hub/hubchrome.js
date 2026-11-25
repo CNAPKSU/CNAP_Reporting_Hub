@@ -35,7 +35,8 @@
     + '.fbk-row button{min-height:42px;padding:0 18px;border-radius:8px;font:500 15px/1 var(--sans,system-ui,sans-serif);cursor:pointer;border:1px solid var(--line-2,#d5d3d9);background:var(--surface,#fff);color:var(--ink,#1d1b21)}'
     + '.fbk-row .fbk-send{background:var(--purple,#512888);border-color:var(--purple,#512888);color:#fff}'
     + '.fbk-proto{margin-top:10px!important;font-size:12.5px;color:var(--muted,#6b6772)}'
-    + '@media (max-width:560px){.fbk-topics{grid-template-columns:1fr}}';
+    + '@media (max-width:560px){.fbk-topics{grid-template-columns:1fr}}'
+    + 'dialog.fbk{padding:28px!important}dialog.fbk form{display:flex;flex-direction:column;gap:24px}dialog.fbk p{margin:0;text-wrap:pretty}dialog.fbk .fbk-head{display:flex;flex-direction:column;gap:8px}dialog.fbk .fbk-head h2{margin:0}dialog.fbk .fbk-head p{font-size:14px;line-height:21px;color:var(--muted,#6b6772)}dialog.fbk fieldset{margin:0!important;padding:0;border:0;min-width:0}dialog.fbk legend,dialog.fbk .fbk-note label{display:block;padding:0;margin:0 0 8px;font-size:14px;line-height:20px;font-weight:600;color:var(--ink,#1d1b21)}dialog.fbk .fbk-topics{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;align-items:start}dialog.fbk .fbk-topics label{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:20px;margin:0}dialog.fbk .fbk-topics input{flex:none;width:16px;height:16px;margin:2px 0 0}dialog.fbk .fbk-rate{display:flex;gap:8px}dialog.fbk .fbk-note textarea{display:block;margin:0!important;box-sizing:border-box}dialog.fbk .fbk-foot{display:flex;flex-direction:column;gap:10px}dialog.fbk .fbk-msg{margin:0!important;min-height:0}dialog.fbk .fbk-msg:empty{display:none}dialog.fbk .fbk-foot .fieldrow,dialog.fbk .fbk-foot .fbk-row{margin:0!important}dialog.fbk .fbk-proto{margin:0!important}@media (max-width:520px){dialog.fbk{padding:22px!important}dialog.fbk .fbk-topics{grid-template-columns:1fr}}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
 
   /* 1. Start a thread, in the ribbon */
@@ -60,13 +61,13 @@
   var topics = [['design', 'Design and look'], ['clarity', 'Clarity of wording or directions'], ['logic', 'Logic or flow'], ['speed', 'Speed and efficiency'], ['fun', 'Fun and motivating touches'], ['broken', 'Something is broken'], ['other', 'Something else']];
   var d = document.createElement('dialog');
   d.className = 'fbk'; d.setAttribute('aria-labelledby', 'fbk-h');
-  d.innerHTML = '<form method="dialog" class="fbk-form"><h2 id="fbk-h">How could this page be better?</h2>'
-    + '<p class="fbk-sub">Your note goes to the CNAP evaluation team, along with the page you are on.</p><p class="fbk-sub">Big ideas and small fixes are equally welcome.</p>'
+  d.innerHTML = '<form method="dialog" class="fbk-form"><div class="fbk-head"><h2 id="fbk-h">How could this page be better?</h2>'
+    + '<p class="fbk-sub">Your note goes to the CNAP evaluation team, with a link to this page.</p><p class="fbk-sub">Big ideas and small fixes are equally welcome.</p></div>'
     + '<fieldset class="fbk-topics"><legend>What is the note about?</legend>' + topics.map(function (t) { return '<label><input type="radio" name="topic" value="' + t[0] + '"> ' + t[1] + '</label>'; }).join('') + '</fieldset>'
     + '<fieldset class="fbk-rate"><legend>How is this page overall? (optional)</legend>' + [1, 2, 3, 4, 5].map(function (n) { return '<label title="' + (n === 1 ? 'Poor' : n === 5 ? 'Excellent' : n + ' of 5') + '"><input type="radio" name="rating" value="' + n + '"><span>' + n + '</span></label>'; }).join('') + '</fieldset>'
-    + '<label class="fbk-l" for="fbk-c">Your note</label><textarea id="fbk-c" name="comment" rows="4" placeholder="For example: the dates on this page are hard to find."></textarea>'
-    + '<p class="fbk-msg" role="status"></p>'
-    + '<div class="fbk-row"><button type="button" class="fbk-send">Send my note</button><button type="button" class="fbk-close">Cancel</button></div>'
+    + '<div class="fbk-note"><label class="fbk-l" for="fbk-c">Your note</label><textarea id="fbk-c" name="comment" rows="4" placeholder="For example: the dates on this page are hard to find."></textarea></div>'
+    + '<div class="fbk-foot"><p class="fbk-msg" role="status"></p>'
+    + '<div class="fbk-row"><button type="button" class="fbk-send">Send my note</button><button type="button" class="fbk-close">Cancel</button></div></div>'
     + '<p class="fbk-proto">Prototype. In the Hub, this note is saved for the evaluation team. Here, nothing is sent.</p></form>';
   document.body.appendChild(b); document.body.appendChild(d);
   var msg = d.querySelector('.fbk-msg');
@@ -515,4 +516,103 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
     b.addEventListener('click',open);tools.insertBefore(b,tools.firstChild);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wire);else wire();
+})();
+
+/* The CNAP neuron mark in the header, the same picture as the browser tab (MW 2026-11-24) */
+(function () {
+  var svg = document.querySelector('.hdr .brand > svg');
+  if (!svg) return;
+  var img = document.createElement('img');
+  img.className = 'brand-mark'; img.src = 'img/cnap-mark.png'; img.width = 36; img.height = 36; img.alt = '';
+  svg.replaceWith(img);
+})();
+
+/* Back to top (MW 2026-11-24): a small quiet round button above Page feedback, shown once the reader is well down a page */
+(function () {
+  if (document.querySelector('.totop')) return;
+  var st = document.createElement('style');
+  st.textContent = '.totop{position:fixed;right:12px;bottom:calc(50px + env(safe-area-inset-bottom,0px));z-index:49;width:34px;height:34px;padding:0;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line-2,#d5d3d9);background:var(--surface,#fff);color:var(--ink-2,#47434f);box-shadow:0 4px 12px -6px rgba(31,27,41,.3);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s,transform .2s,visibility 0s .2s}'
+    + '.totop.on{opacity:.86;visibility:visible;transform:none;transition:opacity .2s,transform .2s}'
+    + '.totop:hover{opacity:1;color:var(--purple,#512888);border-color:currentColor}'
+    + '.totop:focus-visible{opacity:1;outline:2px solid var(--purple,#512888);outline-offset:2px}'
+    + '@media (max-width:760px){.totop{width:38px;height:38px}}'
+    + '@media (prefers-reduced-motion:reduce){.totop,.totop.on{transition:none;transform:none}}'
+    + 'html body .fbk-open.fbk-open.fbk-open{bottom:calc(var(--below,0px) + 12px)!important}';
+  document.head.appendChild(st);
+  var b = document.createElement('button');
+  b.type = 'button'; b.className = 'totop'; b.setAttribute('aria-label', 'Back to top'); b.title = 'Back to the top of this page';
+  b.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>';
+  document.body.appendChild(b);
+  var t = 0;
+  /* Sit 10px above Page feedback, and lift both clear of the phone tab bar when one is showing */
+  function place() {
+    var tb = document.querySelector('nav.tabbar'), below = 0;
+    if (tb && getComputedStyle(tb).position === 'fixed' && tb.offsetHeight) below = tb.offsetHeight;
+    document.documentElement.style.setProperty('--below', below + 'px');
+    var fb = document.querySelector('.fbk-open');
+    b.style.bottom = fb && fb.offsetHeight ? (window.innerHeight - fb.getBoundingClientRect().top + 10) + 'px' : '';
+  }
+  function upd() { b.classList.toggle('on', window.scrollY > window.innerHeight * 1.5); }
+  addEventListener('resize', place); place(); setTimeout(place, 300);
+  addEventListener('scroll', function () { if (!t) t = requestAnimationFrame(function () { t = 0; upd(); }); }, { passive: true });
+  upd();
+  b.addEventListener('click', function () {
+    var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' });
+    var h = document.querySelector('main h1, main h2, h1');
+    if (h) { if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+  });
+})();
+
+/* Contribute strip (MW 2026-11-24): every dedicated page ends with the same quiet place to send the Center
+   something for that page: a story, an achievement, an event, a resource. Requests go to cnap@ksu.edu. */
+(function () {
+  if (document.querySelector('.contrib') || !document.querySelector('main')) return;
+  function mail(subject, lines) {
+    return 'mailto:cnap@ksu.edu?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(['Name:', 'Department:', ''].concat(lines).join('\n') + '\n');
+  }
+  var STORY = ['Suggest a story', mail('Story idea for Research at CNAP', ['The story (a project milestone, a new paper or grant, a core capability, or a person to profile):', '', 'Photos or figures I can share:'])];
+  var ACH = ['Share an achievement', 'community.html#cm-ach'];
+  var NEWS = ['Share a grant opportunity or news', 'funding.html#s-suggest'];
+  var EVENT = ['Submit an event', mail('Event for the CNAP calendar', ['Event title:', 'Date and time:', 'Location or Zoom link:', 'Who it is for:', '', 'Description:'])];
+  var ANN = ['Send an announcement to the listserv', mail('Announcement for the CNAP listserv', ['The announcement, as it should read:', '', 'Date to send it:'])];
+  var SPEAKER = ['Suggest a speaker', 'neurosync.html#ns-join'];
+  var RES = ['Suggest a resource', mail('Resource for the proposal writing toolkit', ['The resource (a link, a template, or an example):', '', 'Who it would help:'])];
+  var TIP = ['Suggest a tip for new members', mail('Tip for new CNAP members', ['The tip:', '', 'Who it is for (mentors, primary project leaders, or pilot project leaders):'])];
+  var SV = ['Suggest an idea for the Site Visit', mail('Idea for the 2027 Site Visit', ['The idea (a session, a speaker, a tour, or a change):'])];
+  var PHOTO = ['Share your photographs', mail('Photographs from the 2026 Site Visit', ['What the photographs show:', '', 'A link to the photographs, or attach them:'])];
+  function core(name) {
+    return [['Share work that used this core', mail('Work that used the ' + name, ['The paper, talk, or grant:', '', 'How the core helped:'])],
+            ['Ask this core a question', mail('Question for the ' + name, ['My question:'])]];
+  }
+  var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  var MAP = {
+    'research.html': [STORY, ACH], 'story.html': [STORY, ACH],
+    'funding.html': [NEWS], 'funding-news.html': [NEWS, EVENT], 'funding-resources.html': [RES, NEWS],
+    'events.html': [EVENT], 'neurosync.html': [SPEAKER, EVENT],
+    'community.html': [ACH, ANN, STORY], 'threads.html': [ACH, ANN], 'thread.html': [ACH, ANN],
+    'core-bn.html': core('Behavioral Neuroscience Core'), 'core-cn.html': core('Cognitive Neuroscience Core'), 'core-ni.html': core('Neuroinformatics Core'),
+    'sitevisit.html': [SV, PHOTO], 'sitevisit-2026.html': [PHOTO, STORY],
+    'mentor.html': [TIP], 'mentee.html': [TIP]
+  };
+  var items = MAP[page] || (/^member-|^thread-/.test(page) ? [ACH, STORY] : null);
+  if (!items) return;
+  var st = document.createElement('style');
+  st.textContent = '.contrib{max-width:var(--maxw,1200px);margin:72px auto 0;padding:24px max(16px,env(safe-area-inset-left,0px)) 8px;box-sizing:border-box}'
+    + '.contrib-in{display:flex;flex-wrap:wrap;align-items:center;gap:8px 32px;border-top:1px solid var(--line,#e4e0d8);padding-top:20px}'
+    + '.contrib h2{margin:0 auto 0 0;font:500 15px/22px var(--sans,system-ui,sans-serif);color:var(--muted,#6b6772)}'
+    + '.contrib ul{display:flex;flex-wrap:wrap;gap:4px 28px;margin:0;padding:0;list-style:none}'
+    + '.contrib .share{margin:0;display:inline-flex;align-items:center;gap:10px;min-height:40px;font-size:14.5px;line-height:20px;font-weight:600;color:var(--purple,#512888);text-decoration:none}'
+    + '.contrib .share:hover{text-decoration:underline;text-underline-offset:3px}'
+    + '.contrib .plus{position:relative;flex:none;width:24px;height:24px;border-radius:50%;background:var(--purple-tint,#efe9f6)}'
+    + '.contrib .plus::before,.contrib .plus::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.6px;margin:-.8px 0 0 -5px;background:currentColor;border-radius:1px}'
+    + '.contrib .plus::after{transform:rotate(90deg)}'
+    + '@media (max-width:640px){.contrib{margin-top:48px}.contrib h2{flex-basis:100%}.contrib ul{flex-direction:column;gap:0}}';
+  document.head.appendChild(st);
+  var a = document.createElement('aside');
+  a.className = 'contrib'; a.setAttribute('aria-labelledby', 'contrib-h');
+  a.innerHTML = '<div class="contrib-in"><h2 id="contrib-h">Have something to add?</h2><ul>' + items.map(function (it) {
+    return '<li><a class="share" href="' + it[1].replace(/&/g, '&amp;') + '"><span class="plus" aria-hidden="true"></span>' + it[0] + '</a></li>';
+  }).join('') + '</ul></div>';
+  document.querySelector('main').appendChild(a);
 })();

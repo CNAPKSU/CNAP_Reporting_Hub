@@ -24,6 +24,7 @@ SCREENS = {
     # Batch 1 (MW 2026-11-05)
     "login": "proto/registration/login.html",  # screen 1
     "link": "proto/registration/link_request.html",  # screen 2
+    "access": "proto/registration/access_request.html",  # Request access (MW 2026-11-24)
     "cp_check": "proto/portal/cp_check.html",  # screen 30
     # Batch 2 (MW 2026-11-05): results
     "results_list": "proto/results.html",  # screen 65

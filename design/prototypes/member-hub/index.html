@@ -1549,6 +1549,151 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
 }
 @media (min-width:641px) and (max-width:1180px){.keys .kd,.kd{grid-template-columns:minmax(0,1fr);gap:12px}.keys .kd-d{padding:6px 14px;min-height:0;height:auto}.keys .kd-n{font-size:28px;line-height:32px}.keys .kd-n.kd-r{font-size:22px;line-height:32px}}
 .brief .bi.intro .lab{justify-self:start!important;text-align:left!important;margin-left:0!important}
+
+/* Pause motion, small and quiet (MW 2026-11-24): a plain text control, no outline */
+.motion{min-height:28px;padding:0 8px;gap:6px;border-color:transparent;font:500 12px/1 var(--sans);opacity:.72;bottom:14px}
+.motion:hover{opacity:1;border-color:transparent;text-decoration:underline;text-underline-offset:3px}
+.motion svg{width:10px;height:10px}
+
+/* the Funding news heading stays on one line in any column (MW 2026-11-24) */
+#news-h{white-space:nowrap}
+
+/* Page feedback, lower and quieter everywhere (MW 2026-11-24): a small tab tucked into the bottom-right corner,
+   so it never sits over the page's own buttons. Phones keep the small round icon. */
+@media (min-width:761px){
+  .fbk-open,body.proto .fbk-open{right:12px!important;bottom:12px!important;padding:6px 12px!important;font-size:12.5px!important;line-height:16px!important;font-weight:600;opacity:.86;box-shadow:0 4px 12px -6px rgba(60,29,102,.45)!important}
+  .fbk-open:hover,body.proto .fbk-open:hover{opacity:1}
+}
+@media (max-width:760px){.fbk-open.fbk-open,body.proto .fbk-open.fbk-open{width:38px;height:38px;bottom:12px!important;right:12px!important}}
+
+/* A quieter, sleeker top bar (MW 2026-11-24: "more quiet and sleek"): smaller type in a softer gray, no filled
+   pills, a hairline under the current section, the account buttons as plain text, and the CNAP neuron mark. */
+.hdr .wrap{min-height:60px;gap:28px}
+.hdr .brand{gap:10px}
+.hdr .brand .brand-mark{width:30px;height:30px;border-radius:7px;object-fit:cover;flex:none}
+.hdr .brand b{font-size:14.5px;line-height:18px;font-weight:600;letter-spacing:-.005em}
+.hdr .brand small{font-size:12px;line-height:15px}
+.hdr .hn .hn-b,.hdr .hn a.hn-b,.hdr .hn-app .rb-b,.hdr .hn-app > a{padding:6px 10px!important;min-height:0;border-radius:0;background:none!important;font-size:14px!important;font-weight:450!important;color:var(--muted)!important;letter-spacing:.005em;box-shadow:none}
+.hdr .hn-app .rb-b,.hdr .hn-app > a{min-height:60px}
+.hdr .hn .hn-b:hover,.hdr .hn-app .rb-b:hover,.hdr .hn-app > a:hover{color:var(--ink)!important;box-shadow:none}
+.hdr .hn .hn-b[aria-current="page"],.hdr .hn .hn-it.is-here>.hn-b,.hdr .hn-app .rb-it.is-here>.rb-b,.hdr .hn-app > a[aria-current="page"]{color:var(--ink)!important;font-weight:500!important;box-shadow:inset 0 -1.5px 0 var(--ink)!important}
+.hdr .hn .hn-b svg,.hdr .hn-app .rb-b svg{width:9px;height:9px;opacity:.55}
+.hdr .tools{gap:2px}
+.hdr .mywork{min-height:32px;padding:0 10px;border:0!important;background:none;font-size:13.5px;font-weight:500;color:var(--ink-2);border-radius:6px}
+.hdr .mywork:hover{background:var(--band);color:var(--ink)}
+.hdr .mywork .count{min-width:18px;height:18px;font-size:11px;padding:0 5px}
+.hdr .avatar{width:32px;height:32px;font-size:12px;margin-left:6px}
+/* current section: a fine underline under the word, not a bar or pill; Start a thread and Search quiet too */
+.hdr .hn .hn-b[aria-current="page"],.hdr .hn .hn-it.is-here>.hn-b,.hdr .hn-app .rb-it.is-here>.rb-b,.hdr .hn-app > a[aria-current="page"]{box-shadow:none!important;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:7px}
+.hdr .hc-thread{min-height:32px!important;padding:0 10px!important;border:0!important;background:none!important;color:var(--ink-2)!important;font-size:13.5px!important;font-weight:500!important;box-shadow:none!important;border-radius:6px}
+.hdr .hc-thread:hover{background:var(--band)!important;color:var(--ink)!important}
+.hdr .hc-thread svg{width:14px;height:14px}
+.hdr .search{min-height:32px;border-color:transparent;background:none;font-size:13.5px}
+.hdr .search:hover{background:var(--band)}
+
+/* Footer (MW 2026-11-24): the CNAP description in the middle, About links on the left, Help links on the right */
+@media (min-width:981px){
+  .foot .g > p{grid-column:4 / span 6!important;grid-row:1;text-align:center}
+  .foot .g > nav:first-of-type{grid-column:1 / span 3!important;grid-row:1;align-items:flex-start;text-align:left}
+  .foot .g > nav:last-of-type{grid-column:10 / span 3!important;grid-row:1;align-items:flex-end;text-align:right}
+}
+
+/* Footer a quarter smaller (MW 2026-11-24), held at 11px so it stays readable */
+.foot p,.foot span{font-size:11px!important;line-height:17px!important}
+.foot nav a{font-size:11px!important;line-height:16px;padding-block:3px}
+.foot{padding-block:28px 40px}
+
+/* Footer spacing (MW 2026-11-24): less empty space above, room below for Page feedback, no one-word last line */
+.foot{margin-top:56px!important;padding-block:24px 56px}
+.foot p{text-wrap:pretty}
+
+/* Funding news gets the same sliding rule as the other sections (MW 2026-11-24) */
+#news-h{position:relative;--s0:0px}
+#news-h::after{content:"";position:absolute;left:calc(100% - 40px);bottom:-1px;width:40px;height:2px;background:var(--ink)}
+@media (prefers-reduced-motion:no-preference){
+  .js-draw #news-h::after{left:0}
+  .js-draw #news-h.drawn::after{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+
+/* Every Home section draws in once, along a line it already has (MW 2026-11-24) */
+.ls-head,.proposal{position:relative}
+.ls-head,.lineup,.proposal{--s0:0px}
+.ls-head::after{content:"";position:absolute;left:calc(100% - 40px);bottom:-1px;width:40px;height:2px;background:var(--ink)}
+.lineup::before{content:"";position:absolute;left:calc(100% - 40px);top:-1px;width:40px;height:2px;background:var(--ink)}
+.proposal::before{content:"";position:absolute;left:-1px;top:calc(100% - 40px);width:2px;height:40px;background:var(--ink)}
+@media (max-width:1180px){.proposal::before{left:calc(100% - 40px);top:-1px;width:40px;height:2px}}
+@media (prefers-reduced-motion:no-preference){
+  .js-draw .ls-head::after,.js-draw .lineup::before{left:0}
+  .js-draw .ls-head.drawn::after,.js-draw .lineup.drawn::before{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+  .js-draw .proposal::before{top:0}
+  .js-draw .proposal.drawn::before{animation:vslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+  .js-draw .tk::after{clip-path:inset(0 100% 0 0)}
+  .js-draw .tk.drawn::after{animation:tkfill 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+@media (max-width:1180px) and (prefers-reduced-motion:no-preference){
+  .js-draw .proposal::before{left:0;top:-1px}
+  .js-draw .proposal.drawn::before{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+@keyframes vslide{from{top:0}to{top:calc(100% - 40px)}}
+@keyframes tkfill{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+
+/* Your week header (MW 2026-11-24): the ordering note sits right under the heading, and the roles read as one
+   tidy left-aligned list, top-aligned with the heading, instead of floating far apart */
+.brief .bi.intro{grid-template-rows:auto 1fr!important;align-items:start!important}
+.brief .bi.intro h2{align-self:start}
+.brief .bi.intro .lab{grid-row:2;align-self:start;margin-top:4px}
+@media (min-width:900px){.brief .bi.intro .body{align-self:start!important;text-align:left!important;justify-self:end;gap:4px!important;padding:6px 0 0 24px;border-left:1px solid var(--line)}}
+.brief .bi.intro .body::before{font-size:12.5px;line-height:16px;font-weight:500;color:var(--muted);margin-bottom:0}
+.brief .bi.intro .body::before{content:none!important;display:none!important}
+.brief .bi.intro .roles-h{align-self:flex-start;font-size:12.5px;line-height:16px;font-weight:500;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line-2,#d5d3d9);text-underline-offset:3px}
+.brief .bi.intro .roles-h:hover{color:var(--purple);text-decoration-color:currentColor}
+.brief .bi.intro .roles{color:var(--ink-2);margin:0!important}
+.brief .bi.intro .more-roles{margin-top:4px}
+
+/* Week view keeps its seven columns on half-screen computers and tablets; only narrow screens get the list (MW 2026-11-24) */
+@media (min-width:861px) and (max-width:980px){
+  .wk{grid-template-columns:repeat(7,minmax(0,1fr))}
+  .wk-d{display:block;min-height:180px;border-top:0;border-left:1px solid var(--wline);padding:10px 6px 14px}
+  .wk-d:first-child{border-left:0}
+  .wk-h{padding:4px 2px 10px}
+  .wk-h .dn{font-size:26px}
+  .wk-wd{font-size:12px}
+  .wk-d{padding-inline:4px}
+  .wk .ce{font-size:11.5px;line-height:15px;padding:5px 5px 6px 6px;overflow-wrap:break-word;hyphens:manual}
+  .wk-none{display:none}
+}
+
+/* Proposal writing toolkit: thin vertical lines between stages at every width that shows columns (MW 2026-11-24) */
+.tk-s::before{content:"";position:absolute;left:-12px;top:52px;bottom:0;border-left:1px solid var(--line,#e4e0d8);pointer-events:none}
+.tk-s.now::before{left:-4px}
+.tk-s:first-child::before{display:none}
+@media (max-width:1180px){.tk-s:nth-child(3n+1)::before{display:none}}
+@media (max-width:640px){.tk-s::before{display:none}}
+
+/* Community: each submit link sits with its own block (MW 2026-11-24) */
+.sub-share{display:flex;justify-content:flex-end;margin-top:20px}
+.sub-share .share{margin:0}
+.g > .sub-share,.sheet > .sub-share{grid-column:1 / -1}
+@media (max-width:640px){.sub-share{justify-content:flex-start}}
+
+/* Toolkit stages get more room on each side of their dividers (MW 2026-11-24) */
+.tk{--tkgap:44px;column-gap:var(--tkgap)!important}
+@media (max-width:1180px){.tk{--tkgap:64px}}
+.tk-s::before{left:calc(var(--tkgap) / -2)}
+.tk-s.now::before{left:calc(var(--tkgap) / -2 + 8px)}
+.tk::after{width:calc((100% + var(--tkgap)) * 2 / 6)}
+@media (max-width:1180px){.tk::before,.tk::after{display:none}}
+
+/* One heading size per level on Home (MW 2026-11-24): every section title matches, and every card title inside a section matches */
+.brief .bi.intro h2#wk{font:500 44px/50px var(--serif)!important;letter-spacing:-.02em}
+.pfy h3,#prop-h,#news-h,#pw-h,#meet-h,.ach > h3,.talk > h3,#list-h,#lu-h,#cx-h{font:500 30px/36px var(--serif)!important;letter-spacing:-.015em!important;text-transform:none!important}
+.talk .ask-l{font:600 15px/22px var(--sans)!important;letter-spacing:0!important;color:var(--ink)}
+.talk > h3{margin-bottom:18px!important}
+@media (max-width:1180px){.brief .bi.intro h2#wk{font-size:38px!important;line-height:44px!important}}
+@media (max-width:640px){
+  .brief .bi.intro h2#wk{font-size:31px!important;line-height:37px!important}
+  .pfy h3,#prop-h,#news-h,#pw-h,#meet-h,.ach > h3,.talk > h3,#list-h,#lu-h,#cx-h{font-size:24px!important;line-height:30px!important}
+}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -1583,7 +1728,7 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
 
 <header class="hdr">
   <div class="wrap">
-    <a class="brand" href="index.html"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="#512888"/><path d="M8.5 23.5c3.4-7.6 6.6-9.8 9.4-9.8 2.7 0 4.3 4.1 9.6 4.1" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="8.5" cy="23.5" r="2.4" fill="#fff"/><circle cx="27.5" cy="17.8" r="2.4" fill="#fff"/></svg><span><b>CNAP Member Hub</b><small>Kansas State University</small></span></a>
+    <a class="brand" href="index.html"><img class="brand-mark" src="img/cnap-mark.png" width="36" height="36" alt=""><span><b>CNAP Member Hub</b><small>Kansas State University</small></span></a>
     <nav class="nav" aria-label="Main"><a href="#" aria-current="page">Home</a><a href="reporting.html">Reporting</a><a href="research.html">Research</a><a href="events.html">Events</a><a href="funding.html">Funding</a><a href="community.html">Community</a><a href="funding-resources.html">Resources</a></nav>
     <div class="tools">
       <a class="search" href="#" data-proto title="Not part of the prototype yet" role="button" aria-label="Search people, events, resources, and funding"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg><span class="st">Search CNAP</span><kbd>/</kbd></a>
@@ -1643,7 +1788,7 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
         <div class="bi intro" role="listitem">
           <span class="lab">Most urgent first, left to right</span>
           <h2 id="wk">Your week</h2>
-          <div class="body"><p class="roles" data-unless="roles admin">Pilot Project Leader<br>Behavioral Neuroscience Core user<br>Mentored by <a class="mb-link" href="member-ev.html">Dr. Elena Voss</a></p><div data-when="roles" hidden><p class="roles">Pilot Project Leader<br>Mentor to two pilot leaders</p><details class="more-roles"><summary>3 more roles</summary><p class="roles">Behavioral Neuroscience Core user<br>Neuroinformatics Core user<br>NeuroSync planning group</p></details></div><p class="roles" data-when="admin" hidden>Center administrator<br>Cognitive Neuroscience Core user<br>NeuroSync planning group</p></div>
+          <div class="body"><a class="roles-h" href="mentee-profile.html" title="Opens your profile, where your roles are listed.">Your roles:</a><p class="roles" data-unless="roles admin">Pilot Project Leader<br>Behavioral Neuroscience Core user<br>Mentored by <a class="mb-link" href="member-ev.html">Dr. Elena Voss</a></p><div data-when="roles" hidden><p class="roles">Pilot Project Leader<br>Mentor to two pilot leaders</p><details class="more-roles"><summary>3 more roles</summary><p class="roles">Behavioral Neuroscience Core user<br>Neuroinformatics Core user<br>NeuroSync planning group</p></details></div><p class="roles" data-when="admin" hidden>Center administrator<br>Cognitive Neuroscience Core user<br>NeuroSync planning group</p></div>
         </div>
         <article class="bi" role="listitem" data-unless="clear urgent admin">
           <span class="kind" style="color:var(--amber)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12.5V1.5M3 2h7.5l-1.6 2.6L10.5 7.2H3"/></svg>Due in 17 days</span>
@@ -1770,7 +1915,7 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
             <a href="funding-resources.html#s-toolkit"><b>Respond to reviews</b><span>Summary statements and resubmission</span></a>
             <a href="reporting.html"><b>Manage the award</b><span>Progress reports and closeout</span></a>
           </nav>
-          <div class="consult"><p>Talk through a funding opportunity you’re considering, submit draft specific aims for review, discuss proposal development and management support needs, and more.</p><a class="btn" href="mailto:mkwills@ksu.edu?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A">Book a time</a></div>
+          <div class="consult"><p>Talk through a funding opportunity, get feedback on draft specific aims, or plan support for writing a proposal and managing an award.</p><a class="btn" href="mailto:mkwills@ksu.edu?subject=Proposal%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AProposal%20and%20funding%20agency%3A%0ADeadline%3A%0A%0AWhat%20I%20would%20like%20help%20with%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A">Book a time</a></div>
         </aside>
       </div>
       <div class="sheet news-sheet">
@@ -1876,13 +2021,15 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
             <a href="community.html"><span class="who-av" aria-hidden="true">DO</span><span class="kind" style="color:var(--purple)"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="7" cy="5.5" r="3.5"/><path d="M4.8 8.5L4 13l3-1.5 3 1.5-.8-4.5"/></svg>Grant award</span><b>A first R01 for a former CNAP pilot project leader</b><span class="meta">Dr. David Osei · National Institute on Aging</span><span class="when">November 6</span></a>
             <a href="community.html"><span class="who-av" aria-hidden="true">WZ</span><span class="kind" style="color:var(--ink-2)"><svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4.8" y="1" width="4.4" height="7" rx="2.2"/><path d="M2.6 6.5a4.4 4.4 0 008.8 0M7 11v2"/></svg>Invited talk</span><b>Neuroinformatics Core pipeline presented at a national meeting</b><span class="meta">Dr. Wei Zhang · Neuroinformatics Core</span><span class="when">October 30</span></a>
         </div>
+        <div class="sub-share"><a class="share" href="community.html#cm-ach"><span class="plus" aria-hidden="true"></span>Share an achievement</a></div>
       </div>
       </div>
       <div class="sheet sheet-list" role="region" aria-labelledby="list-h">
         <div class="ls-head"><div><h3 id="list-h"><a class="sh-link" href="community.html#cm-ann" title="Opens Announcements on the Community page: every listserv email, kept in one place.">Emails from the CNAP listserv</a></h3><p class="ls-sub">Announcements from the CNAP listserv, kept here so you can find each email again.</p></div><a class="t3" href="community.html#cm-ann">All announcements</a></div>
         <ul class="ls-list"><li><a class="ls" href="community.html#cm-ann"><span class="ls-d"><span class="ls-n num">12</span><span class="ls-m">November</span></span><span class="ls-b"><span class="ls-f">CNAP Administrative Core</span><b>Reminder: Year 11 pilot full proposals are due November 20</b><span class="ls-x">Please send all proposal materials as one PDF to cnap@ksu.edu by 5:00 p.m. Central, in the order listed on pages 3 and 4 of the RFA.</span><span class="ls-att">Attachment</span></span></a></li><li><a class="ls" href="community.html#cm-ann"><span class="ls-d"><span class="ls-n num">9</span><span class="ls-m">November</span></span><span class="ls-b"><span class="ls-f">CNAP Director</span><b>Welcome to our three newest graduate students</b><span class="ls-x">Please join us in welcoming the three students to the Cognitive Neuroscience Core this month.</span></span></a></li><li><a class="ls" href="community.html#cm-ann"><span class="ls-d"><span class="ls-n num">4</span><span class="ls-m">November</span></span><span class="ls-b"><span class="ls-f">CNAP Administrative Core</span><b>Updated travel and reimbursement guidelines</b><span class="ls-x">The attached guide replaces last year’s version and takes effect December 1.</span><span class="ls-att">Attachment</span></span></a></li></ul>
+        <div class="sub-share"><a class="share" href="mailto:cnap@ksu.edu?subject=Announcement%20for%20the%20CNAP%20listserv&amp;body=Name%3A%0ADepartment%3A%0A%0AThe%20announcement%2C%20as%20it%20should%20read%3A%0A%0ADate%20to%20send%20it%3A%0A"><span class="plus" aria-hidden="true"></span>Send an announcement to the listserv</a></div>
       </div>
-      <footer class="sf"><a class="btn" href="community.html">Visit the community</a><a class="share" href="community.html#cm-ach"><span class="plus" aria-hidden="true"></span>Share an achievement</a></footer>
+      <footer class="sf"><a class="btn" href="community.html">Visit the community</a></footer>
     </section>
   </div>
   </div>
@@ -1906,7 +2053,7 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
                 <p class="bio">Studies how slow waves and sleep spindles decide which memories last, in younger and older adults.</p>
                 <div class="chips"><span class="chip you">Sleep</span><span class="chip you">Memory consolidation</span><span class="chip">Aging</span></div>
                 <div class="spk-act spk-quiet"><a href="events.html">Add to my calendar</a><span aria-hidden="true">·</span><a href="member-pr.html">Speaker profile</a></div>
-              <p class="ns-getmail">Not getting the Monday NeuroSync email? <a href="mailto:mkwills@ksu.edu?subject=Please%20add%20me%20to%20the%20CNAP%20email%20list&amp;body=Name%3A%0AK-State%20email%3A%0ADepartment%3A%0A" title="Opens an email to Morgan Wills at mkwills@ksu.edu asking to be added to the CNAP email list.">Ask to join the email list</a>.</p>
+              <p class="ns-getmail">Not getting the Monday NeuroSync email? To join the CNAP listserv, <a href="mailto:cnap@ksu.edu?subject=Please%20add%20me%20to%20the%20CNAP%20listserv&amp;body=Name%3A%0AK-State%20email%3A%0ADepartment%3A%0A" title="Opens an email to cnap@ksu.edu asking to join the CNAP listserv.">email a request to cnap@ksu.edu</a>.</p>
               </div>
             </div>
       </div>
@@ -1950,6 +2097,7 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
         <p>Onboarding guides for mentors and new project leaders, on primary or pilot projects. Each one walks through what to do first, step by step.</p>
       </header>
       <div class="ob-grid"><article class="ob ob-mentor"><p class="ob-l">For mentors <span class="ob-start" data-when="newmentor" hidden>Start here</span></p><h3><a class="sh-link" href="mentor.html" title="Opens the mentor guide.">Mentoring at CNAP</a></h3><p class="ob-d">What the Center asks of mentors, and how to support a primary or pilot project leader through the award.</p><details class="ob-x"><summary>See the 5 steps</summary><ol class="ob-s"><li><span class="ob-n num">1</span>Your role and expectations</li><li><span class="ob-n num">2</span>Sign your mentoring agreement</li><li><span class="ob-n num">3</span>Plan your meeting schedule</li><li><span class="ob-n num">4</span>What mentors report, and when</li><li><span class="ob-n num">5</span>Learn about your role at the Site Visit</li></ol></details><div class="ob-a"><a class="btn" href="mentor.html">Start the mentor guide</a><span class="meta">5 steps · about 20 minutes to read</span></div></article><article class="ob ob-awardee"><p class="ob-l">For mentees <span class="ob-start" data-when="newleader" hidden>Start here</span></p><h3><a class="sh-link" href="mentee.html" title="Opens the mentee guide.">Starting your project award</a></h3><p class="ob-d">For primary and pilot project leaders: what to do in your first months, from your mentoring agreement, finance guidelines, and approvals to orientations with the research cores.</p><details class="ob-x"><summary>See the 7 steps</summary><ol class="ob-s"><li><span class="ob-n num">1</span>Welcome to the Center</li><li><span class="ob-n num">2</span>Sign your mentoring agreement</li><li><span class="ob-n num">3</span>Review CNAP’s finance expectations and guidelines</li><li><span class="ob-n num">4</span>Approvals before you begin</li><li><span class="ob-n num">5</span>Orientations with the research cores</li><li><span class="ob-n num">6</span>Your reporting schedule</li><li><span class="ob-n num">7</span>Learn about your role at the Site Visit</li></ol></details><div class="ob-a"><a class="btn" href="mentee.html">Start the mentee guide</a><span class="meta">7 steps · about 40 minutes to read</span></div></article></div>
+          <footer class="sf"><a class="share" href="mailto:cnap@ksu.edu?subject=Tip%20for%20new%20CNAP%20members&amp;body=Name%3A%0ADepartment%3A%0A%0AThe%20tip%3A%0A%0AWho%20it%20is%20for%20%28mentors%2C%20primary%20project%20leaders%2C%20or%20pilot%20project%20leaders%29%3A%0A"><span class="plus" aria-hidden="true"></span>Suggest a tip for new members</a></footer>
     </section>
   </div></div>
 
@@ -2006,7 +2154,7 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
 
 
   /* corner rules: draw in once their section is on screen */
-  try{if('IntersectionObserver' in window){document.documentElement.classList.add('js-draw');/* Sections below Your week wait until its cards finish, so nothing further down moves first (MW 2026-11-24) */var brief=document.querySelector('.brief'),held=[],briefDone=!brief||!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);var q=[],busy=false;function next(){if(busy||!q.length)return;var t=q.shift();t.classList.add('drawn');busy=t.classList.contains('sh');if(busy)setTimeout(function(){busy=false;next();},1700);else next();}function draw(t){q.push(t);next();}function release(){if(briefDone&&!held.length)return;briefDone=true;held.forEach(draw);held=[];}if(!briefDone){var left=[].filter.call(brief.querySelectorAll('.bi:not([hidden])'),function(b){var c=getComputedStyle(b,'::before');return c.display!=='none'&&/trace|bislide/.test(c.animationName);}).length;brief.addEventListener('animationend',function(ev){if(/^(trace|bislide)$/.test(ev.animationName)&&--left<=0)release();});}var dio=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;dio.unobserve(t);if(t===brief){t.classList.add('drawn');setTimeout(release,6000);}else if(!briefDone&&(brief.compareDocumentPosition(t)&Node.DOCUMENT_POSITION_FOLLOWING))held.push(t);else draw(t);});},{rootMargin:'0px 0px -40% 0px'});document.querySelectorAll('.ns-band,.cx,.sh,.brief').forEach(function(el){dio.observe(el);});}}catch(e){}
+  try{if('IntersectionObserver' in window){document.documentElement.classList.add('js-draw');/* Sections below Your week wait until its cards finish, so nothing further down moves first (MW 2026-11-24) */var brief=document.querySelector('.brief'),held=[],briefDone=!brief||!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);var q=[],busy=false;function next(){if(busy||!q.length)return;var t=q.shift();t.classList.add('drawn');busy=t.matches('.sh,#news-h,.proposal,.tk,.ls-head,.lineup');if(busy)setTimeout(function(){busy=false;next();},1700);else next();}function draw(t){q.push(t);next();}function release(){if(briefDone&&!held.length)return;briefDone=true;held.forEach(draw);held=[];}if(!briefDone){var left=[].filter.call(brief.querySelectorAll('.bi:not([hidden])'),function(b){var c=getComputedStyle(b,'::before');return c.display!=='none'&&/trace|bislide/.test(c.animationName);}).length;brief.addEventListener('animationend',function(ev){if(/^(trace|bislide)$/.test(ev.animationName)&&--left<=0)release();});}var dio=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var t=e.target;dio.unobserve(t);if(t===brief){t.classList.add('drawn');setTimeout(release,6000);}else if(!briefDone&&brief.getBoundingClientRect().bottom<0){release();draw(t);}else if(!briefDone&&(brief.compareDocumentPosition(t)&Node.DOCUMENT_POSITION_FOLLOWING))held.push(t);else draw(t);});},{rootMargin:'0px 0px -40% 0px'});document.querySelectorAll('.ns-band,.cx,.sh,#news-h,.proposal,.tk,.ls-head,.lineup,.brief').forEach(function(el){dio.observe(el);});}}catch(e){}
   /* calendar: prototype data only, nothing here is connected to a real calendar */
   var KIND={ns:'NeuroSync',ctr:'Center event',due:'Deadline',you:'Your meeting · only you see this',cam:'K-State'};
   var SHAPE={ns:'<circle cx="5" cy="5" r="4"/>',ctr:'<path d="M5 .5L9.5 5 5 9.5 .5 5z"/>',due:'<rect x="1" y="1" width="8" height="8" rx="1"/>',you:'<circle cx="5" cy="5" r="3.4" fill="none" stroke-width="2"/>',cam:'<path d="M5 .8L9.4 9H.6z"/>'};

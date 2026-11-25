@@ -50,6 +50,8 @@ def cnap(request):
         "keeps_outcomes": keeps_outcomes,
         "can_view_admin": access.can_view_admin(user),
         "can_manage": access.can_manage(user),
+        # Requests to join, waiting for an administrator (MW 2026-11-24)
+        "access_requests_waiting": _waiting_requests(user),
         "is_view_only_admin": access.is_view_only_admin(user),
         "access_label": label,
         "has_cnap_roles": has_roles,
@@ -60,3 +62,14 @@ def cnap(request):
             r.relationship_type.code == "core_director" and r.core_id for r in rels
         ),
     }
+
+
+def _waiting_requests(user):
+    if not access.can_view_admin(user):
+        return 0
+    from apps.accounts.models import AccessRequest
+    from apps.reporting.services.roster_check import own_pending
+
+    return AccessRequest.objects.filter(status=AccessRequest.Status.PENDING).count() + (
+        own_pending().count()
+    )

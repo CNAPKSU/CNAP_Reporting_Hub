@@ -2945,3 +2945,66 @@ h1,h2,h3{overflow-wrap:break-word}
 @media (min-width:981px) and (max-width:1180px){.co-how{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* the program timeline on phones: the line and dots sit in their own gutter, clear of the times */
 @media (max-width:760px){.sv-tl .sv-it{padding-left:28px!important}.sv-tl::before{left:7px!important}.sv-tl .sv-it::before{left:2px!important}}
+
+/* Page feedback, lower and quieter everywhere (MW 2026-11-24): a small tab tucked into the bottom-right corner,
+   so it never sits over the page's own buttons. Phones keep the small round icon. */
+@media (min-width:761px){
+  .fbk-open,body.proto .fbk-open{right:12px!important;bottom:12px!important;padding:6px 12px!important;font-size:12.5px!important;line-height:16px!important;font-weight:600;opacity:.86;box-shadow:0 4px 12px -6px rgba(60,29,102,.45)!important}
+  .fbk-open:hover,body.proto .fbk-open:hover{opacity:1}
+}
+@media (max-width:760px){.fbk-open.fbk-open,body.proto .fbk-open.fbk-open{width:38px;height:38px;bottom:12px!important;right:12px!important}}
+
+/* A quieter, sleeker top bar (MW 2026-11-24: "more quiet and sleek"): smaller type in a softer gray, no filled
+   pills, a hairline under the current section, the account buttons as plain text, and the CNAP neuron mark. */
+.hdr .wrap{min-height:60px;gap:28px}
+.hdr .brand{gap:10px}
+.hdr .brand .brand-mark{width:30px;height:30px;border-radius:7px;object-fit:cover;flex:none}
+.hdr .brand b{font-size:14.5px;line-height:18px;font-weight:600;letter-spacing:-.005em}
+.hdr .brand small{font-size:12px;line-height:15px}
+.hdr .hn .hn-b,.hdr .hn a.hn-b,.hdr .hn-app .rb-b,.hdr .hn-app > a{padding:6px 10px!important;min-height:0;border-radius:0;background:none!important;font-size:14px!important;font-weight:450!important;color:var(--muted)!important;letter-spacing:.005em;box-shadow:none}
+.hdr .hn-app .rb-b,.hdr .hn-app > a{min-height:60px}
+.hdr .hn .hn-b:hover,.hdr .hn-app .rb-b:hover,.hdr .hn-app > a:hover{color:var(--ink)!important;box-shadow:none}
+.hdr .hn .hn-b[aria-current="page"],.hdr .hn .hn-it.is-here>.hn-b,.hdr .hn-app .rb-it.is-here>.rb-b,.hdr .hn-app > a[aria-current="page"]{color:var(--ink)!important;font-weight:500!important;box-shadow:inset 0 -1.5px 0 var(--ink)!important}
+.hdr .hn .hn-b svg,.hdr .hn-app .rb-b svg{width:9px;height:9px;opacity:.55}
+.hdr .tools{gap:2px}
+.hdr .mywork{min-height:32px;padding:0 10px;border:0!important;background:none;font-size:13.5px;font-weight:500;color:var(--ink-2);border-radius:6px}
+.hdr .mywork:hover{background:var(--band);color:var(--ink)}
+.hdr .mywork .count{min-width:18px;height:18px;font-size:11px;padding:0 5px}
+.hdr .avatar{width:32px;height:32px;font-size:12px;margin-left:6px}
+/* current section: a fine underline under the word, not a bar or pill; Start a thread and Search quiet too */
+.hdr .hn .hn-b[aria-current="page"],.hdr .hn .hn-it.is-here>.hn-b,.hdr .hn-app .rb-it.is-here>.rb-b,.hdr .hn-app > a[aria-current="page"]{box-shadow:none!important;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:7px}
+.hdr .hc-thread{min-height:32px!important;padding:0 10px!important;border:0!important;background:none!important;color:var(--ink-2)!important;font-size:13.5px!important;font-weight:500!important;box-shadow:none!important;border-radius:6px}
+.hdr .hc-thread:hover{background:var(--band)!important;color:var(--ink)!important}
+.hdr .hc-thread svg{width:14px;height:14px}
+.hdr .search{min-height:32px;border-color:transparent;background:none;font-size:13.5px}
+.hdr .search:hover{background:var(--band)}
+
+/* Footer a quarter smaller (MW 2026-11-24), held at 11px so it stays readable */
+.foot p,.foot span{font-size:11px!important;line-height:17px!important}
+.foot nav a{font-size:11px!important;line-height:16px;padding-block:3px}
+.foot{padding-block:28px 40px}
+
+/* Footer spacing (MW 2026-11-24): less empty space above, room below for Page feedback, no one-word last line */
+.foot{margin-top:56px!important;padding-block:24px 56px}
+.foot p{text-wrap:pretty}
+
+/* Page feedback: one even rhythm (MW 2026-11-24). 24px between groups, 8px from a label to its control. */
+dialog.fbk{padding:28px!important}
+dialog.fbk form{display:flex;flex-direction:column;gap:24px}
+dialog.fbk p{margin:0;text-wrap:pretty}
+dialog.fbk .fbk-head{display:flex;flex-direction:column;gap:8px}
+dialog.fbk .fbk-head h2{margin:0}
+dialog.fbk .fbk-head p{font-size:14px;line-height:21px;color:var(--muted,#6b6772)}
+dialog.fbk fieldset{margin:0!important;padding:0;border:0;min-width:0}
+dialog.fbk legend,dialog.fbk .fbk-note label{display:block;padding:0;margin:0 0 8px;font-size:14px;line-height:20px;font-weight:600;color:var(--ink,#1d1b21)}
+dialog.fbk .fbk-topics{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;align-items:start}
+dialog.fbk .fbk-topics label{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:20px;margin:0}
+dialog.fbk .fbk-topics input{flex:none;width:16px;height:16px;margin:2px 0 0}
+dialog.fbk .fbk-rate{display:flex;gap:8px}
+dialog.fbk .fbk-note textarea{display:block;margin:0!important;box-sizing:border-box}
+dialog.fbk .fbk-foot{display:flex;flex-direction:column;gap:10px}
+dialog.fbk .fbk-msg{margin:0!important;min-height:0}
+dialog.fbk .fbk-msg:empty{display:none}
+dialog.fbk .fbk-foot .fieldrow,dialog.fbk .fbk-foot .fbk-row{margin:0!important}
+dialog.fbk .fbk-proto{margin:0!important}
+@media (max-width:520px){dialog.fbk{padding:22px!important}dialog.fbk .fbk-topics{grid-template-columns:1fr}}

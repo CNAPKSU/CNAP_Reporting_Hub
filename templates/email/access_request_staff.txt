@@ -1,0 +1,12 @@
+{% autoescape off %}Someone asked to join the CNAP Member Hub.
+
+Name: {{ r.first_name }} {{ r.last_name }}
+Email: {{ r.email }}
+Department: {{ r.department|default:"(not given)" }}
+Connection to CNAP: {{ r.connection|default:"(not given)" }}
+{% if r.note %}Note: {{ r.note }}
+{% endif %}
+Approve or decline it here: {{ site }}/manage/access-requests/
+
+Nothing is created until you approve.
+{% endautoescape %}

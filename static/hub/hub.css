@@ -1494,3 +1494,168 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 }
 @media (min-width:641px) and (max-width:1180px){.keys .kd,.kd{grid-template-columns:minmax(0,1fr);gap:12px}.keys .kd-d{padding:6px 14px;min-height:0;height:auto}.keys .kd-n{font-size:28px;line-height:32px}.keys .kd-n.kd-r{font-size:22px;line-height:32px}}
 .brief .bi.intro .lab{justify-self:start!important;text-align:left!important;margin-left:0!important}
+
+/* Pause motion, small and quiet (MW 2026-11-24): a plain text control, no outline */
+.motion{min-height:28px;padding:0 8px;gap:6px;border-color:transparent;font:500 12px/1 var(--sans);opacity:.72;bottom:14px}
+.motion:hover{opacity:1;border-color:transparent;text-decoration:underline;text-underline-offset:3px}
+.motion svg{width:10px;height:10px}
+
+/* the Funding news heading stays on one line in any column (MW 2026-11-24) */
+#news-h{white-space:nowrap}
+
+/* Page feedback, lower and quieter everywhere (MW 2026-11-24): a small tab tucked into the bottom-right corner,
+   so it never sits over the page's own buttons. Phones keep the small round icon. */
+@media (min-width:761px){
+  .fbk-open,body.proto .fbk-open{right:12px!important;bottom:12px!important;padding:6px 12px!important;font-size:12.5px!important;line-height:16px!important;font-weight:600;opacity:.86;box-shadow:0 4px 12px -6px rgba(60,29,102,.45)!important}
+  .fbk-open:hover,body.proto .fbk-open:hover{opacity:1}
+}
+@media (max-width:760px){.fbk-open.fbk-open,body.proto .fbk-open.fbk-open{width:38px;height:38px;bottom:12px!important;right:12px!important}}
+
+/* A quieter, sleeker top bar (MW 2026-11-24: "more quiet and sleek"): smaller type in a softer gray, no filled
+   pills, a hairline under the current section, the account buttons as plain text, and the CNAP neuron mark. */
+.hdr .wrap{min-height:60px;gap:28px}
+.hdr .brand{gap:10px}
+.hdr .brand .brand-mark{width:30px;height:30px;border-radius:7px;object-fit:cover;flex:none}
+.hdr .brand b{font-size:14.5px;line-height:18px;font-weight:600;letter-spacing:-.005em}
+.hdr .brand small{font-size:12px;line-height:15px}
+.hdr .hn .hn-b,.hdr .hn a.hn-b,.hdr .hn-app .rb-b,.hdr .hn-app > a{padding:6px 10px!important;min-height:0;border-radius:0;background:none!important;font-size:14px!important;font-weight:450!important;color:var(--muted)!important;letter-spacing:.005em;box-shadow:none}
+.hdr .hn-app .rb-b,.hdr .hn-app > a{min-height:60px}
+.hdr .hn .hn-b:hover,.hdr .hn-app .rb-b:hover,.hdr .hn-app > a:hover{color:var(--ink)!important;box-shadow:none}
+.hdr .hn .hn-b[aria-current="page"],.hdr .hn .hn-it.is-here>.hn-b,.hdr .hn-app .rb-it.is-here>.rb-b,.hdr .hn-app > a[aria-current="page"]{color:var(--ink)!important;font-weight:500!important;box-shadow:inset 0 -1.5px 0 var(--ink)!important}
+.hdr .hn .hn-b svg,.hdr .hn-app .rb-b svg{width:9px;height:9px;opacity:.55}
+.hdr .tools{gap:2px}
+.hdr .mywork{min-height:32px;padding:0 10px;border:0!important;background:none;font-size:13.5px;font-weight:500;color:var(--ink-2);border-radius:6px}
+.hdr .mywork:hover{background:var(--band);color:var(--ink)}
+.hdr .mywork .count{min-width:18px;height:18px;font-size:11px;padding:0 5px}
+.hdr .avatar{width:32px;height:32px;font-size:12px;margin-left:6px}
+/* current section: a fine underline under the word, not a bar or pill; Start a thread and Search quiet too */
+.hdr .hn .hn-b[aria-current="page"],.hdr .hn .hn-it.is-here>.hn-b,.hdr .hn-app .rb-it.is-here>.rb-b,.hdr .hn-app > a[aria-current="page"]{box-shadow:none!important;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:7px}
+.hdr .hc-thread{min-height:32px!important;padding:0 10px!important;border:0!important;background:none!important;color:var(--ink-2)!important;font-size:13.5px!important;font-weight:500!important;box-shadow:none!important;border-radius:6px}
+.hdr .hc-thread:hover{background:var(--band)!important;color:var(--ink)!important}
+.hdr .hc-thread svg{width:14px;height:14px}
+.hdr .search{min-height:32px;border-color:transparent;background:none;font-size:13.5px}
+.hdr .search:hover{background:var(--band)}
+
+/* Footer (MW 2026-11-24): the CNAP description in the middle, About links on the left, Help links on the right */
+@media (min-width:981px){
+  .foot .g > p{grid-column:4 / span 6!important;grid-row:1;text-align:center}
+  .foot .g > nav:first-of-type{grid-column:1 / span 3!important;grid-row:1;align-items:flex-start;text-align:left}
+  .foot .g > nav:last-of-type{grid-column:10 / span 3!important;grid-row:1;align-items:flex-end;text-align:right}
+}
+
+/* Footer a quarter smaller (MW 2026-11-24), held at 11px so it stays readable */
+.foot p,.foot span{font-size:11px!important;line-height:17px!important}
+.foot nav a{font-size:11px!important;line-height:16px;padding-block:3px}
+.foot{padding-block:28px 40px}
+
+/* Footer spacing (MW 2026-11-24): less empty space above, room below for Page feedback, no one-word last line */
+.foot{margin-top:56px!important;padding-block:24px 56px}
+.foot p{text-wrap:pretty}
+
+/* Funding news gets the same sliding rule as the other sections (MW 2026-11-24) */
+#news-h{position:relative;--s0:0px}
+#news-h::after{content:"";position:absolute;left:calc(100% - 40px);bottom:-1px;width:40px;height:2px;background:var(--ink)}
+@media (prefers-reduced-motion:no-preference){
+  .js-draw #news-h::after{left:0}
+  .js-draw #news-h.drawn::after{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+
+/* Every Home section draws in once, along a line it already has (MW 2026-11-24) */
+.ls-head,.proposal{position:relative}
+.ls-head,.lineup,.proposal{--s0:0px}
+.ls-head::after{content:"";position:absolute;left:calc(100% - 40px);bottom:-1px;width:40px;height:2px;background:var(--ink)}
+.lineup::before{content:"";position:absolute;left:calc(100% - 40px);top:-1px;width:40px;height:2px;background:var(--ink)}
+.proposal::before{content:"";position:absolute;left:-1px;top:calc(100% - 40px);width:2px;height:40px;background:var(--ink)}
+@media (max-width:1180px){.proposal::before{left:calc(100% - 40px);top:-1px;width:40px;height:2px}}
+@media (prefers-reduced-motion:no-preference){
+  .js-draw .ls-head::after,.js-draw .lineup::before{left:0}
+  .js-draw .ls-head.drawn::after,.js-draw .lineup.drawn::before{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+  .js-draw .proposal::before{top:0}
+  .js-draw .proposal.drawn::before{animation:vslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+  .js-draw .tk::after{clip-path:inset(0 100% 0 0)}
+  .js-draw .tk.drawn::after{animation:tkfill 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+@media (max-width:1180px) and (prefers-reduced-motion:no-preference){
+  .js-draw .proposal::before{left:0;top:-1px}
+  .js-draw .proposal.drawn::before{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+@keyframes vslide{from{top:0}to{top:calc(100% - 40px)}}
+@keyframes tkfill{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+
+/* Your week header (MW 2026-11-24): the ordering note sits right under the heading, and the roles read as one
+   tidy left-aligned list, top-aligned with the heading, instead of floating far apart */
+.brief .bi.intro{grid-template-rows:auto 1fr!important;align-items:start!important}
+.brief .bi.intro h2{align-self:start}
+.brief .bi.intro .lab{grid-row:2;align-self:start;margin-top:4px}
+@media (min-width:900px){.brief .bi.intro .body{align-self:start!important;text-align:left!important;justify-self:end;gap:4px!important;padding:6px 0 0 24px;border-left:1px solid var(--line)}}
+.brief .bi.intro .body::before{font-size:12.5px;line-height:16px;font-weight:500;color:var(--muted);margin-bottom:0}
+.brief .bi.intro .body::before{content:none!important;display:none!important}
+.brief .bi.intro .roles-h{align-self:flex-start;font-size:12.5px;line-height:16px;font-weight:500;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line-2,#d5d3d9);text-underline-offset:3px}
+.brief .bi.intro .roles-h:hover{color:var(--purple);text-decoration-color:currentColor}
+.brief .bi.intro .roles{color:var(--ink-2);margin:0!important}
+.brief .bi.intro .more-roles{margin-top:4px}
+
+/* Week view keeps its seven columns on half-screen computers and tablets; only narrow screens get the list (MW 2026-11-24) */
+@media (min-width:861px) and (max-width:980px){
+  .wk{grid-template-columns:repeat(7,minmax(0,1fr))}
+  .wk-d{display:block;min-height:180px;border-top:0;border-left:1px solid var(--wline);padding:10px 6px 14px}
+  .wk-d:first-child{border-left:0}
+  .wk-h{padding:4px 2px 10px}
+  .wk-h .dn{font-size:26px}
+  .wk-wd{font-size:12px}
+  .wk-d{padding-inline:4px}
+  .wk .ce{font-size:11.5px;line-height:15px;padding:5px 5px 6px 6px;overflow-wrap:break-word;hyphens:manual}
+  .wk-none{display:none}
+}
+/* Page feedback: one even rhythm (MW 2026-11-24). 24px between groups, 8px from a label to its control. */
+dialog.fbk{padding:28px!important}
+dialog.fbk form{display:flex;flex-direction:column;gap:24px}
+dialog.fbk p{margin:0;text-wrap:pretty}
+dialog.fbk .fbk-head{display:flex;flex-direction:column;gap:8px}
+dialog.fbk .fbk-head h2{margin:0}
+dialog.fbk .fbk-head p{font-size:14px;line-height:21px;color:var(--muted,#6b6772)}
+dialog.fbk fieldset{margin:0!important;padding:0;border:0;min-width:0}
+dialog.fbk legend,dialog.fbk .fbk-note label{display:block;padding:0;margin:0 0 8px;font-size:14px;line-height:20px;font-weight:600;color:var(--ink,#1d1b21)}
+dialog.fbk .fbk-topics{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;align-items:start}
+dialog.fbk .fbk-topics label{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:20px;margin:0}
+dialog.fbk .fbk-topics input{flex:none;width:16px;height:16px;margin:2px 0 0}
+dialog.fbk .fbk-rate{display:flex;gap:8px}
+dialog.fbk .fbk-note textarea{display:block;margin:0!important;box-sizing:border-box}
+dialog.fbk .fbk-foot{display:flex;flex-direction:column;gap:10px}
+dialog.fbk .fbk-msg{margin:0!important;min-height:0}
+dialog.fbk .fbk-msg:empty{display:none}
+dialog.fbk .fbk-foot .fieldrow,dialog.fbk .fbk-foot .fbk-row{margin:0!important}
+dialog.fbk .fbk-proto{margin:0!important}
+@media (max-width:520px){dialog.fbk{padding:22px!important}dialog.fbk .fbk-topics{grid-template-columns:1fr}}
+
+/* Proposal writing toolkit: thin vertical lines between stages at every width that shows columns (MW 2026-11-24) */
+.tk-s::before{content:"";position:absolute;left:-12px;top:52px;bottom:0;border-left:1px solid var(--line,#e4e0d8);pointer-events:none}
+.tk-s.now::before{left:-4px}
+.tk-s:first-child::before{display:none}
+@media (max-width:1180px){.tk-s:nth-child(3n+1)::before{display:none}}
+@media (max-width:640px){.tk-s::before{display:none}}
+
+/* Community: each submit link sits with its own block (MW 2026-11-24) */
+.sub-share{display:flex;justify-content:flex-end;margin-top:20px}
+.sub-share .share{margin:0}
+.g > .sub-share,.sheet > .sub-share{grid-column:1 / -1}
+@media (max-width:640px){.sub-share{justify-content:flex-start}}
+
+/* Toolkit stages get more room on each side of their dividers (MW 2026-11-24) */
+.tk{--tkgap:44px;column-gap:var(--tkgap)!important}
+@media (max-width:1180px){.tk{--tkgap:64px}}
+.tk-s::before{left:calc(var(--tkgap) / -2)}
+.tk-s.now::before{left:calc(var(--tkgap) / -2 + 8px)}
+.tk::after{width:calc((100% + var(--tkgap)) * 2 / 6)}
+@media (max-width:1180px){.tk::before,.tk::after{display:none}}
+
+/* One heading size per level on Home (MW 2026-11-24): every section title matches, and every card title inside a section matches */
+.brief .bi.intro h2#wk{font:500 44px/50px var(--serif)!important;letter-spacing:-.02em}
+.pfy h3,#prop-h,#news-h,#pw-h,#meet-h,.ach > h3,.talk > h3,#list-h,#lu-h,#cx-h{font:500 30px/36px var(--serif)!important;letter-spacing:-.015em!important;text-transform:none!important}
+.talk .ask-l{font:600 15px/22px var(--sans)!important;letter-spacing:0!important;color:var(--ink)}
+.talk > h3{margin-bottom:18px!important}
+@media (max-width:1180px){.brief .bi.intro h2#wk{font-size:38px!important;line-height:44px!important}}
+@media (max-width:640px){
+  .brief .bi.intro h2#wk{font-size:31px!important;line-height:37px!important}
+  .pfy h3,#prop-h,#news-h,#pw-h,#meet-h,.ach > h3,.talk > h3,#list-h,#lu-h,#cx-h{font-size:24px!important;line-height:30px!important}
+}

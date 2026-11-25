@@ -2,8 +2,8 @@
 <button type="button" class="fbk-open" aria-haspopup="dialog" title="Tell us how this page could be better: its design, its wording, its logic, its speed, or a fun idea. Your note goes to the CNAP evaluation team, with the page it came from.">Page feedback</button>
 <dialog class="fbk" aria-labelledby="fbk-h">
   <form method="dialog" class="fbk-form">
-    <h2 id="fbk-h">How could this page be better?</h2>
-    <p class="small muted">{{ "Your note goes to the CNAP evaluation team, along with the page you are on. Big ideas and small fixes are equally welcome."|stack }}</p>
+    <div class="fbk-head"><h2 id="fbk-h">How could this page be better?</h2>
+    <p class="small muted">{{ "Your note goes to the CNAP evaluation team, with a link to this page. Big ideas and small fixes are equally welcome."|stack }}</p></div>
     <fieldset class="fbk-topics"><legend class="small">What is the note about?</legend>
       <label><input type="radio" name="topic" value="design"> Design and look</label>
       <label><input type="radio" name="topic" value="clarity"> Clarity of wording or directions</label>
@@ -16,10 +16,10 @@
     <fieldset class="fbk-rate"><legend class="small">How is this page overall? (optional)</legend>
       {% for n in "12345" %}<label title="{% if n == '1' %}Poor{% elif n == '5' %}Excellent{% else %}{{ n }} of 5{% endif %}"><input type="radio" name="rating" value="{{ n }}"><span>{{ n }}</span></label>{% endfor %}
     </fieldset>
-    <label class="small" for="fbk-c">Your note</label>
-    <textarea id="fbk-c" name="comment" rows="4" placeholder="For example: the dates on this page are hard to find."></textarea>
-    <p class="small fbk-msg" role="status"></p>
-    <div class="fieldrow"><button type="button" class="btn fbk-send" title="Sends your note to the CNAP evaluation team.">Send my note</button><button type="button" class="btn ghost fbk-close" title="Closes this box without sending anything.">Cancel</button></div>
+    <div class="fbk-note"><label class="small" for="fbk-c">Your note</label>
+    <textarea id="fbk-c" name="comment" rows="4" placeholder="For example: the dates on this page are hard to find."></textarea></div>
+    <div class="fbk-foot"><p class="small fbk-msg" role="status"></p>
+    <div class="fieldrow"><button type="button" class="btn fbk-send" title="Sends your note to the CNAP evaluation team.">Send my note</button><button type="button" class="btn ghost fbk-close" title="Closes this box without sending anything.">Cancel</button></div></div>
   </form>
 </dialog>
 <script>
@@ -49,6 +49,44 @@
         else msg.textContent = d.error || "That did not send. Try again.";
       })
       .catch(function () { msg.textContent = "That did not send. Try again."; });
+  });
+})();
+</script>
+<script>
+/* Back to top (MW 2026-11-24): a small quiet round button above Page feedback, shown once the reader is well down a page */
+(function () {
+  if (document.querySelector('.totop')) return;
+  var st = document.createElement('style');
+  st.textContent = '.totop{position:fixed;right:12px;bottom:calc(50px + env(safe-area-inset-bottom,0px));z-index:49;width:34px;height:34px;padding:0;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line-2,#d5d3d9);background:var(--surface,#fff);color:var(--ink-2,#47434f);box-shadow:0 4px 12px -6px rgba(31,27,41,.3);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s,transform .2s,visibility 0s .2s}'
+    + '.totop.on{opacity:.86;visibility:visible;transform:none;transition:opacity .2s,transform .2s}'
+    + '.totop:hover{opacity:1;color:var(--purple,#512888);border-color:currentColor}'
+    + '.totop:focus-visible{opacity:1;outline:2px solid var(--purple,#512888);outline-offset:2px}'
+    + '@media (max-width:760px){.totop{width:38px;height:38px}}'
+    + '@media (prefers-reduced-motion:reduce){.totop,.totop.on{transition:none;transform:none}}'
+    + 'html body .fbk-open.fbk-open.fbk-open{bottom:calc(var(--below,0px) + 12px)!important}';
+  document.head.appendChild(st);
+  var b = document.createElement('button');
+  b.type = 'button'; b.className = 'totop'; b.setAttribute('aria-label', 'Back to top'); b.title = 'Back to the top of this page';
+  b.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5"/></svg>';
+  document.body.appendChild(b);
+  var t = 0;
+  /* Sit 10px above Page feedback, and lift both clear of the phone tab bar when one is showing */
+  function place() {
+    var tb = document.querySelector('nav.tabbar'), below = 0;
+    if (tb && getComputedStyle(tb).position === 'fixed' && tb.offsetHeight) below = tb.offsetHeight;
+    document.documentElement.style.setProperty('--below', below + 'px');
+    var fb = document.querySelector('.fbk-open');
+    b.style.bottom = fb && fb.offsetHeight ? (window.innerHeight - fb.getBoundingClientRect().top + 10) + 'px' : '';
+  }
+  function upd() { b.classList.toggle('on', window.scrollY > window.innerHeight * 1.5); }
+  addEventListener('resize', place); place(); setTimeout(place, 300);
+  addEventListener('scroll', function () { if (!t) t = requestAnimationFrame(function () { t = 0; upd(); }); }, { passive: true });
+  upd();
+  b.addEventListener('click', function () {
+    var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' });
+    var h = document.querySelector('main h1, main h2, h1');
+    if (h) { if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
   });
 })();
 </script>

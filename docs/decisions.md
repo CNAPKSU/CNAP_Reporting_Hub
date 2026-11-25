@@ -831,3 +831,8 @@ There are four new fields on `FundingNewsItem` and `FundingEvent`: image address
 - Members see a photo only after a person ticks "Approve: I checked this photo, and CNAP may show it". Changing the image address without viewing the new photo clears the approval.
 - The credit shows under the photo as "Photo: …".
 - Not built: uploading a photo file. That needs file storage on K-State's hosting. For now the photo is shown from its own address.
+
+## 2026-11-24: members ask to change their own roles; new roles bring their forms (MW approved)
+
+- **Profile:** "Suggest a change to my roles" sends a note to the evaluator (email, plus the list on Manage, Access requests, and on every roster check page). It is stored as a roster suggestion of kind "own", with no roster-check link. Nothing on the roster changes until the evaluator changes it on the person's page.
+- **Catch-up:** when an administrator adds a role, hands one off, or adds someone to the roster while a reporting session is open, that person's missing surveys and reports for every open session are added at once (`assignments.catch_up`). Only that person is touched, and nothing is ever removed: a form someone no longer needs is excused, so no half-finished work is lost.

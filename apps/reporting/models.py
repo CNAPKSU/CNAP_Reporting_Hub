@@ -581,13 +581,21 @@ class RosterSuggestion(TimestampedModel):
         NEW = "new", "Someone new"
         CORE_USER = "core_user", "A new core user"
         OTHER = "other", "Something else"
+        OWN = "own", "A member asks to change their own roles"
 
     class Status(models.TextChoices):
         PENDING = "pending", "To review"
         DONE = "done", "Handled"
         DECLINED = "declined", "Declined"
 
-    link = models.ForeignKey(RosterCheckLink, on_delete=models.CASCADE, related_name="suggestions")
+    link = models.ForeignKey(
+        RosterCheckLink,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name="suggestions",
+        help_text="Empty when a member asked from their own profile (MW 2026-11-24).",
+    )
     kind = models.CharField(max_length=12, choices=Kind.choices)
     person = models.ForeignKey(
         Person, null=True, blank=True, on_delete=models.SET_NULL, related_name="+"

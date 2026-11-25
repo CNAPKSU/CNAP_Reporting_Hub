@@ -30,6 +30,7 @@ urlpatterns = [
     path("roster-check/<str:token>/", roster_views.roster_check, name="roster_check"),
     path("accounts/login/", account_views.LoginView.as_view(), name="login"),
     path("accounts/link/", account_views.link_request, name="link_request"),
+    path("accounts/request-access/", account_views.request_access, name="request_access"),
     path("accounts/link/<str:token>/", account_views.link_login, name="link_login"),
     path("accounts/code/", account_views.link_code, name="link_code"),
     path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
