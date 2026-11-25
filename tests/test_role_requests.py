@@ -3,6 +3,7 @@
 import pytest
 from django.core import mail
 from django.urls import reverse
+from django.utils import timezone
 
 from apps.common.enums import PeriodStatus
 from apps.reporting.models import Assignment, RosterSuggestion
@@ -83,14 +84,17 @@ def test_role_added_during_open_session_brings_its_forms(
     )
     assert ("pilot_mentor_report", projects["C"].pk) not in before
     client.force_login(evaluator)
-    client.post(
+    r = client.post(
         reverse("manage:relationship_add", args=[okafor.pk]),
         {
             "relationship_type": reference["types"]["pilot_mentor"].pk,
             "project": projects["C"].pk,
             "start": period.opens_at.date().isoformat(),
         },
+        follow=True,
     )
+    shown = [str(m) for m in r.context["messages"]]
+    assert f"Added {reference['types']['pilot_mentor'].name}." in shown, shown
     after = set(
         Assignment.objects.filter(person=okafor, reporting_period=period).values_list(
             "form_definition__code", "project_id"
@@ -104,7 +108,7 @@ def test_catch_up_only_touches_open_sessions_and_never_removes(okafor, forms, pe
     assignments.generate(period)
     n = Assignment.objects.filter(person=okafor).count()
     assert assignments.catch_up(okafor) == 0
-    period.status = PeriodStatus.CLOSED
+    period.status, period.closed_at = PeriodStatus.CLOSED, timezone.now()
     period.save()
     assert assignments.catch_up(okafor) == 0
     assert Assignment.objects.filter(person=okafor).count() == n
