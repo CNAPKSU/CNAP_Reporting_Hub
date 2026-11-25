@@ -1640,3 +1640,11 @@ dialog.fbk .fbk-proto{margin:0!important}
 .sub-share .share{margin:0}
 .g > .sub-share,.sheet > .sub-share{grid-column:1 / -1}
 @media (max-width:640px){.sub-share{justify-content:flex-start}}
+
+/* Toolkit stages get more room on each side of their dividers (MW 2026-11-24) */
+.tk{--tkgap:44px;column-gap:var(--tkgap)!important}
+@media (max-width:1180px){.tk{--tkgap:64px}}
+.tk-s::before{left:calc(var(--tkgap) / -2)}
+.tk-s.now::before{left:calc(var(--tkgap) / -2 + 8px)}
+.tk::after{width:calc((100% + var(--tkgap)) * 2 / 6)}
+@media (max-width:1180px){.tk::before,.tk::after{display:none}}
