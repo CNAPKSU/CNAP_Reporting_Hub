@@ -92,7 +92,7 @@
           <div class="fp-sh"><h2 id="s-before-h">Before you apply</h2><p>Weigh every funding opportunity with these {{ questions|length|numword }} questions before you apply.</p><p>Select to view the full question.</p></div>
           <div class="fp-weigh">
             <div class="fp-qcard">
-              <div class="fp-qcols"><ol class="fp-qs">{% for q in questions|slice:":4" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol><ol class="fp-qs" start="5">{% for q in questions|slice:"4:" %}<li><details><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter|add:4 }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol></div>
+              <div class="fp-qcols"><ol class="fp-qs">{% for q in questions|slice:":4" %}<li><details data-keep-open><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol><ol class="fp-qs" start="5">{% for q in questions|slice:"4:" %}<li><details data-keep-open><summary><span class="fp-n" aria-hidden="true">{{ forloop.counter|add:4 }}</span><span class="fp-qt">{{ q.title }}</span></summary><p>{{ q.text|linebreaksbr }}</p></details></li>{% endfor %}</ol></div>
               <button type="button" class="fp-qall" data-qall aria-expanded="false">Show all questions</button>
             </div>
             <aside class="fp-help-card" id="s-consult" aria-labelledby="s-consult-h">

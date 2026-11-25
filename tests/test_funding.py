@@ -428,3 +428,21 @@ def test_grant_resources_explains_collaborators_abroad(center, client):
         html = client.get("/funding/resources/").content.decode()
     assert 'id="s-foreign"' in html and "Collaborators and co-authors abroad" in html
     assert "NOT-OD-26-026" in html and "no subawards" in html
+
+
+def test_show_all_questions_keeps_them_open(center, client):
+    """MW 2026-11-25: Show all questions opened every question, then the page's click-outside rule
+    (static/js/dropclose.js) closed them again on the same click. Each question opts out of it."""
+    import re
+
+    from django.test import override_settings
+
+    funding.load_questions()
+    _login(client, "okafor")
+    with override_settings(UI_PROTOTYPE=True, UI_PROTOTYPE_ONLY=True):
+        html = client.get("/funding/resources/").content.decode()
+    assert "data-qall" in html
+    card = html[html.index('class="fp-qcols"') : html.index("data-qall")]
+    details = re.findall(r"<details\b[^>]*>", card)
+    assert len(details) == FundingQuestion.objects.active().count() > 0
+    assert all("data-keep-open" in d for d in details)
