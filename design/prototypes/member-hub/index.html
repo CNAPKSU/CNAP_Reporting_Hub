@@ -1557,6 +1557,14 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
 
 /* the Funding news heading stays on one line in any column (MW 2026-11-24) */
 #news-h{white-space:nowrap}
+
+/* Page feedback, lower and quieter everywhere (MW 2026-11-24): a small tab tucked into the bottom-right corner,
+   so it never sits over the page's own buttons. Phones keep the small round icon. */
+@media (min-width:761px){
+  .fbk-open,body.proto .fbk-open{right:12px!important;bottom:12px!important;padding:6px 12px!important;font-size:12.5px!important;line-height:16px!important;font-weight:600;opacity:.86;box-shadow:0 4px 12px -6px rgba(60,29,102,.45)!important}
+  .fbk-open:hover,body.proto .fbk-open:hover{opacity:1}
+}
+@media (max-width:760px){.fbk-open.fbk-open,body.proto .fbk-open.fbk-open{width:38px;height:38px;bottom:12px!important;right:12px!important}}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
