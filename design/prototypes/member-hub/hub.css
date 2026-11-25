@@ -1367,7 +1367,7 @@ span.wel{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .fbk-open{position:fixed;right:22px;bottom:22px;z-index:50;padding:10px 20px;border-radius:999px;border:0;background:var(--purple);color:#fff;font:600 14px/20px var(--sans);box-shadow:0 8px 24px -8px rgba(60,29,102,.5);cursor:pointer}
 .fbk-open:hover{background:var(--purple-ink)}
 @media (max-width:980px){.fbk-open{bottom:calc(78px + env(safe-area-inset-bottom,0px));right:16px}}
-dialog.fbk{border:0;border-radius:12px;padding:26px 28px;width:min(520px,calc(100vw - 32px));box-shadow:0 18px 50px rgba(31,27,41,.25);font:400 15px/22px var(--sans);color:var(--ink)}
+dialog.fbk{border:0;border-radius:12px;padding:26px 28px;width:min(560px,calc(100vw - 32px));box-shadow:0 18px 50px rgba(31,27,41,.25);font:400 15px/22px var(--sans);color:var(--ink)}
 dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 .fbk h2{margin:0 0 6px;font:500 22px/28px var(--serif)}
 .fbk fieldset{border:0;padding:0;margin:14px 0}
@@ -1500,7 +1500,8 @@ dialog.fbk .fbk-head h2{margin:0}
 dialog.fbk .fbk-head p{font-size:14px;line-height:21px;color:var(--muted,#6b6772)}
 dialog.fbk fieldset{margin:0!important;padding:0;border:0;min-width:0}
 dialog.fbk legend,dialog.fbk .fbk-note label{display:block;padding:0;margin:0 0 8px;font-size:14px;line-height:20px;font-weight:600;color:var(--ink,#1d1b21)}
-dialog.fbk .fbk-topics{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;align-items:start}
+/* Each column as wide as its longest choice, so no choice wraps and the rows keep an even rhythm (MW 2026-11-25) */
+dialog.fbk .fbk-topics{display:grid;grid-template-columns:auto auto;justify-content:start;gap:10px 40px;align-items:start}
 dialog.fbk .fbk-topics label{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:20px;margin:0}
 dialog.fbk .fbk-topics input{flex:none;width:16px;height:16px;margin:2px 0 0}
 dialog.fbk .fbk-rate{display:flex;gap:8px}
