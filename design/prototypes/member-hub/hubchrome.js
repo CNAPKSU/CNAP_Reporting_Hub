@@ -563,3 +563,56 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
     if (h) { if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
   });
 })();
+
+/* Contribute strip (MW 2026-11-24): every dedicated page ends with the same quiet place to send the Center
+   something for that page: a story, an achievement, an event, a resource. Requests go to cnap@ksu.edu. */
+(function () {
+  if (document.querySelector('.contrib') || !document.querySelector('main')) return;
+  function mail(subject, lines) {
+    return 'mailto:cnap@ksu.edu?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(['Name:', 'Department:', ''].concat(lines).join('\n') + '\n');
+  }
+  var STORY = ['Suggest a story', mail('Story idea for Research at CNAP', ['The story (a project milestone, a new paper or grant, a core capability, or a person to profile):', '', 'Photos or figures I can share:'])];
+  var ACH = ['Share an achievement', 'community.html#cm-ach'];
+  var NEWS = ['Share a grant opportunity or news', 'funding.html#s-suggest'];
+  var EVENT = ['Submit an event', mail('Event for the CNAP calendar', ['Event title:', 'Date and time:', 'Location or Zoom link:', 'Who it is for:', '', 'Description:'])];
+  var ANN = ['Send an announcement to the listserv', mail('Announcement for the CNAP listserv', ['The announcement, as it should read:', '', 'Date to send it:'])];
+  var SPEAKER = ['Suggest a speaker', 'neurosync.html#ns-join'];
+  var RES = ['Suggest a resource', mail('Resource for the proposal writing toolkit', ['The resource (a link, a template, or an example):', '', 'Who it would help:'])];
+  var TIP = ['Suggest a tip for new members', mail('Tip for new CNAP members', ['The tip:', '', 'Who it is for (mentors, primary project leaders, or pilot project leaders):'])];
+  var SV = ['Suggest an idea for the Site Visit', mail('Idea for the 2027 Site Visit', ['The idea (a session, a speaker, a tour, or a change):'])];
+  var PHOTO = ['Share your photographs', mail('Photographs from the 2026 Site Visit', ['What the photographs show:', '', 'A link to the photographs, or attach them:'])];
+  function core(name) {
+    return [['Share work that used this core', mail('Work that used the ' + name, ['The paper, talk, or grant:', '', 'How the core helped:'])],
+            ['Ask this core a question', mail('Question for the ' + name, ['My question:'])]];
+  }
+  var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  var MAP = {
+    'research.html': [STORY, ACH], 'story.html': [STORY, ACH],
+    'funding.html': [NEWS], 'funding-news.html': [NEWS, EVENT], 'funding-resources.html': [RES, NEWS],
+    'events.html': [EVENT], 'neurosync.html': [SPEAKER, EVENT],
+    'community.html': [ACH, ANN, STORY], 'threads.html': [ACH, ANN], 'thread.html': [ACH, ANN],
+    'core-bn.html': core('Behavioral Neuroscience Core'), 'core-cn.html': core('Cognitive Neuroscience Core'), 'core-ni.html': core('Neuroinformatics Core'),
+    'sitevisit.html': [SV, PHOTO], 'sitevisit-2026.html': [PHOTO, STORY],
+    'mentor.html': [TIP], 'mentee.html': [TIP]
+  };
+  var items = MAP[page] || (/^member-|^thread-/.test(page) ? [ACH, STORY] : null);
+  if (!items) return;
+  var st = document.createElement('style');
+  st.textContent = '.contrib{max-width:var(--maxw,1200px);margin:72px auto 0;padding:24px max(16px,env(safe-area-inset-left,0px)) 8px;box-sizing:border-box}'
+    + '.contrib-in{display:flex;flex-wrap:wrap;align-items:center;gap:8px 32px;border-top:1px solid var(--line,#e4e0d8);padding-top:20px}'
+    + '.contrib h2{margin:0 auto 0 0;font:500 15px/22px var(--sans,system-ui,sans-serif);color:var(--muted,#6b6772)}'
+    + '.contrib ul{display:flex;flex-wrap:wrap;gap:4px 28px;margin:0;padding:0;list-style:none}'
+    + '.contrib .share{margin:0;display:inline-flex;align-items:center;gap:10px;min-height:40px;font-size:14.5px;line-height:20px;font-weight:600;color:var(--purple,#512888);text-decoration:none}'
+    + '.contrib .share:hover{text-decoration:underline;text-underline-offset:3px}'
+    + '.contrib .plus{position:relative;flex:none;width:24px;height:24px;border-radius:50%;background:var(--purple-tint,#efe9f6)}'
+    + '.contrib .plus::before,.contrib .plus::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.6px;margin:-.8px 0 0 -5px;background:currentColor;border-radius:1px}'
+    + '.contrib .plus::after{transform:rotate(90deg)}'
+    + '@media (max-width:640px){.contrib{margin-top:48px}.contrib h2{flex-basis:100%}.contrib ul{flex-direction:column;gap:0}}';
+  document.head.appendChild(st);
+  var a = document.createElement('aside');
+  a.className = 'contrib'; a.setAttribute('aria-labelledby', 'contrib-h');
+  a.innerHTML = '<div class="contrib-in"><h2 id="contrib-h">Have something to add?</h2><ul>' + items.map(function (it) {
+    return '<li><a class="share" href="' + it[1].replace(/&/g, '&amp;') + '"><span class="plus" aria-hidden="true"></span>' + it[0] + '</a></li>';
+  }).join('') + '</ul></div>';
+  document.querySelector('main').appendChild(a);
+})();

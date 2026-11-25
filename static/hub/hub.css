@@ -1589,6 +1589,9 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 .brief .bi.intro .lab{grid-row:2;align-self:start;margin-top:4px}
 @media (min-width:900px){.brief .bi.intro .body{align-self:start!important;text-align:left!important;justify-self:end;gap:4px!important;padding:6px 0 0 24px;border-left:1px solid var(--line)}}
 .brief .bi.intro .body::before{font-size:12.5px;line-height:16px;font-weight:500;color:var(--muted);margin-bottom:0}
+.brief .bi.intro .body::before{content:none!important;display:none!important}
+.brief .bi.intro .roles-h{align-self:flex-start;font-size:12.5px;line-height:16px;font-weight:500;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line-2,#d5d3d9);text-underline-offset:3px}
+.brief .bi.intro .roles-h:hover{color:var(--purple);text-decoration-color:currentColor}
 .brief .bi.intro .roles{color:var(--ink-2);margin:0!important}
 .brief .bi.intro .more-roles{margin-top:4px}
 
@@ -1624,3 +1627,10 @@ dialog.fbk .fbk-msg:empty{display:none}
 dialog.fbk .fbk-foot .fieldrow,dialog.fbk .fbk-foot .fbk-row{margin:0!important}
 dialog.fbk .fbk-proto{margin:0!important}
 @media (max-width:520px){dialog.fbk{padding:22px!important}dialog.fbk .fbk-topics{grid-template-columns:1fr}}
+
+/* Proposal writing toolkit: thin vertical lines between stages at every width that shows columns (MW 2026-11-24) */
+.tk-s::before{content:"";position:absolute;left:-12px;top:52px;bottom:0;border-left:1px solid var(--line,#e4e0d8);pointer-events:none}
+.tk-s.now::before{left:-4px}
+.tk-s:first-child::before{display:none}
+@media (max-width:1180px){.tk-s:nth-child(3n+1)::before{display:none}}
+@media (max-width:640px){.tk-s::before{display:none}}

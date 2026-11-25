@@ -1644,6 +1644,9 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
 .brief .bi.intro .lab{grid-row:2;align-self:start;margin-top:4px}
 @media (min-width:900px){.brief .bi.intro .body{align-self:start!important;text-align:left!important;justify-self:end;gap:4px!important;padding:6px 0 0 24px;border-left:1px solid var(--line)}}
 .brief .bi.intro .body::before{font-size:12.5px;line-height:16px;font-weight:500;color:var(--muted);margin-bottom:0}
+.brief .bi.intro .body::before{content:none!important;display:none!important}
+.brief .bi.intro .roles-h{align-self:flex-start;font-size:12.5px;line-height:16px;font-weight:500;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line-2,#d5d3d9);text-underline-offset:3px}
+.brief .bi.intro .roles-h:hover{color:var(--purple);text-decoration-color:currentColor}
 .brief .bi.intro .roles{color:var(--ink-2);margin:0!important}
 .brief .bi.intro .more-roles{margin-top:4px}
 
@@ -1659,6 +1662,13 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
   .wk .ce{font-size:11.5px;line-height:15px;padding:5px 5px 6px 6px;overflow-wrap:break-word;hyphens:manual}
   .wk-none{display:none}
 }
+
+/* Proposal writing toolkit: thin vertical lines between stages at every width that shows columns (MW 2026-11-24) */
+.tk-s::before{content:"";position:absolute;left:-12px;top:52px;bottom:0;border-left:1px solid var(--line,#e4e0d8);pointer-events:none}
+.tk-s.now::before{left:-4px}
+.tk-s:first-child::before{display:none}
+@media (max-width:1180px){.tk-s:nth-child(3n+1)::before{display:none}}
+@media (max-width:640px){.tk-s::before{display:none}}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
@@ -1753,7 +1763,7 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
         <div class="bi intro" role="listitem">
           <span class="lab">Most urgent first, left to right</span>
           <h2 id="wk">Your week</h2>
-          <div class="body"><p class="roles" data-unless="roles admin">Pilot Project Leader<br>Behavioral Neuroscience Core user<br>Mentored by <a class="mb-link" href="member-ev.html">Dr. Elena Voss</a></p><div data-when="roles" hidden><p class="roles">Pilot Project Leader<br>Mentor to two pilot leaders</p><details class="more-roles"><summary>3 more roles</summary><p class="roles">Behavioral Neuroscience Core user<br>Neuroinformatics Core user<br>NeuroSync planning group</p></details></div><p class="roles" data-when="admin" hidden>Center administrator<br>Cognitive Neuroscience Core user<br>NeuroSync planning group</p></div>
+          <div class="body"><a class="roles-h" href="mentee-profile.html" title="Opens your profile, where your roles are listed.">Your roles:</a><p class="roles" data-unless="roles admin">Pilot Project Leader<br>Behavioral Neuroscience Core user<br>Mentored by <a class="mb-link" href="member-ev.html">Dr. Elena Voss</a></p><div data-when="roles" hidden><p class="roles">Pilot Project Leader<br>Mentor to two pilot leaders</p><details class="more-roles"><summary>3 more roles</summary><p class="roles">Behavioral Neuroscience Core user<br>Neuroinformatics Core user<br>NeuroSync planning group</p></details></div><p class="roles" data-when="admin" hidden>Center administrator<br>Cognitive Neuroscience Core user<br>NeuroSync planning group</p></div>
         </div>
         <article class="bi" role="listitem" data-unless="clear urgent admin">
           <span class="kind" style="color:var(--amber)"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12.5V1.5M3 2h7.5l-1.6 2.6L10.5 7.2H3"/></svg>Due in 17 days</span>
@@ -1992,7 +2002,7 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
         <div class="ls-head"><div><h3 id="list-h"><a class="sh-link" href="community.html#cm-ann" title="Opens Announcements on the Community page: every listserv email, kept in one place.">Emails from the CNAP listserv</a></h3><p class="ls-sub">Announcements from the CNAP listserv, kept here so you can find each email again.</p></div><a class="t3" href="community.html#cm-ann">All announcements</a></div>
         <ul class="ls-list"><li><a class="ls" href="community.html#cm-ann"><span class="ls-d"><span class="ls-n num">12</span><span class="ls-m">November</span></span><span class="ls-b"><span class="ls-f">CNAP Administrative Core</span><b>Reminder: Year 11 pilot full proposals are due November 20</b><span class="ls-x">Please send all proposal materials as one PDF to cnap@ksu.edu by 5:00 p.m. Central, in the order listed on pages 3 and 4 of the RFA.</span><span class="ls-att">Attachment</span></span></a></li><li><a class="ls" href="community.html#cm-ann"><span class="ls-d"><span class="ls-n num">9</span><span class="ls-m">November</span></span><span class="ls-b"><span class="ls-f">CNAP Director</span><b>Welcome to our three newest graduate students</b><span class="ls-x">Please join us in welcoming the three students to the Cognitive Neuroscience Core this month.</span></span></a></li><li><a class="ls" href="community.html#cm-ann"><span class="ls-d"><span class="ls-n num">4</span><span class="ls-m">November</span></span><span class="ls-b"><span class="ls-f">CNAP Administrative Core</span><b>Updated travel and reimbursement guidelines</b><span class="ls-x">The attached guide replaces last year’s version and takes effect December 1.</span><span class="ls-att">Attachment</span></span></a></li></ul>
       </div>
-      <footer class="sf"><a class="btn" href="community.html">Visit the community</a><a class="share" href="community.html#cm-ach"><span class="plus" aria-hidden="true"></span>Share an achievement</a></footer>
+      <footer class="sf"><a class="btn" href="community.html">Visit the community</a><a class="share" href="community.html#cm-ach"><span class="plus" aria-hidden="true"></span>Share an achievement</a><a class="share" href="mailto:cnap@ksu.edu?subject=Announcement%20for%20the%20CNAP%20listserv&amp;body=Name%3A%0ADepartment%3A%0A%0AThe%20announcement%2C%20as%20it%20should%20read%3A%0A%0ADate%20to%20send%20it%3A%0A"><span class="plus" aria-hidden="true"></span>Send an announcement to the listserv</a></footer>
     </section>
   </div>
   </div>
@@ -2060,6 +2070,7 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
         <p>Onboarding guides for mentors and new project leaders, on primary or pilot projects. Each one walks through what to do first, step by step.</p>
       </header>
       <div class="ob-grid"><article class="ob ob-mentor"><p class="ob-l">For mentors <span class="ob-start" data-when="newmentor" hidden>Start here</span></p><h3><a class="sh-link" href="mentor.html" title="Opens the mentor guide.">Mentoring at CNAP</a></h3><p class="ob-d">What the Center asks of mentors, and how to support a primary or pilot project leader through the award.</p><details class="ob-x"><summary>See the 5 steps</summary><ol class="ob-s"><li><span class="ob-n num">1</span>Your role and expectations</li><li><span class="ob-n num">2</span>Sign your mentoring agreement</li><li><span class="ob-n num">3</span>Plan your meeting schedule</li><li><span class="ob-n num">4</span>What mentors report, and when</li><li><span class="ob-n num">5</span>Learn about your role at the Site Visit</li></ol></details><div class="ob-a"><a class="btn" href="mentor.html">Start the mentor guide</a><span class="meta">5 steps · about 20 minutes to read</span></div></article><article class="ob ob-awardee"><p class="ob-l">For mentees <span class="ob-start" data-when="newleader" hidden>Start here</span></p><h3><a class="sh-link" href="mentee.html" title="Opens the mentee guide.">Starting your project award</a></h3><p class="ob-d">For primary and pilot project leaders: what to do in your first months, from your mentoring agreement, finance guidelines, and approvals to orientations with the research cores.</p><details class="ob-x"><summary>See the 7 steps</summary><ol class="ob-s"><li><span class="ob-n num">1</span>Welcome to the Center</li><li><span class="ob-n num">2</span>Sign your mentoring agreement</li><li><span class="ob-n num">3</span>Review CNAP’s finance expectations and guidelines</li><li><span class="ob-n num">4</span>Approvals before you begin</li><li><span class="ob-n num">5</span>Orientations with the research cores</li><li><span class="ob-n num">6</span>Your reporting schedule</li><li><span class="ob-n num">7</span>Learn about your role at the Site Visit</li></ol></details><div class="ob-a"><a class="btn" href="mentee.html">Start the mentee guide</a><span class="meta">7 steps · about 40 minutes to read</span></div></article></div>
+          <footer class="sf"><a class="share" href="mailto:cnap@ksu.edu?subject=Tip%20for%20new%20CNAP%20members&amp;body=Name%3A%0ADepartment%3A%0A%0AThe%20tip%3A%0A%0AWho%20it%20is%20for%20%28mentors%2C%20primary%20project%20leaders%2C%20or%20pilot%20project%20leaders%29%3A%0A"><span class="plus" aria-hidden="true"></span>Suggest a tip for new members</a></footer>
     </section>
   </div></div>
 
