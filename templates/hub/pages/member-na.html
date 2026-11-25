@@ -29,7 +29,7 @@
     <section class="mb-sec" aria-labelledby="mb-thr"><h2 id="mb-thr" data-rail="Threads">Threads</h2><h3 class="mb-h3">Started</h3><ul class="mb-th"><li><a href="{% url 'portal:hub_thread_na' %}">Graduate student position: motor learning and EEG, spring 2027</a></li></ul><h3 class="mb-h3">Replied to</h3><ul class="mb-th"><li><a href="{% url 'portal:hub_thread_ms' %}">Sharing EEG caps between studies: cleaning and scheduling</a></li></ul></section>
   </div>
 </main>
-<footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. Every member here is fictional, except the Director, the Assistant Director for Grants and Contracts, and the Grant Specialist.</span></div></footer>
+<footer class="foot"><div class="wrap"><a class="ft-site" href="https://www.k-state.edu/cnap/" title="Opens the CNAP website.">Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</a><span>Prototype. Every member here is fictional, except the Director, the Assistant Director for Grants and Contracts, and the Grant Specialist.</span></div></footer>
 <script>document.querySelectorAll('[data-direct]').forEach(function(b){b.addEventListener('click',function(){if(window.hubToast)hubToast('<b>In the Member Hub, this starts an email to '+b.dataset.direct+'.</b> The members here are fictional, so nothing opens in the prototype.');});});</script>
 {% include "_feedback.html" %}
 <script src="{% static 'hub/page.js' %}" defer></script>

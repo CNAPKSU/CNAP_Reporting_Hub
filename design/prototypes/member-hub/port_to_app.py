@@ -93,8 +93,17 @@ def asset(path):
     return None
 
 
+FOOT_NAME = "<span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span>"
+FOOT_LINK = (
+    '<a class="ft-site" href="https://www.k-state.edu/cnap/" title="Opens the CNAP website.">'
+    "Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</a>"
+)
+
+
 def page_fixes(name, body):
     """The few changes a page needs because the app already does the real thing."""
+    # The footer's Center name opens the public CNAP website (MW 2026-11-25).
+    body = body.replace(FOOT_NAME, FOOT_LINK)
     if name == "sitevisit.html":
         # The app has the real RSVP form (portal:sitevisit_rsvp). The prototype's form stays in the page,
         # hidden, only because the page's script expects its fields; members see a link to the real one.

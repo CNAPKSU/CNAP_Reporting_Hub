@@ -106,7 +106,7 @@
   </div>
 </main>
 
-<footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. The mentee, project, products, and meetings are fictional.</span></div></footer>
+<footer class="foot"><div class="wrap"><a class="ft-site" href="https://www.k-state.edu/cnap/" title="Opens the CNAP website.">Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</a><span>Prototype. The mentee, project, products, and meetings are fictional.</span></div></footer>
 <script src="{% static 'hub/guide.js' %}"></script>
 <script>
 (function(){var bs=document.querySelectorAll('.pf-filt button'),yrs=document.querySelectorAll('.pr-yr');bs.forEach(function(b){b.addEventListener('click',function(){var f=b.dataset.f;bs.forEach(function(o){o.setAttribute('aria-pressed',o===b)});yrs.forEach(function(y){var n=0;y.querySelectorAll('li[data-k]').forEach(function(l){var on=f==='all'||l.dataset.k===f;l.hidden=!on;if(on)n++;});y.hidden=!n;y.querySelector('[data-yn]').textContent=n+(n===1?' record':' records');});});});})();
