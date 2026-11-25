@@ -368,3 +368,23 @@ a.ns-tag:hover{color:var(--purple-ink);text-decoration-color:currentColor}
   .ev-ft{grid-template-columns:minmax(0,1fr)}
   .ev-ft .ev-fa{grid-column:1;margin-top:16px;padding:0;border-top:0;justify-content:flex-start}
 }
+
+/* ---------------------------------------------------------------------------------------------
+   12. Selection, everywhere: pale lavender with purple ink (second pass, MW 2026-11-25)
+   Filters (Research, Community, and every page with .pf-filt) and the Calendar/List switch used
+   solid purple for "selected", unlike the tabs and cards. They now match: lavender, a fine purple
+   line, purple-ink text. Solid purple stays for the one primary action on a view.
+   --------------------------------------------------------------------------------------------- */
+.pf-filt button{border-color:var(--line-2);color:var(--ink-2);transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+.pf-filt button:hover{border-color:var(--ink-2);color:var(--ink)}
+.pf-filt button[aria-pressed="true"]{background:var(--purple-tint);border-color:var(--purple-line);color:var(--purple-ink);font-weight:600}
+.ev-mode{padding:3px;border-color:var(--line);border-radius:var(--r-m)}
+.ev-mode button{min-height:34px;padding:0 16px;border-radius:6px;font-size:var(--t-14)}
+.ev-mode button:hover{color:var(--ink)}
+.ev-mode button[aria-pressed="true"]{background:var(--purple-tint);color:var(--purple-ink);box-shadow:inset 0 0 0 1px var(--purple-line)}
+.pf-filt button:focus-visible,.ev-mode button:focus-visible{outline:none;box-shadow:var(--focus)}
+
+/* Grant resources, below the opening: the questions sit on a hairline instead of a floating shadow,
+   and the consultation card moves from a cool blue-gray to the warm band of the palette */
+.fp-qcard{border:1px solid var(--line);border-radius:var(--r-l);box-shadow:none}
+.fp-help-card{border-radius:var(--r-l);background:var(--band)}
