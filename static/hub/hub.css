@@ -1551,3 +1551,56 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 /* Footer spacing (MW 2026-11-24): less empty space above, room below for Page feedback, no one-word last line */
 .foot{margin-top:56px!important;padding-block:24px 56px}
 .foot p{text-wrap:pretty}
+
+/* Funding news gets the same sliding rule as the other sections (MW 2026-11-24) */
+#news-h{position:relative;--s0:0px}
+#news-h::after{content:"";position:absolute;left:calc(100% - 40px);bottom:-1px;width:40px;height:2px;background:var(--ink)}
+@media (prefers-reduced-motion:no-preference){
+  .js-draw #news-h::after{left:0}
+  .js-draw #news-h.drawn::after{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+
+/* Every Home section draws in once, along a line it already has (MW 2026-11-24) */
+.ls-head,.proposal{position:relative}
+.ls-head,.lineup,.proposal{--s0:0px}
+.ls-head::after{content:"";position:absolute;left:calc(100% - 40px);bottom:-1px;width:40px;height:2px;background:var(--ink)}
+.lineup::before{content:"";position:absolute;left:calc(100% - 40px);top:-1px;width:40px;height:2px;background:var(--ink)}
+.proposal::before{content:"";position:absolute;left:-1px;top:calc(100% - 40px);width:2px;height:40px;background:var(--ink)}
+@media (max-width:1180px){.proposal::before{left:calc(100% - 40px);top:-1px;width:40px;height:2px}}
+@media (prefers-reduced-motion:no-preference){
+  .js-draw .ls-head::after,.js-draw .lineup::before{left:0}
+  .js-draw .ls-head.drawn::after,.js-draw .lineup.drawn::before{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+  .js-draw .proposal::before{top:0}
+  .js-draw .proposal.drawn::before{animation:vslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+  .js-draw .tk::after{clip-path:inset(0 100% 0 0)}
+  .js-draw .tk.drawn::after{animation:tkfill 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+@media (max-width:1180px) and (prefers-reduced-motion:no-preference){
+  .js-draw .proposal::before{left:0;top:-1px}
+  .js-draw .proposal.drawn::before{animation:shslide 1.5s cubic-bezier(.65,0,.35,1) .2s forwards}
+}
+@keyframes vslide{from{top:0}to{top:calc(100% - 40px)}}
+@keyframes tkfill{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+
+/* Your week header (MW 2026-11-24): the ordering note sits right under the heading, and the roles read as one
+   tidy left-aligned list, top-aligned with the heading, instead of floating far apart */
+.brief .bi.intro{grid-template-rows:auto 1fr!important;align-items:start!important}
+.brief .bi.intro h2{align-self:start}
+.brief .bi.intro .lab{grid-row:2;align-self:start;margin-top:4px}
+@media (min-width:900px){.brief .bi.intro .body{align-self:start!important;text-align:left!important;justify-self:end;gap:4px!important;padding:6px 0 0 24px;border-left:1px solid var(--line)}}
+.brief .bi.intro .body::before{font-size:12.5px;line-height:16px;font-weight:500;color:var(--muted);margin-bottom:0}
+.brief .bi.intro .roles{color:var(--ink-2);margin:0!important}
+.brief .bi.intro .more-roles{margin-top:4px}
+
+/* Week view keeps its seven columns on half-screen computers and tablets; only narrow screens get the list (MW 2026-11-24) */
+@media (min-width:861px) and (max-width:980px){
+  .wk{grid-template-columns:repeat(7,minmax(0,1fr))}
+  .wk-d{display:block;min-height:180px;border-top:0;border-left:1px solid var(--wline);padding:10px 6px 14px}
+  .wk-d:first-child{border-left:0}
+  .wk-h{padding:4px 2px 10px}
+  .wk-h .dn{font-size:26px}
+  .wk-wd{font-size:12px}
+  .wk-d{padding-inline:4px}
+  .wk .ce{font-size:11.5px;line-height:15px;padding:5px 5px 6px 6px;overflow-wrap:break-word;hyphens:manual}
+  .wk-none{display:none}
+}
