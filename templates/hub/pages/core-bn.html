@@ -1,0 +1,80 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Behavioral Neuroscience Core · {{ platform_name }}</title>
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32.png' %}">
+<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+<link rel="stylesheet" href="{% static 'hub/hub.css' %}">
+<link rel="stylesheet" href="{% static 'hub/guide.css' %}">
+</head>
+<body data-hub-page="core-bn" data-guide="core-bn" class="core-page co-bn">
+{# Built by design/prototypes/member-hub/port_to_app.py from core-bn.html. Change the prototype and run it again. #}
+{% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
+<a class="skip" href="#main">Skip to main content</a>
+{% include "hub/_header.html" with active="resources" %}
+<main id="main">
+<div class="wrap hp-sample"><p class="sample-note">Sample content. The people, posts, and dates on this page are examples until it is connected to the Hub.</p></div>
+  <section class="co-open" aria-labelledby="t">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><a href="{% url 'home' %}#cores-h">Research cores</a><span aria-hidden="true">/</span><span aria-current="page">Behavioral Neuroscience Core</span></nav>
+      <div class="co-hero">
+        <span class="co-mono" aria-hidden="true">BN</span>
+        <div class="co-hd">
+          <p class="for">Research core</p>
+          <h1 id="t">Behavioral Neuroscience Core</h1>
+          <p class="lead">Behavioral research, animal models, and experimental neuroscience support for CNAP. Built in 1981, the only dedicated multi-user behavioral neuroscience facility in psychology in Kansas.</p>
+          <div class="co-act"><a class="btn pri" href="mailto:cnap@ksu.edu?subject=Behavioral%20Neuroscience%20Core%3A%20space%20and%20equipment%20request&amp;body=Name%3A%0ADepartment%3A%0AStudy%20title%3A%0AIACUC%20protocol%20number%20and%20approval%20status%3A%0A%0ASpecies%20and%20number%20of%20animals%3A%0A%0ARooms%20or%20equipment%20needed%3A%0A%0APreferred%20dates%3A%0A%0AQuestions%3A%0A">Request instrument time</a><a class="btn" href="mailto:cnap@ksu.edu?subject=Behavioral%20Neuroscience%20Core%3A%20consultation%20or%20tour%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AConsultation%2C%20tour%2C%20or%20both%3A%0A%0AWhat%20I%20would%20like%20to%20discuss%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A">Book a consultation or tour</a><a class="t3" href="#work">How to work with the core</a></div>
+        </div>
+      </div>
+      <ul class="co-facts" aria-label="At a glance"><li><b class="num">51</b><span>Rooms</span></li><li><b class="num">7,300+</b><span>Net assignable square feet</span></li><li><b class="num">1981</b><span>Year the facility was built</span></li><li><b class="num">Phase 2</b><span>Electrophysiology and optogenetics planned</span></li></ul>
+    </div>
+  </section>
+
+  <div class="guide">
+    <div class="wrap">
+      <nav class="spine" aria-label="Sections on this page">
+        <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
+        <ol><li><a href="#bn-fac"><span class="n"><b>1</b></span><span>Facilities</span></a></li><li><a href="#bn-as"><span class="n"><b>2</b></span><span>Assays and techniques</span></a></li><li><a href="#bn-eq"><span class="n"><b>3</b></span><span>Equipment</span></a></li><li><a href="#bn-svc"><span class="n"><b>4</b></span><span>Services</span></a></li><li><a href="#bn-ppl"><span class="n"><b>5</b></span><span>People</span></a></li><li><a href="#work"><span class="n"><b>6</b></span><span>Working with the core</span></a></li></ol>
+      </nav>
+      <div class="steps">
+        <section class="step cs" id="bn-fac" aria-labelledby="bn-fac-h">
+          <h2 id="bn-fac-h">Facilities</h2>
+          <div class="cs-b"><ul class="co-tiles"><li><b>Colony rooms</b><span>Purpose-built rooms for small animals such as rodents and birds, with special housing for altered light and dark cycles, special populations, and breeding</span></li><li><b>Procedure rooms</b><span>Behavioral testing</span></li><li><b>Surgery and wet laboratory</b><span>Space for surgical and laboratory procedures</span></li><li><b>Cage wash and storage</b><span>In-house cage washer and laundry facility</span></li><li><b>Offices and meeting room</b><span>In a separate block from the animal areas</span></li></ul></div>
+        </section>
+        <section class="step cs" id="bn-as" aria-labelledby="bn-as-h">
+          <h2 id="bn-as-h">Assays and techniques</h2>
+          <div class="cs-b"><p class="co-chips"><span>Pavlovian paradigms</span><span>Instrumental paradigms</span><span>Drug self-administration</span><span>Locomotor behavior</span><span>Open field search and navigation</span><span>Ultrasonic vocalization recordings</span><span>Forced swim tests</span></p></div>
+        </section>
+        <section class="step cs" id="bn-eq" aria-labelledby="bn-eq-h">
+          <h2 id="bn-eq-h">Equipment</h2>
+          <div class="cs-b"><p>Added since Phase 1 of the CNAP grant, with upgrades continuing under Phase 2.</p><dl class="co-spec"><div><dt>Surgery</dt><dd>Two dual-arm stereotaxic instruments with microinfusion pumps, two isoflurane rigs, two procedure hoods, downdraft surgical tables, and four heat pumps for recovery</dd></div><div><dt>Imaging</dt><dd>Fluorescence microscope, co-funded by the Kansas IDeA Network of Biomedical Research Excellence (K-INBRE)</dd></div><div><dt>Storage and preparation</dt><dd>Research-grade refrigerator, −20°C freezer, two −80°C freezers, large autoclave, ice machine, and reverse osmosis and deionized water</dd></div><div><dt>Analysis</dt><dd>Blood alcohol analyzer</dd></div><div><dt>Husbandry</dt><dd>In-house cage washer and laundry facility</dd></div></dl><p class="meta">Planned for Phase 2: shared equipment for electrophysiological recording and optogenetic manipulation.</p></div>
+        </section>
+        <section class="step cs" id="bn-svc" aria-labelledby="bn-svc-h">
+          <h2 id="bn-svc-h">Services</h2>
+          <div class="cs-b"><ul class="dots"><li>Design and running of behavioral assays</li><li>Surgical and laboratory procedure support, including stereotaxic surgery</li><li>Animal care and husbandry, including cage changes and cage washing</li><li>Scheduling of all facility spaces and equipment, and equipment maintenance</li><li>Facility records for compliance reporting</li><li>Coordination with the Comparative Medicine Group, the Institutional Animal Care and Use Committee (IACUC), and the Division of Facilities</li><li>Training and onboarding for new students and staff</li></ul><p class="co-fee"><span><b>Schedule of charges</b> Rates for core services will be posted here.</span><span class="core-soon">Coming soon</span></p></div>
+        </section>
+        <section class="step cs" id="bn-ppl" aria-labelledby="bn-ppl-h">
+          <h2 id="bn-ppl-h">People</h2>
+          <div class="cs-b"><ul class="co-ppl"><li><span class="who-ini" aria-hidden="true">CP</span><div><p class="pp-r">Core Director</p><p class="co-pn">Dr. Charles Pickens</p><p class="co-pd">Associate Professor, Department of Psychological Sciences, and IACUC member. About 20 years of research with rats and mice, including reinforcer devaluation, fear conditioning and punishment learning, alcohol consumption and exposure, intracranial lesion and infusion surgery, and immunohistochemistry. He oversees operations and supervises staff.</p></div></li><li><span class="who-ini" aria-hidden="true">CC</span><div><p class="pp-r">Animal Care Technician</p><p class="co-pn">Cameron Carr-Thompson</p><p class="co-pd">Handles husbandry, daily room checks, and IACUC and AAALAC records, trains new students and staff, and arranges equipment maintenance.</p></div></li><li><span class="who-ini" aria-hidden="true">AD</span><div><p class="pp-r">Assistant Director</p><p class="co-pn">Assistant Director</p><p class="co-pd">Orders supplies, maintains inventory, and arranges maintenance of equipment and shared spaces.</p></div></li></ul></div>
+        </section>
+        <section class="step cs" id="work" aria-labelledby="work-h">
+          <h2 id="work-h">Working with the core</h2>
+          <div class="cs-b"><ol class="co-how"><li><b>Schedule a tour</b><span>See the colony, procedure, and surgery rooms, and talk through your study with the Core Director.</span></li><li><b>Confirm approvals</b><span>Your IACUC protocol must be approved before animals arrive or procedures begin.</span></li><li><b>Complete training</b><span>The Animal Care Technician trains new students and staff on facility procedures.</span></li><li><b>Book space and equipment</b><span>The core schedules rooms and equipment for your study.</span></li></ol><p class="meta">For facilities, services, or a tour, contact the Core Director through <a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a>.<br><a href="https://www.k-state.edu/cnap/research-cores/bn-core.html" target="_blank" rel="noopener">The Behavioral Neuroscience Core on the CNAP website</a></p></div>
+        </section>
+        <aside class="co-more" aria-label="The other cores"><p>The other research cores</p><div><a class="co-o co-ni" href="{% url 'portal:hub_core_ni' %}"><span class="co-ol">NI</span><span>Neuroinformatics Core</span></a><a class="co-o co-cn" href="{% url 'portal:hub_core_cn' %}"><span class="co-ol">CN</span><span>Cognitive Neuroscience Core</span></a></div></aside>
+      </div>
+      <aside class="co-rail" aria-label="Contact the core"><div class="co-rc"><p class="co-rk">Contact</p><p class="pp-r">Core Director</p><p class="co-pn">Dr. Charles Pickens</p><a class="co-re" href="mailto:cnap@ksu.edu">cnap@ksu.edu</a>
+<dl class="co-rd"><div><dt>Location</dt><dd>Department of Psychological Sciences</dd></div><div><dt>On the CNAP website</dt><dd><a href="https://www.k-state.edu/cnap/research-cores/bn-core.html" target="_blank" rel="noopener">Core page</a></dd></div></dl></div></aside>
+    </div>
+  </div>
+</main>
+
+<footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. Request and booking forms are not connected yet.</span></div></footer>
+<script src="{% static 'hub/guide.js' %}"></script>
+{% include "_feedback.html" %}
+<script src="{% static 'hub/page.js' %}" defer></script>
+<script src="{% static 'js/dropclose.js' %}" defer></script>
+</body>
+</html>

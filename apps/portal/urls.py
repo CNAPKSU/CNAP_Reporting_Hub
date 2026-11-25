@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import clicks, sitevisit_views, views
+from . import clicks, hub_pages, sitevisit_views, views
 from . import funding_views as fv
 from . import outcome_views as ov
 
@@ -51,3 +51,6 @@ urlpatterns = [
     path("outcomes/delegates/add/", ov.delegate_add, name="outcome_delegate_add"),
     path("outcomes/delegates/<int:pk>/end/", ov.delegate_end, name="outcome_delegate_end"),
 ]
+
+# The Member Hub section pages (MW 2026-11-25).
+urlpatterns += hub_pages.urlpatterns

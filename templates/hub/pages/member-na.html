@@ -1,0 +1,38 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Nadia Ahmed · {{ platform_name }}</title>
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32.png' %}">
+<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+<link rel="stylesheet" href="{% static 'hub/hub.css' %}">
+<link rel="stylesheet" href="{% static 'hub/guide.css' %}">
+</head>
+<body data-hub-page="member-na" data-guide="community" class="core-page cm-page">
+{# Built by design/prototypes/member-hub/port_to_app.py from member-na.html. Change the prototype and run it again. #}
+{% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
+<a class="skip" href="#main">Skip to main content</a>
+{% include "hub/_header.html" with active="community" %}
+<main id="main" class="mb-page">
+<div class="wrap hp-sample"><p class="sample-note">Sample content. The people, posts, and dates on this page are examples until it is connected to the Hub.</p></div>
+  <section class="mb-hero" aria-labelledby="t">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><a href="{% url 'portal:hub_community' %}">Community</a><span aria-hidden="true">/</span><a href="{% url 'portal:hub_community' %}#cm-dir">Member directory</a><span aria-hidden="true">/</span><span aria-current="page">Nadia Ahmed</span></nav>
+      <div class="mb-top"><span class="cm-av av-a lg" aria-hidden="true">NA</span><div><h1 id="t">Nadia Ahmed</h1><p class="mb-role">Graduate student, Kinesiology</p><span class="cm-new">New this month</span></div>
+        <div class="cm-acts mb-acts"><button type="button" class="btn pri" data-direct="Nadia Ahmed">Email Nadia</button><span class="cm-or">or</span><a class="btn" href="mailto:cnap@ksu.edu?subject=Introduction%20to%20Nadia%20Ahmed&amp;body=Name%3A%0A%0AI%20would%20like%20to%20meet%20Nadia%20Ahmed%20because%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Starts an email asking the CNAP team to introduce you.">Ask for an introduction</a></div></div>
+    </div>
+  </section>
+  <div class="wrap mb-body">
+    <section class="mb-sec" aria-labelledby="mb-int"><h2 id="mb-int" data-rail="Interests and methods">Interests and methods</h2><p class="cm-chips mb-chips"><span>Motor learning</span><span>EEG</span></p></section>
+    
+    <section class="mb-sec" aria-labelledby="mb-thr"><h2 id="mb-thr" data-rail="Threads">Threads</h2><h3 class="mb-h3">Started</h3><ul class="mb-th"><li><a href="{% url 'portal:hub_thread_na' %}">Graduate student position: motor learning and EEG, spring 2027</a></li></ul><h3 class="mb-h3">Replied to</h3><ul class="mb-th"><li><a href="{% url 'portal:hub_thread_ms' %}">Sharing EEG caps between studies: cleaning and scheduling</a></li></ul></section>
+  </div>
+</main>
+<footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. Every member here is fictional, except the Director, the Assistant Director for Grants and Contracts, and the Grant Specialist.</span></div></footer>
+<script>document.querySelectorAll('[data-direct]').forEach(function(b){b.addEventListener('click',function(){if(window.hubToast)hubToast('<b>In the Member Hub, this starts an email to '+b.dataset.direct+'.</b> The members here are fictional, so nothing opens in the prototype.');});});</script>
+{% include "_feedback.html" %}
+<script src="{% static 'hub/page.js' %}" defer></script>
+<script src="{% static 'js/dropclose.js' %}" defer></script>
+</body>
+</html>

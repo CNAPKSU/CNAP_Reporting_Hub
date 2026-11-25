@@ -2,7 +2,7 @@
 <header class="hdr">
   <div class="wrap">
     <a class="brand" href="{% url 'home' %}"><img class="brand-mark" src="{% static 'img/cnap-mark.png' %}" width="36" height="36" alt=""><span><b>{{ platform_name }}</b><small>Kansas State University</small></span></a>
-    {# MW 2026-11-15, approved build: the prototype ribbon. Menus list only pages the app has; other sections go to their part of Home. #}
+    {# MW 2026-11-15, approved build: the prototype ribbon. Menus list only pages the app has. Research, Events, and Community have their own pages (MW 2026-11-25); Resources goes to its part of Home. #}
     <nav class="nav hn-app" aria-label="Main">
       <a href="{% url 'home' %}"{% if active == 'home' %} aria-current="page"{% endif %}>Home</a>
       <div class="rb-it{% if active == 'reporting' %} is-here{% endif %}">
@@ -13,8 +13,8 @@
           <a href="{% url 'portal:history' %}"><b>My history</b><small>Everything you have submitted</small></a>
         </div>
       </div>
-      <a href="{% url 'home' %}#res-h">Research</a>
-      <a href="{% url 'home' %}#cal-h">Events</a>
+      <a href="{% url 'portal:hub_research' %}"{% if active == 'research' %} aria-current="page"{% endif %}>Research</a>
+      <a href="{% url 'portal:hub_events' %}"{% if active == 'events' %} aria-current="page"{% endif %}>Events</a>
       <div class="rb-it{% if active == 'funding' %} is-here{% endif %}">
         <button type="button" class="rb-b" aria-expanded="false" aria-controls="rb-fund">Funding<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="rb-p" id="rb-fund" hidden>
@@ -23,8 +23,8 @@
           <a href="{% url 'portal:funding_news' %}"><b>Funding news</b><small>News from sponsors, and events and talks</small></a>
         </div>
       </div>
-      <a href="{% url 'home' %}#com-h">Community</a>
-      <a href="{% url 'home' %}#cores-h">Resources</a>
+      <a href="{% url 'portal:hub_community' %}"{% if active == 'community' %} aria-current="page"{% endif %}>Community</a>
+      <a href="{% url 'home' %}#cores-h"{% if active == 'resources' %} aria-current="page"{% endif %}>Resources</a>
     </nav>
     <div class="tools">
       {% if is_admin %}<a class="mywork" href="{% url 'manage:home' %}" style="border-style:dashed">Administration</a>{% endif %}

@@ -1,0 +1,98 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Neuroinformatics Core · {{ platform_name }}</title>
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32.png' %}">
+<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+<link rel="stylesheet" href="{% static 'hub/hub.css' %}">
+<link rel="stylesheet" href="{% static 'hub/guide.css' %}">
+</head>
+<body data-hub-page="core-ni" data-guide="core-ni" class="core-page co-ni">
+{# Built by design/prototypes/member-hub/port_to_app.py from core-ni.html. Change the prototype and run it again. #}
+{% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
+<a class="skip" href="#main">Skip to main content</a>
+{% include "hub/_header.html" with active="resources" %}
+<main id="main">
+<div class="wrap hp-sample"><p class="sample-note">Sample content. The people, posts, and dates on this page are examples until it is connected to the Hub.</p></div>
+  <section class="co-open" aria-labelledby="t">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><a href="{% url 'home' %}#cores-h">Research cores</a><span aria-hidden="true">/</span><span aria-current="page">Neuroinformatics Core</span></nav>
+      <div class="co-hero">
+        <span class="co-mono" aria-hidden="true">NI</span>
+        <div class="co-hd">
+          <p class="for">Research core</p>
+          <h1 id="t">Neuroinformatics Core</h1>
+          <p class="lead">Advanced computing, data science, and artificial intelligence (AI) support for CNAP, enabling data-driven neuroscience through high-performance computing and machine learning.</p>
+          <div class="co-act"><a class="btn pri" href="mailto:cnap@ksu.edu?subject=Neuroinformatics%20Core%3A%20analysis%20request&amp;body=Name%3A%0ADepartment%3A%0ACNAP%20project%20or%20grant%3A%0A%0AData%20%28type%2C%20size%2C%20and%20format%29%3A%0A%0AResearch%20question%3A%0A%0AHelp%20needed%20%28consultation%2C%20analysis%20pipeline%2C%20Beocat%20access%2C%20or%20training%29%3A%0A%0ATimeline%20or%20deadline%3A%0A">Request analysis</a><a class="btn" href="mailto:cnap@ksu.edu?subject=Neuroinformatics%20Core%3A%20consultation%20request&amp;body=Name%3A%0ADepartment%3A%0A%0AWhat%20I%20would%20like%20to%20discuss%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A">Book a consultation</a><a class="t3" href="#work">How to work with the core</a></div>
+        </div>
+      </div>
+      <ul class="co-facts" aria-label="At a glance"><li><b class="num">496</b><span>Processor cores for CNAP on Beocat</span></li><li><b class="num">10</b><span>Graphics processing units (GPUs)</span></li><li><b class="num">3.4 TB</b><span>Memory (RAM)</span></li><li><b class="num">882,000+</b><span>Core hours run for CNAP in Grant Year 9</span></li></ul>
+    </div>
+  </section>
+
+  <div class="guide">
+    <div class="wrap">
+      <nav class="spine" aria-label="Sections on this page">
+        <p class="spine-h">On this page</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
+        <ol><li><a href="#ni-svc"><span class="n"><b>1</b></span><span>Services</span></a></li><li><a href="#ni-inf"><span class="n"><b>2</b></span><span>Computing infrastructure</span></a></li><li><a href="#ni-imp"><span class="n"><b>3</b></span><span>Time saved on Beocat</span></a></li><li><a href="#ni-ai"><span class="n"><b>4</b></span><span>Sample AI and machine learning projects</span></a></li><li><a href="#ni-trn"><span class="n"><b>5</b></span><span>Training and outreach</span></a></li><li><a href="#ni-out"><span class="n"><b>6</b></span><span>Research outcomes in Grant Year 9</span></a></li><li><a href="#ni-cx"><span class="n"><b>7</b></span><span>CONNECT Lab</span></a></li><li><a href="#ni-ppl"><span class="n"><b>8</b></span><span>People</span></a></li><li><a href="#work"><span class="n"><b>9</b></span><span>Working with the core</span></a></li></ol>
+      </nav>
+      <div class="steps">
+        <section class="step cs" id="ni-svc" aria-labelledby="ni-svc-h">
+          <h2 id="ni-svc-h">Services</h2>
+          <div class="cs-b"><ul class="dots"><li>Research computing and high-performance computing (HPC) support</li><li>Machine learning and data science assistance</li><li>Data analysis and statistics, including data processing and analysis support</li><li>Custom scripting for data import, cleaning, and analysis</li><li>Research software, workflow development, and automation</li><li>Secure data transfer and collaboration</li><li>Hands-on training and one-on-one consultation</li></ul><p class="co-fee"><span><b>Schedule of charges</b> Rates for core services will be posted here.</span><span class="core-soon">Coming soon</span></p></div>
+        </section>
+        <section class="step cs" id="ni-inf" aria-labelledby="ni-inf-h">
+          <h2 id="ni-inf-h">Computing infrastructure</h2>
+          <div class="cs-b"><p>The core is integrated with Beocat, the Kansas State University high-performance computing cluster in the Carl R. Ice College of Engineering.</p><dl class="co-spec"><div><dt>Beocat cluster</dt><dd>More than 10,000 shared compute cores</dd></div><div><dt>Dedicated to CNAP</dt><dd>496 cores, 10 GPUs, and 3.4 terabytes (TB) of memory</dd></div><div><dt>Storage</dt><dd>3 petabytes (PB) of primary storage and 290 TB of high-speed storage</dd></div><div><dt>Access</dt><dd>Open OnDemand and Jupyter, with secure data transfer</dd></div></dl></div>
+        </section>
+        <section class="step cs" id="ni-imp" aria-labelledby="ni-imp-h">
+          <h2 id="ni-imp-h">Time saved on Beocat</h2>
+          <div class="cs-b"><div class="co-bars" role="list">
+<div class="co-bar" role="listitem"><p><b>Electroencephalography (EEG) analysis</b><span>1,280 hours before, about 20 hours on Beocat</span></p><div class="co-tr"><i class="was" style="--w:100%"></i></div><div class="co-tr"><i class="now" style="--w:1.6%"></i></div></div>
+<div class="co-bar" role="listitem"><p><b>Bayesian simulations</b><span>More than 1,000 hours before, about 8 hours on Beocat</span></p><div class="co-tr"><i class="was" style="--w:78%"></i></div><div class="co-tr"><i class="now" style="--w:.7%"></i></div></div>
+<div class="co-bar" role="listitem"><p><b>Image processing</b><span>Days of processing reduced to hours</span></p></div>
+</div><p class="co-key"><span class="k-was"></span>Before <span class="k-now"></span>On Beocat with the Neuroinformatics Core</p><p class="meta">In Grant Year 9, CNAP members ran more than 208,000 jobs and 882,000 core hours on Beocat.</p></div>
+        </section>
+        <section class="step cs" id="ni-ai" aria-labelledby="ni-ai-h">
+          <h2 id="ni-ai-h">Sample AI and machine learning projects</h2>
+          <div class="cs-b"><ul class="co-tiles"><li><b>AI for behavior analysis</b><span>Automated scoring of novel object recognition and social interaction tests</span></li><li><b>Large language models for cognitive health</b><span>Language models applied to mild cognitive impairment and recall</span></li><li><b>Prompt optimization</b><span>Optimizing prompts for stance detection</span></li><li><b>Multimodal analysis</b><span>EEG combined with behavioral data</span></li></ul></div>
+        </section>
+        <section class="step cs" id="ni-trn" aria-labelledby="ni-trn-h">
+          <h2 id="ni-trn-h">Training and outreach</h2>
+          <div class="cs-b"><ul class="dots"><li>Workshops in R, Python, and machine learning</li><li>Training on Beocat, Open OnDemand, and Jupyter</li><li>Online tutorials and documentation</li><li>About 80 participants trained through outreach</li><li>Graduate courses in deep learning and databases</li></ul></div>
+        </section>
+        <section class="step cs" id="ni-out" aria-labelledby="ni-out-h">
+          <h2 id="ni-out-h">Research outcomes in Grant Year 9</h2>
+          <div class="cs-b"><ul class="co-facts co-facts-in"><li><b class="num">1</b><span>Funded grant</span></li><li><b class="num">8</b><span>Pending grants, more than $14 million</span></li><li><b class="num">14</b><span>Publications, including journal and conference papers</span></li><li><b class="num">12</b><span>Conference presentations and posters</span></li></ul></div>
+        </section>
+        <section class="step cs" id="ni-cx" aria-labelledby="ni-cx-h">
+          <h2 id="ni-cx-h">CONNECT Lab</h2>
+          <div class="cs-b"><div class="co-cx"><div><p class="for">A separate facility, with support from two cores</p><p class="co-cx-n">Cog + Neuro Network for Experimentation and Computing Technologies. A staffed drop-in room, BH 444, with four workstations for R, MATLAB, Python, JMP, PsychoPy, Unity, and more.</p></div>
+<div class="co-cx-g"><div><b>Experiment assistance</b><span>Through the Cognitive Neuroscience Core: experiment programming and design consultation, hardware integration with EEG, TMS, eye tracking, and response devices, help adapting existing scripts, and shared experiment code and templates.</span></div><div><b>Data assistance</b><span>Through the Neuroinformatics Core: data pipelines and analysis consultation, workflows for large-scale and parallel analysis on Beocat, machine learning help, and workshops on analysis tools and methods.</span></div></div>
+<a class="btn" href="https://connect-lab.carrd.co" target="_blank" rel="noopener">Visit the CONNECT Lab</a></div></div>
+        </section>
+        <section class="step cs" id="ni-ppl" aria-labelledby="ni-ppl-h">
+          <h2 id="ni-ppl-h">People</h2>
+          <div class="cs-b"><ul class="co-ppl"><li><span class="who-ini" aria-hidden="true">DC</span><div><p class="pp-r">Core Director</p><p class="co-pn">Dr. Doina Caragea</p><a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a><p class="co-pd">Leads the core’s computing, data science, and machine learning support for CNAP investigators.</p></div></li></ul></div>
+        </section>
+        <section class="step cs" id="work" aria-labelledby="work-h">
+          <h2 id="work-h">Working with the core</h2>
+          <div class="cs-b"><ol class="co-how"><li><b>Book a consultation</b><span>Please describe your data and your question. The core helps you choose an approach and estimate the computing you need.</span></li><li><b>Get access</b><span>The core sets up your Beocat account and secure data transfer, and points you to training if you need training.</span></li><li><b>Run your analysis</b><span>Work on your own with core support, or ask the core to build the pipeline with you.</span></li><li><b>Cite the core</b><span>Acknowledge CNAP and the Neuroinformatics Core in publications and presentations that used the core’s resources.</span></li></ol><p class="meta">Questions about the Neuroinformatics Core go to <a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a>.<br><a href="https://www.k-state.edu/cnap/research-cores/ni-core.html" target="_blank" rel="noopener">The Neuroinformatics Core on the CNAP website</a></p></div>
+        </section>
+        <aside class="co-more" aria-label="The other cores"><p>The other research cores</p><div><a class="co-o co-cn" href="{% url 'portal:hub_core_cn' %}"><span class="co-ol">CN</span><span>Cognitive Neuroscience Core</span></a><a class="co-o co-bn" href="{% url 'portal:hub_core_bn' %}"><span class="co-ol">BN</span><span>Behavioral Neuroscience Core</span></a></div></aside>
+      </div>
+      <aside class="co-rail" aria-label="Contact the core"><div class="co-rc"><p class="co-rk">Contact</p><p class="pp-r">Core Director</p><p class="co-pn">Dr. Doina Caragea</p><a class="co-re" href="mailto:cnap@ksu.edu">cnap@ksu.edu</a>
+<dl class="co-rd"><div><dt>Location</dt><dd>Beocat, Carl R. Ice College of Engineering</dd></div><div><dt>On the CNAP website</dt><dd><a href="https://www.k-state.edu/cnap/research-cores/ni-core.html" target="_blank" rel="noopener">Core page</a></dd></div></dl></div></aside>
+    </div>
+  </div>
+</main>
+
+<footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. Request and booking forms are not connected yet.</span></div></footer>
+<script src="{% static 'hub/guide.js' %}"></script>
+{% include "_feedback.html" %}
+<script src="{% static 'hub/page.js' %}" defer></script>
+<script src="{% static 'js/dropclose.js' %}" defer></script>
+</body>
+</html>
