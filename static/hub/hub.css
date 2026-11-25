@@ -727,13 +727,19 @@ details.wel{flex:1 1 520px;min-width:0}
 .ls-att::before{content:"";width:8px;height:10px;border:1.5px solid currentColor;border-radius:1px}
 @media (max-width:980px){.sheet-list{padding:32px}}
 @media (max-width:640px){.sheet-list{padding:24px 20px;margin-inline:-8px;margin-top:20px}.ls{grid-template-columns:48px minmax(0,1fr);column-gap:14px}.ls-n{font-size:32px}.ls b{font-size:18px;line-height:24px}.ls-head h3{font-size:24px;line-height:30px}}
-.share{margin-left:auto;display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:15px;line-height:20px;font-weight:600;color:var(--purple);text-decoration:none}
-.share:hover{text-decoration:underline;text-underline-offset:3px}
-.share .plus{position:relative;flex:none;width:26px;height:26px;border-radius:50%;background:var(--purple-tint)}
-.share .plus::before,.share .plus::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.6px;margin:-.8px 0 0 -5.5px;background:currentColor;border-radius:1px}
+/* Contribute links ("Share your photographs", "Suggest a story"), MW 2026-11-25: a quiet, exact feature. A fine ring
+   with a thin plus beside a near-black label; on hover the ring fills, the plus turns, and a hairline underline arrives. */
+.share{margin-left:auto;display:inline-flex;align-items:center;gap:12px;min-height:44px;font-size:14.5px;line-height:20px;font-weight:500;letter-spacing:.005em;color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;text-decoration-color:transparent;transition:color .25s ease,text-decoration-color .25s ease;border-radius:999px}
+.share .plus{position:relative;flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--line-2);color:var(--purple);background:transparent;transition:background-color .3s ease,border-color .3s ease,color .3s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.share .plus::before,.share .plus::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.25px;margin:-.625px 0 0 -5px;background:currentColor;border-radius:1px}
 .share .plus::after{transform:rotate(90deg)}
+.share:hover,.share:focus-visible{color:var(--purple-ink,var(--purple));text-decoration-color:currentColor}
+.share:hover .plus,.share:focus-visible .plus{background:var(--purple);border-color:var(--purple);color:#fff;transform:rotate(90deg)}
+.share:focus-visible{outline:2px solid var(--purple);outline-offset:4px}
+@media (prefers-reduced-motion:reduce){.share,.share .plus{transition:none}.share:hover .plus,.share:focus-visible .plus{transform:none}}
 .cal-band .share{color:#fff}
-.cal-band .share .plus{background:rgba(255,255,255,.16)}
+.cal-band .share .plus{border-color:rgba(255,255,255,.42);color:#fff}
+.cal-band .share:hover .plus,.cal-band .share:focus-visible .plus{background:#fff;border-color:#fff;color:#1d1226}
 @media (max-width:640px){.share{margin-left:0}}
 .voucher{display:flex;align-items:center;gap:12px 28px;flex-wrap:wrap;margin-bottom:28px;padding:20px 28px;border-radius:8px;background:linear-gradient(90deg,#ece4f6,#e3f1f1);border:1px solid rgba(81,40,136,.12)}
 .v-l{padding:4px 12px;border-radius:999px;background:var(--purple);color:#fff;font-size:13px;line-height:17px;font-weight:600}
