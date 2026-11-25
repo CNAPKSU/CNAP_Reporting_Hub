@@ -1,0 +1,9 @@
+{% autoescape off %}{{ person.full_name }} asked, from their profile, to change their CNAP roles.
+
+What they wrote:
+{{ note }}
+
+Review it here: {{ site }}/manage/access-requests/#roles
+
+Nothing on the roster changes until you make the change on their page. When you add a role while a reporting session is open, the forms that role calls for are added for them right away.
+{% endautoescape %}

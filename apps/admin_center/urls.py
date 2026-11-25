@@ -41,6 +41,11 @@ urlpatterns = [
         access_requests.access_request_decide,
         name="access_request_decide",
     ),
+    path(
+        "role-requests/<int:pk>/decide/",
+        access_requests.role_request_decide,
+        name="role_request_decide",
+    ),
     path("people/", people.people, name="people"),
     path("people/new/", people.person_new, name="person_new"),
     path("people/<int:pk>/", people.person, name="person"),

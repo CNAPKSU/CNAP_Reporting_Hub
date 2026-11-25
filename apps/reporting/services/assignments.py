@@ -21,11 +21,17 @@ from django.db.models import Q
 from django.utils import timezone
 
 from apps.audit.models import AuditLog, record_event
-from apps.common.enums import AssignmentSource, AssignmentStatus, RuleScope, VersionStatus
+from apps.common.enums import (
+    AssignmentSource,
+    AssignmentStatus,
+    PeriodStatus,
+    RuleScope,
+    VersionStatus,
+)
 from apps.forms_engine.models import FormAssignmentRule
 from apps.people.models import Person, PersonRelationship
 
-from ..models import Assignment
+from ..models import Assignment, ReportingPeriod
 
 
 @dataclass
@@ -139,7 +145,23 @@ def generate(period, actor=None, on=None):
     """Create every planned assignment that does not exist yet. Safe to run again."""
     planned = plan(period, on)
     before = Assignment.objects.filter(reporting_period=period).count()
-    rows = [
+    rows = _rows(period, planned)
+    Assignment.objects.bulk_create(rows, ignore_conflicts=True)
+    after = Assignment.objects.filter(reporting_period=period).count()
+    result = GenerationResult(
+        planned=planned, created=after - before, existing=len(planned) - (after - before)
+    )
+    record_event(
+        actor,
+        AuditLog.Action.ASSIGN,
+        period,
+        new={"created": result.created, "already_existed": result.existing},
+    )
+    return result
+
+
+def _rows(period, planned):
+    return [
         Assignment(
             person_id=p.person_id,
             form_version_id=p.form_version_id,
@@ -154,18 +176,31 @@ def generate(period, actor=None, on=None):
         )
         for p in planned
     ]
-    Assignment.objects.bulk_create(rows, ignore_conflicts=True)
-    after = Assignment.objects.filter(reporting_period=period).count()
-    result = GenerationResult(
-        planned=planned, created=after - before, existing=len(planned) - (after - before)
-    )
-    record_event(
-        actor,
-        AuditLog.Action.ASSIGN,
-        period,
-        new={"created": result.created, "already_existed": result.existing},
-    )
-    return result
+
+
+@transaction.atomic
+def catch_up(person, actor=None):
+    """After a role is added during an open reporting session, add the forms that role calls for.
+
+    Only this person's missing forms are added, in every open session. Nothing is ever removed: a
+    form someone no longer needs is excused by an administrator, so no half-finished work is lost
+    (MW 2026-11-24, approved feature). Returns how many forms were added.
+    """
+    added = 0
+    for period in ReportingPeriod.objects.filter(status=PeriodStatus.OPEN):
+        planned = [p for p in plan(period) if p.person_id == person.pk]
+        if not planned:
+            continue
+        mine = Assignment.objects.filter(reporting_period=period, person=person)
+        before = mine.count()
+        Assignment.objects.bulk_create(_rows(period, planned), ignore_conflicts=True)
+        n = mine.count() - before
+        if n:
+            added += n
+            record_event(
+                actor, AuditLog.Action.ASSIGN, period, new={"person": person.pk, "created": n}
+            )
+    return added
 
 
 @transaction.atomic

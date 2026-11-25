@@ -791,7 +791,7 @@ def roster_check(request, pk):
     p = get_object_or_404(ReportingPeriod, pk=pk)
     s = rc.summary(p)
     sugg = list(
-        RosterSuggestion.objects.filter(link__reporting_period=p)
+        RosterSuggestion.objects.filter(Q(link__reporting_period=p) | Q(link__isnull=True))
         .select_related("link__person", "person", "project", "core")
         .order_by("status", "created_at")
     )
@@ -830,7 +830,9 @@ def roster_check_post(request, pk):
             messages.success(request, msg)
     elif action in ("done", "declined", "pending"):
         sg = get_object_or_404(
-            RosterSuggestion, pk=request.POST.get("id"), link__reporting_period=p
+            RosterSuggestion,
+            Q(link__reporting_period=p) | Q(link__isnull=True),
+            pk=request.POST.get("id"),
         )
         rc.decide(request.user, sg, action)
         messages.success(

@@ -171,7 +171,7 @@ def decide(user, suggestion, status):
     record_event(
         user,
         AuditLog.Action.UPDATE,
-        suggestion.link.reporting_period,
+        suggestion.link.reporting_period if suggestion.link_id else suggestion,
         new={"roster_suggestion": suggestion.pk, "status": status},
     )
 
@@ -192,3 +192,40 @@ def summary(period):
         ).count(),
         "send_day": send_day(period),
     }
+
+
+def suggest_own(person, note, user=None):
+    """A member asks, from their own profile, to change their roles (MW 2026-11-24, approved feature).
+
+    The request waits with the roster-check suggestions and on Manage, Access requests. Nothing on
+    the roster changes until the evaluator acts. The evaluator is told by email.
+    """
+    from apps.accounts.access_requests import notify_address
+
+    note = (note or "").strip()[:2000]
+    if not note:
+        return None
+    s = RosterSuggestion.objects.create(
+        link=None, kind=RosterSuggestion.Kind.OWN, person=person, note=note
+    )
+    record_event(user, AuditLog.Action.CREATE, s, new={"own_roles": person.pk})
+    to = notify_address()
+    if to:
+        body = render_to_string(
+            "email/role_change_request.txt",
+            {"person": person, "note": note, "site": settings.SITE_URL.rstrip("/")},
+        )
+        send_mail(
+            f"{person.full_name} asks to change their CNAP roles",
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [to],
+            fail_silently=True,
+        )
+    return s
+
+
+def own_pending():
+    return RosterSuggestion.objects.filter(
+        link__isnull=True, kind=RosterSuggestion.Kind.OWN, status=RosterSuggestion.Status.PENDING
+    ).select_related("person")

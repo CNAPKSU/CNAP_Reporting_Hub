@@ -2,12 +2,19 @@
 {% block title %}Access requests · {{ platform_name }}{% endblock %}
 {% block content %}
 {# MW 2026-11-24, approved feature: people ask to join from the sign-in page; nothing is created until approval. #}
-<div class="head"><div><h1>Access requests</h1><p>People asking to join the Member Hub from the sign-in page.<br>Approving adds the person and emails them a welcome sign-in link. Declining sends nothing.<br>Each new request is emailed to {{ notify }}.</p></div></div>
+<div class="head"><div><h1>Access requests</h1><p>People asking to join the Member Hub from the sign-in page, and members asking to change their roles.<br>Approving adds the person and emails them a welcome sign-in link. Declining sends nothing.<br>Each new request is emailed to {{ notify }}.</p></div></div>
 <div class="panel"><h2>Waiting for review</h2>
 <table class="tbl"><thead><tr><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Department</th><th scope="col">Connection to CNAP</th><th scope="col">Asked</th><th scope="col">Decide</th></tr></thead><tbody>
 {% for r in pending %}<tr><th scope="row">{{ r.first_name }} {{ r.last_name }}{% if r.note %}<br><small>{{ r.note }}</small>{% endif %}</th><td>{{ r.email }}</td><td>{{ r.department }}</td><td>{{ r.connection }}</td><td>{{ r.created_at|date:"M j, g:i a" }}</td>
 <td>{% if can_manage %}<form method="post" action="{% url 'manage:access_request_decide' r.pk %}" style="display:flex;gap:8px;flex-wrap:wrap">{% csrf_token %}<button class="btn small" name="decision" value="approve" title="Add {{ r.first_name }} to the Hub and email a welcome sign-in link.">Approve</button><button class="btn small ghost" name="decision" value="decline" title="Decline without sending an email.">Decline</button></form>{% else %}Waiting{% endif %}</td></tr>
 {% empty %}<tr><td colspan="6">No requests are waiting.</td></tr>{% endfor %}
+</tbody></table></div>
+<div class="panel" id="roles"><h2>Role changes members asked for</h2>
+<p class="small muted">Members ask from their own profile.<br>Make the change on the person’s page, then mark it as handled.<br>A role added while a reporting session is open adds its surveys and reports for that person right away. Forms are never removed: excuse one the person no longer needs.</p>
+<table class="tbl"><thead><tr><th scope="col">Member</th><th scope="col">What they asked</th><th scope="col">Asked</th><th scope="col">Decide</th></tr></thead><tbody>
+{% for x in role_requests %}<tr><th scope="row"><a href="{% url 'manage:person' x.person.pk %}" title="Opens {{ x.person.first_name }}’s page, where you can add or end a role.">{{ x.person.full_name }}</a></th><td>{{ x.note|linebreaksbr }}</td><td>{{ x.created_at|date:"M j, g:i a" }}</td>
+<td>{% if can_manage %}<form method="post" action="{% url 'manage:role_request_decide' x.pk %}" style="display:flex;gap:8px;flex-wrap:wrap">{% csrf_token %}<button class="btn small" name="decision" value="done" title="You made the change, or none was needed.">Mark as handled</button><button class="btn small ghost" name="decision" value="declined" title="Decline without changing anything.">Decline</button></form>{% else %}Waiting{% endif %}</td></tr>
+{% empty %}<tr><td colspan="4">No role changes are waiting.</td></tr>{% endfor %}
 </tbody></table></div>
 {% if decided %}<div class="panel"><h2>Decided</h2>
 <table class="tbl"><thead><tr><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Decision</th><th scope="col">By</th><th scope="col">When</th></tr></thead><tbody>

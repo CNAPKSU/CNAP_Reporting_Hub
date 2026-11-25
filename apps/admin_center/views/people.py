@@ -304,6 +304,19 @@ def person_email_primary(request, pk, email_pk):
     return redirect("manage:person", pk)
 
 
+def _caught_up(request, person):
+    """Add any forms a new role calls for in an open reporting session, and say so (MW 2026-11-24)."""
+    from apps.reporting.services.assignments import catch_up
+
+    n = catch_up(person, request.user)
+    if n:
+        messages.info(
+            request,
+            f"{n} new survey{'s' if n != 1 else ''} or report{'s' if n != 1 else ''} "
+            f"{'were' if n != 1 else 'was'} added to {person}’s open reporting session.",
+        )
+
+
 @manage_action
 def relationship_add(request, pk):
     p = get_object_or_404(Person, pk=pk)
@@ -322,6 +335,7 @@ def relationship_add(request, pk):
             start=d["start"],
         )
         messages.success(request, f"Added {rel.relationship_type.name}.")
+        _caught_up(request, p)
         from .. import quality
 
         if quality.director_and_leader(max(d["start"], timezone.localdate()), person=p).exists():
@@ -360,6 +374,7 @@ def relationship_handoff(request, pk, rel_pk):
             request.user, rel, form.cleaned_data["new_person"], start=form.cleaned_data["start"]
         )
         messages.success(request, f"Handed off to {new.person}.")
+        _caught_up(request, new.person)
     except services.RelationshipError as exc:
         messages.error(request, str(exc))
     return redirect("manage:person", pk)
@@ -375,6 +390,7 @@ def person_roster(request, pk):
         else:
             services.add_to_roster(request.user, p)
             messages.success(request, f"{p} is now on the CNAP roster.")
+            _caught_up(request, p)
     except services.RelationshipError as exc:
         messages.error(request, str(exc))
     nxt = request.POST.get("next", "")

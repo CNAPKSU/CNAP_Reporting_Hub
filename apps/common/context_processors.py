@@ -68,5 +68,8 @@ def _waiting_requests(user):
     if not access.can_view_admin(user):
         return 0
     from apps.accounts.models import AccessRequest
+    from apps.reporting.services.roster_check import own_pending
 
-    return AccessRequest.objects.filter(status=AccessRequest.Status.PENDING).count()
+    return AccessRequest.objects.filter(status=AccessRequest.Status.PENDING).count() + (
+        own_pending().count()
+    )

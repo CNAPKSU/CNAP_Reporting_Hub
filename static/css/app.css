@@ -2107,3 +2107,12 @@ dialog.fbk .fbk-msg:empty{display:none}
 dialog.fbk .fbk-foot .fieldrow,dialog.fbk .fbk-foot .fbk-row{margin:0!important}
 dialog.fbk .fbk-proto{margin:0!important}
 @media (max-width:520px){dialog.fbk{padding:22px!important}dialog.fbk .fbk-topics{grid-template-columns:1fr}}
+
+/* Profile: a member suggests a change to their own roles (MW 2026-11-24) */
+.rolechg { margin-top: 16px; }
+.rolechg > summary { display: inline-flex; list-style: none; cursor: pointer; }
+.rolechg > summary::-webkit-details-marker { display: none; }
+.rolechg-f { display: flex; flex-direction: column; gap: 8px; max-width: 560px; margin-top: 14px; }
+.rolechg-f label { font-weight: 600; font-size: 14px; }
+.rolechg-f textarea { width: 100%; box-sizing: border-box; }
+.rolechg-f .btn { align-self: flex-start; margin-top: 4px; }

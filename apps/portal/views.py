@@ -498,6 +498,18 @@ def profile(request):
                 "Thanks. The Center evaluator has your request and will get in touch by email.",
             )
             return redirect(reverse("portal:profile") + "#commons")
+        if request.POST.get("action") == "role_change":
+            from apps.reporting.services.roster_check import suggest_own
+
+            if suggest_own(person, request.POST.get("role_note", ""), request.user):
+                messages.success(
+                    request,
+                    "Thanks. The evaluator has your request and will update your roles.\n"
+                    "Any surveys or reports a new role needs will appear in My tasks.",
+                )
+            else:
+                messages.error(request, "Write a few words about what should change.")
+            return redirect(reverse("portal:profile") + "#roles")
         orcid = person.orcid
         if "orcid" in request.POST:
             try:

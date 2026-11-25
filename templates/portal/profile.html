@@ -53,7 +53,15 @@
     <h2 class="sectionhead" title="Each role you hold in CNAP, with its project or core and start date. Your roles decide which surveys and reports you receive. Click to see them.">Your CNAP roles</h2>
     {% for r in rels %}<div class="rolerow"><span class="rolerow-n">{{ r.relationship_type.name }}</span><span class="rolerow-w">{% if r.project %}{{ r.project.title }}{% elif r.core %}{{ r.core.name }}{% else %}Center-level{% endif %}</span><span class="rolerow-d">Since {{ r.effective_from|date:"F Y" }}</span></div>
     {% empty %}<p class="muted">You have no project or core roles.</p>{% endfor %}
-    <p class="small muted mt">{% if on_roster %}You’re on the CNAP roster.<br>{% endif %}Your roles decide which surveys and reports you receive.<br>If something here is wrong, contact the evaluator at <a href="mailto:{{ evaluator_email }}">{{ evaluator_email }}</a>.</p>
+    <p class="small muted mt">{% if on_roster %}You’re on the CNAP roster.<br>{% endif %}Your roles decide which surveys and reports you receive.<br>If something here is wrong or missing, tell the evaluator below.</p>
+    <details class="rolechg"><summary class="btn small ghost">Suggest a change to my roles</summary>
+      <form method="post" class="rolechg-f">{% csrf_token %}<input type="hidden" name="action" value="role_change">
+        <label for="role_note">What should change?</label>
+        <textarea id="role_note" name="role_note" rows="3" maxlength="2000" required placeholder="For example: I became a core user of the Neuroinformatics Core in October."></textarea>
+        <p class="small muted">The evaluator reviews each request and updates your roles. A new role’s surveys and reports then appear in My tasks.</p>
+        <button class="btn small" type="submit">Send my request</button>
+      </form>
+    </details>
   </div>
 {% if my_docs %}
 <div class="panel rollsec">

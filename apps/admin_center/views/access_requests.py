@@ -2,6 +2,7 @@
 
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 
 from apps.accounts import access_requests as ar
 from apps.accounts.models import AccessRequest
@@ -17,10 +18,17 @@ def access_requests(request):
     decided = AccessRequest.objects.exclude(status=AccessRequest.Status.PENDING).select_related(
         "decided_by", "person"
     )[:50]
+    from apps.reporting.services import roster_check as rc
+
     return render(
         request,
         "manage/access_requests.html",
-        {"pending": pending, "decided": decided, "notify": ar.notify_address()},
+        {
+            "pending": pending,
+            "decided": decided,
+            "notify": ar.notify_address(),
+            "role_requests": rc.own_pending(),
+        },
     )
 
 
@@ -40,3 +48,22 @@ def access_request_decide(request, pk):
         ar.decline(req, request.user)
         messages.success(request, f"Declined the request from {req.first_name} {req.last_name}.")
     return redirect("manage:access_requests")
+
+
+@manage_action
+def role_request_decide(request, pk):
+    """Handle a member's own request to change their roles (MW 2026-11-24, approved feature)."""
+    from apps.reporting.models import RosterSuggestion
+    from apps.reporting.services import roster_check as rc
+
+    sg = get_object_or_404(RosterSuggestion, pk=pk, link__isnull=True)
+    status = request.POST.get("decision", "")
+    if status in ("done", "declined", "pending"):
+        rc.decide(request.user, sg, status)
+        messages.success(
+            request,
+            {"done": "Marked as handled.", "declined": "Declined.", "pending": "Back on the list."}[
+                status
+            ],
+        )
+    return redirect(reverse("manage:access_requests") + "#roles")
