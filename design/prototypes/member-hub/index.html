@@ -1590,6 +1590,13 @@ p.ns-getmail a{color:var(--ink-2);text-decoration-thickness:1px;text-underline-o
 .hdr .hc-thread svg{width:14px;height:14px}
 .hdr .search{min-height:32px;border-color:transparent;background:none;font-size:13.5px}
 .hdr .search:hover{background:var(--band)}
+
+/* Footer (MW 2026-11-24): the CNAP description in the middle, About links on the left, Help links on the right */
+@media (min-width:981px){
+  .foot .g > p{grid-column:4 / span 6!important;grid-row:1;text-align:center}
+  .foot .g > nav:first-of-type{grid-column:1 / span 3!important;grid-row:1;align-items:flex-start;text-align:left}
+  .foot .g > nav:last-of-type{grid-column:10 / span 3!important;grid-row:1;align-items:flex-end;text-align:right}
+}
 </style>
 
 <a class="skip" href="#main">Skip to main content</a>
