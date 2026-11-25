@@ -2978,3 +2978,8 @@ h1,h2,h3{overflow-wrap:break-word}
 .hdr .hc-thread svg{width:14px;height:14px}
 .hdr .search{min-height:32px;border-color:transparent;background:none;font-size:13.5px}
 .hdr .search:hover{background:var(--band)}
+
+/* Footer a quarter smaller (MW 2026-11-24), held at 11px so it stays readable */
+.foot p,.foot span{font-size:11px!important;line-height:17px!important}
+.foot nav a{font-size:11px!important;line-height:16px;padding-block:3px}
+.foot{padding-block:28px 40px}
