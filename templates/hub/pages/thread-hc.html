@@ -1,0 +1,72 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Office hours for mixed-effects models in R · {{ platform_name }}</title>
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32.png' %}">
+<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+<link rel="stylesheet" href="{% static 'hub/hub.css' %}">
+<link rel="stylesheet" href="{% static 'hub/guide.css' %}">
+</head>
+<body data-hub-page="thread-hc" data-guide="community" class="core-page cm-page">
+{# Built by design/prototypes/member-hub/port_to_app.py from thread-hc.html. Change the prototype and run it again. #}
+{% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
+<a class="skip" href="#main">Skip to main content</a>
+{% include "hub/_header.html" with active="community" %}
+<main id="main">
+<div class="wrap hp-sample"><p class="sample-note">Sample content. The people, posts, and dates on this page are examples until it is connected to the Hub.</p></div>
+  <section class="co-open tp-open" aria-labelledby="t">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><a href="{% url 'portal:hub_community' %}">Community</a><span aria-hidden="true">/</span><a href="{% url 'portal:hub_threads' %}">Threads</a><span aria-hidden="true">/</span><span aria-current="page">Office hours for mixed-effects models in R</span></nav>
+      <p class="th-tp th-g">Statistics</p>
+      <h1 id="t">Office hours for mixed-effects models in R</h1>
+      <div class="tp-byrow"><div class="tp-by"><span class="cm-av av-p" aria-hidden="true">HC</span><p><b><a class="mb-link" href="{% url 'portal:hub_member_hc' %}">Dr. Hannah Cole</a></b><span>Investigator · Started November 3 · <span data-rc>4 replies</span></span></p></div></div>
+    </div>
+  </section>
+  <div class="wrap tp-cols">
+    <div class="tp-main">
+      <div class="tp-q" id="tp-question" data-rail="The question"><p>I am holding open office hours on Tuesdays from 2:00 to 3:30 p.m. this month for anyone fitting mixed-effects models in R.</p><p>Bring your data and your questions. Students are especially welcome. Reply here so I know roughly how many people to expect.</p><p class="tp-folrow"><button type="button" class="th-fol tp-fol" aria-pressed="false" title="Follow this thread to get one email a day when it has new replies."><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h8v11l-4-3-4 3z"/></svg><span>Follow</span></button></p></div>
+      
+      <h2 class="tp-h" data-rh id="tp-replies" data-rail="Replies">4 replies</h2>
+      <ol class="tp-rs"><li class="tp-r"><span class="cm-av av-t" aria-hidden="true">JL</span><div class="tp-rb"><p class="tp-rh"><b><a class="mb-link" href="{% url 'portal:hub_member_jl' %}">Dr. Jordan Lee</a></b><span>Pilot project leader</span><span>Monday</span></p><p class="tp-rt">I will come next Tuesday with a sleep dataset that has repeated nights per person.</p><p class="tp-ra"><a class="t3" href="mailto:cnap@ksu.edu?subject=Introduction%20to%20Dr.%20Jordan%20Lee&amp;body=Name%3A%0A%0AI%20would%20like%20to%20meet%20Dr.%20Jordan%20Lee%20because%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Starts an email to the CNAP team asking for an introduction to Dr. Jordan Lee.">Ask for an introduction</a></p></div></li><li class="tp-r"><span class="cm-av av-a" aria-hidden="true">LP</span><div class="tp-rb"><p class="tp-rh"><b><a class="mb-link" href="{% url 'portal:hub_member_lp' %}">Dr. Lena Park</a></b><span>Pilot project leader</span><span>Monday</span></p><p class="tp-rt">Thank you, Hannah. Is there a way to join by video?</p><p class="tp-ra"><a class="t3" href="mailto:cnap@ksu.edu?subject=Introduction%20to%20Dr.%20Lena%20Park&amp;body=Name%3A%0A%0AI%20would%20like%20to%20meet%20Dr.%20Lena%20Park%20because%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Starts an email to the CNAP team asking for an introduction to Dr. Lena Park.">Ask for an introduction</a></p></div></li><li class="tp-r"><span class="cm-av av-p" aria-hidden="true">HC</span><div class="tp-rb"><p class="tp-rh"><b><a class="mb-link" href="{% url 'portal:hub_member_hc' %}">Dr. Hannah Cole</a></b><span>Investigator</span><span>Monday</span></p><p class="tp-rt">Yes. I will post a video link here each Tuesday morning.</p><p class="tp-ra"><a class="t3" href="mailto:cnap@ksu.edu?subject=Introduction%20to%20Dr.%20Hannah%20Cole&amp;body=Name%3A%0A%0AI%20would%20like%20to%20meet%20Dr.%20Hannah%20Cole%20because%3A%0A%0ATimes%20that%20work%20for%20me%3A%0A" title="Starts an email to the CNAP team asking for an introduction to Dr. Hannah Cole.">Ask for an introduction</a></p></div></li><li class="tp-r"><span class="cm-av av-p" aria-hidden="true">AO</span><div class="tp-rb"><p class="tp-rh"><b>You</b><span>Pilot project leader, you</span><span>Today</span></p><p class="tp-rt">This is very helpful. I will bring a question about random slopes for the pilot data.</p></div></li></ol>
+      <form class="tp-reply" id="reply" aria-labelledby="tp-rh">
+        <h2 class="tp-h" id="tp-rh" data-rail="Your reply">Your reply</h2>
+        <label class="sr" for="tp-rt">Your reply</label>
+        <textarea id="tp-rt" rows="4" placeholder="Please share what you know, or who to ask."></textarea>
+        <p class="tp-note" role="status" hidden></p>
+        <div class="tp-fb"><button type="submit" class="btn pri">Post your reply</button><span class="meta">Visible to CNAP members only.</span></div>
+      </form>
+    </div>
+    <aside class="tp-side" aria-label="About this thread">
+      <div class="tp-card"><h2 class="tp-sh">In this thread</h2><ul class="tp-ppl"><li><span class="cm-av av-p sm" aria-hidden="true">HC</span><span><a class="mb-link" href="{% url 'portal:hub_member_hc' %}">Dr. Hannah Cole</a></span></li><li><span class="cm-av av-t sm" aria-hidden="true">JL</span><span><a class="mb-link" href="{% url 'portal:hub_member_jl' %}">Dr. Jordan Lee</a></span></li><li><span class="cm-av av-a sm" aria-hidden="true">LP</span><span><a class="mb-link" href="{% url 'portal:hub_member_lp' %}">Dr. Lena Park</a></span></li><li><span class="cm-av av-p sm" aria-hidden="true">AO</span><span>You</span></li></ul></div>
+      <div class="tp-card"><h2 class="tp-sh" id="tp-related" data-rail="Related threads">Related threads</h2><ul class="tp-rel"><li><a href="{% url 'portal:hub_thread' %}">Looking for an EEG collaborator</a><span>4 replies</span></li><li><a href="{% url 'portal:hub_thread_kb' %}">Calibrating the eye tracker for participants who wear glasses</a><span>No replies yet</span></li><li><a href="{% url 'portal:hub_thread_lp' %}">Recruiting older adults: what has worked?</a><span>3 replies</span></li></ul><a class="t3" href="{% url 'portal:hub_threads' %}">All threads</a></div>
+    </aside>
+  </div>
+</main>
+
+<footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. The members and threads are fictional. The Director, the Assistant Director for Grants and Contracts, and the Grant Specialist are real staff. Posting threads isn’t connected yet.</span></div></footer>
+<script>
+(function(){
+  var f=document.querySelector('.tp-reply'),ta=document.getElementById('tp-rt'),note=f.querySelector('.tp-note'),list=document.querySelector('.tp-rs'),
+      rh=document.querySelector('[data-rh]'),rc=document.querySelector('[data-rc]'),n=4;
+  function label(c){return c===0?'No replies yet':(c===1?'1 reply':c+' replies');}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();var v=ta.value.trim();
+    if(!v){note.textContent='Please write your reply first.';note.hidden=false;ta.focus();return;}
+    var em=list.querySelector('.tp-empty');if(em)em.remove();
+    var li=document.createElement('li');li.className='tp-r tp-new';
+    li.innerHTML='<span class="cm-av av-p" aria-hidden="true">AO</span><div class="tp-rb"><p class="tp-rh"><b>You</b><span>Pilot project leader</span><span>Just now</span></p><p class="tp-rt"></p></div>';
+    li.querySelector('.tp-rt').textContent=v;list.appendChild(li);n++;rh.textContent=label(n);rc.textContent=label(n);ta.value='';
+    note.textContent='Your reply is posted below. In the prototype, it disappears when you leave the page.';note.hidden=false;if(fb.getAttribute('aria-pressed')!=='true'){fb.setAttribute('aria-pressed','true');fb.querySelector('span').textContent='Following';}if(window.hubToast)hubToast(hubThreadMsg('reply'));
+    li.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  });
+  var fb=document.querySelector('.tp-fol');fb.addEventListener('click',function(){var on=fb.getAttribute('aria-pressed')!=='true';fb.setAttribute('aria-pressed',on);fb.querySelector('span').textContent=on?'Following':'Follow';if(window.hubToast)hubToast(hubThreadMsg(on?'follow':'unfollow'));});
+  if(location.hash==='#reply'){setTimeout(function(){ta.focus();},300);}
+})();
+</script>
+{% include "_feedback.html" %}
+<script src="{% static 'hub/page.js' %}" defer></script>
+<script src="{% static 'js/dropclose.js' %}" defer></script>
+</body>
+</html>

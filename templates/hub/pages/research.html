@@ -1,0 +1,65 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Research at CNAP · {{ platform_name }}</title>
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32.png' %}">
+<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+<link rel="stylesheet" href="{% static 'hub/hub.css' %}">
+<link rel="stylesheet" href="{% static 'hub/guide.css' %}">
+</head>
+<body data-hub-page="research" data-guide="research" class="rs-page">
+{# Built by design/prototypes/member-hub/port_to_app.py from research.html. Change the prototype and run it again. #}
+{% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
+<a class="skip" href="#main">Skip to main content</a>
+{% include "hub/_header.html" with active="research" %}
+<main id="main">
+<div class="wrap hp-sample"><p class="sample-note">Sample content. The people, posts, and dates on this page are examples until it is connected to the Hub.</p></div>
+  <section class="rs-open" aria-labelledby="t">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><span aria-current="page">Research at CNAP</span></nav>
+      <div class="rs-mast">
+        <div><h1 id="t">Research at CNAP</h1><p class="lead">Work from the Center’s pilot projects, cores, and investigators.</p></div>
+        <a class="btn" href="mailto:cnap@ksu.edu?subject=Story%20idea%20for%20Research%20at%20CNAP&amp;body=Name%3A%0ADepartment%3A%0A%0AThe%20story%20%28a%20project%20milestone%2C%20a%20new%20paper%20or%20grant%2C%20a%20core%20capability%2C%20or%20a%20person%20to%20profile%29%3A%0A%0AWhy%20members%20would%20want%20to%20read%20it%3A%0A%0APhotos%20or%20figures%20I%20can%20share%3A%0A">Suggest a story</a>
+      </div>
+    </div>
+  </section>
+  <div class="wrap rs-body">
+    <article class="rs-feat" data-k="pilot" aria-labelledby="feat-h">
+      <a class="rs-feat-im" href="{% url 'portal:hub_story' %}" tabindex="-1" aria-hidden="true"><img src="{% static 'hub/img/neurons.jpg' %}" alt=""><span class="tag">Illustration</span></a>
+      <div class="rs-feat-t">
+        <p class="eyebrow">Featured story · Pilot project</p>
+        <h2 id="feat-h"><a href="{% url 'portal:hub_story' %}">What a night of sleep does to a new memory</a></h2>
+        <p class="rs-feat-d">A CNAP pilot project is recording brain activity during sleep to learn which memories are kept by morning. The team describes the study design and what the team plans to test next.</p>
+        <p class="meta">The CNAP team · November 10, 2026 · 4-minute read</p>
+        <a class="btn pri" href="{% url 'portal:hub_story' %}">Read the story</a>
+      </div>
+    </article>
+    <section class="rs-more" aria-labelledby="more-h">
+      <header class="rs-more-h">
+        <div><h2 id="more-h">More stories</h2><p class="meta"><span class="rs-n">6</span> stories from pilot projects, cores, and investigators.</p></div>
+        <div class="rs-nav"><button type="button" class="rs-prev" aria-label="Previous stories" disabled><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button><button type="button" class="rs-next" aria-label="Next stories"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg></button></div>
+      </header>
+      <div class="pf-filt rs-filt" role="group" aria-label="Show"><button type="button" aria-pressed="true" data-f="all">All stories</button><button type="button" aria-pressed="false" data-f="pilot">Pilot projects</button><button type="button" aria-pressed="false" data-f="core">Core capabilities</button><button type="button" aria-pressed="false" data-f="pubs">Publications</button><button type="button" aria-pressed="false" data-f="people">Investigator profiles</button><button type="button" aria-pressed="false" data-f="training">Training</button></div>
+      <ul class="rs-car" aria-label="More stories"><li class="sc" data-k="core"><a href="#" data-proto title="Only one story page is built in the prototype."><figure class="sc-im"><img src="{% static 'hub/img/reel-3.jpg' %}" alt="Placeholder for a photograph of the Cognitive Neuroscience Core" loading="lazy"><span class="tag">Photo placeholder</span></figure><div class="sc-t"><p class="eyebrow">Core capability</p><h3>Transcranial magnetic stimulation in the Cognitive Neuroscience Core</h3><p class="sc-d">Combined with EEG, stimulation will let investigators test which brain regions a task depends on, not just which ones are active.</p><p class="meta">The CNAP team · November 8, 2026 · 3-minute read</p></div></a></li><li class="sc" data-k="pilot"><a href="#" data-proto title="Only one story page is built in the prototype."><figure class="sc-im"><img src="{% static 'hub/img/oscillations.jpg' %}" alt="Generated illustration of brain oscillations" loading="lazy"><span class="tag">Illustration</span></figure><div class="sc-t"><p class="eyebrow">Pilot project</p><h3>How a new pilot team is planning the first year</h3><p class="sc-d">Milestones, a standing monthly meeting, and an early conversation with the cores: how one team set up a pilot award.</p><p class="meta">The CNAP team · November 6, 2026 · 5-minute read</p></div></a></li><li class="sc" data-k="pubs"><a href="#" data-proto title="Only one story page is built in the prototype."><figure class="sc-im"><img src="{% static 'hub/img/reel-1.jpg' %}" alt="Placeholder for a photograph of journal articles" loading="lazy"><span class="tag">Photo placeholder</span></figure><div class="sc-t"><p class="eyebrow">Publications</p><h3>Three new papers that cite CNAP this fall</h3><p class="sc-d">Work from two pilot projects and the Neuroinformatics Core, published between September and November.</p><p class="meta">The CNAP team · November 3, 2026 · 2-minute read</p></div></a></li><li class="sc" data-k="people"><a href="#" data-proto title="Only one story page is built in the prototype."><figure class="sc-im"><img src="{% static 'hub/img/reel-4.jpg' %}" alt="Placeholder for a portrait photograph" loading="lazy"><span class="tag">Photo placeholder</span></figure><div class="sc-t"><p class="eyebrow">Investigator profile</p><h3>Meet the Center’s newest pilot project leader</h3><p class="sc-d">Why a sleep researcher joined CNAP, and what she hopes the Center’s cores will make possible.</p><p class="meta">The CNAP team · October 29, 2026 · 4-minute read</p></div></a></li><li class="sc" data-k="core"><a href="#" data-proto title="Only one story page is built in the prototype."><figure class="sc-im"><img src="{% static 'hub/img/reel-5.jpg' %}" alt="Placeholder for a photograph of the Neuroinformatics Core" loading="lazy"><span class="tag">Photo placeholder</span></figure><div class="sc-t"><p class="eyebrow">Core capability</p><h3>What the Neuroinformatics Core can process for your lab</h3><p class="sc-d">From EEG pipelines to machine learning on behavior videos, with run times measured in hours instead of weeks.</p><p class="meta">The CNAP team · October 22, 2026 · 3-minute read</p></div></a></li><li class="sc" data-k="training"><a href="#" data-proto title="Only one story page is built in the prototype."><figure class="sc-im"><img src="{% static 'hub/img/reel-2.jpg' %}" alt="Placeholder for a photograph of a workshop" loading="lazy"><span class="tag">Photo placeholder</span></figure><div class="sc-t"><p class="eyebrow">Training</p><h3>Inside the fall grant-writing workshop series</h3><p class="sc-d">Four sessions, from specific aims to the response to reviewers, and what participants took away.</p><p class="meta">The CNAP team · October 15, 2026 · 4-minute read</p></div></a></li></ul>
+      <p class="rs-none" hidden>No stories of this kind yet. <a href="mailto:cnap@ksu.edu?subject=Story%20idea%20for%20Research%20at%20CNAP&amp;body=Name%3A%0ADepartment%3A%0A%0AThe%20story%20%28a%20project%20milestone%2C%20a%20new%20paper%20or%20grant%2C%20a%20core%20capability%2C%20or%20a%20person%20to%20profile%29%3A%0A%0AWhy%20members%20would%20want%20to%20read%20it%3A%0A%0APhotos%20or%20figures%20I%20can%20share%3A%0A">Suggest one</a>.</p>
+    </section>
+  </div>
+</main>
+<footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. The stories are sample content and the images are illustrations or placeholders. Publishing stories needs a story record and an editor screen, not yet built.</span></div></footer>
+<script src="{% static 'hub/guide.js' %}"></script>
+<script>
+(function(){var car=document.querySelector('.rs-car'),prev=document.querySelector('.rs-prev'),next=document.querySelector('.rs-next'),bs=document.querySelectorAll('.rs-filt button'),cards=car.querySelectorAll('.sc'),none=document.querySelector('.rs-none'),num=document.querySelector('.rs-n');
+function step(){var c=car.querySelector('.sc:not([hidden])');return c?c.getBoundingClientRect().width+20:300;}
+function ends(){prev.disabled=car.scrollLeft<4;next.disabled=car.scrollLeft+car.clientWidth>=car.scrollWidth-4;}
+prev.addEventListener('click',function(){car.scrollBy({left:-step(),behavior:'smooth'});});next.addEventListener('click',function(){car.scrollBy({left:step(),behavior:'smooth'});});
+car.addEventListener('scroll',ends,{passive:true});addEventListener('resize',ends);
+bs.forEach(function(b){b.addEventListener('click',function(){var f=b.dataset.f,n=0;bs.forEach(function(o){o.setAttribute('aria-pressed',o===b)});
+cards.forEach(function(c){var on=f==='all'||c.dataset.k===f;c.hidden=!on;if(on)n++;});num.textContent=n;none.hidden=n>0;car.hidden=n===0;car.scrollLeft=0;ends();});});ends();})();
+</script>
+{% include "_feedback.html" %}
+<script src="{% static 'hub/page.js' %}" defer></script>
+<script src="{% static 'js/dropclose.js' %}" defer></script>
+</body>
+</html>

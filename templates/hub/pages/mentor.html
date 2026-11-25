@@ -1,0 +1,370 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mentor Guide · {{ platform_name }}</title>
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32.png' %}">
+<link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+<link rel="stylesheet" href="{% static 'hub/hub.css' %}">
+<link rel="stylesheet" href="{% static 'hub/guide.css' %}">
+</head>
+<body data-hub-page="mentor" data-guide="mentor">
+{# Built by design/prototypes/member-hub/port_to_app.py from mentor.html. Change the prototype and run it again. #}
+{% if demo_site %}<div class="demo-note" role="note">Test copy with fictional data only.</div>{% endif %}
+<a class="skip" href="#main">Skip to main content</a>
+{% include "hub/_header.html" with active="resources" %}
+<main id="main">
+<div class="wrap hp-sample"><p class="sample-note">Sample content. The people, posts, and dates on this page are examples until it is connected to the Hub.</p></div>
+  <section class="open" aria-labelledby="t">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><a href="{% url 'home' %}#onb-h">Getting started</a><span aria-hidden="true">/</span><span aria-current="page">Mentor guide</span></nav>
+      <div class="open-g">
+        <div>
+          <p class="for">For mentors</p>
+          <h1 id="t">Mentoring at CNAP</h1>
+          <p class="lead">Thank you for mentoring a pilot project leader at the Cognitive and Neurobiological Approaches to Plasticity (CNAP) Center. This guide covers your role, what the Center expects of mentors, and how to get started.</p>
+          <div class="hs"><p class="hs-h"><b>Five steps</b><span>About 20 minutes in all</span></p><ol><li><a href="#s1"><span class="hs-n num" aria-hidden="true">1</span><span class="hs-t">Your role and expectations</span><span class="hs-m">4 min</span></a></li><li><a href="#s2"><span class="hs-n num" aria-hidden="true">2</span><span class="hs-t">Sign your mentoring agreement</span><span class="hs-m">3 min</span></a></li><li><a href="#s3"><span class="hs-n num" aria-hidden="true">3</span><span class="hs-t">Plan your meeting schedule</span><span class="hs-m">4 min</span></a></li><li><a href="#s4"><span class="hs-n num" aria-hidden="true">4</span><span class="hs-t">What mentors report, and when</span><span class="hs-m">6 min</span></a></li><li><a href="#s5"><span class="hs-n num" aria-hidden="true">5</span><span class="hs-t">Learn about your role at the Site Visit</span><span class="hs-m">3 min</span></a></li></ol></div>
+        </div>
+        <div class="who who-link">
+          <div class="who-top"><span class="who-ini" aria-hidden="true">AO</span><div><p class="who-k">Your mentee</p><p class="who-n">Dr. Amara Okafor</p></div></div>
+          <dl class="who-dl"><div><dt>Project</dt><dd>Sleep-dependent memory consolidation in older adults</dd></div><div><dt>Award</dt><dd>Pilot project, Grant Year 10</dd></div><div><dt>Mentoring</dt><dd>January to May 2027</dd></div></dl>
+          <div class="prog"><span class="ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="ring-p" cx="18" cy="18" r="15" pathLength="5" style="stroke-dasharray:0 5"/></svg></span><span><b><span id="read-n" class="num">0 of 5</span> steps read</b><span class="meta">About 20 minutes in all</span></span></div>
+          <div class="rep-now"><p class="rep-k"><span class="rep-dot" aria-hidden="true"></span>Fall reporting is open</p><p class="rep-t">Your mentor reports are due Monday, November 30.</p><p class="rep-w">Your reporting is how the Center shows NIH what your mentoring made possible.</p><a class="btn pri sm" href="{% url 'portal:tasks' %}">Go to your reporting</a></div>
+        <a class="who-more" href="{% url 'portal:hub_mentee_profile' %}" title="Opens Dr. Amara Okafor’s full profile.">View full profile</a></div>
+      </div>
+
+      <div class="year" aria-labelledby="yr-h">
+        <div class="year-h"><div><h2 id="yr-h">Grant Year 10 at a glance</h2><p>June 1, 2026 to May 31, 2027: the Center’s grant year with the National Institutes of Health (NIH).</p><p class="rib-key"><span class="rib-sw" aria-hidden="true"></span>Shaded spans on the line show when reporting is open.</p></div><p class="year-now"><b class="num">24</b><span><strong>Week 24 of 52</strong>Today is Saturday, November 14</span></p></div>
+        <div class="rib">
+          <div class="rib-months" aria-hidden="true"><span>June</span><span>July</span><span>August</span><span>September</span><span>October</span><span>November</span><span>December</span><span>January</span><span>February</span><span>March</span><span>April</span><span>May</span></div>
+          <span class="win" style="left:41.67%;width:5.8%" aria-hidden="true"></span><span class="win" style="left:87.2%;width:5.8%" aria-hidden="true"></span>
+          <div class="today" style="left:45.3%" aria-hidden="true"><span>Today</span></div>
+          <span class="mk" style="left:0%" aria-hidden="true">1</span><span class="mk" style="left:41.67%" aria-hidden="true">2</span><span class="mk you" style="left:58.3%" aria-hidden="true">3</span><span class="mk" style="left:83.3%" aria-hidden="true">4</span><span class="mk you" style="left:87.2%" aria-hidden="true">5</span><span class="mk you" style="left:98.1%" aria-hidden="true">6</span>
+        </div>
+        <ol class="evs"><li class=""><span class="ev-n" aria-hidden="true">1</span><b>Grant year begins</b><span>June 1</span></li><li class=""><span class="ev-n" aria-hidden="true">2</span><b><a href="{% url 'portal:tasks' %}">Fall reporting</a></b><span>Three weeks in November</span></li><li class="you"><span class="ev-n" aria-hidden="true">3</span><b>Semiannual evaluation</b><span>January, on Zoom</span></li><li class=""><span class="ev-n" aria-hidden="true">4</span><b>Progress report to NIH</b><span>Due April 1</span></li><li class="you"><span class="ev-n" aria-hidden="true">5</span><b><a href="{% url 'portal:tasks' %}">Your spring reporting</a></b><span>Mid-April to early May</span></li><li class="you"><span class="ev-n" aria-hidden="true">6</span><b><a class="ev-lk" href="{% url 'portal:hub_sitevisit' %}">Site Visit</a></b><span>May 25 and 26, 2027</span></li></ol>
+      </div>
+    </div>
+  </section>
+
+  <div class="guide">
+    <div class="wrap">
+      <nav class="spine" aria-label="Steps in this guide">
+        <p class="spine-h">In this guide</p><div class="spine-track" aria-hidden="true"><span class="spine-fill"></span></div>
+        <ol>
+          <li><a href="#s1"><span class="n"><b>1</b></span><span>Your role and expectations</span></a></li>
+          <li><a href="#s2"><span class="n"><b>2</b></span><span>Sign your mentoring agreement</span></a></li>
+          <li><a href="#s3"><span class="n"><b>3</b></span><span>Plan your meeting schedule</span></a></li>
+          <li><a href="#s4"><span class="n"><b>4</b></span><span>What mentors report, and when</span></a></li>
+          <li><a href="#s5"><span class="n"><b>5</b></span><span>Learn about your role at the Site Visit</span></a></li>
+        </ol>
+      </nav>
+
+      <div class="steps">
+        <section class="step" id="s1" aria-labelledby="s1-h">
+          <header class="step-h"><p class="step-k"><span class="step-n num" aria-hidden="true">1</span><span>About 4 minutes</span></p><h2 id="s1-h">Your role and expectations</h2></header>
+          <div class="step-b">
+            <p class="big">As a mentor, your role is to help your mentee become independently funded. That is at the heart of the Center’s mission.</p>
+            <p>You’ll advise your mentee at every stage of his or her project: you’ll stay in touch, follow progress toward the aims, talk through challenges, and review grant applications and manuscripts before submission.</p>
+            <h3>What mentors commit to:</h3>
+            <ul class="tiles">
+              <li><b>Meet monthly</b><span>With your mentee, all through the project</span></li>
+              <li><b>Keep a meeting log</b><span>Each date and what you discussed, for your report</span></li>
+              <li><b>Report in the Hub</b><span>A questionnaire and a report each session</span></li>
+              <li><b>Attend the <a href="{% url 'portal:hub_sitevisit' %}">Site Visit</a></b><span>In person or online, May 25 and 26, 2027</span></li>
+              <li><b>Review grant applications</b><span>Before your mentee submits each application or manuscript</span></li>
+              <li><b>Review manuscripts</b><span>Before your mentee submits each application or manuscript</span></li>
+            </ul>
+            <h3>Your mentee’s milestones</h3>
+            <ol class="mile mile-row">
+              <li><span><b>Present</b>At a national or international conference, citing CNAP, during the pilot</span></li>
+              <li><span><b>Publish</b>Submit a manuscript to a high-impact journal within six months of finishing</span></li>
+              <li><span><b>Apply</b>Submit an external grant as lead principal investigator (PI) within a year of finishing</span></li>
+            </ol>
+            <details class="form agree">
+              <summary><span>Read your mentee’s agreement in full<small>Your mentee’s Memorandum of Understanding with the Center</small></span></summary>
+              <div class="form-b doc">
+                <p class="doc-k">Pilot Grant Memorandum of Understanding</p>
+                <p>This Memorandum of Understanding serves to summarize the agreement between the Cognitive and Neurobiological Approaches to Plasticity (CNAP) Center and Dr. Amara Okafor, regarding the participation roles, responsibilities, and terms required by Dr. Heather Bailey (Director) and provided by Dr. Amara Okafor (Pilot Grant Leader).</p>
+                <p>K-State is the recipient of Grant No. 5P20GM113109-10, FAIN: P20GM113109, funded by U.S. Department of Health and Human Services (US DHHS), National Institutes of Health, under CFDA #93.859, Biomedical Research and Research Training, for the project entitled “Cognitive and Neurobiological Approaches to Plasticity (CNAP) Center Phase 2.”</p>
+                <p><b>Performance Period:</b> This agreement shall begin on June 1, 2026, and end on May 31, 2027. If the pilot grantee receives extramural funding for research that overlaps with the pilot grant prior to the end of the performance period, then this contract will be terminated, and any remaining pilot grant funds will revert to the CNAP Center.</p>
+                <p><b>Purpose:</b> Dr. Amara Okafor, Pilot Grant Leader, is hereby awarded a pilot grant under the PRIME AGREEMENT for her project entitled “Sleep-dependent memory consolidation in older adults.” Upon signature of this Internal Memorandum of Understanding, Dr. Amara Okafor agrees to provide the services and deliverables as outlined in the Pilot Grantee Roles, Responsibilities, and Terms, attached hereto as Appendix A.</p>
+                <p><b>Payment:</b> For participation as the Pilot Grant Leader, the CNAP Center shall provide the PPL’S remaining balance of the original 12-month award of $50,000 in direct costs in funding to Dr. Amara Okafor for the services described herein. Continuation of this project through the awarded end date is contingent upon continued funding of the Center in the subsequent grant year.</p>
+                <p class="doc-sig"><span>Dr. Heather Bailey, Director of CNAP Center</span><span>Dr. Amara Okafor, Pilot Grant Leader</span></p>
+                <p class="doc-k">Appendix A · Pilot Grant Leader Roles, Responsibilities, and Terms</p>
+                <p>Dr. Amara Okafor – Pilot Grant Leader, Kansas State University</p>
+                <p>The Pilot Grant Leader shall provide the Services and Deliverables associated with conducting the CNAP Pilot Grant.</p>
+                <h4 class="fq-h">Pilot Grant Leader responsibilities to Program Director:</h4>
+                <ul class="dots">
+                  <li>Provide quantitative data (presentations, publications, grant submissions, awards and honors, scientific highlights, etc.) for submission to NIH RPPR</li>
+                  <li>Prepare research progress summary for RPPR and semi-annual evaluation meetings</li>
+                  <li>Complete various questionnaires designed to assess CNAP functioning on a semi-annual basis for the evaluation meetings and RPPR</li>
+                  <li>Attend and participate in business and evaluation meetings</li>
+                  <li>Attend and participate in CNAP events including weekly brown bag and colloquia</li>
+                  <li>Meet monthly with project mentors -- a written formative evaluation will be prepared by mentors to summarize these meetings</li>
+                  <li>Cite grant number as follows in all publications that used COBRE project funds or research cores: “This project was supported by a grant from the National Institute of General Medical Science GM113109 of the National Institutes of Health”</li>
+                  <li>Send proposal summary statements, reviews, and scores to the Administrative Core’s project manager following each proposal submission</li>
+                </ul>
+                <h4 class="fq-h">Mentee Rights within the Program:</h4>
+                <ul class="dots">
+                  <li>Full access to all COBRE-supported research cores and COBRE-supported programs</li>
+                  <li>Use of the mentoring system to facilitate career development</li>
+                </ul>
+                <h4 class="fq-h">Milestones that will be evaluated:</h4>
+                <ul class="dots">
+                  <li>Deliver at least one presentation at a national and/or international conferences that cites CNAP support during the pilot grant support period</li>
+                  <li>Submit of at least one manuscript to a high impact journal that cites CNAP support within 6 months of pilot grant completion</li>
+                  <li>Submit an extramural grant as lead PI based on CNAP supported research within one year for pilot grant completion</li>
+                </ul>
+                <h4 class="fq-h">General issues of relevance to the COBRE:</h4>
+                <ul class="dots">
+                  <li>The Center Director reserves the right to remove pilot grant funding and/or pilot grant mentors if recommended by the EAC and approved by the NIH</li>
+                  <li>COBRE funds are to be used to support pilot grantees to develop independent, extramurally supported grant funding of direct relevance to the project that was approved for funding by the NIH</li>
+                </ul>
+                <p class="meta">Word for word from the CNAP pilot grant agreement, with this prototype’s fictional names, dates, and award amount. In the finished Hub, your mentee’s own signed agreement appears here.</p>
+              </div>
+            </details>
+            <p class="note"><b>Your time is paid separately.</b> The Center pays mentors from central COBRE (Center of Biomedical Research Excellence) funds, never from your mentee’s budget. <a href="{% url 'portal:hub_mentee' %}">See your mentee’s guide</a>.</p>
+            <p class="note"><b>Foreign co-authors need NIH’s approval first.</b> When you review your mentee’s manuscripts and proposals, please flag any collaborator or co-author at a foreign institution to the CNAP team. Under IDeA awards like CNAP’s, NIH must approve foreign components in advance. <a href="{% url 'portal:funding_resources' %}#s-foreign">Grant resources explains more</a>.</p>
+            <ul class="todo ns-todo">
+              <li><span><b>Optional: join the CNAP listserv</b> for the Monday NeuroSync email and Center announcements. To join, <a href="mailto:cnap@ksu.edu?subject=Please%20add%20me%20to%20the%20CNAP%20listserv&amp;body=Name%3A%0AK-State%20email%3A%0ADepartment%3A%0A" title="Opens an email to cnap@ksu.edu asking to join the CNAP listserv.">email a request to cnap@ksu.edu</a>.</span></li>
+            </ul>
+          </div>
+          <div class="step-f"><button type="button" class="read" aria-pressed="false"><span>Mark as read</span></button><a class="next" href="#s2">Next topic: Sign your mentoring agreement</a></div>
+        </section>
+
+        <section class="step" id="s2" aria-labelledby="s2-h">
+          <header class="step-h"><p class="step-k"><span class="step-n num" aria-hidden="true">2</span><span>About 3 minutes</span></p><h2 id="s2-h">Sign your mentoring agreement</h2></header>
+          <div class="step-b">
+            <p>Your mentoring is set out in a consultant agreement between you and the Center. The agreement’s Scope of Services names you and your mentee, covers the months of mentoring, and lists the services and deliverables described in step 1.</p>
+            <ul class="todo">
+              <li><span><b>Watch for the agreement.</b> The Assistant Director for Grants and Contracts sends the agreement and handles the signing.</span></li>
+              <li><span><b>Please read the Scope of Services.</b> The agreement matches the expectations in this guide, so nothing in the agreement should surprise you.</span></li>
+              <li><span><b>Sign and return the agreement.</b> Your agreement can’t be signed in advance, so the agreement will likely reach you after your mentee’s award has started. Your pay is backdated to your mentee’s start date.</span></li>
+              <li><span><b>Set up payment.</b> The Grant Specialist and Accountant arranges payment for your role as a mentor.</span></li>
+            </ul>
+          </div>
+          <div class="step-f"><button type="button" class="read" aria-pressed="false"><span>Mark as read</span></button><a class="next" href="#s3">Next topic: Plan your meeting schedule</a></div>
+        </section>
+
+        <section class="step" id="s3" aria-labelledby="s3-h">
+          <header class="step-h"><p class="step-k"><span class="step-n num" aria-hidden="true">3</span><span>About 4 minutes</span></p><h2 id="s3-h">Plan your meeting schedule</h2></header>
+          <div class="step-b">
+            <p>Monthly meetings are the backbone of the mentoring. The reports let you follow the pilot as the work unfolds and catch problems early. Set a standing time with your mentee now, so the months don’t slip by.</p>
+            <div class="facts">
+              <div><b class="num">Monthly</b><span>Meetings with your mentee</span></div>
+              <div><b>January</b><span>Semiannual evaluation meeting, on Zoom</span></div>
+              <div><b class="num">5</b><span>Meetings to log by the spring report, from January to May</span></div>
+              <div><b>May 25 and 26</b><span>The 2027 Site Visit, where the Advisory Committee reviews progress</span></div>
+            </div>
+            <h3>Keep a meeting log</h3>
+            <p>After each meeting, jot down the date and a sentence or two on what you covered. Your semiannual reporting asks for exactly this: a list of the dates you met and a brief summary of each meeting.</p>
+            <p class="dl"><a class="dl-a" href="{% static 'hub/files/cnap-mentor-meeting-log.xlsx' %}" download data-dl="{% static 'hub/files/cnap-mentor-meeting-log.xlsx' %}"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 2v8M4.5 6.5 8 10l3.5-3.5M3 13h10"/></svg>Download a meeting log</a><span>Optional. An Excel sheet with a column for each meeting’s date and summary, ready to copy into your report.</span></p>
+            <h3>The semiannual evaluation meeting</h3>
+            <p>Each January, the Director leads a meeting on Zoom to review each pilot’s progress. The Assistant Director for Grants and Contracts schedules your mentee’s meeting with you.</p>
+          </div>
+          <div class="step-f"><button type="button" class="read" aria-pressed="false"><span>Mark as read</span></button><a class="next" href="#s4">Next topic: What mentors report, and when</a></div>
+        </section>
+
+        <section class="step" id="s4" aria-labelledby="s4-h">
+          <header class="step-h"><p class="step-k"><span class="step-n num" aria-hidden="true">4</span><span>About 6 minutes</span></p><h2 id="s4-h">What mentors report, and when</h2></header>
+          <div class="step-b">
+            <p>Your reporting goes into the Center’s annual Research Performance Progress Report (RPPR) to the National Institutes of Health (NIH), which keeps the Center funded. Center leadership also uses the questionnaire to improve how the Center works for researchers, students, and core users.</p>
+            <ol class="rflow" aria-label="The spring reporting session">
+              <li><span class="rf-k">Mid-April</span><b>Reporting opens</b><span>The Member Hub emails you, and reminds you until you’re done.</span></li>
+              <li><span class="rf-k">About three weeks</span><b>You report</b><span>Finishing early helps the team a great deal.</span></li>
+              <li><span class="rf-k">Early May</span><b>Reporting closes</b><span>The Director, Associate Director, Advisory Committee, and some K-State administrators read the report.</span></li>
+              <li><span class="rf-k">May 25 and 26</span><b>Site Visit</b><span>Your reporting informs the Advisory Committee’s review.</span></li>
+            </ol>
+            <p class="meta">If your mentoring also spans a fall session, you’ll get the same two assignments in November, as a status update.</p>
+            <p><a class="go" href="{% url 'portal:tasks' %}">Go to your reporting in My reporting</a></p>
+            <h3>Your two assignments</h3>
+            <p>Here is every survey question, word for word, as each question appears in the Hub. Mentors of pilot projects get the pilot report, and mentors of primary projects get the primary report.</p>
+            <details class="form">
+  <summary><span>Mentor Questionnaire<small>About 10 minutes · your role as a mentor, considering all of your mentees together</small></span></summary>
+  <div class="form-b">
+    <p>This questionnaire asks about your role as a CNAP mentor, considering all of your mentees together.</p>
+    <p>It evaluates the mentoring program as a whole, not individual people.</p>
+    <h4 class="fq-h">Mentoring</h4>
+    <p class="fq-scale">Answered on this scale: 1 - Strongly Disagree · 2 - Disagree · 3 - Neither Agree nor Disagree · 4 - Agree · 5 - Strongly Agree · Not Applicable</p>
+    <ol class="fq">
+      <li>I respond to communications with my mentee(s) in a timely manner.</li>
+      <li>I make myself accessible to my mentee(s).</li>
+      <li>I help my mentee(s) achieve goals.</li>
+      <li>I support the career development of my mentee(s).</li>
+      <li>I enhance the performance of my mentee(s) within the grant program.</li>
+      <li>I make time to regularly meet with my mentee(s).</li>
+      <li>I provide my mentee(s) with high quality feedback.</li>
+      <li>I add value to my mentees’ work.</li>
+      <li>I demonstrate professional integrity with my mentee(s).</li>
+      <li>I am someone that my mentee(s) can trust.</li>
+      <li>I am committed to the success of my mentee(s).</li>
+      <li>I have a sufficient level of expertise for my mentee(s).</li>
+      <li>I focus on the work of mentee(s) during meetings.</li>
+      <li>I provide my mentee(s) with feedback in a timely manner.</li>
+      <li>I am willing to invest time in the relationship with my mentee(s).</li>
+      <li>I discuss with my mentee(s) challenges they are facing.</li>
+      <li>I provide my mentee(s) with useful critiques of their work.</li>
+      <li>I attempt to be as objective as possible when evaluating the work of my mentee(s).</li>
+      <li>I am willing to have candid discussions with my mentee(s).</li>
+    </ol>
+    <h4 class="fq-h">Open-ended questions</h4>
+    <ul class="fq-open">
+      <li><b>Strengths and Weaknesses</b> <em>Written answer, optional</em></li>
+      <li><b>Improvements</b> <em>Written answer, optional</em></li>
+      <li><b>Additional Comments</b> <em>Written answer, optional</em></li>
+    </ul>
+    <p class="fq-link"><a href="{% url 'portal:tasks' %}">Open it in My reporting</a><span class="meta"> In the Hub, this opens the form itself as a read-only preview, from your reporting.</span></p>
+  </div>
+</details>
+            <details class="form">
+  <summary><span>Pilot Grant Mentor Report<small>About 30 minutes · your meetings and your mentee’s progress, if you mentor a pilot project</small></span></summary>
+  <div class="form-b">
+    <p>This report records your meetings with your Pilot Grantee/Mentee and your view of their progress toward the pilot program milestones.</p>
+    <p>The report is used to support the mentee and in the Center’s Research Performance Progress Report (RPPR) to NIH.</p>
+    <p class="meta">Filled in for you: Mentor name, Mentor Institution, Pilot Grantee/Mentee, Pilot Grantee’s Project Title, Reporting period.</p>
+    <h4 class="fq-h">Meetings</h4>
+    <p class="meta">Add one entry for each meeting during the reporting period.</p>
+    <ul class="fq-open">
+      <li><b>Meeting date</b> <em>Date</em></li>
+      <li><b>Summary</b> <em>Written answer</em></li>
+    </ul>
+    <h4 class="fq-h">Evaluation of Pilot Grant Progress</h4>
+    <ul class="fq-open">
+      <li><b>Evaluation of Pilot Grant Progress</b> <em>Written answer</em><span>The program milestones are a national or international presentation citing CNAP, a manuscript submitted within six months of project completion, and an extramural grant submitted as lead Principal Investigator (PI) within one year of pilot completion.</span></li>
+    </ul>
+    <h4 class="fq-h">Challenges Encountered</h4>
+    <ul class="fq-open">
+      <li><b>Challenges Encountered</b> <em>Written answer</em></li>
+    </ul>
+    <h4 class="fq-h">Progress Towards Funding</h4>
+    <ul class="fq-open">
+      <li><b>Progress Towards Funding</b> <em>Written answer</em></li>
+    </ul>
+    <p class="fq-link"><a href="{% url 'portal:tasks' %}">Open it in My reporting</a><span class="meta"> In the Hub, this opens the form itself as a read-only preview, from your reporting.</span></p>
+  </div>
+</details>
+            <details class="form">
+  <summary><span>Primary Research Grant Mentor Report<small>About 30 minutes · your meetings and your mentee’s progress, if you mentor a primary project</small></span></summary>
+  <div class="form-b">
+    <p>This report records your meetings with your Research Project Leader and your view of their progress toward the project milestones.</p>
+    <p>The report is used to support the mentee and in the Center’s Research Performance Progress Report (RPPR) to NIH.</p>
+    <p class="meta">Filled in for you: Mentor name, Mentor Institution, Project Leader/Mentee, Project Leader’s Project Title, Reporting period.</p>
+    <h4 class="fq-h">Meetings</h4>
+    <p class="meta">Add one entry for each meeting during the reporting period.</p>
+    <ul class="fq-open">
+      <li><b>Meeting date</b> <em>Date</em></li>
+      <li><b>Summary</b> <em>Written answer</em></li>
+    </ul>
+    <h4 class="fq-h">Evaluation of Project Progress</h4>
+    <ul class="fq-open">
+      <li><b>Evaluation of Project Progress</b> <em>Written answer</em><span>The milestones are a functional laboratory, recruiting students and staff, progress on specific aims, national or international presentations, peer-reviewed publications, preliminary Research Project Grant (RPG) data, RPG submission, a national reputation, and RPG funding.</span></li>
+    </ul>
+    <h4 class="fq-h">Challenges Encountered</h4>
+    <ul class="fq-open">
+      <li><b>Challenges Encountered</b> <em>Written answer</em></li>
+    </ul>
+    <h4 class="fq-h">Progress Towards Graduation</h4>
+    <ul class="fq-open">
+      <li><b>Progress Towards Graduation</b> <em>Written answer</em></li>
+    </ul>
+    <p class="fq-link"><a href="{% url 'portal:tasks' %}">Open it in My reporting</a><span class="meta"> In the Hub, this opens the form itself as a read-only preview, from your reporting.</span></p>
+  </div>
+</details>
+            <h3>What your mentee is asked about you</h3>
+            <p>We’ve included your mentee’s survey so you can become familiar with the questions your mentee is asked about the mentoring experience. These are the questions your mentoring is evaluated against.</p>
+            <details class="form">
+  <summary><span>Mentee Survey<small>The questions your mentee answers about the mentoring received</small></span></summary>
+  <div class="form-b">
+    <p>This survey asks about your mentoring relationship on your CNAP project: how available, helpful, and supportive your mentor or mentors have been.</p>
+    <p>The survey is used to strengthen the Center’s mentoring program.</p>
+    <h4 class="fq-h">My mentor or mentors</h4>
+    <p class="fq-scale">Answered on this scale: 1 - Strongly Disagree · 2 - Disagree · 3 - Neither Agree nor Disagree · 4 - Agree · 5 - Strongly Agree · Not Applicable</p>
+    <ol class="fq">
+      <li>Respond(s) to communications in a timely manner.</li>
+      <li>Is(are) accessible.</li>
+      <li>Help(s) me achieve goals.</li>
+      <li>Support(s) my career development.</li>
+      <li>Enhance(s) my performance within the grant program.</li>
+      <li>Make(s) time to regularly meet with me.</li>
+      <li>Provide(s) me with high quality feedback.</li>
+      <li>Add(s) value to my work.</li>
+      <li>Demonstrate(s) professional integrity.</li>
+      <li>Is(are) someone that I can trust.</li>
+      <li>Is(are) committed to my success.</li>
+      <li>Has(have) a sufficient level of expertise in my area of need.</li>
+      <li>Focus(es) on my work during meetings.</li>
+      <li>Provide(s) me with feedback in a timely manner.</li>
+      <li>Is(are) willing to invest time in our relationship.</li>
+      <li>Discuss(es) challenges I am facing with me.</li>
+      <li>Provide(s) useful critiques of my work.</li>
+      <li>Attempt(s) to be as objective as possible when evaluating my work.</li>
+      <li>Is(are) willing to have candid conversations with me.</li>
+    </ol>
+    <h4 class="fq-h">Open-ended questions</h4>
+    <ul class="fq-open">
+      <li><b>How would you characterize the strengths and weaknesses of your mentoring relationship(s)?</b> <em>Written answer, optional</em></li>
+      <li><b>How might your mentoring relationship(s) be improved?</b> <em>Written answer, optional</em></li>
+      <li><b>What else would you like to say about mentoring, mentoring relationships, and the mentoring component of CNAP?</b> <em>Written answer, optional</em></li>
+    </ul>
+  </div>
+</details>
+          </div>
+          <div class="step-f"><button type="button" class="read" aria-pressed="false"><span>Mark as read</span></button><a class="next" href="#s5">Next topic: Learn about your role at the Site Visit</a></div>
+        </section>
+
+        <section class="step" id="s5" aria-labelledby="s5-h">
+          <header class="step-h"><p class="step-k"><span class="step-n num" aria-hidden="true">5</span><span>About 3 minutes</span></p><h2 id="s5-h">Learn about your role at the Site Visit</h2></header>
+          <div class="step-b">
+            <p>The Site Visit is the Center’s main event of the year: two days in Manhattan, Kansas, in May or June. The Site Visit brings together core tours, project leader presentations, a keynote address and banquet, and a poster session. The Advisory Committee also meets privately to review the progress of each project leader.</p>
+            <h3><a class="sh-link" href="{% url 'portal:hub_sitevisit' %}">The 2027 Site Visit: May 25 and 26</a></h3>
+            <p><a class="go" href="{% url 'portal:hub_sitevisit' %}">See the full program, the map, and travel details</a></p>
+            <ol class="agenda">
+              <li><span class="ag-d">Tuesday, May 25<small>Daytime</small></span><span>Core tours, then primary project and pilot project presentations and updates.</span></li>
+              <li><span class="ag-d">Tuesday, May 25<small>Evening</small></span><span>Keynote address and banquet.</span></li>
+              <li><span class="ag-d">Wednesday, May 26<small>Morning, ending by noon</small></span><span>Poster session, open to everyone.</span></li>
+            </ol>
+            <p>You’re asked to attend, in person or online. You’re not required to present. However, every presentation is followed by questions and answers. We also schedule interwoven group discussions. Your input, coaching, and feedback during these periods is extremely valuable. Your presence during Site Visit brings depth and perspective.</p>
+            <h3>If you come in person</h3>
+            <ul class="todo">
+              <li><span><b>Lodging is booked for you.</b> The Center books and pays for Site Visit lodging about two months before the Site Visit.</span></li>
+              <li><span><b>Please book your own flight.</b> Flights are reimbursed after the Site Visit.</span></li>
+              <li><span><b>Incidental travel costs are covered.</b> CNAP covers all incidental travel costs, such as meals and rides to and from the airport.</span></li>
+              <li><span><b>Please email in your receipts.</b> Please sign the front of each receipt and email the receipts to <a href="mailto:roxana@ksu.edu">roxana@ksu.edu</a> after the Site Visit.</span></li>
+            </ul>
+            <div class="note save"><p><b>Save the dates: May 25 and 26, 2027.</b> The events appear on the homepage calendar too.</p><p class="save-a"><a class="go" href="https://outlook.office.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&amp;rru=addevent&amp;subject=CNAP%20Site%20Visit&amp;startdt=2027-05-25&amp;enddt=2027-05-27&amp;allday=true&amp;location=Kansas%20State%20University%2C%20Manhattan%2C%20Kansas&amp;body=Cognitive%20and%20Neurobiological%20Approaches%20to%20Plasticity%20%28CNAP%29%20Center%20Site%20Visit.%20Day%201%3A%20core%20tours%2C%20project%20presentations%2C%20keynote%20address%20and%20banquet.%20Day%202%3A%20poster%20session%2C%20ending%20by%20noon." target="_blank" rel="noopener"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>Add to Outlook</a><a class="save-g" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=CNAP%20Site%20Visit&amp;dates=20270525/20270527&amp;location=Kansas%20State%20University%2C%20Manhattan%2C%20Kansas&amp;details=Cognitive%20and%20Neurobiological%20Approaches%20to%20Plasticity%20%28CNAP%29%20Center%20Site%20Visit.%20Day%201%3A%20core%20tours%2C%20project%20presentations%2C%20keynote%20address%20and%20banquet.%20Day%202%3A%20poster%20session%2C%20ending%20by%20noon." target="_blank" rel="noopener">Google Calendar</a></p></div>
+          </div>
+          <div class="step-f"><button type="button" class="read" aria-pressed="false"><span>Mark as read</span></button><a class="next" href="{% url 'home' %}#onb-h">Back to Getting started</a></div>
+        </section>
+      </div>
+
+      <aside class="rail" aria-label="Quick reference">
+        <div class="card ask">
+          <h2>Who<br>to ask</h2>
+          <div class="pp-row">
+            <div class="pp-it"><button type="button" class="pp-b" aria-expanded="false" aria-controls="pp-hb" title="Heather Bailey, Director"><span class="pp-i">HB</span><span class="sr">Heather Bailey, Director</span></button>
+            <div class="pp-p" id="pp-hb" hidden><p class="pp-r">Director</p><p class="pp-n">Heather Bailey</p><a class="pp-e" href="mailto:hbailey@ksu.edu">hbailey@ksu.edu</a><p class="pp-d">Approves any change to a pilot’s budget or aims. Leads the semiannual evaluation meetings and the Site Visit.</p></div></div>
+            <div class="pp-it"><button type="button" class="pp-b" aria-expanded="false" aria-controls="pp-mw" title="Morgan Wills, Assistant Director for Grants and Contracts"><span class="pp-i">MW</span><span class="sr">Morgan Wills, Assistant Director for Grants and Contracts</span></button>
+            <div class="pp-p" id="pp-mw" hidden><p class="pp-r">Assistant Director for Grants and Contracts</p><p class="pp-n">Morgan Wills</p><a class="pp-e" href="mailto:mkwills@ksu.edu">mkwills@ksu.edu</a><p class="pp-d">Your agreement, scheduling the January meeting, and your reporting in the Hub.</p></div></div>
+            <div class="pp-it"><button type="button" class="pp-b" aria-expanded="false" aria-controls="pp-ro" title="Roxana Ortiz, Grant Specialist and Accountant"><span class="pp-i">RO</span><span class="sr">Roxana Ortiz, Grant Specialist and Accountant</span></button>
+            <div class="pp-p" id="pp-ro" hidden><p class="pp-r">Grant Specialist and Accountant</p><p class="pp-n">Roxana Ortiz</p><a class="pp-e" href="mailto:roxana@ksu.edu">roxana@ksu.edu</a><p class="pp-d">Your mentor payment, and Site Visit travel and reimbursement.</p></div></div>
+          
+            <div class="pp-it"><button type="button" class="pp-b" aria-expanded="false" aria-controls="pp-team" title="The whole team"><span class="pp-i"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="2" y="3.5" width="12" height="9" rx="1.5"/><path d="M2.5 4.5 8 9l5.5-4.5"/></svg></span><span class="sr">The whole team</span></button>
+            <div class="pp-p" id="pp-team" hidden><p class="pp-r">The whole team</p><p class="pp-n">CNAP Administrative Core</p><a class="pp-e" href="mailto:cnap@ksu.edu">cnap@ksu.edu</a><p class="pp-d">Anything else, or if you aren’t sure who to ask.</p></div></div>
+          </div>
+        
+        </div>
+        
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. The mentee, project, and Grant Year 10 dates are fictional. In the finished Hub, your agreement, meeting log, and your mentee’s proposal appear on this page.</span></div></footer>
+<script src="{% static 'hub/meeting-log.js' %}"></script>
+<script src="{% static 'hub/guide.js' %}"></script>
+{% include "_feedback.html" %}
+<script src="{% static 'hub/page.js' %}" defer></script>
+<script src="{% static 'js/dropclose.js' %}" defer></script>
+</body>
+</html>
