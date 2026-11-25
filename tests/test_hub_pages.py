@@ -46,6 +46,7 @@ def test_every_page_opens_in_the_hub_design(client, member):
         assert member.person.full_name in html, key  # the account menu
         assert 'class="fbk-open"' in html, key  # Page feedback
         assert 'class="sample-note"' in html, key
+        assert "hub/system.css" in html, key  # the shared design layer (MW 2026-11-25)
         assert "hubchrome.js" not in html and "{%" not in html and "{{" not in html, key
         assert not re.search(r'(?:href|src)="[a-z0-9-]+\.html', html), key
         assert not re.search(r'(?:href|src)="img/', html), key
@@ -99,3 +100,11 @@ def test_site_visit_rsvp_goes_to_the_real_form(client, member):
     assert f'href="{reverse("portal:sitevisit_rsvp")}"' in html
     assert '<div class="sv-rs" hidden' in html  # the prototype's form never shows
     assert "This form does not send anything yet" not in html
+
+
+@override_settings(**ON)
+def test_home_and_funding_load_the_design_layer(client, member):
+    """MW 2026-11-25: one design layer, loaded last, decides the shared pieces on every Hub page."""
+    for url in ("/", reverse("portal:funding"), reverse("portal:funding_resources")):
+        html = client.get(url).content.decode()
+        assert html.index("hub/system.css") > html.index("hub/hub.css"), url

@@ -8,6 +8,7 @@
 <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/guide.css' %}">
+<link rel="stylesheet" href="{% static 'hub/system.css' %}">
 </head>
 <body data-hub-page="member-ev" data-guide="community" class="core-page cm-page">
 {# Built by design/prototypes/member-hub/port_to_app.py from member-ev.html. Change the prototype and run it again. #}
@@ -15,7 +16,7 @@
 <a class="skip" href="#main">Skip to main content</a>
 {% include "hub/_header.html" with active="community" %}
 <main id="main" class="mb-page">
-<div class="wrap hp-sample"><p class="sample-note">Sample content. The people, posts, and dates on this page are examples until it is connected to the Hub.</p></div>
+<div class="wrap hp-sample"><p class="sample-note"><b>Sample content.</b> The people, posts, and dates on this page are examples until it is connected to the Hub.</p></div>
   <section class="mb-hero" aria-labelledby="t">
     <div class="wrap">
       <nav class="crumb" aria-label="Breadcrumb"><a href="{% url 'home' %}">Home</a><span aria-hidden="true">/</span><a href="{% url 'portal:hub_community' %}">Community</a><span aria-hidden="true">/</span><a href="{% url 'portal:hub_community' %}#cm-dir">Member directory</a><span aria-hidden="true">/</span><span aria-current="page">Dr. Elena Voss</span></nav>

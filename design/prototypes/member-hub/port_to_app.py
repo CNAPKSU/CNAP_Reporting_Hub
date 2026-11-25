@@ -58,7 +58,7 @@ APP_ROUTES = {
 FILES = {"cnap-mentor-meeting-log.xlsx", "neurosync-flyer.pdf"}
 
 SAMPLE_NOTE = (
-    '<div class="wrap hp-sample"><p class="sample-note">Sample content. '
+    '<div class="wrap hp-sample"><p class="sample-note"><b>Sample content.</b> '
     "The people, posts, and dates on this page are examples until it is connected to the Hub.</p></div>"
 )
 
@@ -165,6 +165,7 @@ def convert(name, key, active):
 <link rel="apple-touch-icon" href="{{% static 'img/apple-touch-icon.png' %}}">
 <link rel="stylesheet" href="{{% static 'hub/hub.css' %}}">
 <link rel="stylesheet" href="{{% static 'hub/guide.css' %}}">{extra_css}
+<link rel="stylesheet" href="{{% static 'hub/system.css' %}}">
 </head>
 {body_tag}
 {{# Built by design/prototypes/member-hub/port_to_app.py from {name}. Change the prototype and run it again. #}}
