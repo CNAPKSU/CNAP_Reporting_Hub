@@ -1604,3 +1604,23 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
   .wk .ce{font-size:11.5px;line-height:15px;padding:5px 5px 6px 6px;overflow-wrap:break-word;hyphens:manual}
   .wk-none{display:none}
 }
+/* Page feedback: one even rhythm (MW 2026-11-24). 24px between groups, 8px from a label to its control. */
+dialog.fbk{padding:28px!important}
+dialog.fbk form{display:flex;flex-direction:column;gap:24px}
+dialog.fbk p{margin:0;text-wrap:pretty}
+dialog.fbk .fbk-head{display:flex;flex-direction:column;gap:8px}
+dialog.fbk .fbk-head h2{margin:0}
+dialog.fbk .fbk-head p{font-size:14px;line-height:21px;color:var(--muted,#6b6772)}
+dialog.fbk fieldset{margin:0!important;padding:0;border:0;min-width:0}
+dialog.fbk legend,dialog.fbk .fbk-note label{display:block;padding:0;margin:0 0 8px;font-size:14px;line-height:20px;font-weight:600;color:var(--ink,#1d1b21)}
+dialog.fbk .fbk-topics{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;align-items:start}
+dialog.fbk .fbk-topics label{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:20px;margin:0}
+dialog.fbk .fbk-topics input{flex:none;width:16px;height:16px;margin:2px 0 0}
+dialog.fbk .fbk-rate{display:flex;gap:8px}
+dialog.fbk .fbk-note textarea{display:block;margin:0!important;box-sizing:border-box}
+dialog.fbk .fbk-foot{display:flex;flex-direction:column;gap:10px}
+dialog.fbk .fbk-msg{margin:0!important;min-height:0}
+dialog.fbk .fbk-msg:empty{display:none}
+dialog.fbk .fbk-foot .fieldrow,dialog.fbk .fbk-foot .fbk-row{margin:0!important}
+dialog.fbk .fbk-proto{margin:0!important}
+@media (max-width:520px){dialog.fbk{padding:22px!important}dialog.fbk .fbk-topics{grid-template-columns:1fr}}

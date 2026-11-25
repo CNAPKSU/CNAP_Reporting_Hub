@@ -35,7 +35,8 @@
     + '.fbk-row button{min-height:42px;padding:0 18px;border-radius:8px;font:500 15px/1 var(--sans,system-ui,sans-serif);cursor:pointer;border:1px solid var(--line-2,#d5d3d9);background:var(--surface,#fff);color:var(--ink,#1d1b21)}'
     + '.fbk-row .fbk-send{background:var(--purple,#512888);border-color:var(--purple,#512888);color:#fff}'
     + '.fbk-proto{margin-top:10px!important;font-size:12.5px;color:var(--muted,#6b6772)}'
-    + '@media (max-width:560px){.fbk-topics{grid-template-columns:1fr}}';
+    + '@media (max-width:560px){.fbk-topics{grid-template-columns:1fr}}'
+    + 'dialog.fbk{padding:28px!important}dialog.fbk form{display:flex;flex-direction:column;gap:24px}dialog.fbk p{margin:0;text-wrap:pretty}dialog.fbk .fbk-head{display:flex;flex-direction:column;gap:8px}dialog.fbk .fbk-head h2{margin:0}dialog.fbk .fbk-head p{font-size:14px;line-height:21px;color:var(--muted,#6b6772)}dialog.fbk fieldset{margin:0!important;padding:0;border:0;min-width:0}dialog.fbk legend,dialog.fbk .fbk-note label{display:block;padding:0;margin:0 0 8px;font-size:14px;line-height:20px;font-weight:600;color:var(--ink,#1d1b21)}dialog.fbk .fbk-topics{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;align-items:start}dialog.fbk .fbk-topics label{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:20px;margin:0}dialog.fbk .fbk-topics input{flex:none;width:16px;height:16px;margin:2px 0 0}dialog.fbk .fbk-rate{display:flex;gap:8px}dialog.fbk .fbk-note textarea{display:block;margin:0!important;box-sizing:border-box}dialog.fbk .fbk-foot{display:flex;flex-direction:column;gap:10px}dialog.fbk .fbk-msg{margin:0!important;min-height:0}dialog.fbk .fbk-msg:empty{display:none}dialog.fbk .fbk-foot .fieldrow,dialog.fbk .fbk-foot .fbk-row{margin:0!important}dialog.fbk .fbk-proto{margin:0!important}@media (max-width:520px){dialog.fbk{padding:22px!important}dialog.fbk .fbk-topics{grid-template-columns:1fr}}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
 
   /* 1. Start a thread, in the ribbon */
@@ -60,13 +61,13 @@
   var topics = [['design', 'Design and look'], ['clarity', 'Clarity of wording or directions'], ['logic', 'Logic or flow'], ['speed', 'Speed and efficiency'], ['fun', 'Fun and motivating touches'], ['broken', 'Something is broken'], ['other', 'Something else']];
   var d = document.createElement('dialog');
   d.className = 'fbk'; d.setAttribute('aria-labelledby', 'fbk-h');
-  d.innerHTML = '<form method="dialog" class="fbk-form"><h2 id="fbk-h">How could this page be better?</h2>'
-    + '<p class="fbk-sub">Your note goes to the CNAP evaluation team, along with the page you are on.</p><p class="fbk-sub">Big ideas and small fixes are equally welcome.</p>'
+  d.innerHTML = '<form method="dialog" class="fbk-form"><div class="fbk-head"><h2 id="fbk-h">How could this page be better?</h2>'
+    + '<p class="fbk-sub">Your note goes to the CNAP evaluation team, with a link to this page.</p><p class="fbk-sub">Big ideas and small fixes are equally welcome.</p></div>'
     + '<fieldset class="fbk-topics"><legend>What is the note about?</legend>' + topics.map(function (t) { return '<label><input type="radio" name="topic" value="' + t[0] + '"> ' + t[1] + '</label>'; }).join('') + '</fieldset>'
     + '<fieldset class="fbk-rate"><legend>How is this page overall? (optional)</legend>' + [1, 2, 3, 4, 5].map(function (n) { return '<label title="' + (n === 1 ? 'Poor' : n === 5 ? 'Excellent' : n + ' of 5') + '"><input type="radio" name="rating" value="' + n + '"><span>' + n + '</span></label>'; }).join('') + '</fieldset>'
-    + '<label class="fbk-l" for="fbk-c">Your note</label><textarea id="fbk-c" name="comment" rows="4" placeholder="For example: the dates on this page are hard to find."></textarea>'
-    + '<p class="fbk-msg" role="status"></p>'
-    + '<div class="fbk-row"><button type="button" class="fbk-send">Send my note</button><button type="button" class="fbk-close">Cancel</button></div>'
+    + '<div class="fbk-note"><label class="fbk-l" for="fbk-c">Your note</label><textarea id="fbk-c" name="comment" rows="4" placeholder="For example: the dates on this page are hard to find."></textarea></div>'
+    + '<div class="fbk-foot"><p class="fbk-msg" role="status"></p>'
+    + '<div class="fbk-row"><button type="button" class="fbk-send">Send my note</button><button type="button" class="fbk-close">Cancel</button></div></div>'
     + '<p class="fbk-proto">Prototype. In the Hub, this note is saved for the evaluation team. Here, nothing is sent.</p></form>';
   document.body.appendChild(b); document.body.appendChild(d);
   var msg = d.querySelector('.fbk-msg');
