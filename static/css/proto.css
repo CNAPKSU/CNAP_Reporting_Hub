@@ -2269,7 +2269,8 @@ dialog.fbk .fbk-head h2{margin:0}
 dialog.fbk .fbk-head p{font-size:14px;line-height:21px;color:var(--muted,#6b6772)}
 dialog.fbk fieldset{margin:0!important;padding:0;border:0;min-width:0}
 dialog.fbk legend,dialog.fbk .fbk-note label{display:block;padding:0;margin:0 0 8px;font-size:14px;line-height:20px;font-weight:600;color:var(--ink,#1d1b21)}
-dialog.fbk .fbk-topics{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;align-items:start}
+/* Each column as wide as its longest choice, so no choice wraps and the rows keep an even rhythm (MW 2026-11-25) */
+dialog.fbk .fbk-topics{display:grid;grid-template-columns:auto auto;justify-content:start;gap:10px 40px;align-items:start}
 dialog.fbk .fbk-topics label{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:20px;margin:0}
 dialog.fbk .fbk-topics input{flex:none;width:16px;height:16px;margin:2px 0 0}
 dialog.fbk .fbk-rate{display:flex;gap:8px}
