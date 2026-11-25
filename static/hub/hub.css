@@ -1560,6 +1560,8 @@ dialog.fbk::backdrop{background:rgba(31,27,41,.35)}
 
 /* Funding news gets the same sliding rule as the other sections (MW 2026-11-24) */
 #news-h{position:relative;--s0:0px}
+/* The news-item link rules (.news a) must not reach the heading's link: it stays as wide as its words, like every other section title (MW 2026-11-25) */
+.news-sheet .news #news-h > .sh-link,.news #news-h > .sh-link{display:inline;padding:0;border:0;gap:0}
 #news-h::after{content:"";position:absolute;left:calc(100% - 40px);bottom:-1px;width:40px;height:2px;background:var(--ink)}
 @media (prefers-reduced-motion:no-preference){
   .js-draw #news-h::after{left:0}
