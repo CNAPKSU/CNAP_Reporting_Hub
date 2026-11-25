@@ -516,3 +516,12 @@ document.querySelectorAll("a[data-proto]").forEach(function(a){a.addEventListene
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wire);else wire();
 })();
+
+/* The CNAP neuron mark in the header, the same picture as the browser tab (MW 2026-11-24) */
+(function () {
+  var svg = document.querySelector('.hdr .brand > svg');
+  if (!svg) return;
+  var img = document.createElement('img');
+  img.className = 'brand-mark'; img.src = 'img/cnap-mark.png'; img.width = 36; img.height = 36; img.alt = '';
+  svg.replaceWith(img);
+})();

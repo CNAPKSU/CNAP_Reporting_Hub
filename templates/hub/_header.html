@@ -1,7 +1,7 @@
-{# The Member Hub header, shared by the homepage and the pages built in its design (MW 2026-11-14). Pass active. #}
+{% load static %}{# The Member Hub header, shared by the homepage and the pages built in its design (MW 2026-11-14). Pass active. #}
 <header class="hdr">
   <div class="wrap">
-    <a class="brand" href="{% url 'home' %}"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="#512888"/><path d="M8.5 23.5c3.4-7.6 6.6-9.8 9.4-9.8 2.7 0 4.3 4.1 9.6 4.1" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="8.5" cy="23.5" r="2.4" fill="#fff"/><circle cx="27.5" cy="17.8" r="2.4" fill="#fff"/></svg><span><b>{{ platform_name }}</b><small>Kansas State University</small></span></a>
+    <a class="brand" href="{% url 'home' %}"><img class="brand-mark" src="{% static 'img/cnap-mark.png' %}" width="36" height="36" alt=""><span><b>{{ platform_name }}</b><small>Kansas State University</small></span></a>
     {# MW 2026-11-15, approved build: the prototype ribbon. Menus list only pages the app has; other sections go to their part of Home. #}
     <nav class="nav hn-app" aria-label="Main">
       <a href="{% url 'home' %}"{% if active == 'home' %} aria-current="page"{% endif %}>Home</a>
