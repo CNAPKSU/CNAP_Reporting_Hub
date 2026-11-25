@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import (
+    access_requests,
     audit,
     core_reports,
     dashboards,
@@ -34,6 +35,12 @@ urlpatterns = [
     path("site-photo/", home.photo_set, name="photo_set"),
     path("documents/<int:pk>/remove/", home.doc_remove, name="doc_remove"),
     # people and relationships
+    path("access-requests/", access_requests.access_requests, name="access_requests"),
+    path(
+        "access-requests/<int:pk>/decide/",
+        access_requests.access_request_decide,
+        name="access_request_decide",
+    ),
     path("people/", people.people, name="people"),
     path("people/new/", people.person_new, name="person_new"),
     path("people/<int:pk>/", people.person, name="person"),

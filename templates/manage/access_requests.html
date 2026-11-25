@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% load cnap %}
+{% block title %}Access requests · {{ platform_name }}{% endblock %}
+{% block content %}
+{# MW 2026-11-24, approved feature: people ask to join from the sign-in page; nothing is created until approval. #}
+<div class="head"><div><h1>Access requests</h1><p>People asking to join the Member Hub from the sign-in page.<br>Approving adds the person and emails them a welcome sign-in link. Declining sends nothing.<br>Each new request is emailed to {{ notify }}.</p></div></div>
+<div class="panel"><h2>Waiting for review</h2>
+<table class="tbl"><thead><tr><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Department</th><th scope="col">Connection to CNAP</th><th scope="col">Asked</th><th scope="col">Decide</th></tr></thead><tbody>
+{% for r in pending %}<tr><th scope="row">{{ r.first_name }} {{ r.last_name }}{% if r.note %}<br><small>{{ r.note }}</small>{% endif %}</th><td>{{ r.email }}</td><td>{{ r.department }}</td><td>{{ r.connection }}</td><td>{{ r.created_at|date:"M j, g:i a" }}</td>
+<td>{% if can_manage %}<form method="post" action="{% url 'manage:access_request_decide' r.pk %}" style="display:flex;gap:8px;flex-wrap:wrap">{% csrf_token %}<button class="btn small" name="decision" value="approve" title="Add {{ r.first_name }} to the Hub and email a welcome sign-in link.">Approve</button><button class="btn small ghost" name="decision" value="decline" title="Decline without sending an email.">Decline</button></form>{% else %}Waiting{% endif %}</td></tr>
+{% empty %}<tr><td colspan="6">No requests are waiting.</td></tr>{% endfor %}
+</tbody></table></div>
+{% if decided %}<div class="panel"><h2>Decided</h2>
+<table class="tbl"><thead><tr><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Decision</th><th scope="col">By</th><th scope="col">When</th></tr></thead><tbody>
+{% for r in decided %}<tr><th scope="row">{% if r.person %}<a href="{% url 'manage:person' r.person.pk %}">{{ r.first_name }} {{ r.last_name }}</a>{% else %}{{ r.first_name }} {{ r.last_name }}{% endif %}</th><td>{{ r.email }}</td><td>{{ r.get_status_display }}</td><td>{{ r.decided_by.get_full_name|default:r.decided_by }}</td><td>{{ r.decided_at|date:"M j, Y" }}</td></tr>{% endfor %}
+</tbody></table></div>{% endif %}
+{% endblock %}

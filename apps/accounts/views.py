@@ -123,3 +123,21 @@ def link_code(request):
             "email": request.session.get("link_email") or person.primary_email,
         },
     )
+
+
+def request_access(request):
+    """Ask to join the Member Hub (MW 2026-11-24). The reply is the same whatever happens, so the page never says
+    whether someone is already a member."""
+    from apps.common import prototype
+
+    from . import access_requests
+
+    sent = False
+    if request.method == "POST":
+        access_requests.submit(request.POST, ip=signin.client_ip(request))
+        sent = True
+    return render(
+        request,
+        prototype.template(request, "access", "proto/registration/access_request.html"),
+        {"sent": sent},
+    )

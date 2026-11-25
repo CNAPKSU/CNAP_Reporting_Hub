@@ -9,7 +9,7 @@
     <h1 class="px-title si-title" id="si-h">Email me a sign-in link</h1>
     {% if sent %}
       <div class="px-callout ok" role="status"><p><strong>If {{ email }} is on file with the Center, a sign-in link is on its way.</strong></p></div>
-      <p class="px-note">The link works once and expires in {{ days }} days.<br>Check your spam folder if the email doesn’t arrive in a few minutes.<br>Still nothing? Make sure it’s the address the Center has for you.<br>You can also email the evaluator at {{ evaluator_email }}.</p>
+      <p class="px-note">The link works once and expires in {{ days }} days.<br>Check your spam folder if the email doesn’t arrive in a few minutes.<br>Still nothing? Make sure it’s the address the Center has for you.<br>You can also email the evaluator at {{ evaluator_email }}.<br>Not a member yet? <a class="px-link" href="{% url 'request_access' %}">Request access</a>.</p>
       <div class="si-acts"><a class="px-btn quiet" href="{% url 'link_request' %}" title="Enter a different email address.">Send to a different address</a><a class="px-link" href="{% url 'login' %}">Back to sign in</a></div>
     {% else %}
       <p class="px-note si-lede">Enter the email address the Center has for you.<br>We’ll send a link that signs you in.</p>

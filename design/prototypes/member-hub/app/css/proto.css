@@ -2252,3 +2252,10 @@ body.proto .filezone { grid-template-columns: minmax(0, 1fr); }
   .fbk-open:hover,body.proto .fbk-open:hover{opacity:1}
 }
 @media (max-width:760px){.fbk-open.fbk-open,body.proto .fbk-open.fbk-open{width:38px;height:38px;bottom:12px!important;right:12px!important}}
+
+/* Sign-in cards (MW 2026-11-24): every block one even step apart; the small label stays with its heading */
+body.proto .si-card { display: flex; flex-direction: column; gap: 24px; }
+body.proto .si-card > * { margin-top: 0 !important; margin-bottom: 0 !important; }
+body.proto .si-card > .px-eyebrow + .si-title { margin-top: -16px !important; }
+body.proto .si-card .si-form { display: flex; flex-direction: column; gap: 16px; }
+body.proto .si-card .si-form > * { margin: 0 !important; }

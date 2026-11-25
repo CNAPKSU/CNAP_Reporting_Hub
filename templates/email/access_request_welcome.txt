@@ -1,0 +1,12 @@
+{% autoescape off %}Hello {{ person.first_name }},
+
+Your request to join the CNAP Member Hub is approved. Welcome!
+
+This link signs you in:
+
+{{ url }}
+
+The link works once and expires in {{ days }} days. You can get a new one any time at {{ site }}/accounts/link/
+
+The CNAP team
+{% endautoescape %}

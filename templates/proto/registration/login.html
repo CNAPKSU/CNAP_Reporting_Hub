@@ -19,7 +19,7 @@
     </form>
     <div class="si-or"><span>or</span></div>
     <div class="si-acts"><a class="px-btn quiet" href="{% url 'link_request' %}" title="We email you a link that signs you in. No password needed.">Email me a sign-in link</a></div>
-    <p class="px-note si-foot">Not at K-State?<br>Use an emailed sign-in link.<br>K-State single sign-on will replace passwords once K-State IT approves it.</p>
+    <p class="px-note si-foot">Not a member yet? <a class="px-link" href="{% url 'request_access' %}">Request access</a></p>
   </section>
 </div>
 {% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}{% load static cnap %}
+{% block title %}Request access · {{ platform_name }}{% endblock %}
+{% block anon %}
+{# Request access (MW 2026-11-24). The reply is the same whatever happens, so it never says who is already a member. #}
+<div class="si si-solo">
+  <section class="si-card" aria-labelledby="si-h">
+    <img class="si-logo" src="{% static 'img/cnap-logo.png' %}" alt="CNAP Center: Cognitive and Neurobiological Approaches to Plasticity">
+    <p class="px-eyebrow">CNAP Member Hub</p>
+    <h1 class="px-title si-title" id="si-h">Request access</h1>
+    {% if sent %}
+      <div class="px-callout ok" role="status"><p><strong>Thank you. Your request is with the CNAP team.</strong></p></div>
+      <p class="px-note">The team reviews each request and emails you a sign-in link once it is approved.<br>If you are already a member, a sign-in link is on its way instead.<br>Questions? Email {{ evaluator_email }}.</p>
+      <div class="si-acts"><a class="px-link" href="{% url 'login' %}">Back to sign in</a></div>
+    {% else %}
+      <p class="px-note si-lede">For CNAP project leaders, mentors, core users, students, and staff.<br>The CNAP team reviews each request.</p>
+      <form method="post" class="si-form">{% csrf_token %}
+        <label class="si-field" for="id_first_name"><span class="px-label">First name</span><input type="text" name="first_name" id="id_first_name" autocomplete="given-name" maxlength="100" required autofocus></label>
+        <label class="si-field" for="id_last_name"><span class="px-label">Last name</span><input type="text" name="last_name" id="id_last_name" autocomplete="family-name" maxlength="100" required></label>
+        <label class="si-field" for="id_email"><span class="px-label">Email address</span><input type="email" name="email" id="id_email" autocomplete="email" maxlength="254" required></label>
+        <label class="si-field" for="id_department"><span class="px-label">Department <span class="px-note">(optional)</span></span><input type="text" name="department" id="id_department" autocomplete="organization-title" maxlength="200"></label>
+        <label class="si-field" for="id_connection"><span class="px-label">Your connection to CNAP</span><input type="text" name="connection" id="id_connection" maxlength="300" placeholder="For example: pilot project leader, core user, graduate student" required></label>
+        <label class="si-field" for="id_note"><span class="px-label">Anything else? <span class="px-note">(optional)</span></span><textarea name="note" id="id_note" rows="3" maxlength="2000"></textarea></label>
+        <div aria-hidden="true" style="position:absolute;left:-9999px"><label for="id_website">Leave this empty</label><input type="text" name="website" id="id_website" tabindex="-1" autocomplete="off"></div>
+        <div class="si-acts"><button class="px-btn" type="submit" title="Send your request to the CNAP team.">Send request</button><a class="px-link" href="{% url 'login' %}">Back to sign in</a></div>
+      </form>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}
