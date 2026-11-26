@@ -21,6 +21,20 @@ def roster_imports(request):
     )
 
 
+@admin_view
+def roster_template(request):
+    """A blank spreadsheet with the columns the roster upload reads (MW 2026-11-25)."""
+    import csv
+
+    from django.http import HttpResponse
+
+    resp = HttpResponse(content_type="text/csv; charset=utf-8")
+    resp["Content-Disposition"] = 'attachment; filename="cnap-roster-template.csv"'
+    resp.write("\ufeff")  # so Excel opens it as UTF-8
+    csv.writer(resp).writerow(roster_import.TEMPLATE_HEADER)
+    return resp
+
+
 @manage_action
 def roster_upload(request):
     form = RosterUploadForm(request.POST, request.FILES)

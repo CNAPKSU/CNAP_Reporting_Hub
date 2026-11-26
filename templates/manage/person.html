@@ -3,7 +3,7 @@
 {% block content %}
 <div class="head">
   <div><h1>{{ p }}</h1>
-    <p>{{ p.institution|default:"No institution recorded" }}{% if p.department %} · {{ p.department }}{% endif %}{% if p.position_title %} · {{ p.position_title }}{% endif %}</p>
+    <p>{{ p.institution|default:"No institution recorded" }}{% if p.department %} · {{ p.department }}{% endif %}{% if p.position_title %} · {{ p.position_title }}{% endif %}{% if p.center_role %} · {{ p.center_role_label }}{% endif %}</p>
     <p class="small">{% if external %}Outside K-State: signs in with an emailed link.{% else %}K-State: signs in with K-State single sign-on.{% endif %}</p>
   </div>
   <div class="rosterbox {% if on_roster %}on{% endif %}">
@@ -36,7 +36,7 @@
     </div>
     {% if can_manage %}
     <details class="panel{% if request.proto_active %} pa-details{% endif %}">
-      <summary>{% if request.proto_active %}<h2 class="sectionhead">Name, institution, and position</h2><p class="rollsum">{{ p.institution|default:"No institution" }}{% if p.department %}, {{ p.department }}{% endif %}{% if p.position_title %}, {{ p.position_title }}{% endif %}</p>{% else %}<strong>Edit details</strong>{% endif %}</summary>
+      <summary>{% if request.proto_active %}<h2 class="sectionhead">Name, institution, title, and role</h2><p class="rollsum">{{ p.institution|default:"No institution" }}{% if p.department %}, {{ p.department }}{% endif %}{% if p.position_title %}, {{ p.position_title }}{% endif %}{% if p.center_role %}, {{ p.center_role_label }}{% endif %}</p>{% else %}<strong>Edit details</strong>{% endif %}</summary>
       <form method="post" action="{% url 'manage:person_edit' p.pk %}" class="mt">{% csrf_token %}
         {% for field in edit_form %}<div class="field"><label>{{ field.label }}{{ field }}</label></div>{% endfor %}
         <div class="actions"><button class="btn" type="submit">Save</button></div>

@@ -20,6 +20,7 @@ from ..forms import (
     PersonForm,
     ProjectForm,
     RelationshipForm,
+    RosterUploadForm,
 )
 
 
@@ -102,6 +103,8 @@ def person_new(request):
                 institution=d["institution"],
                 department=d["department"],
                 position_title=d["position_title"],
+                center_role=d["center_role"],
+                center_role_other=d["center_role_other"],
                 notes=d["notes"],
             )
         except services.RelationshipError as exc:
@@ -111,7 +114,9 @@ def person_new(request):
                 services.add_to_roster(request.user, person)
             messages.success(request, f"{person} added. Give them CNAP relationships below.")
             return redirect("manage:person", person.pk)
-    return render(request, "manage/person_new.html", {"form": form})
+    return render(
+        request, "manage/person_new.html", {"form": form, "upload_form": RosterUploadForm()}
+    )
 
 
 @admin_view

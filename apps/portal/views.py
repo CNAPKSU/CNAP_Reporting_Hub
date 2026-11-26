@@ -478,6 +478,7 @@ def center_results(request):
 
 
 LEVELS = [c for c in Person._meta.get_field("trainee_level").choices]
+CENTER_ROLES = Person._meta.get_field("center_role").choices
 
 
 @login_required
@@ -517,9 +518,24 @@ def profile(request):
             except ValueError as exc:
                 messages.error(request, str(exc))
                 return redirect(reverse("portal:profile") + "#orcid")
+        role_fields = {}
+        if "center_role" in request.POST:
+            role = request.POST.get("center_role", "")
+            role = role if role in dict(CENTER_ROLES) else ""
+            other = request.POST.get("center_role_other", "").strip()[:200]
+            if role == "other" and not other:
+                messages.error(
+                    request, "Describe your role in the Center, or choose one from the list."
+                )
+                return redirect(reverse("portal:profile") + "#center-role")
+            role_fields = {
+                "center_role": role,
+                "center_role_other": other if role == "other" else "",
+            }
         update_person(
             request.user,
             person,
+            **role_fields,
             orcid=orcid,
             department=request.POST.get("department", "")[:200],
             position_title=request.POST.get("position_title", "")[:200],
@@ -548,6 +564,7 @@ def profile(request):
             "rels": [r for r in rels if r.relationship_type.code != "cnap_member"],
             "on_roster": any(r.relationship_type.code == "cnap_member" for r in rels),
             "levels": LEVELS,
+            "center_roles": CENTER_ROLES,
             "is_trainee": any(
                 r.relationship_type.code in ("project_student", "student_trainee") for r in rels
             ),

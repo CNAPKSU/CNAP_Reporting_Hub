@@ -5,30 +5,27 @@ from django import forms
 from apps.common.enums import ProjectKind
 from apps.people.models import Core, Person, Project, RelationshipType
 
+ROLE_OTHER_WIDGET = forms.TextInput(attrs={"placeholder": "Describe the role"})
 
-class PersonForm(forms.ModelForm):
+
+class CenterRoleMixin:
+    """Role in the Center: Other needs its fill-in-the-blank; any other choice clears it."""
+
+    def clean(self):
+        d = super().clean()
+        role = d.get("center_role", "")
+        other = (d.get("center_role_other") or "").strip()
+        if role == "other" and not other:
+            self.add_error("center_role_other", "Describe the role, or choose one from the list.")
+        d["center_role_other"] = other if role == "other" else ""
+        return d
+
+
+class PersonForm(CenterRoleMixin, forms.ModelForm):
     email = forms.EmailField(
         required=False, help_text="The person’s main email. Sign-in links go here."
     )
 
-    class Meta:
-        model = Person
-        fields = ["first_name", "last_name", "institution", "department", "position_title", "notes"]
-        widgets = {
-            "notes": forms.Textarea(attrs={"rows": 3}),
-            "department": forms.TextInput(
-                attrs={"placeholder": "For example: Psychological Sciences"}
-            ),
-            "position_title": forms.TextInput(
-                attrs={"placeholder": "For example: Assistant Professor"}
-            ),
-        }
-        help_texts = {
-            "institution": "Leave as Kansas State University for K-State members. Anyone else signs in by emailed link."
-        }
-
-
-class PersonEditForm(forms.ModelForm):
     class Meta:
         model = Person
         fields = [
@@ -37,6 +34,37 @@ class PersonEditForm(forms.ModelForm):
             "institution",
             "department",
             "position_title",
+            "center_role",
+            "center_role_other",
+            "notes",
+        ]
+        widgets = {
+            "notes": forms.Textarea(attrs={"rows": 3}),
+            "department": forms.TextInput(
+                attrs={"placeholder": "For example: Psychological Sciences"}
+            ),
+            "position_title": forms.TextInput(
+                attrs={"placeholder": "For example: Assistant Professor"}
+            ),
+            "center_role_other": ROLE_OTHER_WIDGET,
+        }
+        labels = {"center_role_other": "Role, if Other"}
+        help_texts = {
+            "institution": "Leave as Kansas State University for K-State members. Anyone else signs in by emailed link."
+        }
+
+
+class PersonEditForm(CenterRoleMixin, forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = [
+            "first_name",
+            "last_name",
+            "institution",
+            "department",
+            "position_title",
+            "center_role",
+            "center_role_other",
             "era_commons_id",
             "orcid",
             "senior_key",
@@ -55,6 +83,7 @@ class PersonEditForm(forms.ModelForm):
             "position_title": forms.TextInput(
                 attrs={"placeholder": "For example: Assistant Professor"}
             ),
+            "center_role_other": ROLE_OTHER_WIDGET,
             "senior_key": forms.Select(
                 choices=[
                     ("unknown", "Automatic (PD/PI and RP Leaders)"),
@@ -63,7 +92,7 @@ class PersonEditForm(forms.ModelForm):
                 ]
             ),
         }
-        labels = {"is_active": "Active (receives forms)"}
+        labels = {"is_active": "Active (receives forms)", "center_role_other": "Role, if Other"}
 
     def clean_orcid(self):
         from apps.people.services import normalize_orcid

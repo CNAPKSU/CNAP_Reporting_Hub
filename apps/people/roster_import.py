@@ -4,7 +4,7 @@ then commit. Nothing changes until the evaluator commits.
 
 Columns (header names are matched loosely, case and spacing ignored):
     first name, last name, email, institution (optional), department (optional),
-    position (optional)
+    title (optional), role in the Center (optional)
 
 Each row is classified:
 - matched: the email belongs to an existing person;
@@ -52,8 +52,42 @@ COLUMN_ALIASES = {
     },  # accepts both spellings in uploaded files
     "institution": {"institution", "university", "organization", "affiliation"},
     "department": {"department", "dept", "unit"},
-    "position_title": {"position", "title", "position title", "job title", "role"},
+    "position_title": {"position", "title", "position title", "job title"},
+    "center_role": {"role", "center role", "role in the center", "role in center", "cnap role"},
 }
+
+# The blank spreadsheet offered on Add a person and Roster import.
+TEMPLATE_HEADER = [
+    "First name",
+    "Last name",
+    "Email",
+    "Institution",
+    "Department",
+    "Title",
+    "Role in the Center",
+]
+
+
+def center_role_fields(text):
+    """Read a Role in the Center cell: a listed role by name, otherwise Other with the text."""
+    from .models import CENTER_ROLES
+
+    text = str(text or "").strip()
+    if not text:
+        return {}
+    key = _norm(text)
+    for code, label in CENTER_ROLES:
+        if key in (_norm(label), _norm(code)) and code != "other":
+            return {"center_role": code}
+    if key.startswith("other"):
+        text = text[5:].lstrip(" :-–").strip()
+    return (
+        {"center_role": "other", "center_role_other": text[:200]}
+        if text
+        else {"center_role": "other"}
+    )
+
+
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
@@ -216,6 +250,7 @@ def commit(actor, imp):
     for row in imp.rows.select_related("matched_person"):
         raw = row.raw or {}
         extra = {k: raw.get(k, "") for k in ("department", "position_title") if raw.get(k)}
+        extra.update(center_role_fields(raw.get("center_role")))
         if row.decision == "skip" or row.decision == "keep":
             done["skipped"] += row.decision == "skip"
             continue

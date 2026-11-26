@@ -10,10 +10,11 @@
       <label class="ri-label" for="{{ form.file.id_for_label }}">Roster file</label>
       <p class="ri-help">A .csv or .xlsx file, with one row per person.</p>
       {{ form.file }}
+      <p class="ri-help"><a href="{% url 'manage:roster_template' %}">Download a blank spreadsheet</a> with these columns.</p>
     </div>
     <dl class="ri-cols">
       <div><dt>Required columns</dt><dd>First name, last name, and email.</dd></div>
-      <div><dt>Optional columns</dt><dd>Institution, department, and position.</dd></div>
+      <div><dt>Optional columns</dt><dd>Institution, department, title, and role in the Center.</dd></div>
     </dl>
     <p class="px-callout warn ri-privacy">Use real member data only once the Member Hub is on K-State hosting.</p>
     <div class="actions"><button class="btn" type="submit">Upload and review</button></div>
@@ -21,8 +22,8 @@
 </div>{% else %}<div class="panel" style="max-width:640px">
   <h2 class="sectionhead">Upload a list</h2>
   <form method="post" enctype="multipart/form-data" action="{% url 'manage:roster_upload' %}">{% csrf_token %}
-    <div class="field"><label>File{{ form.file }}</label><div class="help">{{ form.file.help_text|stack }}</div></div>
-    <p class="small muted">{{ "Optional columns: institution, department, position. Only use real member data once the Member Hub is on K-State hosting."|stack }}</p>
+    <div class="field"><label>File{{ form.file }}</label><div class="help">{{ form.file.help_text|stack }}<br><a href="{% url 'manage:roster_template' %}">Download a blank spreadsheet</a> with these columns.</div></div>
+    <p class="small muted">{{ "Optional columns: institution, department, title, role in the Center. Only use real member data once the Member Hub is on K-State hosting."|stack }}</p>
     <div class="actions"><button class="btn" type="submit">Upload and review</button></div>
   </form>
 </div>{% endif %}{% endif %}

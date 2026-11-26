@@ -89,6 +89,7 @@ urlpatterns = [
     path("projects/<int:pk>/", people.project, name="project"),
     # roster import
     path("roster/", roster.roster_imports, name="roster_imports"),
+    path("roster/template.csv", roster.roster_template, name="roster_template"),
     path("roster/upload/", roster.roster_upload, name="roster_upload"),
     path("roster/<int:pk>/", roster.roster_review, name="roster_import"),
     path("roster/<int:pk>/decide/", roster.roster_decide, name="roster_decide"),
