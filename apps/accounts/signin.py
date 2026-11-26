@@ -11,11 +11,15 @@ Emailed sign-in links and 6-digit codes (decisions.md 2026-10-24, sign-in plan).
 - Who may use links: people outside K-State always; K-State people too until single sign-on is switched on
   (SIGNIN_LINKS_FOR_KSTATE, default: not SSO_ENABLED).
 - Requests are throttled per address, and the request page never says whether an address is on file.
+- A person on file who may not use a link (an administrator, or someone whose access is off) gets an email
+  saying why, instead of silence (MW 2026-11-26). It goes only to the address on file, so the page still
+  reveals nothing. Mail that fails to send is logged rather than dropped.
 """
 
 import hashlib
 import hmac
 import ipaddress
+import logging
 import secrets
 import threading
 import unicodedata
@@ -33,6 +37,8 @@ from apps.people.models import PersonEmail
 
 from . import access
 from .models import FailedLogin, LinkRequest, SignInCode, SignInLink, User
+
+logger = logging.getLogger(__name__)
 
 LINK_DAYS = getattr(settings, "SIGNIN_LINK_DAYS", 7)
 CODE_MINUTES = getattr(settings, "SIGNIN_CODE_MINUTES", 15)
@@ -67,6 +73,23 @@ def may_use_link(person):
     if user is not None and not link_session_allowed(user):
         return False
     return is_external(person) or links_for_kstate()
+
+
+def link_refusal(person):
+    """Why a person on file can't have a link: "off", "password", "kstate", or "" when they can."""
+    from apps.people.services import is_external
+
+    if not person.is_active or person.archived_at:
+        return "off"
+    user = getattr(person, "user", None)
+    if user is not None:
+        if not user.is_enabled:
+            return "off"
+        if not link_session_allowed(user):
+            return "password"
+    if not (is_external(person) or links_for_kstate()):
+        return "kstate"
+    return ""
 
 
 def link_session_allowed(user):
@@ -106,15 +129,53 @@ def make_link(person, email, purpose="request", next_path=""):
     return url
 
 
+def _deliver(kw):
+    """Send one email; a failure goes to the server log (Render's Logs tab) instead of vanishing."""
+    try:
+        send_mail(**kw, fail_silently=False)
+    except Exception:
+        logger.exception(
+            "Sign-in email could not be sent to %s", ", ".join(kw.get("recipient_list") or [])
+        )
+
+
 def _send(**kw):
     """Send mail off the request thread (SIGNIN_SEND_ASYNC), so a known address doesn't answer more slowly than an
     unknown one."""
     if getattr(settings, "SIGNIN_SEND_ASYNC", True):
-        threading.Thread(
-            target=send_mail, kwargs={**kw, "fail_silently": True}, daemon=True
-        ).start()
+        threading.Thread(target=_deliver, args=(kw,), daemon=True).start()
     else:
-        send_mail(**kw, fail_silently=True)
+        _deliver(kw)
+
+
+def _explain_refusal(person, email, reason):
+    """Tell the address on file why no link came. At most LINKS_PER_HOUR an hour per person."""
+    since = timezone.now() - timedelta(hours=1)
+    recent = AuditLog.objects.filter(
+        entity_type="people.Person",
+        entity_id=person.pk,
+        at__gte=since,
+        new_value__has_key="signin_link_refused",
+    ).count()
+    if recent >= LINKS_PER_HOUR:
+        return
+    user = getattr(person, "user", None)
+    _send(
+        subject="About your CNAP Member Hub sign-in",
+        message=render_to_string(
+            "email/signin_refused.txt",
+            {
+                "person": person,
+                "reason": reason,
+                "username": getattr(user, "username", ""),
+                "site": settings.SITE_URL,
+                "evaluator": settings.EVALUATOR_EMAIL,
+            },
+        ),
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=[email],
+    )
+    record_event(None, AuditLog.Action.UPDATE, person, new={"signin_link_refused": reason})
 
 
 def request_link(email, ip=None):
@@ -129,7 +190,11 @@ def request_link(email, ip=None):
         LinkRequest.objects.create(ip=ip)
         LinkRequest.objects.filter(at__lt=timezone.now() - timedelta(days=1)).delete()
     person = person_for_email(email)
-    if not person or not may_use_link(person):
+    if not person:
+        return None
+    reason = link_refusal(person)
+    if reason:
+        _explain_refusal(person, email, reason)
         return None
     recent = SignInLink.objects.filter(
         email__iexact=email, created_at__gte=timezone.now() - timedelta(hours=1)

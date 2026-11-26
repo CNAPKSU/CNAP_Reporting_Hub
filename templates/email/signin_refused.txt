@@ -1,0 +1,17 @@
+{% autoescape off %}Hello {{ person.first_name }},
+
+Someone, probably you, asked for a sign-in link to the CNAP Member Hub for this email address. We didn't send one, because {% if reason == "password" %}administrator accounts sign in with a username and password instead. This keeps the Hub's administrative pages safe.
+
+Sign in here: {{ site }}/accounts/login/
+{% if username %}Your username is {{ username }}.
+{% endif %}
+If you've forgotten the password, another administrator can set a new one, or it can be reset from the Render dashboard (open the cnap-hub service, choose Shell, and run: python manage.py changepassword {{ username|default:"your-username" }}).{% elif reason == "off" %}your access to the Hub is turned off at the moment.
+
+If you need it back, email {{ evaluator }}.{% else %}K-State members sign in with their K-State eID.
+
+Sign in here: {{ site }}/accounts/login/{% endif %}
+
+If you didn't ask for this, you can ignore this email.
+
+The CNAP evaluation team
+{% endautoescape %}

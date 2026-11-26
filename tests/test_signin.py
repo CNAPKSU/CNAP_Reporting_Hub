@@ -49,10 +49,49 @@ def test_request_sends_link_only_to_people_on_file(client, center):
     assert SignInLink.objects.filter(person=p).count() == 1
 
 
-def test_administrators_never_get_links(client, center):
+def test_administrators_never_get_links_but_are_told_why(client, center):
     admin = User.objects.get(username="mwills")
-    client.post("/accounts/link/", {"email": admin.person.primary_email})
+    r = client.post("/accounts/link/", {"email": admin.person.primary_email})
+    assert "is on file with the Center" in r.content.decode()  # the page says the same as ever
+    assert len(mail.outbox) == 1
+    msg = mail.outbox[0]
+    assert msg.to == [admin.person.primary_email] and not link_from(msg)
+    assert "username and password" in msg.body and "Your username is mwills." in msg.body
+    assert "/accounts/login/" in msg.body
+    assert not SignInLink.objects.filter(person=admin.person).exists()
+
+
+def test_refusal_emails_are_limited(client, center):
+    admin = User.objects.get(username="mwills")
+    for _ in range(signin.LINKS_PER_HOUR + 2):
+        client.post("/accounts/link/", {"email": admin.person.primary_email})
+    assert len(mail.outbox) == signin.LINKS_PER_HOUR
+
+
+def test_someone_turned_off_is_told_whom_to_ask(client, center, settings):
+    settings.EVALUATOR_EMAIL = "evaluator@example.edu"
+    p = outside_person()
+    p.is_active = False
+    p.save()
+    client.post("/accounts/link/", {"email": "ada@example.org"})
+    assert len(mail.outbox) == 1 and not link_from(mail.outbox[0])
+    assert "turned off" in mail.outbox[0].body and "evaluator@example.edu" in mail.outbox[0].body
+
+
+def test_unknown_addresses_still_get_nothing(client, center):
+    client.post("/accounts/link/", {"email": "stranger@example.org"})
     assert len(mail.outbox) == 0
+
+
+def test_a_failed_send_is_logged(client, center, monkeypatch, caplog):
+    def boom(**kw):
+        raise OSError("mail server refused")
+
+    monkeypatch.setattr(signin, "send_mail", boom)
+    outside_person()
+    with caplog.at_level("ERROR", logger="apps.accounts.signin"):
+        client.post("/accounts/link/", {"email": "ada@example.org"})
+    assert "could not be sent to ada@example.org" in caplog.text
 
 
 def test_link_is_single_use_and_scanner_safe(client, center):
