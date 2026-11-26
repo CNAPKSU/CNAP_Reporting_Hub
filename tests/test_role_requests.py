@@ -89,7 +89,7 @@ def test_role_added_during_open_session_brings_its_forms(
         {
             "relationship_type": reference["types"]["pilot_mentor"].pk,
             "project": projects["C"].pk,
-            "start": period.opens_at.date().isoformat(),
+            "start": timezone.localdate(period.opens_at).isoformat(),
         },
         follow=True,
     )
