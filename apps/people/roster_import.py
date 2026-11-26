@@ -69,23 +69,35 @@ TEMPLATE_HEADER = [
 
 
 def center_role_fields(text):
-    """Read a Role in the Center cell: a listed role by name, otherwise Other with the text."""
+    """Read a Role in the Center cell. Several roles may be separated by ; or , (or new lines).
+    Listed roles are matched by name; anything else becomes Other with that text."""
     from .models import CENTER_ROLES
 
-    text = str(text or "").strip()
-    if not text:
-        return {}
-    key = _norm(text)
+    names = {}
     for code, label in CENTER_ROLES:
-        if key in (_norm(label), _norm(code)) and code != "other":
-            return {"center_role": code}
-    if key.startswith("other"):
-        text = text[5:].lstrip(" :-–").strip()
-    return (
-        {"center_role": "other", "center_role_other": text[:200]}
-        if text
-        else {"center_role": "other"}
-    )
+        if code != "other":
+            names[_norm(label)] = code
+            names[_norm(code)] = code
+    roles, others = [], []
+    for part in re.split(r"[;,\n]", str(text or "")):
+        part = part.strip()
+        if not part:
+            continue
+        code = names.get(_norm(part))
+        if code:
+            roles.append(code)
+            continue
+        if _norm(part).startswith("other"):
+            part = part[5:].lstrip(" :-–").strip()
+        roles.append("other")
+        if part:
+            others.append(part)
+    if not roles:
+        return {}
+    out = {"center_roles": [c for c, _ in CENTER_ROLES if c in roles]}
+    if others:
+        out["center_role_other"] = ", ".join(others)[:200]
+    return out
 
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")

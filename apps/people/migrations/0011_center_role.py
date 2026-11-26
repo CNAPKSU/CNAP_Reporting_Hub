@@ -1,4 +1,4 @@
-# MW 2026-11-25: "Title" instead of "Position title", and the person's role in the Center.
+# MW 2026-11-25: "Title" instead of "Position title", and the person's roles in the Center (several allowed).
 
 from django.db import migrations, models
 
@@ -17,25 +17,12 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name="person",
-            name="center_role",
-            field=models.CharField(
+            name="center_roles",
+            field=models.JSONField(
                 blank=True,
-                choices=[
-                    ("research_project_leader", "Research project leader"),
-                    ("pilot_project_leader", "Pilot project leader"),
-                    ("mentor", "Mentor"),
-                    ("core_director", "Core director"),
-                    ("core_senior_advisor", "Core senior advisor"),
-                    ("core_scientific_advisor", "Core scientific advisor"),
-                    ("center_director", "Center Director"),
-                    ("center_associate_director", "Center Associate Director"),
-                    ("graduate_student", "Graduate student"),
-                    ("core_staff", "Core staff"),
-                    ("other", "Other"),
-                ],
-                help_text="How the person describes their part in CNAP. It does not decide which forms they receive.",
-                max_length=40,
-                verbose_name="Role in the Center",
+                default=list,
+                help_text="How the person describes their part in CNAP (any of CENTER_ROLES). It does not decide which forms they receive.",
+                verbose_name="Roles in the Center",
             ),
         ),
         migrations.AddField(

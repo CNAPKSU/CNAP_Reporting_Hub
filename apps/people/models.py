@@ -31,6 +31,12 @@ CENTER_ROLES = [
 ]
 
 
+def clean_center_roles(codes):
+    """Keep known role codes only, once each, in list order."""
+    chosen = set(codes or [])
+    return [code for code, _ in CENTER_ROLES if code in chosen]
+
+
 class Person(ArchivableModel):
     """Every CNAP person has exactly one row here, whether or not they ever log in."""
 
@@ -39,12 +45,11 @@ class Person(ArchivableModel):
     institution = models.CharField(max_length=200, blank=True)
     department = models.CharField(max_length=200, blank=True)
     position_title = models.CharField("Title", max_length=200, blank=True)
-    center_role = models.CharField(
-        "Role in the Center",
-        max_length=40,
+    center_roles = models.JSONField(
+        "Roles in the Center",
+        default=list,
         blank=True,
-        choices=CENTER_ROLES,
-        help_text="How the person describes their part in CNAP. It does not decide which forms they receive.",
+        help_text="How the person describes their part in CNAP (any of CENTER_ROLES). It does not decide which forms they receive.",
     )
     center_role_other = models.CharField(
         "Role in the Center (other)",
@@ -124,11 +129,19 @@ class Person(ArchivableModel):
         return f"{self.first_name} {self.last_name}"
 
     @property
+    def center_role_labels(self):
+        """The roles as people read them, in list order; Other shows the typed-in text."""
+        names = dict(CENTER_ROLES)
+        chosen = set(self.center_roles or [])
+        out = []
+        for code, _ in CENTER_ROLES:
+            if code in chosen:
+                out.append((self.center_role_other or "Other") if code == "other" else names[code])
+        return out
+
+    @property
     def center_role_label(self):
-        """The role as people read it: the typed-in text when the role is Other."""
-        if self.center_role == "other":
-            return self.center_role_other or "Other"
-        return self.get_center_role_display() if self.center_role else ""
+        return ", ".join(self.center_role_labels)
 
     @property
     def full_name(self):

@@ -103,7 +103,7 @@ def person_new(request):
                 institution=d["institution"],
                 department=d["department"],
                 position_title=d["position_title"],
-                center_role=d["center_role"],
+                center_roles=d["center_roles"],
                 center_role_other=d["center_role_other"],
                 notes=d["notes"],
             )

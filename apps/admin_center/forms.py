@@ -3,21 +3,36 @@
 from django import forms
 
 from apps.common.enums import ProjectKind
-from apps.people.models import Core, Person, Project, RelationshipType
+from apps.people.models import (
+    CENTER_ROLES,
+    Core,
+    Person,
+    Project,
+    RelationshipType,
+    clean_center_roles,
+)
 
 ROLE_OTHER_WIDGET = forms.TextInput(attrs={"placeholder": "Describe the role"})
 
 
-class CenterRoleMixin:
-    """Role in the Center: Other needs its fill-in-the-blank; any other choice clears it."""
+class CenterRoleMixin(forms.Form):
+    """Roles in the Center, as many as apply. Other needs its fill-in-the-blank."""
+
+    center_roles = forms.MultipleChoiceField(
+        label="Role in the Center",
+        choices=CENTER_ROLES,
+        required=False,
+        help_text="Choose all that apply.",
+    )
 
     def clean(self):
         d = super().clean()
-        role = d.get("center_role", "")
+        roles = clean_center_roles(d.get("center_roles"))
         other = (d.get("center_role_other") or "").strip()
-        if role == "other" and not other:
-            self.add_error("center_role_other", "Describe the role, or choose one from the list.")
-        d["center_role_other"] = other if role == "other" else ""
+        if "other" in roles and not other:
+            self.add_error("center_role_other", "Describe the role, or untick Other.")
+        d["center_roles"] = roles
+        d["center_role_other"] = other if "other" in roles else ""
         return d
 
 
@@ -34,7 +49,7 @@ class PersonForm(CenterRoleMixin, forms.ModelForm):
             "institution",
             "department",
             "position_title",
-            "center_role",
+            "center_roles",
             "center_role_other",
             "notes",
         ]
@@ -63,7 +78,7 @@ class PersonEditForm(CenterRoleMixin, forms.ModelForm):
             "institution",
             "department",
             "position_title",
-            "center_role",
+            "center_roles",
             "center_role_other",
             "era_commons_id",
             "orcid",

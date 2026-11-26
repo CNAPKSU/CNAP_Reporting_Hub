@@ -2117,3 +2117,4 @@ dialog.fbk .fbk-proto{margin:0!important}
 .rolechg-f label { font-weight: 600; font-size: 14px; }
 .rolechg-f textarea { width: 100%; box-sizing: border-box; }
 .rolechg-f .btn { align-self: flex-start; margin-top: 4px; }
+.crole { max-height: none; }
