@@ -58,7 +58,7 @@ APP_ROUTES = {
 FILES = {"cnap-mentor-meeting-log.xlsx", "neurosync-flyer.pdf"}
 
 SAMPLE_NOTE = (
-    '<div class="wrap hp-sample"><p class="sample-note"><b>Sample content.</b> '
+    '<div class="wrap hp-sample"><p class="sample-note">Sample content. '
     "The people, posts, and dates on this page are examples until it is connected to the Hub.</p></div>"
 )
 

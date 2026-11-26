@@ -1,38 +1,35 @@
-/* CNAP Member Hub design system (MW 2026-11-25, "Comprehensive design elevation").
+/* CNAP Member Hub design layer (MW 2026-11-25).
 
    Loaded last on every Hub page (Home, the Funding pages, the RSVP page, and the section pages built
-   by port_to_app.py), so the shared pieces are decided here, once: the tokens, the header, breadcrumbs,
-   the sample-content notice, buttons and links, the floating controls, and the footer. Page-specific
-   refinements follow in their own marked parts. hub.css, page.css, and guide.css still lay the pages
-   out; where they disagree about a shared piece, this file is the answer.
+   by port_to_app.py). It decides the top navigation ribbon in one place: the header, its menus, the
+   account, and how it fits from tablet to desktop. MW kept the ribbon from the design elevation and
+   set the rest aside, so everything below the header is as hub.css, page.css, and guide.css draw it.
 
    Some rules carry !important only because the rule they replace in hub.css does. */
 
 /* ---------------------------------------------------------------------------------------------
-   1. Tokens
-   Color: warm ivory surfaces, charcoal ink, K-State purple for actions and selection only, deep plum
-   for the few dark bands. Type: Lora for display and editorial titles, Inter for everything a member
-   reads to act. Sizes keep to one scale (no half pixels). Radii: 4 small marks, 8 controls and cards,
-   12 large panels and dialogs; circles only for people and dots. Shadows only on things that float.
+   1. Tokens for the ribbon: warm ivory, charcoal ink, K-State purple only for the current section
+   and focus. Lora for the wordmark, Inter for the labels. Shadows only on the menus that float.
    --------------------------------------------------------------------------------------------- */
-:root{
-  --paper:#faf9f7;--band:#f3f0ea;--surface:#ffffff;
-  --line:#e6e1d8;--line-2:#d5cec2;
-  --ink:#1d1b21;--ink-2:#3f3b45;--muted:#5d5866;
-  --purple:#512888;--purple-ink:#3c1d66;--purple-tint:#f3eefa;--purple-line:#d6c8ea;
-  --plum:#22132f;--plum-2:#2c1a3b;--on-plum:#f6f2fa;--on-plum-2:#cfc4dd;
-  --amber-ink:#6e470d;--amber-wash:#f8f1e4;--amber-line:#eadcc0;--amber-dot:#c08a2c;
-
-  --t-12:12px;--t-13:13px;--t-14:14px;--t-15:15px;--t-16:16px;--t-18:18px;
-  --d-20:20px;--d-24:24px;--d-30:30px;--d-40:40px;--d-52:52px;--d-64:64px;
-
-  --s-4:4px;--s-8:8px;--s-12:12px;--s-16:16px;--s-24:24px;--s-32:32px;--s-48:48px;--s-64:64px;--s-96:96px;
-
-  --r-s:4px;--r-m:8px;--r-l:12px;
-
-  --float:0 1px 2px rgba(29,27,33,.06),0 8px 20px -10px rgba(29,27,33,.22);
+.hdr,.acct-menu{
+  --paper:#faf9f7;
+  --band:#f3f0ea;
+  --line:#e6e1d8;
+  --line-2:#d5cec2;
+  --ink:#1d1b21;
+  --ink-2:#3f3b45;
+  --muted:#5d5866;
+  --purple:#512888;
+  --purple-ink:#3c1d66;
+  --purple-tint:#f3eefa;
+  --purple-line:#d6c8ea;
+  --t-12:12px;
+  --t-13:13px;
+  --t-14:14px;
+  --t-15:15px;
+  --r-m:8px;
+  --r-l:12px;
   --menu:0 1px 2px rgba(29,27,33,.05),0 16px 36px -14px rgba(29,27,33,.24);
-  --ease:cubic-bezier(.2,.7,.2,1);
   --focus:0 0 0 2px var(--paper),0 0 0 4px var(--purple);
 }
 
@@ -79,281 +76,7 @@
 .acct-menu a,.acct-menu button{border-radius:var(--r-m);font-size:var(--t-15)}
 .acct-menu a:hover,.acct-menu button:hover{background:var(--band);color:var(--ink)}
 
-/* ---------------------------------------------------------------------------------------------
-   3. Breadcrumbs: small, quiet, and one size everywhere
-   --------------------------------------------------------------------------------------------- */
-.crumb,.fp-crumb{gap:0;font-size:var(--t-13);line-height:20px;letter-spacing:.005em}
-.crumb span[aria-hidden],.fp-crumb span[aria-hidden]{margin:0 10px;opacity:.7}
-.crumb [aria-current="page"],.fp-crumb [aria-current="page"]{color:var(--ink-2)}
-.fp-page .fp-open .fp-crumb [aria-current="page"]{color:var(--on-plum)}
-.crumb a,.fp-crumb a{text-underline-offset:3px}
-
-/* ---------------------------------------------------------------------------------------------
-   4. Sample-content notice
-   It stays on every page whose content is still a sample, but as information, not an alert: a
-   slim sand band under the header with a small amber mark, in the page's own measure.
-   --------------------------------------------------------------------------------------------- */
-.sample-note{display:inline-flex;align-items:baseline;gap:8px;margin-top:14px;padding:0;border-radius:0;background:none;color:var(--amber-ink);font:500 var(--t-13)/20px var(--sans)}
-.sample-note::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--amber-dot);transform:translateY(-1px)}
-.sample-note b{font-weight:600}
-.wrap.hp-sample{max-width:none;margin:0;padding:0;background:var(--amber-wash);border-bottom:1px solid var(--amber-line)}
-.wrap.hp-sample .sample-note{display:block;max-width:1360px;margin:0 auto;padding:9px var(--side-r) 9px var(--side)}
-[data-hub-page] .wrap.hp-sample .sample-note{max-width:1480px}
-.wrap.hp-sample .sample-note::before{display:inline-block;margin-right:8px;vertical-align:middle;transform:translateY(-1px)}
-
-/* ---------------------------------------------------------------------------------------------
-   5. Buttons and links
-   Primary: the one action that matters on a view, in purple. Secondary: an outlined control on the
-   surface. Tertiary: a text action in ink with a short arrow, for "see more" moves. Links in prose
-   are purple and underlined, thinner than the text.
-   --------------------------------------------------------------------------------------------- */
-.btn{min-height:44px;padding:0 18px;border-radius:var(--r-m);border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font:500 var(--t-15)/1 var(--sans);letter-spacing:0;box-shadow:none;transition:background-color .15s ease,border-color .15s ease,color .15s ease}
-.btn:hover{background:var(--surface);border-color:var(--ink-2);color:var(--ink)}
-.btn.pri,.btn.primary{background:var(--purple);border-color:var(--purple);color:#fff}
-.btn.pri:hover,.btn.primary:hover{background:var(--purple-ink);border-color:var(--purple-ink);color:#fff}
-.btn.sm{min-height:36px;padding:0 14px;font-size:var(--t-14)}
-.btn:focus-visible{outline:none;box-shadow:var(--focus)}
-.t3,.go{color:var(--ink);font-weight:500;text-decoration:none}
-main p a:not(.btn):not(.sh-link):not(.share),main li > a:not([class]){text-decoration-thickness:1px;text-underline-offset:3px}
-
-/* ---------------------------------------------------------------------------------------------
-   6. Floating controls: Page feedback and Back to top
-   One family: ivory, a hairline, the smallest shadow that lifts them off the page, ink text. They
-   stay in the corner and out of the content's way; hover and focus bring the purple in.
-   --------------------------------------------------------------------------------------------- */
-html body .fbk-open.fbk-open{right:20px!important;height:36px;min-height:0;padding:0 14px!important;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line-2);border-radius:var(--r-m);background:var(--surface);color:var(--ink-2)!important;font:500 var(--t-13)/1 var(--sans)!important;letter-spacing:0;box-shadow:var(--float)!important;opacity:1;transition:color .15s ease,border-color .15s ease}
-html body .fbk-open.fbk-open.fbk-open.fbk-open{bottom:calc(var(--below,0px) + 20px)!important}
-html body .fbk-open.fbk-open::before{content:"";width:14px;height:14px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z'/%3E%3C/svg%3E") center/contain no-repeat}
-html body .fbk-open.fbk-open:hover{color:var(--purple-ink)!important;border-color:var(--purple-line);background:var(--surface)}
-html body .fbk-open.fbk-open:focus-visible{outline:none;box-shadow:var(--focus)!important}
-html body .totop{right:20px;width:36px;height:36px;border-radius:var(--r-m);border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);box-shadow:var(--float)}
-html body .totop.on{opacity:1}
-html body .totop:hover{color:var(--purple-ink);border-color:var(--purple-line)}
-@media (max-width:760px){
-  html body .fbk-open.fbk-open{width:40px;height:40px;padding:0!important;justify-content:center;gap:0;font-size:0!important;color:var(--ink-2)!important}
-  html body .fbk-open.fbk-open::before{width:18px;height:18px;background:var(--ink-2)!important}
-  html body .fbk-open.fbk-open,html body .totop{right:16px!important}
-  html body .totop{width:40px;height:40px}
-}
-
-/* ---------------------------------------------------------------------------------------------
-   7. Footer: a deliberate close to the page
-   Generous room, one hairline, the Center's name in Lora (it opens the CNAP website), the contact
-   address in ink with a quiet underline that only arrives on hover.
-   --------------------------------------------------------------------------------------------- */
-.fp-foot,[data-hub-page] footer.foot{margin-top:0;padding:48px 0 64px;border-top:1px solid var(--line);background:var(--paper);color:var(--muted)}
-.fp-foot .wrap,[data-hub-page] footer.foot .wrap{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 32px}
-.fp-foot .ft-site,[data-hub-page] footer.foot .ft-site{font:500 var(--t-16)/24px var(--serif);letter-spacing:-.005em;color:var(--ink-2)}
-.fp-foot .ft-site:hover,.fp-foot .ft-site:focus-visible,[data-hub-page] footer.foot .ft-site:hover,[data-hub-page] footer.foot .ft-site:focus-visible{color:var(--purple-ink)}
-.fp-foot a[href^="mailto:"]{font-size:var(--t-14);color:var(--ink-2);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:var(--line-2);transition:color .15s ease,text-decoration-color .15s ease}
-.fp-foot a[href^="mailto:"]:hover,.fp-foot a[href^="mailto:"]:focus-visible{color:var(--purple-ink);text-decoration-color:currentColor}
-[data-hub-page] footer.foot .wrap span:last-child{font-size:var(--t-13);line-height:20px;color:var(--muted)}
-
-@media (prefers-reduced-motion:reduce){
-  .hdr .hn-app .rb-b,.hdr .hn-app > a,.hdr .hn-app .rb-b::after,.hdr .hn-app > a::after,.btn,html body .fbk-open.fbk-open{transition:none}
-}
-
-/* =============================================================================================
-   PAGE REFINEMENTS
-   ============================================================================================= */
-
-/* ---------------------------------------------------------------------------------------------
-   8. The Funding pages' plum opening (Funding opportunities, Grant resources, Funding news)
-   A composed two-column opening: the title and its lead on the left at a reading measure; the
-   page's facts on the right as a short numbered register, so they belong to the opening instead
-   of trailing it. The headline is smaller and set tighter, so it reads as confident rather than
-   loud. The three pages are a navigation system: quiet ruled panels on the plum, the current page
-   in pale lavender with a fine purple rule along its foot, and an arrow on the others.
-   --------------------------------------------------------------------------------------------- */
-.fp-page .fp-open{padding:48px 0 56px!important;background:radial-gradient(110% 120% at 88% 0%,var(--plum-2) 0%,#1a0f22 60%,#150c1b 100%)}
-.fp-page .fp-open .fp-hero{margin-top:40px}
-.fp-page .fp-open .fp-hd{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);column-gap:clamp(40px,6vw,96px);align-items:end}
-.fp-page .fp-open .fp-hd>*{grid-column:1}
-.fp-page .fp-open .fp-hd .fp-for{margin:0;font:500 var(--t-13)/20px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:#e3c58f}
-.fp-page .fp-open .fp-hd h1{margin-top:14px;font:400 clamp(40px,4vw,52px)/1.06 var(--serif);letter-spacing:-.02em}
-.fp-page .fp-open .fp-lead{margin-top:18px;max-width:54ch;font-size:var(--t-18);line-height:29px;color:var(--on-plum-2)}
-
-.fp-page .fp-open .fp-facts{grid-column:2;grid-row:1 / span 3;align-self:end;display:block!important;margin:0!important;counter-reset:fact}
-.fp-page .fp-open .fp-facts div,.fp-page .fp-open .fp-facts div:last-child{display:grid;grid-template-columns:32px minmax(0,1fr);column-gap:8px;margin:0!important;padding:14px 0 15px!important;border:0!important;box-shadow:inset 0 1px 0 rgba(246,242,250,.16)!important;counter-increment:fact}
-.fp-page .fp-open .fp-facts div:last-child{box-shadow:inset 0 1px 0 rgba(246,242,250,.16),inset 0 -1px 0 rgba(246,242,250,.16)!important}
-.fp-page .fp-open .fp-facts div::before{content:counter(fact,decimal-leading-zero);grid-row:1 / span 2;padding-top:2px;font:500 var(--t-12)/18px var(--sans);letter-spacing:.04em;color:rgba(246,242,250,.45);font-variant-numeric:tabular-nums}
-.fp-page .fp-open .fp-facts dt{font:500 var(--t-12)/18px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--on-plum-2)}
-.fp-page .fp-open .fp-facts dd{margin:4px 0 0;font:400 var(--d-20)/26px var(--serif)!important;letter-spacing:-.005em;color:var(--on-plum)}
-
-.fp-page .fp-open nav.fp-tabs{gap:12px;margin-top:48px}
-.fp-page .fp-open nav.fp-tabs a,.fp-page .fp-open nav.fp-tabs a+a{position:relative;gap:6px;padding:20px 48px 22px 22px!important;border:1px solid rgba(246,242,250,.16)!important;border-radius:var(--r-m);background:rgba(246,242,250,.04);transition:background-color .2s ease,border-color .2s ease}
-.fp-page .fp-open nav.fp-tabs a::after{content:"";position:absolute;right:22px;top:26px;width:7px;height:7px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:rotate(45deg);color:rgba(246,242,250,.5);transition:transform .25s var(--ease),color .2s ease}
-.fp-page .fp-open nav.fp-tabs b{font:400 var(--d-20)/26px var(--serif);letter-spacing:-.005em;color:var(--on-plum)}
-.fp-page .fp-open nav.fp-tabs span{font-size:var(--t-14);line-height:20px;color:var(--on-plum-2)}
-.fp-page .fp-open nav.fp-tabs a:hover{background:rgba(246,242,250,.08);border-color:rgba(246,242,250,.3)!important}
-.fp-page .fp-open nav.fp-tabs a:hover::after{transform:translateX(3px) rotate(45deg);color:var(--on-plum)}
-.fp-page .fp-open nav.fp-tabs a:focus-visible{outline:none;box-shadow:0 0 0 2px #1a0f22,0 0 0 4px #d4bdf6!important}
-.fp-page .fp-open nav.fp-tabs a[aria-current="page"]{background:var(--purple-tint);border-color:transparent!important;box-shadow:inset 0 -2px 0 var(--purple)!important}
-.fp-page .fp-open nav.fp-tabs a[aria-current="page"]::after{display:none}
-.fp-page .fp-open nav.fp-tabs a[aria-current="page"] b{color:var(--purple-ink)}
-.fp-page .fp-open nav.fp-tabs a[aria-current="page"] span{color:var(--muted)}
-
-@media (max-width:980px){
-  .fp-page .fp-open .fp-hd{grid-template-columns:minmax(0,1fr)}
-  .fp-page .fp-open .fp-facts{grid-column:1;grid-row:auto;margin-top:28px!important}
-}
-@media (max-width:760px){
-  .fp-page .fp-open{padding:32px 0 40px!important}
-  .fp-page .fp-open .fp-hero{margin-top:28px}
-  .fp-page .fp-open nav.fp-tabs{gap:8px;margin-top:32px}
-  .fp-page .fp-open nav.fp-tabs a,.fp-page .fp-open nav.fp-tabs a+a{padding:16px 44px 17px 18px!important}
-  .fp-page .fp-open nav.fp-tabs a::after{right:18px;top:22px}
-}
-
-/* ---------------------------------------------------------------------------------------------
-   9. Editorial mastheads (Research at CNAP, Events) and the featured story
-   The masthead's contribution action ("Suggest a story", "Submit an event") speaks the same
-   language as the contribute links on Home: a fine ring with a plus, beside an ink label, set on
-   the lead's baseline instead of a form button in the corner.
-   --------------------------------------------------------------------------------------------- */
-.rs-open{padding:40px 0 40px}
-.rs-mast{margin-top:32px;align-items:flex-end}
-.rs-mast h1{font:400 clamp(40px,4.4vw,56px)/1.05 var(--serif);letter-spacing:-.02em}
-.rs-mast .lead{margin-top:14px;max-width:52ch;font-size:var(--t-18);line-height:29px;color:var(--ink-2)}
-.rs-mast a.btn{position:relative;gap:12px;min-height:44px;padding:0;border:0;background:none;color:var(--ink);font:500 var(--t-15)/20px var(--sans);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;text-decoration-color:transparent;transition:color .2s ease,text-decoration-color .2s ease}
-.rs-mast a.btn::before{content:"";flex:none;width:30px;height:30px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line-2);background:linear-gradient(var(--purple),var(--purple)) center/10px 1.25px no-repeat,linear-gradient(var(--purple),var(--purple)) center/1.25px 10px no-repeat;transition:background-color .3s ease,box-shadow .3s ease,transform .45s var(--ease)}
-.rs-mast a.btn:hover,.rs-mast a.btn:focus-visible{background:none;color:var(--purple-ink);text-decoration-color:currentColor}
-.rs-mast a.btn:hover::before,.rs-mast a.btn:focus-visible::before{background:linear-gradient(#fff,#fff) center/10px 1.25px no-repeat,linear-gradient(#fff,#fff) center/1.25px 10px no-repeat,var(--purple);box-shadow:inset 0 0 0 1px var(--purple);transform:rotate(90deg)}
-.rs-mast a.btn:focus-visible{box-shadow:none;outline:2px solid var(--purple);outline-offset:4px;border-radius:999px}
-@media (prefers-reduced-motion:reduce){.rs-mast a.btn::before{transition:none}.rs-mast a.btn:hover::before{transform:none}}
-
-/* The featured story: the image keeps its impact at about three fifths; the text column is centered
-   with a reading measure; the label above the title is a quiet small-caps line; the story is read
-   from a text action, so the purple stays with the title's link. No shadow: a hairline frames it. */
-.rs-body{padding-top:56px}
-.rs-feat{grid-template-columns:minmax(0,3fr) minmax(0,2fr);border-radius:var(--r-l);border:1px solid var(--line);box-shadow:none}
-.rs-feat-im{min-height:500px}
-.rs-feat-t{gap:0;padding:56px 56px 52px}
-.rs-feat-t .eyebrow{margin:0 0 18px;font:500 var(--t-12)/18px var(--sans);letter-spacing:.07em;text-transform:uppercase;color:var(--purple)}
-.rs-feat-t h2{font:400 clamp(32px,3vw,42px)/1.12 var(--serif);letter-spacing:-.018em;text-wrap:balance}
-.rs-feat-d{margin-top:18px;font-size:var(--t-16);line-height:26px;max-width:44ch}
-.rs-feat-t .meta{margin-top:16px;font-size:var(--t-13);line-height:20px;color:var(--muted)}
-.rs-feat-t .btn.pri{margin-top:28px;min-height:0;padding:0;border:0;background:none;color:var(--ink);font:500 var(--t-15)/20px var(--sans);gap:10px}
-.rs-feat-t .btn.pri::after{content:"";width:7px;height:7px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:rotate(45deg);transition:transform .25s var(--ease)}
-.rs-feat-t .btn.pri:hover{background:none;color:var(--purple-ink)}
-.rs-feat-t .btn.pri:hover::after{transform:translateX(3px) rotate(45deg)}
-.rs-feat-t .btn.pri:focus-visible{box-shadow:none;outline:2px solid var(--purple);outline-offset:4px;border-radius:2px}
-
-/* Image labels ("Illustration", "Photo placeholder"): a credit, not a sticker. Small capitals in a
-   tight dark tab at the image's lower left, legible on light and dark pictures alike. */
-.rs-body .tag,.rs-feat-im .tag{top:auto;left:14px;bottom:14px;padding:3px 7px;border-radius:2px;background:rgba(20,12,26,.62);color:rgba(255,255,255,.92);font:500 11px/16px var(--sans);letter-spacing:.07em;text-transform:uppercase;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-
-@media (max-width:1100px){.rs-feat{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.rs-feat-im{min-height:420px}.rs-feat-t{padding:40px}}
-@media (max-width:760px){
-  .rs-feat{grid-template-columns:1fr}.rs-feat-im{min-height:0;aspect-ratio:16/10}.rs-feat-t{padding:28px 24px 32px}
-  .rs-mast a.btn{margin-top:4px}
-}
-
-/* ---------------------------------------------------------------------------------------------
-   10. Events: the featured event
-   The editorial date stays the signature, a little smaller so the card is in proportion to what it
-   holds. The hierarchy reads in order: the series label, the title, who, what, then the logistics
-   as one scannable line, then the calendar actions as a matched pair (Outlook first, as K-State's
-   calendar; Google beside it in the same size, outlined).
-   --------------------------------------------------------------------------------------------- */
-.ev-feat{gap:24px 56px;margin-top:40px;padding:36px 44px 36px 40px;border-radius:var(--r-l);background:var(--surface);border:1px solid var(--line)}
-.ev-poster{min-width:168px;padding-right:48px}
-.p-day{font:500 var(--t-12)/18px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.p-num{font:400 124px/.86 var(--serif);letter-spacing:-.045em;margin:14px 0 12px;color:var(--purple-ink);font-variant-numeric:lining-nums}
-.p-mon{font:400 var(--d-24)/30px var(--serif);letter-spacing:-.01em;color:var(--ink)}
-.ev-ft .eyebrow{margin:0;font:500 var(--t-12)/18px var(--sans);letter-spacing:.07em;text-transform:uppercase;color:var(--purple)}
-.ev-ft h2{margin:12px 0 0;font:400 clamp(28px,2.8vw,38px)/1.14 var(--serif);letter-spacing:-.015em}
-.ev-who{margin:12px 0 0;font-size:var(--t-15);line-height:22px;color:var(--ink-2)}
-.ev-who b{font-weight:600;color:var(--ink)}
-.ev-desc{margin:12px 0 0;font-size:var(--t-16);line-height:26px;max-width:64ch}
-.ev-ft{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:0;align-items:end}
-.ev-ft>*{grid-column:1 / -1}
-.ev-ft .meta{grid-column:1;margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);font-size:var(--t-14);line-height:22px;color:var(--ink-2);font-variant-numeric:tabular-nums;align-self:stretch}
-.ev-ft .ev-fa{grid-column:2;margin-top:20px;padding:12px 0 0 32px;border-top:1px solid var(--line);gap:10px;justify-content:flex-end}
-.ev-add.ev-lg{gap:10px;font:500 var(--t-14)/1 var(--sans)}
-.ev-add.ev-lg a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border-radius:var(--r-m);text-decoration:none;transition:background-color .15s ease,border-color .15s ease,color .15s ease}
-.ev-add.ev-lg a:first-child{background:var(--purple);border:1px solid var(--purple);color:#fff;font-size:var(--t-14)}
-.ev-add.ev-lg a:first-child:hover{background:var(--purple-ink);border-color:var(--purple-ink)}
-.ev-add.ev-lg a+a{border:1px solid var(--line-2);background:var(--surface);color:var(--ink)}
-.ev-add.ev-lg a+a:hover{border-color:var(--ink-2)}
-.ev-add.ev-lg a:focus-visible{outline:none;box-shadow:var(--focus)}
-@media (max-width:760px){
-  .ev-feat{padding:24px 22px}
-  .ev-poster{padding:0 0 16px;gap:12px;align-items:baseline}
-  .p-num{font-size:64px;margin:0}.p-mon{font-size:22px}
-  .ev-ft{grid-template-columns:minmax(0,1fr)}
-  .ev-ft .ev-fa{grid-column:1;margin-top:16px;padding-top:0;border-top:0;justify-content:flex-start}
-}
-
-/* ---------------------------------------------------------------------------------------------
-   11. NeuroSync: Talks by semester (the archive)
-   Kept as it is in structure: the semester selector, the chronological rows, the editorial dates,
-   the initials, serif titles, and hairlines. Refined in measure: one radius, a pale lavender
-   selection with a fine purple foot, an even date column, initials in a restrained three-tone
-   palette, and recording states as small marks in the text's own voice instead of badges.
-   --------------------------------------------------------------------------------------------- */
-.ns-semh{margin:56px 0 16px;padding-top:32px;font:400 var(--d-24)/30px var(--serif);letter-spacing:-.01em}
-.ns-semtabs.sv-days{display:inline-flex;flex-wrap:wrap;margin-bottom:24px;border:1px solid var(--line);border-radius:var(--r-m);background:var(--surface)}
-.ns-semtabs.sv-days button{flex:none;gap:2px;padding:12px 22px 13px;transition:background-color .15s ease}
-.ns-semtabs.sv-days button+button{border-left:1px solid var(--line)}
-.ns-semtabs.sv-days b{font:400 17px/22px var(--serif);letter-spacing:-.005em;color:var(--ink)}
-.ns-semtabs.sv-days span{font-size:var(--t-12);line-height:16px;letter-spacing:.01em;color:var(--muted)}
-.ns-semtabs.sv-days button:hover{background:var(--band)}
-.ns-semtabs.sv-days button[aria-selected="true"]{background:var(--purple-tint);box-shadow:inset 0 -2px 0 var(--purple)}
-.ns-semtabs.sv-days button[aria-selected="true"] b{color:var(--purple-ink)}
-.ns-semtabs.sv-days button[aria-selected="true"] span{color:var(--ink-2)}
-.ns-semtabs.sv-days button:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--purple)}
-.ns-semtabs.sv-days button:first-child{border-radius:7px 0 0 7px}
-.ns-semtabs.sv-days button:last-child{border-radius:0 7px 7px 0}
-
-.ns-ph{margin:0 0 12px;font-size:var(--t-14);line-height:20px}
-.ns-rows{border-top:1px solid var(--line-2)}
-.ns-r{grid-template-columns:52px 40px minmax(0,1fr) auto;gap:20px;padding:16px 0;border-bottom:1px solid var(--line)}
-.ns-rd b{font:400 26px/1 var(--serif);font-variant-numeric:lining-nums tabular-nums;color:var(--ink)}
-.ns-rd small{margin-top:4px;font:500 11px/14px var(--sans);letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
-.ns-rt{font:400 18px/24px var(--serif);letter-spacing:-.005em;color:var(--ink)}
-.ns-rw{margin-top:3px;font-size:var(--t-14);line-height:20px;color:var(--muted)}
-.ns-r.is-past .ns-rt,.ns-r.is-past .ns-rd b{color:var(--ink-2)}
-.ns-r.is-next{margin:0 -16px;padding-inline:16px;border-radius:var(--r-m);background:var(--purple-tint)}
-.ns-r.is-off{padding:12px 0}
-.ns-r.is-off .ns-rd b{font-size:20px;color:var(--muted)}
-.ns-ra-off{width:40px;height:1px;background:var(--line-2)}
-.ns-ra-open{width:40px;height:40px;border:1px dashed var(--line-2);font-size:18px}
-
-/* presenter initials: one size, a hairline ring, three quiet tones */
-.ns-r .cm-av{width:40px;height:40px;font:500 14px/1 var(--serif);letter-spacing:.03em;box-shadow:inset 0 0 0 1px rgba(29,27,33,.06)}
-.av-p{background:#f1edf7;color:#3f2468}
-.av-t{background:#e9f0ee;color:#1d4d50}
-.av-a{background:#f4eee5;color:#674314}
-
-/* recording states, as marks in the row's own type */
-.ns-tag{min-height:0;padding:0;border-radius:0;background:none;gap:8px;font:500 var(--t-13)/18px var(--sans);color:var(--muted)}
-.ns-tag::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;box-shadow:inset 0 0 0 1.25px currentColor}
-.ns-tag.on{background:none;color:var(--purple-ink);font-weight:600}
-.ns-tag.on::before{background:var(--purple);box-shadow:none}
-a.ns-tag{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--line-2)}
-a.ns-tag::before{background:var(--ink);box-shadow:none}
-a.ns-tag:hover{color:var(--purple-ink);text-decoration-color:currentColor}
-
-@media (max-width:640px){
-  .ns-r{grid-template-columns:44px minmax(0,1fr);gap:4px 14px}
-  .ns-semtabs.sv-days{display:flex;flex-wrap:nowrap;max-width:100%;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  .ns-semtabs.sv-days::-webkit-scrollbar{display:none}
-  .ns-semtabs.sv-days button{flex:none;padding:10px 16px}
-  .ns-r .ns-ra-off{display:none}
-}
-
-/* The "On this page" dot rail on the section pages sits in the left margin. Where that margin is
-   too narrow to hold it apart from the content (under about 1560px), it read as a stray line beside
-   the headings, so it steps aside; the sections are all on the page, and wider screens keep it. */
-@media (max-width:1559px){[data-hub-page] .sv-rail{display:none!important}}
-/* the footer keeps its right edge clear of the floating controls, so at the very bottom of a page
-   nothing sits under Page feedback or Back to top */
-@media (min-width:761px){.fp-foot .wrap,[data-hub-page] footer.foot .wrap{padding-right:max(var(--side-r),184px)}}
-@media (max-width:760px){.fp-foot,[data-hub-page] footer.foot{padding-bottom:88px}}
-
-/* Tablet widths: the header keeps every item in view, and the featured event stacks its actions
-   under the logistics instead of squeezing them into a narrow column */
+/* Tablet widths: the ribbon keeps every item in view (it ran off the right edge from about 760 to 1180px) */
 @media (max-width:1240px){
   .hdr .wrap{gap:20px}
   .hdr .hn-app{gap:0}
@@ -364,27 +87,7 @@ a.ns-tag:hover{color:var(--purple-ink);text-decoration-color:currentColor}
 @media (max-width:1100px) and (min-width:761px){
   .hdr .brand b,.hdr .brand small{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
-@media (max-width:1100px){
-  .ev-ft{grid-template-columns:minmax(0,1fr)}
-  .ev-ft .ev-fa{grid-column:1;margin-top:16px;padding:0;border-top:0;justify-content:flex-start}
+
+@media (prefers-reduced-motion:reduce){
+  .hdr .hn-app .rb-b,.hdr .hn-app > a,.hdr .hn-app .rb-b::after,.hdr .hn-app > a::after{transition:none}
 }
-
-/* ---------------------------------------------------------------------------------------------
-   12. Selection, everywhere: pale lavender with purple ink (second pass, MW 2026-11-25)
-   Filters (Research, Community, and every page with .pf-filt) and the Calendar/List switch used
-   solid purple for "selected", unlike the tabs and cards. They now match: lavender, a fine purple
-   line, purple-ink text. Solid purple stays for the one primary action on a view.
-   --------------------------------------------------------------------------------------------- */
-.pf-filt button{border-color:var(--line-2);color:var(--ink-2);transition:background-color .15s ease,border-color .15s ease,color .15s ease}
-.pf-filt button:hover{border-color:var(--ink-2);color:var(--ink)}
-.pf-filt button[aria-pressed="true"]{background:var(--purple-tint);border-color:var(--purple-line);color:var(--purple-ink);font-weight:600}
-.ev-mode{padding:3px;border-color:var(--line);border-radius:var(--r-m)}
-.ev-mode button{min-height:34px;padding:0 16px;border-radius:6px;font-size:var(--t-14)}
-.ev-mode button:hover{color:var(--ink)}
-.ev-mode button[aria-pressed="true"]{background:var(--purple-tint);color:var(--purple-ink);box-shadow:inset 0 0 0 1px var(--purple-line)}
-.pf-filt button:focus-visible,.ev-mode button:focus-visible{outline:none;box-shadow:var(--focus)}
-
-/* Grant resources, below the opening: the questions sit on a hairline instead of a floating shadow,
-   and the consultation card moves from a cool blue-gray to the warm band of the palette */
-.fp-qcard{border:1px solid var(--line);border-radius:var(--r-l);box-shadow:none}
-.fp-help-card{border-radius:var(--r-l);background:var(--band)}
