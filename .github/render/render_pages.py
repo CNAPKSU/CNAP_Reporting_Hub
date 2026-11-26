@@ -38,6 +38,11 @@ pages = [
     "/tasks/",
 ]
 pages += [reverse(f"portal:{url_name(k)}") for k in PAGES]
+from apps.reporting.models import ReportingPeriod  # noqa: E402
+
+pages += [
+    reverse("manage:launch", args=[p.pk]) for p in ReportingPeriod.objects.order_by("-pk")[:2]
+]
 with override_settings(UI_PROTOTYPE=True, UI_PROTOTYPE_ONLY=True, DEBUG=False):
     for username in ("mwills", "okafor"):
         c = Client()
