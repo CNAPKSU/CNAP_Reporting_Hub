@@ -8,6 +8,7 @@
 <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/guide.css' %}">
+<link rel="stylesheet" href="{% static 'hub/system.css' %}">
 </head>
 <body data-hub-page="story" data-guide="story" class="rs-page st-page">
 {# Built by design/prototypes/member-hub/port_to_app.py from story.html. Change the prototype and run it again. #}
@@ -60,7 +61,7 @@
     <ul class="rs-grid"><li class="sc" data-k="pilot"><a href="#" data-proto title="Only one story page is built in the prototype."><figure class="sc-im"><img src="{% static 'hub/img/oscillations.jpg' %}" alt="Generated illustration of brain oscillations" loading="lazy"><span class="tag">Illustration</span></figure><div class="sc-t"><p class="eyebrow">Pilot project</p><h3>How a new pilot team is planning the first year</h3><p class="sc-d">Milestones, a standing monthly meeting, and an early conversation with the cores: how one team set up a pilot award.</p><p class="meta">The CNAP team · November 6, 2026 · 5-minute read</p></div></a></li><li class="sc" data-k="core"><a href="#" data-proto title="Only one story page is built in the prototype."><figure class="sc-im"><img src="{% static 'hub/img/reel-3.jpg' %}" alt="Placeholder for a photograph of the Cognitive Neuroscience Core" loading="lazy"><span class="tag">Photo placeholder</span></figure><div class="sc-t"><p class="eyebrow">Core capability</p><h3>Transcranial magnetic stimulation in the Cognitive Neuroscience Core</h3><p class="sc-d">Combined with EEG, stimulation will let investigators test which brain regions a task depends on, not just which ones are active.</p><p class="meta">The CNAP team · November 8, 2026 · 3-minute read</p></div></a></li><li class="sc" data-k="people"><a href="#" data-proto title="Only one story page is built in the prototype."><figure class="sc-im"><img src="{% static 'hub/img/reel-4.jpg' %}" alt="Placeholder for a portrait photograph" loading="lazy"><span class="tag">Photo placeholder</span></figure><div class="sc-t"><p class="eyebrow">Investigator profile</p><h3>Meet the Center’s newest pilot project leader</h3><p class="sc-d">Why a sleep researcher joined CNAP, and what she hopes the Center’s cores will make possible.</p><p class="meta">The CNAP team · October 29, 2026 · 4-minute read</p></div></a></li></ul>
   </section>
 </main>
-<footer class="foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><span>Prototype. This story is sample content. The project, people, and quote are fictional.</span></div></footer>
+<footer class="foot"><div class="wrap"><a class="ft-site" href="https://www.k-state.edu/cnap/" title="Opens the CNAP website.">Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</a><span>Prototype. This story is sample content. The project, people, and quote are fictional.</span></div></footer>
 <script src="{% static 'hub/guide.js' %}"></script>
 <script>
 (function(){var b=document.querySelector('.st-copy');if(b)b.addEventListener('click',function(){var u=location.href;var done=function(){b.textContent='Link copied';setTimeout(function(){b.textContent='Copy link'},2000)};try{navigator.clipboard.writeText(u).then(done,function(){});}catch(e){}});

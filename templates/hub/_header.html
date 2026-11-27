@@ -9,7 +9,8 @@
         <button type="button" class="rb-b" aria-expanded="false" aria-controls="rb-rep">Reporting<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="rb-p" id="rb-rep" hidden>
           <a href="{% url 'portal:tasks' %}"><b>My tasks</b><small>Surveys and reports due this session</small></a>
-          <a href="{% url 'portal:outcomes' %}"><b>Publications, talks, and grants</b><small>Record a paper, a presentation, or a proposal</small></a>
+          {# Only people who keep outcomes have a page of their own; staff see the Center's list (MW 2026-11-25, as in base.html) #}
+          {% if keeps_outcomes %}<a href="{% url 'portal:outcomes' %}"><b>Publications, talks, and grants</b><small>Record a paper, a presentation, or a proposal</small></a>{% elif can_view_admin %}<a href="{% url 'manage:outcomes' %}"><b>Publications, talks, and grants</b><small>The Center’s papers, talks, and proposals</small></a>{% endif %}
           <a href="{% url 'portal:history' %}"><b>My history</b><small>Everything you have submitted</small></a>
         </div>
       </div>

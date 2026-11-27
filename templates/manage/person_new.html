@@ -5,11 +5,21 @@
 <div class="panel" style="max-width:640px">
   <form method="post">{% csrf_token %}
     {% if form.non_field_errors %}<div class="error">{{ form.non_field_errors|join:" " }}</div>{% endif %}
-    {% for field in form %}
-      <div class="field"><label>{{ field.label }}{{ field }}</label>{% if field.help_text %}<div class="help">{{ field.help_text|stack }}</div>{% endif %}{% if field.errors %}<div class="error">{{ field.errors|join:" " }}</div>{% endif %}</div>
+    {% for field in form %}{% if field.name == "center_roles" %}{% include "_center_roles.html" with choices=field.field.choices selected=field.value errors=field.errors %}{% else %}
+      <div class="field"><label>{{ field.label }}{{ field }}</label>{% if field.help_text %}<div class="help">{{ field.help_text|stack }}</div>{% endif %}{% if field.errors %}<div class="error">{{ field.errors|join:" " }}</div>{% endif %}</div>{% endif %}
     {% endfor %}
     <div class="field"><label style="flex-direction:row;gap:8px;align-items:center;color:var(--ink)"><input type="checkbox" name="roster" value="1" checked> Put them on the CNAP roster</label></div>
     <div class="actions"><button class="btn" type="submit">Add person</button><a href="{% url 'manage:people' %}">Cancel</a></div>
+  </form>
+</div>
+<div class="panel" id="add-many" style="max-width:640px">
+  <h2 class="sectionhead">Adding several people? Upload a spreadsheet</h2>
+  <p>{{ "One row per person. Required columns: first name, last name, and email. Optional columns: institution, department, title, and role in the Center."|stack }}</p>
+  <p><a href="{% url 'manage:roster_template' %}">Download a blank spreadsheet</a> with these columns.</p>
+  <form method="post" enctype="multipart/form-data" action="{% url 'manage:roster_upload' %}">{% csrf_token %}
+    <div class="field"><label>Spreadsheet (.csv or .xlsx){{ upload_form.file }}</label></div>
+    <p class="small muted">{{ "You’ll review every row before anything is saved. Everyone in the file goes on the CNAP roster."|stack }}</p>
+    <div class="actions"><button class="btn" type="submit">Upload and review</button></div>
   </form>
 </div>
 {% endblock %}

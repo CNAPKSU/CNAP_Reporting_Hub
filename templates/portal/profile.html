@@ -5,7 +5,7 @@
   <div class="avatar" aria-hidden="true">{{ person.first_name|slice:":1" }}{{ person.last_name|slice:":1" }}</div>
   <div class="profhero-t">
     <h1>{{ person }}</h1>
-    <p class="profhero-s">{% if person.position_title %}{{ person.position_title }}{% if person.department or person.institution %} · {% endif %}{% endif %}{% if person.department %}{{ person.department }}{% if person.institution %} · {% endif %}{% endif %}{{ person.institution|default:"" }}</p>
+    <p class="profhero-s">{% if person.position_title %}{{ person.position_title }}{% if person.center_roles or person.department or person.institution %} · {% endif %}{% endif %}{% if person.center_roles %}{{ person.center_role_label }}{% if person.department or person.institution %} · {% endif %}{% endif %}{% if person.department %}{{ person.department }}{% if person.institution %} · {% endif %}{% endif %}{{ person.institution|default:"" }}</p>
     {% if rels %}<ul class="rolechips" aria-label="Your CNAP roles">{% for r in rels %}<li>{% if r.core %}{{ r.core.code }} {% endif %}{{ r.relationship_type.name }}</li>{% endfor %}</ul>{% endif %}
   </div>
   <dl class="profhero-ids">
@@ -16,10 +16,12 @@
 <p class="small muted profnote">Open a section to check or update it.</p>
 <div class="rollup profsecs" data-start="closed">
   <div class="panel rollsec">
-    <h2 class="sectionhead" title="Your department, position, eRA Commons ID, ORCID iD, and effort on CNAP work. The Center uses these details in its NIH reports. Click to check or update them.">Your details</h2>
+    <h2 class="sectionhead" title="Your department, title, role in the Center, eRA Commons ID, ORCID iD, and effort on CNAP work. The Center uses these details in its NIH reports. Click to check or update them.">Your details</h2>
     <form method="post">{% csrf_token %}
       <div class="field"><label>Department<input type="text" name="department" value="{{ person.department }}"></label></div>
-      <div class="field"><label>Position title<input type="text" name="position_title" placeholder="For example, Assistant Professor or Graduate Research Assistant" value="{{ person.position_title }}"></label></div>
+      <div class="field"><label>Title<input type="text" name="position_title" placeholder="For example, Assistant Professor or Graduate Research Assistant" value="{{ person.position_title }}"></label></div>
+      {% include "_center_roles.html" with choices=center_role_choices selected=person.center_roles %}
+      <div class="field"><label>Your role, if Other<input type="text" name="center_role_other" maxlength="200" placeholder="Describe your role" value="{{ person.center_role_other }}"></label></div>
       <div class="field" id="commons"><label>eRA Commons ID<input type="text" name="era_commons_id" value="{{ person.era_commons_id }}" autocomplete="off" spellcheck="false"></label>
         <p class="small muted">Your eRA Commons ID is your NIH eRA Commons user name. The Center lists your eRA Commons ID in its annual NIH <a href="https://grants.nih.gov/grants-process/post-award-monitoring-and-reporting/reporting-requirements/research-performance-progress-report-rppr" target="_blank" rel="noopener">Research Performance Progress Report (RPPR)</a>.<br><a href="https://era.nih.gov/register-accounts/create-and-edit-an-account.htm" target="_blank" rel="noopener">eRA’s guide to creating and managing an eRA Commons account</a> (opens in a new tab)</p>
         {% if not person.era_commons_id %}<details class="helpbox"{% if person.era_commons_help_requested_at %} open{% endif %}><summary class="small">I need help with eRA Commons, or I’m not sure I need one</summary>

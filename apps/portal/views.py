@@ -18,7 +18,7 @@ from django.views.decorators.http import require_POST
 from apps.accounts import access
 from apps.common import prototype
 from apps.common.enums import COMPLETE_STATUSES, PeriodStatus
-from apps.people.models import Person
+from apps.people.models import CENTER_ROLES, Person, clean_center_roles
 from apps.people.services import SENIOR_KEY_TYPES, is_external, normalize_orcid, update_person
 from apps.reporting.models import Assignment, File, ReportingPeriod
 from apps.reporting.services import responses as rs
@@ -517,9 +517,21 @@ def profile(request):
             except ValueError as exc:
                 messages.error(request, str(exc))
                 return redirect(reverse("portal:profile") + "#orcid")
+        role_fields = {}
+        if "center_roles_shown" in request.POST:
+            roles = clean_center_roles(request.POST.getlist("center_roles"))
+            other = request.POST.get("center_role_other", "").strip()[:200]
+            if "other" in roles and not other:
+                messages.error(request, "Describe your role in the Center, or untick Other.")
+                return redirect(reverse("portal:profile") + "#center-role")
+            role_fields = {
+                "center_roles": roles,
+                "center_role_other": other if "other" in roles else "",
+            }
         update_person(
             request.user,
             person,
+            **role_fields,
             orcid=orcid,
             department=request.POST.get("department", "")[:200],
             position_title=request.POST.get("position_title", "")[:200],
@@ -548,6 +560,7 @@ def profile(request):
             "rels": [r for r in rels if r.relationship_type.code != "cnap_member"],
             "on_roster": any(r.relationship_type.code == "cnap_member" for r in rels),
             "levels": LEVELS,
+            "center_role_choices": CENTER_ROLES,
             "is_trainee": any(
                 r.relationship_type.code in ("project_student", "student_trainee") for r in rels
             ),

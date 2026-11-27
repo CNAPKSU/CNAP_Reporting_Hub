@@ -4,7 +4,7 @@ then commit. Nothing changes until the evaluator commits.
 
 Columns (header names are matched loosely, case and spacing ignored):
     first name, last name, email, institution (optional), department (optional),
-    position (optional)
+    title (optional), role in the Center (optional)
 
 Each row is classified:
 - matched: the email belongs to an existing person;
@@ -52,8 +52,54 @@ COLUMN_ALIASES = {
     },  # accepts both spellings in uploaded files
     "institution": {"institution", "university", "organization", "affiliation"},
     "department": {"department", "dept", "unit"},
-    "position_title": {"position", "title", "position title", "job title", "role"},
+    "position_title": {"position", "title", "position title", "job title"},
+    "center_role": {"role", "center role", "role in the center", "role in center", "cnap role"},
 }
+
+# The blank spreadsheet offered on Add a person and Roster import.
+TEMPLATE_HEADER = [
+    "First name",
+    "Last name",
+    "Email",
+    "Institution",
+    "Department",
+    "Title",
+    "Role in the Center",
+]
+
+
+def center_role_fields(text):
+    """Read a Role in the Center cell. Several roles may be separated by ; or , (or new lines).
+    Listed roles are matched by name; anything else becomes Other with that text."""
+    from .models import CENTER_ROLES
+
+    names = {}
+    for code, label in CENTER_ROLES:
+        if code != "other":
+            names[_norm(label)] = code
+            names[_norm(code)] = code
+    roles, others = [], []
+    for part in re.split(r"[;,\n]", str(text or "")):
+        part = part.strip()
+        if not part:
+            continue
+        code = names.get(_norm(part))
+        if code:
+            roles.append(code)
+            continue
+        if _norm(part).startswith("other"):
+            part = part[5:].lstrip(" :-–").strip()
+        roles.append("other")
+        if part:
+            others.append(part)
+    if not roles:
+        return {}
+    out = {"center_roles": [c for c, _ in CENTER_ROLES if c in roles]}
+    if others:
+        out["center_role_other"] = ", ".join(others)[:200]
+    return out
+
+
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
@@ -216,6 +262,7 @@ def commit(actor, imp):
     for row in imp.rows.select_related("matched_person"):
         raw = row.raw or {}
         extra = {k: raw.get(k, "") for k in ("department", "position_title") if raw.get(k)}
+        extra.update(center_role_fields(raw.get("center_role")))
         if row.decision == "skip" or row.decision == "keep":
             done["skipped"] += row.decision == "skip"
             continue

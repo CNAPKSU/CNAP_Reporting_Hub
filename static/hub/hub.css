@@ -1668,3 +1668,8 @@ dialog.fbk .fbk-proto{margin:0!important}
   .brief .bi.intro h2#wk{font-size:31px!important;line-height:37px!important}
   .pfy h3,#prop-h,#news-h,#pw-h,#meet-h,.ach > h3,.talk > h3,#list-h,#lu-h,#cx-h{font-size:24px!important;line-height:30px!important}
 }
+
+/* Footer: the Center's name opens the public CNAP website (MW 2026-11-25). It reads as the footer's text until pointed at. */
+.ft-site{color:var(--muted);text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:3px;transition:color .2s ease,text-decoration-color .2s ease}
+.ft-site:hover,.ft-site:focus-visible{color:var(--purple);text-decoration-color:currentColor}
+.foot .ft-site{font-size:13.5px;line-height:21px}

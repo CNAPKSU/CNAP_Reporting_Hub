@@ -1,0 +1,8 @@
+{# Roles in the Center (MW 2026-11-26): tick all that apply. Expects choices, selected (codes), and optionally errors. #}
+<fieldset class="checks field" id="center-role">
+  <legend>Role in the Center</legend>
+  <div class="help">Choose all that apply.</div>
+  <div class="checkgrid crole">{% for c, l in choices %}<label><input type="checkbox" name="center_roles" value="{{ c }}"{% if c in selected %} checked{% endif %}> {{ l }}</label>{% endfor %}</div>
+  <input type="hidden" name="center_roles_shown" value="1">
+  {% if errors %}<div class="error">{{ errors|join:" " }}</div>{% endif %}
+</fieldset>

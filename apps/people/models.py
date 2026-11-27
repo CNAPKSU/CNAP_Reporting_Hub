@@ -16,6 +16,26 @@ from django.db.models.functions import Lower
 from apps.common.enums import ContextKind, ProjectKind
 from apps.common.models import ArchivableModel, TimestampedModel
 
+CENTER_ROLES = [
+    ("research_project_leader", "Research project leader"),
+    ("pilot_project_leader", "Pilot project leader"),
+    ("mentor", "Mentor"),
+    ("core_director", "Core director"),
+    ("core_senior_advisor", "Core senior advisor"),
+    ("core_scientific_advisor", "Core scientific advisor"),
+    ("center_director", "Center Director"),
+    ("center_associate_director", "Center Associate Director"),
+    ("graduate_student", "Graduate student"),
+    ("core_staff", "Core staff"),
+    ("other", "Other"),
+]
+
+
+def clean_center_roles(codes):
+    """Keep known role codes only, once each, in list order."""
+    chosen = set(codes or [])
+    return [code for code, _ in CENTER_ROLES if code in chosen]
+
 
 class Person(ArchivableModel):
     """Every CNAP person has exactly one row here, whether or not they ever log in."""
@@ -24,7 +44,19 @@ class Person(ArchivableModel):
     last_name = models.CharField(max_length=100)
     institution = models.CharField(max_length=200, blank=True)
     department = models.CharField(max_length=200, blank=True)
-    position_title = models.CharField(max_length=200, blank=True)
+    position_title = models.CharField("Title", max_length=200, blank=True)
+    center_roles = models.JSONField(
+        "Roles in the Center",
+        default=list,
+        blank=True,
+        help_text="How the person describes their part in CNAP (any of CENTER_ROLES). It does not decide which forms they receive.",
+    )
+    center_role_other = models.CharField(
+        "Role in the Center (other)",
+        max_length=200,
+        blank=True,
+        help_text="Filled in when the role is Other.",
+    )
     is_active = models.BooleanField(default=True)
     rich_profile_override = models.BooleanField(
         null=True,
@@ -95,6 +127,21 @@ class Person(ArchivableModel):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    @property
+    def center_role_labels(self):
+        """The roles as people read them, in list order; Other shows the typed-in text."""
+        names = dict(CENTER_ROLES)
+        chosen = set(self.center_roles or [])
+        out = []
+        for code, _ in CENTER_ROLES:
+            if code in chosen:
+                out.append((self.center_role_other or "Other") if code == "other" else names[code])
+        return out
+
+    @property
+    def center_role_label(self):
+        return ", ".join(self.center_role_labels)
 
     @property
     def full_name(self):

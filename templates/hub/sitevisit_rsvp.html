@@ -7,6 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32.png' %}">
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/page.css' %}">
+<link rel="stylesheet" href="{% static 'hub/system.css' %}">
 </head>
 <body class="hub-page fp-page sv-page">
 {# MW 2026-11-15, approved build: the Site Visit RSVP, following the prototype's form. One RSVP a year per person. #}
@@ -80,7 +81,7 @@
     </form>
   </div></div>
 </main>
-<footer class="fp-foot"><div class="wrap"><span>Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</span><a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a></div></footer>
+<footer class="fp-foot"><div class="wrap"><a class="ft-site" href="https://www.k-state.edu/cnap/" title="Opens the CNAP website.">Cognitive and Neurobiological Approaches to Plasticity Center, Kansas State University</a><a href="mailto:cnap@ksu.edu">cnap@ksu.edu</a></div></footer>
 <script>
 (function(){var f=document.querySelector('.sv-appform');if(!f)return;
 function sync(){var a=(f.querySelector('input[name=attend]:checked')||{}).value||'person';
