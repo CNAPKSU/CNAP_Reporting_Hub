@@ -3009,3 +3009,10 @@ dialog.fbk .fbk-msg:empty{display:none}
 dialog.fbk .fbk-foot .fieldrow,dialog.fbk .fbk-foot .fbk-row{margin:0!important}
 dialog.fbk .fbk-proto{margin:0!important}
 @media (max-width:520px){dialog.fbk{padding:22px!important}dialog.fbk .fbk-topics{grid-template-columns:1fr}}
+
+/* dot rail: each dot centred on the line, closed and open (MW 2026-11-26) */
+@media (min-width:981px){
+  .guide .spine .spine-track{left:13px}
+  .guide .spine:hover a,.guide .spine:focus-within a{overflow:visible}
+  .guide .spine:hover .spine-track,.guide .spine:focus-within .spine-track{left:23px}
+}

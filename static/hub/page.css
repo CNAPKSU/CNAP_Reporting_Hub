@@ -643,3 +643,10 @@ p,li,dd,figcaption,blockquote{text-wrap:pretty}
 .foot p,.foot span{font-size:13.5px;line-height:21px;color:var(--muted)}
 .foot nav a{font-size:14px;color:var(--muted)}
 .foot nav a:hover{color:var(--purple)}
+
+/* dot rail: each dot centred on the line, closed and open (MW 2026-11-26) */
+@media (min-width:981px){
+  .fp-page .spine .spine-track{left:13px}
+  .fp-page .spine:hover a,.fp-page .spine:focus-within a{overflow:visible}
+  .fp-page .spine:hover .spine-track,.fp-page .spine:focus-within .spine-track{left:23px}
+}
