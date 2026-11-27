@@ -3058,3 +3058,16 @@ dialog.fbk .fbk-proto{margin:0!important}
 @media (max-width:640px){.sv-page .sv-askf{margin:20px 0 0;flex-wrap:wrap}}
 @media (min-width:981px){.sv-page .sv-menu{margin-right:0}}
 @media (max-width:1099px){.sv-page .sv-askw{padding-top:28px;padding-bottom:28px}.sv-page .sv-askf{margin-top:0!important}}
+
+/* Site Visit spacing (MW 2026-11-27): sections breathe as on Events, not twice as much */
+.sv-page .sv-sec{padding:72px 0}
+.sv-page .sv-eve{padding:80px 0}
+.sv-page .sv-pho.sv-sec{padding:72px 0}
+.sv-page .sv-tband+.sv-sec{padding-top:64px}
+@media (max-width:760px){.sv-page .sv-sec,.sv-page .sv-pho.sv-sec{padding:52px 0}.sv-page .sv-eve{padding:60px 0}}
+/* RSVP: the button under the text, the 2026 group on the right */
+.sv-rsvp .sv-fg{align-items:center}
+.sv-rsvp .sv-rsgo{margin:28px 0 0}
+.sv-rsfig{margin:0;display:grid;gap:10px}
+.sv-rsfig img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px}
+.sv-rsfig figcaption{font-size:13.5px;color:var(--muted)}
