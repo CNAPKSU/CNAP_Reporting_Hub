@@ -1,0 +1,29 @@
+# TEMPORARY (design review only; removed before the PR): real renders of Hub pages for screenshots.
+name: Render previews
+on:
+  push:
+    branches: ["held/design-elevation"]
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env: { POSTGRES_USER: cnap, POSTGRES_PASSWORD: cnap, POSTGRES_DB: cnap }
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U cnap" --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      SECRET_KEY: ci-secret-key
+      DATABASE_URL: postgres://cnap:cnap@localhost:5432/cnap
+      DJANGO_SETTINGS_MODULE: config.settings.test
+      MEDIA_ROOT: /tmp/media
+      ALLOWED_HOSTS: testserver,localhost
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -e ".[dev]"
+      - run: python .github/render/render_pages.py
+      # Artifacts live on a host the design workspace can't reach, so the pages go into the log, compressed.
+      - run: tar czf - rendered | base64 -w 76 | sed 's/^/RENDERED:/'
