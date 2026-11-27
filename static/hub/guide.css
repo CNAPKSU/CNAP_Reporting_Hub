@@ -3071,3 +3071,4 @@ dialog.fbk .fbk-proto{margin:0!important}
 .sv-rsfig{margin:0;display:grid;gap:10px}
 .sv-rsfig img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px}
 .sv-rsfig figcaption{font-size:13.5px;color:var(--muted)}
+.sv-page .foot{margin-top:0}
