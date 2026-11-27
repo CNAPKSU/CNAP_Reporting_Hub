@@ -90,7 +90,7 @@ roster check replies, check the flags, check the totals, check each person, then
         <details class="px-roll lch-group" id="lch-g-{{ g.key }}"{% if forloop.first or warnings %} open{% endif %}>
           <summary title="Click to see everyone in this group and the forms each person receives."><span class="px-roll-t"><span class="px-label">Group {{ forloop.counter }}, {{ g.rows|length }} {% if g.rows|length == 1 %}person{% else %}people{% endif %}</span><h3 class="px-h2">{{ g.title }}</h3><span class="px-roll-meta">{{ g.note|stack }}</span></span><span class="px-roll-cue" aria-hidden="true"></span></summary>
           <div class="px-roll-body">
-            <div class="px-tablewrap lch-wrap"><table class="lch-matrix" title="{{ g.title }}: one row per person, one column per form.">
+            <div class="px-tablewrap lch-wrap"><table class="lch-matrix nosort" title="{{ g.title }}: one row per person, one column per form.">
               <thead><tr><th scope="col" class="lch-pcol">Person</th>{% for label in g.order %}<th scope="col" class="lch-fcol" data-slot="{{ forloop.counter0 }}"><span>{{ label }}</span></th>{% endfor %}</tr></thead>
               <tbody>{% for r in g.rows %}<tr data-name="{{ r.person.last_name }} {{ r.person.first_name }}">
                 <th scope="row" class="lch-who">
@@ -162,7 +162,7 @@ roster check replies, check the flags, check the totals, check each person, then
     });
   });
   arrange("like");
-  /* The grid's columns aren't sortable: sorting a column would undo "Like forms together". */
-  document.addEventListener("DOMContentLoaded", function () { setTimeout(function () { document.querySelectorAll(".lch-matrix th").forEach(function (h) { h.classList.remove("sorth", "asc", "desc"); }); }, 0); });
+  /* The grid's columns aren't sortable (sorting a column would undo "Like forms together"), so the table is marked
+     nosort and sorttable.js leaves its headings alone: no sort arrow glued into the rotated form names (MW 2026-11-25). */
 })();
 </script>{% endblock %}
