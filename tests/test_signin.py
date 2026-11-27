@@ -233,9 +233,11 @@ def test_turn_off_sign_in_ends_open_sessions(client, center):
     assert okafor.is_enabled is False
     r = other.get("/tasks/")
     assert r.status_code == 302 and "/accounts/login/" in r["Location"]
-    # and no emailed link either
+    # and no emailed link either, only a note that access is off
     client.post("/accounts/link/", {"email": okafor.person.primary_email})
-    assert not any(okafor.person.primary_email in m.to for m in mail.outbox)
+    theirs = [m for m in mail.outbox if okafor.person.primary_email in m.to]
+    assert theirs and not any(link_from(m) for m in theirs)
+    assert "turned off" in theirs[-1].body
     client.post(f"/manage/people/{okafor.person.pk}/account/", {"enable": "1"})
     okafor.refresh_from_db()
     assert okafor.is_enabled is True
