@@ -2,7 +2,7 @@
 <header class="hdr">
   <div class="wrap">
     <a class="brand" href="{% url 'home' %}"><img class="brand-mark" src="{% static 'img/cnap-mark.png' %}" width="36" height="36" alt=""><span><b>{{ platform_name }}</b><small>Kansas State University</small></span></a>
-    {# MW 2026-11-15, approved build: the prototype ribbon. Menus list only pages the app has. Research, Events, and Community have their own pages (MW 2026-11-25); Resources goes to its part of Home. #}
+    {# MW 2026-11-15, approved build: the prototype ribbon. Menus list only pages the app has. Research, Events, and Community have their own pages (MW 2026-11-25). Each menu lists its page's sections, and Resources lists the cores and guides (MW 2026-11-27). #}
     <nav class="nav hn-app" aria-label="Main">
       <a href="{% url 'home' %}"{% if active == 'home' %} aria-current="page"{% endif %}>Home</a>
       <div class="rb-it{% if active == 'reporting' %} is-here{% endif %}">
@@ -14,8 +14,8 @@
           <a href="{% url 'portal:history' %}"><b>My history</b><small>Everything you have submitted</small></a>
         </div>
       </div>
-      <a href="{% url 'portal:hub_research' %}"{% if active == 'research' %} aria-current="page"{% endif %}>Research</a>
-      <a href="{% url 'portal:hub_events' %}"{% if active == 'events' %} aria-current="page"{% endif %}>Events</a>
+      <div class="rb-it{% if active == 'research' %} is-here{% endif %}"><button type="button" class="rb-b" aria-expanded="false" aria-controls="rb-res">Research<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button><div class="rb-p rb-secs" id="rb-res" hidden><a class="rb-top" href="{% url 'portal:hub_research' %}"{% if active == 'research' %} aria-current="page"{% endif %}><b>Research at CNAP</b><small>Stories from the Center’s labs</small></a><p class="rb-k">On this page</p><div class="rb-sl"><a class="rb-s" href="{% url 'portal:hub_research' %}#feat-h">Featured story</a><a class="rb-s" href="{% url 'portal:hub_research' %}#more-h">More stories</a></div></div></div>
+      <div class="rb-it{% if active == 'events' %} is-here{% endif %}"><button type="button" class="rb-b" aria-expanded="false" aria-controls="rb-ev">Events<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button><div class="rb-p rb-secs" id="rb-ev" hidden><a class="rb-top" href="{% url 'portal:hub_events' %}"{% if active == 'events' %} aria-current="page"{% endif %}><b>Events</b><small>NeuroSync, the Site Visit, and the calendar</small></a><p class="rb-k">On this page</p><div class="rb-sl"><a class="rb-s" href="{% url 'portal:hub_events' %}#ev-this">This week at NeuroSync</a><a class="rb-s" href="{% url 'portal:hub_events' %}#ev-calh">Calendar</a><a class="rb-s" href="{% url 'portal:hub_events' %}#ev-keys">Key dates</a><a class="rb-s" href="{% url 'portal:hub_events' %}#ns-h">NeuroSync Weekly Speaker Series</a><a class="rb-s" href="{% url 'portal:hub_events' %}#sv-h">The 2027 Site Visit</a><a class="rb-s" href="{% url 'portal:hub_events' %}#ev-sub">Subscribe</a></div></div></div>
       <div class="rb-it{% if active == 'funding' %} is-here{% endif %}">
         <button type="button" class="rb-b" aria-expanded="false" aria-controls="rb-fund">Funding<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="rb-p" id="rb-fund" hidden>
@@ -24,8 +24,8 @@
           <a href="{% url 'portal:funding_news' %}"><b>Funding news</b><small>News from sponsors, and events and talks</small></a>
         </div>
       </div>
-      <a href="{% url 'portal:hub_community' %}"{% if active == 'community' %} aria-current="page"{% endif %}>Community</a>
-      <a href="{% url 'home' %}#cores-h"{% if active == 'resources' %} aria-current="page"{% endif %}>Resources</a>
+      <div class="rb-it{% if active == 'community' %} is-here{% endif %}"><button type="button" class="rb-b" aria-expanded="false" aria-controls="rb-com">Community<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button><div class="rb-p rb-secs rb-two" id="rb-com" hidden><a class="rb-top" href="{% url 'portal:hub_community' %}"{% if active == 'community' %} aria-current="page"{% endif %}><b>Community</b><small>Who works on what, and who to ask</small></a><p class="rb-k">On this page</p><div class="rb-sl"><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-ach">Recent achievements</a><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-ask">Ask the community</a><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-first">Your first month</a><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-match">Members who share your interests</a><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-know">Interests and expertise</a><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-dir">Member directory</a><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-alum">CNAP alumni</a><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-spk">Past outside speakers</a><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-ways">Ways to connect</a><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-ann">Announcements</a><a class="rb-s" href="{% url 'portal:hub_community' %}#cm-priv">Your profile and privacy</a></div></div></div>
+      <div class="rb-it{% if active == 'resources' %} is-here{% endif %}"><button type="button" class="rb-b" aria-expanded="false" aria-controls="rb-rsc">Resources<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button><div class="rb-p" id="rb-rsc" hidden><a href="{% url 'home' %}#cores-h"><b>Research cores</b><small>Services from the three cores</small></a><a href="{% url 'home' %}#onb-h"><b>Getting started</b><small>Guides for new mentors and project leaders</small></a><a href="{% url 'portal:hub_mentor' %}"><b>Mentor guide</b><small>Your role, the agreement, and the year ahead</small></a><a href="{% url 'portal:hub_mentee' %}"><b>Project leader guide</b><small>Starting your project award</small></a></div></div>
     </nav>
     <div class="tools">
       {% if is_admin %}<a class="mywork" href="{% url 'manage:home' %}" style="border-style:dashed">Administration</a>{% endif %}
@@ -52,6 +52,6 @@ its.forEach(function(it){var b=it.querySelector('.rb-b'),p=it.querySelector('.rb
   b.addEventListener('click',function(e){e.stopPropagation();var open=b.getAttribute('aria-expanded')!=='true';shut(it);b.setAttribute('aria-expanded',String(open));p.hidden=!open;if(open){var a=p.querySelector('a');if(a&&e.detail===0)a.focus();}});
   p.addEventListener('keydown',function(e){var as=[].slice.call(p.querySelectorAll('a')),i=as.indexOf(document.activeElement);
     if(e.key==='ArrowDown'){e.preventDefault();as[(i+1)%as.length].focus();}else if(e.key==='ArrowUp'){e.preventDefault();as[(i-1+as.length)%as.length].focus();}});});
-document.addEventListener('click',function(e){if(!e.target.closest('.hn-app .rb-it'))shut();});
+document.addEventListener('click',function(e){if(!e.target.closest('.hn-app .rb-it')||e.target.closest('.hn-app .rb-p a'))shut();});
 document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;var o=document.querySelector('.hn-app .rb-b[aria-expanded="true"]');shut();if(o)o.focus();});})();
 </script>

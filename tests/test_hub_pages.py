@@ -92,6 +92,26 @@ def test_header_opens_research_events_and_community(client, member):
     assert f'href="{reverse("portal:hub_research")}"' in nav
     assert f'href="{reverse("portal:hub_community")}"' in nav
     assert f'href="{reverse("portal:hub_events")}" aria-current="page"' in nav
+    # each menu lists its page's sections (MW 2026-11-27)
+    events = reverse("portal:hub_events")
+    for anchor in ("ns-h", "sv-h", "ev-keys"):
+        assert f'href="{events}#{anchor}"' in nav, anchor
+    assert f'href="{reverse("portal:hub_community")}#cm-dir"' in nav
+    assert f'href="{reverse("portal:hub_research")}#feat-h"' in nav
+    assert f'href="{reverse("portal:hub_mentor")}"' in nav
+
+
+@override_settings(**ON)
+def test_header_section_links_land_on_real_sections(client, member):
+    """Every section a menu lists exists on its page."""
+    nav = re.search(
+        r'<nav class="nav hn-app".*?</nav>',
+        client.get(reverse("home")).content.decode(),
+        re.S,
+    ).group(0)
+    for url, anchor in set(re.findall(r'href="(/[^"#]*)#([\w-]+)"', nav)):
+        page = client.get(url).content.decode()
+        assert f'id="{anchor}"' in page, f"{url}#{anchor}"
 
 
 @override_settings(**ON)
