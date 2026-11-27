@@ -3021,3 +3021,11 @@ dialog.fbk .fbk-proto{margin:0!important}
 .mb-prj-t{margin:4px 0 4px;font:500 20px/27px var(--serif);color:var(--ink);letter-spacing:-.005em}
 .mb-when{margin:0 0 12px;font-size:13.5px;color:var(--muted)}
 .mb-sec p+p{margin-top:8px}
+
+/* 2026 Site Visit gallery: the real photographs (MW 2026-11-26) */
+.pg-real{padding:0;background:var(--line)}
+.pg-real a{display:block;width:100%;height:100%}
+.pg-real img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.pg-real a:hover img,.pg-real a:focus-visible img{transform:scale(1.03)}
+.pg-real a:focus-visible{outline:3px solid var(--purple);outline-offset:-3px}
+@media (prefers-reduced-motion:reduce){.pg-real img{transition:none}}
