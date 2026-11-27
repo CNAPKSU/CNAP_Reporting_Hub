@@ -3032,3 +3032,29 @@ dialog.fbk .fbk-proto{margin:0!important}
 
 /* Community hero: stack the heading over the network below 1100px, so the heading never squeezes (MW 2026-11-26) */
 @media (max-width:1100px){.cm-hero{grid-template-columns:minmax(0,1fr)}.cm-net{max-width:520px;width:100%;margin-inline:auto}}
+
+/* Site Visit side rails (MW 2026-11-27): they wait until the hero has scrolled away, the page keeps clear room
+   from each rail, and on half-width windows Who to ask sits in the page under the hero instead of floating. */
+@media (min-width:981px){
+  .sv-page .sv-rail{top:124px!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s,visibility .25s}
+  .sv-page.sv-past-hero .sv-rail{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+  /* room from the left rail: rail edge + 28px rail + 48px clear */
+  .sv-page main .wrap{padding-left:max(var(--side,40px),calc(max(10px,(100vw - 1400px) / 4) + 76px - max(0px,(100vw - 1480px) / 2)))}
+}
+@media (min-width:1100px){
+  .sv-page .sv-askf{top:124px!important;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s,visibility .25s}
+  .sv-page.sv-past-hero .sv-askf{opacity:1;visibility:visible;pointer-events:auto}
+  .sv-page .sv-askw{height:0;padding-top:0;padding-bottom:0}
+  /* room from Who to ask: its right offset + 36px + 48px clear */
+  .sv-page main .wrap{padding-right:max(var(--side-r,40px),calc(max(2px,(max(40px,(100vw - 1400px) / 2) - 36px) / 2) + 84px - max(0px,(100vw - 1480px) / 2)))}
+}
+@media (max-width:1099px){
+  .sv-page .sv-askf{position:static!important;top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;width:fit-content;margin:28px auto 0 0!important;justify-self:start;flex-direction:row;align-items:center;gap:14px;padding:8px 14px 8px 18px;border-radius:999px;box-shadow:none;opacity:1;visibility:visible}
+  .sv-page .sv-askf h2{font-size:13px;line-height:18px;white-space:nowrap}
+  .sv-page .sv-askf .pp-row{flex-direction:row}
+  .sv-page .sv-askf .pp-it{position:relative}
+  .sv-page .sv-askf .pp-p{top:calc(100% + 10px);bottom:auto;left:0;right:auto;z-index:40}
+}
+@media (max-width:640px){.sv-page .sv-askf{margin:20px 0 0;flex-wrap:wrap}}
+@media (min-width:981px){.sv-page .sv-menu{margin-right:0}}
+@media (max-width:1099px){.sv-page .sv-askw{padding-top:28px;padding-bottom:28px}.sv-page .sv-askf{margin-top:0!important}}
