@@ -2281,3 +2281,18 @@ dialog.fbk .fbk-msg:empty{display:none}
 dialog.fbk .fbk-foot .fieldrow,dialog.fbk .fbk-foot .fbk-row{margin:0!important}
 dialog.fbk .fbk-proto{margin:0!important}
 @media (max-width:520px){dialog.fbk{padding:22px!important}dialog.fbk .fbk-topics{grid-template-columns:1fr}}
+
+/* Numbered circle headings (MW 2026-11-27): everything under the heading (its subtitle, notes, lists,
+   tables, forms) starts exactly where the heading's words start, not at the side of the circle.
+   One measure, --num-gut, sets both the space after the circle and the indent below it. */
+body.proto { --num-gut: calc(26px + var(--px-3)); }
+html body.proto .r90-part { gap: 0 !important; }
+html body.proto .r90-part > span { width: 26px; min-width: 26px; margin-right: calc(var(--num-gut) - 26px) !important; }
+/* a heading inside a fold (My submissions, the report parts, launch) */
+html body.proto .px-roll-h.r90-part + .px-roll-meta, html body.proto .px-roll-h.r90-part + .px-roll-figs { padding-left: var(--num-gut); }
+html body.proto details.px-roll:has(> summary .px-roll-h.r90-part) > .px-roll-body { padding-left: var(--num-gut); }
+html body.proto .r90-partt > .px-note { padding-left: var(--num-gut); }
+html body.proto .r90-partbody { margin-left: var(--num-gut); }
+/* a heading at the top of a plain section (Roster check, Funding, Core report, Builder) */
+html body.proto .px-section:has(> .r90-part) { padding-left: var(--num-gut); }
+html body.proto .px-section:has(> .r90-part) > .r90-part { margin-left: calc(-1 * var(--num-gut)); }
