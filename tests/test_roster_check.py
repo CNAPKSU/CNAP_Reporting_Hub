@@ -86,3 +86,20 @@ def test_evaluator_reviews_and_launch_shows_who_is_out(client, spring):
 def test_members_cannot_open_the_evaluator_page(client, spring):
     client.force_login(User.objects.get(username="okafor"))
     assert client.get(f"/manage/periods/{spring.pk}/roster-check/").status_code in (302, 403)
+
+
+def test_launch_matrix_headings_are_not_sortable(client, spring):
+    """MW 2026-11-25: the form names over the launch matrix overlapped ("BN" over "Core") and NeuroSync
+    vanished, because sorttable.js glued each heading's last word to a sort arrow inside the rotated label.
+    The matrix is marked nosort, so its headings stay exactly the form names."""
+    import re
+
+    from django.test import override_settings
+
+    client.force_login(User.objects.get(username="mwills"))
+    with override_settings(UI_PROTOTYPE=True, UI_PROTOTYPE_ONLY=True):
+        html = client.get(f"/manage/periods/{spring.pk}/launch/").content.decode()
+    tables = re.findall(r'<table class="([^"]*lch-matrix[^"]*)"', html)
+    assert tables and all("nosort" in t.split() for t in tables)
+    labels = re.findall(r'<th scope="col" class="lch-fcol"[^>]*><span>([^<]+)</span></th>', html)
+    assert labels and all(lab.strip() for lab in labels)
