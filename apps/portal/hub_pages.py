@@ -37,6 +37,9 @@ for _p in sorted(_TEMPLATES.glob("thread-*.html")):
 for _p in sorted(_TEMPLATES.glob("member-*.html")):
     PAGES[_p.stem] = f"community/members/{_p.stem.removeprefix('member-')}/"
 
+# Pages about real people, without the "Sample content" note (MW 2026-11-26).
+REAL_PAGES = {"member-jc"}
+
 
 def url_name(key):
     return "hub_" + key.replace("-", "_")

@@ -3016,3 +3016,8 @@ dialog.fbk .fbk-proto{margin:0!important}
   .guide .spine:hover a,.guide .spine:focus-within a{overflow:visible}
   .guide .spine:hover .spine-track,.guide .spine:focus-within .spine-track{left:23px}
 }
+
+/* a member's CNAP project on their profile (MW 2026-11-26) */
+.mb-prj-t{margin:4px 0 4px;font:500 20px/27px var(--serif);color:var(--ink);letter-spacing:-.005em}
+.mb-when{margin:0 0 12px;font-size:13.5px;color:var(--muted)}
+.mb-sec p+p{margin-top:8px}
