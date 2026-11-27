@@ -118,3 +118,12 @@ def test_joshua_carr_profile_is_real_and_listed(client, member):
     assert 'href="mailto:joshuacarr@k-state.edu"' in page
     directory = client.get(reverse("portal:hub_community")).content.decode()
     assert reverse("portal:hub_member_jc") in directory
+
+
+@override_settings(**ON)
+def test_bethany_plakke_profile_is_real_and_listed(client, member):
+    page = client.get(reverse("portal:hub_member_pl")).content.decode()
+    assert "Dr. Bethany Plakke" in page and "Fmr1 knockout rats" in page
+    assert 'href="mailto:bplakke@ksu.edu"' in page and "Sample content" not in page
+    directory = client.get(reverse("portal:hub_community")).content.decode()
+    assert reverse("portal:hub_member_pl") in directory
