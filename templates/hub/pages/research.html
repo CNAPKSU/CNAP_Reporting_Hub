@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/guide.css' %}">
 <link rel="stylesheet" href="{% static 'hub/system.css' %}">
+<link rel="stylesheet" href="{% static 'css/bubbles.css' %}">
 </head>
 <body data-hub-page="research" data-guide="research" class="rs-page">
 {# Built by design/prototypes/member-hub/port_to_app.py from research.html. Change the prototype and run it again. #}
@@ -62,5 +63,6 @@ cards.forEach(function(c){var on=f==='all'||c.dataset.k===f;c.hidden=!on;if(on)n
 {% include "_feedback.html" %}
 <script src="{% static 'hub/page.js' %}" defer></script>
 <script src="{% static 'js/dropclose.js' %}" defer></script>
+<script src="{% static 'js/bubbles.js' %}" defer></script>
 </body>
 </html>

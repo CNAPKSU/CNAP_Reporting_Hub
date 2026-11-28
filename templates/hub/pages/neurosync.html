@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/guide.css' %}">
 <link rel="stylesheet" href="{% static 'hub/system.css' %}">
+<link rel="stylesheet" href="{% static 'css/bubbles.css' %}">
 </head>
 <body data-hub-page="neurosync" class="ns-page">
 {# Built by design/prototypes/member-hub/port_to_app.py from neurosync.html. Change the prototype and run it again. #}
@@ -114,5 +115,6 @@ a.addEventListener('click',function(e){if(!dl)return;e.preventDefault();fetch(a.
 {% include "_feedback.html" %}
 <script src="{% static 'hub/page.js' %}" defer></script>
 <script src="{% static 'js/dropclose.js' %}" defer></script>
+<script src="{% static 'js/bubbles.js' %}" defer></script>
 </body>
 </html>

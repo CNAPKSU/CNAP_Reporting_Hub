@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/guide.css' %}">
 <link rel="stylesheet" href="{% static 'hub/system.css' %}">
+<link rel="stylesheet" href="{% static 'css/bubbles.css' %}">
 </head>
 <body data-hub-page="sitevisit-2026" data-guide="community" class="core-page cm-page">
 {# Built by design/prototypes/member-hub/port_to_app.py from sitevisit-2026.html. Change the prototype and run it again. #}
@@ -44,5 +45,6 @@ addEventListener('scroll',spy,{passive:true});spy();})();</script>
 {% include "_feedback.html" %}
 <script src="{% static 'hub/page.js' %}" defer></script>
 <script src="{% static 'js/dropclose.js' %}" defer></script>
+<script src="{% static 'js/bubbles.js' %}" defer></script>
 </body>
 </html>

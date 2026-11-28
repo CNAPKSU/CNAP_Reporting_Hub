@@ -1,0 +1,13 @@
+/* One information bubble for the whole site (MW 2026-11-28). The same look as the "?" bubbles:
+   dark purple, white words, rounded corners, a soft shadow. Used by bubbles.js for every title. */
+.cnap-bubble { position: fixed; z-index: 1000; display: none; box-sizing: content-box; max-width: min(320px, calc(100vw - 40px)); padding: 10px 12px; border-radius: 10px;
+  background: #2a2140; color: #fff; font: 400 .72rem/1.5 "IBM Plex Sans", "Public Sans", system-ui, sans-serif; text-align: left; white-space: pre-line;
+  letter-spacing: normal; text-transform: none; box-shadow: 0 8px 24px rgba(42, 33, 64, .35); pointer-events: none; }
+.cnap-bubble.on { display: block; }
+/* The "?" and "i" bubbles keep their size; the other bubbles take the same look. */
+.whyq .whyb { font-family: "IBM Plex Sans", "Public Sans", system-ui, sans-serif; }
+.term:focus::after { background: #2a2140 !important; color: #fff !important; border-radius: 10px !important; font-size: .72rem !important; line-height: 1.5 !important;
+  box-shadow: 0 8px 24px rgba(42, 33, 64, .35) !important; }
+body.proto .px-names::after { background: #2a2140 !important; color: #fff !important; border: 0 !important; border-radius: 10px !important;
+  box-shadow: 0 8px 24px rgba(42, 33, 64, .35) !important; }
+@media print { .cnap-bubble { display: none !important; } }
