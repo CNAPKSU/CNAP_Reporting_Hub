@@ -2296,3 +2296,10 @@ html body.proto .r90-partbody { margin-left: var(--num-gut); }
 /* a heading at the top of a plain section (Roster check, Funding, Core report, Builder) */
 html body.proto .px-section:has(> .r90-part) { padding-left: var(--num-gut); }
 html body.proto .px-section:has(> .r90-part) > .r90-part { margin-left: calc(-1 * var(--num-gut)); }
+/* MW 2026-11-28, Reporting sessions: a calmer gap between the page's button and the first section,
+   and the year cards hang outside the text column so the words inside them line up with the words above
+   (the rule for every box or circle: words line up with words, not with the box's edge). */
+body.proto.pa .pa-page > .pa-actions + .panel:not(details) { margin-top: var(--px-4) !important; padding-top: var(--px-5) !important; }
+body.proto.pa .yearband, body.proto.pa .yb-months { --yb-hang: 15px; margin-left: calc(-1 * var(--yb-hang)); margin-right: calc(-1 * var(--yb-hang)); }
+body.proto.pa .yearband { margin-top: var(--px-4); margin-bottom: var(--px-2); }
+@media (max-width: 720px) { body.proto.pa .yearband, body.proto.pa .yb-months { --yb-hang: 0px; } }
