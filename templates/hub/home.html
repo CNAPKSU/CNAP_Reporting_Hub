@@ -168,6 +168,7 @@
         <h2 id="cal-h"><a class="sh-link" href="{% url 'portal:hub_events' %}" title="Opens the Events calendar: every Center event, deadline, and campus date.">Calendar</a></h2>
         <p>Center events, deadlines, and NeuroSync talks in one place.</p>
       </header>
+      {% include "hub/_calsync.html" with id="-home" %}
       {% if cal.kinds|length > 1 %}<div class="cal-filters" role="group" aria-label="Show on the calendar">
         {% if 'ns' in cal.kinds %}<button type="button" class="cf" data-k="ns" aria-pressed="true"><svg viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="4"/></svg>NeuroSync</button>{% endif %}
         {% if 'ctr' in cal.kinds %}<button type="button" class="cf" data-k="ctr" aria-pressed="true"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M5 .5L9.5 5 5 9.5 .5 5z"/></svg>Center events</button>{% endif %}

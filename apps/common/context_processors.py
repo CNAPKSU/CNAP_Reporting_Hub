@@ -47,6 +47,8 @@ def cnap(request):
     return {
         "platform_name": "CNAP Member Hub",
         "evaluator_email": settings.EVALUATOR_EMAIL,
+        # The Sync the CNAP calendar box on Home and Events (MW 2026-11-27)
+        "calendar_sync": _calendar_sync(),
         "keeps_outcomes": keeps_outcomes,
         "can_view_admin": access.can_view_admin(user),
         "can_manage": access.can_manage(user),
@@ -73,3 +75,12 @@ def _waiting_requests(user):
     return AccessRequest.objects.filter(status=AccessRequest.Status.PENDING).count() + (
         own_pending().count()
     )
+
+
+def _calendar_sync():
+    from apps.events.feed import subscribe_links
+
+    try:
+        return subscribe_links()
+    except Exception:  # never let the calendar box break a page
+        return None

@@ -1,0 +1,71 @@
+{% extends "base.html" %}{% load cnap %}
+{% block title %}Calendar · {{ platform_name }}{% endblock %}
+{% block content %}
+<div class="head"><div><h1>Calendar{% why "Events published here go to the Hub’s Home and Events pages and to every member’s own calendar that subscribes to the CNAP calendar. NeuroSync talks, reporting due dates and funding dates are added on their own." %}</h1><p>{{ "Add a Center event here, or email it in. Emailed events wait as drafts until you publish them. Changes reach subscribed calendars on their own."|stack }}</p></div></div>
+
+{% if drafts %}<div class="panel cal-drafts">
+  <h2 class="sectionhead">Drafts waiting for you ({{ drafts|length }})</h2>
+  <div class="scroll"><table class="spk-tbl"><thead><tr><th>Event</th><th>When</th><th>Came from</th><th></th></tr></thead><tbody>
+  {% for r in drafts %}<tr><td>{{ r.e.title }}{% if r.e.place %}<div class="small muted">{{ r.e.place }}</div>{% endif %}</td>
+    <td class="small">{% if r.e.check_date %}<span class="gap">No clear date was in the email. Please set one.</span>{% else %}{{ r.when }}{% endif %}</td>
+    <td class="small">{% if r.e.source == 'email' %}Email from {{ r.e.email_from }}{% if r.e.email_subject %}<div class="muted">“{{ r.e.email_subject }}”</div>{% endif %}{% else %}Added here{% endif %}</td>
+    <td>{% if can_manage %}<a class="btn small ghost" href="?edit={{ r.e.pk }}#cal-form">Check and edit</a>
+      {% if not r.e.check_date %}<form method="post" action="{% url 'manage:calendar_status' r.e.pk %}" style="display:inline">{% csrf_token %}<button class="btn small" name="act" value="publish" type="submit">Publish</button></form>{% endif %}
+      <form method="post" action="{% url 'manage:calendar_status' r.e.pk %}" style="display:inline">{% csrf_token %}<button class="btn small ghost" name="act" value="discard" type="submit" data-confirm="Discard the draft “{{ r.e.title }}”?">Discard</button></form>{% endif %}</td></tr>{% endfor %}
+  </tbody></table></div>
+</div>{% endif %}
+
+{% if can_manage %}<div class="panel" id="cal-form" style="max-width:760px">
+  <h2 class="sectionhead">{% if editing %}Edit “{{ editing.title }}”{% else %}Add an event{% endif %}</h2>
+  {% if editing and editing.source == 'email' and editing.email_body %}<details class="small"><summary>The original email</summary><pre class="small" style="white-space:pre-wrap;font-family:inherit">{{ editing.email_body }}</pre></details>{% endif %}
+  <form method="post" action="{% url 'manage:calendar_save' %}">{% csrf_token %}
+    {% if editing %}<input type="hidden" name="pk" value="{{ editing.pk }}">{% endif %}
+    <div class="field"><label>{{ form.title.label }}{{ form.title }}</label></div>
+    <div class="speakgrid">
+      <label>{{ form.day.label }}{{ form.day }}</label><label>{{ form.end_day.label }}{{ form.end_day }}</label>
+      <label>{{ form.starts.label }}{{ form.starts }}<span class="small muted">{{ form.starts.help_text }}</span></label><label>{{ form.ends.label }}{{ form.ends }}</label>
+    </div>
+    <div class="field mt"><label>{{ form.place.label }}{{ form.place }}</label></div>
+    <div class="field mt"><label>{{ form.url.label }}{{ form.url }}<span class="small muted">People who click the event go here. Leave it blank to send them to the Events page.</span></label></div>
+    <div class="field mt"><label>{{ form.details.label }}{{ form.details }}</label></div>
+    <div class="actions">
+      <button class="btn" type="submit" name="go" value="publish">Put it on the calendar</button>
+      {% if not editing or editing.status == 'draft' %}<button class="btn ghost" type="submit" name="go" value="draft">Save as draft</button>{% endif %}
+      {% if editing %}<a class="btn ghost" href="{% url 'manage:calendar' %}">Stop editing</a>{% endif %}
+    </div>
+  </form>
+</div>{% endif %}
+
+<div class="panel">
+  <h2 class="sectionhead">Coming up ({{ upcoming|length }})</h2>
+  {% if upcoming %}<div class="scroll"><table class="spk-tbl"><thead><tr><th>Event</th><th>When</th><th>Link</th><th></th></tr></thead><tbody>
+  {% for r in upcoming %}<tr><td>{{ r.e.title }}{% if r.e.place %}<div class="small muted">{{ r.e.place }}</div>{% endif %}</td><td class="small">{{ r.when }}</td>
+    <td class="small">{% if r.e.url %}<a href="{{ r.e.url }}">{{ r.e.url|truncatechars:40 }}</a>{% else %}<span class="muted">Events page</span>{% endif %}</td>
+    <td>{% if can_manage %}<a class="btn small ghost" href="?edit={{ r.e.pk }}#cal-form">Edit</a>
+      <form method="post" action="{% url 'manage:calendar_status' r.e.pk %}" style="display:inline">{% csrf_token %}<button class="btn small ghost" name="act" value="cancel" type="submit" data-confirm="Cancel “{{ r.e.title }}”? It leaves everyone’s subscribed calendar.">Cancel</button></form>{% endif %}</td></tr>{% endfor %}
+  </tbody></table></div>{% else %}<p class="small muted">No Center events are coming up. Add one above, or email one in.</p>{% endif %}
+  {% if cancelled_upcoming %}<h3 class="small mt">Cancelled</h3><ul class="small">{% for r in cancelled_upcoming %}<li>{{ r.e.title }}, {{ r.when }}{% if can_manage %} <form method="post" action="{% url 'manage:calendar_status' r.e.pk %}" style="display:inline">{% csrf_token %}<button class="btn small ghost" name="act" value="restore" type="submit">Put it back</button></form>{% endif %}</li>{% endfor %}</ul>{% endif %}
+</div>
+
+<div class="panel" style="max-width:760px">
+  <h2 class="sectionhead">Email an event in</h2>
+  {% if inbound_address %}<p class="small">{{ "Send an email to the address below. Put the event name in the subject. Put the date, time, place and any link in the message. It arrives here as a draft, and you get an email back with a link to check it."|stack }}</p>
+  <p><strong>{{ inbound_address }}</strong></p>
+  <p class="small muted">Only emails from people who manage the Hub are accepted. Others are ignored.</p>
+  {% else %}<p class="small">Email-in isn’t switched on yet. It needs the Postmark inbound address. Until then, add events with the form above.</p>{% endif %}
+  <details class="small mt"><summary>Example email</summary><pre class="small" style="white-space:pre-wrap;font-family:inherit">Subject: Event: Spring CNAP retreat
+
+Date: April 10, 2027
+Time: 9 a.m. to 3 p.m.
+Where: K-State Alumni Center
+More info: https://example.k-state.edu/retreat
+
+A day of talks and posters for all CNAP members.</pre></details>
+</div>
+
+{% if sync %}{% include "hub/_calsync.html" with id="-mg" %}{% endif %}
+
+{% if past %}<details class="panel"><summary class="small"><strong>Past events ({{ past|length }})</strong></summary>
+  <ul class="small">{% for r in past %}<li>{{ r.e.title }}, {{ r.when }}{% if r.e.status == 'cancelled' %} <span class="muted">(cancelled)</span>{% endif %}</li>{% endfor %}</ul>
+</details>{% endif %}
+{% endblock %}

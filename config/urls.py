@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
 from apps.accounts import views as account_views
+from apps.events import views as event_views
 from apps.portal import roster_views
 from apps.portal.views import home
 
@@ -24,6 +25,8 @@ def healthz(request):
 
 urlpatterns = [
     path("healthz", healthz, name="healthz"),
+    path("calendar/<str:key>.ics", event_views.calendar_feed, name="calendar_feed"),
+    path("calendar/inbound/<str:key>/", event_views.calendar_inbound, name="calendar_inbound"),
     path("ui-preview/<str:view>/", ui_prototype.switch, name="ui_switch"),
     path("admin/login/", account_views.admin_login),
     path("admin/", admin.site.urls),

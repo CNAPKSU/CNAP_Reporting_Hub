@@ -81,9 +81,7 @@
         </div>
         <div class="rp-card">
           <h2 data-rail="Subscribe" id="ev-sub">Subscribe</h2>
-          <p class="ev-sub">Please add the Center calendar to Outlook or Google, so new events appear automatically. Your private meetings are never included.</p>
-          <button type="button" class="btn ev-copyfeed">Copy calendar link</button>
-          <p class="meta ev-feed-note">The subscription link is created when the Hub goes live.</p>
+          {% include "hub/_calsync.html" with id="-ev" %}
             <p class="ev-sub ev-list">Reminders come by email too. Join the CNAP listserv to get the Monday NeuroSync email and Center announcements. To join, <a href="mailto:cnap@ksu.edu?subject=Please%20add%20me%20to%20the%20CNAP%20listserv&amp;body=Name%3A%0AK-State%20email%3A%0ADepartment%3A%0A" title="Opens an email to cnap@ksu.edu asking to join the CNAP listserv.">email a request to cnap@ksu.edu</a>.</p>
         </div>
       </aside>
@@ -192,7 +190,7 @@ function apply(){var n=0;document.querySelectorAll('.ev').forEach(function(e){va
 document.querySelectorAll('.ag-day').forEach(function(x){x.hidden=!x.querySelector('.ev:not([hidden])');});
 document.querySelectorAll('.ag-m').forEach(function(x){x.hidden=!x.querySelector('.ag-day:not([hidden])');});none.hidden=n>0;}
 bs.forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.k;on[k]=on[k]?0:1;b.setAttribute('aria-pressed',!!on[k]);apply();});});
-var c=document.querySelector('.ev-copyfeed');if(c)c.addEventListener('click',function(){c.textContent='Available when the Hub goes live';setTimeout(function(){c.textContent='Copy calendar link'},2400);});})();
+})();
 </script>
 {% include "_feedback.html" %}
 <script src="{% static 'hub/page.js' %}" defer></script>
