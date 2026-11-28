@@ -3072,3 +3072,18 @@ dialog.fbk .fbk-proto{margin:0!important}
 .sv-rsfig img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px}
 .sv-rsfig figcaption{font-size:13.5px;color:var(--muted)}
 .sv-page .foot{margin-top:0}
+
+/* Member profiles (MW 2026-11-28): the name lines up with the section titles below it, not the photo circle.
+   The body stays centred under the header at every width. On wide windows the circle hangs to the left of
+   the text edge; with no room for that, it sits above the name. */
+.wrap.mb-body{max-width:1480px}
+.mb-top{grid-template-columns:minmax(0,1fr) auto;column-gap:20px;row-gap:16px}
+.mb-top>.cm-av{grid-column:1;grid-row:1;justify-self:start}
+.mb-top>div:not(.cm-acts){grid-column:1;grid-row:2;min-width:0}
+.mb-top>.mb-acts{grid-column:2;grid-row:2;align-self:center}
+@media (max-width:760px){.mb-top>.mb-acts{grid-column:1;grid-row:3;justify-self:start}}
+@media (min-width:1660px){
+  .mb-top{position:relative}
+  .mb-top>.cm-av{position:absolute;left:-104px;top:50%;transform:translateY(-50%)}
+  .mb-top>div:not(.cm-acts),.mb-top>.mb-acts{grid-row:1}
+}
