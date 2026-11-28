@@ -236,17 +236,26 @@ def _funding_rows(person, today):
     return out
 
 
+def _clock(t):
+    """2:30 p.m., 9 a.m."""
+    h = t.hour % 12 or 12
+    m = f":{t.minute:02d}" if t.minute else ""
+    return f"{h}{m} {'a.m.' if t.hour < 12 else 'p.m.'}"
+
+
 def calendar(person, today, picked):
     """The calendar's items for the academic year around today, from records the app keeps."""
     start = date(today.year if today.month >= 8 else today.year - 1, 8, 1)
     end = date(start.year + 1, 7, 31)
     ev = []
+    ns_url = reverse("portal:hub_neurosync")
     talks = SpeakerTalk.objects.filter(
         ends_at__date__gte=start, ends_at__date__lte=end
     ).select_related("speaker")
     for t in talks:
         row = _talk_row(t)
-        ev.append([row["day"].isoformat(), row["chip_time"], "ns", t.title, None, "#ev-h"])
+        # A talk opens its full details on the NeuroSync page (MW 2026-11-27).
+        ev.append([row["day"].isoformat(), row["chip_time"], "ns", t.title, None, ns_url])
     for p in ReportingPeriod.objects.filter(status="open"):
         d = timezone.localtime(p.due_at).date()
         if start <= d <= end:
@@ -280,6 +289,25 @@ def calendar(person, today, picked):
                     e.url or fund_url,
                 ]
             )
+    # Center events from the Calendar page (MW 2026-11-27)
+    from apps.events.models import CenterEvent
+
+    events_url = reverse("portal:hub_events")
+    for e in (
+        CenterEvent.objects.filter(status=CenterEvent.Status.PUBLISHED, day__lte=end)
+        .exclude(end_day__lt=start)
+        .exclude(end_day__isnull=True, day__lt=start)
+    ):
+        ev.append(
+            [
+                e.day.isoformat(),
+                _clock(e.starts) if e.starts else "All day",
+                "ctr",
+                e.title,
+                e.end_day.isoformat() if e.end_day and e.end_day != e.day else None,
+                e.url or events_url,
+            ]
+        )
     ev.sort(key=lambda x: (x[0], x[1]))
     kinds = sorted({x[2] for x in ev}, key=["ns", "ctr", "due", "you", "cam"].index)
     upcoming_due = [x for x in ev if x[2] == "due" and x[0] >= today.isoformat()]

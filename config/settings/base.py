@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "apps.reporting",
     "apps.analytics",
     "apps.outcomes",
+    "apps.events",
     "apps.portal",
     "apps.admin_center",
 ]
@@ -159,6 +160,11 @@ FORMS_URLFIELD_ASSUME_HTTPS = True
 
 # Links in e-mails point here (no trailing slash).
 SITE_URL = env("SITE_URL").rstrip("/")
+# The calendar feed's secret key (MW 2026-11-27). Blank: derived from SECRET_KEY. Set a new value to retire old links.
+CALENDAR_FEED_KEY = env("CALENDAR_FEED_KEY", default="")
+# Events by email (MW 2026-11-27): the address shown on the Calendar page, and the webhook's secret key.
+CALENDAR_INBOUND_ADDRESS = env("CALENDAR_INBOUND_ADDRESS", default="")
+CALENDAR_INBOUND_KEY = env("CALENDAR_INBOUND_KEY", default="")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 # Mail server as one URL, e.g. smtp+tls://user:password@smtp.k-state.edu:587 (K-State's relay). Default: print to
 # the console, which sends nothing.

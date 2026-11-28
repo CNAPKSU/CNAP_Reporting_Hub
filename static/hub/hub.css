@@ -1673,3 +1673,19 @@ dialog.fbk .fbk-proto{margin:0!important}
 .ft-site{color:var(--muted);text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:3px;transition:color .2s ease,text-decoration-color .2s ease}
 .ft-site:hover,.ft-site:focus-visible{color:var(--purple);text-decoration-color:currentColor}
 .foot .ft-site{font-size:13.5px;line-height:21px}
+
+/* Sync the CNAP calendar (MW 2026-11-27) */
+.calsync{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 28px;align-items:center;margin:6px 0 22px;padding:18px 22px;border:1px solid var(--line);border-left:3px solid var(--purple);border-radius:12px;background:var(--card,#fff)}
+.calsync h3{display:flex;align-items:center;gap:10px;margin:0;font:600 16px/22px var(--sans);color:var(--ink)}
+.calsync h3 svg{width:20px;height:20px;flex:none;fill:none;stroke:var(--purple);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.calsync-t p{margin:4px 0 0 30px;font-size:14.5px;line-height:22px;color:var(--ink-2,var(--ink))}
+.calsync-a{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;justify-content:flex-end}
+.calsync-a .btn{white-space:nowrap}
+.calsync-copy{background:none;border:0;padding:4px 2px;cursor:pointer}
+.calsync-n{grid-column:1/-1;margin:0 0 0 30px;font-size:13px;line-height:19px;color:var(--muted)}
+@media (max-width:980px){.calsync{grid-template-columns:minmax(0,1fr)}.calsync-a{justify-content:flex-start;margin-left:30px}}
+/* in a narrow side card, stack */
+.rp-card .calsync{grid-template-columns:minmax(0,1fr);margin:0 0 18px;padding:0;border:0;background:none}
+.rp-card .calsync h3{display:none}
+.rp-card .calsync-t p,.rp-card .calsync-n{margin-left:0}
+.rp-card .calsync-a{justify-content:flex-start;margin-left:0}

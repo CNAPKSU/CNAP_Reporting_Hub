@@ -1,0 +1,15 @@
+{# Sync the CNAP calendar (MW 2026-11-27). A live subscription, not a download: new and changed dates follow on their own. #}
+{% if calendar_sync %}<div class="calsync" aria-labelledby="calsync-h{{ id|default:'' }}">
+  <div class="calsync-t">
+    <h3 id="calsync-h{{ id|default:'' }}"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M3 8h14M7 2.5v3M13 2.5v3"/><path d="m8 12.5 1.6 1.6L13 10.8"/></svg>Sync the CNAP calendar to yours</h3>
+    <p>Subscribe once. NeuroSync talks, Center events, and reporting deadlines then appear in your own calendar, and new or changed dates follow on their own.</p>
+  </div>
+  <div class="calsync-a">
+    <a class="btn pri" href="{{ calendar_sync.outlook }}" target="_blank" rel="noopener" title="Opens Outlook on the web to subscribe. Outlook checks for updates every few hours.">Add to Outlook</a>
+    <a class="btn" href="{{ calendar_sync.google }}" target="_blank" rel="noopener" title="Opens Google Calendar to subscribe. Google checks for updates about once a day.">Add to Google</a>
+    <a class="btn" href="{{ calendar_sync.webcal }}" title="For Apple Calendar and other apps.">Apple or other</a>
+    <button type="button" class="t3 calsync-copy" data-url="{{ calendar_sync.url }}">Copy the link</button>
+  </div>
+  <p class="calsync-n">This link is for CNAP members. Please don’t share it outside the Center. Your private meetings are never part of it.</p>
+</div>
+<script>document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.calsync-copy');if(!b)return;var t=b.textContent;try{navigator.clipboard.writeText(b.dataset.url);b.textContent='Copied. Paste it into your calendar app';}catch(x){prompt('Copy this link:',b.dataset.url);}setTimeout(function(){b.textContent=t;},2600);},{once:false});</script>{% endif %}

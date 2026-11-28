@@ -3,6 +3,7 @@ from django.urls import path
 from .views import (
     access_requests,
     audit,
+    calendar,
     core_reports,
     dashboards,
     formspec,
@@ -24,6 +25,9 @@ urlpatterns = [
     path("forms/", formspec.forms, name="forms"),
     path("forms/<slug:code>/", formspec.form_detail, name="form_detail"),
     path("forms/<slug:code>/blank/", formspec.form_blank, name="form_blank"),
+    path("calendar/", calendar.calendar, name="calendar"),
+    path("calendar/save/", calendar.calendar_save, name="calendar_save"),
+    path("calendar/<int:pk>/status/", calendar.calendar_status, name="calendar_status"),
     path("neurosync/", speakers.talks, name="speakers"),
     path("neurosync/add/", speakers.talk_add, name="speaker_add"),
     path("neurosync/template/", speakers.talk_template, name="speaker_template"),
