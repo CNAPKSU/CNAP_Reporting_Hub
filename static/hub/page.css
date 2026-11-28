@@ -650,3 +650,21 @@ p,li,dd,figcaption,blockquote{text-wrap:pretty}
   .fp-page .spine:hover a,.fp-page .spine:focus-within a{overflow:visible}
   .fp-page .spine:hover .spine-track,.fp-page .spine:focus-within .spine-track{left:23px}
 }
+
+/* Site Visit RSVP (MW 2026-11-27): each question gets room to breathe, and a taller, calmer hero. */
+.sv-appform{gap:36px;padding:36px 36px 32px}
+.sv-appform [data-show]:not([hidden]),.sv-appform .sv-pfields:not([hidden]){display:grid;gap:36px}
+.sv-appform .sv-pfields:not([hidden]){gap:20px}
+.sv-appform legend{padding:0;margin-bottom:12px;font-size:16px;line-height:24px}
+.sv-appform .sv-ops{gap:10px}
+.sv-appform .sv-hint{margin-top:10px;line-height:20px}
+.sv-appform .sv-tx{gap:10px}
+.sv-appform .sv-tx b,.sv-appform .sv-tx>span{line-height:24px}
+.sv-appform .sv-act{padding-top:8px}
+.sv-page .fp-open{padding:60px 0 72px}
+.sv-page .fp-hero{margin-top:40px}
+.sv-page .fp-hd .fp-for{display:flex;align-items:center;gap:10px;margin-left:-17px;letter-spacing:.01em}
+.sv-page .fp-hd .fp-for::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgba(233,201,143,.18)}
+.sv-page .fp-hd h1{margin-top:18px}
+.sv-page .fp-lead{margin-top:22px;max-width:58ch;font-size:16px;line-height:27px}
+@media (max-width:760px){.sv-page .fp-open{padding:40px 0 48px}.sv-page .fp-hero{margin-top:28px}.sv-appform{gap:30px;padding:24px 20px}.sv-appform [data-show]:not([hidden]){gap:30px}}

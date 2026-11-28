@@ -91,3 +91,13 @@
 @media (prefers-reduced-motion:reduce){
   .hdr .hn-app .rb-b,.hdr .hn-app > a,.hdr .hn-app .rb-b::after,.hdr .hn-app > a::after{transition:none}
 }
+
+/* Section menus: the page on top, then its sections (MW 2026-11-27) */
+.hdr .hn-app .rb-secs{min-width:300px}
+.hdr .hn-app .rb-secs.rb-two{min-width:520px}
+.hdr .hn-app .rb-secs .rb-k{margin:8px 12px 4px;padding-top:10px;border-top:1px solid var(--line);font-size:var(--t-13,13px);font-weight:500;color:var(--muted)}
+.hdr .hn-app .rb-secs .rb-sl{display:grid;padding-bottom:2px}
+.hdr .hn-app .rb-secs.rb-two .rb-sl{grid-template-columns:1fr 1fr;column-gap:4px}
+.hdr .hn-app .rb-p a.rb-s{padding:8px 12px;font-size:var(--t-15,15px);line-height:20px;color:var(--ink-2,var(--ink));border-top:0}
+.hdr .hn-app .rb-p a.rb-s:hover,.hdr .hn-app .rb-p a.rb-s:focus-visible{color:var(--ink)}
+@media (max-width:1240px){.hdr .hn-app .rb-secs.rb-two{min-width:440px}}
