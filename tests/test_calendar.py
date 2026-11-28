@@ -5,6 +5,7 @@ from datetime import date, time, timedelta
 
 import pytest
 from django.core import mail
+from django.test import override_settings
 from django.utils import timezone
 
 from apps.accounts import access
@@ -61,13 +62,14 @@ def test_the_same_event_keeps_its_uid_and_a_change_raises_its_sequence(client, c
         title="Retreat", day=timezone.localdate() + timedelta(days=5), created_by=u
     )
     first = client.get(_url()).content.decode()
-    assert f"UID:{e.uid}" in first.replace("\r\n ", "")
+    assert f"UID:event-{e.uid}@cnap-hub" in first.replace("\r\n ", "")
     e.title = "Retreat (new room)"
     e.save()
     second = client.get(_url()).content.decode().replace("\r\n ", "")
-    assert f"UID:{e.uid}" in second and "Retreat (new room)" in second
+    assert f"UID:event-{e.uid}@cnap-hub" in second and "Retreat (new room)" in second
 
 
+@override_settings(UI_PROTOTYPE=True, UI_PROTOTYPE_ONLY=True)
 def test_home_and_events_show_the_sync_box(client, center):
     _manager(client)
     for path in ("/", "/events/"):
