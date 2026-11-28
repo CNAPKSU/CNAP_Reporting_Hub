@@ -1557,7 +1557,7 @@ ol.life li + li { border-left: 0; }
 ol.life li::before { z-index: 1; }
 ol.life li:not(:last-child)::after { content: ""; position: absolute; top: 12px; left: 44px; right: 2px; height: 2px; background: var(--line); border-radius: 2px; }
 ol.life li.done:not(:last-child)::after { background: var(--purple); opacity: .45; }
-@media (max-width: 860px) { ol.life li::after { display: none; } }
+@media (max-width: 760px) { ol.life li::after { display: none; } } /* MW 2026-11-28: hide the line only once the steps stack (it vanished at half screen) */
 
 /* The tab band reads clearly as a band: a deeper wash and a firmer rule under it. */
 .panel > .tabs { background: #ebe5f5; border-bottom: 2px solid var(--purple, #512888); }
