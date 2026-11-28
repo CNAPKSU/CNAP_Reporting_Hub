@@ -1673,3 +1673,4 @@ dialog.fbk .fbk-proto{margin:0!important}
 .ft-site{color:var(--muted);text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:3px;transition:color .2s ease,text-decoration-color .2s ease}
 .ft-site:hover,.ft-site:focus-visible{color:var(--purple);text-decoration-color:currentColor}
 .foot .ft-site{font-size:13.5px;line-height:21px}
+.cm-spot-n{color:inherit;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px}.cm-spot-n:hover{color:var(--purple)}
