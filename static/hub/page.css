@@ -243,13 +243,13 @@ a.fp-name:hover{color:var(--purple);text-decoration:underline}
   .fp-page .spine-h{display:none}
   .fp-page .spine a{height:26px;padding:3px 0 3px 18px;overflow:hidden;white-space:nowrap;color:transparent!important}
   .fp-page .spine a::before{left:9px;top:10px}
-  .fp-page .spine-track{left:13.5px}
+  .fp-page .spine-track{left:13px}
   .fp-page .spine:hover,.fp-page .spine:focus-within{width:260px;padding:20px 20px 14px;background:var(--surface);border-color:rgba(29,27,33,.07);box-shadow:var(--sh)}
   .fp-page .spine:hover .spine-h,.fp-page .spine:focus-within .spine-h{display:block}
   .fp-page .spine:hover a,.fp-page .spine:focus-within a{height:auto;padding:6px 0 6px 18px;white-space:normal;color:var(--ink-2)!important}
   .fp-page .spine:hover a[aria-current="step"],.fp-page .spine:focus-within a[aria-current="step"]{color:var(--purple-ink)!important}
   .fp-page .spine:hover a::before,.fp-page .spine:focus-within a::before{left:-1px;top:13px}
-  .fp-page .spine:hover .spine-track,.fp-page .spine:focus-within .spine-track{left:23.5px}
+  .fp-page .spine:hover .spine-track,.fp-page .spine:focus-within .spine-track{left:23px}
 }
 @media (max-width:980px){
   .fp-hero{grid-template-columns:minmax(0,1fr);align-items:start}
