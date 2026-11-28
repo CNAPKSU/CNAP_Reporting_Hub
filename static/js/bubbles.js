@@ -71,7 +71,7 @@
     if (el === owner) return;
     if (!el) { if (owner && !owner.contains(e.target)) hide(); return; }
     clearTimeout(timer);
-    timer = setTimeout(function () { show(el); }, owner ? 0 : 250);
+    timer = setTimeout(function () { show(el); }, owner ? 0 : 80); /* MW 2026-11-28: the gray tooltip took far too long */
   });
   document.addEventListener("mouseout", function (e) {
     var el = target(e.target);
