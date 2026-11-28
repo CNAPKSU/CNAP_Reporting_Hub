@@ -638,3 +638,33 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("toggle", function () { setTimeout(run, 30); }, true);
   document.addEventListener("click", function () { setTimeout(run, 60); });
 })();
+
+/* "On this page" rail (MW 2026-11-28): the Hub homepage's track. It runs from the first section's dot to the
+   last, and fills with purple down to the section being read; sections above it are marked as seen. */
+(function () {
+  document.querySelectorAll("nav.px-onpage").forEach(function (nav) {
+    var ol = nav.querySelector(":scope > ol");
+    if (!ol) return;
+    var tops = Array.prototype.map.call(ol.children, function (li) { return li.querySelector(":scope > a"); }).filter(Boolean);
+    if (tops.length < 2) return;
+    var track = document.createElement("div"); track.className = "px-rail-track"; track.setAttribute("aria-hidden", "true");
+    track.innerHTML = '<span class="px-rail-fill"></span>';
+    ol.insertBefore(track, ol.firstChild);
+    function mid(a) { var o = ol.getBoundingClientRect(), r = a.getBoundingClientRect(); return r.top - o.top + 16; }
+    function draw() {
+      if (!ol.offsetParent) return;
+      var first = mid(tops[0]), last = mid(tops[tops.length - 1]);
+      track.style.setProperty("--tt", first + "px");
+      track.style.setProperty("--th", Math.max(0, last - first) + "px");
+      /* the current section, or the top-level section a current sub-section belongs to */
+      var cur = ol.querySelector("a.on"), idx = -1;
+      if (cur) tops.forEach(function (a, i) { if (a === cur || a.parentNode.contains(cur)) idx = i; });
+      tops.forEach(function (a, i) { a.classList.toggle("seen", idx > -1 && i < idx); });
+      track.style.setProperty("--tf", (idx > -1 ? mid(tops[idx]) - first : 0) + "px");
+    }
+    new MutationObserver(function () { requestAnimationFrame(draw); }).observe(ol, { subtree: true, attributes: true, attributeFilter: ["class"] });
+    addEventListener("resize", draw);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+    draw();
+  });
+})();

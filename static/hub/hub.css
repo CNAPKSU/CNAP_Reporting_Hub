@@ -1673,3 +1673,10 @@ dialog.fbk .fbk-proto{margin:0!important}
 .ft-site{color:var(--muted);text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:3px;transition:color .2s ease,text-decoration-color .2s ease}
 .ft-site:hover,.ft-site:focus-visible{color:var(--purple);text-decoration-color:currentColor}
 .foot .ft-site{font-size:13.5px;line-height:21px}
+
+/* "On this homepage": each dot centred on the line, closed and open (MW 2026-11-28; it sat 2px off) */
+.otp-track{left:25px}
+@media (min-width:981px) and (max-width:1839px){
+  .otp .otp-track{left:15px!important}
+  .otp:hover .otp-track,.otp:focus-within .otp-track{left:25px!important}
+}
