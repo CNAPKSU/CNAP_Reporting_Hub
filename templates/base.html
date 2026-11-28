@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
   {% if request.proto_active %}<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/proto.css' %}">{% endif %}
+<link rel="stylesheet" href="{% static 'css/bubbles.css' %}">
 </head>
 <body{% if request.proto_active %} class="proto{% if request.proto_admin and not request.proto_own %} pa{% endif %}"{% endif %}>
 {% if demo_site %}<div role="note" style="background:#fff4d6;color:#4a3500;border-bottom:1px solid #e8d49a;padding:8px 16px;text-align:center;font:500 14px/1.4 system-ui,sans-serif">Test copy with fictional data only. Every account uses the password Demo-Password-2026. Emails are not sent.</div>{% endif %}
@@ -126,5 +127,6 @@
 <script src="{% static 'js/pickfilter.js' %}" defer></script>
 <script src="{% static 'js/dropclose.js' %}" defer></script>
 {% if request.proto_admin and not request.proto_own %}<script src="{% static 'js/proto.js' %}" defer></script>{% endif %}
+<script src="{% static 'js/bubbles.js' %}" defer></script>
 </body>
 </html>

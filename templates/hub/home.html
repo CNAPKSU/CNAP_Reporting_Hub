@@ -8,6 +8,7 @@
 <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/system.css' %}">
+<link rel="stylesheet" href="{% static 'css/bubbles.css' %}">
 </head>
 <body class="hub-page">
 {# CNAP Member Hub homepage (MW 2026-11-13), built from design/prototypes/member-hub/. Data: apps/portal/hub.py. #}
@@ -386,5 +387,6 @@ document.addEventListener('click',function(e){var a=e.target.closest('main a[hre
   var where=h?h.textContent.replace(/\s+/g,' ').trim().slice(0,60):'Home';if(!label)return;
   var d=new FormData();d.append('k',where+': '+label);try{navigator.sendBeacon(url,d);}catch(x){}},true);})();
 </script>
+<script src="{% static 'js/bubbles.js' %}" defer></script>
 </body>
 </html>

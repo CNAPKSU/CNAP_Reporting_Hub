@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="{% static 'hub/guide.css' %}">
 <link rel="stylesheet" href="{% static 'hub/evcal.css' %}">
 <link rel="stylesheet" href="{% static 'hub/system.css' %}">
+<link rel="stylesheet" href="{% static 'css/bubbles.css' %}">
 </head>
 <body data-hub-page="events" data-guide="events" class="ev-page">
 {# Built by design/prototypes/member-hub/port_to_app.py from events.html. Change the prototype and run it again. #}
@@ -197,5 +198,6 @@ var c=document.querySelector('.ev-copyfeed');if(c)c.addEventListener('click',fun
 {% include "_feedback.html" %}
 <script src="{% static 'hub/page.js' %}" defer></script>
 <script src="{% static 'js/dropclose.js' %}" defer></script>
+<script src="{% static 'js/bubbles.js' %}" defer></script>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{% static 'hub/hub.css' %}">
 <link rel="stylesheet" href="{% static 'hub/page.css' %}">
 <link rel="stylesheet" href="{% static 'hub/system.css' %}">
+<link rel="stylesheet" href="{% static 'css/bubbles.css' %}">
 </head>
 <body class="hub-page fp-page sv-page">
 {# MW 2026-11-15, approved build: the Site Visit RSVP, following the prototype's form. One RSVP a year per person. #}
@@ -91,5 +92,6 @@ f.addEventListener('change',sync);sync();
 var ab=f.querySelector('[data-wc]');if(ab){var out=ab.parentNode.querySelector('.sv-wc');function wc(){var n=ab.value.trim()?ab.value.trim().split(/\s+/).length:0;out.textContent=n+' of 150 words';out.classList.toggle('over',n>150);}ab.addEventListener('input',wc);wc();}})();
 </script>
 <script src="{% static 'js/dropclose.js' %}" defer></script>
+<script src="{% static 'js/bubbles.js' %}" defer></script>
 </body>
 </html>
