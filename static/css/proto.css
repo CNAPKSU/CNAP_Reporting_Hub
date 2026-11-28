@@ -497,7 +497,7 @@ body.proto .px-roll-cue::before { content: "Show"; }
 body.proto details[open] > summary .px-roll-cue::before { content: "Hide"; }
 body.proto .px-roll-cue::after { content: ""; width: 7px; height: 7px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .15s ease; }
 body.proto details[open] > summary .px-roll-cue::after { transform: translateY(2px) rotate(-135deg); }
-body.proto .px-roll-body { padding: var(--px-3) 0 var(--px-6); min-width: 0; } /* MW 2026-11-27: text sat right on the open row's edge */
+body.proto .px-roll-body { padding: 0 0 var(--px-6); min-width: 0; }
 body.proto .px-roll-figs { display: flex; flex-wrap: wrap; gap: 4px var(--px-5); margin-top: 6px; font-size: var(--px-fs-sm); color: var(--px-muted); }
 body.proto .px-roll-figs b { font: 500 1.125rem/1.2 var(--px-serif); color: var(--px-ink); font-variant-numeric: tabular-nums; margin-right: 4px; }
 body.proto .px-roll-figs b.pos { color: var(--px-ok); }
@@ -2296,3 +2296,5 @@ html body.proto .r90-partbody { margin-left: var(--num-gut); }
 /* a heading at the top of a plain section (Roster check, Funding, Core report, Builder) */
 html body.proto .px-section:has(> .r90-part) { padding-left: var(--num-gut); }
 html body.proto .px-section:has(> .r90-part) > .r90-part { margin-left: calc(-1 * var(--num-gut)); }
+/* MW 2026-11-27: on the dashboard, an open section's first line sat right on the edge of its heading row. */
+body.proto details.px-roll:is([id^="d53-"], #list) > .px-roll-body { padding-top: var(--px-3) !important; }
