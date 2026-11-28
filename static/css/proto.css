@@ -2296,3 +2296,5 @@ html body.proto .r90-partbody { margin-left: var(--num-gut); }
 /* a heading at the top of a plain section (Roster check, Funding, Core report, Builder) */
 html body.proto .px-section:has(> .r90-part) { padding-left: var(--num-gut); }
 html body.proto .px-section:has(> .r90-part) > .r90-part { margin-left: calc(-1 * var(--num-gut)); }
+/* MW 2026-11-27: on the dashboard, an open section's first line sat right on the edge of its heading row. */
+body.proto details.px-roll:is([id^="d53-"], #list) > .px-roll-body { padding-top: var(--px-3) !important; }
